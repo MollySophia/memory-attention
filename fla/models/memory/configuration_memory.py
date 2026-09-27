@@ -37,7 +37,6 @@ class MemoryConfig(PretrainedConfig):
         fuse_linear_cross_entropy: bool = False,
         use_l2warp: bool = False,
         vocab_size: int = 32000,
-        attn_type: str = "mha",
         use_gate: bool = False,
         use_head_gate: bool = False,
         **kwargs,
@@ -45,7 +44,6 @@ class MemoryConfig(PretrainedConfig):
 
         self.use_gate = use_gate
         self.use_head_gate = use_head_gate
-        self.attn_type = attn_type
         self.hidden_size = hidden_size
         self.num_hidden_layers = num_hidden_layers
         self.num_heads = num_heads

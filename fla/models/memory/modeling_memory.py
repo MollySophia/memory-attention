@@ -49,7 +49,6 @@ class MemoryBlock(GradientCheckpointingLayer):
             rope_theta=config.rope_theta,
             max_position_embeddings=config.max_position_embeddings,
             layer_idx=layer_idx,
-            attn_type=config.attn_type,
             use_gate=config.use_gate,
             use_head_gate=config.use_head_gate,
             vocab_size=config.vocab_size,

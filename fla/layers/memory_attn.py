@@ -47,12 +47,9 @@ class MemoryAttention(nn.Module):
         rope_theta: float | None = 10000.,
         max_position_embeddings: int | None = None,
         layer_idx: int = None,
-        attn_type: str = 'mok',
         use_gate: bool = False,
         use_head_gate: bool = False,
         vocab_size: int | None = None,
-        input_ids: torch.LongTensor | None = None,
-        inputs_embeds: torch.FloatTensor | None = None,
     ):
         super().__init__()
 
@@ -76,8 +73,7 @@ class MemoryAttention(nn.Module):
         if flash_attn_func is None:
             raise ImportError("Please install Flash Attention via `pip install flash-attn --no-build-isolation` first")
 
-        ## MQA
-        self.att = attn_type
+
         self.use_gate = use_gate
         self.use_head_gate = use_head_gate
         self.v_dim = self.head_dim
@@ -120,8 +116,6 @@ class MemoryAttention(nn.Module):
 
         batch_size, q_len, _ = hidden_states.size()
 
-        if input_ids is None:
-            raise ValueError("`input_ids` must be provided when attn_type='eva'")
         q,k,m = self.q_proj(hidden_states), self.k_proj(hidden_states), self.m_proj(input_ids)
         q = rearrange(q, '... (h d) -> ... h d', d=self.head_dim)
         k = rearrange(k, '... (h d) -> ... h d', d=self.head_dim)
@@ -156,7 +150,7 @@ class MemoryAttention(nn.Module):
                 attn_state=(k.flatten(-2, -1), v.flatten(-2, -1)),
                 layer_idx=self.layer_idx,
                 offset=q_len,
-                cache_kwargs=dict(window_size=None if self.att=='nha' else self.window_size),
+                cache_kwargs=dict(window_size=self.window_size),
             )['attn_state']
             if cache_has_content:
                 k, v = k_cached, v_cached
