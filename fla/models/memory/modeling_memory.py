@@ -250,6 +250,9 @@ class MemoryModel(MemoryPreTrainedModel):
         self._offload_device = device
         self._offload_dtype = dtype
         self._offload_fold_norm = fold_norm
+        # One cached offloader per input shape (prefill vs decode differ).
+        self._offloader_cache = {}
+        self._offloader_cache_size = 2
 
     def _restore_unfolded_table(
         self,
@@ -306,29 +309,55 @@ class MemoryModel(MemoryPreTrainedModel):
             layer.attn.memory_table_folded = True
         self._table_folded = True
 
-    def set_offload_offloader(self, batch: int, seq_len: int) -> None:
-        """(Re)build the prefetcher for a given input shape."""
-        if self.memory_table is None:
-            raise RuntimeError("call enable_memory_offload() first")
-        if self.memory_offloader is not None:
-            self.memory_offloader.close()
+    def _build_offloader(self, batch: int, seq_len: int):
         config = self.config
         device = self._offload_device
         policy = config.memory_offload_policy
         if policy == "auto":
             policy = "bulk" if batch * seq_len <= config.memory_offload_bulk_max_tokens else "pipeline"
         if policy == "bulk":
-            self.memory_offloader = BulkMemoryTableOffloader(self.memory_table, batch, seq_len, device)
-        else:
-            self.memory_offloader = MemoryTableOffloader(
-                self.memory_table, batch, seq_len,
-                group_size=config.memory_offload_group_size,
-                device=device,
-                prefetch_depth=config.memory_offload_prefetch_depth,
-            )
+            return BulkMemoryTableOffloader(self.memory_table, batch, seq_len, device)
+        return MemoryTableOffloader(
+            self.memory_table, batch, seq_len,
+            group_size=config.memory_offload_group_size,
+            device=device,
+            prefetch_depth=config.memory_offload_prefetch_depth,
+        )
+
+    def _offloader_for(self, batch: int, seq_len: int):
+        """Return an offloader for this shape, building it on first use.
+
+        Prefill and decode have very different shapes (long sequence vs a single
+        token), and each offloader preallocates pinned host plus device buffers
+        sized to its input. Rebuilding on every shape change would reallocate
+        hundreds of MiB per generated token, so instances are cached per shape.
+        """
+        if self.memory_table is None:
+            raise RuntimeError("call enable_memory_offload() first")
+        cache = getattr(self, "_offloader_cache", None)
+        if cache is None:
+            cache = self._offloader_cache = {}
+        key = (batch, seq_len)
+        if key not in cache:
+            if len(cache) >= self._offloader_cache_size:
+                # Drop the least recently used entry.
+                cache.pop(next(iter(cache)))
+            cache[key] = self._build_offloader(batch, seq_len)
+        self.memory_offloader = cache[key]
+        return cache[key]
+
+    def set_offload_offloader(self, batch: int, seq_len: int) -> None:
+        """Build (or reuse) the prefetcher for a given input shape."""
+        self._offloader_for(batch, seq_len)
 
     def close_memory_offload(self) -> None:
         """Stop streaming and restore the GPU-resident m_proj path."""
+        for offloader in (getattr(self, "_offloader_cache", None) or {}).values():
+            try:
+                offloader.close()
+            except Exception:
+                pass
+        self._offloader_cache = {}
         if self.memory_offloader is not None:
             self.memory_offloader.close()
             self.memory_offloader = None
@@ -387,7 +416,11 @@ class MemoryModel(MemoryPreTrainedModel):
         if use_cache and not isinstance(past_key_values, Cache):
             past_key_values = Cache.from_legacy_cache(past_key_values)
 
-        if self.memory_offloader is not None:
+        # Key off memory_table, not memory_offloader: enabling offload frees the
+        # per-layer m_proj immediately, so the first forward has no offloader
+        # yet but must still take the streaming path. _offloader_for() builds
+        # one on demand for whatever shape this call uses.
+        if self.memory_table is not None:
             # The offload producer gathers from host memory, so it needs the
             # IDs on CPU. Accept them on either device and stage the embedding
             # lookup on the compute device.
@@ -467,10 +500,7 @@ class MemoryModel(MemoryPreTrainedModel):
         layers already running.
         """
         batch, seq_len = hidden_states.shape[0], hidden_states.shape[1]
-        if self.memory_offloader is None or (
-            self.memory_offloader.batch != batch or self.memory_offloader.seq_len != seq_len
-        ):
-            self.set_offload_offloader(batch, seq_len)
+        offloader = self._offloader_for(batch, seq_len)
 
         state = dict(hidden=hidden_states, past=past_key_values)
         all_hidden_states = () if output_hidden_states else None
@@ -494,7 +524,7 @@ class MemoryModel(MemoryPreTrainedModel):
         # input_ids must stay on CPU: the producer gathers from host memory.
         if input_states_ids is None:
             raise ValueError("offloaded forward requires input_ids")
-        self.memory_offloader.forward(input_states_ids, consume)
+        offloader.forward(input_states_ids, consume)
 
         hidden_states = self.norm(state["hidden"])
 
