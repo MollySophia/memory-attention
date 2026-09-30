@@ -39,11 +39,25 @@ class MemoryConfig(PretrainedConfig):
         vocab_size: int = 32000,
         use_gate: bool = False,
         use_head_gate: bool = False,
+        memory_offload: bool = False,
+        memory_offload_policy: str = "auto",
+        memory_offload_group_size: int = 1,
+        memory_offload_prefetch_depth: int = 4,
+        memory_offload_bulk_max_tokens: int = 4096,
+        memory_offload_chunk_size: int = 1024,
         **kwargs,
     ):
 
         self.use_gate = use_gate
         self.use_head_gate = use_head_gate
+        self.memory_offload = memory_offload
+        if memory_offload_policy not in ("auto", "pipeline", "bulk"):
+            raise ValueError("`memory_offload_policy` must be one of 'auto', 'pipeline', 'bulk'")
+        self.memory_offload_policy = memory_offload_policy
+        self.memory_offload_group_size = memory_offload_group_size
+        self.memory_offload_prefetch_depth = memory_offload_prefetch_depth
+        self.memory_offload_bulk_max_tokens = memory_offload_bulk_max_tokens
+        self.memory_offload_chunk_size = memory_offload_chunk_size
         self.hidden_size = hidden_size
         self.num_hidden_layers = num_hidden_layers
         self.num_heads = num_heads

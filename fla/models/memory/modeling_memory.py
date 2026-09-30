@@ -12,6 +12,7 @@ from transformers.utils import logging
 from transformers.utils.deprecation import deprecate_kwarg
 
 from fla.layers.memory_attn import MemoryAttention
+from fla.layers.memory_offload import BulkMemoryTableOffloader, MemoryTableOffloader, build_cpu_table
 from fla.models.memory.configuration_memory import MemoryConfig
 from fla.models.utils import Cache, FLAGenerationMixin
 from fla.modules import FusedCrossEntropyLoss, FusedLinearCrossEntropyLoss, RMSNorm
@@ -169,7 +170,112 @@ class MemoryModel(MemoryPreTrainedModel):
 
         self.gradient_checkpointing = False
 
+        # CPU offload state. The stacked table is a plain attribute (not a
+        # buffer) so it stays out of state_dict/parameter counts; the folded
+        # tables are what actually gets transferred, and the per-layer
+        # nn.Embedding weights are dropped to free their device copy.
+        self.memory_offloader = None
+        self.memory_table = None
+
         self.post_init()
+
+    def enable_memory_offload(
+        self,
+        device: torch.device | str = "cuda:0",
+        dtype: torch.dtype = torch.bfloat16,
+        fold_norm: bool = True,
+    ) -> None:
+        """Move the memory table to pinned CPU memory and stream it per forward.
+
+        The per-layer ``m_proj`` embeddings are folded (including the head-wise
+        RMSNorm) into a single ``[vocab, layers, kv_dim]`` CPU tensor, then
+        removed from the module tree so their device copy is freed. Layers then
+        receive memory values through the offloader instead of a local lookup.
+
+        Must be called after weights are loaded and the model is on ``device``.
+        """
+        if not torch.cuda.is_available():
+            raise RuntimeError("memory offload requires CUDA")
+        if self.training or torch.is_grad_enabled():
+            raise RuntimeError("memory offload is inference-only; call under torch.inference_mode()")
+
+        device = torch.device(device)
+        config = self.config
+        head_dim = config.hidden_size // config.num_heads
+
+        m_projs = [layer.attn.m_proj for layer in self.layers]
+        if any(m is None for m in m_projs):
+            raise RuntimeError(
+                "m_proj is already offloaded; call close_memory_offload() before re-enabling"
+            )
+        norms = [layer.attn.m_norm for layer in self.layers]
+
+        if fold_norm:
+            table = build_cpu_table(
+                m_projs, norms, head_dim,
+                chunk_size=config.memory_offload_chunk_size,
+                dtype=dtype,
+            )
+        else:
+            table = torch.stack(
+                [m_proj.weight.detach().to(dtype).cpu() for m_proj in m_projs], dim=1
+            ).contiguous()
+        for layer in self.layers:
+            layer.attn.memory_table_folded = fold_norm
+
+        # Retain the originals on CPU rather than deleting them, so
+        # close_memory_offload() can restore the resident path. The folded
+        # table is what gets transferred, so the device copies can go.
+        self._resident_m_projs = [
+            nn.Embedding.from_pretrained(m.weight.detach().to("cpu"), freeze=True)
+            for m in m_projs
+        ]
+        for layer in self.layers:
+            layer.attn.m_proj = None
+
+        self.memory_table = table
+        self._offload_device = device
+        self._offload_dtype = dtype
+        self._offload_fold_norm = fold_norm
+
+    def set_offload_offloader(self, batch: int, seq_len: int) -> None:
+        """(Re)build the prefetcher for a given input shape."""
+        if self.memory_table is None:
+            raise RuntimeError("call enable_memory_offload() first")
+        if self.memory_offloader is not None:
+            self.memory_offloader.close()
+        config = self.config
+        device = self._offload_device
+        policy = config.memory_offload_policy
+        if policy == "auto":
+            policy = "bulk" if batch * seq_len <= config.memory_offload_bulk_max_tokens else "pipeline"
+        if policy == "bulk":
+            self.memory_offloader = BulkMemoryTableOffloader(self.memory_table, batch, seq_len, device)
+        else:
+            self.memory_offloader = MemoryTableOffloader(
+                self.memory_table, batch, seq_len,
+                group_size=config.memory_offload_group_size,
+                device=device,
+                prefetch_depth=config.memory_offload_prefetch_depth,
+            )
+
+    def close_memory_offload(self) -> None:
+        """Stop streaming and restore the GPU-resident m_proj path."""
+        if self.memory_offloader is not None:
+            self.memory_offloader.close()
+            self.memory_offloader = None
+        self.memory_table = None
+        for layer in self.layers:
+            layer.attn.memory_table_folded = False
+        # Put the saved tables back on the model's device.
+        resident = getattr(self, "_resident_m_projs", None)
+        if resident is not None:
+            device = getattr(self, "_offload_device", torch.device("cpu"))
+            for layer, m in zip(self.layers, resident):
+                layer.attn.m_proj = nn.Embedding.from_pretrained(
+                    m.weight.detach().to(device), freeze=True
+                )
+            self._resident_m_projs = None
 
     def get_input_embeddings(self):
         return self.embeddings
@@ -207,6 +313,21 @@ class MemoryModel(MemoryPreTrainedModel):
 
         if use_cache and not isinstance(past_key_values, Cache):
             past_key_values = Cache.from_legacy_cache(past_key_values)
+
+        if self.memory_offloader is not None:
+            # The offload producer gathers from host memory, so it needs the
+            # IDs on CPU. Accept them on either device and stage the embedding
+            # lookup on the compute device.
+            device = next(self.parameters()).device
+            ids_cpu = input_ids.to("cpu") if input_ids is not None else None
+            if inputs_embeds is None:
+                if input_ids is None:
+                    raise ValueError("offloaded forward requires input_ids or inputs_embeds")
+                inputs_embeds = self.embeddings(input_ids.to(device, non_blocking=True))
+            return self._forward_offloaded(
+                inputs_embeds, ids_cpu, attention_mask, past_key_values,
+                use_cache, output_hidden_states, return_dict,
+            )
 
         if inputs_embeds is None:
             inputs_embeds = self.embeddings(input_ids)
@@ -256,6 +377,69 @@ class MemoryModel(MemoryPreTrainedModel):
             attentions=all_attns,
         )
 
+    def _forward_offloaded(
+        self,
+        hidden_states: torch.Tensor,
+        input_states_ids: torch.LongTensor,
+        attention_mask: torch.Tensor | None,
+        past_key_values: Cache | None,
+        use_cache: bool,
+        output_hidden_states: bool,
+        return_dict: bool,
+    ):
+        """Run the layer stack while the memory table streams from CPU.
+
+        The offloader owns the loop: it hands each layer its slice of M at the
+        point of use, so the H2D for a group overlaps the Q/K kernels of the
+        layers already running.
+        """
+        batch, seq_len = hidden_states.shape[0], hidden_states.shape[1]
+        if self.memory_offloader is None or (
+            self.memory_offloader.batch != batch or self.memory_offloader.seq_len != seq_len
+        ):
+            self.set_offload_offloader(batch, seq_len)
+
+        state = dict(hidden=hidden_states, past=past_key_values)
+        all_hidden_states = () if output_hidden_states else None
+
+        def consume(index: int, memory_table) -> None:
+            layer = self.layers[index]
+            if output_hidden_states:
+                all_hidden_states += (state["hidden"],)
+            outputs = layer(
+                state["hidden"],
+                attention_mask=attention_mask,
+                past_key_values=state["past"],
+                output_attentions=False,
+                use_cache=use_cache,
+                memory_table=memory_table,
+            )
+            state["hidden"] = outputs[0]
+            if use_cache:
+                state["past"] = outputs[1]
+
+        # input_ids must stay on CPU: the producer gathers from host memory.
+        if input_states_ids is None:
+            raise ValueError("offloaded forward requires input_ids")
+        self.memory_offloader.forward(input_states_ids, consume)
+
+        hidden_states = self.norm(state["hidden"])
+
+        if output_hidden_states:
+            all_hidden_states += (hidden_states,)
+
+        if not return_dict:
+            return tuple(
+                v for v in [hidden_states, state["past"], all_hidden_states] if v is not None
+            )
+
+        return BaseModelOutputWithPast(
+            last_hidden_state=hidden_states,
+            past_key_values=state["past"],
+            hidden_states=all_hidden_states,
+            attentions=None,
+        )
+
 
 class MemoryForCausalLM(MemoryPreTrainedModel, FLAGenerationMixin):
 
@@ -288,6 +472,22 @@ class MemoryForCausalLM(MemoryPreTrainedModel, FLAGenerationMixin):
 
     def get_decoder(self):
         return self.model
+
+    # Memory-table CPU offload. Thin pass-throughs to the backbone, which owns
+    # the folded table and the prefetcher.
+    def enable_memory_offload(
+        self,
+        device: torch.device | str = "cuda:0",
+        dtype: torch.dtype = torch.bfloat16,
+        fold_norm: bool = True,
+    ) -> None:
+        self.model.enable_memory_offload(device=device, dtype=dtype, fold_norm=fold_norm)
+
+    def set_offload_offloader(self, batch: int, seq_len: int) -> None:
+        self.model.set_offload_offloader(batch, seq_len)
+
+    def close_memory_offload(self) -> None:
+        self.model.close_memory_offload()
 
     @deprecate_kwarg("num_logits_to_keep", version="4.50", new_name="logits_to_keep")
     def forward(
