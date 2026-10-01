@@ -7,8 +7,8 @@
   "parent_sha": "81684d34e44db04a0511698081cab336abf4a60d",
   "original_protocol_version": "fixed_context_v2_rollback_excluded; legacy full logits prefill",
   "protocol_version": "offload_gap_v1",
-  "workflow_stage": "screening",
-  "performance": null,
+  "workflow_stage": "baseline_screen_complete",
+  "performance": "R01-summary.json",
   "not_run": {
     "confirmation": "baseline screening first",
     "full_validation": "only for retention nomination",
@@ -19,5 +19,8 @@
     "standalone": "PASS; max difference 0"
   },
   "source_note": "Exact frozen source commit and checkout recorded in campaign manifest after commit.",
-  "candidate_sha": "62942a0387608fe21baaeb2dce9ef3b0947dde4d"
+  "candidate_sha": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
+  "status": "accepted",
+  "status_scope": "frozen baseline only, accepted_step=0; no optimization gain",
+  "source_audit": "All 16 jobs have identical prepared source SHA256 and required 2,836,499,968 parameters. Differing Git HEADs are result-only commits; fla/ remains at restored implementation."
 }
