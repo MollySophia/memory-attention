@@ -19,7 +19,7 @@ from benchmark_telemetry import environment_details, source_state, memory_snapsh
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--backend', choices=('pytorch', 'nsys'), default='pytorch')
+    parser.add_argument('--backend', choices=('pytorch', 'nsys', 'events'), default='pytorch')
     parser.add_argument('--mode', choices=('prefill','decode'), required=True)
     parser.add_argument('--variant', choices=('ma_offload','ma_gpu'), required=True)
     parser.add_argument('--output', type=Path, required=True)
@@ -61,6 +61,42 @@ def main():
             one()
         if cache is not None: rollback(cache,2048)
         torch.cuda.synchronize()
+        if args.backend == 'events':
+            # Diagnostic stream intervals, NOT isolated kernel durations:
+            # event instrumentation and CPU launch gaps affect these spans.
+            original_cat = torch.cat
+            copies = []
+            def traced_cat(tensors, *cat_args, **cat_kwargs):
+                begin = torch.cuda.Event(enable_timing=True)
+                end = torch.cuda.Event(enable_timing=True)
+                begin.record()
+                result = original_cat(tensors, *cat_args, **cat_kwargs)
+                end.record()
+                copies.append((begin, end, result.numel()*result.element_size()))
+                return result
+            start = torch.cuda.Event(enable_timing=True)
+            stop = torch.cuda.Event(enable_timing=True)
+            try:
+                torch.cat = traced_cat
+                start.record()
+                output = one()
+                stop.record()
+                torch.cuda.synchronize()
+            finally:
+                torch.cat = original_cat
+            spans = [dict(stream_ms=a.elapsed_time(b), output_bytes=size) for a,b,size in copies]
+            (args.output/'events.json').write_text(json.dumps(dict(
+                total_stream_ms=start.elapsed_time(stop), cat_spans=spans,
+                cat_sum_stream_ms=sum(x['stream_ms'] for x in spans),
+                cat_output_bytes=sum(x['output_bytes'] for x in spans),
+                caveat='Instrumented stream spans include CPU launch gaps; not kernel time or headline latency.'), indent=2)+'\n')
+            (args.output/'metadata.json').write_text(json.dumps(dict(
+                status='completed', backend='events', mode=args.mode, variant=args.variant,
+                source=source, environment=environment, env=env_fingerprint(),
+                config=model.config.to_dict(), warmup=30, profiled_calls=1,
+                memory=memory_snapshot(model,'cuda',output.past_key_values)),indent=2,default=str)+'\n')
+            del output
+            return
         if args.backend == 'nsys':
             # External Nsight Systems captures only this model call; warmup,
             # setup, and cache rollback remain outside its capture range.
