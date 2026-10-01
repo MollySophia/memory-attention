@@ -27,6 +27,11 @@ except ImportError:
     )
     flash_attn_func = None
 
+try:
+    from flash_attn import flash_attn_with_kvcache
+except ImportError:
+    flash_attn_with_kvcache = None
+
 logger = logging.get_logger(__name__)
 
 
@@ -215,11 +220,18 @@ class MemoryAttention(nn.Module):
             ).unsqueeze(0)
         else:
 
-            o = flash_attn_func(
-                q, k, v,
-                causal=True,
-                window_size=(-1, -1) if self.window_size is None else (self.window_size-1, 0),
-            )
+            if (torch.is_inference_mode_enabled() and q_len == 1
+                    and past_key_values is not None and cache_has_content
+                    and self.window_size is None and flash_attn_with_kvcache is not None):
+                # Cache update already happened above. Omit new k/v: this call
+                # reads the logical cache view without changing its ownership.
+                o = flash_attn_with_kvcache(q, k, v, causal=True, num_splits=0)
+            else:
+                o = flash_attn_func(
+                    q, k, v,
+                    causal=True,
+                    window_size=(-1, -1) if self.window_size is None else (self.window_size-1, 0),
+                )
 
 
 
