@@ -62,3 +62,29 @@ def test_decode_backend_128_steps(policy,batch,kv_heads,padded):
             out.write_text(json.dumps(dict(contract=numerics.CONTRACT,rows=rows,argmax_agreement=agreement),indent=2)+'\n')
             assert agreement>=.99,agreement
         finally:model.close_memory_offload()
+
+@torch.inference_mode()
+def test_decode_backend_reads_cache_without_second_update():
+    if not torch.cuda.is_available():pytest.skip('requires CUDA')
+    from unittest.mock import patch
+    import fla.layers.memory_attn as attention
+    gate=load(ROOT/'profile/test_memory_offload.py')
+    model,_=gate.build(layers=3,hidden=128,heads=2,vocab=128)
+    original=attention.flash_attn_with_kvcache;calls=[]
+    def checked(*args,**kwargs):
+        assert len(args)==3 and 'k' not in kwargs and 'v' not in kwargs
+        k,v=args[1],args[2];before_k,before_v=k.clone(),v.clone()
+        out=original(*args,**kwargs)
+        assert torch.equal(k,before_k) and torch.equal(v,before_v)
+        calls.append(k.shape[1]);return out
+    try:
+        model.fold_memory_table_on_gpu()
+        prefix=torch.randint(0,128,(2,4),device='cuda');token=prefix[:,:1]
+        with patch.object(attention,'flash_attn_with_kvcache',checked):
+            cache=model(input_ids=prefix,use_cache=True).past_key_values
+            assert not calls
+            model(input_ids=token,past_key_values=cache,use_cache=True)
+            assert calls==[5,5,5]
+            model(input_ids=token,attention_mask=torch.ones(2,6,device='cuda',dtype=torch.long),past_key_values=cache,use_cache=True)
+            assert calls==[5,5,5]
+    finally:model.close_memory_offload()
