@@ -606,3 +606,10 @@ Offload decode provisional1.08934x vs resident1.00240x; bothprefills near1.0.
 Placement discrepancy can reflect offload process jitter,so do not attribute
 the9% to copy fusion. Predeclare R02 with12 fresh offload primary processes,
 3 alternating pairs each10/10/3,paired-log95%CI; no optional extension.
+
+A0004 R02 completed12 processes/360 samples; raw/source/config/environment
+audit passed. Prefill0.999654xCI[0.992357,1.007004],decode0.971017x
+CI[0.878762,1.072957],bothwithin_noise. The provisional8.9% decode gain
+did not repeat. Save model/test patch,then revert paired-copy implementation
+and its helper-specific tests. No additional samples to chase a favorable
+result; effective new accepted count remains0. Next: rotary dispatch diagnostic.

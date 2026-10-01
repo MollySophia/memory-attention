@@ -2,8 +2,8 @@
   "attempt_id": "A0004",
   "parent_attempt_id": "A0002",
   "accepted_step": null,
-  "status": null,
-  "phase": "confirmation_prepared",
+  "status": "within_noise",
+  "phase": "final_verdict",
   "label": "Coalesce one-token K/V append into one exact copy kernel",
   "parent_sha": "4d40047882867b10f6de430f184309e21cd5e501",
   "incumbent_sha": "ec6384d2e9081ecbb2926fe8a6193bc48ea650a3",
@@ -17,7 +17,7 @@
   ],
   "correctness_plan": "Bit-exact targeted strided K/V append with sentinels and growing rollback plus existing independent frozen cache growing128,GQA,padding,bulk/pipeline and primary if screen promising.",
   "measurement_plan": "Same8-job primary screening vs accepted A0002,3/5/1,approx3min; formal pairs only if promising.",
-  "next_action": "Primary exact gate then R02 confirmation.",
+  "next_action": "Revert paired copy kernel and its implementation-specific tests; retain patch and all evidence. Profile rotary dispatch from accepted A0002.",
   "candidate_sha": "413afba7d667595b67f3dc786bee98cd9000fc7f",
   "correctness": {
     "pytest": "57 passed;correctness-pytest.txt",
@@ -33,8 +33,17 @@
     "baseline_attempt": "A0002"
   },
   "performance": {
-    "screening": "screening-summary.json"
+    "screening": "screening-summary.json",
+    "confirmation": "confirmation-summary.json"
   },
   "screening_outcome": "Offload decode1.08934x but resident1.00240x; prefill near1.0. Mismatched placement benefit warrants caution about process jitter, not a headline gain.",
-  "confirmation_plan": "12 fresh offload primary processes,3 independent alternating pairs per mode,10/10/3,95% paired-log t intervals df2. Estimated4\u20135min; no optional extension."
+  "confirmation_plan": "12 fresh offload primary processes,3 independent alternating pairs per mode,10/10/3,95% paired-log t intervals df2. Estimated4\u20135min; no optional extension.",
+  "confirmation": {
+    "run": "R02-confirmation",
+    "controller_pid": 1632307,
+    "tool_session": 58396,
+    "job_count": 12,
+    "status": "complete"
+  },
+  "reason": "Screening offload decode gain did not repeat. Formal prefill0.999654xCI[0.992357,1.007004],decode0.971017xCI[0.878762,1.072957]. No repeatable primary gain; no optional resampling."
 }

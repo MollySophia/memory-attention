@@ -1,0 +1,16 @@
+{
+  "objective": "Pursue5\u201310 effective accepted optimization iterations beyond A0002",
+  "starting_incumbent": "A0002",
+  "accepted_new_steps": [],
+  "attempts": {
+    "A0003": "within_noise,reverted",
+    "A0004": "within_noise,reverted"
+  },
+  "pending_hypotheses": [
+    "combined Q/K rotary launch",
+    "native RMSNorm launch/reduction costs",
+    "decode projection/MLP dispatch",
+    "offload gather/layout coordination"
+  ],
+  "complete": false
+}

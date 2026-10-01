@@ -1,0 +1,12 @@
+p1-baseline-ma_offload-prefill complete
+p1-candidate-ma_offload-prefill complete
+p1-baseline-ma_offload-decode complete
+p1-candidate-ma_offload-decode complete
+p2-candidate-ma_offload-prefill complete
+p2-baseline-ma_offload-prefill complete
+p2-candidate-ma_offload-decode complete
+p2-baseline-ma_offload-decode complete
+p3-baseline-ma_offload-prefill complete
+p3-candidate-ma_offload-prefill complete
+p3-baseline-ma_offload-decode complete
+p3-candidate-ma_offload-decode complete

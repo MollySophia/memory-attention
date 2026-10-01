@@ -1,0 +1,121 @@
+diff --git a/fla/models/utils.py b/fla/models/utils.py
+index ab798dc..4badea9 100644
+--- a/fla/models/utils.py
++++ b/fla/models/utils.py
+@@ -10,6 +10,8 @@ from transformers.cache_utils import Cache as HFCacheBase
+ from transformers.generation import GenerationMixin
+ from transformers.utils.deprecation import deprecate_kwarg
+ 
++from fla.ops.utils.memory_cache import append_kv_pair
++
+ _TF_VERSION = transformers.__version__
+ _NEED_NEW = "4.53.3"
+ _IS_TRANSFORMERS_4_56_PLUS = version.parse(_TF_VERSION) >= version.parse("4.56.0")
+@@ -58,8 +60,21 @@ class FLALayer(CacheLayerMixin):
+             for buf, x in zip(buffers, old):
+                 buf[:, :length].copy_(x)
+             self._memory_kv_buffers = buffers
+-        for buf, x in zip(buffers, incoming):
+-            buf[:, length:end].copy_(x)
++        if (len(incoming) == 2 and len(buffers) == 2
++                and incoming[0].is_cuda and incoming[0].ndim == 3
++                and incoming[0].dtype in (torch.float16, torch.bfloat16, torch.float32)
++                and incoming[0].numel() > 0
++                and incoming[0].shape[1] == 1
++                and incoming[0].shape == incoming[1].shape
++                and incoming[0].dtype == incoming[1].dtype
++                and incoming[0].device == incoming[1].device
++                and all(buf.ndim == 3 and buf.device == x.device and buf.dtype == x.dtype
++                        and buf.shape[0] == x.shape[0] and buf.shape[2] == x.shape[2]
++                        for buf, x in zip(buffers, incoming))):
++            append_kv_pair(buffers, incoming, length)
++        else:
++            for buf, x in zip(buffers, incoming):
++                buf[:, length:end].copy_(x)
+         return tuple(buf[:, :end] for buf in buffers)
+ 
+     def update(
+diff --git a/fla/ops/utils/memory_cache.py b/fla/ops/utils/memory_cache.py
+new file mode 100644
+index 0000000..c7c5b4d
+--- /dev/null
++++ b/fla/ops/utils/memory_cache.py
+@@ -0,0 +1,28 @@
++"""Exact paired single-token writes into cache-owned inference buffers."""
++import torch
++import triton
++import triton.language as tl
++
++
++@triton.jit(do_not_specialize=['offset'])
++def _append_kv(K, V, BK, BV, offset,
++               N: tl.constexpr, D: tl.constexpr,
++               KS0: tl.constexpr, KS2: tl.constexpr, VS0: tl.constexpr, VS2: tl.constexpr,
++               BKS0: tl.constexpr, BKS1: tl.constexpr, BKS2: tl.constexpr,
++               BVS0: tl.constexpr, BVS1: tl.constexpr, BVS2: tl.constexpr,
++               BLOCK: tl.constexpr):
++    i=tl.program_id(0)*BLOCK+tl.arange(0,BLOCK)
++    b,d=i//D,i%D
++    k=tl.load(K+b*KS0+d*KS2,i<N)
++    v=tl.load(V+b*VS0+d*VS2,i<N)
++    tl.store(BK+b*BKS0+offset*BKS1+d*BKS2,k,i<N)
++    tl.store(BV+b*BVS0+offset*BVS1+d*BVS2,v,i<N)
++
++
++def append_kv_pair(buffers, incoming, offset):
++    k,v=incoming;bk,bv=buffers
++    with torch.cuda.device(k.device):
++        _append_kv[(triton.cdiv(k.numel(),256),)](
++            k,v,bk,bv,offset,k.numel(),k.shape[2],
++            k.stride(0),k.stride(2),v.stride(0),v.stride(2),
++            *bk.stride(),*bv.stride(),BLOCK=256,num_warps=4)
+diff --git a/tests/test_memory_kv_copy.py b/tests/test_memory_kv_copy.py
+new file mode 100644
+index 0000000..546ab30
+--- /dev/null
++++ b/tests/test_memory_kv_copy.py
+@@ -0,0 +1,44 @@
++"""Paired append must write exact bytes only at the requested cache position."""
++import pytest
++import torch
++from fla.ops.utils.memory_cache import append_kv_pair
++
++@pytest.mark.parametrize('dtype',[torch.bfloat16,torch.float16,torch.float32])
++@pytest.mark.parametrize('batch,width,offset',[(2,17,0),(3,65,127),(8,2048,2048)])
++@torch.inference_mode()
++def test_strided_pair_copy_and_sentinels(dtype,batch,width,offset):
++    if not torch.cuda.is_available():pytest.skip('requires CUDA')
++    torch.manual_seed(238)
++    # Different source and destination strides for K and V.
++    k=torch.randn(batch,1,width*2,device='cuda',dtype=dtype)[...,::2]
++    v=torch.randn(1,batch,width,device='cuda',dtype=dtype).transpose(0,1)
++    bk=torch.full((batch,offset+3,width*2),37,device='cuda',dtype=dtype)[...,::2]
++    bv=torch.full((offset+3,batch,width),-19,device='cuda',dtype=dtype).transpose(0,1)
++    expected_k,expected_v=bk.clone(),bv.clone()
++    expected_k[:,offset:offset+1].copy_(k);expected_v[:,offset:offset+1].copy_(v)
++    append_kv_pair((bk,bv),(k,v),offset)
++    assert torch.equal(bk,expected_k)
++    assert torch.equal(bv,expected_v)
++
++@pytest.mark.parametrize('shape',[(1,1,17),(3,1,1)])
++@torch.inference_mode()
++def test_broadcast_input_keeps_torch_copy_fallback(shape):
++    if not torch.cuda.is_available():pytest.skip('requires CUDA')
++    from fla.models.utils import FLALayer
++    layer=FLALayer()
++    initial=tuple(torch.randn(3,5,17,device='cuda',dtype=torch.bfloat16) for _ in range(2))
++    layer.update(attn_state=initial,cache_kwargs={'memory_append':True})
++    incoming=tuple(torch.randn(*shape,device='cuda',dtype=torch.bfloat16) for _ in range(2))
++    got=layer.update(attn_state=incoming,cache_kwargs={'memory_append':True})['attn_state']
++    for out,old,x in zip(got,initial,incoming):
++        want=torch.cat((old,x.expand(3,1,17)),dim=1)
++        assert torch.equal(out,want)
++
++@torch.inference_mode()
++def test_copy_preserves_bfloat16_special_value_bits():
++    if not torch.cuda.is_available():pytest.skip('requires CUDA')
++    bits=torch.tensor([0,-32768,32640,-128,32704,1,-1],device='cuda',dtype=torch.int16)
++    values=bits.view(torch.bfloat16).view(1,1,-1).expand(2,1,-1)
++    buffers=tuple(torch.zeros((2,4,7),device='cuda',dtype=torch.bfloat16) for _ in range(2))
++    append_kv_pair(buffers,(values,values),2)
++    for buf in buffers:assert torch.equal(buf[:,2:3].view(torch.int16),values.view(torch.int16))
