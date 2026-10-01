@@ -1,0 +1,68 @@
+{
+  "stage": "screening",
+  "valid_for_acceptance": false,
+  "status": "promising",
+  "sampling": {
+    "warmup": 3,
+    "repeats": 5,
+    "rounds": 1
+  },
+  "audit": "8 completed jobs; 40 raw samples; actual imported cache modules verified per process; clean source patches; matching explicit counts and paper_v1 scope; round means recomputed.",
+  "rows": [
+    {
+      "variant": "ma_offload",
+      "mode": "prefill",
+      "baseline_ms": 209.9284621886909,
+      "candidate_ms": 210.15267567709088,
+      "provisional_speedup": 0.998933092392578,
+      "latency_change_pct": 0.10680471150141813,
+      "baseline_gpu_peak_gib": 6.448451995849609,
+      "candidate_gpu_peak_gib": 6.448451995849609,
+      "baseline_kv_capacity_gib": 3.0,
+      "candidate_kv_capacity_gib": 3.0
+    },
+    {
+      "variant": "ma_offload",
+      "mode": "decode",
+      "baseline_ms": 11.00359233096242,
+      "candidate_ms": 5.956731364130974,
+      "provisional_speedup": 1.8472534110269938,
+      "latency_change_pct": -45.86557566868734,
+      "baseline_gpu_peak_gib": 5.746937274932861,
+      "candidate_gpu_peak_gib": 5.8082356452941895,
+      "baseline_kv_capacity_gib": 3.00146484375,
+      "candidate_kv_capacity_gib": 3.1875
+    },
+    {
+      "variant": "ma_gpu",
+      "mode": "prefill",
+      "baseline_ms": 206.19646348059177,
+      "candidate_ms": 206.293317489326,
+      "provisional_speedup": 0.9995305034117781,
+      "latency_change_pct": 0.04697171188066118,
+      "baseline_gpu_peak_gib": 9.15084457397461,
+      "candidate_gpu_peak_gib": 9.15084457397461,
+      "baseline_kv_capacity_gib": 3.0,
+      "candidate_kv_capacity_gib": 3.0
+    },
+    {
+      "variant": "ma_gpu",
+      "mode": "decode",
+      "baseline_ms": 10.914471186697483,
+      "candidate_ms": 5.334914475679398,
+      "provisional_speedup": 2.045856824219761,
+      "latency_change_pct": -51.120724179641684,
+      "baseline_gpu_peak_gib": 8.449360370635986,
+      "candidate_gpu_peak_gib": 8.51062822341919,
+      "baseline_kv_capacity_gib": 3.00146484375,
+      "candidate_kv_capacity_gib": 3.1875
+    }
+  ],
+  "next_step": "Formal primary confirmation: at least three independent alternating baseline/candidate pairs, 10 warmups and 10 samples x3 rounds; no full matrix yet.",
+  "not_run": {
+    "formal_confirmation": "next gate",
+    "full_matrix": "candidate not yet nominated",
+    "generation_performance": "candidate not yet nominated"
+  },
+  "caveat": "Single short run per point; no uncertainty or repeatable-gain claim. R02 invalid and excluded."
+}

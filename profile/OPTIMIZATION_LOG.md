@@ -375,3 +375,14 @@ capacity matched the candidate (3.1875 GiB), confirmed by an import-path probe.
 Stopped controller and active child; preserved R02 as invalid for comparisons.
 Controller now sets checkout-specific PYTHONPATH and verifies actual module
 path before each process. R03 will rerun the eight short measurements.
+
+A0001 R03 screening completed with independently verified import paths: 8 jobs,
+40 samples (3 warmups /5 samples /1 round). Matching scope/counts audited.
+ma_offload prefill: 209.9285 -> 210.1527 ms; provisional ratio 0.999x; peak GPU 6.4485 -> 6.4485 GiB.
+ma_offload decode: 11.0036 -> 5.9567 ms; provisional ratio 1.847x; peak GPU 5.7469 -> 5.8082 GiB.
+ma_gpu prefill: 206.1965 -> 206.2933 ms; provisional ratio 1.000x; peak GPU 9.1508 -> 9.1508 GiB.
+ma_gpu decode: 10.9145 -> 5.3349 ms; provisional ratio 2.046x; peak GPU 8.4494 -> 8.5106 GiB.
+Screening is promising, not an accepted gain. No accepted_step advanced.
+Next: >=3 independent alternating baseline/candidate confirmation pairs using
+10/10/3, then full matrix/generation only if primary confirmation passes.
+R02 remains invalid and excluded. Structured summary and CSV retained.

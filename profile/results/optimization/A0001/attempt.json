@@ -4,9 +4,9 @@
   "accepted_step": null,
   "label": "Amortized KV cache append with bounded spare capacity",
   "status": null,
-  "phase": "screening",
-  "candidate_sha": "f87a7e6b6d8e7f5df1894890d23ddd9820c5a0ef",
-  "parent_sha": "2b85165ff27b4edf6b41e065ac20aee127a113e6",
+  "phase": "screening_complete",
+  "candidate_sha": "d2a0c1745f3b35f9949eb7c06eedf5763646bebf",
+  "parent_sha": "f87a7e6b6d8e7f5df1894890d23ddd9820c5a0ef",
   "hypothesis": "Primary decode repeatedly copies the full history via 48 torch.cat calls. Append new K/V into reusable capacity without changing stored values, attention scope, precision or offload placement.",
   "evidence": "A0000/diagnostics/decode-ma_offload-events/events.json: 3222798336 output bytes across 48 cats, 5.9039 ms summed instrumented stream spans out of 11.2209 ms total. These are diagnostic spans, not kernel timing or speedup claims.",
   "planned_change": "Inference-only append with bounded chunked spare capacity, lazy allocation on decode to preserve prefill path; fall back for unsupported/cache-transformation cases. No cached model outputs or token lookups.",
@@ -16,7 +16,10 @@
     "confirmation": "10/10/3, at least3 independent alternating pairs if promising",
     "acceptance": "full matrix and generation2/5/3 with matching baseline where needed; no resolved primary regression or offload memory loss"
   },
-  "performance": null,
+  "performance": {
+    "screening": "screening-summary.json",
+    "formal": null
+  },
   "risks": [
     "Spare cache storage raises GPU memory; record backing capacity and peaks.",
     "Cache views/rollback/reordering must not reuse stale or incompatible storage.",
@@ -30,5 +33,6 @@
     "primary": "PASS: 296 exact tensor comparisons, full primary model prefix2048 +3 decode steps against frozen cache"
   },
   "development_failure": "Initial capacity test failed after large rollback: 384-slot buffer retained for 129 tokens. Fixed reuse condition to require spare capacity <128; original log retained. Numerical comparisons passed.",
-  "implementation_sha": "2b85165ff27b4edf6b41e065ac20aee127a113e6"
+  "implementation_sha": "2b85165ff27b4edf6b41e065ac20aee127a113e6",
+  "next_action": "Formal primary confirmation: at least three independent alternating baseline/candidate pairs, 10 warmups and 10 samples x3 rounds; no full matrix yet."
 }
