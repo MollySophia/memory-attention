@@ -1,0 +1,37 @@
+
+tests/test_sampling_plans.py::test_cli_defaults[prefill-extra0-expected0] 
+-------------------------------- live log call ---------------------------------
+INFO     numexpr.utils:utils.py:149 Note: NumExpr detected 32 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+INFO     numexpr.utils:utils.py:162 NumExpr defaulting to 16 threads.
+PASSED                                                                   [  3%]
+tests/test_sampling_plans.py::test_cli_defaults[decode-extra1-expected1] PASSED [  6%]
+tests/test_sampling_plans.py::test_cli_defaults[generation-extra2-expected2] PASSED [ 10%]
+tests/test_sampling_plans.py::test_cli_defaults[decode-extra3-expected3] PASSED [ 13%]
+tests/test_sampling_plans.py::test_cli_defaults[prefill-extra4-expected4] PASSED [ 16%]
+tests/test_sampling_plans.py::test_cli_defaults[generation-extra5-expected5] PASSED [ 20%]
+tests/test_sampling_plans.py::test_cli_defaults[generation-extra6-expected6] PASSED [ 23%]
+tests/test_sampling_plans.py::test_cli_defaults[prefill-extra7-expected7] PASSED [ 26%]
+tests/test_sampling_plans.py::test_explicit_override_is_identified PASSED [ 30%]
+tests/test_sampling_plans.py::test_invalid_plans_rejected[generation-extra0] PASSED [ 33%]
+tests/test_sampling_plans.py::test_invalid_plans_rejected[prefill-extra1] PASSED [ 36%]
+tests/test_sampling_plans.py::test_invalid_plans_rejected[decode-extra2] PASSED [ 40%]
+tests/test_sampling_plans.py::test_invalid_plans_rejected[decode-extra3] PASSED [ 43%]
+tests/test_sampling_plans.py::test_matrix_child_plan_matches_manifest[screening-4] PASSED [ 46%]
+tests/test_sampling_plans.py::test_matrix_child_plan_matches_manifest[confirmation-4] PASSED [ 50%]
+tests/test_sampling_plans.py::test_matrix_child_plan_matches_manifest[full_validation-48] PASSED [ 53%]
+tests/test_sampling_plans.py::test_matrix_child_plan_matches_manifest[generation_validation-6] PASSED [ 56%]
+tests/test_sampling_plans.py::test_matrix_child_plan_matches_manifest[legacy-48] PASSED [ 60%]
+tests/test_decode_benchmark.py::test_decode_excludes_rollback_and_keeps_context_fixed PASSED [ 63%]
+tests/test_decode_benchmark.py::test_prefill_scope_and_raw_samples[inference-1-True] PASSED [ 66%]
+tests/test_decode_benchmark.py::test_prefill_scope_and_raw_samples[historical-0-False] PASSED [ 70%]
+tests/test_decode_benchmark.py::test_generation_grows_and_restarts_cache PASSED [ 73%]
+tests/test_decode_benchmark.py::test_benchmark_persists_setup_failure[False] PASSED [ 76%]
+tests/test_decode_benchmark.py::test_benchmark_persists_setup_failure[True] PASSED [ 80%]
+tests/test_decode_benchmark.py::test_paper_matrix_covers_goal PASSED     [ 83%]
+tests/test_paper_report.py::test_pending_and_failures_remain_null PASSED [ 86%]
+tests/test_paper_report.py::test_raw_samples_and_source_are_audited[None-prefill] PASSED [ 90%]
+tests/test_paper_report.py::test_raw_samples_and_source_are_audited[screening-prefill] PASSED [ 93%]
+tests/test_paper_report.py::test_raw_samples_and_source_are_audited[full_validation-prefill] PASSED [ 96%]
+tests/test_paper_report.py::test_raw_samples_and_source_are_audited[full_validation-generation] PASSED [100%]
+
+============================== 30 passed in 2.91s ==============================

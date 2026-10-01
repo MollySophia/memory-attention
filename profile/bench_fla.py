@@ -16,7 +16,9 @@ sweep relies on. Variants mirror bmk.py's naming so summaries line up:
 Primary prefill constructs a KV cache and returns last-token logits. Historical
 full-logits/no-cache prefill is selected explicitly with --prefill-workload.
 Every raw sample is retained; median_ms is the median of round means. Round
-spread describes variability and is not a significance threshold. Protocol paper_v1 is frozen for the paper-001 campaign.
+spread describes variability and is not a significance threshold. Timing scope paper_v1 is frozen for the paper-001 campaign. Sampling defaults
+to screening (3/5/1); generation defaults to generation_validation (2/5/3).
+Use --stage confirmation or full_validation for 10/10/3, or legacy for 30/30/5.
 """
 
 from __future__ import annotations
@@ -38,6 +40,7 @@ import torch
 # Support direct CLI invocation and importlib-based regression tests.
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from benchmark_telemetry import memory_snapshot, environment_details, source_state
+from sampling_plan import STAGES, sampling_plan
 
 from fla.models.memory.configuration_memory import MemoryConfig
 from fla.models.memory.modeling_memory import MemoryForCausalLM
@@ -57,9 +60,10 @@ def parse_args():
     p.add_argument("--seq-len", type=int, required=True)
     p.add_argument("--context-len", type=int, required=True)
     p.add_argument("--generation-steps", type=int, default=128)
-    p.add_argument("--warmup", type=int, default=30)
-    p.add_argument("--repeats", type=int, default=30)
-    p.add_argument("--rounds", type=int, default=5)
+    p.add_argument("--stage", choices=STAGES, help="default: screening; generation uses generation_validation")
+    p.add_argument("--warmup", type=int, help="override stage warmup (recorded as custom plan)")
+    p.add_argument("--repeats", type=int)
+    p.add_argument("--rounds", type=int)
     p.add_argument("--logits-to-keep", type=int, default=1)
     p.add_argument("--prefill-workload", choices=("inference", "historical"), default="inference")
     p.add_argument("--hidden-size", type=int, default=2048)
@@ -76,6 +80,13 @@ def parse_args():
     p.add_argument("--device", default="cuda:0")
     p.add_argument("--json", type=Path, required=True)
     args = p.parse_args()
+    stage = args.stage or ('generation_validation' if args.mode == 'generation' else 'screening')
+    try:
+        plan = sampling_plan(stage, args.mode, args.warmup, args.repeats, args.rounds)
+    except ValueError as exc:
+        p.error(str(exc))
+    for key, value in plan.items():
+        setattr(args, key, value)
     if min(args.batch_size, args.seq_len, args.context_len, args.repeats, args.rounds, args.generation_steps) <= 0 or args.warmup < 0:
         p.error("shapes, repeats and rounds must be positive; warmup must be nonnegative")
     if args.logits_to_keep < 0:
@@ -297,6 +308,7 @@ def measure(model, args, variant, device):
         memory_before=measurements["memory_before"],
         memory_after=measurements["memory_after"],
         protocol_version=PROTOCOL_VERSION,
+        sampling_plan=sampling_plan(args.stage, args.mode, args.warmup, args.repeats, args.rounds),
         estimator="median_of_round_means",
         sample_p50_ms=statistics.median(samples),
         sample_p95_ms=sorted(samples)[max(0, math.ceil(len(samples) * .95) - 1)],
@@ -382,7 +394,7 @@ def main():
         failure = dict(type=type(exc).__name__, message=str(exc), traceback=traceback.format_exc())
         print(failure["traceback"], file=sys.stderr, flush=True)
 
-    payload = dict(protocol_version=PROTOCOL_VERSION, config=vars(args), status=status, failure=failure, model_config=model.config.to_dict() if model is not None else None, env=env_fingerprint(), source=sources, environment_before=environment_before, environment_after=environment_details(), command=sys.argv, results=results)
+    payload = dict(protocol_version=PROTOCOL_VERSION, stage=args.stage, measurement_plan_id=args.measurement_plan_id, config=vars(args), status=status, failure=failure, model_config=model.config.to_dict() if model is not None else None, env=env_fingerprint(), source=sources, environment_before=environment_before, environment_after=environment_details(), command=sys.argv, results=results)
     args.json.parent.mkdir(parents=True, exist_ok=True)
     args.json.write_text(json.dumps(payload, indent=2, default=str), encoding="utf-8")
 

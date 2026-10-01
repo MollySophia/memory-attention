@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "tests": "30 passed",
+  "command": "/home/molly/miniconda3/envs/fla-bench/bin/python -m pytest -q tests/test_sampling_plans.py tests/test_decode_benchmark.py tests/test_paper_report.py",
+  "legacy_audit": "A0000/R01: all 48 jobs and 7200 samples pass unchanged",
+  "screening": {
+    "jobs": 4,
+    "samples": 20
+  },
+  "full_validation": {
+    "jobs": 48,
+    "samples": 1350
+  },
+  "scope": "CPU harness/CLI/report validation and plan-only previews. No GPU timings or algorithmic candidate changes."
+}

@@ -302,3 +302,26 @@ Raw traces preserved and limitation recorded in `diagnostics-audit.json`.
 Committed external Nsight capture support, then launched single-call offload
 decode capture (source d60be57); controller/child verified live. Actual Nsight
 GPU event availability remains unverified. No model optimization made yet.
+
+### Post-A0000 tooling — staged sampling requested by user (2026-10-01)
+
+Updated GOAL.md and scripts without changing model arithmetic or paper_v1
+measurement scope. `bench_fla.py` defaults to screening 3/5/1 for prefill/decode;
+generation uses 2/5/3. Confirmation/full-validation single calls use 10/10/3.
+Stage, plan ID, sampling unit and actual counts are recorded; explicit count
+overrides produce custom plan IDs. `--stage legacy` preserves 30/30/5 sampling.
+Exact A0000 source remains available in its frozen checkout.
+
+Matrix driver defaults to four primary screening jobs (20 samples total).
+`--stage full_validation` retains all 48 points (1350 samples total);
+`--plan-only` writes exact commands and work counts without GPU execution.
+Confirmation stage generates one side of a run, not an independent-pair claim.
+Report validation uses the declared per-job plan; old metadata-free A0000
+results remain validated against legacy counts. Screening figures are labeled
+and absent off-scope shapes remain not_run.
+
+Validation: 30 CPU tests passed for CLI defaults/overrides/errors, command-plan
+agreement, timing boundaries, raw-sample integrity and old/new report schemas.
+Re-audited all 48 A0000 jobs / 7200 samples unchanged. Evidence and plan previews:
+`profile/results/protocol/staged-sampling/`. No performance rerun or A0001 model
+candidate was started by this tooling update.

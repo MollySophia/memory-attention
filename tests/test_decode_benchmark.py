@@ -133,7 +133,7 @@ def test_benchmark_persists_setup_failure(monkeypatch, tmp_path, oom):
     spec = importlib.util.spec_from_file_location('bench_failure', script)
     bench = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(bench)
-    args = SimpleNamespace(device='cuda:0', json=tmp_path/'failure.json')
+    args = SimpleNamespace(device='cuda:0', json=tmp_path/'failure.json', stage='screening', measurement_plan_id='screen_v1_w3_n5_r1')
     monkeypatch.setattr(bench, 'parse_args', lambda: args)
     monkeypatch.setattr(torch.cuda, 'is_available', lambda: True)
     monkeypatch.setattr(bench, 'environment_details', lambda: {})

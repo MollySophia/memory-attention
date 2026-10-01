@@ -1,8 +1,10 @@
 # Memory Attention inference performance experiments
 
-Status: proposed experiment protocol. This file describes future optimization
-work; creating it does not start an optimization run. Freeze the measurement
-protocol and establish a fresh baseline before evaluating optimizations.
+Status: active campaign with frozen baseline A0000 already completed under
+paper_v1. Preserve its source, raw measurements and figures. This revision
+changes the order and sampling plans for future work; it does not invalidate,
+relabel or require rerunning the completed baseline. Use the staged workflow
+below to reach useful optimization evidence before spending on full validation.
 
 ## Objective and constraints
 
@@ -38,7 +40,7 @@ Attention Q/K/V heads have dimension 64. Prefill transfers at most
 batch * length * layers * kv_dim * sizeof(dtype) = 1536 MiB of gathered
 memory values at this shape; decode transfers 0.75 MiB per step.
 
-Proposed validation matrix (freeze before optimization):
+Final validation matrix (frozen for the current campaign):
 
 - Batch sweep: 1, 4, 8, 16 at prefill/context length 2048.
 - Length sweep: 512, 2048, 4096, 8192 at batch 8.
@@ -46,11 +48,15 @@ Proposed validation matrix (freeze before optimization):
 - A growing-cache generation run: 128 decode steps after a 2048-token prefix,
   batches 1 and 8, fixed predetermined tokens for equivalence across variants.
 
-Use the primary shape during iteration. Run the full matrix for a retained
-candidate and the final implementation, including regression checks against
-the frozen baseline at the other shapes.
+Use the primary shape during iteration. The full matrix is an acceptance gate
+for a candidate nominated for retention, not a prerequisite for profiling or
+screening every idea. Include regression checks against the frozen baseline at
+all other shapes before accepting a retained candidate. If the final
+implementation is the same verified source with the same measurement plan and
+environment, reuse that full-matrix evidence rather than rerunning it simply
+because the candidate is now called final.
 
-## Measurement protocol to implement before optimization
+## Measurement scope and staged sampling plans
 
 Use profile/bench_fla.py for the actual model. profile/bmk.py implements a
 separate experiment and must not supply this model's headline numbers.
@@ -63,8 +69,8 @@ Define and persist a protocol version in every result:
   [batch, 1, vocab]. Report latency per batch step and batch tokens/second.
 - Retain the existing full-logits, use_cache=False prefill as a separate
   historical/ablation workload, with logits [batch, length, vocab].
-- Apply logits_to_keep to prefill as well as decode; it currently only affects
-  decode. Do not compare different output/cache scopes in the same speedup.
+- Apply logits_to_keep to prefill as well as decode. Do not compare different
+  output/cache scopes in the same speedup.
 - Keep benchmark-only cache rollback and test token selection outside the
   timed interval (implemented as fixed_context_v2_rollback_excluded). Keep a
   fixed context for isolated decode timing, and measure growing context separately.
@@ -77,9 +83,62 @@ Define and persist a protocol version in every result:
 - Generation latency includes prefill and all 128 decode calls. State whether
   sampling/token selection is excluded; do not label it serving latency.
 
-Start with 30 warmup calls, 30 samples per round, 5 rounds. Preserve every
-sample, round means and run-level estimates. The current median_ms is a median
-of round means, not a median of individual request latencies; label it precisely.
+Separate measurement scope from sampling effort. Persist `protocol_version`,
+`measurement_plan_id`, `stage`, warmup, repeats and rounds in each future run.
+The existing A0000 paper_v1 records retain their original configuration; do not
+retroactively edit their metadata. Freeze each plan before collecting its data.
+These are starting plans, not universal sample-size guarantees. Independence
+comes from separate paired processes; many samples in one process do not replace
+that requirement. Do not apply the old 30-warmup/150-sample plan to every point.
+
+| Stage | Workloads and placements | Warmup / samples per round / rounds | Purpose |
+| --- | --- | --- | --- |
+| Screening | Primary prefill and decode; ma_offload first, ma_gpu for attribution | 3 / 5 / 1 per point | Reject poor ideas quickly; no accepted gain claims |
+| Confirmation | Primary prefill and decode; independent frozen baseline/candidate pairs for ma_offload, resident comparison separately | 10 / 10 / 3 per point | Repeatability and primary regression checks |
+| Full validation | Complete batch/length matrix for a candidate nominated for retention, including placement/folding references | 10 / 10 / 3 per prefill/decode point | Scaling, memory and regression acceptance gates |
+| Generation validation | Prefix2048 + 128 steps; batches1/8, placement/folding references | 2 full-trajectory warmups / 5 trajectories / 3 rounds | Growing-cache latency and memory |
+
+Use `profile/bench_fla.py --stage <stage>` for a single configuration and
+`profile/run_paper_matrix.py --stage <stage>` for a stage's workload set.
+Both default to screening (single-config generation defaults to
+generation_validation). `--stage legacy` selects the original 30/30/5 sampling;
+use the frozen checkout to reproduce the exact A0000 implementation.
+`--plan-only` on the matrix driver writes commands and planned sample/call counts
+without launching measurements. Confirmation jobs from this driver represent
+one side of a run; schedule independent alternating baseline/candidate pairs
+separately. Explicit warmup/repeats/rounds overrides on bench_fla receive a
+custom plan ID and retain their actual counts in the result.
+
+Screening still requires compilation and offload buffer setup before timing.
+If the short warmup is insufficient, increase it for both baseline and candidate
+and record the revised plan before comparing. Short-plan results are provisional
+and must never supply headline or accepted-step speedups. These sampling plans
+do not shorten correctness tests: retain multi-step/growing-cache gates even
+when generation performance is not measured during screening.
+
+A generation warmup/sample is an entire prefix plus 128-step trajectory, not
+one decode call. Its warmup count is independent of the single-call benchmark.
+The completed A0000 generation data used 30 trajectory warmups and remain valid
+under that recorded plan. For a future generation speedup comparison, either
+use that original plan for both sides, or rerun only the matching baseline
+and candidate generation points under the new plan. This also applies to the
+reduced prefill/decode plans: collect matching baseline measurements for formal
+comparisons, without rerunning unrelated baseline matrix points. Do not silently
+compare different sampling plans as matched evidence.
+
+Escalate measurement effort only for a concrete unresolved question: compilation
+or allocation still occurring during measurement, warmup drift, run-order or
+thermal effects, or paired uncertainty that cannot distinguish a gain from a
+regression. First diagnose the cause. Then predeclare the revised plan and rerun
+both sides at the affected points under new run IDs, retaining earlier results.
+Prefer additional independent process pairs when between-run variability
+dominates; add within-process samples only when request-level noise warrants it.
+Do not keep extending a run until a favorable result appears. If uncertainty
+remains, report within_noise; do not lower acceptance standards. Larger plans
+such as 30 warmups and 150 samples are an escalation option, not the default.
+
+Preserve every sample, round means and run-level estimates. The current
+median_ms is a median of round means, not a median of individual request latencies; label it precisely.
 Report throughput as batch * sequence_length / seconds for prefill and
 batch / seconds for decode. Report p50/p95 of actual samples if used, separately
 from statistics over rounds.
@@ -89,6 +148,13 @@ on the same machine, with at least 3 independent process pairs. Report the
 distribution of paired speedups and uncertainty. Round spread is descriptive,
 not a confidence interval or a universal significance threshold. Classify
 unresolved improvements as within noise. Profile separately from timing runs.
+
+Profile as soon as the primary baseline is available; do not wait for a full
+baseline matrix or generation sweep before investigating bottlenecks. Run GPU
+profiling and GPU timing sequentially so they do not interfere. Use ma_gpu_unfolded
+for the folding ablation and full validation, rather than automatically including
+it in every screening run. For a rejected screen, record the evidence and move
+on without running its full matrix or generation performance sweep.
 
 ## Memory and environment
 
@@ -105,9 +171,13 @@ Record GPU, driver, CUDA, torch, FlashAttention, Python, CPU, thread settings,
 commit and source hash. Note GPU temperature/clocks and competing GPU work.
 Use a new result directory per attempt/protocol/environment. Preserve source
 or a patch for dirty attempts; a hash alone cannot reconstruct the code.
-Previous benchmark artifacts were removed to start with a clean dataset.
-The historical tracked sweep is recoverable from commit 544b760; establish
-a fresh A0000 under the frozen protocol and do not reuse old timings.
+The historical tracked sweep is recoverable from commit 544b760 and is not the
+current baseline. A0000/R01 is the completed paper_v1 baseline (48 points,
+7200 samples); its frozen candidate source is
+`d949640ebf2f13f56021bd08c5c9f10e65d571c3`.
+Use it for scaling/context and preserve the independent frozen checkout.
+Claimed improvements still require fresh matching paired runs; a stored
+baseline point alone cannot replace independent confirmation.
 
 ## Correctness gates
 
@@ -155,14 +225,21 @@ Record:
 
 - Hypothesis, expected bottleneck, change, parent baseline and exact source
   commit/hash or saved patch; original and candidate protocol versions.
-- Configuration, seed, environment, exact commands, raw timing samples,
-  complete correctness output, memory data, logs and relevant profiles.
+- Stage and measurement plan, configuration, seed, environment, exact commands,
+  raw timing samples, complete correctness output, memory data, logs and
+  relevant profiles.
 - Per-shape prefill/decode latency, throughput, memory and paired speedup
   against frozen baseline; resident-placement comparison separately.
 - Status: accepted, rejected, within_noise, correctness_failed, oom,
   unsupported, benchmark_failed or interrupted. Include reason and next insight.
 - For attempts blocked before timing, record performance as unavailable and
   explain why. Never substitute zero for failed/missing measurements.
+
+Track workflow progress separately from the outcome status: screening,
+confirmation, full_validation, then a final verdict. Passing screening or
+primary confirmation is not `accepted` and does not advance `accepted_step`.
+List intentionally unmeasured points as not run at this stage, with their
+reason; do not confuse them with OOM, unsupported, or missing completed-run data.
 
 Record failure evidence and a reproducible patch before reverting. Keep each
 experiment focused on one hypothesis; combined optimizations need ablations.
@@ -229,16 +306,43 @@ incomparable protocol/configuration points in a single series.
 
 ## Execution order
 
-1. Preserve the current fixes/tests/protocol as a reproducible source revision.
-2. Complete the measurement protocol, raw-sample/memory reporting and missing
-   growing-cache correctness coverage. Verify the harness before kernel work.
-3. Freeze the configuration/protocol and record fresh baseline A0000, including
-   resident and offloaded placements. Keep the baseline code available for
-   independent reruns; later protocol changes require a new baseline campaign.
-4. Profile, register an attempt, change code, gate, measure, and record the
-   outcome before accepting or reverting. Repeat in bounded campaigns.
-5. Confirm retained candidates on the full matrix; generate final artifacts.
+1. Reuse the existing frozen A0000 source and results. For a future campaign,
+   verify the harness/correctness gates and freeze scope/configuration first,
+   then establish only the primary offload/resident baseline needed to begin.
+   A complete baseline matrix is not a prerequisite for the first profile.
+2. Profile primary prefill/decode separately from timing. Identify a concrete
+   bottleneck before registering and implementing a focused candidate. If a
+   profiling backend lacks GPU events, record that limitation and use a working
+   diagnostic path; never treat unavailable timings as zero.
+3. Register and commit the candidate, run correctness gates, then screen primary
+   offload prefill/decode with the short plan. Compare against a matching frozen
+   baseline run. Reject clear regressions or unpromising ideas promptly; collect
+   resident measurements where they help attribute a model-wide change.
+4. For a promising candidate, run formal primary confirmation with at least
+   three independent alternating baseline/candidate process pairs. Confirm
+   memory savings and the absence of a resolved regression in the other primary
+   latency. Record inconclusive results as within_noise, not accepted.
+5. Nominate a candidate for retention only after confirmation. Run the full
+   matrix, generation validation and all applicable correctness checks before
+   acceptance. Reuse valid existing measurements where source, scope, sampling
+   plan and environment match; rerun matching baseline points where required
+   for comparisons. Investigate regressions rather than silently dropping them.
+6. Commit the verdict/evidence, accept or revert, and continue from the best
+   verified implementation. Generate final figures and reproducible commands
+   from accepted evidence without duplicating an already completed identical
+   validation run.
 
-No numeric speedup target or runtime budget has been set. Work in explicitly
-bounded experiment campaigns. A failed or unresolved campaign remains a valid
-record; do not declare success based on a noisy point or omit failed attempts.
+For the current campaign, evaluate up to three focused candidates after A0000,
+then review the findings and define the next bounded campaign if necessary.
+No numeric speedup target or total runtime budget has been set. Before launching
+an expensive matrix, record the job count and estimated cost from measured
+latencies, including warmup trajectories and per-process setup. These are
+planning estimates, not permission gates or timeouts for live jobs.
+
+Preserve per-job raw results automatically. Commit completed experiment stages
+or meaningful groups of results, rather than every polling checkpoint. Keep
+wait updates brief; verify the actual controller/child process before declaring
+it stopped, and never restart solely because observation timed out. A failed or
+unresolved campaign remains a valid record; do not declare success based on a
+noisy point or omit failed attempts. Completing a baseline or bounded campaign
+alone does not satisfy the optimization objective.

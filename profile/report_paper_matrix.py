@@ -10,6 +10,9 @@ import json
 import math
 from pathlib import Path
 import statistics
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from sampling_plan import sampling_plan
 
 
 def collect(run):
@@ -17,6 +20,8 @@ def collect(run):
     rows = []
     for job in manifest['jobs']:
         row = {k: job[k] for k in ('name', 'mode', 'variant', 'batch', 'length', 'status')}
+        plan = job.get('sampling_plan', sampling_plan('legacy', job['mode']))
+        row.update(stage=plan['stage'], measurement_plan_id=plan['measurement_plan_id'])
         row.update(median_ms=None, round_min_ms=None, round_max_ms=None,
                    tokens_per_second=None, gpu_peak_allocated_gib=None,
                    gpu_peak_reserved_gib=None, host_rss_gib=None, pinned_mib=None,
@@ -27,7 +32,13 @@ def collect(run):
             assert data['protocol_version'] == 'paper_v1', job['name']
             assert data['source']['git_commit']['stdout'].strip() == manifest['candidate_sha'], job['name']
             config = data['config']
-            assert (config['warmup'], config['rounds'], config['repeats']) == (30, 5, 30), job['name']
+            assert all(config[k] == plan[k] for k in ('warmup', 'rounds', 'repeats')), job['name']
+            assert sampling_plan(plan['stage'], job['mode'], plan['warmup'], plan['repeats'], plan['rounds']) == plan
+            if 'sampling_plan' in job:
+                assert all(config[k] == plan[k] for k in plan), job['name']
+                assert data['stage'] == plan['stage'] and data['measurement_plan_id'] == plan['measurement_plan_id']
+            else:
+                assert 'measurement_plan_id' not in data, 'new result requires a declared manifest plan'
             assert (config['batch_size'], config['seq_len'], config['context_len']) == (job['batch'], job['length'], job['length'])
             expected_config = dict(num_layers=24, hidden_size=2048, num_heads=32,
                                    num_kv_heads=32, intermediate_size=5632, vocab_size=32000,
@@ -37,8 +48,10 @@ def collect(run):
             assert len(data['results']) == 1
             result = data['results'][0]
             assert (result['mode'], result['variant']) == (job['mode'], job['variant'])
+            if 'sampling_plan' in job:
+                assert result['sampling_plan'] == plan
             samples = result['samples_ms']
-            assert len(samples) == 5 and all(len(r) == 30 for r in samples), job['name']
+            assert len(samples) == plan['rounds'] and all(len(r) == plan['repeats'] for r in samples), job['name']
             assert all(math.isfinite(x) and x > 0 for r in samples for x in r)
             means = [statistics.mean(r) for r in samples]
             assert means == result['round_ms']
@@ -53,7 +66,7 @@ def collect(run):
                        gpu_peak_reserved_gib=mem['gpu_peak_reserved_bytes']/2**30,
                        host_rss_gib=mem['host_rss_bytes']/2**30,
                        pinned_mib=mem['offload_pinned_bytes']/2**20,
-                       kv_gib=mem['kv_cache_storage_bytes']/2**30, sample_count=150)
+                       kv_gib=mem['kv_cache_storage_bytes']/2**30, sample_count=sum(map(len, samples)))
         rows.append(row)
     return manifest, rows
 
@@ -69,7 +82,8 @@ def plot(rows, output, partial):
                'Baseline placement: ma_offload; resident/folding references shown separately. No quality claim.')
 
     def finish(fig, name):
-        fig.suptitle(('PARTIAL — ' if partial else '')+name.replace('_', ' '))
+        stage_label = 'SCREENING ONLY — ' if any(r['stage']=='screening' for r in rows) else ''
+        fig.suptitle(stage_label+('PARTIAL — ' if partial else '')+name.replace('_', ' '))
         fig.text(.5, .01, caption.replace('fixed-context decode', 'growing-context decode') if name == 'growing_generation' else caption, ha='center', fontsize=8)
         fig.tight_layout(rect=(0, .12, 1, .95))
         for extension in ('png', 'svg', 'pdf'):
@@ -82,7 +96,8 @@ def plot(rows, output, partial):
         for index, (variant, color) in enumerate(zip(variants, colors)):
             selected = [r for r in rows if r['mode']==mode and r['variant']==variant and
                         (r['length']==2048 if sweep=='batch' else r['batch']==8)]
-            by_x = {r[axis_key]:r for r in selected}
+            by_x = {x: dict(status='not_run', **{metric: None}) for x in expected}
+            by_x.update({r[axis_key]:r for r in selected})
             values = [by_x[x][metric] if by_x[x]['status']=='completed' else math.nan for x in expected]
             ax.plot(expected, values, 'o-', color=color, label=variant)
             for x in expected:
