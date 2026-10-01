@@ -1,0 +1,972 @@
+{
+  "campaign_id": "offload-gap-001",
+  "purpose": "diagnostic only; instrumented, not headline timing",
+  "command": [
+    "profile/results/optimization/offload-gap-001/diagnose_decode_gather.py",
+    "--source-root",
+    "/home/molly/workspace-memory-attn/offload-gap-001-A0001",
+    "--output",
+    "profile/results/optimization/offload-gap-001/A0001/decode-gather-diagnostic-candidate.json"
+  ],
+  "source": {
+    "source_sha256": "a21cfb59e20667368dbbf7e116cc23b723c27d7a8df69c27d387cc61365652b7",
+    "git_commit": {
+      "returncode": 0,
+      "stdout": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb\n",
+      "stderr": ""
+    },
+    "git_status": {
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "source_patch": {
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  "env": {
+    "git_commit": "ffdad5c",
+    "model_module": "/home/molly/workspace-memory-attn/offload-gap-001-A0001/fla/models/memory/modeling_memory.py",
+    "torch": "2.9.0+cu130",
+    "torch_cuda": "13.0",
+    "flash_attn": "2.8.3",
+    "fla": "0.4.2",
+    "python": "3.12.2",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "gpu_capability": "sm_120",
+    "cuda_visible_devices": ""
+  },
+  "environment": {
+    "cpu": {
+      "returncode": 0,
+      "stdout": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           48 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  32\nOn-line CPU(s) list:                     0-31\nVendor ID:                               AuthenticAMD\nModel name:                              AMD Ryzen 9 9950X 16-Core Processor\nCPU family:                              26\nModel:                                   68\nThread(s) per core:                      2\nCore(s) per socket:                      16\nSocket(s):                               1\nStepping:                                0\nMicrocode version:                       0xb404035\nFrequency boost:                         enabled\nCPU(s) scaling MHz:                      45%\nCPU max MHz:                             5756.4521\nCPU min MHz:                             624.1940\nBogoMIPS:                                8584.34\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good amd_lbr_v2 nopl xtopology nonstop_tsc cpuid extd_apicid aperfmperf rapl pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpuid_fault cpb cat_l3 cdp_l3 hw_pstate ssbd mba perfmon_v2 ibrs ibpb stibp ibrs_enhanced vmmcall fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid cqm rdt_a avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local user_shstk avx_vnni avx512_bf16 clzero irperf xsaveerptr rdpru wbnoinvd cppc arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif x2avic v_spec_ctrl vnmi avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid bus_lock_detect movdiri movdir64b overflow_recov succor smca fsrm avx512_vp2intersect flush_l1d amd_lbr_pmc_freeze\nVirtualization:                          AMD-V\nL1d cache:                               768 KiB (16 instances)\nL1i cache:                               512 KiB (16 instances)\nL2 cache:                                16 MiB (16 instances)\nL3 cache:                                64 MiB (2 instances)\nNUMA node(s):                            1\nNUMA node0 CPU(s):                       0-31\nVulnerability Gather data sampling:      Not affected\nVulnerability Ghostwrite:                Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Not affected\nVulnerability Mds:                       Not affected\nVulnerability Meltdown:                  Not affected\nVulnerability Mmio stale data:           Not affected\nVulnerability Old microcode:             Not affected\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Not affected\nVulnerability Spec rstack overflow:      Mitigation; IBPB on VMEXIT only\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Enhanced / Automatic IBRS; IBPB conditional; STIBP always-on; PBRSB-eIBRS Not affected; BHI Not affected\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Not affected\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Mitigation; IBPB on VMEXIT\n",
+      "stderr": ""
+    },
+    "cpu_affinity": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31
+    ],
+    "platform": "Linux-6.18.9-arch1-2-molly-x86_64-with-glibc2.44",
+    "torch_threads": 16,
+    "torch_interop_threads": 32,
+    "thread_environment": {
+      "OMP_NUM_THREADS": null,
+      "MKL_NUM_THREADS": null,
+      "OPENBLAS_NUM_THREADS": null
+    },
+    "nvidia_smi": {
+      "returncode": 0,
+      "stdout": "Thu Oct  1 23:19:32 2026       \n+-----------------------------------------------------------------------------------------+\n| NVIDIA-SMI 610.57.04              KMD Version: 610.57.04     CUDA UMD Version: 13.3     |\n+-----------------------------------------+------------------------+----------------------+\n| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |\n| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |\n|                                         |                        |               MIG M. |\n|=========================================+========================+======================|\n|   0  NVIDIA GeForce RTX 5090        Off |   00000000:01:00.0 Off |                  N/A |\n|  0%   46C    P1            121W /  575W |    7105MiB /  32607MiB |     64%      Default |\n|                                         |                        |                  N/A |\n+-----------------------------------------+------------------------+----------------------+\n\n+-----------------------------------------------------------------------------------------+\n| Processes:                                                                              |\n|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |\n|        ID   ID                                                               Usage      |\n|=========================================================================================|\n|    0   N/A  N/A         1748096      C   ...da3/envs/fla-bench/bin/python       6402MiB |\n|    0   N/A  N/A         3625831      C   ...ngtz/trm-mcp/.venv/bin/python        654MiB |\n+-----------------------------------------------------------------------------------------+\n",
+      "stderr": ""
+    },
+    "gpu_telemetry": {
+      "returncode": 0,
+      "stdout": "name, driver_version, temperature.gpu, clocks.current.sm [MHz], clocks.current.memory [MHz], power.draw [W], utilization.gpu [%], memory.used [MiB]\nNVIDIA GeForce RTX 5090, 610.57.04, 46, 2805 MHz, 13801 MHz, 121.98 W, 64 %, 7105 MiB\n",
+      "stderr": ""
+    }
+  },
+  "config": {
+    "seed": 1234,
+    "hidden_size": 2048,
+    "num_layers": 24,
+    "num_heads": 32,
+    "num_kv_heads": 32,
+    "vocab_size": 32000,
+    "hidden_ratio": 4,
+    "intermediate_size": 5632,
+    "group_size": 1,
+    "prefetch_depth": 4,
+    "policy": "auto",
+    "device": "cuda:0",
+    "batch_size": 1,
+    "seq_len": 2048,
+    "context_len": 2048,
+    "mode": "decode",
+    "stage": "confirmation",
+    "warmup": 10,
+    "repeats": 10,
+    "rounds": 3,
+    "logits_to_keep": 1,
+    "prefill_workload": "inference",
+    "generation_steps": 128
+  },
+  "records": [
+    {
+      "ids": 2048,
+      "source_shape": [
+        32000,
+        1,
+        2048
+      ],
+      "wall_ms": 0.648565,
+      "caller_thread_cpu_ms": 0.627286,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "ids": 2048,
+      "source_shape": [
+        32000,
+        1,
+        2048
+      ],
+      "wall_ms": 0.519561,
+      "caller_thread_cpu_ms": 0.518381,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "ids": 2048,
+      "source_shape": [
+        32000,
+        1,
+        2048
+      ],
+      "wall_ms": 0.860275,
+      "caller_thread_cpu_ms": 0.851045,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "ids": 2048,
+      "source_shape": [
+        32000,
+        1,
+        2048
+      ],
+      "wall_ms": 0.976043,
+      "caller_thread_cpu_ms": 0.95514,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "ids": 2048,
+      "source_shape": [
+        32000,
+        1,
+        2048
+      ],
+      "wall_ms": 0.299866,
+      "caller_thread_cpu_ms": 0.293641,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "ids": 2048,
+      "source_shape": [
+        32000,
+        1,
+        2048
+      ],
+      "wall_ms": 0.330264,
+      "caller_thread_cpu_ms": 0.300252,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "ids": 2048,
+      "source_shape": [
+        32000,
+        1,
+        2048
+      ],
+      "wall_ms": 0.371853,
+      "caller_thread_cpu_ms": 0.366717,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "ids": 2048,
+      "source_shape": [
+        32000,
+        1,
+        2048
+      ],
+      "wall_ms": 0.308643,
+      "caller_thread_cpu_ms": 0.307857,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "ids": 2048,
+      "source_shape": [
+        32000,
+        1,
+        2048
+      ],
+      "wall_ms": 0.295668,
+      "caller_thread_cpu_ms": 0.292087,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "ids": 2048,
+      "source_shape": [
+        32000,
+        1,
+        2048
+      ],
+      "wall_ms": 0.340984,
+      "caller_thread_cpu_ms": 0.337502,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "ids": 2048,
+      "source_shape": [
+        32000,
+        1,
+        2048
+      ],
+      "wall_ms": 0.255713,
+      "caller_thread_cpu_ms": 0.251041,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "ids": 2048,
+      "source_shape": [
+        32000,
+        1,
+        2048
+      ],
+      "wall_ms": 0.225196,
+      "caller_thread_cpu_ms": 0.222287,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "ids": 2048,
+      "source_shape": [
+        32000,
+        1,
+        2048
+      ],
+      "wall_ms": 0.25413,
+      "caller_thread_cpu_ms": 0.21793,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "ids": 2048,
+      "source_shape": [
+        32000,
+        1,
+        2048
+      ],
+      "wall_ms": 0.205227,
+      "caller_thread_cpu_ms": 0.204844,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "ids": 2048,
+      "source_shape": [
+        32000,
+        1,
+        2048
+      ],
+      "wall_ms": 0.183577,
+      "caller_thread_cpu_ms": 0.183173,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "ids": 2048,
+      "source_shape": [
+        32000,
+        1,
+        2048
+      ],
+      "wall_ms": 0.170582,
+      "caller_thread_cpu_ms": 0.170209,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "ids": 2048,
+      "source_shape": [
+        32000,
+        1,
+        2048
+      ],
+      "wall_ms": 0.169641,
+      "caller_thread_cpu_ms": 0.167645,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "ids": 2048,
+      "source_shape": [
+        32000,
+        1,
+        2048
+      ],
+      "wall_ms": 0.16414,
+      "caller_thread_cpu_ms": 0.163547,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "ids": 2048,
+      "source_shape": [
+        32000,
+        1,
+        2048
+      ],
+      "wall_ms": 0.156595,
+      "caller_thread_cpu_ms": 0.156263,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "ids": 2048,
+      "source_shape": [
+        32000,
+        1,
+        2048
+      ],
+      "wall_ms": 0.149913,
+      "caller_thread_cpu_ms": 0.149561,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "ids": 2048,
+      "source_shape": [
+        32000,
+        1,
+        2048
+      ],
+      "wall_ms": 0.149032,
+      "caller_thread_cpu_ms": 0.148679,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "ids": 2048,
+      "source_shape": [
+        32000,
+        1,
+        2048
+      ],
+      "wall_ms": 0.148971,
+      "caller_thread_cpu_ms": 0.146514,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "ids": 2048,
+      "source_shape": [
+        32000,
+        1,
+        2048
+      ],
+      "wall_ms": 0.145705,
+      "caller_thread_cpu_ms": 0.145352,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "ids": 2048,
+      "source_shape": [
+        32000,
+        1,
+        2048
+      ],
+      "wall_ms": 0.140676,
+      "caller_thread_cpu_ms": 0.140273,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.061486,
+      "caller_thread_cpu_ms": 0.058931,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.041519,
+      "caller_thread_cpu_ms": 0.039254,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.02628,
+      "caller_thread_cpu_ms": 0.025177,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.023073,
+      "caller_thread_cpu_ms": 0.022121,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.023855,
+      "caller_thread_cpu_ms": 0.022893,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.023474,
+      "caller_thread_cpu_ms": 0.022572,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.025929,
+      "caller_thread_cpu_ms": 0.025007,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.023164,
+      "caller_thread_cpu_ms": 0.022302,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.02689,
+      "caller_thread_cpu_ms": 0.025968,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.023805,
+      "caller_thread_cpu_ms": 0.022843,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.026019,
+      "caller_thread_cpu_ms": 0.025127,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.027091,
+      "caller_thread_cpu_ms": 0.026239,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.022903,
+      "caller_thread_cpu_ms": 0.021981,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.023484,
+      "caller_thread_cpu_ms": 0.022563,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.024797,
+      "caller_thread_cpu_ms": 0.023945,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.023554,
+      "caller_thread_cpu_ms": 0.022572,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.024366,
+      "caller_thread_cpu_ms": 0.023544,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.025949,
+      "caller_thread_cpu_ms": 0.025067,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.023895,
+      "caller_thread_cpu_ms": 0.022933,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.024406,
+      "caller_thread_cpu_ms": 0.023444,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.02669,
+      "caller_thread_cpu_ms": 0.025718,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.020969,
+      "caller_thread_cpu_ms": 0.019908,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.016932,
+      "caller_thread_cpu_ms": 0.01608,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.017423,
+      "caller_thread_cpu_ms": 0.016561,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.017613,
+      "caller_thread_cpu_ms": 0.016731,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.017463,
+      "caller_thread_cpu_ms": 0.016561,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.017653,
+      "caller_thread_cpu_ms": 0.016662,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.017032,
+      "caller_thread_cpu_ms": 0.016141,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.01591,
+      "caller_thread_cpu_ms": 0.015038,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.017123,
+      "caller_thread_cpu_ms": 0.016231,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.023916,
+      "caller_thread_cpu_ms": 0.022943,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.022923,
+      "caller_thread_cpu_ms": 0.022051,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.024557,
+      "caller_thread_cpu_ms": 0.023604,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.025338,
+      "caller_thread_cpu_ms": 0.024355,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.025538,
+      "caller_thread_cpu_ms": 0.024636,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.018235,
+      "caller_thread_cpu_ms": 0.017312,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.020759,
+      "caller_thread_cpu_ms": 0.019827,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.023294,
+      "caller_thread_cpu_ms": 0.022292,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.019246,
+      "caller_thread_cpu_ms": 0.018315,
+      "thread": "MainThread"
+    },
+    {
+      "ids": 1,
+      "source_shape": [
+        32000,
+        24,
+        2048
+      ],
+      "wall_ms": 0.020038,
+      "caller_thread_cpu_ms": 0.019066,
+      "thread": "MainThread"
+    }
+  ],
+  "model_measurement": {
+    "variant": "ma_offload",
+    "mode": "decode",
+    "median_ms": 4.624989489093423,
+    "mean_ms": 4.620901324475805,
+    "min_ms": 4.6108003705739975,
+    "max_ms": 4.6269141137599945,
+    "round_ms": [
+      4.6269141137599945,
+      4.6108003705739975,
+      4.624989489093423
+    ],
+    "samples_ms": [
+      [
+        4.744901787489653,
+        4.55570500344038,
+        4.578597843647003,
+        4.584668669849634,
+        4.629765171557665,
+        4.626899026334286,
+        4.70991525799036,
+        4.631668329238892,
+        4.57437988370657,
+        4.632640164345503
+      ],
+      [
+        4.657255951315165,
+        4.602522123605013,
+        4.587454255670309,
+        4.597173072397709,
+        4.618932958692312,
+        4.58607217296958,
+        4.579809959977865,
+        4.590100143104792,
+        4.649390932172537,
+        4.639292135834694
+      ],
+      [
+        4.593485966324806,
+        4.597573075443506,
+        4.615067038685083,
+        4.707330837845802,
+        4.608024377375841,
+        4.627639893442392,
+        4.63097682222724,
+        4.632278811186552,
+        4.645855166018009,
+        4.591662902384996
+      ]
+    ],
+    "memory_before": {
+      "gpu_allocated_bytes": 2980729344,
+      "gpu_reserved_bytes": 5991563264,
+      "gpu_peak_allocated_bytes": 5840924672,
+      "gpu_peak_reserved_bytes": 5991563264,
+      "host_rss_bytes": 11649957888,
+      "host_process_high_water_bytes": 12892721152,
+      "host_high_water_scope": "process lifetime, including model loading",
+      "raw_table_snapshot_bytes": 3145728000,
+      "cpu_table_bytes": 3145728000,
+      "offload_pinned_bytes": 33652736,
+      "offload_gpu_buffer_bytes": 33652736,
+      "offloader_capacities": [
+        {
+          "batch": 1,
+          "length": 2048,
+          "policy": "pipeline",
+          "host_bytes": 33554432,
+          "gpu_bytes": 33554432
+        },
+        {
+          "batch": 1,
+          "length": 1,
+          "policy": "bulk",
+          "host_bytes": 98304,
+          "gpu_bytes": 98304
+        }
+      ],
+      "kv_cache_storage_bytes": 402849792
+    },
+    "memory_after": {
+      "gpu_allocated_bytes": 2980793344,
+      "gpu_reserved_bytes": 5991563264,
+      "gpu_peak_allocated_bytes": 2997539328,
+      "gpu_peak_reserved_bytes": 5991563264,
+      "host_rss_bytes": 11650486272,
+      "host_process_high_water_bytes": 12892721152,
+      "host_high_water_scope": "process lifetime, including model loading",
+      "raw_table_snapshot_bytes": 3145728000,
+      "cpu_table_bytes": 3145728000,
+      "offload_pinned_bytes": 33652736,
+      "offload_gpu_buffer_bytes": 33652736,
+      "offloader_capacities": [
+        {
+          "batch": 1,
+          "length": 2048,
+          "policy": "pipeline",
+          "host_bytes": 33554432,
+          "gpu_bytes": 33554432
+        },
+        {
+          "batch": 1,
+          "length": 1,
+          "policy": "bulk",
+          "host_bytes": 98304,
+          "gpu_bytes": 98304
+        }
+      ],
+      "kv_cache_storage_bytes": 402849792
+    },
+    "protocol_version": "offload_gap_v1",
+    "sampling_plan": {
+      "stage": "confirmation",
+      "measurement_plan_id": "formal_v1_w10_n10_r3",
+      "warmup": 10,
+      "repeats": 10,
+      "rounds": 3,
+      "sampling_unit": "model_call"
+    },
+    "estimator": "median_of_round_means",
+    "sample_p50_ms": 4.616999998688698,
+    "sample_p95_ms": 4.70991525799036,
+    "sample_percentile_method": "nearest_rank_p95; median_p50",
+    "tokens_per_second": 216.21670759645707,
+    "output_scope": "cached_logits",
+    "logits_to_keep": 1,
+    "spread_pct": 0.34871428871779575,
+    "seq_len": 1,
+    "context_len": 2048,
+    "group_size": 1,
+    "offload_policy": "bulk",
+    "gpu_parameters": 1263635968,
+    "cpu_parameters": 1572864000,
+    "gpu_parameter_mib": 2410.1943359375,
+    "cpu_parameter_mib": 3000.0,
+    "offload_gpu_buffer_mib": 32.09375,
+    "offload_pinned_mib": 32.09375,
+    "benchmark_scope": "model",
+    "decode_timing_protocol": "fixed_context_v2_rollback_excluded"
+  },
+  "note": "For ids=1 the first 10 gathers are warmup and the following 30 match model samples in order. Caller thread CPU excludes worker CPU; wall/CPU differences can indicate waiting but do not uniquely identify its cause."
+}

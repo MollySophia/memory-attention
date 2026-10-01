@@ -1,0 +1,20 @@
+{
+  "campaign_id": "offload-gap-001",
+  "rows": [
+    {
+      "implementation": "baseline",
+      "instrumented_model_mean_ms": 4.764724833269914,
+      "gather_wall_mean_ms": 0.0223181,
+      "gather_wall_max_ms": 0.031339,
+      "gather_caller_cpu_mean_ms": 0.021276966666666668
+    },
+    {
+      "implementation": "candidate",
+      "instrumented_model_mean_ms": 4.620901324475805,
+      "gather_wall_mean_ms": 0.0218372,
+      "gather_wall_max_ms": 0.027091,
+      "gather_caller_cpu_mean_ms": 0.0209149
+    }
+  ],
+  "conclusion": "Instrumented 30-call diagnostics did not reproduce the large R02 decode spikes. Gather means are about 0.022 ms on both sources, so available evidence does not attribute the spikes to gather cost. Fixed process order remains a verified confound. Correct that design; do not remove outliers or increase warmup/samples without further evidence."
+}
