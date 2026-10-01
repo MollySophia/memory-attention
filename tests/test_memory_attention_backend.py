@@ -88,3 +88,22 @@ def test_decode_backend_reads_cache_without_second_update():
             model(input_ids=token,attention_mask=torch.ones(2,6,device='cuda',dtype=torch.long),past_key_values=cache,use_cache=True)
             assert calls==[5,5,5]
     finally:model.close_memory_offload()
+
+@pytest.mark.parametrize('batch,hq,hk,length',[(1,2,2,2048),(8,32,32,2049),(8,32,8,8192)])
+@torch.inference_mode()
+def test_long_context_backend_numerics_and_read_only(batch,hq,hk,length):
+    if not torch.cuda.is_available():pytest.skip('requires CUDA')
+    from flash_attn import flash_attn_func,flash_attn_with_kvcache
+    numerics=load(ROOT/'profile/results/optimization/A0006/numerics.py')
+    torch.manual_seed(532)
+    q=torch.randn(batch,1,hq,64,device='cuda',dtype=torch.bfloat16)
+    # Logical view backed by larger capacity exercises the production layout.
+    k=torch.randn(batch,length+127,hk,64,device='cuda',dtype=torch.bfloat16)[:,:length]
+    v=torch.randn_like(k);saved_k=k.clone();saved_v=v.clone()
+    expected=flash_attn_func(q,k,v,causal=True)
+    actual=flash_attn_with_kvcache(q,k,v,causal=True,num_splits=0)
+    assert torch.equal(k,saved_k) and torch.equal(v,saved_v)
+    report=numerics.compare(actual,expected,'attention')
+    import json
+    path=ROOT/f'profile/results/optimization/A0006/long-context-b{batch}-hq{hq}-hk{hk}-l{length}.json'
+    path.write_text(json.dumps(report,indent=2)+'\n')
