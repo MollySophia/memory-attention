@@ -211,3 +211,17 @@ def test_growing_cache_exact_with_slot_reuse(seed, policy, padded):
                         torch.testing.assert_close(value, expected, rtol=0, atol=0)
         finally:
             model.close_memory_offload()
+
+
+def test_auto_policy_boundary_and_shape_reuse(model):
+    model.config.memory_offload_policy = 'auto'
+    assert model.config.memory_offload_bulk_max_tokens == 1024
+    gate = load_script('test_memory_offload')
+    for length, policy in [(1024, 'bulk'), (1025, 'pipeline'), (1, 'bulk'), (1025, 'pipeline')]:
+        ids = torch.randint(0, 128, (1, length), device='cuda')
+        ref = gate.resident_prefill(model, ids)
+        model.enable_memory_offload()
+        for _ in range(2):
+            actual = model(input_ids=ids, use_cache=False).logits.float()
+            assert model.model.memory_offloader.policy == policy
+            torch.testing.assert_close(actual, ref, rtol=0, atol=0)

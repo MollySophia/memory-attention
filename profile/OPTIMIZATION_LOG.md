@@ -164,3 +164,22 @@ results directory. Its plan-only audit verifies 48 jobs = 3 blocks x 4 primary
 workloads x 2 placements x 2 implementations, each at 10/10/3. This is harness
 work, not an optimization attempt. The measured-cost estimate is ~15 minutes;
 no confirmation has been launched or claimed.
+
+
+### A0001 — pipeline above 1024 tokens (campaign_id: offload-gap-001)
+
+Parent implementation A0000, accepted_step null. Registered after all 16
+initial baseline jobs and all primary profiles completed. Hypothesis:
+batch-1 length-2048 prefill unnecessarily serializes ~11.17 ms CPU gather plus
+~3.50 ms H2D with layer computation. Lower the auto-policy bulk cutoff from
+4096 to 1024 tokens, keeping the existing bulk path for tiny decode requests.
+The 1024 threshold is a predeclared conservative midpoint below the measured
+2048-token bottleneck, not a fitted optimum. No arithmetic or resident-path
+changes. This is a scheduling experiment, not a generic model speedup.
+
+Screen predeclared: batches 1/8/16, prefill/decode length/context2048, both
+placements, 12 isolated jobs, screening 3/5/1. Compare to matched A0000 R01.
+Run all correctness gates plus automatic-policy transition checks first.
+Only promising results advance to independent confirmation; no acceptance or
+accepted-step increment from screening. Full validation/generation intentionally
+not run yet. Exact candidate/parent SHAs are recorded in A0001/record.json.

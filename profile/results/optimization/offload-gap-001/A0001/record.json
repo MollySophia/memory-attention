@@ -1,0 +1,40 @@
+{
+  "campaign_id": "offload-gap-001",
+  "attempt_id": "A0001",
+  "parent_attempt_id": "A0000",
+  "parent_sha": "7e2990ef8ec14b9320dc752629a329d2ffff0552",
+  "accepted_step": null,
+  "label": "pipeline above 1024 tokens",
+  "workflow_stage": "registered",
+  "hypothesis": "The batch-1 prefill bulk path serializes ~11.17 ms CPU gather and ~3.50 ms H2D before layers. Route medium prefill to existing bounded pipeline to overlap this work; preserve bulk for decode.",
+  "expected_bottleneck": "unoverlapped CPU gather and H2D at batch1 length2048",
+  "change": "Lower default auto-policy bulk cutoff from 4096 to 1024 tokens; no arithmetic/table/precision changes.",
+  "profile_evidence": "../A0000/diagnostics-summary.json",
+  "original_protocol_version": "offload_gap_v1",
+  "protocol_version": "offload_gap_v1",
+  "measurement_plan_id": "screen_v1_w3_n5_r1",
+  "screen": {
+    "batches": [
+      1,
+      8,
+      16
+    ],
+    "length": 2048,
+    "modes": [
+      "prefill",
+      "decode"
+    ],
+    "variants": [
+      "ma_offload",
+      "ma_gpu"
+    ],
+    "jobs": 12,
+    "reason_batch16": "Pipeline scheduling change"
+  },
+  "not_run": {
+    "confirmation": "only if screen promising",
+    "full_validation": "only if independently confirmed",
+    "generation_validation": "only if independently confirmed"
+  },
+  "performance": null
+}

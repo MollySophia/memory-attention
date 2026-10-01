@@ -43,7 +43,7 @@ class MemoryConfig(PretrainedConfig):
         memory_offload_policy: str = "auto",
         memory_offload_group_size: int = 1,
         memory_offload_prefetch_depth: int = 4,
-        memory_offload_bulk_max_tokens: int = 4096,
+        memory_offload_bulk_max_tokens: int = 1024,
         memory_offload_chunk_size: int = 1024,
         **kwargs,
     ):
