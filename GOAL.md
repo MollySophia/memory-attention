@@ -169,6 +169,35 @@ experiment focused on one hypothesis; combined optimizations need ablations.
 Use the best verified implementation as the starting point for subsequent
 attempts, while retaining the frozen baseline for final comparisons.
 
+## Git audit trail and publishing
+
+Every attempt, including a failed or rejected attempt, must have a committed
+candidate implementation before measurement. Record the full candidate SHA
+and parent SHA in the attempt metadata. Repeat runs of unchanged code share
+that candidate commit. Commit the outcome, raw results and logs afterward;
+include the attempt ID in both commit messages, for example
+`experiment(A0001): overlap memory transfer` and
+`results(A0001): rejected due to decode regression`. The results commit is
+identified through Git history; do not try to embed its own SHA in itself.
+
+Use a dedicated campaign branch such as `attempts/paper-001`, created from the
+prepared source revision. Keep all attempts and result commits on that branch.
+For a rejected attempt, commit its evidence first, then revert the code change
+with a new commit before the next attempt. Do not reset, squash or force-push
+away attempt history. The final mainline can contain a separately curated set
+of accepted changes, while the experiment branch preserves the full audit trail.
+
+Remotes:
+
+- `origin`: https://github.com/MollySophia/memory-attention.git (user's repository).
+- `upstream`: https://github.com/Joluck/memory-attention.git (original repository).
+
+The user authorizes pushing the campaign branch and its attempt/result commits
+to `origin` during the experiment. Use explicit remote and branch names, e.g.
+`git push -u origin attempts/paper-001`; do not rely on implicit push defaults.
+Publish to `upstream` only after final results and the curated mainline are
+ready. Routine intermediate attempt pushes belong to `origin`.
+
 ## Deliverables and stopping
 
 Deliver a verified optimized implementation, regression tests, complete attempt
