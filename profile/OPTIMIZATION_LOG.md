@@ -448,3 +448,8 @@ full-matrix points explicitly not_run; one active point interrupted. Growing
 performance was not reached. Next hypothesis: retain concatenation for batch1
 while reusing bounded capacity for multi-item batches. Register as A0002 only
 after evidence commit and model reversion; keep independent correctness tools.
+
+Reverted A0001 model changes to frozen A0000 after committing failure evidence.
+Removed candidate-specific cache ownership tests from the active baseline;
+they remain reproducible in implementation commit2b85165. Retained independent
+frozen-reference helper, expanded GQA/growing correctness coverage and tooling.
