@@ -43,7 +43,7 @@ where the only difference is the transfer itself.
 ### Environment convention
 
 Each sweep writes `<output>/env.json` recording the git commit, whether the
-tree was dirty, torch / torch_cuda / flash-attn / fla versions, python, GPU
+tree was dirty, source SHA-256, torch / torch_cuda / flash-attn / fla versions, python, GPU
 name, capability and count. On a later run against the same directory:
 
 - any difference in those fields is **rejected** with a diff of what changed,
@@ -51,6 +51,8 @@ name, capability and count. On a later run against the same directory:
   optimization under test;
 - the environment is folded into every job signature, so `--resume` cannot
   reuse rows measured elsewhere;
+- the source hash covers `fla/**/*.py`, profiling scripts and package metadata,
+  including uncommitted changes; generated results are excluded;
 - pass `--allow-env-change` to deliberately re-measure in a new environment.
 
 **One sweep directory = one environment = one experiment.** When comparing
@@ -58,60 +60,15 @@ across optimization steps, compare the summary CSVs and check that their
 `env.json` files agree; if the commit differs, the numbers are from a different
 tree and are not directly comparable. Record the commit in the log entry.
 
-## Established baseline
+## Baseline pending
 
-Recorded on the environment below, at commit `300ebb9` (tree dirty: the
-sweep harness changes were uncommitted during the run). See `env.json` in
-`results/sweep_baseline/` for the machine-readable form.
+Previous benchmark artifacts were removed on 2026-10-01 at the user's request
+so the paper experiments can start with a clean dataset. The tracked historical
+sweep remains recoverable from commit `544b760`; it is not the new baseline.
 
-| env | |
-|---|---|
-| GPU | NVIDIA GeForce RTX 5090, sm_120, 32 GiB |
-| torch | 2.9.0+cu130 |
-| flash-attn | 2.8.3 |
-| fla | 0.4.2 |
-| python | 3.12.2 |
-
-Sweep over batch size at seq/context 2048, 24 layers / hidden 2048 / 32 heads,
-BF16. `ma_gpu` is the 1.00x reference. Raw data:
-`results/sweep_baseline/summary.csv` (12/12 runs, no OOM).
-
-| mode | batch | ma_gpu (ms) | ma_offload (ms) | rel | offload spread |
-|---|---|---|---|---|---|
-| prefill | 4 | 110.159 | 113.277 | 0.97x | 0.81% |
-| prefill | 8 | 217.244 | 220.549 | 0.99x | 0.93% |
-| prefill | 16 | 438.525 | 446.003 | 0.98x | 1.42% |
-| decode | 4 | 7.277 | 7.370 | 0.99x | 0.20% |
-| decode | 8 | 11.004 | 11.124 | 0.99x | 0.88% |
-| decode | 16 | 20.423 | 20.394 | **1.00x** | 0.57% |
-
-Offload overhead: ~1–3% at prefill, ≤1% at decode, and at batch 16 decode it
-falls inside the noise floor. Reference spread is 0.05–1.93%; treat anything
-under ~2% at prefill and ~0.9% at decode as unresolved at this sample size.
-
-Throughput at batch 16 decode: 784 tok/s offloaded vs 784 resident.
-
-An earlier run of this same sweep gave 216.9 / 220.6 ms at bs8 prefill against
-217.2 / 220.5 here — agreement to 0.5%. That is the spread column doing its job:
-run-to-run variation is comparable to the effects being measured, so no single
-point should be quoted as evidence on its own.
-
-Memory: GPU-resident parameters drop 2836.5M → 1263.6M, and the 3000 MiB table
-moves to pinned host memory. That is the actual trade — the offload is
-essentially free at decode and costs a few percent at prefill.
-
-Numeric agreement: the offloaded table is bitwise identical to the resident
-folded table. The ~0.25 max logit delta between offloaded and resident is BF16
-rounding in `k + m` (relative 2⁻⁸, accumulated over 24 layers), not a logic
-difference. Unfolded vs folded is exact. All three gate cases pass bit-exact.
-
-### Reading these numbers
-
-The interesting result is that offload is close to free at decode. A decode
-step touches one table row per layer (~2 MiB), so the transfer hides behind the
-attention work; a prefill touches `batch × seq` rows and must actually move
-them. If the goal is a large model on a small GPU, the prefill cost is the
-number to argue about — at batch 16 that is 7.3 ms of 446 ms.
+Follow `GOAL.md`: finish and freeze the measurement protocol, then record a
+fresh baseline `A0000` before performance optimization. No current performance
+claim or baseline measurement is established by this log.
 
 ## Entries
 
@@ -127,4 +84,22 @@ baseline, spread, GPU parameters.
 **Verdict.** Better / worse / within noise, against the spread column.
 ```
 
-_(none yet — append one per optimization step)_
+### Decode timing boundary correction — 69d692d (2026-10-01)
+
+**Change.** Move fixed-context KV-cache rollback and test-token selection before
+the decode timer in `bench_fla.py`. Model execution, including its own KV-cache
+update, remains timed. Warmup still resets the context before every call.
+New decode rows record
+`decode_timing_protocol=fixed_context_v2_rollback_excluded`.
+
+**Correctness.** All 9 tests in `tests/test_decode_benchmark.py` and
+`tests/test_memory_offload_regressions.py` pass in the `fla-bench` environment.
+The timing regression assigns 100 ms to setup and 2 ms to model execution,
+checks that only the 2 ms is reported, and verifies that every warmup/timed
+decode begins at the same cache length across multiple rounds.
+
+**Data.** No new performance comparison. Existing decode results include
+rollback and token selection; they belong to the previous timing protocol.
+Re-measure both baseline and candidate before comparing under the new protocol.
+
+**Verdict.** Measurement correction, not an inference speedup.
