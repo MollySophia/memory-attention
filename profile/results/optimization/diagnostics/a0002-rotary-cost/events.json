@@ -1,0 +1,261 @@
+{
+  "source": {
+    "source_sha256": "87d1ba4b7d75b0641c4564b03bf7e30a7fe6c5545acd9e4566fd6d754862689d",
+    "git_commit": {
+      "returncode": 0,
+      "stdout": "ec6384d2e9081ecbb2926fe8a6193bc48ea650a3\n",
+      "stderr": ""
+    },
+    "git_status": {
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "source_patch": {
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  "environment": {
+    "cpu": {
+      "returncode": 0,
+      "stdout": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           48 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  32\nOn-line CPU(s) list:                     0-31\nVendor ID:                               AuthenticAMD\nModel name:                              AMD Ryzen 9 9950X 16-Core Processor\nCPU family:                              26\nModel:                                   68\nThread(s) per core:                      2\nCore(s) per socket:                      16\nSocket(s):                               1\nStepping:                                0\nMicrocode version:                       0xb404035\nFrequency boost:                         enabled\nCPU(s) scaling MHz:                      66%\nCPU max MHz:                             5756.4521\nCPU min MHz:                             624.1940\nBogoMIPS:                                8584.34\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good amd_lbr_v2 nopl xtopology nonstop_tsc cpuid extd_apicid aperfmperf rapl pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpuid_fault cpb cat_l3 cdp_l3 hw_pstate ssbd mba perfmon_v2 ibrs ibpb stibp ibrs_enhanced vmmcall fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid cqm rdt_a avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local user_shstk avx_vnni avx512_bf16 clzero irperf xsaveerptr rdpru wbnoinvd cppc arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif x2avic v_spec_ctrl vnmi avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid bus_lock_detect movdiri movdir64b overflow_recov succor smca fsrm avx512_vp2intersect flush_l1d amd_lbr_pmc_freeze\nVirtualization:                          AMD-V\nL1d cache:                               768 KiB (16 instances)\nL1i cache:                               512 KiB (16 instances)\nL2 cache:                                16 MiB (16 instances)\nL3 cache:                                64 MiB (2 instances)\nNUMA node(s):                            1\nNUMA node0 CPU(s):                       0-31\nVulnerability Gather data sampling:      Not affected\nVulnerability Ghostwrite:                Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Not affected\nVulnerability Mds:                       Not affected\nVulnerability Meltdown:                  Not affected\nVulnerability Mmio stale data:           Not affected\nVulnerability Old microcode:             Not affected\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Not affected\nVulnerability Spec rstack overflow:      Mitigation; IBPB on VMEXIT only\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Enhanced / Automatic IBRS; IBPB conditional; STIBP always-on; PBRSB-eIBRS Not affected; BHI Not affected\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Not affected\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Mitigation; IBPB on VMEXIT\n",
+      "stderr": ""
+    },
+    "cpu_affinity": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31
+    ],
+    "platform": "Linux-6.18.9-arch1-2-molly-x86_64-with-glibc2.44",
+    "torch_threads": 16,
+    "torch_interop_threads": 32,
+    "thread_environment": {
+      "OMP_NUM_THREADS": null,
+      "MKL_NUM_THREADS": null,
+      "OPENBLAS_NUM_THREADS": null
+    },
+    "nvidia_smi": {
+      "returncode": 0,
+      "stdout": "Thu Oct  1 20:03:54 2026       \n+-----------------------------------------------------------------------------------------+\n| NVIDIA-SMI 610.57.04              KMD Version: 610.57.04     CUDA UMD Version: 13.3     |\n+-----------------------------------------+------------------------+----------------------+\n| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |\n| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |\n|                                         |                        |               MIG M. |\n|=========================================+========================+======================|\n|   0  NVIDIA GeForce RTX 5090        Off |   00000000:01:00.0 Off |                  N/A |\n| 30%   43C    P1             72W /  575W |   10627MiB /  32607MiB |     24%      Default |\n|                                         |                        |                  N/A |\n+-----------------------------------------+------------------------+----------------------+\n\n+-----------------------------------------------------------------------------------------+\n| Processes:                                                                              |\n|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |\n|        ID   ID                                                               Usage      |\n|=========================================================================================|\n|    0   N/A  N/A         1637880      C   ...da3/envs/fla-bench/bin/python       9924MiB |\n|    0   N/A  N/A         3625831      C   ...ngtz/trm-mcp/.venv/bin/python        654MiB |\n+-----------------------------------------------------------------------------------------+\n",
+      "stderr": ""
+    },
+    "gpu_telemetry": {
+      "returncode": 0,
+      "stdout": "name, driver_version, temperature.gpu, clocks.current.sm [MHz], clocks.current.memory [MHz], power.draw [W], utilization.gpu [%], memory.used [MiB]\nNVIDIA GeForce RTX 5090, 610.57.04, 43, 2415 MHz, 13801 MHz, 72.51 W, 24 %, 10627 MiB\n",
+      "stderr": ""
+    }
+  },
+  "imported_cache": "/home/molly/workspace-memory-attn/accepted-a0002/fla/models/utils.py",
+  "mode": "decode",
+  "batch": 8,
+  "context": 2048,
+  "diagnostic_calls": 1,
+  "warmup": 10,
+  "instrumented_total_wall_ms": 5.562025122344494,
+  "instrumented_total_stream_ms": 5.558688163757324,
+  "rotary_cpu_ms": 1.3516582548618317,
+  "rotary_stream_ms": 0.17644799686968327,
+  "rotary_calls": 48,
+  "spans": [
+    {
+      "layer": 0,
+      "cpu_ms": 0.07732538506388664,
+      "stream_ms": 0.08383999764919281,
+      "incoming_bytes": 65536,
+      "rotary_calls": 2
+    },
+    {
+      "layer": 1,
+      "cpu_ms": 0.060403719544410706,
+      "stream_ms": 0.004095999989658594,
+      "incoming_bytes": 65536,
+      "rotary_calls": 2
+    },
+    {
+      "layer": 2,
+      "cpu_ms": 0.05658622831106186,
+      "stream_ms": 0.004095999989658594,
+      "incoming_bytes": 65536,
+      "rotary_calls": 2
+    },
+    {
+      "layer": 3,
+      "cpu_ms": 0.056717079132795334,
+      "stream_ms": 0.004095999989658594,
+      "incoming_bytes": 65536,
+      "rotary_calls": 2
+    },
+    {
+      "layer": 4,
+      "cpu_ms": 0.055684708058834076,
+      "stream_ms": 0.004095999989658594,
+      "incoming_bytes": 65536,
+      "rotary_calls": 2
+    },
+    {
+      "layer": 5,
+      "cpu_ms": 0.054212287068367004,
+      "stream_ms": 0.004095999989658594,
+      "incoming_bytes": 65536,
+      "rotary_calls": 2
+    },
+    {
+      "layer": 6,
+      "cpu_ms": 0.05449308082461357,
+      "stream_ms": 0.004095999989658594,
+      "incoming_bytes": 65536,
+      "rotary_calls": 2
+    },
+    {
+      "layer": 7,
+      "cpu_ms": 0.05365116521716118,
+      "stream_ms": 0.004095999989658594,
+      "incoming_bytes": 65536,
+      "rotary_calls": 2
+    },
+    {
+      "layer": 8,
+      "cpu_ms": 0.053110066801309586,
+      "stream_ms": 0.004095999989658594,
+      "incoming_bytes": 65536,
+      "rotary_calls": 2
+    },
+    {
+      "layer": 9,
+      "cpu_ms": 0.052838586270809174,
+      "stream_ms": 0.004095999989658594,
+      "incoming_bytes": 65536,
+      "rotary_calls": 2
+    },
+    {
+      "layer": 10,
+      "cpu_ms": 0.0540316104888916,
+      "stream_ms": 0.004095999989658594,
+      "incoming_bytes": 65536,
+      "rotary_calls": 2
+    },
+    {
+      "layer": 11,
+      "cpu_ms": 0.05358131602406502,
+      "stream_ms": 0.004095999989658594,
+      "incoming_bytes": 65536,
+      "rotary_calls": 2
+    },
+    {
+      "layer": 12,
+      "cpu_ms": 0.05721813067793846,
+      "stream_ms": 0.004095999989658594,
+      "incoming_bytes": 65536,
+      "rotary_calls": 2
+    },
+    {
+      "layer": 13,
+      "cpu_ms": 0.05542486906051636,
+      "stream_ms": 0.0038399999029934406,
+      "incoming_bytes": 65536,
+      "rotary_calls": 2
+    },
+    {
+      "layer": 14,
+      "cpu_ms": 0.05398178473114967,
+      "stream_ms": 0.004095999989658594,
+      "incoming_bytes": 65536,
+      "rotary_calls": 2
+    },
+    {
+      "layer": 15,
+      "cpu_ms": 0.05411216989159584,
+      "stream_ms": 0.004095999989658594,
+      "incoming_bytes": 65536,
+      "rotary_calls": 2
+    },
+    {
+      "layer": 16,
+      "cpu_ms": 0.053330790251493454,
+      "stream_ms": 0.0038399999029934406,
+      "incoming_bytes": 65536,
+      "rotary_calls": 2
+    },
+    {
+      "layer": 17,
+      "cpu_ms": 0.054723117500543594,
+      "stream_ms": 0.0038079998921602964,
+      "incoming_bytes": 65536,
+      "rotary_calls": 2
+    },
+    {
+      "layer": 18,
+      "cpu_ms": 0.05385233089327812,
+      "stream_ms": 0.004095999989658594,
+      "incoming_bytes": 65536,
+      "rotary_calls": 2
+    },
+    {
+      "layer": 19,
+      "cpu_ms": 0.05258992314338684,
+      "stream_ms": 0.004095999989658594,
+      "incoming_bytes": 65536,
+      "rotary_calls": 2
+    },
+    {
+      "layer": 20,
+      "cpu_ms": 0.05332101136445999,
+      "stream_ms": 0.0038399999029934406,
+      "incoming_bytes": 65536,
+      "rotary_calls": 2
+    },
+    {
+      "layer": 21,
+      "cpu_ms": 0.0538509339094162,
+      "stream_ms": 0.0038079998921602964,
+      "incoming_bytes": 65536,
+      "rotary_calls": 2
+    },
+    {
+      "layer": 22,
+      "cpu_ms": 0.054072123020887375,
+      "stream_ms": 0.0038399999029934406,
+      "incoming_bytes": 65536,
+      "rotary_calls": 2
+    },
+    {
+      "layer": 23,
+      "cpu_ms": 0.07254583761096,
+      "stream_ms": 0.004095999989658594,
+      "incoming_bytes": 65536,
+      "rotary_calls": 2
+    }
+  ],
+  "limitation": "Instrumented spans include launch gaps/overhead; not isolated kernels or headline timing."
+}

@@ -613,3 +613,9 @@ CI[0.878762,1.072957],bothwithin_noise. The provisional8.9% decode gain
 did not repeat. Save model/test patch,then revert paired-copy implementation
 and its helper-specific tests. No additional samples to chase a favorable
 result; effective new accepted count remains0. Next: rotary dispatch diagnostic.
+
+A0005 registered from accepted A0002: paired Q/K rotary dispatch for single-
+token inference. Diagnostic measured48 calls,1.351658ms cumulative CPU spans,
+0.176448ms stream spans in5.562025ms instrumented wall time. CPU/stream spans
+include instrumentation/launch gaps; not pure kernels or speedup evidence.
+Exact arithmetic required. Preserve generic/padded/varlen/XPos/training paths.

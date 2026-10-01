@@ -1,0 +1,1 @@
+{"instrumented_total_wall_ms": 5.562025122344494, "rotary_cpu_ms": 1.3516582548618317, "rotary_stream_ms": 0.17644799686968327, "rotary_calls": 48}
