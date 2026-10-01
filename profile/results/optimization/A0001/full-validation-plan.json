@@ -1,5 +1,5 @@
 {
-  "status": "ready_after_primary_nomination_not_launched",
+  "status": "cancelled_after_small_batch_regression",
   "condition": "R04 formal confirmation and memory audit nominate A0001",
   "new_processes": 88,
   "reused_processes": 8,
@@ -482,5 +482,6 @@
   "estimated_total_minutes": 40.577289094595606,
   "estimate_assumption": "Use original baseline latencies for both sides, conservatively ignoring expected candidate decode gain. No fixed runtime timeout. Peak/OOM states retained.",
   "protocol": "paper_v1: non-generation 10/10/3; generation2/5/3; paired per-shape baseline/candidate; matching actual import paths",
-  "nomination_evidence": "confirmation-summary.json and preserved correctness outputs"
+  "nomination_evidence": "confirmation-summary.json and preserved correctness outputs",
+  "outcome": "R06 deliberately interrupted, R07 confirmed resident batch1 regression; A0001 rejected. Historical primary confirmation remains valid but does not establish full acceptance."
 }
