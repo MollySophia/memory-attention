@@ -1,0 +1,128 @@
+diff --git a/fla/layers/memory_attn.py b/fla/layers/memory_attn.py
+index ff6011b..c356095 100644
+--- a/fla/layers/memory_attn.py
++++ b/fla/layers/memory_attn.py
+@@ -168,7 +168,7 @@ class MemoryAttention(nn.Module):
+ 
+         if self.max_position_embeddings is not None:
+             max_seqlen = max(max_seqlen, self.max_position_embeddings)
+-        q, k = self.rotary(q, k, seqlen_offset=seqlen_offset, max_seqlen=max_seqlen, cu_seqlens=cu_seqlens)
++        q, k = self.rotary(q, k, seqlen_offset=seqlen_offset, max_seqlen=max_seqlen, cu_seqlens=cu_seqlens, memory_pair=True)
+ 
+         if past_key_values is not None:
+             cache_has_content = past_key_values.get_seq_length(self.layer_idx) > 0
+diff --git a/fla/modules/rotary.py b/fla/modules/rotary.py
+index fc15ad6..3a9935e 100644
+--- a/fla/modules/rotary.py
++++ b/fla/modules/rotary.py
+@@ -132,6 +132,37 @@ def rotary_embedding_kernel(
+         tl.store(p_y, b_y, mask=mask)
+ 
+ 
++@triton.jit(do_not_specialize=['offset'])
++def _memory_rotary_pair_kernel(Q, K, OQ, OK, COS, SIN, offset,
++                               HQ: tl.constexpr, HK: tl.constexpr,
++                               D: tl.constexpr, R: tl.constexpr, BLOCK: tl.constexpr):
++    h, b = tl.program_id(0), tl.program_id(1)
++    if h < HQ:
++        x = Q + (b * HQ + h) * D
++        y = OQ + (b * HQ + h) * D
++    else:
++        x = K + (b * HK + h - HQ) * D
++        y = OK + (b * HK + h - HQ) * D
++    r = tl.arange(0, BLOCK)
++    c = tl.load(COS + offset * R + r, r < R, other=1.0).to(tl.float32)
++    si = tl.load(SIN + offset * R + r, r < R, other=0.0).to(tl.float32)
++    x0 = tl.load(x + r, r < R, other=0.0).to(tl.float32)
++    x1 = tl.load(x + R + r, r < R, other=0.0).to(tl.float32)
++    o0 = x0 * c - x1 * si
++    o1 = x0 * si + x1 * c
++    tl.store(y + r, o0, r < R)
++    tl.store(y + R + r, o1, r < R)
++
++
++def _memory_rotary_pair(q, k, cos, sin, offset):
++    oq, ok = torch.empty_like(q), torch.empty_like(k)
++    with torch.cuda.device(q.device):
++        _memory_rotary_pair_kernel[(q.shape[2] + k.shape[2], q.shape[0])](
++            q, k, oq, ok, cos, sin, offset, q.shape[2], k.shape[2], q.shape[3],
++            cos.shape[1], triton.next_power_of_2(cos.shape[1]), num_warps=4)
++    return oq, ok
++
++
+ def rotary_embedding_fwdbwd(
+     x: torch.Tensor,
+     cos: torch.Tensor,
+@@ -444,6 +475,7 @@ class RotaryEmbedding(nn.Module):
+         seqlen_offset: int | torch.Tensor = 0,
+         cu_seqlens: torch.Tensor | None = None,
+         max_seqlen: int | None = None,
++        memory_pair: bool = False,
+     ) -> torch.Tensor | tuple[torch.Tensor, torch.Tensor]:
+         """
+         q: [B, T, H, D]
+@@ -459,6 +491,20 @@ class RotaryEmbedding(nn.Module):
+             self._update_cos_sin_cache(max_seqlen, device=q.device, dtype=q.dtype)
+         elif isinstance(seqlen_offset, int):
+             self._update_cos_sin_cache(q.shape[1] + seqlen_offset, device=q.device, dtype=q.dtype)
++        if (memory_pair and torch.is_inference_mode_enabled()
++                and self.scale is None and not self.interleaved and cu_seqlens is None
++                and isinstance(seqlen_offset, int) and seqlen_offset >= 0
++                and q.is_cuda and q.device == k.device
++                and q.ndim == 4 and k.ndim == 4 and q.shape[1] == k.shape[1] == 1
++                and q.shape[0] == k.shape[0] and q.shape[0] > 0
++                and q.shape[2] > 0 and k.shape[2] > 0
++                and 0 < self.dim <= 256 and self.dim % 2 == 0
++                and q.shape[3] == k.shape[3] == self.dim
++                and q.dtype == k.dtype == self._cos_cached.dtype
++                and q.dtype in (torch.float16, torch.bfloat16, torch.float32)
++                and q.is_contiguous() and k.is_contiguous()
++                and seqlen_offset < self._cos_cached.shape[0]):
++            return _memory_rotary_pair(q, k, self._cos_cached, self._sin_cached, seqlen_offset)
+         if self.scale is None:
+             q = rotary_embedding(
+                 q,
+diff --git a/tests/test_memory_rotary_pair.py b/tests/test_memory_rotary_pair.py
+new file mode 100644
+index 0000000..68cfa5f
+--- /dev/null
++++ b/tests/test_memory_rotary_pair.py
+@@ -0,0 +1,38 @@
++"""Memory-only paired decode RoPE must equal the generic separate calls."""
++from unittest.mock import patch
++import pytest
++import torch
++from fla.modules.rotary import RotaryEmbedding
++
++@pytest.mark.parametrize('dtype',[torch.bfloat16,torch.float16,torch.float32])
++@pytest.mark.parametrize('batch,hq,hk,dim,offset',[(1,2,2,64,0),(2,4,1,64,127),(8,32,32,64,2048),
++                                                  (2,4,2,32,16),(2,4,2,128,64),(2,4,2,256,64)])
++@torch.inference_mode()
++def test_pair_exact(dtype,batch,hq,hk,dim,offset):
++    if not torch.cuda.is_available():pytest.skip('requires CUDA')
++    torch.manual_seed(527)
++    rotary=RotaryEmbedding(dim=dim).cuda()
++    q=torch.randn(batch,1,hq,dim,device='cuda',dtype=dtype)
++    k=torch.randn(batch,1,hk,dim,device='cuda',dtype=dtype)
++    expected=rotary(q,k,seqlen_offset=offset,max_seqlen=offset+1)
++    actual=rotary(q,k,seqlen_offset=offset,max_seqlen=offset+1,memory_pair=True)
++    for a,b in zip(actual,expected):torch.testing.assert_close(a,b,rtol=0,atol=0)
++
++@pytest.mark.parametrize('kind',['prefill','tensor_offset','noncontiguous','interleaved','xpos','partial_rotary','grad'])
++def test_unsupported_pair_uses_original(kind):
++    if not torch.cuda.is_available():pytest.skip('requires CUDA')
++    context=torch.enable_grad() if kind=='grad' else torch.inference_mode()
++    with context:
++        rotary=RotaryEmbedding(dim=32 if kind=='partial_rotary' else 64,
++                               interleaved=kind=='interleaved',scale_base=512 if kind=='xpos' else None).cuda()
++        length=4 if kind=='prefill' else 1
++        q=torch.randn(2,length,2,128 if kind=='noncontiguous' else 64,device='cuda',dtype=torch.bfloat16)
++        if kind=='noncontiguous':q=q[...,::2]
++        if kind=='grad':q.requires_grad_()
++        k=q.clone()
++        offset=torch.tensor([0,1],device='cuda') if kind=='tensor_offset' else 0
++        expected=rotary(q,k,seqlen_offset=offset,max_seqlen=length+1)
++        with patch('fla.modules.rotary._memory_rotary_pair',side_effect=AssertionError('must use generic path')):
++            actual=rotary(q,k,seqlen_offset=offset,max_seqlen=length+1,memory_pair=True)
++        for a,b in zip(actual,expected):torch.testing.assert_close(a,b,rtol=0,atol=0)
++        if kind=='grad':sum(x.float().sum() for x in actual).backward();assert q.grad is not None

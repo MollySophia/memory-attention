@@ -22,3 +22,19 @@ promising primary gains with at least3 fresh alternating pairs. Full validation
 only for retention candidates. Never run diagnostics/tests/plots with timing.
 The roadmap may change when evidence rejects a mechanism. Do not combine these
 hypotheses in one candidate to manufacture a win.
+
+## Followup research after A0005 screening
+
+Recorded environment is torch2.9.0+cu130. The matching upstream
+[layer_norm.cpp](https://github.com/pytorch/pytorch/blob/v2.9.0/aten/src/ATen/native/layer_norm.cpp)
+routes ordinary same-dtype RMSNorm to `_fused_rms_norm`; native RMSNorm must not
+be assumed to consist of many unfused elementwise launches. Any norm candidate
+needs fresh operator evidence and should target a measured cost, such as
+residual/norm boundaries, rather than merely replacing its Python wrapper.
+
+The installed FlashAttention2.8.3 interface also exposes an inference-only
+KV-cache attention path, including GQA and split-KV controls. It can read cache
+without writing when new K/V are omitted. Before considering this as a model
+candidate, measure attention spans independently. A changed softmax reduction
+order would need predeclared numerical tolerances and a frozen-forward check;
+it cannot inherit the bit-exact scheduling claim of A0005.

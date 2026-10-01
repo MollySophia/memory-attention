@@ -5,7 +5,7 @@
   "attempts": {
     "A0003": "within_noise,reverted",
     "A0004": "within_noise,reverted",
-    "A0005": "screening_running"
+    "A0005": "within_noise,reverted"
   },
   "pending_hypotheses": [
     "combined Q/K rotary launch",

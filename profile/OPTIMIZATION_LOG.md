@@ -635,3 +635,12 @@ evidence): gather medians0.05246/0.02270ms,model5.3994/5.3664ms. This
 does not explain prior~0.5ms process shifts; keep default environment unchanged.
 R02 predeclared12 fresh offload primary processes,3alternating pairs10/10/3,
 95%paired-logCI,no optional extensions. Primary exact gate precedes timing.
+
+A0005 R02 completed12 processes/360samples; source/import/config/environment
+and raw-statistics audit passed. Prefill1.001907xCI[0.991799,1.012118];
+decode1.008898xCI[0.992154,1.025925]. Bothwithin_noise; no accepted gain.
+The small positive decode estimate does not warrant optional extra runs.
+Preserve model/test patch and results,then revert paired rotary implementation.
+Three continued-campaign attempts evaluated so far,zero newly accepted gains.
+Next inspect attention kernel cost rather than continuing only small dispatch
+optimizations. Accepted incumbent remains A0002.

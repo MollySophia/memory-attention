@@ -2,8 +2,8 @@
   "attempt_id": "A0005",
   "parent_attempt_id": "A0002",
   "accepted_step": null,
-  "status": null,
-  "phase": "confirmation_prepared",
+  "status": "within_noise",
+  "phase": "final_verdict",
   "label": "Single-launch paired Q/K rotary for inference decode",
   "parent_sha": "c677ed9967930f870c77b21e94246414ead7fd4b",
   "incumbent_sha": "ec6384d2e9081ecbb2926fe8a6193bc48ea650a3",
@@ -17,7 +17,7 @@
     "Unsupported shapes must preserve original semantics and autograd"
   ],
   "measurement_plan": "8 fresh primary screening jobs vs A0002,3/5/1; independent confirmation only if promising.",
-  "next_action": "Primary frozen-forward gate then R02 confirmation; no environment change to chase gain.",
+  "next_action": "Revert paired rotary and helper-specific tests; retain all evidence. Profile attention kernels and evaluate a more substantial bottleneck.",
   "candidate_sha": "3fa9ce24f8d3ef6e0fdeee71a39a106cd644f391",
   "correctness": {
     "pytest": "78 passed;correctness-pytest.txt",
@@ -33,9 +33,18 @@
     "baseline_attempt": "A0002"
   },
   "performance": {
-    "screening": "screening-summary.json"
+    "screening": "screening-summary.json",
+    "confirmation": "confirmation-summary.json"
   },
   "screening_outcome": "Offload decode1.119156x, resident1.011922x; prefills near1.0. Placement discrepancy and prior process jitter require independent confirmation.",
   "confirmation_plan": "12 fresh offload primary processes,3 alternating pairs each10/10/3,95% paired-log t intervals df2; unchanged16-thread default environment,estimated4\u20135min. No optional extension.",
-  "diagnostic_followup": "../diagnostics/a0002-gather-threads/diagnostic.json"
+  "diagnostic_followup": "../diagnostics/a0002-gather-threads/diagnostic.json",
+  "confirmation": {
+    "run": "R02-confirmation",
+    "controller_pid": 1650161,
+    "tool_session": 21376,
+    "job_count": 12,
+    "status": "complete"
+  },
+  "reason": "Formal incremental prefill1.001907xCI[0.991799,1.012118],decode1.008898xCI[0.992154,1.025925]. Small positive estimate is not independently confirmed under predeclared criterion; no optional extension."
 }
