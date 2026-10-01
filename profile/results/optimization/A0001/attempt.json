@@ -4,7 +4,7 @@
   "accepted_step": null,
   "label": "Amortized KV cache append with bounded spare capacity",
   "status": null,
-  "phase": "nominated_for_full_validation",
+  "phase": "investigating_small_batch_regression",
   "candidate_sha": "d2a0c1745f3b35f9949eb7c06eedf5763646bebf",
   "parent_sha": "f87a7e6b6d8e7f5df1894890d23ddd9820c5a0ef",
   "hypothesis": "Primary decode repeatedly copies the full history via 48 torch.cat calls. Append new K/V into reusable capacity without changing stored values, attention scope, precision or offload placement.",
@@ -34,7 +34,7 @@
   },
   "development_failure": "Initial capacity test failed after large rollback: 384-slot buffer retained for 129 tokens. Fixed reuse condition to require spare capacity <128; original log retained. Numerical comparisons passed.",
   "implementation_sha": "2b85165ff27b4edf6b41e065ac20aee127a113e6",
-  "next_action": "Run matched full matrix and 128-step generation validation; reuse R04 pair1 primary points, retain all pairs for primary uncertainty.",
+  "next_action": "R07 small-batch confirmation: reuse R06 first pair and add two alternating independent pairs for each folded placement, 10/10/3. Reject/record tradeoff if regression repeats; no model code changes yet.",
   "confirmation_plan": "run_confirmation.py: 24 processes, 3 alternating pairs per placement/mode; 10/10/3; predeclared 95% paired-log Student-t intervals; expected 8-12 minutes.",
   "confirmation_outcome": {
     "status": "passed_primary_confirmation",
@@ -49,5 +49,15 @@
     ],
     "offload_prefill": "within_noise; no resolved regression",
     "memory": "offload GPU peak saving >2.7 GiB at both primary modes in all three pairs"
+  },
+  "full_validation": {
+    "run": "R06-full-validation",
+    "controller_pid": 1506417,
+    "controller_log": "R06-controller.log",
+    "new_processes": 88,
+    "reused_processes": 8,
+    "candidate_commit": "935f5bd7d2505b66f45aa7a25c2ffd30a029b6b7",
+    "accepted": false,
+    "status": "interrupted_to_investigate"
   }
 }

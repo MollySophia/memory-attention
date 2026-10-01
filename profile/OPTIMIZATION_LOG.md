@@ -421,3 +421,16 @@ across points. Non-generation10/10/3, generation2/5/3. Keep OOM/unsupported
 and failed points explicitly; investigate regressions before acceptance.
 Estimated cost40.6 minutes, dominated by repeated full-model setup. No source
 or candidate changes during timing. Conditional plan from prior stage retained.
+
+A0001 R06 stopped deliberately after18 new completed jobs (plus8 reused),
+with one active job interrupted and69 pending. Batch1/context2048 decode was
+4.56296 ->4.77310 ms offload and4.57304 ->4.76848 ms resident, with nonoverlapping
+round ranges in both. These are signals, not independent-process confidence.
+Saved all raw data and interruption evidence before terminating own controller
+and active child. No timeout/restart. Preserve candidate code for investigation.
+Predeclare R07: reuse those first pairs and add two independent pairs per
+placement in alternating order (8 new processes, estimated3 minutes),10/10/3.
+Use paired-log95% t intervals (df2), as in R04; upper bound below1 confirms
+regression. Do not complete the expensive matrix for a rejected candidate.
+No accepted step advanced. Full-matrix audit script and environment checks
+prepared; report scripts are outside the benchmark source fingerprint.
