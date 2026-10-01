@@ -1,0 +1,16 @@
+
+profile/results/optimization/offload-gap-001/test_reuse_helpers.py::test_valid_evidence PASSED [  7%]
+profile/results/optimization/offload-gap-001/test_reuse_helpers.py::test_incompatible_evidence_rejected[path0-oom] PASSED [ 15%]
+profile/results/optimization/offload-gap-001/test_reuse_helpers.py::test_incompatible_evidence_rejected[path1-wrong] PASSED [ 23%]
+profile/results/optimization/offload-gap-001/test_reuse_helpers.py::test_incompatible_evidence_rejected[path2-screen_v1_w3_n5_r1] PASSED [ 30%]
+profile/results/optimization/offload-gap-001/test_reuse_helpers.py::test_incompatible_evidence_rejected[path3-0] PASSED [ 38%]
+profile/results/optimization/offload-gap-001/test_reuse_helpers.py::test_incompatible_evidence_rejected[path4-4321] PASSED [ 46%]
+profile/results/optimization/offload-gap-001/test_reuse_helpers.py::test_incompatible_evidence_rejected[path5-1024] PASSED [ 53%]
+profile/results/optimization/offload-gap-001/test_reuse_helpers.py::test_incompatible_evidence_rejected[path6-True] PASSED [ 61%]
+profile/results/optimization/offload-gap-001/test_reuse_helpers.py::test_incompatible_evidence_rejected[path7-8] PASSED [ 69%]
+profile/results/optimization/offload-gap-001/test_reuse_helpers.py::test_incompatible_evidence_rejected[path8-wrong] PASSED [ 76%]
+profile/results/optimization/offload-gap-001/test_reuse_helpers.py::test_incompatible_evidence_rejected[path9-wrong] PASSED [ 84%]
+profile/results/optimization/offload-gap-001/test_reuse_helpers.py::test_incompatible_evidence_rejected[path10-full_logits_no_cache] PASSED [ 92%]
+profile/results/optimization/offload-gap-001/test_reuse_helpers.py::test_incompatible_evidence_rejected[path11-value11] PASSED [100%]
+
+============================== 13 passed in 0.14s ==============================

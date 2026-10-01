@@ -202,3 +202,22 @@ Use frozen source worktrees A0000=`62942a0`, A0001=`942a2a5`; this preserves
 candidate commit identity across repeated runs while result commits advance.
 No accepted step yet. Full matrix, growing generation and full-model frozen
 reference fingerprints remain gates after confirmation.
+
+
+A0001 validation preparation while R02 remains live: added strict reuse of
+all three independent primary confirmation blocks for matching full-validation
+points. Source commits/hashes, import routing, model dimensions, seed,
+last-token/cache scope, raw counts, protocol/plan, package/GPU/driver identity,
+CPU affinity and thread environment must match. Thirteen CPU-only harness
+checks pass, including rejection of incompatible evidence. Reused raw files
+retain their original confirmation stage and commands; they are referenced,
+not relabeled or duplicated as fresh timings.
+
+If confirmation nominates A0001, the complete 84-point paired prefill/decode
+matrix needs 68 new processes and 16 reused primary points (48 existing
+process records), followed by 12 new generation processes and eight independent
+full-model correctness processes. Planning cost excludes the known controller
+pause in baseline J09 setup. A sequential continuation controller waits for
+R02 to terminate, checks the predeclared statistical/memory gate, then records
+plans before launching these remaining gates. It stops for failed/inconclusive
+confirmation or failed validation and never declares acceptance automatically.
