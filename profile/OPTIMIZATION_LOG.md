@@ -251,3 +251,15 @@ failed so far. Controller and active child verified live; no restart or
 concurrent GPU profiling. Raw 8192-length measurements and process observation
 preserved in `R01-checkpoint-07.json`. Generation remains required before
 completion of the baseline and subsequent profiling/candidate experiments.
+
+### A0000 — placement scaling audit while generation runs (2026-10-01)
+
+All 42 fixed-workload records validate. `placement-scaling-summary.json`
+compares each offload point with the folded resident point of identical shape.
+Offload peak allocated GPU savings range from 1.952 to 2.828 GiB. Small
+prefill shapes have larger offload overhead: batch1/length2048 latency ratio
+1.514; batch8/length512 ratio1.560 (offload/resident). These single-process
+ratios describe baseline placement, not paired optimization gains. Inspect
+bulk gather/transfer behavior for these shapes in subsequent profiling.
+Generation is still running; controller and current child verified live.
+No model change or extra GPU job was introduced.
