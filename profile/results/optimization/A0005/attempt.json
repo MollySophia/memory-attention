@@ -3,7 +3,7 @@
   "parent_attempt_id": "A0002",
   "accepted_step": null,
   "status": null,
-  "phase": "screening_prepared",
+  "phase": "confirmation_prepared",
   "label": "Single-launch paired Q/K rotary for inference decode",
   "parent_sha": "c677ed9967930f870c77b21e94246414ead7fd4b",
   "incumbent_sha": "ec6384d2e9081ecbb2926fe8a6193bc48ea650a3",
@@ -17,11 +17,24 @@
     "Unsupported shapes must preserve original semantics and autograd"
   ],
   "measurement_plan": "8 fresh primary screening jobs vs A0002,3/5/1; independent confirmation only if promising.",
-  "next_action": "8 fresh primary screening processes vs A0002; no accepted gain claim.",
+  "next_action": "Primary frozen-forward gate then R02 confirmation; no environment change to chase gain.",
   "candidate_sha": "3fa9ce24f8d3ef6e0fdeee71a39a106cd644f391",
   "correctness": {
     "pytest": "78 passed;correctness-pytest.txt",
     "standalone": "PASS,maxdiff0;correctness-standalone.txt",
     "independent_reference": "A0003/reference.py loads frozen A0002 attention,which does not opt into paired rotary;128-step exact model gates passed."
-  }
+  },
+  "screening": {
+    "run": "R01-screening",
+    "controller_pid": 1643970,
+    "job_count": 8,
+    "tool_session": 2584,
+    "baseline_attempt": "A0002"
+  },
+  "performance": {
+    "screening": "screening-summary.json"
+  },
+  "screening_outcome": "Offload decode1.119156x, resident1.011922x; prefills near1.0. Placement discrepancy and prior process jitter require independent confirmation.",
+  "confirmation_plan": "12 fresh offload primary processes,3 alternating pairs each10/10/3,95% paired-log t intervals df2; unchanged16-thread default environment,estimated4\u20135min. No optional extension.",
+  "diagnostic_followup": "../diagnostics/a0002-gather-threads/diagnostic.json"
 }

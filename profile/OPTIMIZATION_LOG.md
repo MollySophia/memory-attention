@@ -626,3 +626,12 @@ GQA,noncontiguous/varlen-related fallback,gradient path and frozen-A0002
 attention128-step model comparisons plus existing cache/offload gates.
 Standalone offload maxdiff0. Launch8 fresh primary screen jobs vs A0002,
 3/5/1,estimated3minutes. No claim of gain until measurement.
+
+A0005 R01 raw/source/config/environment audit passed8 processes/40samples.
+Offload decode1.119156x,resident1.011922x,prefills near1.0. Placement
+discrepancy again suggests process jitter; no headline claim. Accepted-model
+CPU-gather diagnostic(30calls each16threads then1,oneprocess,not independent
+evidence): gather medians0.05246/0.02270ms,model5.3994/5.3664ms. This
+does not explain prior~0.5ms process shifts; keep default environment unchanged.
+R02 predeclared12 fresh offload primary processes,3alternating pairs10/10/3,
+95%paired-logCI,no optional extensions. Primary exact gate precedes timing.
