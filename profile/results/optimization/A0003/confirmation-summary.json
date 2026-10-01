@@ -1,0 +1,111 @@
+{
+  "stage": "confirmation",
+  "baseline_attempt": "A0002",
+  "run": "R02-confirmation",
+  "job_count": 12,
+  "sample_count": 360,
+  "audit": "All actual import paths, expected commits, source patches/hashes, paired model/config/environment, 360 finite raw samples, and recomputed round/run estimators passed.",
+  "estimator": "median of round means per process; geometric mean of paired baseline/candidate ratios",
+  "uncertainty": "95% Student-t interval on three independent paired log ratios, df=2. Small-n interval assumes approximately normal paired log ratios; within-process rounds are not independent process pairs.",
+  "source_hashes": {
+    "baseline": [
+      "87d1ba4b7d75b0641c4564b03bf7e30a7fe6c5545acd9e4566fd6d754862689d"
+    ],
+    "candidate": [
+      "e625fb400161ca4eed4da2d465560e21639199813957ca1ff059d3d945995b8f"
+    ]
+  },
+  "rows": [
+    {
+      "variant": "ma_offload",
+      "mode": "prefill",
+      "pairs": [
+        {
+          "pair": 1,
+          "baseline_ms": 210.37150472402573,
+          "candidate_ms": 209.6120493952185,
+          "speedup": 1.0036231472904276,
+          "baseline_peak_gpu_gib": 6.448451995849609,
+          "candidate_peak_gpu_gib": 6.448451995849609,
+          "baseline_host_rss_gib": 10.905410766601562,
+          "candidate_host_rss_gib": 10.904705047607422
+        },
+        {
+          "pair": 2,
+          "baseline_ms": 209.48595432564616,
+          "candidate_ms": 209.39626963809133,
+          "speedup": 1.000428301266827,
+          "baseline_peak_gpu_gib": 6.448451995849609,
+          "candidate_peak_gpu_gib": 6.448451995849609,
+          "baseline_host_rss_gib": 10.904922485351562,
+          "candidate_host_rss_gib": 10.906829833984375
+        },
+        {
+          "pair": 3,
+          "baseline_ms": 210.3587807621807,
+          "candidate_ms": 208.6980927735567,
+          "speedup": 1.0079573702210392,
+          "baseline_peak_gpu_gib": 6.448451995849609,
+          "candidate_peak_gpu_gib": 6.448451995849609,
+          "baseline_host_rss_gib": 10.905323028564453,
+          "candidate_host_rss_gib": 10.904953002929688
+        }
+      ],
+      "geometric_mean_speedup": 1.0039982003564263,
+      "paired_speedup_ci95": [
+        0.9946573077321986,
+        1.0134268139216647
+      ],
+      "verdict": "within_noise"
+    },
+    {
+      "variant": "ma_offload",
+      "mode": "decode",
+      "pairs": [
+        {
+          "pair": 1,
+          "baseline_ms": 5.622504977509379,
+          "candidate_ms": 5.744527466595173,
+          "speedup": 0.9787584810421114,
+          "baseline_peak_gpu_gib": 5.808236598968506,
+          "candidate_peak_gpu_gib": 5.808236598968506,
+          "baseline_host_rss_gib": 11.066856384277344,
+          "candidate_host_rss_gib": 11.064769744873047
+        },
+        {
+          "pair": 2,
+          "baseline_ms": 5.414445325732231,
+          "candidate_ms": 5.406311061233282,
+          "speedup": 1.0015045868443044,
+          "baseline_peak_gpu_gib": 5.808236598968506,
+          "candidate_peak_gpu_gib": 5.808236598968506,
+          "baseline_host_rss_gib": 11.064765930175781,
+          "candidate_host_rss_gib": 11.064735412597656
+        },
+        {
+          "pair": 3,
+          "baseline_ms": 5.977878300473094,
+          "candidate_ms": 5.406828131526709,
+          "speedup": 1.1056164825392998,
+          "baseline_peak_gpu_gib": 5.808236598968506,
+          "candidate_peak_gpu_gib": 5.808236598968506,
+          "baseline_host_rss_gib": 11.065311431884766,
+          "candidate_host_rss_gib": 11.067020416259766
+        }
+      ],
+      "geometric_mean_speedup": 1.0271747345598394,
+      "paired_speedup_ci95": [
+        0.874539984498382,
+        1.206449052095946
+      ],
+      "verdict": "within_noise"
+    }
+  ],
+  "environment_note": "Raw before/after GPU clocks, temperature, utilization and process listings retained per job. A separate trm-mcp Python process holds 654 MiB; snapshots are not continuous utilization monitoring.",
+  "offload_memory_saving_preserved": null,
+  "memory_note": "CPU table placement verified; final offload/resident peak saving requires full validation.",
+  "elapsed_minutes": 4.809407726923625,
+  "nominated_for_full_validation": false,
+  "accepted": false,
+  "next_action": "Investigate resolved primary regression or record within_noise; no acceptance."
+}

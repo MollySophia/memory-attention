@@ -581,3 +581,10 @@ prefill1.004315x,decode1.006374x; resident near1.0,peak allocation unchanged.
 offload-only primary processes,three alternating pairs per mode10/10/3,
 95% paired-log t intervals(df2),estimated4–5min. No optional repeats; no
 acceptance from screening. Primary frozen-forward check precedes confirmation.
+
+A0003 R02 completed12 processes/360 samples,source/import/config/environment/
+raw-statistics audit passed. Prefill1.003998xCI[0.994657,1.013427],decode
+1.027175xCI[0.874540,1.206449]; both within_noise. No accepted incremental
+gain; no extra runs to chase significance. Save candidate-model.patch and all
+results before reverting only the scheduling implementation. Accepted incumbent
+remains A0002; continued-campaign effective accepted count remains0.

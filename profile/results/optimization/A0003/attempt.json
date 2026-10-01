@@ -2,8 +2,8 @@
   "attempt_id": "A0003",
   "parent_attempt_id": "A0002",
   "accepted_step": null,
-  "status": null,
-  "phase": "confirmation_prepared",
+  "status": "within_noise",
+  "phase": "final_verdict",
   "label": "Defer PendingM acquisition until Q/K normalization and rotary are queued",
   "parent_sha": "1b74d96ad2a5d80b07905154c0c05ee877a40b72",
   "incumbent_sha": "ec6384d2e9081ecbb2926fe8a6193bc48ea650a3",
@@ -20,7 +20,7 @@
   ],
   "correctness_plan": "Bit-exact logits/hidden/KV against frozen A0002 attention forward; batch1/2,bulk/pipeline,GQA,padding,growing128,group2depth1,plus existing gates and primary gate if screened promising.",
   "measurement_plan": "Initial8 fresh processes: primary prefill/decode,offload/resident,one alternating incumbent/candidate pair under3/5/1; roughly3min from19ssetup/process plusmodelwork. Promising primary effects require>=3 fresh independent pairs10/10/3. No acceptance from screen.",
-  "next_action": "Primary-shape frozen-forward exact gate, then R02 confirmation.",
+  "next_action": "Revert scheduling change to accepted A0002; profile and implement a separate KV append launch optimization.",
   "candidate_sha": "feb2c660744b94768f5635772722181685cff1b0",
   "correctness": {
     "pytest": "53 passed;8 independent frozen-forward growing128 cases plus45existing gates",
@@ -37,8 +37,18 @@
     "tool_session": 16808
   },
   "performance": {
-    "screening": "screening-summary.json"
+    "screening": "screening-summary.json",
+    "confirmation": "confirmation-summary.json"
   },
   "screening_outcome": "Offload prefill1.004315x,decode1.006374x; resident near1.0. Tiny provisional changes require independent confirmation.",
-  "confirmation_plan": "12 fresh processes: offload primary prefill/decode,three alternating pairs each10/10/3.95% paired-log t CI df2; no optional extension. Either repeatable primary improvement with no other-primary regression nominates full validation. Estimated4-5min."
+  "confirmation_plan": "12 fresh processes: offload primary prefill/decode,three alternating pairs each10/10/3.95% paired-log t CI df2; no optional extension. Either repeatable primary improvement with no other-primary regression nominates full validation. Estimated4-5min.",
+  "confirmation": {
+    "run": "R02-confirmation",
+    "controller_pid": 1620021,
+    "job_count": 12,
+    "baseline_attempt": "A0002",
+    "tool_session": 95487,
+    "status": "complete"
+  },
+  "reason": "Neither primary incremental effect has a95% paired-log interval excluding1; no confirmed gain. Prefill1.003998x[0.994657,1.013427],decode1.027175x[0.874540,1.206449]. Preserve broad decode uncertainty; do not extend measurements to seek significance."
 }
