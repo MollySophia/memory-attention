@@ -453,3 +453,14 @@ Reverted A0001 model changes to frozen A0000 after committing failure evidence.
 Removed candidate-specific cache ownership tests from the active baseline;
 they remain reproducible in implementation commit2b85165. Retained independent
 frozen-reference helper, expanded GQA/growing correctness coverage and tooling.
+
+### A0002 — multi-item KV reuse registered (2026-10-01)
+
+Parent accepted A0000; informed by rejected A0001. Hypothesis: keep original
+concatenation for batch1, where bounded reuse overhead exceeds the history-copy
+saving, and retain reuse for larger batches. This interpretation is inferred
+from A0001 scaling evidence, not a pure-kernel timing attribution. Register
+before modifying model code. Restore independent ownership/growing gates and
+add an explicit batch1 fallback/rollback gate. Screening includes primary plus
+batch1/context2048 and batch8/context512 decode before another full sweep.
+See A0002/attempt.json; no candidate implementation or performance yet.

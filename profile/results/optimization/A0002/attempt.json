@@ -1,0 +1,25 @@
+{
+  "attempt_id": "A0002",
+  "parent_attempt_id": "A0000",
+  "informed_by_attempt": "A0001",
+  "accepted_step": null,
+  "status": null,
+  "phase": "registered",
+  "candidate_sha": null,
+  "parent_sha": "2f7028ba2cd5ddc00684752d4f24961882b4e543",
+  "label": "Bounded KV reuse for multi-item batches with batch1 concatenation",
+  "hypothesis": "A0001 amortized history-copy cost improves primary batch8 decode ~2x but incurs a confirmed ~5% resident batch1 slowdown. The added Python checks, slices and copies may outweigh saved history copying at batch1. Keep the independent original concatenation path for batch1 and use bounded reuse for larger batches.",
+  "planned_change": "Reapply the audited A0001 bounded-capacity implementation from the accepted A0000 baseline, with MemoryAttention opting in only for batch>1. Preserve inference/training/window/legacy fallbacks and exact values. This is one focused policy change relative to the recorded A0001 ablation.",
+  "correctness_gate": "Restore cache ownership tests; retain independent frozen cache comparisons, growing128, GQA, padding, both policies and exact primary outputs. Add a batch1 gate proving the original concat path remains active and exact across repeated decode/rollback.",
+  "measurement_plan": {
+    "screening": "3/5/1 matching baseline/candidate: primary prefill/decode plus batch1/context2048 decode and batch8/context512 decode, both folded placements. Check small-copy workloads before another full sweep.",
+    "confirmation": "If promising, >=3 independent alternating pairs under10/10/3 at primary and batch1 regression point. Preserve unhelpful/noisy results.",
+    "full_validation": "Only after confirmation, full matrix and128-step generation; reuse valid unchanged baseline records where source, scope, plan and recorded environment match. Candidate records must use A0002 source."
+  },
+  "performance": null,
+  "risks": [
+    "Batch gating may forgo gains at batch1 with very long contexts; no gain claimed there.",
+    "Other small-copy shapes may also fail to amortize overhead; explicitly screen batch8/context512.",
+    "Must compare candidate paths independently; do not allow branch fallback to hide missing optimized-path correctness coverage."
+  ]
+}
