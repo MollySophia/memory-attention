@@ -1,0 +1,5 @@
+Frozen A0002 vs itself also fails full padded KV comparison: Tensor-likes are not equal!
+
+Mismatched elements: 384 / 4096 (9.4%)
+Greatest absolute difference: 0.87890625 at index (0, 0, 24)
+Greatest relative difference: 11968.0 at index (0, 2, 65)

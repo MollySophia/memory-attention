@@ -38,8 +38,13 @@ def test_deferred_acquire_exact_128_steps(policy,batch,kv_heads,padded):
                     out=model(input_ids=ids,attention_mask=mask,past_key_values=cache,
                               use_cache=True,logits_to_keep=1,output_hidden_states=True)
                     cache=out.past_key_values
+                    # The frozen rotary kernel does not write negative-position
+                    # padded K entries. Compare every defined K and all V, plus
+                    # all logits/hidden states (including padded hidden states).
+                    valid = mask.bool() if mask is not None else None
                     values.append([out.logits.clone(),*[h.clone() for h in out.hidden_states],
-                                   *[t.clone() for state in cache for t in state['attn_state']]])
+                                   *[(t[valid] if valid is not None and j == 0 else t).clone()
+                                     for state in cache for j,t in enumerate(state['attn_state'])]])
                 torch.cuda.synchronize()
                 return values
             with ref.frozen_attention():expected=capture()
