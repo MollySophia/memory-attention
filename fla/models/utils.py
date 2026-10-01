@@ -10,8 +10,6 @@ from transformers.cache_utils import Cache as HFCacheBase
 from transformers.generation import GenerationMixin
 from transformers.utils.deprecation import deprecate_kwarg
 
-from fla.ops.utils.memory_cache import append_kv_pair
-
 _TF_VERSION = transformers.__version__
 _NEED_NEW = "4.53.3"
 _IS_TRANSFORMERS_4_56_PLUS = version.parse(_TF_VERSION) >= version.parse("4.56.0")
@@ -60,21 +58,8 @@ class FLALayer(CacheLayerMixin):
             for buf, x in zip(buffers, old):
                 buf[:, :length].copy_(x)
             self._memory_kv_buffers = buffers
-        if (len(incoming) == 2 and len(buffers) == 2
-                and incoming[0].is_cuda and incoming[0].ndim == 3
-                and incoming[0].dtype in (torch.float16, torch.bfloat16, torch.float32)
-                and incoming[0].numel() > 0
-                and incoming[0].shape[1] == 1
-                and incoming[0].shape == incoming[1].shape
-                and incoming[0].dtype == incoming[1].dtype
-                and incoming[0].device == incoming[1].device
-                and all(buf.ndim == 3 and buf.device == x.device and buf.dtype == x.dtype
-                        and buf.shape[0] == x.shape[0] and buf.shape[2] == x.shape[2]
-                        for buf, x in zip(buffers, incoming))):
-            append_kv_pair(buffers, incoming, length)
-        else:
-            for buf, x in zip(buffers, incoming):
-                buf[:, length:end].copy_(x)
+        for buf, x in zip(buffers, incoming):
+            buf[:, length:end].copy_(x)
         return tuple(buf[:, :end] for buf in buffers)
 
     def update(
