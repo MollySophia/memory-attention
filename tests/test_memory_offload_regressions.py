@@ -154,3 +154,20 @@ Path(a.json).write_text(json.dumps(dict(
     monkeypatch.setattr('sys.argv', args + ['--allow-env-change'])
     assert sweep.main() == 0
     assert bmk.with_suffix('.count').read_text() == '2'
+
+
+@pytest.mark.parametrize('offload', [False, True])
+def test_cached_prefill_last_token_scope(model, offload):
+    ids = torch.randint(0, 128, (2, 8), device='cuda')
+    if offload:
+        model.enable_memory_offload()
+    else:
+        model.fold_memory_table_on_gpu()
+    full = model(input_ids=ids, use_cache=True, logits_to_keep=0)
+    last = model(input_ids=ids, use_cache=True, logits_to_keep=1)
+    assert last.logits.shape == (2, 1, 128)
+    torch.testing.assert_close(last.logits, full.logits[:, -1:], rtol=0, atol=0)
+    assert last.past_key_values.get_seq_length() == 8
+    for actual, expected in zip(last.past_key_values, full.past_key_values):
+        for a, b in zip(actual['attn_state'], expected['attn_state']):
+            torch.testing.assert_close(a, b, rtol=0, atol=0)

@@ -56,7 +56,38 @@ def test_decode_excludes_rollback_and_keeps_context_fixed(monkeypatch):
     monkeypatch.setattr(bench, 'time', SimpleNamespace(perf_counter=timestamp))
     monkeypatch.setattr(torch.cuda, 'synchronize', lambda _: None)
     rounds = bench.run_decode(model, args, 'cpu')
-    assert rounds == pytest.approx([2.0, 2.0])
+    assert rounds["round_ms"] == pytest.approx([2.0, 2.0])
+    for samples in rounds["samples_ms"]:
+        assert samples == pytest.approx([2.0] * args.repeats)
     assert clock.intervals == args.rounds * args.repeats
     assert clock.calls == clock.rollbacks == args.warmup + args.rounds * args.repeats
     assert not clock.timing
+
+
+@pytest.mark.parametrize("workload,keep,cache", [("inference", 1, True), ("historical", 0, False)])
+def test_prefill_scope_and_raw_samples(monkeypatch, workload, keep, cache):
+    script = Path(__file__).resolve().parents[1] / 'profile' / 'bench_fla.py'
+    spec = importlib.util.spec_from_file_location('bench_fla_prefill', script)
+    bench = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(bench)
+    args = SimpleNamespace(vocab_size=16, batch_size=2, seq_len=8,
+                           warmup=2, repeats=3, rounds=2, logits_to_keep=1,
+                           prefill_workload=workload)
+    calls = []
+    ticks = iter([0, .001, 1, 1.002, 2, 2.003, 3, 3.004, 4, 4.005, 5, 5.006])
+
+    def model(**kwargs):
+        assert kwargs['use_cache'] is cache
+        assert kwargs['logits_to_keep'] == keep
+        assert kwargs['input_ids'].shape == (2, 8)
+        assert 'past_key_values' not in kwargs
+        calls.append(kwargs['input_ids'].clone())
+
+    monkeypatch.setattr(torch.cuda, 'synchronize', lambda _: None)
+    monkeypatch.setattr(bench, 'time', SimpleNamespace(perf_counter=lambda: next(ticks)))
+    result = bench.run_prefill(model, args, 'cpu')
+    assert result['round_ms'] == pytest.approx([2, 5])
+    assert result['samples_ms'][0] == pytest.approx([1, 2, 3])
+    assert result['samples_ms'][1] == pytest.approx([4, 5, 6])
+    assert len(calls) == 8
+    assert all(torch.equal(calls[0], ids) for ids in calls)

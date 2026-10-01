@@ -13,20 +13,18 @@ sweep relies on. Variants mirror bmk.py's naming so summaries line up:
   ma_offload       -- streamed from pinned host memory
   ma_gpu_unfolded  -- resident table, norm per token    (original fla path)
 
-Statistics: per-round means are collected, then reduced with median/min/max
-across rounds. The spread between rounds is reported so a later 1-2% change
-can be told apart from measurement noise -- observed run-to-run spread on this
-GPU is 0.1-0.2%.
-
-Timing scope matches bmk.py: input embedding, all blocks, final RMSNorm, LM
-head. Prefix construction, norm folding and the decode cache rollback are
-excluded.
+Primary prefill constructs a KV cache and returns last-token logits. Historical
+full-logits/no-cache prefill is selected explicitly with --prefill-workload.
+Every raw sample is retained; median_ms is the median of round means. Round
+spread describes variability and is not a significance threshold. Protocol is
+still draft until memory/environment and growing-generation reporting land.
 """
 
 from __future__ import annotations
 
 import argparse
 import json
+import math
 import os
 import platform
 import statistics
@@ -44,6 +42,7 @@ from fla.models.utils import Cache
 
 VARIANTS = ("ma_gpu", "ma_offload", "ma_gpu_unfolded")
 MODES = ("prefill", "decode")
+PROTOCOL_VERSION = "paper_v1_draft"
 
 
 def parse_args():
@@ -56,7 +55,8 @@ def parse_args():
     p.add_argument("--warmup", type=int, default=30)
     p.add_argument("--repeats", type=int, default=30)
     p.add_argument("--rounds", type=int, default=5)
-    p.add_argument("--logits-to-keep", type=int, default=0)
+    p.add_argument("--logits-to-keep", type=int, default=1)
+    p.add_argument("--prefill-workload", choices=("inference", "historical"), default="inference")
     p.add_argument("--hidden-size", type=int, default=2048)
     p.add_argument("--num-heads", type=int, default=32)
     p.add_argument("--num-kv-heads", type=int, default=None)
@@ -70,7 +70,12 @@ def parse_args():
     p.add_argument("--seed", type=int, default=1234)
     p.add_argument("--device", default="cuda:0")
     p.add_argument("--json", type=Path, required=True)
-    return p.parse_args()
+    args = p.parse_args()
+    if min(args.batch_size, args.seq_len, args.context_len, args.repeats, args.rounds) <= 0 or args.warmup < 0:
+        p.error("shapes, repeats and rounds must be positive; warmup must be nonnegative")
+    if args.logits_to_keep < 0:
+        p.error("logits-to-keep must be nonnegative")
+    return args
 
 
 def build(args):
@@ -110,22 +115,30 @@ def rollback(cache, length):
 def run_prefill(model, args, device):
     ids = torch.randint(0, args.vocab_size, (args.batch_size, args.seq_len), device=device)
     feed = ids
+    historical = args.prefill_workload == "historical"
+
+    def one():
+        # A fresh cache on every prefill; construction is part of model work.
+        return model(input_ids=feed, use_cache=not historical,
+                     logits_to_keep=0 if historical else args.logits_to_keep)
 
     for _ in range(args.warmup):
-        model(input_ids=feed, use_cache=False)
+        one()
     torch.cuda.synchronize(device)
 
     rounds = []
+    raw_samples = []
     for _ in range(args.rounds):
         samples = []
         for _ in range(args.repeats):
             torch.cuda.synchronize(device)
             begin = time.perf_counter()
-            model(input_ids=feed, use_cache=False)
+            one()
             torch.cuda.synchronize(device)
             samples.append((time.perf_counter() - begin) * 1e3)
+        raw_samples.append(samples)
         rounds.append(statistics.mean(samples))
-    return rounds
+    return {"round_ms": rounds, "samples_ms": raw_samples}
 
 
 @torch.inference_mode()
@@ -138,7 +151,7 @@ def run_decode(model, args, device):
     )
     # Prefix build is setup, not part of the measured step.
     out = model(
-        input_ids=prefix, past_key_values=Cache.from_legacy_cache(None), use_cache=True
+        input_ids=prefix, past_key_values=Cache.from_legacy_cache(None), use_cache=True, logits_to_keep=1
     )
     cache = out.past_key_values
     del out, prefix
@@ -146,7 +159,7 @@ def run_decode(model, args, device):
     def one(token):
         return model(
             input_ids=token, past_key_values=cache, use_cache=True,
-            logits_to_keep=1 if args.logits_to_keep else 0,
+            logits_to_keep=args.logits_to_keep,
         ).logits
 
     for i in range(args.warmup):
@@ -155,6 +168,7 @@ def run_decode(model, args, device):
     torch.cuda.synchronize(device)
 
     rounds = []
+    raw_samples = []
     cursor = args.warmup
     for _ in range(args.rounds):
         samples = []
@@ -169,9 +183,10 @@ def run_decode(model, args, device):
             torch.cuda.synchronize(device)
             samples.append((time.perf_counter() - begin) * 1e3)
             cursor += 1
+        raw_samples.append(samples)
         rounds.append(statistics.mean(samples))
     del cache, steps
-    return rounds
+    return {"round_ms": rounds, "samples_ms": raw_samples}
 
 
 @torch.inference_mode()
@@ -205,7 +220,11 @@ def measure(model, args, variant, device):
         policy = model.model.memory_offloader.policy
 
     runner = run_prefill if args.mode == "prefill" else run_decode
-    rounds = runner(model, args, device)
+    # Variant-independent inputs, even when several placements share a process.
+    torch.manual_seed(args.seed + 1)
+    measurements = runner(model, args, device)
+    rounds = measurements["round_ms"]
+    samples = [sample for run in measurements["samples_ms"] for sample in run]
 
     gpu_params = sum(p.numel() for p in model.parameters() if p.device.type == "cuda")
     table = model.model.memory_table
@@ -217,8 +236,16 @@ def measure(model, args, variant, device):
         min_ms=min(rounds),
         max_ms=max(rounds),
         round_ms=rounds,
-        # max-min over the mean, as a fraction: the noise floor to compare
-        # future changes against.
+        samples_ms=measurements["samples_ms"],
+        protocol_version=PROTOCOL_VERSION,
+        estimator="median_of_round_means",
+        sample_p50_ms=statistics.median(samples),
+        sample_p95_ms=sorted(samples)[max(0, math.ceil(len(samples) * .95) - 1)],
+        sample_percentile_method="nearest_rank_p95; median_p50",
+        tokens_per_second=args.batch_size * (args.seq_len if args.mode == "prefill" else 1) * 1000 / statistics.median(rounds),
+        output_scope="full_logits_no_cache" if args.mode == "prefill" and args.prefill_workload == "historical" else "cached_logits",
+        logits_to_keep=0 if args.mode == "prefill" and args.prefill_workload == "historical" else args.logits_to_keep,
+        # Round spread is descriptive, not a significance threshold.
         spread_pct=(max(rounds) - min(rounds)) / statistics.mean(rounds) * 100,
         seq_len=args.seq_len if args.mode == "prefill" else 1,
         context_len=args.context_len,
@@ -288,7 +315,7 @@ def main():
     for variant in dict.fromkeys(args.variants):
         results.append(measure(model, args, variant, device))
 
-    payload = dict(config=vars(args), env=env_fingerprint(), results=results)
+    payload = dict(protocol_version=PROTOCOL_VERSION, config=vars(args), model_config=model.config.to_dict(), env=env_fingerprint(), results=results)
     args.json.parent.mkdir(parents=True, exist_ok=True)
     args.json.write_text(json.dumps(payload, indent=2, default=str), encoding="utf-8")
 
