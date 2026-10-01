@@ -5,7 +5,7 @@
   "parent_sha": "7e2990ef8ec14b9320dc752629a329d2ffff0552",
   "accepted_step": null,
   "label": "pipeline above 1024 tokens",
-  "workflow_stage": "confirmation_design_corrected",
+  "workflow_stage": "full_validation",
   "hypothesis": "The batch-1 prefill bulk path serializes ~11.17 ms CPU gather and ~3.50 ms H2D before layers. Route medium prefill to existing bounded pipeline to overlap this work; preserve bulk for decode.",
   "expected_bottleneck": "unoverlapped CPU gather and H2D at batch1 length2048",
   "change": "Lower default auto-policy bulk cutoff from 4096 to 1024 tokens; no arithmetic/table/precision changes.",
@@ -32,8 +32,8 @@
     "reason_batch16": "Pipeline scheduling change"
   },
   "not_run": {
-    "full_validation": "only if independently confirmed",
-    "generation_validation": "only if independently confirmed"
+    "generation_validation": "queued after full matrix",
+    "full_model_independent_correctness": "queued after generation"
   },
   "performance": "screen-comparison.json",
   "candidate_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
@@ -41,7 +41,7 @@
     "pytest": "43 passed",
     "standalone": "PASS; max difference 0"
   },
-  "decision": "Rerun confirmation after concrete order-design diagnosis; not accepted",
+  "decision": "Nominated after corrected independent confirmation; not accepted until remaining gates pass",
   "commands": {
     "pytest": "/home/molly/miniconda3/envs/fla-bench/bin/python -m pytest -q tests/test_memory_offload_regressions.py tests/test_decode_benchmark.py tests/test_sampling_plans.py",
     "standalone": "/home/molly/miniconda3/envs/fla-bench/bin/python profile/test_memory_offload.py",
@@ -50,5 +50,12 @@
   },
   "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0001",
   "confirmation_run_outcome": "R02 benchmark_failed: nonalternating paired design; preserved",
-  "confirmation_plan_id": "formal_v1_w10_n10_r3__balanced_order_v2"
+  "confirmation_plan_id": "formal_v1_w10_n10_r3__balanced_order_v2",
+  "confirmation_manifest": "R03-confirmation-v2/manifest.json",
+  "confirmation_analysis": "validation-v2-confirmation-analysis.json",
+  "screen_manifest": "R01/manifest.json",
+  "screen_summary": "R01-summary.json",
+  "validation_matrix_manifest": "R04-full-validation/manifest.json",
+  "generation_manifest": "R05-generation-validation/manifest.json",
+  "correctness_directory": "R06-full-correctness"
 }

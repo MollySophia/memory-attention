@@ -244,3 +244,24 @@ R02 design and end-to-end validation of all eight corrected pair sequences.
 R02 will not be combined with R03 or reused for full validation. Before R03,
 collect one instrumented 10/10/3 batch-1 decode diagnostic per implementation
 for CPU gather variability; preserve it separately from inference timing.
+
+
+A0001 R03 corrected confirmation passes the predeclared primary gate. All 48
+jobs completed with verified per-workload/per-placement source alternation.
+Batch-1 prefill offload reduction: 13.7987 ms, paired 95% interval
+[13.5270, 14.0705] ms; absolute-gap reduction: 13.7839 ms, interval
+[13.4968, 14.0709] ms; paired offload speedup 1.4634x [1.4561, 1.4708].
+Other primary workloads have no resolved offload regression, no resolved
+resident slowdown, and retain GPU memory savings. Batch-1 decode remains
+noisy: its estimated reduction is -0.1777 ms [-0.6276, +0.2723], so no decode
+improvement is claimed. R02 remains excluded from this confirmation.
+
+A0001 is nominated, not accepted. R04 full validation has started with 68 new
+processes and 16 reused primary points referencing all 48 corrected R03 jobs.
+The complete matrix still contains 84 source/placement/workload points.
+R05 generation and R06 independent full-model exactness follow sequentially.
+Prepared history/accepted-step plotting now has tests proving that the
+incumbent is one whole model, failures are not zero latency, partial valid
+measurements survive a failed resident partner, and accepted-step plots require
+explicit eligible confirmation. Preview layout inspected; final publication
+figures remain pending the completed campaign.

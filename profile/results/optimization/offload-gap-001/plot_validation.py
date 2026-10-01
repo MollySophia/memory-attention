@@ -19,9 +19,9 @@ VARIANTS=('ma_offload','ma_gpu','ma_gpu_unfolded')
 CAPTION='2.836B parameters · BF16 · RTX 5090 · seeded random weights (no quality claim)\nCached last-token logits. Bars: process 95% CI where n=3; otherwise descriptive round range, not CI.'
 
 
-def save(fig,output,name,caption=CAPTION):
+def save(fig,output,name,caption=CAPTION,top=.96):
     fig.text(.01,.015,caption,fontsize=8,va='bottom')
-    fig.tight_layout(rect=(0,.095,1,.96))
+    fig.tight_layout(rect=(0,.095,1,top))
     for extension in ('pdf','svg','png'):
         fig.savefig(output/(name+'.'+extension),dpi=180)
     plt.close(fig)

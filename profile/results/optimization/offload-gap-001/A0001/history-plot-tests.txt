@@ -1,0 +1,6 @@
+
+profile/results/optimization/offload-gap-001/test_history_plots.py::test_incumbent_is_whole_model_and_failure_has_no_numeric_point PASSED [ 33%]
+profile/results/optimization/offload-gap-001/test_history_plots.py::test_accepted_step_requires_explicit_eligible_confirmation PASSED [ 66%]
+profile/results/optimization/offload-gap-001/test_history_plots.py::test_valid_offload_point_survives_failed_resident_partner PASSED [100%]
+
+============================== 3 passed in 0.52s ===============================
