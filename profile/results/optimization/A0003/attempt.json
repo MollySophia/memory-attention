@@ -25,7 +25,8 @@
   "correctness": {
     "pytest": "53 passed;8 independent frozen-forward growing128 cases plus45existing gates",
     "standalone": "correctness-standalone.txt",
-    "padding_initial_failure": "padding-audit.md; uninitialized masked keys fail even frozen self-comparison; zero tolerance retained for defined scope"
+    "padding_initial_failure": "padding-audit.md; uninitialized masked keys fail even frozen self-comparison; zero tolerance retained for defined scope",
+    "primary": "296 exact comparisons; frozen A0002 attention plus independent A0000 cache"
   },
   "screening": {
     "run": "R01-screening",
