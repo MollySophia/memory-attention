@@ -1,0 +1,3635 @@
+{
+  "reference_cache_sha": "d949640ebf2f13f56021bd08c5c9f10e65d571c3",
+  "status": "passed",
+  "source": {
+    "source_sha256": "35b5029a0b958d48f151132e4057872d9909c4e653cce112548a79a13f3e25a0",
+    "git_commit": {
+      "returncode": 0,
+      "stdout": "2b85165ff27b4edf6b41e065ac20aee127a113e6\n",
+      "stderr": ""
+    },
+    "git_status": {
+      "returncode": 0,
+      "stdout": " M profile/results/optimization/A0001/attempt.json\n?? profile/results/optimization/A0000/R01-live-audit.json\n?? profile/results/optimization/A0001/correctness-primary.txt\n",
+      "stderr": ""
+    },
+    "source_patch": {
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  "config": {
+    "use_gate": false,
+    "use_head_gate": false,
+    "memory_offload": false,
+    "memory_offload_policy": "auto",
+    "memory_offload_group_size": 1,
+    "memory_offload_prefetch_depth": 4,
+    "memory_offload_bulk_max_tokens": 4096,
+    "memory_offload_chunk_size": 1024,
+    "hidden_size": 2048,
+    "num_hidden_layers": 24,
+    "num_heads": 32,
+    "num_kv_heads": 32,
+    "qkv_bias": false,
+    "qk_norm": false,
+    "window_size": null,
+    "rope_theta": 10000.0,
+    "max_position_embeddings": 2048,
+    "hidden_ratio": 4,
+    "intermediate_size": 5632,
+    "hidden_act": "swish",
+    "initializer_range": 0.02,
+    "elementwise_affine": true,
+    "norm_eps": 1e-06,
+    "use_cache": true,
+    "fuse_norm": false,
+    "fuse_swiglu": true,
+    "fuse_cross_entropy": true,
+    "fuse_linear_cross_entropy": false,
+    "use_l2warp": false,
+    "vocab_size": 32000,
+    "return_dict": true,
+    "output_hidden_states": false,
+    "dtype": null,
+    "chunk_size_feed_forward": 0,
+    "is_encoder_decoder": false,
+    "architectures": null,
+    "id2label": {
+      "0": "LABEL_0",
+      "1": "LABEL_1"
+    },
+    "label2id": {
+      "LABEL_0": 0,
+      "LABEL_1": 1
+    },
+    "problem_type": null,
+    "_name_or_path": "",
+    "transformers_version": "5.3.0",
+    "pad_token_id": null,
+    "bos_token_id": 1,
+    "eos_token_id": 2,
+    "tie_word_embeddings": false,
+    "model_type": "memory",
+    "output_attentions": false
+  },
+  "batch": 8,
+  "prefix_length": 2048,
+  "decode_steps": 3,
+  "comparison": "bit exact all logits, hidden states and KV entries",
+  "comparisons": [
+    {
+      "step": 0,
+      "tensor": "logits",
+      "shape": [
+        8,
+        1,
+        32000
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "hidden_0",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "hidden_1",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "hidden_2",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "hidden_3",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "hidden_4",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "hidden_5",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "hidden_6",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "hidden_7",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "hidden_8",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "hidden_9",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "hidden_10",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "hidden_11",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "hidden_12",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "hidden_13",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "hidden_14",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "hidden_15",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "hidden_16",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "hidden_17",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "hidden_18",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "hidden_19",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "hidden_20",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "hidden_21",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "hidden_22",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "hidden_23",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "hidden_24",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "k_0",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "v_0",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "k_1",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "v_1",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "k_2",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "v_2",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "k_3",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "v_3",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "k_4",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "v_4",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "k_5",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "v_5",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "k_6",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "v_6",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "k_7",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "v_7",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "k_8",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "v_8",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "k_9",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "v_9",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "k_10",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "v_10",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "k_11",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "v_11",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "k_12",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "v_12",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "k_13",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "v_13",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "k_14",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "v_14",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "k_15",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "v_15",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "k_16",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "v_16",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "k_17",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "v_17",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "k_18",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "v_18",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "k_19",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "v_19",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "k_20",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "v_20",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "k_21",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "v_21",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "k_22",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "v_22",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "k_23",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 0,
+      "tensor": "v_23",
+      "shape": [
+        8,
+        2048,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "logits",
+      "shape": [
+        8,
+        1,
+        32000
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "hidden_0",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "hidden_1",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "hidden_2",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "hidden_3",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "hidden_4",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "hidden_5",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "hidden_6",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "hidden_7",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "hidden_8",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "hidden_9",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "hidden_10",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "hidden_11",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "hidden_12",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "hidden_13",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "hidden_14",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "hidden_15",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "hidden_16",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "hidden_17",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "hidden_18",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "hidden_19",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "hidden_20",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "hidden_21",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "hidden_22",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "hidden_23",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "hidden_24",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "k_0",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "v_0",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "k_1",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "v_1",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "k_2",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "v_2",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "k_3",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "v_3",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "k_4",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "v_4",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "k_5",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "v_5",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "k_6",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "v_6",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "k_7",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "v_7",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "k_8",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "v_8",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "k_9",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "v_9",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "k_10",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "v_10",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "k_11",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "v_11",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "k_12",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "v_12",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "k_13",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "v_13",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "k_14",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "v_14",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "k_15",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "v_15",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "k_16",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "v_16",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "k_17",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "v_17",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "k_18",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "v_18",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "k_19",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "v_19",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "k_20",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "v_20",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "k_21",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "v_21",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "k_22",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "v_22",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "k_23",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 1,
+      "tensor": "v_23",
+      "shape": [
+        8,
+        2049,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "logits",
+      "shape": [
+        8,
+        1,
+        32000
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "hidden_0",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "hidden_1",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "hidden_2",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "hidden_3",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "hidden_4",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "hidden_5",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "hidden_6",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "hidden_7",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "hidden_8",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "hidden_9",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "hidden_10",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "hidden_11",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "hidden_12",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "hidden_13",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "hidden_14",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "hidden_15",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "hidden_16",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "hidden_17",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "hidden_18",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "hidden_19",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "hidden_20",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "hidden_21",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "hidden_22",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "hidden_23",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "hidden_24",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "k_0",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "v_0",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "k_1",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "v_1",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "k_2",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "v_2",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "k_3",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "v_3",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "k_4",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "v_4",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "k_5",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "v_5",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "k_6",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "v_6",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "k_7",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "v_7",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "k_8",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "v_8",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "k_9",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "v_9",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "k_10",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "v_10",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "k_11",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "v_11",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "k_12",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "v_12",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "k_13",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "v_13",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "k_14",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "v_14",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "k_15",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "v_15",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "k_16",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "v_16",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "k_17",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "v_17",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "k_18",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "v_18",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "k_19",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "v_19",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "k_20",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "v_20",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "k_21",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "v_21",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "k_22",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "v_22",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "k_23",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 2,
+      "tensor": "v_23",
+      "shape": [
+        8,
+        2050,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "logits",
+      "shape": [
+        8,
+        1,
+        32000
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "hidden_0",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "hidden_1",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "hidden_2",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "hidden_3",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "hidden_4",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "hidden_5",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "hidden_6",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "hidden_7",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "hidden_8",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "hidden_9",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "hidden_10",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "hidden_11",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "hidden_12",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "hidden_13",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "hidden_14",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "hidden_15",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "hidden_16",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "hidden_17",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "hidden_18",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "hidden_19",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "hidden_20",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "hidden_21",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "hidden_22",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "hidden_23",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "hidden_24",
+      "shape": [
+        8,
+        1,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "k_0",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "v_0",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "k_1",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "v_1",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "k_2",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "v_2",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "k_3",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "v_3",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "k_4",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "v_4",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "k_5",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "v_5",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "k_6",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "v_6",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "k_7",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "v_7",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "k_8",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "v_8",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "k_9",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "v_9",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "k_10",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "v_10",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "k_11",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "v_11",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "k_12",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "v_12",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "k_13",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "v_13",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "k_14",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "v_14",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "k_15",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "v_15",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "k_16",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "v_16",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "k_17",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "v_17",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "k_18",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "v_18",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "k_19",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "v_19",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "k_20",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "v_20",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "k_21",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "v_21",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "k_22",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "v_22",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "k_23",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    },
+    {
+      "step": 3,
+      "tensor": "v_23",
+      "shape": [
+        8,
+        2051,
+        2048
+      ],
+      "exact": true,
+      "finite": true,
+      "max_abs_error": 0
+    }
+  ]
+}

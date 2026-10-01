@@ -1,0 +1,5 @@
+{
+  "status": "benchmark_failed",
+  "reason": "Prelaunch cleanliness guard rejected untracked screening controller. No benchmark launched; commit controller before R02.",
+  "performance": null
+}
