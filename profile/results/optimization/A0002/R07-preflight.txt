@@ -1,0 +1,1 @@
+Initial followup plan refused launch because new profile result Python tools were uncommitted (git profile/*.py pathspec includes descendants). No timing started, no result directory created. Commit completed evidence/tools before generating the plan; retain existing clean-source guard.

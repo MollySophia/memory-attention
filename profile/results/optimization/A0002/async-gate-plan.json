@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "reason": "Existing per-step CPU snapshots synchronize between decode calls. Generation timing only synchronizes around a full trajectory; add a gate using GPU snapshots and end-of-trajectory synchronization.",
+  "coverage": "batch1/2, bulk/pipeline,128 steps, chunk-boundary growth, partial groups and slot reuse, exact logits/hidden/KV vs frozen cache",
+  "command": "/home/molly/miniconda3/envs/fla-bench/bin/python -m pytest -q tests/test_memory_offload_regressions.py -k async_generation",
+  "execution": "Only after R06 GPU timing controller exits. Model and benchmark source unchanged.",
+  "result": "async-gate-pytest.txt",
+  "passed": 4
+}

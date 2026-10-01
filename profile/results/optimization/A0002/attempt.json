@@ -4,7 +4,7 @@
   "informed_by_attempt": "A0001",
   "accepted_step": null,
   "status": null,
-  "phase": "full_validation_planned",
+  "phase": "regression_followup_preparation",
   "candidate_sha": "7647da8c431fa4e7bf5800d7556ef2f8f6c171ed",
   "parent_sha": "384aa1a5e644d7ee2fe3fa7cc1a07cd82ca30b17",
   "label": "Bounded KV reuse for multi-item batches with batch1 concatenation",
@@ -19,7 +19,8 @@
   "performance": {
     "screening": "screening-summary.json",
     "small_batch": "small-batch-summary.json",
-    "primary_confirmation": "confirmation-summary.json"
+    "primary_confirmation": "confirmation-summary.json",
+    "full_validation": "reports/R06-final-audit/source.json"
   },
   "risks": [
     "Batch gating may forgo gains at batch1 with very long contexts; no gain claimed there.",
@@ -30,10 +31,11 @@
   "correctness": {
     "pytest": "41 passed: ownership, independent frozen growing128, GQA/padding/two policies plus explicit batch1 fallback, rollback and shape switches.",
     "standalone": "PASS; worst max difference0",
-    "primary": "PASS:296 exact comparisons at batch8/prefix2048 plus3 decode steps"
+    "primary": "PASS:296 exact comparisons at batch8/prefix2048 plus3 decode steps",
+    "async_generation": "4 passed: batch1/2 bulk/pipeline,128 steps with GPU snapshots and end-only synchronization; async-gate-pytest.txt"
   },
   "screening_outcome": "Primary offload decode2.029x and short-context decode1.116x provisional speedup. Batch1 offload-2.45% latency, resident+2.08%; unresolved after one short process pair. Prioritize fresh small-batch confirmation before full primary confirmation.",
-  "next_action": "Complete separate prefill module-stream diagnostic, then run matched full matrix/generation with verified reuse.",
+  "next_action": "Three fresh alternating pairs for each of four full-matrix regression signals; no acceptance before investigation.",
   "small_batch_plan": "12 fresh processes: three alternating baseline/candidate pairs per folded placement,10/10/3;95% paired-log Student-t CI df2. Any upper bound below1 triggers rejection/investigation before primary confirmation.",
   "small_batch_outcome": "Both folded placements within_noise. Resident paired speedup1.0040x,95% CI[0.9737,1.0353]. Offload1.0112x, wideCI[0.7224,1.4155]; retain all samples and do not claim equivalence. No resolved regression under predeclared criterion.",
   "primary_confirmation": {
@@ -54,5 +56,19 @@
     "prefill": "within_noise in both placements",
     "memory": "preserved CPU table placement and positive offload GPU peak saving; full-matrix check pending"
   },
-  "full_validation_plan": "R05-full-plan:96 records,19 verified reuses,77 new processes; estimated37.0 minutes. Reuse audit passed570 existing samples; all stages keep exact source/config/import checks."
+  "full_validation_plan": "R05-full-plan:96 records,19 verified reuses,77 new processes; estimated37.0 minutes. Reuse audit passed570 existing samples; all stages keep exact source/config/import checks.",
+  "full_validation": {
+    "run": "R06-full-validation",
+    "controller_pid": 1544101,
+    "candidate_commit": "c5c764d079e78a19e9dc317645b55daf89718e45",
+    "new_processes": 77,
+    "reused_processes": 19,
+    "controller_log": "R06-controller.log",
+    "accepted": false,
+    "status": "complete",
+    "completed_records": 96,
+    "samples": 2700,
+    "memory_audit": "R06-memory-final.json",
+    "regression_signals_requiring_followup": 4
+  }
 }

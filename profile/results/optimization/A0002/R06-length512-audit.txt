@@ -1,0 +1,90 @@
+{
+  "status_counts": {
+    "completed": 60,
+    "pending": 35,
+    "running": 1
+  },
+  "samples": 1800,
+  "regression_signals": [
+    {
+      "mode": "prefill",
+      "variant": "ma_offload",
+      "batch": 1,
+      "length": 2048,
+      "baseline_status": "completed",
+      "candidate_status": "completed",
+      "baseline_ms": 43.85635033249855,
+      "candidate_ms": 44.11943876184523,
+      "speedup": 0.9940369044409921,
+      "round_extreme_ratio_low": 0.9918810069636883,
+      "round_extreme_ratio_high": 0.9987108489275259,
+      "regression_signal": true,
+      "independent_confirmation_verdict": null,
+      "requires_investigation": true
+    },
+    {
+      "mode": "decode",
+      "variant": "ma_gpu",
+      "batch": 1,
+      "length": 2048,
+      "baseline_status": "completed",
+      "candidate_status": "completed",
+      "baseline_ms": 4.513850528746843,
+      "candidate_ms": 4.548915661871433,
+      "speedup": 0.992291540285413,
+      "round_extreme_ratio_low": 0.9885558589286433,
+      "round_extreme_ratio_high": 0.9965161289173005,
+      "regression_signal": true,
+      "independent_confirmation_verdict": "within_noise",
+      "requires_investigation": false
+    },
+    {
+      "mode": "prefill",
+      "variant": "ma_offload",
+      "batch": 8,
+      "length": 512,
+      "baseline_status": "completed",
+      "candidate_status": "completed",
+      "baseline_ms": 80.54013061337173,
+      "candidate_ms": 81.9494831841439,
+      "speedup": 0.9828021786591955,
+      "round_extreme_ratio_low": 0.9768243209786656,
+      "round_extreme_ratio_high": 0.9873120569905595,
+      "regression_signal": true,
+      "independent_confirmation_verdict": null,
+      "requires_investigation": true
+    },
+    {
+      "mode": "prefill",
+      "variant": "ma_gpu",
+      "batch": 8,
+      "length": 512,
+      "baseline_status": "completed",
+      "candidate_status": "completed",
+      "baseline_ms": 52.127073938027024,
+      "candidate_ms": 52.34621949493885,
+      "speedup": 0.9958135361249342,
+      "round_extreme_ratio_low": 0.9928274326642279,
+      "round_extreme_ratio_high": 0.999822501729502,
+      "regression_signal": true,
+      "independent_confirmation_verdict": null,
+      "requires_investigation": true
+    },
+    {
+      "mode": "decode",
+      "variant": "ma_gpu_unfolded",
+      "batch": 8,
+      "length": 512,
+      "baseline_status": "completed",
+      "candidate_status": "completed",
+      "baseline_ms": 5.699506308883429,
+      "candidate_ms": 5.803047260269523,
+      "speedup": 0.9821574861030367,
+      "round_extreme_ratio_low": 0.9757621745443904,
+      "round_extreme_ratio_high": 0.9920513997476784,
+      "regression_signal": true,
+      "independent_confirmation_verdict": null,
+      "requires_investigation": true
+    }
+  ]
+}

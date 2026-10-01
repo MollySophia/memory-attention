@@ -1,0 +1,11 @@
+{
+  "status": "data_logic_verified_rendering_deferred",
+  "script": "../plot_campaign.py",
+  "checks": [
+    "Syntax valid",
+    "Current rejected/pending attempts do not advance incumbent",
+    "Only baseline appears among accepted steps"
+  ],
+  "timing_guard": "Rendering refuses live known timing controllers; do not commit source while R06 expected HEAD remains pinned.",
+  "remaining": "Render PNG/PDF/SVG and inspect after timing finishes; no final figures yet."
+}

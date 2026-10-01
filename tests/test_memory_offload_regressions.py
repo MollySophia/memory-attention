@@ -283,3 +283,42 @@ def test_batch1_concat_path_exact_through_rollback_and_shape_switch(model, polic
         for got,expected in zip(actual,reference):
             for a,b in zip(got,expected):
                 torch.testing.assert_close(a,b,rtol=0,atol=0)
+
+
+@pytest.mark.parametrize('policy', ['bulk', 'pipeline'])
+@pytest.mark.parametrize('batch', [1, 2])
+def test_async_generation_128_steps_exact_without_cpu_snapshots(model, policy, batch):
+    """Queue GPU snapshots, synchronize only after the entire trajectory.
+
+    Per-step .cpu() snapshots in the other growing-cache gate synchronize the
+    device; this gate exercises the synchronization scope used by generation
+    timing, including a128-position capacity boundary for the optimized path.
+    """
+    frozen=load_script('frozen_cache_reference')
+    model.config.memory_offload_policy=policy
+    model.config.memory_offload_group_size=2
+    model.config.memory_offload_prefetch_depth=1
+    with torch.inference_mode():
+        torch.manual_seed(817)
+        prefix=torch.randint(0,128,(batch,16),device='cuda')
+        tokens=torch.randint(0,128,(128,batch,1),device='cuda')
+        def capture():
+            cache=None;snapshots=[]
+            for i,ids in enumerate([prefix,*tokens.unbind(0)]):
+                out=model(input_ids=ids,past_key_values=cache,use_cache=True,
+                          logits_to_keep=1,output_hidden_states=True)
+                cache=out.past_key_values
+                assert cache.get_seq_length()==16+i
+                # clone() is queued on GPU and preserves this step's values
+                # before later cache writes; no device-to-host synchronization.
+                snapshots.append([out.logits.clone(),*[h.clone() for h in out.hidden_states],
+                                  *[t.clone() for state in cache for t in state['attn_state']]])
+            torch.cuda.synchronize()
+            return snapshots
+        model.fold_memory_table_on_gpu()
+        with frozen.frozen_cache_updates():reference=capture()
+        model.close_memory_offload();model.enable_memory_offload()
+        actual=capture()
+        for got,expected in zip(actual,reference):
+            for a,b in zip(got,expected):
+                torch.testing.assert_close(a,b,rtol=0,atol=0)

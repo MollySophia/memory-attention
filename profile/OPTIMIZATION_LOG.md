@@ -538,3 +538,15 @@ coarse categories; never add them together. These are stream spans including
 CPU launch gaps/instrumentation, not pure kernels or headline speedups. They
 support prefill being dominated by work unaffected by KV append reuse. Raw
 spans, environments, source and memory snapshots retained. No concurrent timing.
+
+A0002 R06 completed all96 records (77 new,19 verified reuse),2700 raw samples.
+Final source/config/environment/statistics audit passed. All16 candidate placement
+pairs preserve positive GPU peak savings,1.9524–2.8278 GiB. Four additional exact
+128-step generation gates passed with GPU snapshots and end-only synchronization
+(batch1/2,bulk/pipeline), covering the timing synchronization scope.
+Four non-primary signals require fresh confirmation: offload prefill b1/l2048;
+offload and resident prefill b8/l512; unfolded resident decode b8/l512.
+Round-range signals are not confirmed regressions. Predeclare three new alternating
+pairs per point,24 processes, keeping initial observations separate and retaining
+all outcomes. A0002 remains unaccepted. Initial plan-only preflight refused
+uncommitted nested result scripts; no measurements started. Commit evidence first.
