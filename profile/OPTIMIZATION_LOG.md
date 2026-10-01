@@ -366,3 +366,12 @@ loads cache updates directly from the frozen baseline Git object.
 policies, 128 growing steps, rollback/reorder, gradients and cache ownership.
 Standalone gate PASS (worst difference zero). Initial large-rollback spare
 capacity failure was fixed; original failure log retained. No timing yet.
+
+A0001 full primary gate passed: 296 exact tensor comparisons across prefix2048
+and three decode calls. R01 screening refused the uncommitted controller before
+launch. R02 exposed an import-routing error: frozen baseline script imported
+candidate model through the environment's editable install. Its decode KV
+capacity matched the candidate (3.1875 GiB), confirmed by an import-path probe.
+Stopped controller and active child; preserved R02 as invalid for comparisons.
+Controller now sets checkout-specific PYTHONPATH and verifies actual module
+path before each process. R03 will rerun the eight short measurements.

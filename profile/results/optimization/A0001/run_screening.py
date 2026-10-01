@@ -1,5 +1,6 @@
 """Reproduce the eight matched-plan screening subprocesses; no formal gain claims."""
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -35,9 +36,16 @@ def main():
         (output / 'manifest.json').write_text(json.dumps(manifest, indent=2)+'\n')
     save()
     for job in jobs:
-        job.update(status='running', started=time.time())
+        checkout = BASELINE if job['side'] == 'baseline' else ROOT
+        env = dict(os.environ, PYTHONPATH=str(checkout))
+        probe = subprocess.check_output(
+            [sys.executable, '-c', 'import fla.models.utils as u; print(u.__file__)'],
+            cwd=checkout, env=env, text=True).strip()
+        assert Path(probe).resolve() == checkout / 'fla/models/utils.py', probe
+        job.update(status='running', started=time.time(), pythonpath=str(checkout),
+                   verified_cache_module=probe)
         with (output / f"{job['name']}.txt").open('w') as log:
-            p = subprocess.Popen(job['command'], cwd=BASELINE if job['side']=='baseline' else ROOT, stdout=log, stderr=subprocess.STDOUT)
+            p = subprocess.Popen(job['command'], cwd=checkout, env=env, stdout=log, stderr=subprocess.STDOUT)
             job['pid'] = p.pid
             save()
             job['returncode'] = p.wait()

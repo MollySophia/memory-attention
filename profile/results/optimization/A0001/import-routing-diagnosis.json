@@ -1,0 +1,9 @@
+{
+  "status": "confirmed_and_corrected",
+  "baseline_direct_script_cache_module": "/home/molly/workspace-memory-attn/memory-attention/fla/models/utils.py",
+  "baseline_expected_cache_module": "/home/molly/workspace-memory-attn/baseline-paper-001/fla/models/utils.py",
+  "cause": "Direct profile script adds profile directory, not checkout root; editable install resolves candidate source even when cwd is baseline.",
+  "evidence": "R02 baseline decode KV storage 3.1875 GiB (candidate capacity), identical to candidate; direct import probe confirms candidate module.",
+  "action": "Terminate R02 controller and active child, preserve raw artifacts as invalid comparisons. Set explicit per-child PYTHONPATH to its checkout and verify resolved module path before each launch.",
+  "baseline_A0000": "Retained: original baseline predates A0001 model changes; no retrospective metadata edits. Fresh comparisons must verify actual import paths."
+}
