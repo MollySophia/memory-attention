@@ -104,6 +104,56 @@ def check_decode(model, config, device="cuda:0"):
 
 
 @torch.inference_mode()
+def check_padding(model, config, device="cuda:0"):
+    """Offloaded forward must match the resident path with left padding.
+
+    Left padding is the interesting case: the pad tokens sit at the front, so
+    every sequence has a different number of real tokens. This exercises the
+    unpad/varlen branch in memory_attn.py, where attention_mask is not None,
+    and the prepare_lens_from_mask offset correction at line 166.
+    """
+    torch.manual_seed(23)
+    batch, seq_len = 3, 96
+    # Different real length per row, padding on the left.
+    real = [96, 61, 40]
+    ids = torch.zeros(batch, seq_len, dtype=torch.long, device=device)
+    mask = torch.zeros(batch, seq_len, dtype=torch.long, device=device)
+    for row, length in enumerate(real):
+        ids[row, seq_len - length:] = torch.randint(
+            1, config.vocab_size, (length,), device=device
+        )
+        mask[row, seq_len - length:] = 1
+    # Pad tokens must not alias real rows; give them a distinct id.
+    ids = torch.where(mask.bool(), ids, torch.zeros_like(ids))
+
+    def resident():
+        model.close_memory_offload()
+        model.model._restore_unfolded_table(device, torch.bfloat16)
+        model.fold_memory_table_on_gpu(dtype=torch.bfloat16)
+        return model(
+            input_ids=ids, attention_mask=mask, use_cache=False
+        ).logits.float().clone()
+
+    ref = resident()
+
+    model.close_memory_offload()
+    model.model._restore_unfolded_table(device, torch.bfloat16)
+    model.enable_memory_offload(device=device, dtype=torch.bfloat16, fold_norm=True)
+    out = model(input_ids=ids, attention_mask=mask, use_cache=False).logits.float()
+
+    diff = (out - ref).abs().max().item()
+    agree = (out.argmax(-1) == ref.argmax(-1)).float().mean().item() * 100
+    policy = model.model.memory_offloader.policy if model.model.memory_offloader else "none"
+    print(f"  padded batch    max diff={diff:.6f}  argmax agree={agree:.2f}%  "
+          f"policy={policy}  real lens={real}")
+    # Only the non-pad positions are meaningful.
+    real_pos = mask.bool()
+    real_diff = (out - ref).abs()[real_pos].max().item()
+    print(f"  on real tokens  max diff={real_diff:.6f}")
+    return real_diff
+
+
+@torch.inference_mode()
 def main():
     model, config = build()
     torch.manual_seed(7)
@@ -127,6 +177,15 @@ def main():
     print("=== decode: real KV cache, single-token steps ===")
     decode_diff = check_decode(model, config)
     worst = max(worst, decode_diff)
+
+    print()
+    print("=== left-padded batch: unpad / varlen attention ===")
+    try:
+        pad_diff = check_padding(model, config)
+    except Exception as exc:  # surface the failure, keep the rest of the report
+        print(f"  FAILED: {type(exc).__name__}: {exc}")
+        pad_diff = float("inf")
+    worst = max(worst, pad_diff)
 
     print()
     print("=== memory accounting ===")

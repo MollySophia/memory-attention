@@ -44,15 +44,23 @@ def read_result(path, job):
 
 
 FIELDS = ['sweep_axes', 'batch_size', 'length', 'mode', 'variant', 'status', 'median_ms',
-          'min_ms', 'max_ms', 'tokens_per_second', 'speedup_vs_standard',
+          'min_ms', 'max_ms', 'spread_pct', 'tokens_per_second', 'speedup_vs_standard',
           'gpu_parameter_mib', 'cpu_parameter_mib', 'offload_gpu_buffer_mib',
           'offload_pinned_mib', 'wall_seconds', 'exit_code', 'log', 'result', 'error']
 
 
-def summarize(output, records):
+def summarize(output, records, reference='standard'):
+    """Write summary.csv/json, normalizing every row against `reference`.
+
+    bmk.py's baseline is `standard`. The fla model has no v_proj variant to
+    compare against, so its reference is `ma_gpu` (the resident, norm-folded
+    table) -- that is the placement where only the transfer differs, so any
+    delta attributed to it is the offload overhead alone. Pass --reference to
+    override.
+    """
     rows = []
     standards = {(r['batch_size'], r['length'], r['mode']): r['metrics']['median_ms']
-                 for r in records if r['status'] == 'ok' and r['variant'] == 'standard'}
+                 for r in records if r['status'] == 'ok' and r['variant'] == reference}
     for r in records:
         row = {k: r.get(k, '') for k in FIELDS}
         if r['status'] == 'ok':
@@ -62,6 +70,11 @@ def summarize(output, records):
             row['tokens_per_second'] = tokens * 1000 / m['median_ms']
             base = standards.get((r['batch_size'], r['length'], r['mode']))
             row['speedup_vs_standard'] = base / m['median_ms'] if base is not None else ''
+            # Spread of the per-round means: the noise floor a later change
+            # has to clear before it can be called an improvement.
+            rounds = m.get('round_ms') or []
+            if len(rounds) > 1:
+                row['spread_pct'] = (max(rounds) - min(rounds)) / (sum(rounds) / len(rounds)) * 100
         rows.append(row)
     temp = output / 'summary.csv.tmp'
     with temp.open('w', newline='', encoding='utf-8-sig') as f:
@@ -82,7 +95,8 @@ def plot_results(output, records):
     from html import escape
     import textwrap
 
-    colors = {'standard': '#3878bf', 'ma_gpu': '#159b79', 'ma_offload': '#df7930'}
+    colors = {'standard': '#3878bf', 'ma_gpu': '#159b79', 'ma_offload': '#df7930',
+              'ma_gpu_unfolded': '#8f7ee7'}
     try:
         import matplotlib
         matplotlib.use('Agg')
@@ -206,8 +220,11 @@ def main():
                    help='batch size held fixed during the length sweep')
     p.add_argument('--sweep', choices=['both', 'batch', 'length'], default='both')
     p.add_argument('--modes', nargs='+', choices=['prefill', 'decode'], default=['prefill', 'decode'])
-    p.add_argument('--variants', nargs='+', choices=['standard', 'ma_gpu', 'ma_offload'],
+    p.add_argument('--variants', nargs='+',
+                   choices=['standard', 'ma_gpu', 'ma_offload', 'ma_gpu_unfolded'],
                    default=['standard', 'ma_gpu', 'ma_offload'])
+    p.add_argument('--reference', default='standard',
+                   help='variant every speedup is measured against; use ma_gpu for the fla model')
     p.add_argument('--warmup', type=int, default=30)
     p.add_argument('--repeats', type=int, default=30)
     p.add_argument('--rounds', type=int, default=5)
@@ -285,7 +302,7 @@ def main():
                     previous['metrics'] = read_result(result_path, job)
                     previous['sweep_axes'] = job['sweep_axes']
                     records.append(previous)
-                    summarize(output, records)
+                    summarize(output, records, args.reference)
                     print(f'[{number}/{len(jobs)}] SKIP {job["key"]}', flush=True)
                     continue
             except (ValueError, KeyError, OSError, TypeError):
@@ -340,7 +357,7 @@ def main():
             record['exit_code'] = exit_code
             write_json(checkpoint, record)
             records.append(record)
-            summarize(output, records)
+            summarize(output, records, args.reference)
         metric = f" {record['metrics']['median_ms']:.3f} ms" if record['status'] == 'ok' else ''
         print(f'  {record["status"].upper()}{metric} ({record["wall_seconds"]:.1f}s)', flush=True)
         if record.get('error'):
