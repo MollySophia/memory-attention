@@ -19,6 +19,7 @@ from benchmark_telemetry import environment_details, source_state, memory_snapsh
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--backend', choices=('pytorch', 'nsys'), default='pytorch')
     parser.add_argument('--mode', choices=('prefill','decode'), required=True)
     parser.add_argument('--variant', choices=('ma_offload','ma_gpu'), required=True)
     parser.add_argument('--output', type=Path, required=True)
@@ -60,6 +61,23 @@ def main():
             one()
         if cache is not None: rollback(cache,2048)
         torch.cuda.synchronize()
+        if args.backend == 'nsys':
+            # External Nsight Systems captures only this model call; warmup,
+            # setup, and cache rollback remain outside its capture range.
+            torch.cuda.profiler.start()
+            output = one()
+            torch.cuda.synchronize()
+            torch.cuda.profiler.stop()
+            memory = memory_snapshot(model, 'cuda', output.past_key_values)
+            del output
+            (args.output/'metadata.json').write_text(json.dumps(dict(
+                status='capture_requested', backend='nsys', mode=args.mode,
+                variant=args.variant, source=source, environment=environment,
+                env=env_fingerprint(), config=model.config.to_dict(), memory=memory,
+                warmup=30, profiled_calls=1,
+                scope='diagnostic only; inspect external nsys report for GPU events'),
+                indent=2, default=str)+'\n')
+            return
         with torch.profiler.profile(activities=[torch.profiler.ProfilerActivity.CPU,
                                                torch.profiler.ProfilerActivity.CUDA],
                                     record_shapes=True,profile_memory=True,with_stack=False) as profiler:
@@ -81,7 +99,7 @@ def main():
               for event in averages]
         (args.output/'operators.json').write_text(json.dumps(rows,indent=2)+'\n')
         (args.output/'operators.txt').write_text(averages.table(sort_by='self_device_time_total',row_limit=60))
-        (args.output/'metadata.json').write_text(json.dumps(dict(status='completed',mode=args.mode,
+        (args.output/'metadata.json').write_text(json.dumps(dict(status='completed' if any(r['device_total_us'] for r in rows) else 'completed_cpu_only',mode=args.mode,
             variant=args.variant,source=source,environment=environment,env=env_fingerprint(),
             config=model.config.to_dict(),memory=memory,warmup=30,profiled_calls=1,
             scope='diagnostic only; profiler overhead; NOT paper_v1 latency',
