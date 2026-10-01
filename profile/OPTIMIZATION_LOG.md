@@ -568,3 +568,9 @@ optimizations, superseding the original three-candidate cap. Start new IDs at
 A0003, preserve A0000 and accepted A0002, and require incremental paired evidence
 against the incumbent. Rejected/noisy attempts do not count as accepted gains.
 Roadmap in results/optimization/CAMPAIGN_002.md; no new gain claimed.
+
+A0003 registered from accepted A0002: defer PendingM acquisition until Q/K norm
+and rotary are queued. Existing A0002 prefill spans and current wait ordering
+identify a concrete overlap opportunity. Exact arithmetic required; later slot
+release and extra K lifetime may negate the benefit. Frozen A0002 forward is
+the independent correctness reference; first screen8 primary paired jobs.

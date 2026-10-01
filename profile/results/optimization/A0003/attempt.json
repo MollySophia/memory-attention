@@ -1,0 +1,24 @@
+{
+  "attempt_id": "A0003",
+  "parent_attempt_id": "A0002",
+  "accepted_step": null,
+  "status": null,
+  "phase": "registered",
+  "label": "Defer PendingM acquisition until Q/K normalization and rotary are queued",
+  "parent_sha": "1b74d96ad2a5d80b07905154c0c05ee877a40b72",
+  "incumbent_sha": "ec6384d2e9081ecbb2926fe8a6193bc48ea650a3",
+  "hypothesis": "A0002 primary prefill diagnostics showed offload attention75.835ms vs resident71.857ms. Static attention forward waits for PendingM before independent QK norm/rotary launches. Queue these first to overlap copy/producer wait; leave resident path arithmetic and lookup unchanged.",
+  "evidence": [
+    "../A0002/diagnostics/prefill-ma_offload/events.json",
+    "../A0002/diagnostics/prefill-ma_gpu/events.json",
+    "fla/layers/memory_attn.py"
+  ],
+  "risks": [
+    "Later slot release can reduce pipeline lookahead",
+    "Live original K adds temporary lifetime; measure peak memory",
+    "GQA/QK norm must preserve pre-normalized,pre-rotary K used in V"
+  ],
+  "correctness_plan": "Bit-exact logits/hidden/KV against frozen A0002 attention forward; batch1/2,bulk/pipeline,GQA,padding,growing128,group2depth1,plus existing gates and primary gate if screened promising.",
+  "measurement_plan": "Initial8 fresh processes: primary prefill/decode,offload/resident,one alternating incumbent/candidate pair under3/5/1; roughly3min from19ssetup/process plusmodelwork. Promising primary effects require>=3 fresh independent pairs10/10/3. No acceptance from screen.",
+  "next_action": "Implement one scheduling change and commit before correctness/timing."
+}
