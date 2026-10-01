@@ -588,3 +588,9 @@ raw-statistics audit passed. Prefill1.003998xCI[0.994657,1.013427],decode
 gain; no extra runs to chase significance. Save candidate-model.patch and all
 results before reverting only the scheduling implementation. Accepted incumbent
 remains A0002; continued-campaign effective accepted count remains0.
+
+A0004 registered from A0002 after reverting A0003. Independent accepted-A0002
+diagnostic:48 single-token append copies per24-layer decode,0.365ms cumulative
+CPU spans,0.175ms stream spans,5.577ms instrumented wall total. These are
+diagnostics with launch gaps,not pure kernels or headline gains. Coalesce K/V
+append into one exact-copy kernel,retain all original ownership/capacity gates.

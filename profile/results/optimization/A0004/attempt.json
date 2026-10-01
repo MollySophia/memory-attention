@@ -1,0 +1,21 @@
+{
+  "attempt_id": "A0004",
+  "parent_attempt_id": "A0002",
+  "accepted_step": null,
+  "status": null,
+  "phase": "registered",
+  "label": "Coalesce one-token K/V append into one exact copy kernel",
+  "parent_sha": "4d40047882867b10f6de430f184309e21cd5e501",
+  "incumbent_sha": "ec6384d2e9081ecbb2926fe8a6193bc48ea650a3",
+  "hypothesis": "Accepted A0002 decode diagnostic counts48 KV append copies across24layers; append CPU spans0.365ms and stream spans0.175ms in5.577ms instrumented model call. One kernel per K/V pair may reduce launch and slice dispatch overhead without changing values.",
+  "diagnostic": "../diagnostics/a0002-append-cost/events.json",
+  "scope": "Only CUDA3D paired equal-shape/dtype one-token incoming K/V under existing inference-only bounded cache path. Preserve allocation,copy-old,ownership,rollback,training,CPU,multi-token,window and batch1 model fallbacks.",
+  "risks": [
+    "Triton launch/device context overhead may exceed two PyTorch copy launches",
+    "Strided tensors and capacity offsets require exact indexing",
+    "Growth allocation still copies history; no gain assumed there"
+  ],
+  "correctness_plan": "Bit-exact targeted strided K/V append with sentinels and growing rollback plus existing independent frozen cache growing128,GQA,padding,bulk/pipeline and primary if screen promising.",
+  "measurement_plan": "Same8-job primary screening vs accepted A0002,3/5/1,approx3min; formal pairs only if promising.",
+  "next_action": "Implement and commit fused copy,run exact gates before timing."
+}

@@ -1,0 +1,1 @@
+{"instrumented_total_wall_ms": 5.5772592313587666, "append_cpu_ms": 0.36505749449133873, "append_stream_ms": 0.17539200512692332, "append_copies": 48}
