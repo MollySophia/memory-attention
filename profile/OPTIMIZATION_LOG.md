@@ -594,3 +594,9 @@ diagnostic:48 single-token append copies per24-layer decode,0.365ms cumulative
 CPU spans,0.175ms stream spans,5.577ms instrumented wall total. These are
 diagnostics with launch gaps,not pure kernels or headline gains. Coalesce K/V
 append into one exact-copy kernel,retain all original ownership/capacity gates.
+
+A0004 implementation committed (e8acf92; premeasurement dispatch guards refined
+in413afba).57 correctness tests passed,including strided/sentinel/special-bit
+copies,broadcast fallback and all existing independent frozen-cache gates.
+Standalone offload maxdiff0. Launch8 fresh primary screen jobs vs accepted
+A0002,3/5/1,estimated3min. No GPU diagnostics or tests overlap timing.

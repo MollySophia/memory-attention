@@ -3,7 +3,7 @@
   "parent_attempt_id": "A0002",
   "accepted_step": null,
   "status": null,
-  "phase": "registered",
+  "phase": "screening_prepared",
   "label": "Coalesce one-token K/V append into one exact copy kernel",
   "parent_sha": "4d40047882867b10f6de430f184309e21cd5e501",
   "incumbent_sha": "ec6384d2e9081ecbb2926fe8a6193bc48ea650a3",
@@ -17,5 +17,11 @@
   ],
   "correctness_plan": "Bit-exact targeted strided K/V append with sentinels and growing rollback plus existing independent frozen cache growing128,GQA,padding,bulk/pipeline and primary if screen promising.",
   "measurement_plan": "Same8-job primary screening vs accepted A0002,3/5/1,approx3min; formal pairs only if promising.",
-  "next_action": "Implement and commit fused copy,run exact gates before timing."
+  "next_action": "Run8 fresh primary screening processes vs A0002; no gain claimed before timing.",
+  "candidate_sha": "413afba7d667595b67f3dc786bee98cd9000fc7f",
+  "correctness": {
+    "pytest": "57 passed;correctness-pytest.txt",
+    "standalone": "PASS,maxdiff0;correctness-standalone.txt",
+    "premeasurement_guard_fix": "Broadcast sizes,empty and unsupported dtype use original copy_; initial54pass results retained."
+  }
 }
