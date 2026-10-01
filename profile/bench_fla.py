@@ -16,8 +16,7 @@ sweep relies on. Variants mirror bmk.py's naming so summaries line up:
 Primary prefill constructs a KV cache and returns last-token logits. Historical
 full-logits/no-cache prefill is selected explicitly with --prefill-workload.
 Every raw sample is retained; median_ms is the median of round means. Round
-spread describes variability and is not a significance threshold. Protocol is
-still draft until memory/environment and growing-generation reporting land.
+spread describes variability and is not a significance threshold. Protocol paper_v1 is frozen for the paper-001 campaign.
 """
 
 from __future__ import annotations
@@ -31,6 +30,7 @@ import statistics
 import subprocess
 import sys
 import time
+import traceback
 from pathlib import Path
 
 import torch
@@ -46,7 +46,7 @@ from fla.models.utils import Cache
 
 VARIANTS = ("ma_gpu", "ma_offload", "ma_gpu_unfolded")
 MODES = ("prefill", "decode", "generation")
-PROTOCOL_VERSION = "paper_v1_draft"
+PROTOCOL_VERSION = "paper_v1"
 
 
 def parse_args():
@@ -370,12 +370,19 @@ def main():
 
     environment_before = environment_details()
     sources = source_state()
-    model = build(args)
+    model = None
     results = []
-    for variant in dict.fromkeys(args.variants):
-        results.append(measure(model, args, variant, device))
+    status, failure = "completed", None
+    try:
+        model = build(args)
+        for variant in dict.fromkeys(args.variants):
+            results.append(measure(model, args, variant, device))
+    except Exception as exc:
+        status = "oom" if isinstance(exc, torch.cuda.OutOfMemoryError) else "benchmark_failed"
+        failure = dict(type=type(exc).__name__, message=str(exc), traceback=traceback.format_exc())
+        print(failure["traceback"], file=sys.stderr, flush=True)
 
-    payload = dict(protocol_version=PROTOCOL_VERSION, config=vars(args), model_config=model.config.to_dict(), env=env_fingerprint(), source=sources, environment_before=environment_before, environment_after=environment_details(), command=sys.argv, results=results)
+    payload = dict(protocol_version=PROTOCOL_VERSION, config=vars(args), status=status, failure=failure, model_config=model.config.to_dict() if model is not None else None, env=env_fingerprint(), source=sources, environment_before=environment_before, environment_after=environment_details(), command=sys.argv, results=results)
     args.json.parent.mkdir(parents=True, exist_ok=True)
     args.json.write_text(json.dumps(payload, indent=2, default=str), encoding="utf-8")
 
@@ -386,8 +393,9 @@ def main():
             f"spread={row['spread_pct']:.2f}%  policy={row['offload_policy']}",
             flush=True,
         )
-    model.close_memory_offload()
-    return 0
+    if model is not None:
+        model.close_memory_offload()
+    return 0 if status == "completed" else 1
 
 
 if __name__ == "__main__":

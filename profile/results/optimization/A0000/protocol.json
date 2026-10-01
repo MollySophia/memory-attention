@@ -1,0 +1,61 @@
+{
+  "protocol_version": "paper_v1",
+  "campaign": "paper-001",
+  "baseline_placement": "ma_offload",
+  "resident_reference": "ma_gpu",
+  "folding_ablation": "ma_gpu_unfolded",
+  "model": {
+    "layers": 24,
+    "hidden": 2048,
+    "heads": 32,
+    "kv_heads": 32,
+    "head_dim": 64,
+    "vocab": 32000,
+    "intermediate": 5632,
+    "parameters": 2836499968,
+    "precision": "bfloat16",
+    "qk_norm": false,
+    "use_gate": false,
+    "fuse_norm": false,
+    "seed": 1234
+  },
+  "measurement": {
+    "warmup": 30,
+    "repeats": 30,
+    "rounds": 5,
+    "estimator": "median_of_round_means",
+    "primary_prefill": "last-token logits, fresh KV cache",
+    "decode": "fixed_context_v2_rollback_excluded",
+    "generation": "prefix plus 128 predetermined GPU-token decode calls, no sampling",
+    "timing": "synchronized perf_counter wall time; input staging/gather/H2D included; setup and reporting excluded",
+    "historical": "explicit --prefill-workload historical, full logits no cache; excluded from primary matrix",
+    "memory": "before/after live outputs and KV, GPU peak across timed calls, all cached offloaders, raw table snapshots, host RSS; host HWM is process lifetime"
+  },
+  "matrix": {
+    "batch_sweep": [
+      1,
+      4,
+      8,
+      16
+    ],
+    "batch_sweep_length": 2048,
+    "length_sweep": [
+      512,
+      2048,
+      4096,
+      8192
+    ],
+    "length_sweep_batch": 8,
+    "generation_batches": [
+      1,
+      8
+    ],
+    "generation_prefix": 2048,
+    "generation_steps": 128,
+    "total_jobs": 48
+  },
+  "acceptance": "At least three independent alternating process pairs; repeatable improvement in >=1 primary latency with no resolved regression in the other and preserved offload memory savings; complete matrix for retained candidate.",
+  "correctness": "Placement changes bit-exact logits/hidden/KV vs independent folded resident. Padded rotary K undefined at masked negative positions; compare valid KV and all hidden/logits; unpadded KV fully compared.",
+  "driver": "profile/run_paper_matrix.py",
+  "bounded_campaign": "After A0000, profile primary workloads and evaluate up to three focused algorithmic candidates before full-matrix confirmation and artifact synthesis; unresolved/failed campaigns remain explicitly incomplete."
+}

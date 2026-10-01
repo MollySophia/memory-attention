@@ -125,3 +125,44 @@ def test_generation_grows_and_restarts_cache(monkeypatch):
     assert lengths == list(range(8, 137)) * 5
     assert result['round_ms'] == pytest.approx([129., 129.])
     assert all(torch.equal(torch.stack(inputs[0]), torch.stack(x)) for x in inputs)
+
+
+@pytest.mark.parametrize('oom', [False, True])
+def test_benchmark_persists_setup_failure(monkeypatch, tmp_path, oom):
+    script = Path(__file__).resolve().parents[1] / 'profile' / 'bench_fla.py'
+    spec = importlib.util.spec_from_file_location('bench_failure', script)
+    bench = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(bench)
+    args = SimpleNamespace(device='cuda:0', json=tmp_path/'failure.json')
+    monkeypatch.setattr(bench, 'parse_args', lambda: args)
+    monkeypatch.setattr(torch.cuda, 'is_available', lambda: True)
+    monkeypatch.setattr(bench, 'environment_details', lambda: {})
+    monkeypatch.setattr(bench, 'source_state', lambda: {})
+    monkeypatch.setattr(bench, 'env_fingerprint', lambda: {})
+
+    def fail(_):
+        raise torch.cuda.OutOfMemoryError('injected OOM') if oom else RuntimeError('injected failure')
+
+    monkeypatch.setattr(bench, 'build', fail)
+    assert bench.main() == 1
+    import json
+    result = json.loads(args.json.read_text())
+    assert result['status'] == ('oom' if oom else 'benchmark_failed')
+    assert result['results'] == []
+    assert result['model_config'] is None
+    assert 'injected' in result['failure']['message']
+
+
+def test_paper_matrix_covers_goal():
+    script = Path(__file__).resolve().parents[1] / 'profile' / 'run_paper_matrix.py'
+    spec = importlib.util.spec_from_file_location('paper_matrix', script)
+    runner = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(runner)
+    jobs = list(runner.jobs())
+    assert len(jobs) == 48
+    assert len({tuple(j.values()) for j in jobs}) == 48
+    for variant in ('ma_offload', 'ma_gpu', 'ma_gpu_unfolded'):
+        for mode in ('prefill', 'decode'):
+            shapes = {(j['batch'], j['length']) for j in jobs if j['variant'] == variant and j['mode'] == mode}
+            assert shapes == {(b, 2048) for b in (1,4,8,16)} | {(8,l) for l in (512,2048,4096,8192)}
+        assert {j['batch'] for j in jobs if j['mode']=='generation' and j['variant']==variant} == {1,8}
