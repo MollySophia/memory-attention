@@ -4,8 +4,8 @@
   "informed_by_attempt": "A0001",
   "accepted_step": null,
   "status": null,
-  "phase": "correctness",
-  "candidate_sha": null,
+  "phase": "screening_complete",
+  "candidate_sha": "7647da8c431fa4e7bf5800d7556ef2f8f6c171ed",
   "parent_sha": "384aa1a5e644d7ee2fe3fa7cc1a07cd82ca30b17",
   "label": "Bounded KV reuse for multi-item batches with batch1 concatenation",
   "hypothesis": "A0001 amortized history-copy cost improves primary batch8 decode ~2x but incurs a confirmed ~5% resident batch1 slowdown. The added Python checks, slices and copies may outweigh saved history copying at batch1. Keep the independent original concatenation path for batch1 and use bounded reuse for larger batches.",
@@ -16,7 +16,9 @@
     "confirmation": "If promising, >=3 independent alternating pairs under10/10/3 at primary and batch1 regression point. Preserve unhelpful/noisy results.",
     "full_validation": "Only after confirmation, full matrix and128-step generation; reuse valid unchanged baseline records where source, scope, plan and recorded environment match. Candidate records must use A0002 source."
   },
-  "performance": null,
+  "performance": {
+    "screening": "screening-summary.json"
+  },
   "risks": [
     "Batch gating may forgo gains at batch1 with very long contexts; no gain claimed there.",
     "Other small-copy shapes may also fail to amortize overhead; explicitly screen batch8/context512.",
@@ -26,6 +28,8 @@
   "correctness": {
     "pytest": "41 passed: ownership, independent frozen growing128, GQA/padding/two policies plus explicit batch1 fallback, rollback and shape switches.",
     "standalone": "PASS; worst max difference0",
-    "primary": "pending"
-  }
+    "primary": "PASS:296 exact comparisons at batch8/prefix2048 plus3 decode steps"
+  },
+  "screening_outcome": "Primary offload decode2.029x and short-context decode1.116x provisional speedup. Batch1 offload-2.45% latency, resident+2.08%; unresolved after one short process pair. Prioritize fresh small-batch confirmation before full primary confirmation.",
+  "next_action": "Run three fresh independent alternating batch1/context2048 decode pairs per folded placement under10/10/3. If any resolved regression, stop before expensive primary/full validation. Otherwise confirm primary with three pairs, then full matrix/generation."
 }

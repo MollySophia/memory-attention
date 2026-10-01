@@ -473,3 +473,21 @@ switches; helper is mocked to raise if batch1 enters it. Standalone gate PASS,
 worst difference0. Screening controller includes16 matched processes at primary,
 batch1/context2048 decode and batch8/context512 decode (3/5/1), estimated5-7min.
 No performance measurements yet; commit candidate before timing.
+
+A0002 primary gate passed296 exact comparisons. R01 screening completed16
+processes,80 raw samples in5.28 minutes; source/import/config/sampling
+and raw-statistics audit passed.
+ma_gpu decode b1 l2048: 4.5712 ->4.6665 ms (0.9796x provisional).
+ma_gpu decode b8 l512: 5.5873 ->4.8433 ms (1.1536x provisional).
+ma_gpu decode b8 l2048: 10.9170 ->5.3408 ms (2.0441x provisional).
+ma_offload decode b1 l2048: 4.8607 ->4.7415 ms (1.0251x provisional).
+ma_offload decode b8 l512: 5.8348 ->5.2265 ms (1.1164x provisional).
+ma_offload decode b8 l2048: 11.0061 ->5.4243 ms (2.0290x provisional).
+ma_gpu prefill b8 l2048: 206.1772 ->206.6129 ms (0.9979x provisional).
+ma_offload prefill b8 l2048: 209.9437 ->210.2055 ms (0.9988x provisional).
+Batch1 resident remains+2.08% in this single short pair; do not call it a
+confirmed regression or dismiss it. Prioritize three fresh alternating
+batch1 pairs/placement at10/10/3 before primary confirmation and any new full
+matrix. Screening shows promise, not acceptance; accepted_step remains null.
+Reproduction instructions now document explicit import isolation and failed
+attempt handling in profile/results/optimization/REPRODUCE.md.
