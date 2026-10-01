@@ -1,5 +1,5 @@
 {
-  "status": "prepared_not_run",
+  "status": "in_progress",
   "requires": "R01 complete; no concurrent GPU benchmark",
   "commands": [
     [
@@ -58,5 +58,6 @@
     "cli_help": "passed",
     "active_matrix_guard": "correctly refused with exit1 before model build or output creation; profiler-active-matrix-refusal.txt"
   },
-  "limitations": "No actual profiler trace yet; syntax/guard checks are not evidence that trace export succeeds."
+  "limitations": "No actual profiler trace yet; syntax/guard checks are not evidence that trace export succeeds.",
+  "observation": "Both decode Kineto captures contain CPU events only; Nsight Systems fallback currently running. Prefill diagnostics not yet run."
 }

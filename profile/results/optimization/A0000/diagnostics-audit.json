@@ -1,0 +1,32 @@
+{
+  "kineto": [
+    {
+      "variant": "ma_offload",
+      "status": "gpu_timing_unavailable",
+      "categories": {
+        "user_annotation": 1,
+        "cpu_op": 2532,
+        "cpu_instant_event": 1113,
+        "uncategorized": 58,
+        "Trace": 1
+      },
+      "reason": "No CUDA kernel/memcpy events in exported Kineto trace; operator device time is zero. Original metadata completed means capture returned, not GPU profiling success."
+    },
+    {
+      "variant": "ma_gpu",
+      "status": "gpu_timing_unavailable",
+      "categories": {
+        "user_annotation": 1,
+        "cpu_op": 2687,
+        "cpu_instant_event": 1159,
+        "uncategorized": 58,
+        "Trace": 1
+      },
+      "reason": "No CUDA kernel/memcpy events in exported Kineto trace; operator device time is zero. Original metadata completed means capture returned, not GPU profiling success."
+    }
+  ],
+  "nsys_status": "running",
+  "nsys_controller_pid": 1470203,
+  "nsys_child_pid": 1470248,
+  "scope": "Diagnostic captures only, not headline timing"
+}

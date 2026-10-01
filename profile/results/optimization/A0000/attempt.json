@@ -3,15 +3,18 @@
   "parent_attempt_id": null,
   "accepted_step": 0,
   "label": "Frozen baseline protocol preparation",
-  "phase": "baseline_measurement",
-  "status": null,
-  "performance": null,
+  "phase": "baseline_complete",
+  "status": "accepted",
+  "performance": {
+    "run": "R01",
+    "jobs": 48,
+    "raw_samples": 7200
+  },
   "parent_sha": "d5e7188a4c6947b737d70ebaeccb146bbb938b6a",
   "candidate_sha": "d949640ebf2f13f56021bd08c5c9f10e65d571c3",
-  "reason": "Frozen baseline, complete gates passed; R01 full matrix running.",
+  "reason": "Frozen baseline fully measured and audited; accepted as step0 reference, not an optimization gain.",
   "remaining": [
-    "complete R01 full matrix",
-    "inspect baseline results and profiles"
+    "profile primary paths before A0001"
   ],
   "preparation_sha": "e13d2a86dbc98b42ada90ca007dd5edce9ebb7c7",
   "original_protocol": "historical_full_logits_no_cache; fixed_context_v2_rollback_excluded",

@@ -70,7 +70,7 @@ def plot(rows, output, partial):
 
     def finish(fig, name):
         fig.suptitle(('PARTIAL — ' if partial else '')+name.replace('_', ' '))
-        fig.text(.5, .01, caption, ha='center', fontsize=8)
+        fig.text(.5, .01, caption.replace('fixed-context decode', 'growing-context decode') if name == 'growing_generation' else caption, ha='center', fontsize=8)
         fig.tight_layout(rect=(0, .12, 1, .95))
         for extension in ('png', 'svg', 'pdf'):
             fig.savefig(output/f'{name}.{extension}', dpi=160)
@@ -105,7 +105,7 @@ def plot(rows, output, partial):
             ax.set_yticks([])
             ax.text(.5,.6,'No completed measurements',transform=ax.transAxes,ha='center')
         ax.set_xlabel('Batch (length=2048)' if sweep=='batch' else 'Context/prefill length (batch=8)')
-        ax.set_ylabel(metric.replace('_', ' '))
+        ax.set_ylabel({'median_ms': 'Median of round means (ms)', 'tokens_per_second': 'Tokens / second', 'gpu_peak_allocated_gib': 'Peak GPU allocated (GiB)', 'gpu_peak_reserved_gib': 'Peak GPU reserved (GiB)', 'host_rss_gib': 'Host RSS (GiB)'}[metric])
         ax.set_title(mode)
         ax.grid(alpha=.2)
 

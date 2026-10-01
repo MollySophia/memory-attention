@@ -280,3 +280,25 @@ predetermined decode tokens, batch8. All 150 raw samples pass protocol
 validation; final KV storage matches the 2176-token context. No sampling.
 Folded-resident J47 is confirmed live; unfolded J48 remains pending.
 This is baseline data only; full-matrix audit and profiling are still pending.
+
+### A0000 — full frozen baseline complete and audited (2026-10-01)
+
+All **48 jobs / 7200 raw samples** completed, with exit0 and no OOM, missing,
+or failed point. Controller and final child exited. Audit confirms one frozen
+source hash, one software environment, unchanged implementation, exact workload
+configuration, recomputed estimates and final generation KV capacities.
+`baseline-audit.json` records evidence; `attempt.json` accepts A0000 as step0
+reference only. This is not an accepted optimization or task completion.
+
+Final baseline figures: `reports/baseline-final/`, six PNG/SVG/PDF exports plus
+source CSV/JSON; latency estimator and generation scope labels clarified.
+GPU temperature/clocks vary over the long matrix and are retained per job.
+Future gains still require alternating independent baseline/candidate pairs.
+
+Started separate primary decode diagnostics for offload/resident. Both Kineto
+captures returned but exported **CPU events only**, with no GPU kernel events
+and zero operator device time; those zeros are not GPU latency measurements.
+Raw traces preserved and limitation recorded in `diagnostics-audit.json`.
+Committed external Nsight capture support, then launched single-call offload
+decode capture (source d60be57); controller/child verified live. Actual Nsight
+GPU event availability remains unverified. No model optimization made yet.

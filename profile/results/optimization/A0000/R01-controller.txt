@@ -1,0 +1,96 @@
+START J01-prefill-ma_offload-b8-l2048
+END J01-prefill-ma_offload-b8-l2048 completed
+START J02-prefill-ma_gpu-b8-l2048
+END J02-prefill-ma_gpu-b8-l2048 completed
+START J03-prefill-ma_gpu_unfolded-b8-l2048
+END J03-prefill-ma_gpu_unfolded-b8-l2048 completed
+START J04-decode-ma_offload-b8-l2048
+END J04-decode-ma_offload-b8-l2048 completed
+START J05-decode-ma_gpu-b8-l2048
+END J05-decode-ma_gpu-b8-l2048 completed
+START J06-decode-ma_gpu_unfolded-b8-l2048
+END J06-decode-ma_gpu_unfolded-b8-l2048 completed
+START J07-prefill-ma_offload-b1-l2048
+END J07-prefill-ma_offload-b1-l2048 completed
+START J08-prefill-ma_gpu-b1-l2048
+END J08-prefill-ma_gpu-b1-l2048 completed
+START J09-prefill-ma_gpu_unfolded-b1-l2048
+END J09-prefill-ma_gpu_unfolded-b1-l2048 completed
+START J10-decode-ma_offload-b1-l2048
+END J10-decode-ma_offload-b1-l2048 completed
+START J11-decode-ma_gpu-b1-l2048
+END J11-decode-ma_gpu-b1-l2048 completed
+START J12-decode-ma_gpu_unfolded-b1-l2048
+END J12-decode-ma_gpu_unfolded-b1-l2048 completed
+START J13-prefill-ma_offload-b4-l2048
+END J13-prefill-ma_offload-b4-l2048 completed
+START J14-prefill-ma_gpu-b4-l2048
+END J14-prefill-ma_gpu-b4-l2048 completed
+START J15-prefill-ma_gpu_unfolded-b4-l2048
+END J15-prefill-ma_gpu_unfolded-b4-l2048 completed
+START J16-decode-ma_offload-b4-l2048
+END J16-decode-ma_offload-b4-l2048 completed
+START J17-decode-ma_gpu-b4-l2048
+END J17-decode-ma_gpu-b4-l2048 completed
+START J18-decode-ma_gpu_unfolded-b4-l2048
+END J18-decode-ma_gpu_unfolded-b4-l2048 completed
+START J19-prefill-ma_offload-b16-l2048
+END J19-prefill-ma_offload-b16-l2048 completed
+START J20-prefill-ma_gpu-b16-l2048
+END J20-prefill-ma_gpu-b16-l2048 completed
+START J21-prefill-ma_gpu_unfolded-b16-l2048
+END J21-prefill-ma_gpu_unfolded-b16-l2048 completed
+START J22-decode-ma_offload-b16-l2048
+END J22-decode-ma_offload-b16-l2048 completed
+START J23-decode-ma_gpu-b16-l2048
+END J23-decode-ma_gpu-b16-l2048 completed
+START J24-decode-ma_gpu_unfolded-b16-l2048
+END J24-decode-ma_gpu_unfolded-b16-l2048 completed
+START J25-prefill-ma_offload-b8-l512
+END J25-prefill-ma_offload-b8-l512 completed
+START J26-prefill-ma_gpu-b8-l512
+END J26-prefill-ma_gpu-b8-l512 completed
+START J27-prefill-ma_gpu_unfolded-b8-l512
+END J27-prefill-ma_gpu_unfolded-b8-l512 completed
+START J28-decode-ma_offload-b8-l512
+END J28-decode-ma_offload-b8-l512 completed
+START J29-decode-ma_gpu-b8-l512
+END J29-decode-ma_gpu-b8-l512 completed
+START J30-decode-ma_gpu_unfolded-b8-l512
+END J30-decode-ma_gpu_unfolded-b8-l512 completed
+START J31-prefill-ma_offload-b8-l4096
+END J31-prefill-ma_offload-b8-l4096 completed
+START J32-prefill-ma_gpu-b8-l4096
+END J32-prefill-ma_gpu-b8-l4096 completed
+START J33-prefill-ma_gpu_unfolded-b8-l4096
+END J33-prefill-ma_gpu_unfolded-b8-l4096 completed
+START J34-decode-ma_offload-b8-l4096
+END J34-decode-ma_offload-b8-l4096 completed
+START J35-decode-ma_gpu-b8-l4096
+END J35-decode-ma_gpu-b8-l4096 completed
+START J36-decode-ma_gpu_unfolded-b8-l4096
+END J36-decode-ma_gpu_unfolded-b8-l4096 completed
+START J37-prefill-ma_offload-b8-l8192
+END J37-prefill-ma_offload-b8-l8192 completed
+START J38-prefill-ma_gpu-b8-l8192
+END J38-prefill-ma_gpu-b8-l8192 completed
+START J39-prefill-ma_gpu_unfolded-b8-l8192
+END J39-prefill-ma_gpu_unfolded-b8-l8192 completed
+START J40-decode-ma_offload-b8-l8192
+END J40-decode-ma_offload-b8-l8192 completed
+START J41-decode-ma_gpu-b8-l8192
+END J41-decode-ma_gpu-b8-l8192 completed
+START J42-decode-ma_gpu_unfolded-b8-l8192
+END J42-decode-ma_gpu_unfolded-b8-l8192 completed
+START J43-generation-ma_offload-b1-l2048
+END J43-generation-ma_offload-b1-l2048 completed
+START J44-generation-ma_gpu-b1-l2048
+END J44-generation-ma_gpu-b1-l2048 completed
+START J45-generation-ma_gpu_unfolded-b1-l2048
+END J45-generation-ma_gpu_unfolded-b1-l2048 completed
+START J46-generation-ma_offload-b8-l2048
+END J46-generation-ma_offload-b8-l2048 completed
+START J47-generation-ma_gpu-b8-l2048
+END J47-generation-ma_gpu-b8-l2048 completed
+START J48-generation-ma_gpu_unfolded-b8-l2048
+END J48-generation-ma_gpu_unfolded-b8-l2048 completed

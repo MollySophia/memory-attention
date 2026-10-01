@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "candidate_sha": "d949640ebf2f13f56021bd08c5c9f10e65d571c3",
+  "source_sha256": "cb10074e60fbc8e3daf46efdf6318fa9429711bd25169814c278dd3804eb4a7a",
+  "jobs": 48,
+  "raw_samples": 7200,
+  "failures": 0,
+  "missing": 0,
+  "unique_software_environments": 1,
+  "all_generation_final_kv_capacity_correct": true,
+  "limits": "Single matrix baseline run; not paired optimization evidence. GPU clocks/temperatures vary and are recorded in each job."
+}
