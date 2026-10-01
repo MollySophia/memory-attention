@@ -234,3 +234,11 @@ child verified live; no restart or concurrent GPU profiling. Details and process
 observation: `R01-checkpoint-05.json`. Length4096/8192 and generation remain
 required before baseline completion. This turn is continued verified waiting
 plus preservation of newly completed measurement evidence.
+
+### A0000 — 4096-length checkpoint (2026-10-01)
+
+Counts: {"completed": 36, "running": 1, "pending": 11}. All completed measurements pass frozen-protocol
+validation. Controller/current child verified live; original run continues
+without restart or additional GPU work. New raw results and live process
+observation are preserved in R01 and `R01-checkpoint-06.json`. The remaining
+8192-length and growing-generation workloads are still required.
