@@ -105,12 +105,12 @@ def make_plan(output):
             can_reuse=False
             if record is not None:
                 old_job,path,data,source=record
-                c=data['config'];plan=entry['sampling_plan']
+                c=data['config'];reuse_plan=entry['sampling_plan']
                 can_reuse=(data['status']=='completed' and data['protocol_version']=='paper_v1'
                            and data['source']['source_sha256']==entry['expected_source_sha256']
                            and not data['source']['source_patch']['stdout']
                            and environment_signature(data)==reference_environment
-                           and all(c[k]==plan[k] for k in ('warmup','repeats','rounds')))
+                           and all(c[k]==reuse_plan[k] for k in ('warmup','repeats','rounds')))
             if can_reuse:
                 original_stage=data.get('stage','full_validation')
                 entry.update(status='reused',result=str(path),expected_commit=old_job['expected_commit'],

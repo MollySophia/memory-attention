@@ -1,0 +1,5 @@
+{
+  "status": "preflight_failed",
+  "performance": null,
+  "reason": "New reuse branch shadowed the job-list variable plan with the sampling-plan dict; AttributeError before any benchmark launch. Renamed to reuse_plan; retry uses R05 plan ID."
+}
