@@ -1,0 +1,31 @@
+{
+  "campaign_id": "offload-gap-001",
+  "batch_size": 1,
+  "mode": "decode",
+  "variant": "ma_offload",
+  "diagnostic_wall_ms": 4.623374901711941,
+  "cpu_spans": [
+    {
+      "label": "id_d2h_staging",
+      "cpu_ms": 0.014897901564836502,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 0.023735221475362778,
+      "thread": "MainThread"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.005510635673999786,
+      "thread": "MainThread"
+    }
+  ],
+  "transfers": [
+    {
+      "stream_ms": 0.011008000001311302,
+      "bytes": 98304
+    }
+  ],
+  "caveat": "Instrumented single call. CPU spans overlap; stream spans include submission gaps; not headline timings."
+}

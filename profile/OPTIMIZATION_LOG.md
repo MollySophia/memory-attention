@@ -138,3 +138,29 @@ plus decode prefixes. Initial estimate ~546 seconds assumes 30-second setup,
 1000-ms prefill and 30-ms decode; these are provisional planning inputs until
 measured per-process costs are available. Full validation/generation/confirmation
 are intentionally not run at this stage. No gain claim is made.
+
+
+A0000 primary screen and diagnostics: source frozen at
+`62942a0` (full SHA and independent checkout in campaign manifest).
+Batch-1 prefill: offload 43.603 ms, resident 28.813 ms, signed gap +14.790 ms
+(+51.3%). Batch-8 prefill: 209.162 vs 205.555 ms, gap +3.607 ms (+1.8%).
+Decode gaps: +0.054 ms at batch 1 and +0.092 ms at batch 8; short screens
+cannot resolve these small differences as gains or regressions.
+
+Paused the timing controller after the primary screen (one batch-4 child was
+already launched and allowed to finish). Verified that child was terminal
+before diagnostics; resumed the same controller after all 12 diagnostic jobs.
+All eight PyTorch traces are CPU-only: unavailable device timing is not zero.
+Working CUDA-event H2D instrumentation plus producer-thread CPU instrumentation
+shows batch-1 prefill synchronous gather 11.166 ms and H2D span 3.497 ms;
+ID staging is 0.028 ms. Batch-8 pipeline overlaps its 75.159-ms CPU gathers
+and 41.842-ms transfer spans with model computation; those spans are not
+additive. Decode gather spans are 0.024/0.044 ms (b1/b8), supporting retention
+of the bulk path for tiny decode inputs. Raw traces, exact commands,
+environment snapshots, and diagnostic limitations are preserved under A0000.
+
+Prepared a balanced independent-process comparison driver under the campaign
+results directory. Its plan-only audit verifies 48 jobs = 3 blocks x 4 primary
+workloads x 2 placements x 2 implementations, each at 10/10/3. This is harness
+work, not an optimization attempt. The measured-cost estimate is ~15 minutes;
+no confirmation has been launched or claimed.

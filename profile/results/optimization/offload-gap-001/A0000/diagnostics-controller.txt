@@ -1,0 +1,12 @@
+b1-prefill-ma_offload-pytorch completed
+b1-prefill-ma_gpu-pytorch completed
+b1-prefill-ma_offload-offload completed
+b1-decode-ma_offload-pytorch completed
+b1-decode-ma_gpu-pytorch completed
+b1-decode-ma_offload-offload completed
+b8-prefill-ma_offload-pytorch completed
+b8-prefill-ma_gpu-pytorch completed
+b8-prefill-ma_offload-offload completed
+b8-decode-ma_offload-pytorch completed
+b8-decode-ma_gpu-pytorch completed
+b8-decode-ma_offload-offload completed

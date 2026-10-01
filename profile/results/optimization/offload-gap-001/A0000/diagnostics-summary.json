@@ -1,0 +1,117 @@
+{
+  "campaign_id": "offload-gap-001",
+  "attempt_id": "A0000",
+  "rows": [
+    {
+      "batch": 1,
+      "mode": "decode",
+      "diagnostic_wall_ms": 4.623374901711941,
+      "cpu_spans": {
+        "id_d2h_staging": {
+          "count": 1,
+          "sum_cpu_ms": 0.014897901564836502,
+          "max_cpu_ms": 0.014897901564836502
+        },
+        "h2d_submit": {
+          "count": 1,
+          "sum_cpu_ms": 0.005510635673999786,
+          "max_cpu_ms": 0.005510635673999786
+        },
+        "cpu_table_gather": {
+          "count": 1,
+          "sum_cpu_ms": 0.023735221475362778,
+          "max_cpu_ms": 0.023735221475362778
+        }
+      },
+      "h2d_bytes": 98304,
+      "h2d_sum_stream_ms": 0.011008000001311302
+    },
+    {
+      "batch": 1,
+      "mode": "prefill",
+      "diagnostic_wall_ms": 43.27386384829879,
+      "cpu_spans": {
+        "id_d2h_staging": {
+          "count": 1,
+          "sum_cpu_ms": 0.02832384780049324,
+          "max_cpu_ms": 0.02832384780049324
+        },
+        "h2d_submit": {
+          "count": 1,
+          "sum_cpu_ms": 0.008695758879184723,
+          "max_cpu_ms": 0.008695758879184723
+        },
+        "cpu_table_gather": {
+          "count": 1,
+          "sum_cpu_ms": 11.166378390043974,
+          "max_cpu_ms": 11.166378390043974
+        }
+      },
+      "h2d_bytes": 201326592,
+      "h2d_sum_stream_ms": 3.496608018875122
+    },
+    {
+      "batch": 8,
+      "mode": "decode",
+      "diagnostic_wall_ms": 11.03837601840496,
+      "cpu_spans": {
+        "id_d2h_staging": {
+          "count": 1,
+          "sum_cpu_ms": 0.021451152861118317,
+          "max_cpu_ms": 0.021451152861118317
+        },
+        "h2d_submit": {
+          "count": 1,
+          "sum_cpu_ms": 0.005770940333604813,
+          "max_cpu_ms": 0.005770940333604813
+        },
+        "cpu_table_gather": {
+          "count": 1,
+          "sum_cpu_ms": 0.0436222180724144,
+          "max_cpu_ms": 0.0436222180724144
+        }
+      },
+      "h2d_bytes": 786432,
+      "h2d_sum_stream_ms": 0.021888000890612602
+    },
+    {
+      "batch": 8,
+      "mode": "prefill",
+      "diagnostic_wall_ms": 211.01341489702463,
+      "cpu_spans": {
+        "id_d2h_staging": {
+          "count": 1,
+          "sum_cpu_ms": 0.08834712207317352,
+          "max_cpu_ms": 0.08834712207317352
+        },
+        "h2d_submit": {
+          "count": 24,
+          "sum_cpu_ms": 0.312149990350008,
+          "max_cpu_ms": 0.022402964532375336
+        },
+        "ticket_acquire": {
+          "count": 24,
+          "sum_cpu_ms": 92.82268583774567,
+          "max_cpu_ms": 8.290994446724653
+        },
+        "cpu_table_gather": {
+          "count": 24,
+          "sum_cpu_ms": 75.15942165628076,
+          "max_cpu_ms": 3.982394002377987
+        }
+      },
+      "h2d_bytes": 1610612736,
+      "h2d_sum_stream_ms": 41.84188747406006
+    }
+  ],
+  "limitations": [
+    "PyTorch profiler has no GPU events for all eight operator profiles. CPU-only traces retained.",
+    "Separate CUDA-event instrumentation successfully records H2D stream spans. These include enqueue gaps and instrumentation overhead.",
+    "CPU spans and transfer spans overlap model compute and are not additive. Single-call diagnostics are not headline timing evidence."
+  ],
+  "insights": [
+    "Batch-1 bulk prefill gathers 192 MiB synchronously before a single H2D; gather and copy together explain approximately the 14.79 ms measured offload/resident gap.",
+    "Batch-8 pipeline streams 24 groups. Gather and transfer overlap ~205 ms resident compute; the wall gap is much smaller than their summed spans.",
+    "Both decode batches use bulk with tiny gather/transfer spans; avoid imposing pipeline coordination on those shapes."
+  ]
+}
