@@ -4,7 +4,8 @@
   "accepted_new_steps": [],
   "attempts": {
     "A0003": "within_noise,reverted",
-    "A0004": "within_noise,reverted"
+    "A0004": "within_noise,reverted",
+    "A0005": "correctness_testing"
   },
   "pending_hypotheses": [
     "combined Q/K rotary launch",

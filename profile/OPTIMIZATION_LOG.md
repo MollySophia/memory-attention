@@ -619,3 +619,10 @@ token inference. Diagnostic measured48 calls,1.351658ms cumulative CPU spans,
 0.176448ms stream spans in5.562025ms instrumented wall time. CPU/stream spans
 include instrumentation/launch gaps; not pure kernels or speedup evidence.
 Exact arithmetic required. Preserve generic/padded/varlen/XPos/training paths.
+
+A0005 paired rotary implementation(ffeb079,device/shape guards3fa9ce2)
+passed78 tests: direct BF16/FP16/FP32 exact comparisons at D32/64/128/256,
+GQA,noncontiguous/varlen-related fallback,gradient path and frozen-A0002
+attention128-step model comparisons plus existing cache/offload gates.
+Standalone offload maxdiff0. Launch8 fresh primary screen jobs vs A0002,
+3/5/1,estimated3minutes. No claim of gain until measurement.

@@ -3,7 +3,7 @@
   "parent_attempt_id": "A0002",
   "accepted_step": null,
   "status": null,
-  "phase": "registered",
+  "phase": "screening_prepared",
   "label": "Single-launch paired Q/K rotary for inference decode",
   "parent_sha": "c677ed9967930f870c77b21e94246414ead7fd4b",
   "incumbent_sha": "ec6384d2e9081ecbb2926fe8a6193bc48ea650a3",
@@ -17,5 +17,11 @@
     "Unsupported shapes must preserve original semantics and autograd"
   ],
   "measurement_plan": "8 fresh primary screening jobs vs A0002,3/5/1; independent confirmation only if promising.",
-  "next_action": "Implement and commit before correctness tests/timing."
+  "next_action": "8 fresh primary screening processes vs A0002; no accepted gain claim.",
+  "candidate_sha": "3fa9ce24f8d3ef6e0fdeee71a39a106cd644f391",
+  "correctness": {
+    "pytest": "78 passed;correctness-pytest.txt",
+    "standalone": "PASS,maxdiff0;correctness-standalone.txt",
+    "independent_reference": "A0003/reference.py loads frozen A0002 attention,which does not opt into paired rotary;128-step exact model gates passed."
+  }
 }
