@@ -3,7 +3,7 @@
   "parent_attempt_id": "A0002",
   "accepted_step": null,
   "status": null,
-  "phase": "screening_prepared",
+  "phase": "confirmation_prepared",
   "label": "Defer PendingM acquisition until Q/K normalization and rotary are queued",
   "parent_sha": "1b74d96ad2a5d80b07905154c0c05ee877a40b72",
   "incumbent_sha": "ec6384d2e9081ecbb2926fe8a6193bc48ea650a3",
@@ -20,11 +20,24 @@
   ],
   "correctness_plan": "Bit-exact logits/hidden/KV against frozen A0002 attention forward; batch1/2,bulk/pipeline,GQA,padding,growing128,group2depth1,plus existing gates and primary gate if screened promising.",
   "measurement_plan": "Initial8 fresh processes: primary prefill/decode,offload/resident,one alternating incumbent/candidate pair under3/5/1; roughly3min from19ssetup/process plusmodelwork. Promising primary effects require>=3 fresh independent pairs10/10/3. No acceptance from screen.",
-  "next_action": "Run8 fresh primary screening processes against accepted A0002; no accepted gain claim.",
+  "next_action": "Primary-shape frozen-forward exact gate, then R02 confirmation.",
   "candidate_sha": "feb2c660744b94768f5635772722181685cff1b0",
   "correctness": {
     "pytest": "53 passed;8 independent frozen-forward growing128 cases plus45existing gates",
     "standalone": "correctness-standalone.txt",
     "padding_initial_failure": "padding-audit.md; uninitialized masked keys fail even frozen self-comparison; zero tolerance retained for defined scope"
-  }
+  },
+  "screening": {
+    "run": "R01-screening",
+    "controller_pid": 1615526,
+    "log": "R01-controller.txt",
+    "baseline_attempt": "A0002",
+    "job_count": 8,
+    "tool_session": 16808
+  },
+  "performance": {
+    "screening": "screening-summary.json"
+  },
+  "screening_outcome": "Offload prefill1.004315x,decode1.006374x; resident near1.0. Tiny provisional changes require independent confirmation.",
+  "confirmation_plan": "12 fresh processes: offload primary prefill/decode,three alternating pairs each10/10/3.95% paired-log t CI df2; no optional extension. Either repeatable primary improvement with no other-primary regression nominates full validation. Estimated4-5min."
 }

@@ -574,3 +574,10 @@ and rotary are queued. Existing A0002 prefill spans and current wait ordering
 identify a concrete overlap opportunity. Exact arithmetic required; later slot
 release and extra K lifetime may negate the benefit. Frozen A0002 forward is
 the independent correctness reference; first screen8 primary paired jobs.
+
+A0003 R01 screening passed8-source/config/import/raw-data audits: offload
+prefill1.004315x,decode1.006374x; resident near1.0,peak allocation unchanged.
+53 correctness tests and standalone maxdiff0 passed. Register R02:12 fresh
+offload-only primary processes,three alternating pairs per mode10/10/3,
+95% paired-log t intervals(df2),estimated4–5min. No optional repeats; no
+acceptance from screening. Primary frozen-forward check precedes confirmation.
