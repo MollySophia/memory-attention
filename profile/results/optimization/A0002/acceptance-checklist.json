@@ -1,0 +1,91 @@
+{
+  "accepted": false,
+  "purpose": "Completion checklist against GOAL.md; partial measurements do not establish acceptance.",
+  "requirements": [
+    {
+      "requirement": "Exact intended model, protocol, parameter placement and frozen reference",
+      "state": "verified_for_screening",
+      "evidence": [
+        "screening-summary.json",
+        "R01-screening/manifest.json"
+      ],
+      "remaining": "Verify each formal/full-matrix result, including actual imports and source identity."
+    },
+    {
+      "requirement": "Independent exact numerical gates across growing128, GQA, padding, policies, rollback and shapes",
+      "state": "passed",
+      "evidence": [
+        "correctness-pytest.txt",
+        "correctness-standalone.txt"
+      ],
+      "scope": "41 tests including batch1 fallback; frozen Git cache implementation as reference."
+    },
+    {
+      "requirement": "Primary-shape exact logits, hidden states and KV",
+      "state": "passed",
+      "evidence": [
+        "correctness-primary.json"
+      ],
+      "scope": "296 comparisons at batch8/prefix2048 plus3 decode steps."
+    },
+    {
+      "requirement": "Resolve known batch1 regression signal before expensive validation",
+      "state": "within_noise_no_resolved_regression",
+      "evidence": [
+        "small-batch-summary.json",
+        "small-batch-audit.txt"
+      ],
+      "remaining": "Offload between-process uncertainty remains wide; no equivalence claim. Preserve alongside final validation."
+    },
+    {
+      "requirement": "Repeatable primary improvement without resolved other-primary regression",
+      "state": "pending",
+      "evidence": [],
+      "remaining": "Three independent alternating formal pairs per primary mode/placement; screening cannot substitute."
+    },
+    {
+      "requirement": "Complete batch/length matrix and investigate regressions",
+      "state": "pending",
+      "evidence": [],
+      "remaining": "All seven unique shapes, prefill/decode and three placements; preserve OOM/unsupported/missing explicitly."
+    },
+    {
+      "requirement": "128-step growing-generation latency and memory",
+      "state": "pending",
+      "evidence": [],
+      "remaining": "Prefix2048 at batches1/8 and three placements; matching baseline/candidate2/5/3 plan."
+    },
+    {
+      "requirement": "Preserve CPU table placement and offload GPU memory saving",
+      "state": "pending_final_matrix",
+      "evidence": [
+        "R01-screening/manifest.json"
+      ],
+      "remaining": "Audit all final GPU/host/pinned/KV-capacity records, not just primary peak allocation."
+    },
+    {
+      "requirement": "Profiles identify bottleneck, separate from headline timing",
+      "state": "partial",
+      "evidence": [
+        "../A0000/diagnostics/decode-ma_offload-events/events.json"
+      ],
+      "remaining": "Retain documented profiler limitations; prefill diagnostic remains pending. CUDA-event spans are not pure kernel times."
+    },
+    {
+      "requirement": "Complete attempt ledger, failures, exact source and reproducible commands",
+      "state": "in_progress",
+      "evidence": [
+        "../A0001/attempt.json",
+        "../REPRODUCE.md",
+        "attempt.json"
+      ],
+      "remaining": "Commit this attempt final verdict and all resulting raw data before acceptance/reversion."
+    },
+    {
+      "requirement": "Standalone PNG/PDF/SVG figures plus source CSV/JSON",
+      "state": "pending",
+      "evidence": [],
+      "remaining": "Final latency/throughput/memory/generation plots; attempt history with failed markers and incumbent step line; cumulative accepted-step plot using matched formal evidence."
+    }
+  ]
+}

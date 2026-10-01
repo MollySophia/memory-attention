@@ -497,3 +497,14 @@ alternating pairs per folded placement, batch1/context2048 decode,10/10/3.
 Estimated4-5 minutes.95% paired-log t interval (df2), upper bound below1 means
 resolved regression. Do not reuse short-plan samples or extend until favorable.
 Complete this gate before spending on primary confirmation/full matrix.
+
+A0002 R02 completed12 fresh processes,360 samples. Both batch1 folded placements
+are within_noise under the predeclared paired-log95% t criterion. Resident
+speedup1.00401x CI[0.97367,1.03530]; offload1.01117x CI[0.72236,1.41546].
+Offload has large between-process variability in opposite directions; keep
+all samples, do not claim equivalence or extend until favorable. No resolved
+regression. Proceed to primary confirmation, not full acceptance.
+R03 predeclared:24 fresh processes, primary prefill/decode in both placements,
+three alternating pairs,10/10/3; expected8-12 minutes. Primary analysis requires
+unchanged source hashes relative to the batch1 gate. Full validation remains
+conditional on repeatable primary gain and no resolved other-primary regression.
