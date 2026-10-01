@@ -6,6 +6,10 @@ compares logits. The folded table must reproduce the per-token m_norm result,
 so both paths should agree to within BF16 tolerance.
 """
 
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
 import torch
 
 from fla.models.memory.configuration_memory import MemoryConfig
@@ -207,7 +211,7 @@ def main():
     model.enable_memory_offload(device="cuda:0", dtype=torch.bfloat16, fold_norm=True)
     resident = torch.cuda.memory_allocated()
     table_mib = model.model.memory_table.numel() * model.model.memory_table.element_size() / 2**20
-    print(f"  folded CPU table   : {table_mib:.1f} MiB (pinned, {model.model.memory_table.shape})")
+    print(f"  folded CPU table   : {table_mib:.1f} MiB (ordinary CPU, {model.model.memory_table.shape})")
     print(f"  GPU after offload  : {resident / 2**20:.1f} MiB")
 
     ok = worst < 0.05

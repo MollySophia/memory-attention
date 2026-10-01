@@ -103,3 +103,38 @@ rollback and token selection; they belong to the previous timing protocol.
 Re-measure both baseline and candidate before comparing under the new protocol.
 
 **Verdict.** Measurement correction, not an inference speedup.
+
+
+## Campaign offload-gap-001 (new, independent of paper-001)
+
+### A0000 — prepared baseline, accepted_step 0
+
+Campaign ID: `offload-gap-001`. Parent restored revision:
+`81684d34e44db04a0511698081cab336abf4a60d`. No archived model optimization
+or archived timing has been imported. Only measurement infrastructure was
+ported and reviewed; `fla/` remains identical to the restored revision.
+New protocol: `offload_gap_v1`; initial plan: `screen_v1_w3_n5_r1`.
+
+Prepared last-token cached prefill, fixed-context decode (rollback/token
+selection excluded), 128-step generation, raw samples, memory/environment
+snapshots, failure persistence, plan-only commands, and local-checkout import
+routing. Screening defaults cover batches 1/8 in both placements; initial
+baseline additionally covers 4/16 (16 jobs), pipeline candidates add 16.
+Diagnostic profiling supports batches 1/8 and producer-thread CPU gather,
+ID staging, H2D stream spans and acquire wait instrumentation. No inference
+model source changed.
+
+Verification: 42 tests pass; standalone correctness PASS (max difference 0).
+The added 128-step trajectories cover two seeds, bulk/pipeline, GQA, non-unit
+norm, gating/QK norm, group boundaries, single-slot reuse, repeated forwards,
+left padding and shape switches. Initial diagnostic failures were restricted
+to uninitialized left-padding K cells: rotary.py masks stores for negative
+positions, and attention excludes those cells. Tests compare all valid KV
+cells (all cells in unpadded cases), logits and hidden states bit-exactly.
+The failed diagnostic log is preserved, not a model optimization attempt.
+
+Initial screen planned work: 16 processes, 80 samples, 128 warmup/timed calls
+plus decode prefixes. Initial estimate ~546 seconds assumes 30-second setup,
+1000-ms prefill and 30-ms decode; these are provisional planning inputs until
+measured per-process costs are available. Full validation/generation/confirmation
+are intentionally not run at this stage. No gain claim is made.

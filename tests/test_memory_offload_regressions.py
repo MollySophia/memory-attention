@@ -154,3 +154,60 @@ Path(a.json).write_text(json.dumps(dict(
     monkeypatch.setattr('sys.argv', args + ['--allow-env-change'])
     assert sweep.main() == 0
     assert bmk.with_suffix('.count').read_text() == '2'
+
+
+@pytest.mark.parametrize('padded', [False, True])
+@pytest.mark.parametrize('seed', [1234, 4321])
+@pytest.mark.parametrize('policy', ['bulk', 'pipeline'])
+def test_growing_cache_exact_with_slot_reuse(seed, policy, padded):
+    """128 growing steps, non-unit norms, partial groups, GQA and padding."""
+    if not torch.cuda.is_available():
+        pytest.skip('requires CUDA')
+    from fla.models.memory.configuration_memory import MemoryConfig
+    from fla.models.memory.modeling_memory import MemoryForCausalLM
+    torch.manual_seed(seed)
+    config = MemoryConfig(hidden_size=128, num_hidden_layers=3, num_heads=4,
+                          num_kv_heads=2, vocab_size=128, qk_norm=True,
+                          use_gate=True, fuse_norm=False,
+                          memory_offload_policy=policy,
+                          memory_offload_group_size=2, memory_offload_prefetch_depth=1)
+    with torch.inference_mode():
+        model = MemoryForCausalLM(config).to('cuda', dtype=torch.bfloat16).eval()
+        for layer in model.model.layers:
+            layer.attn.m_norm.weight.copy_(torch.linspace(.5, 1.5, 32, device='cuda'))
+        prefix = torch.randint(0, 128, (2, 17), device='cuda')
+        tokens = torch.randint(0, 128, (128, 2, 1), device='cuda').unbind()
+        mask = torch.ones_like(prefix)
+        if padded:
+            mask[0, :5] = 0
+
+        def trajectory():
+            records, cache = [], None
+            for index, token in enumerate((prefix, *tokens)):
+                current_mask = torch.cat((mask, torch.ones((2,index),device='cuda',dtype=mask.dtype)), dim=1)
+                out = model(input_ids=token, attention_mask=current_mask,
+                            past_key_values=cache, use_cache=True,
+                            output_hidden_states=True, logits_to_keep=1)
+                cache = out.past_key_values
+                tensors = [out.logits, *out.hidden_states]
+                # Rotary skips writes at negative (left-pad) positions. Those
+                # uninitialized K cells are excluded by attention_mask forever.
+                # Compare every usable KV element; unpadded cases cover all cells.
+                tensors += [t[current_mask.bool()] for state in cache for t in state['attn_state']]
+                records.append([t.clone() for t in tensors])
+            return records
+
+        try:
+            model.fold_memory_table_on_gpu()
+            reference = trajectory()
+            model.close_memory_offload()
+            model.enable_memory_offload()
+            for _ in range(2):
+                actual = trajectory()
+                for expected_step, actual_step in zip(reference, actual):
+                    assert len(expected_step) == len(actual_step)
+                    for expected, value in zip(expected_step, actual_step):
+                        assert torch.isfinite(value).all()
+                        torch.testing.assert_close(value, expected, rtol=0, atol=0)
+        finally:
+            model.close_memory_offload()
