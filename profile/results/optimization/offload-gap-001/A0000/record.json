@@ -18,5 +18,6 @@
     "pytest": "42 passed",
     "standalone": "PASS; max difference 0"
   },
-  "source_note": "Exact frozen source commit and checkout recorded in campaign manifest after commit."
+  "source_note": "Exact frozen source commit and checkout recorded in campaign manifest after commit.",
+  "candidate_sha": "62942a0387608fe21baaeb2dce9ef3b0947dde4d"
 }

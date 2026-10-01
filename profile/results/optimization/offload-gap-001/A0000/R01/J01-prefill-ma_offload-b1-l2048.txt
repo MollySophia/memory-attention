@@ -1,0 +1,1 @@
+ma_offload       prefill  median=   43.603 ms  min=   43.603  max=   43.603  spread=0.00%  policy=bulk
