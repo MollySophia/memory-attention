@@ -22,7 +22,8 @@
   "correctness": {
     "pytest": "57 passed;correctness-pytest.txt",
     "standalone": "PASS,maxdiff0;correctness-standalone.txt",
-    "premeasurement_guard_fix": "Broadcast sizes,empty and unsupported dtype use original copy_; initial54pass results retained."
+    "premeasurement_guard_fix": "Broadcast sizes,empty and unsupported dtype use original copy_; initial54pass results retained.",
+    "primary": "296 exact comparisons against independent frozen A0000 cache;correctness-primary.json"
   },
   "screening": {
     "run": "R01-screening",
