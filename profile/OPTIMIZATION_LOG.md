@@ -167,3 +167,25 @@ R01 is running; no baseline estimate or optimization claim yet. See
 and current child PIDs before taking any restart action. This campaign will
 profile then evaluate at most three focused candidates before full-matrix
 confirmation; failure/noise never satisfies the optimization objective.
+
+### A0000 — R01 primary observations and reporting (2026-10-01)
+
+All six primary-shape jobs completed with 150 samples each. Median of round
+means (ms), prefill / decode: ma_offload **210.7232 / 11.0559**;
+ma_gpu **209.9147 / 10.9418**; ma_gpu_unfolded **212.9333 / 11.0427**.
+Peak allocated GPU GiB: offload **6.448 / 5.747**, folded resident
+**9.151 / 8.449**. This is one baseline run, not paired candidate evidence or
+an optimization acceptance. The rest of R01 is still running.
+
+Added `profile/report_paper_matrix.py`: validates frozen SHA, workload/model
+configuration, 150 finite positive raw samples, recomputed round means and
+latency/throughput before export. Missing/running/failed/OOM points remain
+null, with annotations instead of zero-valued plot points. Error bars are
+round-mean ranges, explicitly not confidence intervals. Two CPU-only report
+regressions pass (corrupt aggregates/source rejected, missing values retained).
+
+`reports/partial-02` is an explicitly PARTIAL snapshot with 5 completed jobs
+at collection time, source CSV/JSON and six figures in PNG/SVG/PDF. Later
+completed raw jobs are stored separately; final plots must be regenerated.
+The current process manifest snapshot is `R01-checkpoint-01.json`.
+No baseline source changes or additional GPU jobs were made during R01.

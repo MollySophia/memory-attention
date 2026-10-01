@@ -1,0 +1,5 @@
+
+tests/test_paper_report.py::test_pending_and_failures_remain_null PASSED [ 50%]
+tests/test_paper_report.py::test_raw_samples_and_source_are_audited PASSED [100%]
+
+============================== 2 passed in 0.01s ===============================
