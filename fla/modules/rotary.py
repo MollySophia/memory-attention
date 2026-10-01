@@ -156,9 +156,10 @@ def _memory_rotary_pair_kernel(Q, K, OQ, OK, COS, SIN, offset,
 
 def _memory_rotary_pair(q, k, cos, sin, offset):
     oq, ok = torch.empty_like(q), torch.empty_like(k)
-    _memory_rotary_pair_kernel[(q.shape[2] + k.shape[2], q.shape[0])](
-        q, k, oq, ok, cos, sin, offset, q.shape[2], k.shape[2], q.shape[3],
-        cos.shape[1], triton.next_power_of_2(cos.shape[1]), num_warps=4)
+    with torch.cuda.device(q.device):
+        _memory_rotary_pair_kernel[(q.shape[2] + k.shape[2], q.shape[0])](
+            q, k, oq, ok, cos, sin, offset, q.shape[2], k.shape[2], q.shape[3],
+            cos.shape[1], triton.next_power_of_2(cos.shape[1]), num_warps=4)
     return oq, ok
 
 
@@ -497,6 +498,7 @@ class RotaryEmbedding(nn.Module):
                 and q.ndim == 4 and k.ndim == 4 and q.shape[1] == k.shape[1] == 1
                 and q.shape[0] == k.shape[0] and q.shape[0] > 0
                 and q.shape[2] > 0 and k.shape[2] > 0
+                and 0 < self.dim <= 256 and self.dim % 2 == 0
                 and q.shape[3] == k.shape[3] == self.dim
                 and q.dtype == k.dtype == self._cos_cached.dtype
                 and q.dtype in (torch.float16, torch.bfloat16, torch.float32)

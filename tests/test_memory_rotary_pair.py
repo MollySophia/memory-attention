@@ -5,7 +5,8 @@ import torch
 from fla.modules.rotary import RotaryEmbedding
 
 @pytest.mark.parametrize('dtype',[torch.bfloat16,torch.float16,torch.float32])
-@pytest.mark.parametrize('batch,hq,hk,dim,offset',[(1,2,2,64,0),(2,4,1,64,127),(8,32,32,64,2048)])
+@pytest.mark.parametrize('batch,hq,hk,dim,offset',[(1,2,2,64,0),(2,4,1,64,127),(8,32,32,64,2048),
+                                                  (2,4,2,32,16),(2,4,2,128,64),(2,4,2,256,64)])
 @torch.inference_mode()
 def test_pair_exact(dtype,batch,hq,hk,dim,offset):
     if not torch.cuda.is_available():pytest.skip('requires CUDA')
