@@ -396,3 +396,19 @@ a primary prefill interval wholly below1 is a resolved regression. Unresolved
 intervals remain unresolved. Expected cost 8-12 minutes from R03 setup durations
 and about103 seconds of prefill work. No full matrix/generation yet. Verify
 checkout-specific imported modules and expected commits for every run.
+
+A0001 R04 confirmation completed in 9.48 minutes: 24 independent
+processes, 720 raw samples. All source/config/import/count/statistical audits passed.
+ma_offload prefill: paired geometric speedup 0.9995x, 95% paired-log t interval [0.9876, 1.0114], within_noise.
+ma_offload decode: paired geometric speedup 2.0252x, 95% paired-log t interval [1.9964, 2.0545], repeatable_improvement.
+ma_gpu prefill: paired geometric speedup 0.9991x, 95% paired-log t interval [0.9932, 1.0050], within_noise.
+ma_gpu decode: paired geometric speedup 2.0498x, 95% paired-log t interval [2.0246, 2.0753], repeatable_improvement.
+Intervals use three process pairs (df=2), not within-process rounds; small-n
+normal-log-ratio assumption is explicit. GPU peak offload saving stays above
+2.7 GiB in every primary pair; decode peak increase about63 MiB. Raw environment
+snapshots retain a separate trm-mcp process holding654 MiB; snapshots do not
+provide continuous monitoring. Candidate nominated for full validation only;
+status/accepted_step remain unset. Full validation plan:88 new processes plus
+8 reused first-pair primary results, ~40.6 minutes from measured setup/model
+costs; non-generation10/10/3 and generation2/5/3. All three primary pairs remain
+available for uncertainty. No full matrix or generation performance started yet.

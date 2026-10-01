@@ -4,7 +4,7 @@
   "accepted_step": null,
   "label": "Amortized KV cache append with bounded spare capacity",
   "status": null,
-  "phase": "confirmation_planned",
+  "phase": "nominated_for_full_validation",
   "candidate_sha": "d2a0c1745f3b35f9949eb7c06eedf5763646bebf",
   "parent_sha": "f87a7e6b6d8e7f5df1894890d23ddd9820c5a0ef",
   "hypothesis": "Primary decode repeatedly copies the full history via 48 torch.cat calls. Append new K/V into reusable capacity without changing stored values, attention scope, precision or offload placement.",
@@ -18,7 +18,7 @@
   },
   "performance": {
     "screening": "screening-summary.json",
-    "formal": null
+    "formal": "confirmation-summary.json"
   },
   "risks": [
     "Spare cache storage raises GPU memory; record backing capacity and peaks.",
@@ -34,6 +34,20 @@
   },
   "development_failure": "Initial capacity test failed after large rollback: 384-slot buffer retained for 129 tokens. Fixed reuse condition to require spare capacity <128; original log retained. Numerical comparisons passed.",
   "implementation_sha": "2b85165ff27b4edf6b41e065ac20aee127a113e6",
-  "next_action": "Formal primary confirmation: at least three independent alternating baseline/candidate pairs, 10 warmups and 10 samples x3 rounds; no full matrix yet.",
-  "confirmation_plan": "run_confirmation.py: 24 processes, 3 alternating pairs per placement/mode; 10/10/3; predeclared 95% paired-log Student-t intervals; expected 8-12 minutes."
+  "next_action": "Run matched full matrix and 128-step generation validation; reuse R04 pair1 primary points, retain all pairs for primary uncertainty.",
+  "confirmation_plan": "run_confirmation.py: 24 processes, 3 alternating pairs per placement/mode; 10/10/3; predeclared 95% paired-log Student-t intervals; expected 8-12 minutes.",
+  "confirmation_outcome": {
+    "status": "passed_primary_confirmation",
+    "run": "R04-confirmation",
+    "summary": "confirmation-summary.json",
+    "candidate_commit": "057acecedf172bb97aab9578cdb2dd67d38c9265",
+    "accepted": false,
+    "offload_decode_geometric_speedup": 2.0252495644932464,
+    "offload_decode_ci95": [
+      1.9964399887257336,
+      2.0544748761008504
+    ],
+    "offload_prefill": "within_noise; no resolved regression",
+    "memory": "offload GPU peak saving >2.7 GiB at both primary modes in all three pairs"
+  }
 }

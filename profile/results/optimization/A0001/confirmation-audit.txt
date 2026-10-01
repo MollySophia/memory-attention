@@ -1,0 +1,237 @@
+{
+  "stage": "confirmation",
+  "run": "R04-confirmation",
+  "job_count": 24,
+  "sample_count": 720,
+  "audit": "All actual import paths, expected commits, source patches/hashes, paired model/config/environment, 720 finite raw samples, and recomputed round/run estimators passed.",
+  "estimator": "median of round means per process; geometric mean of paired baseline/candidate ratios",
+  "uncertainty": "95% Student-t interval on three independent paired log ratios, df=2. Small-n interval assumes approximately normal paired log ratios; within-process rounds are not independent process pairs.",
+  "source_hashes": {
+    "baseline": [
+      "cb10074e60fbc8e3daf46efdf6318fa9429711bd25169814c278dd3804eb4a7a"
+    ],
+    "candidate": [
+      "35b5029a0b958d48f151132e4057872d9909c4e653cce112548a79a13f3e25a0"
+    ]
+  },
+  "rows": [
+    {
+      "variant": "ma_offload",
+      "mode": "prefill",
+      "pairs": [
+        {
+          "pair": 1,
+          "baseline_ms": 209.9967568181455,
+          "candidate_ms": 210.72244923561811,
+          "speedup": 0.996556169406226,
+          "baseline_peak_gpu_gib": 6.448451995849609,
+          "candidate_peak_gpu_gib": 6.448451995849609,
+          "baseline_host_rss_gib": 10.90524673461914,
+          "candidate_host_rss_gib": 10.905254364013672
+        },
+        {
+          "pair": 2,
+          "baseline_ms": 209.5933625008911,
+          "candidate_ms": 210.25308286771178,
+          "speedup": 0.9968622559164292,
+          "baseline_peak_gpu_gib": 6.448451995849609,
+          "candidate_peak_gpu_gib": 6.448451995849609,
+          "baseline_host_rss_gib": 10.905387878417969,
+          "candidate_host_rss_gib": 10.905223846435547
+        },
+        {
+          "pair": 3,
+          "baseline_ms": 210.5601758696139,
+          "candidate_ms": 209.51119577512145,
+          "speedup": 1.0050067973246564,
+          "baseline_peak_gpu_gib": 6.448451995849609,
+          "candidate_peak_gpu_gib": 6.448451995849609,
+          "baseline_host_rss_gib": 10.90523910522461,
+          "candidate_host_rss_gib": 10.90744400024414
+        }
+      ],
+      "geometric_mean_speedup": 0.9994674264152762,
+      "paired_speedup_ci95": [
+        0.9876476674068912,
+        1.0114286394134056
+      ],
+      "verdict": "within_noise"
+    },
+    {
+      "variant": "ma_offload",
+      "mode": "decode",
+      "pairs": [
+        {
+          "pair": 1,
+          "baseline_ms": 11.05101672001183,
+          "candidate_ms": 5.472745234146714,
+          "speedup": 2.0192821421797564,
+          "baseline_peak_gpu_gib": 5.746938228607178,
+          "candidate_peak_gpu_gib": 5.808236598968506,
+          "baseline_host_rss_gib": 11.076583862304688,
+          "candidate_host_rss_gib": 11.064964294433594
+        },
+        {
+          "pair": 2,
+          "baseline_ms": 11.008615652099252,
+          "candidate_ms": 5.399678274989128,
+          "speedup": 2.0387539944907953,
+          "baseline_peak_gpu_gib": 5.746938228607178,
+          "candidate_peak_gpu_gib": 5.808236598968506,
+          "baseline_host_rss_gib": 11.076080322265625,
+          "candidate_host_rss_gib": 11.065013885498047
+        },
+        {
+          "pair": 3,
+          "baseline_ms": 11.014995304867625,
+          "candidate_ms": 5.458967434242368,
+          "speedup": 2.017779999157727,
+          "baseline_peak_gpu_gib": 5.746938228607178,
+          "candidate_peak_gpu_gib": 5.808236598968506,
+          "baseline_host_rss_gib": 11.076309204101562,
+          "candidate_host_rss_gib": 11.06463623046875
+        }
+      ],
+      "geometric_mean_speedup": 2.0252495644932464,
+      "paired_speedup_ci95": [
+        1.9964399887257336,
+        2.0544748761008504
+      ],
+      "verdict": "repeatable_improvement"
+    },
+    {
+      "variant": "ma_gpu",
+      "mode": "prefill",
+      "pairs": [
+        {
+          "pair": 1,
+          "baseline_ms": 206.4495668746531,
+          "candidate_ms": 206.9463555701077,
+          "speedup": 0.9975994324998572,
+          "baseline_peak_gpu_gib": 9.15084457397461,
+          "candidate_peak_gpu_gib": 9.15084457397461,
+          "baseline_host_rss_gib": 4.7909698486328125,
+          "candidate_host_rss_gib": 4.792934417724609
+        },
+        {
+          "pair": 2,
+          "baseline_ms": 206.54476573690772,
+          "candidate_ms": 206.9862985983491,
+          "speedup": 0.9978668498135804,
+          "baseline_peak_gpu_gib": 9.15084457397461,
+          "candidate_peak_gpu_gib": 9.15084457397461,
+          "baseline_host_rss_gib": 4.791240692138672,
+          "candidate_host_rss_gib": 4.790763854980469
+        },
+        {
+          "pair": 3,
+          "baseline_ms": 207.1217434015125,
+          "candidate_ms": 206.74506821669638,
+          "speedup": 1.0018219306901257,
+          "baseline_peak_gpu_gib": 9.15084457397461,
+          "candidate_peak_gpu_gib": 9.15084457397461,
+          "baseline_host_rss_gib": 4.790885925292969,
+          "candidate_host_rss_gib": 4.7912139892578125
+        }
+      ],
+      "geometric_mean_speedup": 0.9990942074492005,
+      "paired_speedup_ci95": [
+        0.9932417579522643,
+        1.0049811411639415
+      ],
+      "verdict": "within_noise"
+    },
+    {
+      "variant": "ma_gpu",
+      "mode": "decode",
+      "pairs": [
+        {
+          "pair": 1,
+          "baseline_ms": 10.925336554646492,
+          "candidate_ms": 5.311981588602066,
+          "speedup": 2.056734642696996,
+          "baseline_peak_gpu_gib": 8.449361324310303,
+          "candidate_peak_gpu_gib": 8.510629177093506,
+          "baseline_host_rss_gib": 4.96221923828125,
+          "candidate_host_rss_gib": 4.9530792236328125
+        },
+        {
+          "pair": 2,
+          "baseline_ms": 10.926522361114621,
+          "candidate_ms": 5.361153278499842,
+          "speedup": 2.0380917674810597,
+          "baseline_peak_gpu_gib": 8.449361324310303,
+          "candidate_peak_gpu_gib": 8.510629177093506,
+          "baseline_host_rss_gib": 4.962512969970703,
+          "candidate_host_rss_gib": 4.950740814208984
+        },
+        {
+          "pair": 3,
+          "baseline_ms": 10.927610797807574,
+          "candidate_ms": 5.318604409694672,
+          "speedup": 2.0546011615168993,
+          "baseline_peak_gpu_gib": 8.449361324310303,
+          "candidate_peak_gpu_gib": 8.510629177093506,
+          "baseline_host_rss_gib": 4.961936950683594,
+          "candidate_host_rss_gib": 4.951137542724609
+        }
+      ],
+      "geometric_mean_speedup": 2.049792229310286,
+      "paired_speedup_ci95": [
+        2.0245671820160087,
+        2.0753315674893758
+      ],
+      "verdict": "repeatable_improvement"
+    }
+  ],
+  "environment_note": "Raw before/after GPU clocks, temperature, utilization and process listings retained per job. A separate trm-mcp Python process holds 654 MiB; snapshots are not continuous utilization monitoring.",
+  "memory_comparison": [
+    {
+      "mode": "prefill",
+      "pair": 1,
+      "baseline_offload_saving_gib": 2.702392578125,
+      "candidate_offload_saving_gib": 2.702392578125,
+      "candidate_offload_peak_increase_mib": 0.0
+    },
+    {
+      "mode": "prefill",
+      "pair": 2,
+      "baseline_offload_saving_gib": 2.702392578125,
+      "candidate_offload_saving_gib": 2.702392578125,
+      "candidate_offload_peak_increase_mib": 0.0
+    },
+    {
+      "mode": "prefill",
+      "pair": 3,
+      "baseline_offload_saving_gib": 2.702392578125,
+      "candidate_offload_saving_gib": 2.702392578125,
+      "candidate_offload_peak_increase_mib": 0.0
+    },
+    {
+      "mode": "decode",
+      "pair": 1,
+      "baseline_offload_saving_gib": 2.702423095703125,
+      "candidate_offload_saving_gib": 2.702392578125,
+      "candidate_offload_peak_increase_mib": 62.76953125
+    },
+    {
+      "mode": "decode",
+      "pair": 2,
+      "baseline_offload_saving_gib": 2.702423095703125,
+      "candidate_offload_saving_gib": 2.702392578125,
+      "candidate_offload_peak_increase_mib": 62.76953125
+    },
+    {
+      "mode": "decode",
+      "pair": 3,
+      "baseline_offload_saving_gib": 2.702423095703125,
+      "candidate_offload_saving_gib": 2.702392578125,
+      "candidate_offload_peak_increase_mib": 62.76953125
+    }
+  ],
+  "offload_memory_saving_preserved": true,
+  "elapsed_minutes": 9.479788557688396,
+  "nominated_for_full_validation": true,
+  "accepted": false,
+  "next_action": "Full matrix and growing generation validation"
+}
