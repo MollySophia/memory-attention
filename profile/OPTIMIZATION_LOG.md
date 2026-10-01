@@ -491,3 +491,9 @@ batch1 pairs/placement at10/10/3 before primary confirmation and any new full
 matrix. Screening shows promise, not acceptance; accepted_step remains null.
 Reproduction instructions now document explicit import isolation and failed
 attempt handling in profile/results/optimization/REPRODUCE.md.
+
+A0002 R02 small-batch confirmation predeclared:12 fresh processes, three
+alternating pairs per folded placement, batch1/context2048 decode,10/10/3.
+Estimated4-5 minutes.95% paired-log t interval (df2), upper bound below1 means
+resolved regression. Do not reuse short-plan samples or extend until favorable.
+Complete this gate before spending on primary confirmation/full matrix.
