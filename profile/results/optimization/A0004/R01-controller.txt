@@ -1,0 +1,8 @@
+baseline-ma_offload-prefill-b8-l2048 complete
+candidate-ma_offload-prefill-b8-l2048 complete
+baseline-ma_gpu-prefill-b8-l2048 complete
+candidate-ma_gpu-prefill-b8-l2048 complete
+candidate-ma_offload-decode-b8-l2048 complete
+baseline-ma_offload-decode-b8-l2048 complete
+candidate-ma_gpu-decode-b8-l2048 complete
+baseline-ma_gpu-decode-b8-l2048 complete

@@ -600,3 +600,9 @@ in413afba).57 correctness tests passed,including strided/sentinel/special-bit
 copies,broadcast fallback and all existing independent frozen-cache gates.
 Standalone offload maxdiff0. Launch8 fresh primary screen jobs vs accepted
 A0002,3/5/1,estimated3min. No GPU diagnostics or tests overlap timing.
+
+A0004 R01 raw/source/config/environment audit passed8 processes/40samples.
+Offload decode provisional1.08934x vs resident1.00240x; bothprefills near1.0.
+Placement discrepancy can reflect offload process jitter,so do not attribute
+the9% to copy fusion. Predeclare R02 with12 fresh offload primary processes,
+3 alternating pairs each10/10/3,paired-log95%CI; no optional extension.

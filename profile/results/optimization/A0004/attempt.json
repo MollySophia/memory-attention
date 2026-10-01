@@ -3,7 +3,7 @@
   "parent_attempt_id": "A0002",
   "accepted_step": null,
   "status": null,
-  "phase": "screening_prepared",
+  "phase": "confirmation_prepared",
   "label": "Coalesce one-token K/V append into one exact copy kernel",
   "parent_sha": "4d40047882867b10f6de430f184309e21cd5e501",
   "incumbent_sha": "ec6384d2e9081ecbb2926fe8a6193bc48ea650a3",
@@ -17,11 +17,23 @@
   ],
   "correctness_plan": "Bit-exact targeted strided K/V append with sentinels and growing rollback plus existing independent frozen cache growing128,GQA,padding,bulk/pipeline and primary if screen promising.",
   "measurement_plan": "Same8-job primary screening vs accepted A0002,3/5/1,approx3min; formal pairs only if promising.",
-  "next_action": "Run8 fresh primary screening processes vs A0002; no gain claimed before timing.",
+  "next_action": "Primary exact gate then R02 confirmation.",
   "candidate_sha": "413afba7d667595b67f3dc786bee98cd9000fc7f",
   "correctness": {
     "pytest": "57 passed;correctness-pytest.txt",
     "standalone": "PASS,maxdiff0;correctness-standalone.txt",
     "premeasurement_guard_fix": "Broadcast sizes,empty and unsupported dtype use original copy_; initial54pass results retained."
-  }
+  },
+  "screening": {
+    "run": "R01-screening",
+    "controller_pid": 1627993,
+    "job_count": 8,
+    "tool_session": 49894,
+    "baseline_attempt": "A0002"
+  },
+  "performance": {
+    "screening": "screening-summary.json"
+  },
+  "screening_outcome": "Offload decode1.08934x but resident1.00240x; prefill near1.0. Mismatched placement benefit warrants caution about process jitter, not a headline gain.",
+  "confirmation_plan": "12 fresh offload primary processes,3 independent alternating pairs per mode,10/10/3,95% paired-log t intervals df2. Estimated4\u20135min; no optional extension."
 }
