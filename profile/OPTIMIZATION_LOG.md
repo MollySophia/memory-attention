@@ -386,3 +386,13 @@ Screening is promising, not an accepted gain. No accepted_step advanced.
 Next: >=3 independent alternating baseline/candidate confirmation pairs using
 10/10/3, then full matrix/generation only if primary confirmation passes.
 R02 remains invalid and excluded. Structured summary and CSV retained.
+
+A0001 formal confirmation plan frozen before measurement: three independent
+alternating process pairs per primary placement/mode (24 processes total),
+10 warmups and 10 samples x3 rounds. Per-process estimator remains median of
+round means. Report three paired ratios, geometric mean and 95% Student-t
+interval on log ratios (df=2). Require decode interval above1 for repeatability;
+a primary prefill interval wholly below1 is a resolved regression. Unresolved
+intervals remain unresolved. Expected cost 8-12 minutes from R03 setup durations
+and about103 seconds of prefill work. No full matrix/generation yet. Verify
+checkout-specific imported modules and expected commits for every run.
