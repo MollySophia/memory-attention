@@ -1,0 +1,90 @@
+{
+  "run": "R07-small-batch",
+  "rows": [
+    {
+      "variant": "ma_offload",
+      "mode": "decode",
+      "batch": 1,
+      "context": 2048,
+      "geometric_mean_speedup": 0.9230477168910989,
+      "ci95": [
+        0.7989228500320464,
+        1.0664572776003265
+      ],
+      "geometric_latency_increase_pct": 8.336761112208023,
+      "verdict": "within_noise"
+    },
+    {
+      "variant": "ma_gpu",
+      "mode": "decode",
+      "batch": 1,
+      "context": 2048,
+      "geometric_mean_speedup": 0.9527310953053026,
+      "ci95": [
+        0.9222261199792416,
+        0.9842451003036793
+      ],
+      "geometric_latency_increase_pct": 4.961410929864751,
+      "verdict": "resolved_regression"
+    }
+  ],
+  "pairs": [
+    {
+      "variant": "ma_offload",
+      "pair": 1,
+      "baseline_ms": 4.562958935275674,
+      "candidate_ms": 4.773103445768356,
+      "speedup": 0.9559731916811927
+    },
+    {
+      "variant": "ma_offload",
+      "pair": 2,
+      "baseline_ms": 4.750751191750169,
+      "candidate_ms": 5.504048755392432,
+      "speedup": 0.8631375561664053
+    },
+    {
+      "variant": "ma_offload",
+      "pair": 3,
+      "baseline_ms": 4.579506907612085,
+      "candidate_ms": 4.804763197898865,
+      "speedup": 0.9531181286134384
+    },
+    {
+      "variant": "ma_gpu",
+      "pair": 1,
+      "baseline_ms": 4.573039896786213,
+      "candidate_ms": 4.768479615449905,
+      "speedup": 0.9590142488959235
+    },
+    {
+      "variant": "ma_gpu",
+      "pair": 2,
+      "baseline_ms": 4.524608422070742,
+      "candidate_ms": 4.821276618167758,
+      "speedup": 0.9384668792951856
+    },
+    {
+      "variant": "ma_gpu",
+      "pair": 3,
+      "baseline_ms": 4.592803167179227,
+      "candidate_ms": 4.779812088236213,
+      "speedup": 0.9608752566827384
+    }
+  ],
+  "sample_count": 360,
+  "independent_pairs_per_placement": 3,
+  "estimator": "Median of round means per process; geometric mean of paired speedups.",
+  "uncertainty": "Predeclared95% Student-t CI on paired log ratios, df2; assumes approximately normal paired log ratios.",
+  "source_hashes": {
+    "baseline": [
+      "cb10074e60fbc8e3daf46efdf6318fa9429711bd25169814c278dd3804eb4a7a"
+    ],
+    "candidate": [
+      "35b5029a0b958d48f151132e4057872d9909c4e653cce112548a79a13f3e25a0"
+    ]
+  },
+  "audit": "Raw samples, round/run estimates, source SHA/hash/patch, scope/counts, actual module paths, model/config/environment and independent process IDs verified.",
+  "regression_confirmed": true,
+  "accepted": false
+}

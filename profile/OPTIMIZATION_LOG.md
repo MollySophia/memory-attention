@@ -434,3 +434,17 @@ Use paired-log95% t intervals (df2), as in R04; upper bound below1 confirms
 regression. Do not complete the expensive matrix for a rejected candidate.
 No accepted step advanced. Full-matrix audit script and environment checks
 prepared; report scripts are outside the benchmark source fingerprint.
+
+A0001 verdict: REJECTED; accepted_step remains null. R07 completed8 new
+processes plus4 reused,360 samples across three independent pairs/placement.
+Batch1 resident decode paired geometric speedup0.95273x (latency+4.96%),95%
+paired-log t CI[0.92223,0.98425]: resolved regression. Offload speedup0.92305x,
+CI[0.79892,1.06646]: within_noise despite all three pairs slower; one noisy
+pair is retained, not discarded. Do not claim confirmed offload regression.
+Primary decode remains a valid ~2x improvement, but unconditional reuse is a
+scaling tradeoff. Reject rather than replace the accepted baseline. Preserve
+all raw results, logs, and candidate-model.patch before reverting.69 remaining
+full-matrix points explicitly not_run; one active point interrupted. Growing
+performance was not reached. Next hypothesis: retain concatenation for batch1
+while reusing bounded capacity for multi-item batches. Register as A0002 only
+after evidence commit and model reversion; keep independent correctness tools.

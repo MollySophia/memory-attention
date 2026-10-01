@@ -3,8 +3,8 @@
   "parent_attempt_id": "A0000",
   "accepted_step": null,
   "label": "Amortized KV cache append with bounded spare capacity",
-  "status": null,
-  "phase": "investigating_small_batch_regression",
+  "status": "rejected",
+  "phase": "verdict",
   "candidate_sha": "d2a0c1745f3b35f9949eb7c06eedf5763646bebf",
   "parent_sha": "f87a7e6b6d8e7f5df1894890d23ddd9820c5a0ef",
   "hypothesis": "Primary decode repeatedly copies the full history via 48 torch.cat calls. Append new K/V into reusable capacity without changing stored values, attention scope, precision or offload placement.",
@@ -18,7 +18,8 @@
   },
   "performance": {
     "screening": "screening-summary.json",
-    "formal": "confirmation-summary.json"
+    "formal": "confirmation-summary.json",
+    "small_batch": "small-batch-summary.json"
   },
   "risks": [
     "Spare cache storage raises GPU memory; record backing capacity and peaks.",
@@ -34,7 +35,7 @@
   },
   "development_failure": "Initial capacity test failed after large rollback: 384-slot buffer retained for 129 tokens. Fixed reuse condition to require spare capacity <128; original log retained. Numerical comparisons passed.",
   "implementation_sha": "2b85165ff27b4edf6b41e065ac20aee127a113e6",
-  "next_action": "R07 small-batch confirmation: reuse R06 first pair and add two alternating independent pairs for each folded placement, 10/10/3. Reject/record tradeoff if regression repeats; no model code changes yet.",
+  "next_action": "Commit evidence, revert model implementation, then register A0002 for bounded KV reuse with a batch1 concatenation path.",
   "confirmation_plan": "run_confirmation.py: 24 processes, 3 alternating pairs per placement/mode; 10/10/3; predeclared 95% paired-log Student-t intervals; expected 8-12 minutes.",
   "confirmation_outcome": {
     "status": "passed_primary_confirmation",
@@ -58,6 +59,13 @@
     "reused_processes": 8,
     "candidate_commit": "935f5bd7d2505b66f45aa7a25c2ffd30a029b6b7",
     "accepted": false,
-    "status": "interrupted_to_investigate"
+    "status": "interrupted_then_candidate_rejected"
+  },
+  "reason": "Primary decode improves about2x but full-validation batch1 exposes a confirmed resident decode regression (paired geometric latency +4.96%, speedup95% CI0.9222-0.9842). Offload batch1 is slower in all three pairs but its wide interval crosses1; classify it within_noise, not a confirmed regression. Reject this unconditional append policy as a scaling tradeoff and investigate shape-selective reuse.",
+  "reproducible_patch": "candidate-model.patch",
+  "not_run": {
+    "remaining_matrix": "69 pending points intentionally not launched after small-batch regression signal; one active point interrupted",
+    "generation_performance": "not reached before regression investigation; candidate rejected",
+    "full_acceptance": "not met"
   }
 }

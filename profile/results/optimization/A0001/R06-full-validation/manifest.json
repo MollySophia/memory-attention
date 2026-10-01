@@ -2057,7 +2057,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -2106,7 +2106,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J14-baseline-prefill-ma_gpu-b4-l2048.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J14-baseline-prefill-ma_gpu-b4-l2048.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J14-baseline-prefill-ma_gpu-b4-l2048.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "prefill",
@@ -2125,7 +2126,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -2174,7 +2175,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J15-baseline-prefill-ma_gpu_unfolded-b4-l2048.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J15-baseline-prefill-ma_gpu_unfolded-b4-l2048.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J15-baseline-prefill-ma_gpu_unfolded-b4-l2048.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "prefill",
@@ -2193,7 +2195,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -2244,7 +2246,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J15-candidate-prefill-ma_gpu_unfolded-b4-l2048.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J15-candidate-prefill-ma_gpu_unfolded-b4-l2048.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J15-candidate-prefill-ma_gpu_unfolded-b4-l2048.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "decode",
@@ -2263,7 +2266,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -2314,7 +2317,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J16-candidate-decode-ma_offload-b4-l2048.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J16-candidate-decode-ma_offload-b4-l2048.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J16-candidate-decode-ma_offload-b4-l2048.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "decode",
@@ -2333,7 +2337,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -2382,7 +2386,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J16-baseline-decode-ma_offload-b4-l2048.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J16-baseline-decode-ma_offload-b4-l2048.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J16-baseline-decode-ma_offload-b4-l2048.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "decode",
@@ -2401,7 +2406,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -2450,7 +2455,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J17-baseline-decode-ma_gpu-b4-l2048.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J17-baseline-decode-ma_gpu-b4-l2048.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J17-baseline-decode-ma_gpu-b4-l2048.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "decode",
@@ -2469,7 +2475,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -2520,7 +2526,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J17-candidate-decode-ma_gpu-b4-l2048.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J17-candidate-decode-ma_gpu-b4-l2048.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J17-candidate-decode-ma_gpu-b4-l2048.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "decode",
@@ -2539,7 +2546,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -2590,7 +2597,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J18-candidate-decode-ma_gpu_unfolded-b4-l2048.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J18-candidate-decode-ma_gpu_unfolded-b4-l2048.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J18-candidate-decode-ma_gpu_unfolded-b4-l2048.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "decode",
@@ -2609,7 +2617,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -2658,7 +2666,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J18-baseline-decode-ma_gpu_unfolded-b4-l2048.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J18-baseline-decode-ma_gpu_unfolded-b4-l2048.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J18-baseline-decode-ma_gpu_unfolded-b4-l2048.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "prefill",
@@ -2677,7 +2686,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -2726,7 +2735,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J19-baseline-prefill-ma_offload-b16-l2048.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J19-baseline-prefill-ma_offload-b16-l2048.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J19-baseline-prefill-ma_offload-b16-l2048.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "prefill",
@@ -2745,7 +2755,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -2796,7 +2806,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J19-candidate-prefill-ma_offload-b16-l2048.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J19-candidate-prefill-ma_offload-b16-l2048.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J19-candidate-prefill-ma_offload-b16-l2048.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "prefill",
@@ -2815,7 +2826,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -2866,7 +2877,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J20-candidate-prefill-ma_gpu-b16-l2048.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J20-candidate-prefill-ma_gpu-b16-l2048.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J20-candidate-prefill-ma_gpu-b16-l2048.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "prefill",
@@ -2885,7 +2897,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -2934,7 +2946,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J20-baseline-prefill-ma_gpu-b16-l2048.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J20-baseline-prefill-ma_gpu-b16-l2048.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J20-baseline-prefill-ma_gpu-b16-l2048.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "prefill",
@@ -2953,7 +2966,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -3002,7 +3015,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J21-baseline-prefill-ma_gpu_unfolded-b16-l2048.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J21-baseline-prefill-ma_gpu_unfolded-b16-l2048.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J21-baseline-prefill-ma_gpu_unfolded-b16-l2048.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "prefill",
@@ -3021,7 +3035,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -3072,7 +3086,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J21-candidate-prefill-ma_gpu_unfolded-b16-l2048.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J21-candidate-prefill-ma_gpu_unfolded-b16-l2048.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J21-candidate-prefill-ma_gpu_unfolded-b16-l2048.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "decode",
@@ -3091,7 +3106,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -3142,7 +3157,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J22-candidate-decode-ma_offload-b16-l2048.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J22-candidate-decode-ma_offload-b16-l2048.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J22-candidate-decode-ma_offload-b16-l2048.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "decode",
@@ -3161,7 +3177,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -3210,7 +3226,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J22-baseline-decode-ma_offload-b16-l2048.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J22-baseline-decode-ma_offload-b16-l2048.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J22-baseline-decode-ma_offload-b16-l2048.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "decode",
@@ -3229,7 +3246,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -3278,7 +3295,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J23-baseline-decode-ma_gpu-b16-l2048.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J23-baseline-decode-ma_gpu-b16-l2048.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J23-baseline-decode-ma_gpu-b16-l2048.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "decode",
@@ -3297,7 +3315,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -3348,7 +3366,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J23-candidate-decode-ma_gpu-b16-l2048.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J23-candidate-decode-ma_gpu-b16-l2048.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J23-candidate-decode-ma_gpu-b16-l2048.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "decode",
@@ -3367,7 +3386,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -3418,7 +3437,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J24-candidate-decode-ma_gpu_unfolded-b16-l2048.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J24-candidate-decode-ma_gpu_unfolded-b16-l2048.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J24-candidate-decode-ma_gpu_unfolded-b16-l2048.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "decode",
@@ -3437,7 +3457,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -3486,7 +3506,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J24-baseline-decode-ma_gpu_unfolded-b16-l2048.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J24-baseline-decode-ma_gpu_unfolded-b16-l2048.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J24-baseline-decode-ma_gpu_unfolded-b16-l2048.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "prefill",
@@ -3505,7 +3526,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -3554,7 +3575,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J25-baseline-prefill-ma_offload-b8-l512.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J25-baseline-prefill-ma_offload-b8-l512.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J25-baseline-prefill-ma_offload-b8-l512.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "prefill",
@@ -3573,7 +3595,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -3624,7 +3646,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J25-candidate-prefill-ma_offload-b8-l512.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J25-candidate-prefill-ma_offload-b8-l512.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J25-candidate-prefill-ma_offload-b8-l512.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "prefill",
@@ -3643,7 +3666,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -3694,7 +3717,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J26-candidate-prefill-ma_gpu-b8-l512.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J26-candidate-prefill-ma_gpu-b8-l512.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J26-candidate-prefill-ma_gpu-b8-l512.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "prefill",
@@ -3713,7 +3737,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -3762,7 +3786,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J26-baseline-prefill-ma_gpu-b8-l512.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J26-baseline-prefill-ma_gpu-b8-l512.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J26-baseline-prefill-ma_gpu-b8-l512.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "prefill",
@@ -3781,7 +3806,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -3830,7 +3855,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J27-baseline-prefill-ma_gpu_unfolded-b8-l512.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J27-baseline-prefill-ma_gpu_unfolded-b8-l512.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J27-baseline-prefill-ma_gpu_unfolded-b8-l512.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "prefill",
@@ -3849,7 +3875,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -3900,7 +3926,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J27-candidate-prefill-ma_gpu_unfolded-b8-l512.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J27-candidate-prefill-ma_gpu_unfolded-b8-l512.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J27-candidate-prefill-ma_gpu_unfolded-b8-l512.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "decode",
@@ -3919,7 +3946,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -3970,7 +3997,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J28-candidate-decode-ma_offload-b8-l512.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J28-candidate-decode-ma_offload-b8-l512.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J28-candidate-decode-ma_offload-b8-l512.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "decode",
@@ -3989,7 +4017,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -4038,7 +4066,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J28-baseline-decode-ma_offload-b8-l512.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J28-baseline-decode-ma_offload-b8-l512.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J28-baseline-decode-ma_offload-b8-l512.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "decode",
@@ -4057,7 +4086,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -4106,7 +4135,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J29-baseline-decode-ma_gpu-b8-l512.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J29-baseline-decode-ma_gpu-b8-l512.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J29-baseline-decode-ma_gpu-b8-l512.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "decode",
@@ -4125,7 +4155,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -4176,7 +4206,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J29-candidate-decode-ma_gpu-b8-l512.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J29-candidate-decode-ma_gpu-b8-l512.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J29-candidate-decode-ma_gpu-b8-l512.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "decode",
@@ -4195,7 +4226,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -4246,7 +4277,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J30-candidate-decode-ma_gpu_unfolded-b8-l512.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J30-candidate-decode-ma_gpu_unfolded-b8-l512.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J30-candidate-decode-ma_gpu_unfolded-b8-l512.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "decode",
@@ -4265,7 +4297,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -4314,7 +4346,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J30-baseline-decode-ma_gpu_unfolded-b8-l512.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J30-baseline-decode-ma_gpu_unfolded-b8-l512.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J30-baseline-decode-ma_gpu_unfolded-b8-l512.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "prefill",
@@ -4333,7 +4366,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -4382,7 +4415,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J31-baseline-prefill-ma_offload-b8-l4096.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J31-baseline-prefill-ma_offload-b8-l4096.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J31-baseline-prefill-ma_offload-b8-l4096.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "prefill",
@@ -4401,7 +4435,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -4452,7 +4486,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J31-candidate-prefill-ma_offload-b8-l4096.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J31-candidate-prefill-ma_offload-b8-l4096.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J31-candidate-prefill-ma_offload-b8-l4096.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "prefill",
@@ -4471,7 +4506,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -4522,7 +4557,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J32-candidate-prefill-ma_gpu-b8-l4096.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J32-candidate-prefill-ma_gpu-b8-l4096.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J32-candidate-prefill-ma_gpu-b8-l4096.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "prefill",
@@ -4541,7 +4577,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -4590,7 +4626,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J32-baseline-prefill-ma_gpu-b8-l4096.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J32-baseline-prefill-ma_gpu-b8-l4096.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J32-baseline-prefill-ma_gpu-b8-l4096.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "prefill",
@@ -4609,7 +4646,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -4658,7 +4695,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J33-baseline-prefill-ma_gpu_unfolded-b8-l4096.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J33-baseline-prefill-ma_gpu_unfolded-b8-l4096.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J33-baseline-prefill-ma_gpu_unfolded-b8-l4096.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "prefill",
@@ -4677,7 +4715,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -4728,7 +4766,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J33-candidate-prefill-ma_gpu_unfolded-b8-l4096.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J33-candidate-prefill-ma_gpu_unfolded-b8-l4096.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J33-candidate-prefill-ma_gpu_unfolded-b8-l4096.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "decode",
@@ -4747,7 +4786,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -4798,7 +4837,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J34-candidate-decode-ma_offload-b8-l4096.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J34-candidate-decode-ma_offload-b8-l4096.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J34-candidate-decode-ma_offload-b8-l4096.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "decode",
@@ -4817,7 +4857,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -4866,7 +4906,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J34-baseline-decode-ma_offload-b8-l4096.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J34-baseline-decode-ma_offload-b8-l4096.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J34-baseline-decode-ma_offload-b8-l4096.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "decode",
@@ -4885,7 +4926,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -4934,7 +4975,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J35-baseline-decode-ma_gpu-b8-l4096.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J35-baseline-decode-ma_gpu-b8-l4096.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J35-baseline-decode-ma_gpu-b8-l4096.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "decode",
@@ -4953,7 +4995,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -5004,7 +5046,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J35-candidate-decode-ma_gpu-b8-l4096.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J35-candidate-decode-ma_gpu-b8-l4096.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J35-candidate-decode-ma_gpu-b8-l4096.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "decode",
@@ -5023,7 +5066,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -5074,7 +5117,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J36-candidate-decode-ma_gpu_unfolded-b8-l4096.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J36-candidate-decode-ma_gpu_unfolded-b8-l4096.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J36-candidate-decode-ma_gpu_unfolded-b8-l4096.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "decode",
@@ -5093,7 +5137,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -5142,7 +5186,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J36-baseline-decode-ma_gpu_unfolded-b8-l4096.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J36-baseline-decode-ma_gpu_unfolded-b8-l4096.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J36-baseline-decode-ma_gpu_unfolded-b8-l4096.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "prefill",
@@ -5161,7 +5206,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -5210,7 +5255,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J37-baseline-prefill-ma_offload-b8-l8192.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J37-baseline-prefill-ma_offload-b8-l8192.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J37-baseline-prefill-ma_offload-b8-l8192.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "prefill",
@@ -5229,7 +5275,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -5280,7 +5326,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J37-candidate-prefill-ma_offload-b8-l8192.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J37-candidate-prefill-ma_offload-b8-l8192.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J37-candidate-prefill-ma_offload-b8-l8192.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "prefill",
@@ -5299,7 +5346,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -5350,7 +5397,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J38-candidate-prefill-ma_gpu-b8-l8192.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J38-candidate-prefill-ma_gpu-b8-l8192.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J38-candidate-prefill-ma_gpu-b8-l8192.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "prefill",
@@ -5369,7 +5417,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -5418,7 +5466,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J38-baseline-prefill-ma_gpu-b8-l8192.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J38-baseline-prefill-ma_gpu-b8-l8192.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J38-baseline-prefill-ma_gpu-b8-l8192.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "prefill",
@@ -5437,7 +5486,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -5486,7 +5535,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J39-baseline-prefill-ma_gpu_unfolded-b8-l8192.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J39-baseline-prefill-ma_gpu_unfolded-b8-l8192.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J39-baseline-prefill-ma_gpu_unfolded-b8-l8192.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "prefill",
@@ -5505,7 +5555,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -5556,7 +5606,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J39-candidate-prefill-ma_gpu_unfolded-b8-l8192.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J39-candidate-prefill-ma_gpu_unfolded-b8-l8192.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J39-candidate-prefill-ma_gpu_unfolded-b8-l8192.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "decode",
@@ -5575,7 +5626,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -5626,7 +5677,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J40-candidate-decode-ma_offload-b8-l8192.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J40-candidate-decode-ma_offload-b8-l8192.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J40-candidate-decode-ma_offload-b8-l8192.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "decode",
@@ -5645,7 +5697,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -5694,7 +5746,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J40-baseline-decode-ma_offload-b8-l8192.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J40-baseline-decode-ma_offload-b8-l8192.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J40-baseline-decode-ma_offload-b8-l8192.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "decode",
@@ -5713,7 +5766,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -5762,7 +5815,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J41-baseline-decode-ma_gpu-b8-l8192.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J41-baseline-decode-ma_gpu-b8-l8192.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J41-baseline-decode-ma_gpu-b8-l8192.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "decode",
@@ -5781,7 +5835,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -5832,7 +5886,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J41-candidate-decode-ma_gpu-b8-l8192.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J41-candidate-decode-ma_gpu-b8-l8192.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J41-candidate-decode-ma_gpu-b8-l8192.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "decode",
@@ -5851,7 +5906,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -5902,7 +5957,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J42-candidate-decode-ma_gpu_unfolded-b8-l8192.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J42-candidate-decode-ma_gpu_unfolded-b8-l8192.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J42-candidate-decode-ma_gpu_unfolded-b8-l8192.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "decode",
@@ -5921,7 +5977,7 @@
         "rounds": 3,
         "sampling_unit": "model_call"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -5970,7 +6026,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J42-baseline-decode-ma_gpu_unfolded-b8-l8192.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J42-baseline-decode-ma_gpu_unfolded-b8-l8192.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J42-baseline-decode-ma_gpu_unfolded-b8-l8192.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "generation",
@@ -5989,7 +6046,7 @@
         "rounds": 3,
         "sampling_unit": "trajectory"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -6038,7 +6095,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J43-baseline-generation-ma_offload-b1-l2048.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J43-baseline-generation-ma_offload-b1-l2048.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J43-baseline-generation-ma_offload-b1-l2048.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "generation",
@@ -6057,7 +6115,7 @@
         "rounds": 3,
         "sampling_unit": "trajectory"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -6108,7 +6166,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J43-candidate-generation-ma_offload-b1-l2048.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J43-candidate-generation-ma_offload-b1-l2048.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J43-candidate-generation-ma_offload-b1-l2048.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "generation",
@@ -6127,7 +6186,7 @@
         "rounds": 3,
         "sampling_unit": "trajectory"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -6178,7 +6237,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J44-candidate-generation-ma_gpu-b1-l2048.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J44-candidate-generation-ma_gpu-b1-l2048.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J44-candidate-generation-ma_gpu-b1-l2048.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "generation",
@@ -6197,7 +6257,7 @@
         "rounds": 3,
         "sampling_unit": "trajectory"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -6246,7 +6306,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J44-baseline-generation-ma_gpu-b1-l2048.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J44-baseline-generation-ma_gpu-b1-l2048.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J44-baseline-generation-ma_gpu-b1-l2048.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "generation",
@@ -6265,7 +6326,7 @@
         "rounds": 3,
         "sampling_unit": "trajectory"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -6314,7 +6375,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J45-baseline-generation-ma_gpu_unfolded-b1-l2048.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J45-baseline-generation-ma_gpu_unfolded-b1-l2048.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J45-baseline-generation-ma_gpu_unfolded-b1-l2048.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "generation",
@@ -6333,7 +6395,7 @@
         "rounds": 3,
         "sampling_unit": "trajectory"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -6384,7 +6446,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J45-candidate-generation-ma_gpu_unfolded-b1-l2048.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J45-candidate-generation-ma_gpu_unfolded-b1-l2048.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J45-candidate-generation-ma_gpu_unfolded-b1-l2048.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "generation",
@@ -6403,7 +6466,7 @@
         "rounds": 3,
         "sampling_unit": "trajectory"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -6454,7 +6517,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J46-candidate-generation-ma_offload-b8-l2048.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J46-candidate-generation-ma_offload-b8-l2048.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J46-candidate-generation-ma_offload-b8-l2048.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "generation",
@@ -6473,7 +6537,7 @@
         "rounds": 3,
         "sampling_unit": "trajectory"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -6522,7 +6586,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J46-baseline-generation-ma_offload-b8-l2048.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J46-baseline-generation-ma_offload-b8-l2048.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J46-baseline-generation-ma_offload-b8-l2048.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "generation",
@@ -6541,7 +6606,7 @@
         "rounds": 3,
         "sampling_unit": "trajectory"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -6590,7 +6655,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J47-baseline-generation-ma_gpu-b8-l2048.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J47-baseline-generation-ma_gpu-b8-l2048.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J47-baseline-generation-ma_gpu-b8-l2048.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "generation",
@@ -6609,7 +6675,7 @@
         "rounds": 3,
         "sampling_unit": "trajectory"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -6660,7 +6726,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J47-candidate-generation-ma_gpu-b8-l2048.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J47-candidate-generation-ma_gpu-b8-l2048.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J47-candidate-generation-ma_gpu-b8-l2048.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "generation",
@@ -6679,7 +6746,7 @@
         "rounds": 3,
         "sampling_unit": "trajectory"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/bench_fla.py",
@@ -6730,7 +6797,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J48-candidate-generation-ma_gpu_unfolded-b8-l2048.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J48-candidate-generation-ma_gpu_unfolded-b8-l2048.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J48-candidate-generation-ma_gpu_unfolded-b8-l2048.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     },
     {
       "mode": "generation",
@@ -6749,7 +6817,7 @@
         "rounds": 3,
         "sampling_unit": "trajectory"
       },
-      "status": "pending",
+      "status": "not_run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/baseline-paper-001/profile/bench_fla.py",
@@ -6798,7 +6866,8 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J48-baseline-generation-ma_gpu_unfolded-b8-l2048.json"
       ],
-      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J48-baseline-generation-ma_gpu_unfolded-b8-l2048.json"
+      "result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0001/R06-full-validation/J48-baseline-generation-ma_gpu_unfolded-b8-l2048.json",
+      "reason": "Candidate rejected after small-batch regression investigation; no need to complete its acceptance matrix."
     }
   ],
   "new_processes": 88,
