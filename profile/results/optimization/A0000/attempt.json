@@ -1,0 +1,21 @@
+{
+  "attempt_id": "A0000",
+  "parent_attempt_id": null,
+  "accepted_step": 0,
+  "label": "Frozen baseline protocol preparation",
+  "phase": "protocol_preparation",
+  "status": null,
+  "performance": null,
+  "parent_sha": "81684d34e44db04a0511698081cab336abf4a60d",
+  "candidate_sha": null,
+  "reason": "Baseline timing unavailable until protocol, memory reporting and correctness coverage are complete.",
+  "remaining": [
+    "memory and environment reporting",
+    "growing-cache workload and correctness",
+    "freeze protocol and candidate SHA",
+    "baseline full matrix"
+  ],
+  "preparation_sha": "9cf8a2251ff63cc7180e869a1468a1dd8b7b18ea",
+  "original_protocol": "historical_full_logits_no_cache; fixed_context_v2_rollback_excluded",
+  "candidate_protocol": "paper_v1_draft (not frozen)"
+}

@@ -1,0 +1,19 @@
+{
+  "source_sha": "9cf8a2251ff63cc7180e869a1468a1dd8b7b18ea",
+  "phase": "protocol_preparation",
+  "commands": [
+    "/home/molly/miniconda3/envs/fla-bench/bin/python -m pytest -q tests/test_decode_benchmark.py tests/test_memory_offload_regressions.py",
+    "/home/molly/miniconda3/envs/fla-bench/bin/python profile/test_memory_offload.py"
+  ],
+  "pytest": "13 passed",
+  "standalone_gate": "PASS",
+  "initial_test_failure": "New KV comparison used legacy .states; changed to public iteration. Full failure log retained.",
+  "performance": null,
+  "limitations": [
+    "No baseline timing",
+    "Protocol not frozen",
+    "Memory/environment reporting incomplete",
+    "Growing-cache validation incomplete",
+    "No primary-shape validation"
+  ]
+}

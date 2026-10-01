@@ -10,8 +10,8 @@ step, newest last. Each entry must be reproducible from the stated commit.
   different `torch` / `flash_attn` / GPU rows.
 - **prefill / decode** — median ms at 24 layers / hidden 2048 / 32 heads /
   batch 8 / seq 2048, BF16, against the `ma_gpu` reference (1.00x).
-- **spread** — (max−min)/mean across the 5 per-round means. This is the noise
-  floor. A change smaller than the spread is not a result.
+- **spread** — (max−min)/mean across the 5 per-round means. Descriptive
+  variability only; acceptance requires independent paired runs, not a spread threshold.
 - **correctness** — gate status from `profile/test_memory_offload.py`. Prefill,
   decode and left-padded batches, each against the resident folded path.
 
@@ -81,7 +81,7 @@ One per optimization step, newest last. Copy this template:
 **Correctness.** `PASS` / failure, and anything the gate does not cover.
 **Data.** `<output dir>` — prefill median vs baseline, decode median vs
 baseline, spread, GPU parameters.
-**Verdict.** Better / worse / within noise, against the spread column.
+**Verdict.** Accepted / rejected / within_noise, with independent paired evidence.
 ```
 
 ### Decode timing boundary correction — 69d692d (2026-10-01)
@@ -103,3 +103,19 @@ rollback and token selection; they belong to the previous timing protocol.
 Re-measure both baseline and candidate before comparing under the new protocol.
 
 **Verdict.** Measurement correction, not an inference speedup.
+
+### A0000 — baseline protocol preparation (2026-10-01)
+
+Registered before harness edits on `attempts/paper-001`. Parent: `81684d3`.
+No performance measurement yet; status pending, performance unavailable.
+First preparation change separates cached last-token prefill from historical
+full-logits/no-cache prefill and preserves raw samples. This is harness work,
+not a model optimization. Protocol remains unfrozen until all GOAL.md gates
+and reporting requirements are implemented. See `results/optimization/A0000/attempt.json`.
+
+Preparation validation: 13 regression tests and the standalone offload gate
+(commands recorded in `A0000/validation.json`). Initial new test used a
+legacy cache field and failed twice after the logits checks passed; retained
+that output, fixed the test to iterate the public cache interface, and reran.
+No model arithmetic changed. Remaining protocol work is explicitly tracked;
+these tests do not establish a baseline or full primary-shape correctness.

@@ -1,0 +1,82 @@
+
+tests/test_decode_benchmark.py::test_decode_excludes_rollback_and_keeps_context_fixed 
+-------------------------------- live log call ---------------------------------
+INFO     numexpr.utils:utils.py:149 Note: NumExpr detected 32 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+INFO     numexpr.utils:utils.py:162 NumExpr defaulting to 16 threads.
+PASSED                                                                   [  7%]
+tests/test_decode_benchmark.py::test_prefill_scope_and_raw_samples[inference-1-True] PASSED [ 15%]
+tests/test_decode_benchmark.py::test_prefill_scope_and_raw_samples[historical-0-False] PASSED [ 23%]
+tests/test_memory_offload_regressions.py::test_offloaded_hidden_states[True-bulk] PASSED [ 30%]
+tests/test_memory_offload_regressions.py::test_offloaded_hidden_states[True-pipeline] PASSED [ 38%]
+tests/test_memory_offload_regressions.py::test_offloaded_hidden_states[False-bulk] PASSED [ 46%]
+tests/test_memory_offload_regressions.py::test_offloaded_hidden_states[False-pipeline] PASSED [ 53%]
+tests/test_memory_offload_regressions.py::test_fold_close_restores_weights_logits_and_device PASSED [ 61%]
+tests/test_memory_offload_regressions.py::test_each_prefill_case_uses_resident_reference PASSED [ 69%]
+tests/test_memory_offload_regressions.py::test_source_fingerprint_tracks_model_edits_and_ignores_results PASSED [ 76%]
+tests/test_memory_offload_regressions.py::test_resume_reruns_after_dirty_model_edit PASSED [ 84%]
+tests/test_memory_offload_regressions.py::test_cached_prefill_last_token_scope[False] FAILED [ 92%]
+tests/test_memory_offload_regressions.py::test_cached_prefill_last_token_scope[True] FAILED [100%]
+
+=================================== FAILURES ===================================
+_________________ test_cached_prefill_last_token_scope[False] __________________
+
+model = MemoryForCausalLM(
+  (model): MemoryModel(
+    (embeddings): Embedding(128, 128)
+    (layers): ModuleList(
+      (0-2)...rm((128,), eps=1e-06, elementwise_affine=True)
+  )
+  (lm_head): Linear(in_features=128, out_features=128, bias=False)
+)
+offload = False
+
+    @pytest.mark.parametrize('offload', [False, True])
+    def test_cached_prefill_last_token_scope(model, offload):
+        ids = torch.randint(0, 128, (2, 8), device='cuda')
+        if offload:
+            model.enable_memory_offload()
+        else:
+            model.fold_memory_table_on_gpu()
+        full = model(input_ids=ids, use_cache=True, logits_to_keep=0)
+        last = model(input_ids=ids, use_cache=True, logits_to_keep=1)
+        assert last.logits.shape == (2, 1, 128)
+        torch.testing.assert_close(last.logits, full.logits[:, -1:], rtol=0, atol=0)
+        assert last.past_key_values.get_seq_length() == 8
+>       for actual, expected in zip(last.past_key_values.states, full.past_key_values.states):
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'Cache' object has no attribute 'states'
+
+tests/test_memory_offload_regressions.py:171: AttributeError
+__________________ test_cached_prefill_last_token_scope[True] __________________
+
+model = MemoryForCausalLM(
+  (model): MemoryModel(
+    (embeddings): Embedding(128, 128)
+    (layers): ModuleList(
+      (0-2)...rm((128,), eps=1e-06, elementwise_affine=True)
+  )
+  (lm_head): Linear(in_features=128, out_features=128, bias=False)
+)
+offload = True
+
+    @pytest.mark.parametrize('offload', [False, True])
+    def test_cached_prefill_last_token_scope(model, offload):
+        ids = torch.randint(0, 128, (2, 8), device='cuda')
+        if offload:
+            model.enable_memory_offload()
+        else:
+            model.fold_memory_table_on_gpu()
+        full = model(input_ids=ids, use_cache=True, logits_to_keep=0)
+        last = model(input_ids=ids, use_cache=True, logits_to_keep=1)
+        assert last.logits.shape == (2, 1, 128)
+        torch.testing.assert_close(last.logits, full.logits[:, -1:], rtol=0, atol=0)
+        assert last.past_key_values.get_seq_length() == 8
+>       for actual, expected in zip(last.past_key_values.states, full.past_key_values.states):
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'Cache' object has no attribute 'states'
+
+tests/test_memory_offload_regressions.py:171: AttributeError
+=========================== short test summary info ============================
+FAILED tests/test_memory_offload_regressions.py::test_cached_prefill_last_token_scope[False]
+FAILED tests/test_memory_offload_regressions.py::test_cached_prefill_last_token_scope[True]
+========================= 2 failed, 11 passed in 3.20s =========================
