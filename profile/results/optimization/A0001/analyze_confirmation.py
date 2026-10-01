@@ -54,6 +54,11 @@ def main():
                     if k != 'json':
                         assert c['config'][k] == v, (k, v, c['config'].get(k))
                 br, cr = b['results'][0], c['results'][0]
+                for key in ('cpu_parameters', 'gpu_parameters'):
+                    assert br[key] == cr[key], key
+                if variant == 'ma_offload':
+                    assert cr['cpu_parameters'] == 1572864000
+                    assert cr['memory_after']['cpu_table_bytes'] == 3145728000
                 paired.append(dict(pair=pair, baseline_ms=br['median_ms'], candidate_ms=cr['median_ms'],
                                    speedup=br['median_ms']/cr['median_ms'],
                                    baseline_peak_gpu_gib=br['memory_after']['gpu_peak_allocated_bytes']/2**30,
@@ -76,11 +81,9 @@ def main():
                                baseline_offload_saving_gib=gpu['baseline_peak_gpu_gib']-off['baseline_peak_gpu_gib'],
                                candidate_offload_saving_gib=gpu['candidate_peak_gpu_gib']-off['candidate_peak_gpu_gib'],
                                candidate_offload_peak_increase_mib=(off['candidate_peak_gpu_gib']-off['baseline_peak_gpu_gib'])*1024))
-    saving_preserved = all(x['candidate_offload_saving_gib'] > 0 and
-                           x['candidate_offload_saving_gib'] >= x['baseline_offload_saving_gib'] - 1/1024
-                           for x in memory)
-    # Allow one MiB of allocator rounding in the placement saving comparison;
-    # actual change here is only 32 KiB. Report exact differences regardless.
+    # Preserve the actual table placement (asserted above) and a measured GPU
+    # peak saving. Report its exact size/change without a post-hoc tolerance.
+    saving_preserved = all(x['candidate_offload_saving_gib'] > 0 for x in memory)
     primary = {r['mode']:r for r in summaries if r['variant']=='ma_offload'}
     nominee = saving_preserved and primary['decode']['verdict']=='repeatable_improvement' and primary['prefill']['verdict']!='resolved_regression'
     output = dict(stage='confirmation', run=run.name, job_count=len(pids), sample_count=30*len(pids),
