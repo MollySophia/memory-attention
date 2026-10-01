@@ -132,37 +132,6 @@ def rotary_embedding_kernel(
         tl.store(p_y, b_y, mask=mask)
 
 
-@triton.jit(do_not_specialize=['offset'])
-def _memory_rotary_pair_kernel(Q, K, OQ, OK, COS, SIN, offset,
-                               HQ: tl.constexpr, HK: tl.constexpr,
-                               D: tl.constexpr, R: tl.constexpr, BLOCK: tl.constexpr):
-    h, b = tl.program_id(0), tl.program_id(1)
-    if h < HQ:
-        x = Q + (b * HQ + h) * D
-        y = OQ + (b * HQ + h) * D
-    else:
-        x = K + (b * HK + h - HQ) * D
-        y = OK + (b * HK + h - HQ) * D
-    r = tl.arange(0, BLOCK)
-    c = tl.load(COS + offset * R + r, r < R, other=1.0).to(tl.float32)
-    si = tl.load(SIN + offset * R + r, r < R, other=0.0).to(tl.float32)
-    x0 = tl.load(x + r, r < R, other=0.0).to(tl.float32)
-    x1 = tl.load(x + R + r, r < R, other=0.0).to(tl.float32)
-    o0 = x0 * c - x1 * si
-    o1 = x0 * si + x1 * c
-    tl.store(y + r, o0, r < R)
-    tl.store(y + R + r, o1, r < R)
-
-
-def _memory_rotary_pair(q, k, cos, sin, offset):
-    oq, ok = torch.empty_like(q), torch.empty_like(k)
-    with torch.cuda.device(q.device):
-        _memory_rotary_pair_kernel[(q.shape[2] + k.shape[2], q.shape[0])](
-            q, k, oq, ok, cos, sin, offset, q.shape[2], k.shape[2], q.shape[3],
-            cos.shape[1], triton.next_power_of_2(cos.shape[1]), num_warps=4)
-    return oq, ok
-
-
 def rotary_embedding_fwdbwd(
     x: torch.Tensor,
     cos: torch.Tensor,
@@ -475,7 +444,6 @@ class RotaryEmbedding(nn.Module):
         seqlen_offset: int | torch.Tensor = 0,
         cu_seqlens: torch.Tensor | None = None,
         max_seqlen: int | None = None,
-        memory_pair: bool = False,
     ) -> torch.Tensor | tuple[torch.Tensor, torch.Tensor]:
         """
         q: [B, T, H, D]
@@ -491,20 +459,6 @@ class RotaryEmbedding(nn.Module):
             self._update_cos_sin_cache(max_seqlen, device=q.device, dtype=q.dtype)
         elif isinstance(seqlen_offset, int):
             self._update_cos_sin_cache(q.shape[1] + seqlen_offset, device=q.device, dtype=q.dtype)
-        if (memory_pair and torch.is_inference_mode_enabled()
-                and self.scale is None and not self.interleaved and cu_seqlens is None
-                and isinstance(seqlen_offset, int) and seqlen_offset >= 0
-                and q.is_cuda and q.device == k.device
-                and q.ndim == 4 and k.ndim == 4 and q.shape[1] == k.shape[1] == 1
-                and q.shape[0] == k.shape[0] and q.shape[0] > 0
-                and q.shape[2] > 0 and k.shape[2] > 0
-                and 0 < self.dim <= 256 and self.dim % 2 == 0
-                and q.shape[3] == k.shape[3] == self.dim
-                and q.dtype == k.dtype == self._cos_cached.dtype
-                and q.dtype in (torch.float16, torch.bfloat16, torch.float32)
-                and q.is_contiguous() and k.is_contiguous()
-                and seqlen_offset < self._cos_cached.shape[0]):
-            return _memory_rotary_pair(q, k, self._cos_cached, self._sin_cached, seqlen_offset)
         if self.scale is None:
             q = rotary_embedding(
                 q,
