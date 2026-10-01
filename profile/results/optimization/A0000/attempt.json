@@ -8,14 +8,14 @@
   "performance": null,
   "parent_sha": "81684d34e44db04a0511698081cab336abf4a60d",
   "candidate_sha": null,
-  "reason": "Baseline timing unavailable until protocol, memory reporting and correctness coverage are complete.",
+  "reason": "Telemetry, growing generation harness and small-model correctness validated; baseline remains unavailable until protocol freeze and primary-shape gates.",
   "remaining": [
-    "memory and environment reporting",
-    "growing-cache workload and correctness",
+    "primary-shape correctness against folded resident",
+    "OOM/failure recording and frozen matrix driver",
     "freeze protocol and candidate SHA",
     "baseline full matrix"
   ],
-  "preparation_sha": "9cf8a2251ff63cc7180e869a1468a1dd8b7b18ea",
+  "preparation_sha": "e13d2a86dbc98b42ada90ca007dd5edce9ebb7c7",
   "original_protocol": "historical_full_logits_no_cache; fixed_context_v2_rollback_excluded",
   "candidate_protocol": "paper_v1_draft (not frozen)"
 }

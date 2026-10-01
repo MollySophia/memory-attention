@@ -1,0 +1,2 @@
+ma_gpu           generation median=   77.511 ms  min=   77.231  max=   77.791  spread=0.72%  policy=none
+ma_offload       generation median=   89.468 ms  min=   89.352  max=   89.585  spread=0.26%  policy=bulk

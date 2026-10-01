@@ -1,0 +1,29 @@
+
+tests/test_decode_benchmark.py::test_decode_excludes_rollback_and_keeps_context_fixed 
+-------------------------------- live log call ---------------------------------
+INFO     numexpr.utils:utils.py:149 Note: NumExpr detected 32 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+INFO     numexpr.utils:utils.py:162 NumExpr defaulting to 16 threads.
+PASSED                                                                   [  4%]
+tests/test_decode_benchmark.py::test_prefill_scope_and_raw_samples[inference-1-True] PASSED [  9%]
+tests/test_decode_benchmark.py::test_prefill_scope_and_raw_samples[historical-0-False] PASSED [ 13%]
+tests/test_memory_offload_regressions.py::test_offloaded_hidden_states[True-bulk] PASSED [ 18%]
+tests/test_memory_offload_regressions.py::test_offloaded_hidden_states[True-pipeline] PASSED [ 22%]
+tests/test_memory_offload_regressions.py::test_offloaded_hidden_states[False-bulk] PASSED [ 27%]
+tests/test_memory_offload_regressions.py::test_offloaded_hidden_states[False-pipeline] PASSED [ 31%]
+tests/test_memory_offload_regressions.py::test_fold_close_restores_weights_logits_and_device PASSED [ 36%]
+tests/test_memory_offload_regressions.py::test_each_prefill_case_uses_resident_reference PASSED [ 40%]
+tests/test_memory_offload_regressions.py::test_source_fingerprint_tracks_model_edits_and_ignores_results PASSED [ 45%]
+tests/test_memory_offload_regressions.py::test_resume_reruns_after_dirty_model_edit PASSED [ 50%]
+tests/test_memory_offload_regressions.py::test_cached_prefill_last_token_scope[False] PASSED [ 54%]
+tests/test_memory_offload_regressions.py::test_cached_prefill_last_token_scope[True] PASSED [ 59%]
+tests/test_memory_offload_regressions.py::test_growing_cache_128_steps_exact[False-1234-bulk] PASSED [ 63%]
+tests/test_memory_offload_regressions.py::test_growing_cache_128_steps_exact[False-1234-pipeline] PASSED [ 68%]
+tests/test_memory_offload_regressions.py::test_growing_cache_128_steps_exact[False-4321-bulk] PASSED [ 72%]
+tests/test_memory_offload_regressions.py::test_growing_cache_128_steps_exact[False-4321-pipeline] PASSED [ 77%]
+tests/test_memory_offload_regressions.py::test_growing_cache_128_steps_exact[True-1234-bulk] PASSED [ 81%]
+tests/test_memory_offload_regressions.py::test_growing_cache_128_steps_exact[True-1234-pipeline] PASSED [ 86%]
+tests/test_memory_offload_regressions.py::test_growing_cache_128_steps_exact[True-4321-bulk] PASSED [ 90%]
+tests/test_memory_offload_regressions.py::test_growing_cache_128_steps_exact[True-4321-pipeline] PASSED [ 95%]
+tests/test_memory_offload_regressions.py::test_telemetry_counts_all_cached_offloaders_and_snapshot PASSED [100%]
+
+============================== 22 passed in 7.34s ==============================

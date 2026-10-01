@@ -119,3 +119,30 @@ legacy cache field and failed twice after the logits checks passed; retained
 that output, fixed the test to iterate the public cache interface, and reran.
 No model arithmetic changed. Remaining protocol work is explicitly tracked;
 these tests do not establish a baseline or full primary-shape correctness.
+
+### A0000 — telemetry and growing-cache preparation (2026-10-01)
+
+Source: `e13d2a86dbc98b42ada90ca007dd5edce9ebb7c7`. No model implementation changed.
+Added untimed before/after GPU allocation/reservation and measured-region
+peaks, process RSS/high-water (explicitly process-lifetime), raw table snapshots,
+KV backing storage and all cached offloader capacities. Record source hash,
+full commit, source patch, CPU/thread settings and before/after GPU telemetry.
+Decode now preallocates the actual context length even if seq_len differs.
+Outputs remain alive through synchronization; their release is outside timing.
+Added generation timing including prefix plus 128 predetermined GPU-token
+steps; no sampling, fresh cache for each repeated trajectory.
+
+Validation: **23 passed** plus standalone **PASS**. Growing-cache comparisons
+cover two seeds, bulk/pipeline, partial groups and slot reuse, non-unit norm,
+QK normalization/gating, padded and unpadded prefixes. Exact logits, hidden
+states and valid KV agree. Initial full padded-K comparison failed because
+rotary uses empty_like and masks stores at negative padded positions; these
+undefined masked entries are excluded. Unpadded KV remains fully compared.
+Both the failure output and final results are preserved.
+
+Small-model CLI smoke runs exercised all three modes and both placements;
+KV capacities and all cached offloader sums were checked from emitted JSON.
+These 1-warmup/2-sample/2-round smoke runs are **not baseline measurements**
+and support no performance claim. Details: `A0000/telemetry-validation.json`.
+Next: primary-shape correctness, explicit failure/OOM records and frozen
+matrix orchestration, then freeze A0000 and perform formal measurements.

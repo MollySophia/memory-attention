@@ -1,0 +1,2 @@
+ma_gpu           prefill  median=    0.758 ms  min=    0.686  max=    0.830  spread=18.93%  policy=none
+ma_offload       prefill  median=    0.970 ms  min=    0.775  max=    1.165  spread=40.22%  policy=bulk

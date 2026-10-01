@@ -1,0 +1,51 @@
+{
+  "source_sha": "e13d2a86dbc98b42ada90ca007dd5edce9ebb7c7",
+  "pytest": "23 passed",
+  "standalone_gate": "PASS",
+  "smoke_validation": [
+    {
+      "mode": "prefill",
+      "variant": "ma_gpu",
+      "kv_bytes": 49152,
+      "offload_pinned_bytes": 0
+    },
+    {
+      "mode": "prefill",
+      "variant": "ma_offload",
+      "kv_bytes": 49152,
+      "offload_pinned_bytes": 26112
+    },
+    {
+      "mode": "decode",
+      "variant": "ma_gpu",
+      "kv_bytes": 76800,
+      "offload_pinned_bytes": 0
+    },
+    {
+      "mode": "decode",
+      "variant": "ma_offload",
+      "kv_bytes": 76800,
+      "offload_pinned_bytes": 38400
+    },
+    {
+      "mode": "generation",
+      "variant": "ma_gpu",
+      "kv_bytes": 466944,
+      "offload_pinned_bytes": 0
+    },
+    {
+      "mode": "generation",
+      "variant": "ma_offload",
+      "kv_bytes": 466944,
+      "offload_pinned_bytes": 38400
+    }
+  ],
+  "smoke_scope": "3 layers/hidden128/batch2; diagnostic only, not baseline or speedup evidence",
+  "correctness_scope": "128 growing decode steps, bulk/pipeline, seeds1234/4321, QK normalization and gating, non-unit affine, partial groups and slot reuse, padded/unpadded; exact logits/hidden/all valid KV",
+  "padded_kv_limitation": "Rotary apply_rotary_emb allocates empty_like and masks stores for negative positions. Padded K entries are undefined and excluded from valid-cache equality; all unpadded KV, all hidden states and logits compared exactly. Original failures retained.",
+  "commands": [
+    "/home/molly/miniconda3/envs/fla-bench/bin/python -m pytest -q tests/test_decode_benchmark.py tests/test_memory_offload_regressions.py",
+    "/home/molly/miniconda3/envs/fla-bench/bin/python profile/test_memory_offload.py"
+  ],
+  "benchmark_commands": "See command arrays in preparation-smoke/*.json"
+}

@@ -1,0 +1,2 @@
+ma_gpu           decode   median=    0.695 ms  min=    0.653  max=    0.738  spread=12.19%  policy=none
+ma_offload       decode   median=    0.767 ms  min=    0.741  max=    0.793  spread=6.76%  policy=bulk
