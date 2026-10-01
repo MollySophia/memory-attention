@@ -39,9 +39,12 @@
     },
     {
       "requirement": "Repeatable primary improvement without resolved other-primary regression",
-      "state": "pending",
-      "evidence": [],
-      "remaining": "Three independent alternating formal pairs per primary mode/placement; screening cannot substitute."
+      "state": "passed_primary_confirmation",
+      "evidence": [
+        "confirmation-summary.json",
+        "confirmation-audit.txt"
+      ],
+      "remaining": "Full validation and known noisy batch1 evidence still required before final acceptance."
     },
     {
       "requirement": "Complete batch/length matrix and investigate regressions",

@@ -508,3 +508,18 @@ R03 predeclared:24 fresh processes, primary prefill/decode in both placements,
 three alternating pairs,10/10/3; expected8-12 minutes. Primary analysis requires
 unchanged source hashes relative to the batch1 gate. Full validation remains
 conditional on repeatable primary gain and no resolved other-primary regression.
+
+A0002 R03 completed24 processes/720 samples in9.53 minutes. Full
+source/config/import/raw-statistics audit passed; model source matches R02.
+ma_offload prefill: paired geometric speedup1.00037x,95% CI[0.9897555160063687, 1.0111002120462171], within_noise.
+ma_offload decode: paired geometric speedup1.99048x,95% CI[1.8969380855437679, 2.088643745947008], repeatable_improvement.
+ma_gpu prefill: paired geometric speedup1.00028x,95% CI[0.9915624646297904, 1.009075667717301], within_noise.
+ma_gpu decode: paired geometric speedup2.05271x,95% CI[2.0424064037705176, 2.0630746630242935], repeatable_improvement.
+A0002 nominated for full validation; accepted_step remains null. Preserve
+wide batch1 offload uncertainty, do not claim equivalence. Prefill diagnostic
+script prepared with CUDA-event module spans (linear spans nested, not pure
+kernel time); run only after confirmed timing controller exit. Full validation
+controller will reuse current first formal pairs plus unchanged frozen-baseline
+records only when source/counts/scope/recorded environment agree. Never reuse
+A0001 candidate results. Estimate remaining cost from raw baseline latencies
+and recent process setup durations before launching the matrix.

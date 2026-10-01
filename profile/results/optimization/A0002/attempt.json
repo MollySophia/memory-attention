@@ -4,7 +4,7 @@
   "informed_by_attempt": "A0001",
   "accepted_step": null,
   "status": null,
-  "phase": "primary_confirmation_planned",
+  "phase": "nominated_for_full_validation",
   "candidate_sha": "7647da8c431fa4e7bf5800d7556ef2f8f6c171ed",
   "parent_sha": "384aa1a5e644d7ee2fe3fa7cc1a07cd82ca30b17",
   "label": "Bounded KV reuse for multi-item batches with batch1 concatenation",
@@ -18,7 +18,8 @@
   },
   "performance": {
     "screening": "screening-summary.json",
-    "small_batch": "small-batch-summary.json"
+    "small_batch": "small-batch-summary.json",
+    "primary_confirmation": "confirmation-summary.json"
   },
   "risks": [
     "Batch gating may forgo gains at batch1 with very long contexts; no gain claimed there.",
@@ -32,7 +33,25 @@
     "primary": "PASS:296 exact comparisons at batch8/prefix2048 plus3 decode steps"
   },
   "screening_outcome": "Primary offload decode2.029x and short-context decode1.116x provisional speedup. Batch1 offload-2.45% latency, resident+2.08%; unresolved after one short process pair. Prioritize fresh small-batch confirmation before full primary confirmation.",
-  "next_action": "Run24 primary confirmation processes: three alternating pairs per mode and folded placement,10/10/3; require repeatable primary gain and no resolved other-primary regression before full validation.",
+  "next_action": "Complete separate prefill module-stream diagnostic, then run matched full matrix/generation with verified reuse.",
   "small_batch_plan": "12 fresh processes: three alternating baseline/candidate pairs per folded placement,10/10/3;95% paired-log Student-t CI df2. Any upper bound below1 triggers rejection/investigation before primary confirmation.",
-  "small_batch_outcome": "Both folded placements within_noise. Resident paired speedup1.0040x,95% CI[0.9737,1.0353]. Offload1.0112x, wideCI[0.7224,1.4155]; retain all samples and do not claim equivalence. No resolved regression under predeclared criterion."
+  "small_batch_outcome": "Both folded placements within_noise. Resident paired speedup1.0040x,95% CI[0.9737,1.0353]. Offload1.0112x, wideCI[0.7224,1.4155]; retain all samples and do not claim equivalence. No resolved regression under predeclared criterion.",
+  "primary_confirmation": {
+    "run": "R03-confirmation",
+    "controller_pid": 1532130,
+    "log": "R03-controller.log",
+    "candidate_commit": "923fbdd68cba0db535a24dc1120c3456c657bc06"
+  },
+  "confirmation_outcome": {
+    "summary": "confirmation-summary.json",
+    "accepted": false,
+    "nominated_for_full_validation": true,
+    "offload_decode_speedup": 1.9904843302120419,
+    "offload_decode_ci95": [
+      1.8969380855437679,
+      2.088643745947008
+    ],
+    "prefill": "within_noise in both placements",
+    "memory": "preserved CPU table placement and positive offload GPU peak saving; full-matrix check pending"
+  }
 }
