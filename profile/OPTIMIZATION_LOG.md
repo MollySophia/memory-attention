@@ -464,3 +464,12 @@ before modifying model code. Restore independent ownership/growing gates and
 add an explicit batch1 fallback/rollback gate. Screening includes primary plus
 batch1/context2048 and batch8/context512 decode before another full sweep.
 See A0002/attempt.json; no candidate implementation or performance yet.
+
+A0002 implementation complete: restore bounded KV reuse and opt in only for
+batch_size>1. Batch1 uses original concatenation; inference/training/window
+and legacy behavior preserved.41 regression tests passed, including new exact
+batch1 fallback checks across repeated decoding, rollback and request shape
+switches; helper is mocked to raise if batch1 enters it. Standalone gate PASS,
+worst difference0. Screening controller includes16 matched processes at primary,
+batch1/context2048 decode and batch8/context512 decode (3/5/1), estimated5-7min.
+No performance measurements yet; commit candidate before timing.

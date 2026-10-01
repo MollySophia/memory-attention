@@ -176,7 +176,7 @@ class MemoryAttention(nn.Module):
                 attn_state=(k.flatten(-2, -1), v.flatten(-2, -1)),
                 layer_idx=self.layer_idx,
                 offset=q_len,
-                cache_kwargs=dict(window_size=self.window_size),
+                cache_kwargs=dict(window_size=self.window_size, memory_append=batch_size > 1),
             )['attn_state']
             if cache_has_content:
                 k, v = k_cached, v_cached

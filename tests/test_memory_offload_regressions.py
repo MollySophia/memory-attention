@@ -242,3 +242,44 @@ def test_telemetry_counts_all_cached_offloaders_and_snapshot(model):
     assert snap['raw_table_snapshot_bytes'] == 3*128*128*2
     assert snap['cpu_table_bytes'] == 3*128*128*2
     assert snap['host_rss_bytes'] > 0
+
+
+@pytest.mark.parametrize('policy', ['bulk', 'pipeline'])
+def test_batch1_concat_path_exact_through_rollback_and_shape_switch(model, policy):
+    from fla.models.utils import FLALayer
+    from unittest.mock import patch
+    frozen = load_script('frozen_cache_reference')
+    bench = load_script('bench_fla')
+    model.config.memory_offload_policy = policy
+    with torch.inference_mode():
+        torch.manual_seed(12345)
+        # Switch offload buffer shapes on one model; each request has its own KV.
+        cases = [(torch.randint(0,128,(1,n),device='cuda'),
+                  torch.randint(0,128,(6,1,1),device='cuda')) for n in (8,16,8)]
+        def capture():
+            values=[]
+            for prefix,tokens in cases:
+                out=model(input_ids=prefix,use_cache=True,logits_to_keep=1,output_hidden_states=True)
+                cache=out.past_key_values
+                for i,ids in enumerate(tokens):
+                    if i==3:
+                        bench.rollback(cache,prefix.shape[1])
+                    out=model(input_ids=ids,past_key_values=cache,use_cache=True,
+                              logits_to_keep=1,output_hidden_states=True)
+                    cache=out.past_key_values
+                    values.append([out.logits.cpu().clone(),
+                                   *[h.cpu().clone() for h in out.hidden_states],
+                                   *[t.cpu().clone() for state in cache for t in state['attn_state']]])
+                    assert all(layer._memory_kv_buffers is None for layer in cache.layers)
+            return values
+        model.fold_memory_table_on_gpu()
+        with frozen.frozen_cache_updates():
+            reference=capture()
+        model.close_memory_offload()
+        model.enable_memory_offload()
+        # Fallback must avoid the append helper entirely, not just match values.
+        with patch.object(FLALayer,'_append_memory_kv',side_effect=AssertionError('batch1 must concatenate')):
+            actual=capture()
+        for got,expected in zip(actual,reference):
+            for a,b in zip(got,expected):
+                torch.testing.assert_close(a,b,rtol=0,atol=0)
