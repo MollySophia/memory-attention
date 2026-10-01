@@ -207,3 +207,12 @@ Four exact commands are stored in `profiling-plan.json` and must run serially.
 Static observation: both supported KV cache implementations call torch.cat
 for each decode layer. This is a profiling hypothesis, not a demonstrated
 bottleneck or an accepted optimization. No algorithmic candidate was changed.
+
+### A0000 — continued verified matrix wait (2026-10-01)
+
+Controller PID 1432876 and active child verified live repeatedly; no restart.
+Checkpoint counts: {"completed": 20, "running": 1, "pending": 27}. All completed raw records pass
+frozen-protocol checks. Batch16/length2048 ma_offload prefill median of round
+means is 427.7873 ms, peak allocated GPU 10.5274 GiB. This is baseline scaling
+data, not a candidate gain. New raw data and R01-checkpoint-03.json preserved.
+Profiling remains deferred until matrix completion.
