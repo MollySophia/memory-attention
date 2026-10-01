@@ -3,7 +3,7 @@
   "parent_attempt_id": "A0002",
   "accepted_step": null,
   "status": null,
-  "phase": "registered",
+  "phase": "screening_prepared",
   "label": "Defer PendingM acquisition until Q/K normalization and rotary are queued",
   "parent_sha": "1b74d96ad2a5d80b07905154c0c05ee877a40b72",
   "incumbent_sha": "ec6384d2e9081ecbb2926fe8a6193bc48ea650a3",
@@ -20,5 +20,11 @@
   ],
   "correctness_plan": "Bit-exact logits/hidden/KV against frozen A0002 attention forward; batch1/2,bulk/pipeline,GQA,padding,growing128,group2depth1,plus existing gates and primary gate if screened promising.",
   "measurement_plan": "Initial8 fresh processes: primary prefill/decode,offload/resident,one alternating incumbent/candidate pair under3/5/1; roughly3min from19ssetup/process plusmodelwork. Promising primary effects require>=3 fresh independent pairs10/10/3. No acceptance from screen.",
-  "next_action": "Implement one scheduling change and commit before correctness/timing."
+  "next_action": "Run8 fresh primary screening processes against accepted A0002; no accepted gain claim.",
+  "candidate_sha": "feb2c660744b94768f5635772722181685cff1b0",
+  "correctness": {
+    "pytest": "53 passed;8 independent frozen-forward growing128 cases plus45existing gates",
+    "standalone": "correctness-standalone.txt",
+    "padding_initial_failure": "padding-audit.md; uninitialized masked keys fail even frozen self-comparison; zero tolerance retained for defined scope"
+  }
 }
