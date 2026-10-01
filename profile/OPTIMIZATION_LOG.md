@@ -263,3 +263,12 @@ ratios describe baseline placement, not paired optimization gains. Inspect
 bulk gather/transfer behavior for these shapes in subsequent profiling.
 Generation is still running; controller and current child verified live.
 No model change or extra GPU job was introduced.
+
+### A0000 — batch1 generation checkpoint (2026-10-01)
+
+Counts: {"completed": 45, "running": 1, "pending": 2}. Completed generation raw samples validate;
+KV storage matches prefix2048 + 128 decode tokens. Batch1 offload generation
+median of round means is 657.4702 ms; folded resident is 598.0860 ms.
+Both include prefix and exclude sampling; these are baseline placement data,
+not paired optimization gains. Raw files and live process observation saved
+in R01 and `R01-checkpoint-08.json`. Remaining jobs continue without restart.
