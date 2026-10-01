@@ -325,3 +325,33 @@ agreement, timing boundaries, raw-sample integrity and old/new report schemas.
 Re-audited all 48 A0000 jobs / 7200 samples unchanged. Evidence and plan previews:
 `profile/results/protocol/staged-sampling/`. No performance rerun or A0001 model
 candidate was started by this tooling update.
+
+### A0000 diagnostics — event fallback resolves KV-copy hypothesis (2026-10-01)
+
+Nsight child was blocked on pipe read with a zombie `file` child before model
+capture; suspected numexpr platform.architecture import probe. Preserved process
+evidence, intentionally terminated the failed diagnostic child, then killed
+remaining own controller/agent after TERM failed. This was a diagnosed stalled
+capture, not a benchmark timeout/restart. Kineto minimal matmul probes with
+bundled and toolkit CUPTI also returned no GPU events (logs preserved).
+
+Committed diagnostic CUDA-event backend: scoped torch.cat instrumentation,
+restored afterward, no model arithmetic change. Primary offload decode reports
+48 cats, 3,222,798,336 output bytes, 5.9039 ms summed cat stream spans versus
+11.2209 ms total stream span. Intervals include instrumentation/CPU launch gaps;
+not pure kernel times or headline performance. Resident diagnostic is running.
+
+### A0001 — reusable KV append capacity registered (2026-10-01)
+
+Parent A0000. Hypothesis: avoid full-history copies on each decode by appending
+new K/V into reusable bounded capacity, lazily allocated on decode. Register
+before implementation; candidate SHA and performance unavailable until code and
+gates are ready. All numeric comparisons remain exact against an independent
+concatenating reference; preserve training/sliding-window behavior and report
+spare-capacity memory. Details: `A0001/attempt.json`. Start with staged screening,
+then independent confirmation/full validation only if warranted.
+
+Resident decode event diagnostic completed: 48 cats, same 3,222,798,336
+output bytes, 5.9004 ms summed cat spans / 11.1230 ms total. This corroborates
+a model-wide copy cost rather than offload-only transfer. All trace/event
+artifacts and failures retained; no candidate timing claim yet.

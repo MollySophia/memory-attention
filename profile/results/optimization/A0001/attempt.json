@@ -1,0 +1,25 @@
+{
+  "attempt_id": "A0001",
+  "parent_attempt_id": "A0000",
+  "accepted_step": null,
+  "label": "Amortized KV cache append with bounded spare capacity",
+  "status": null,
+  "phase": "registered",
+  "candidate_sha": null,
+  "parent_sha": "89f67a0ba80f78a35a4ca6ddb74f16ab3d846d0e",
+  "hypothesis": "Primary decode repeatedly copies the full history via 48 torch.cat calls. Append new K/V into reusable capacity without changing stored values, attention scope, precision or offload placement.",
+  "evidence": "A0000/diagnostics/decode-ma_offload-events/events.json: 3222798336 output bytes across 48 cats, 5.9039 ms summed instrumented stream spans out of 11.2209 ms total. These are diagnostic spans, not kernel timing or speedup claims.",
+  "planned_change": "Inference-only append with bounded chunked spare capacity, lazy allocation on decode to preserve prefill path; fall back for unsupported/cache-transformation cases. No cached model outputs or token lookups.",
+  "correctness_gate": "Bit-exact logits, hidden states and valid KV vs independent frozen concatenating cache; growing128, rollback, group/slot reuse, padding, GQA, shape switches and primary shape. Preserve differentiable/training and sliding-window behavior.",
+  "measurement_plan": {
+    "screening": "3/5/1 matching baseline/candidate primary prefill/decode",
+    "confirmation": "10/10/3, at least3 independent alternating pairs if promising",
+    "acceptance": "full matrix and generation2/5/3 with matching baseline where needed; no resolved primary regression or offload memory loss"
+  },
+  "performance": null,
+  "risks": [
+    "Spare cache storage raises GPU memory; record backing capacity and peaks.",
+    "Cache views/rollback/reordering must not reuse stale or incompatible storage.",
+    "Noncontiguous batch strides must preserve exact attention results."
+  ]
+}

@@ -1,0 +1,200 @@
+{
+  "total_stream_ms": 11.220864295959473,
+  "cat_spans": [
+    {
+      "stream_ms": 0.13315199315547943,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.12780800461769104,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.11673600226640701,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.13174399733543396,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.11673600226640701,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.12848000228405,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.11673600226640701,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.12835200130939484,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.11708799749612808,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.12803199887275696,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.11673600226640701,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.12835200130939484,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.11708799749612808,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.12835200130939484,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.11708799749612808,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.12800000607967377,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.11673600226640701,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.12828800082206726,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.11913599818944931,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.1276800036430359,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.11708799749612808,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.12595200538635254,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.11673600226640701,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.12835200130939484,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.11673600226640701,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.12956799566745758,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.11673600226640701,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.12835200130939484,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.11913599818944931,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.12800000607967377,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.11635199934244156,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.1263359934091568,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.11673600226640701,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.12838399410247803,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.11673600226640701,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.12835200130939484,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.11878400295972824,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.12838399410247803,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.11708799749612808,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.12595200538635254,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.11673600226640701,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.12835200130939484,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.11673600226640701,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.12835200130939484,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.11673600226640701,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.12950399518013,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.11673600226640701,
+      "output_bytes": 67141632
+    },
+    {
+      "stream_ms": 0.12867200374603271,
+      "output_bytes": 67141632
+    }
+  ],
+  "cat_sum_stream_ms": 5.903904028236866,
+  "cat_output_bytes": 3222798336,
+  "caveat": "Instrumented stream spans include CPU launch gaps; not kernel time or headline latency."
+}

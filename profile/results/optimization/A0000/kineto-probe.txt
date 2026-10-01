@@ -1,0 +1,24 @@
+INFO:2026-10-01 16:09:58 1479077:1479077 CuptiActivityProfiler.cpp:243] CUDA versions. CUPTI: 130000; Runtime: 13000; Driver: 13030
+  Log file: /tmp/libkineto_activities_1479077.json
+  Trace start time: 2026-10-01 16:10:05
+  Trace duration: 500ms
+  Warmup duration: 5s
+  Max GPU buffer size: 128MB
+  Enabled activities: cpu_op,user_annotation,gpu_user_annotation,gpu_memcpy,gpu_memset,kernel,external_correlation,cuda_runtime,cuda_driver,cpu_instant_event,python_function,overhead,xpu_runtime,privateuse1_runtime,privateuse1_driver
+INFO:2026-10-01 16:09:58 1479077:1479077 CuptiActivityProfiler.cpp:1092] Enabling GPU tracing with max CUPTI buffer size 128MB)
+VERBOSE:2026-10-01 16:09:58 1479077:1479077 CuptiActivityApi.cpp:331] Not enabling per-thread activity buffer
+INFO:2026-10-01 16:09:58 1479077:1479077 CuptiActivityProfiler.cpp:1150] Tracing starting in 6s
+INFO:2026-10-01 16:09:58 1479077:1479077 CuptiActivityProfiler.cpp:1155] Tracing will end in 7s
+STAGE:2026-10-01 16:09:58 1479077:1479077 ActivityProfilerController.cpp:381] Completed Stage: Warm Up
+VERBOSE:2026-10-01 16:09:58 1479077:1479077 CuptiActivityApi.cpp:166] CUPTI buffer requested
+STAGE:2026-10-01 16:09:58 1479077:1479077 ActivityProfilerController.cpp:388] Completed Stage: Collection
+INFO:2026-10-01 16:09:58 1479077:1479077 CuptiActivityProfiler.cpp:292] Processing 1 CPU buffers
+WARNING:2026-10-01 16:09:58 1479077:1479077 CuptiActivityProfiler.cpp:365] GPU trace is empty!
+INFO:2026-10-01 16:09:58 1479077:1479077 CuptiActivityProfiler.cpp:406] Record counts: Out-of-range = 0, Blocklisted runtime = 0, Invalid ext correlations = 0, CPU GPU out-of-order = 0, Unexpected CUDA events = 0, CUPTI stopped early? = 0
+INFO:2026-10-01 16:09:58 1479077:1479077 CuptiActivityProfiler.cpp:1449] CPU Traces Recorded:
+INFO:2026-10-01 16:09:58 1479077:1479077 CuptiActivityProfiler.cpp:1452] PyTorch Profiler: 1 span(s) recorded
+STAGE:2026-10-01 16:09:58 1479077:1479077 ActivityProfilerController.cpp:393] Completed Stage: Post Processing
+INFO:2026-10-01 16:09:58 1479077:1479077 output_json.cpp:175] Tracing to temporary file /tmp/memory-kineto-probe.json
+INFO:2026-10-01 16:09:58 1479077:1479077 output_json.cpp:685] Chrome Trace written to /tmp/memory-kineto-probe.json
+INFO:2026-10-01 16:09:58 1479077:1479077 output_json.cpp:737] Renamed the trace file to /tmp/memory-kineto-probe.json
+Counter({None: 58, 'cpu_op': 2, 'Trace': 1})

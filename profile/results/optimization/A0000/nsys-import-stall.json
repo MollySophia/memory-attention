@@ -1,0 +1,7 @@
+{
+  "status": "interrupted",
+  "reason": "Observed Python sleeping in anon_pipe_read, exited file child remains zombie; no output directory/model capture reached. Intentional cancellation to investigate import-time subprocess instrumentation, not timeout-based restart.",
+  "processes": "    PID    PPID     ELAPSED S WCHAN                    COMMAND\n1470203 1388665       17:15 S futex_do_wait            /usr/local/cuda-13.1/nsight-systems-2025.5.2/target-linux-x64/nsys profile --trace=cuda,nvtx --sample=none --cpuctxsw=none --capture-range=cudaProfilerApi --capture-range-end=stop --output=profile/results/optimization/A0000/diagnostics/decode-ma_offload-nsys /home/molly/miniconda3/envs/fla-bench/bin/python profile/profile_paper.py --backend nsys --mode decode --variant ma_offload --matrix profile/results/optimization/A0000/R01/manifest.json --output profile/results/optimization/A0000/diagnostics/decode-ma_offload-nsys-metadata\n1470248 1470247       17:15 S anon_pipe_read           /home/molly/miniconda3/envs/fla-bench/bin/python profile/profile_paper.py --backend nsys --mode decode --variant ma_offload --matrix profile/results/optimization/A0000/R01/manifest.json --output profile/results/optimization/A0000/diagnostics/decode-ma_offload-nsys-metadata\n1470297 1470248       17:14 Z -                        [file] <defunct>\n",
+  "suspected_call": "numexpr/cpuinfo.py:107 platform.architecture() -> platform.py file -b",
+  "ptrace": "strace attach denied by host ptrace policy"
+}

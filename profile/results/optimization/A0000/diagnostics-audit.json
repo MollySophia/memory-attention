@@ -25,8 +25,12 @@
       "reason": "No CUDA kernel/memcpy events in exported Kineto trace; operator device time is zero. Original metadata completed means capture returned, not GPU profiling success."
     }
   ],
-  "nsys_status": "running",
+  "nsys_status": "interrupted_after_import_stall",
   "nsys_controller_pid": 1470203,
   "nsys_child_pid": 1470248,
-  "scope": "Diagnostic captures only, not headline timing"
+  "scope": "Diagnostic captures only, not headline timing",
+  "nsys_reason": "Parent waited on pipe from exited file child before model capture; original child terminated, controller/agent required SIGKILL after TERM did not exit.",
+  "events_status": "offload_and_resident_decode_completed",
+  "events_result": "diagnostics/decode-ma_offload-events/events.json",
+  "resident_events_result": "diagnostics/decode-ma_gpu-events/events.json"
 }
