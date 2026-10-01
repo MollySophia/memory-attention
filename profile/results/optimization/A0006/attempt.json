@@ -3,7 +3,7 @@
   "parent_attempt_id": "A0002",
   "accepted_step": null,
   "status": null,
-  "phase": "registered",
+  "phase": "screening_prepared",
   "label": "Use inference KV-cache attention kernel for one-token decode",
   "parent_sha": "149b2d636981beb3c9298341d185a6d13be7ed6d",
   "incumbent_sha": "ec6384d2e9081ecbb2926fe8a6193bc48ea650a3",
@@ -19,5 +19,14 @@
     "New reduction must meet predeclared elementwise,NRMS,finiteness and argmax requirements"
   ],
   "measurement_plan": "Run correctness first.8 fresh primary screening processes vs A0002,3/5/1; formal pairs and full acceptance gates only if promising.",
-  "next_action": "Commit registration/contract,then implement one kernel-selection change."
+  "next_action": "8 fresh primary screening processes vs accepted A0002; numerical gate passed but no performance gain claimed.",
+  "candidate_sha": "0ff7b16d14770e1a126dbf279eb02806204ab3a6",
+  "correctness": {
+    "main_pytest": "53 passed;correctness-pytest.txt",
+    "routing": "1 passed;actual decode calls verified,cache unchanged by read-only API,padded fallback unchanged",
+    "long_context": "3 passed;length2048/2049/8192,GQA andstrided cache;all exact",
+    "primary": "296 frozen attention/cache comparisons passed;all exact;argmax1.0",
+    "standalone": "PASS,maxdiff0",
+    "small_numerics": "11352 comparisons,all exact;predeclared arithmetic tolerances remain unchanged"
+  }
 }

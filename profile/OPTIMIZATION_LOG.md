@@ -655,3 +655,11 @@ Required existing placement/cache gates remain exact and unchanged. Retired
 A0003 scheduling-specific forward test will be archived and replaced by an
 independent arithmetic-contract gate with the same128-step coverage. This is
 a declared changed-arithmetic contract,not post-failure tolerance relaxation.
+
+A0006 correctness passed:53 main tests,1 routing/read-only gate,3long-context
+attention gates,296 primary comparisons and standalone maxdiff0. All11352
+small-model tensor comparisons and296 primary checks were actually exact,
+argmax agreement1.0; tolerances remain as predeclared,not relaxed. Original
+placement/cache tests unchanged. Launch8 fresh primary screening processes vs
+A0002 under3/5/1,estimated3min. API selection alone is not proof of a faster
+kernel; require actual end-to-end evidence.

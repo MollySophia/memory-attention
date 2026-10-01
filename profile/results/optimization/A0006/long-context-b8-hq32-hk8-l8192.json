@@ -1,0 +1,15 @@
+{
+  "name": "attention",
+  "shape": [
+    8,
+    1,
+    32,
+    64
+  ],
+  "finite": true,
+  "max_abs_error": 0.0,
+  "max_relative_error": 0.0,
+  "normalized_rms": 0.0,
+  "exact": true,
+  "required_exact": false
+}
