@@ -189,3 +189,21 @@ at collection time, source CSV/JSON and six figures in PNG/SVG/PDF. Later
 completed raw jobs are stored separately; final plots must be regenerated.
 The current process manifest snapshot is `R01-checkpoint-01.json`.
 No baseline source changes or additional GPU jobs were made during R01.
+
+### A0000 — separate profiling harness prepared (2026-10-01)
+
+R01 remains live, with no failures at this checkpoint. Authoritative controller
+and active child processes were inspected; no restart performed. New completed
+raw jobs are preserved with `R01-checkpoint-02.json`.
+
+Added `profile/profile_paper.py` for one primary model call after 30 warmups,
+separate from headline timings. It will export compressed Chrome CPU/CUDA
+trace, operator counts/shapes/device and host durations, memory and source/env
+metadata. It refuses to run while the baseline matrix has pending/running jobs;
+that guard was exercised (expected exit1, no model built or output directory).
+Syntax and CLI help pass; actual trace export remains unverified until R01 ends.
+Four exact commands are stored in `profiling-plan.json` and must run serially.
+
+Static observation: both supported KV cache implementations call torch.cat
+for each decode layer. This is a profiling hypothesis, not a demonstrated
+bottleneck or an accepted optimization. No algorithmic candidate was changed.

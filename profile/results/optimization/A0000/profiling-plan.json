@@ -1,0 +1,62 @@
+{
+  "status": "prepared_not_run",
+  "requires": "R01 complete; no concurrent GPU benchmark",
+  "commands": [
+    [
+      "/home/molly/miniconda3/envs/fla-bench/bin/python",
+      "profile/profile_paper.py",
+      "--mode",
+      "prefill",
+      "--variant",
+      "ma_offload",
+      "--matrix",
+      "profile/results/optimization/A0000/R01/manifest.json",
+      "--output",
+      "profile/results/optimization/A0000/diagnostics/prefill-ma_offload"
+    ],
+    [
+      "/home/molly/miniconda3/envs/fla-bench/bin/python",
+      "profile/profile_paper.py",
+      "--mode",
+      "prefill",
+      "--variant",
+      "ma_gpu",
+      "--matrix",
+      "profile/results/optimization/A0000/R01/manifest.json",
+      "--output",
+      "profile/results/optimization/A0000/diagnostics/prefill-ma_gpu"
+    ],
+    [
+      "/home/molly/miniconda3/envs/fla-bench/bin/python",
+      "profile/profile_paper.py",
+      "--mode",
+      "decode",
+      "--variant",
+      "ma_offload",
+      "--matrix",
+      "profile/results/optimization/A0000/R01/manifest.json",
+      "--output",
+      "profile/results/optimization/A0000/diagnostics/decode-ma_offload"
+    ],
+    [
+      "/home/molly/miniconda3/envs/fla-bench/bin/python",
+      "profile/profile_paper.py",
+      "--mode",
+      "decode",
+      "--variant",
+      "ma_gpu",
+      "--matrix",
+      "profile/results/optimization/A0000/R01/manifest.json",
+      "--output",
+      "profile/results/optimization/A0000/diagnostics/decode-ma_gpu"
+    ]
+  ],
+  "question": "Determine whether KV concat/copies, GPU kernels or host dispatch dominate the primary paths before selecting A0001.",
+  "source_observation": "fla/models/utils.py lines80/242 concatenate KV every growing decode step.",
+  "validation": {
+    "py_compile": "passed",
+    "cli_help": "passed",
+    "active_matrix_guard": "correctly refused with exit1 before model build or output creation; profiler-active-matrix-refusal.txt"
+  },
+  "limitations": "No actual profiler trace yet; syntax/guard checks are not evidence that trace export succeeds."
+}
