@@ -562,3 +562,9 @@ other primary within_noise; full matrix and generation complete; exact gates
 passed; offload memory saving preserved; no resolved investigated regression.
 Keep wide batch1offload uncertainty and all failed A0001 evidence. No equivalence
 or text-quality claim. Final plots and deliverable audit remain to finish.
+
+User continued the objective after A0002 completion: pursue5–10 effective
+optimizations, superseding the original three-candidate cap. Start new IDs at
+A0003, preserve A0000 and accepted A0002, and require incremental paired evidence
+against the incumbent. Rejected/noisy attempts do not count as accepted gains.
+Roadmap in results/optimization/CAMPAIGN_002.md; no new gain claimed.

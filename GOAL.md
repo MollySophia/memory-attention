@@ -1,6 +1,10 @@
 # Memory Attention inference performance experiments
 
-Status: active campaign with frozen baseline A0000 already completed under
+Status: continued optimization campaign; A0002 is the accepted starting point.
+The user now requests5–10 effective optimization iterations. Preserve A0000
+and A0002 evidence; continue new attempts from A0003 onward.
+
+Frozen baseline A0000 already completed under
 paper_v1. Preserve its source, raw measurements and figures. This revision
 changes the order and sampling plans for future work; it does not invalidate,
 relabel or require rerunning the completed baseline. Use the staged workflow
@@ -332,8 +336,13 @@ incomparable protocol/configuration points in a single series.
    from accepted evidence without duplicating an already completed identical
    validation run.
 
-For the current campaign, evaluate up to three focused candidates after A0000,
-then review the findings and define the next bounded campaign if necessary.
+The original three-candidate campaign limit is superseded by the user’s
+continuation request. Pursue5–10 effective optimization iterations starting
+from accepted A0002, registering new focused attempts from A0003 onward.
+Rejected/noisy ideas remain valuable evidence but do not count as effective
+accepted improvements. Each retained step requires the existing correctness,
+independent confirmation, regression and memory gates. Do not stop merely
+because five superficial edits or failed screens have been recorded.
 No numeric speedup target or total runtime budget has been set. Before launching
 an expensive matrix, record the job count and estimated cost from measured
 latencies, including warmup trajectories and per-process setup. These are
