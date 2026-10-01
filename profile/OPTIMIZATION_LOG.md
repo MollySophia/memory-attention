@@ -272,3 +272,11 @@ median of round means is 657.4702 ms; folded resident is 598.0860 ms.
 Both include prefix and exclude sampling; these are baseline placement data,
 not paired optimization gains. Raw files and live process observation saved
 in R01 and `R01-checkpoint-08.json`. Remaining jobs continue without restart.
+
+### A0000 — batch8 offload generation complete (2026-10-01)
+
+J46 completed: median of round means 1378.8977 ms for prefix2048 + 128
+predetermined decode tokens, batch8. All 150 raw samples pass protocol
+validation; final KV storage matches the 2176-token context. No sampling.
+Folded-resident J47 is confirmed live; unfolded J48 remains pending.
+This is baseline data only; full-matrix audit and profiling are still pending.
