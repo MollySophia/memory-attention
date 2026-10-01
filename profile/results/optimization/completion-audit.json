@@ -25,9 +25,7 @@
   "visual_review": "All eight PNG figures inspected for labels, scopes, curves and legends; round ranges distinguished from paired CI.",
   "history_incumbent_and_accepted_steps_verified": true,
   "correctness": "41 candidate tests +4 end-only-sync generation cases; standalone diff0; primary exact check passed.",
-  "remaining": [
-    "Final commit and explicit origin branch push verification"
-  ],
+  "remaining": [],
   "requirements": [
     {
       "requirement": "Exact intended model, protocol, parameter placement and frozen reference",
@@ -113,14 +111,14 @@
     },
     {
       "requirement": "Complete attempt ledger, failures, exact source and reproducible commands",
-      "state": "ready_for_final_commit",
+      "state": "passed",
       "evidence": [
         "attempt.json",
         "../RESULTS.md",
         "../REPRODUCE.md",
-        "../../../../OPTIMIZATION_LOG.md"
+        "../../../OPTIMIZATION_LOG.md"
       ],
-      "remaining": "Commit and push final result package; verify remote branch."
+      "remaining": "None; result package ba728b2709f08564a3bc567d74e9a107ee219f53 verified on origin/attempts/paper-001."
     },
     {
       "requirement": "Standalone PNG/PDF/SVG figures plus source CSV/JSON",
@@ -131,5 +129,11 @@
       ],
       "remaining": "None; eight PNGs visually inspected,24 image/vector artifacts validated."
     }
-  ]
+  ],
+  "complete": true,
+  "result_commit": "ba728b2709f08564a3bc567d74e9a107ee219f53",
+  "remote_result_commit_verified": true,
+  "frozen_checkout_clean": true,
+  "frozen_checkout_sha": "d949640ebf2f13f56021bd08c5c9f10e65d571c3",
+  "unrelated_untracked_file_preserved": "A0000/R01-live-audit.json"
 }

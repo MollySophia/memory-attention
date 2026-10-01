@@ -86,14 +86,14 @@
     },
     {
       "requirement": "Complete attempt ledger, failures, exact source and reproducible commands",
-      "state": "ready_for_final_commit",
+      "state": "passed",
       "evidence": [
         "attempt.json",
         "../RESULTS.md",
         "../REPRODUCE.md",
-        "../../../../OPTIMIZATION_LOG.md"
+        "../../../OPTIMIZATION_LOG.md"
       ],
-      "remaining": "Commit and push final result package; verify remote branch."
+      "remaining": "None; result package ba728b2709f08564a3bc567d74e9a107ee219f53 verified on origin/attempts/paper-001."
     },
     {
       "requirement": "Standalone PNG/PDF/SVG figures plus source CSV/JSON",
@@ -105,5 +105,5 @@
       "remaining": "None; eight PNGs visually inspected,24 image/vector artifacts validated."
     }
   ],
-  "deliverables_complete": false
+  "deliverables_complete": true
 }
