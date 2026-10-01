@@ -171,3 +171,72 @@ def test_cached_prefill_last_token_scope(model, offload):
     for actual, expected in zip(last.past_key_values, full.past_key_values):
         for a, b in zip(actual['attn_state'], expected['attn_state']):
             torch.testing.assert_close(a, b, rtol=0, atol=0)
+
+
+@pytest.mark.parametrize('policy', ['bulk', 'pipeline'])
+@pytest.mark.parametrize('seed', [1234, 4321])
+@pytest.mark.parametrize('left_padded', [False, True])
+def test_growing_cache_128_steps_exact(policy, seed, left_padded):
+    if not torch.cuda.is_available():
+        pytest.skip('requires CUDA')
+    gate = load_script('test_memory_offload')
+    with torch.inference_mode():
+        model, config = gate.build(seed=seed, layers=3, hidden=128, heads=2, vocab=128)
+        config.memory_offload_policy = policy
+        config.memory_offload_group_size = 2  # Partial final group.
+        config.memory_offload_prefetch_depth = 1  # Forces repeated slot reuse.
+        for layer in model.model.layers:
+            layer.attn.m_norm.weight.copy_(torch.linspace(.5, 1.5, 64, device='cuda', dtype=torch.bfloat16))
+        prefix = torch.randint(0, 128, (2, 16), device='cuda')
+        tokens = torch.randint(0, 128, (128, 2, 1), device='cuda')
+        mask = torch.ones(2, 144, device='cuda', dtype=torch.long)
+        if left_padded:
+            mask[0, :5] = 0
+
+        def capture():
+            cache = None
+            snapshots = []
+            for i, ids in enumerate([prefix, *tokens.unbind(0)]):
+                out = model(input_ids=ids, attention_mask=mask[:, :16+i],
+                            past_key_values=cache, use_cache=True, logits_to_keep=1,
+                            output_hidden_states=True)
+                cache = out.past_key_values
+                assert cache.get_seq_length() == 16+i
+                # Negative rotary positions at masked prefix keys have no
+                # defined value. Compare every valid KV entry, and all hidden
+                # states/logits including padded hidden positions. Unpadded
+                # cases compare the entire cache without exclusions.
+                valid = mask[:, :16+i].bool()
+                snapshots.append((out.logits.cpu().clone(),
+                                  [h.cpu().clone() for h in out.hidden_states],
+                                  [[t[valid].cpu().clone() for t in state['attn_state']] for state in cache]))
+            return snapshots
+
+        try:
+            model.fold_memory_table_on_gpu()
+            reference = capture()
+            model.close_memory_offload()
+            model.enable_memory_offload()
+            actual = capture()
+            for got, ref in zip(actual, reference):
+                for a, b in [(got[0], ref[0]), *zip(got[1], ref[1]),
+                             *[(x, y) for xs, ys in zip(got[2], ref[2]) for x, y in zip(xs, ys)]]:
+                    assert torch.isfinite(a).all()
+                    torch.testing.assert_close(a, b, rtol=0, atol=0)
+        finally:
+            model.close_memory_offload()
+
+
+def test_telemetry_counts_all_cached_offloaders_and_snapshot(model):
+    bench = load_script('bench_fla')
+    model.enable_memory_offload()
+    model.set_offload_offloader(2, 16)
+    model.set_offload_offloader(2, 1)
+    snap = bench.memory_snapshot(model, 'cuda')
+    slots = [slot for off in model.model._offloader_cache.values() for slot in off.slots]
+    assert len(snap['offloader_capacities']) == 2
+    assert snap['offload_pinned_bytes'] == sum(s['host'].numel()*2 for s in slots)
+    assert snap['offload_gpu_buffer_bytes'] == sum(s['gpu'].numel()*2 for s in slots)
+    assert snap['raw_table_snapshot_bytes'] == 3*128*128*2
+    assert snap['cpu_table_bytes'] == 3*128*128*2
+    assert snap['host_rss_bytes'] > 0

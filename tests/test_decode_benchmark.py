@@ -91,3 +91,37 @@ def test_prefill_scope_and_raw_samples(monkeypatch, workload, keep, cache):
     assert result['samples_ms'][1] == pytest.approx([4, 5, 6])
     assert len(calls) == 8
     assert all(torch.equal(calls[0], ids) for ids in calls)
+
+
+def test_generation_grows_and_restarts_cache(monkeypatch):
+    script = Path(__file__).resolve().parents[1] / 'profile' / 'bench_fla.py'
+    spec = importlib.util.spec_from_file_location('bench_generation', script)
+    bench = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(bench)
+    args = SimpleNamespace(vocab_size=16, batch_size=2, context_len=8,
+                           warmup=1, repeats=2, rounds=2, logits_to_keep=1,
+                           generation_steps=128)
+    lengths, inputs = [], []
+    ticks = SimpleNamespace(now=0.)
+
+    def model(input_ids, use_cache, logits_to_keep, past_key_values=None):
+        assert use_cache and logits_to_keep == 1
+        if past_key_values is None:
+            assert input_ids.shape == (2, 8)
+            cache = SimpleNamespace(length=8)
+            inputs.append([])
+        else:
+            assert input_ids.shape == (2, 1)
+            cache = past_key_values
+            cache.length += 1
+            inputs[-1].append(input_ids.clone())
+        lengths.append(cache.length)
+        ticks.now += .001
+        return SimpleNamespace(past_key_values=cache)
+
+    monkeypatch.setattr(torch.cuda, 'synchronize', lambda _: None)
+    monkeypatch.setattr(bench, 'time', SimpleNamespace(perf_counter=lambda: ticks.now))
+    result = bench.run_generation(model, args, 'cpu')
+    assert lengths == list(range(8, 137)) * 5
+    assert result['round_ms'] == pytest.approx([129., 129.])
+    assert all(torch.equal(torch.stack(inputs[0]), torch.stack(x)) for x in inputs)

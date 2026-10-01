@@ -35,13 +35,17 @@ from pathlib import Path
 
 import torch
 
+# Support direct CLI invocation and importlib-based regression tests.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from benchmark_telemetry import memory_snapshot, environment_details, source_state
+
 from fla.models.memory.configuration_memory import MemoryConfig
 from fla.models.memory.modeling_memory import MemoryForCausalLM
 from fla.models.utils import Cache
 
 
 VARIANTS = ("ma_gpu", "ma_offload", "ma_gpu_unfolded")
-MODES = ("prefill", "decode")
+MODES = ("prefill", "decode", "generation")
 PROTOCOL_VERSION = "paper_v1_draft"
 
 
@@ -52,6 +56,7 @@ def parse_args():
     p.add_argument("--batch-size", type=int, required=True)
     p.add_argument("--seq-len", type=int, required=True)
     p.add_argument("--context-len", type=int, required=True)
+    p.add_argument("--generation-steps", type=int, default=128)
     p.add_argument("--warmup", type=int, default=30)
     p.add_argument("--repeats", type=int, default=30)
     p.add_argument("--rounds", type=int, default=5)
@@ -71,7 +76,7 @@ def parse_args():
     p.add_argument("--device", default="cuda:0")
     p.add_argument("--json", type=Path, required=True)
     args = p.parse_args()
-    if min(args.batch_size, args.seq_len, args.context_len, args.repeats, args.rounds) <= 0 or args.warmup < 0:
+    if min(args.batch_size, args.seq_len, args.context_len, args.repeats, args.rounds, args.generation_steps) <= 0 or args.warmup < 0:
         p.error("shapes, repeats and rounds must be positive; warmup must be nonnegative")
     if args.logits_to_keep < 0:
         p.error("logits-to-keep must be nonnegative")
@@ -126,6 +131,10 @@ def run_prefill(model, args, device):
         one()
     torch.cuda.synchronize(device)
 
+    memory_before = memory_snapshot(model, device) if str(device) != "cpu" else None
+    if memory_before is not None:
+        torch.cuda.reset_peak_memory_stats(device)
+    memory_after = None
     rounds = []
     raw_samples = []
     for _ in range(args.rounds):
@@ -133,12 +142,15 @@ def run_prefill(model, args, device):
         for _ in range(args.repeats):
             torch.cuda.synchronize(device)
             begin = time.perf_counter()
-            one()
+            output = one()
             torch.cuda.synchronize(device)
             samples.append((time.perf_counter() - begin) * 1e3)
+            if memory_before is not None and len(raw_samples) == args.rounds - 1 and len(samples) == args.repeats:
+                memory_after = memory_snapshot(model, device, getattr(output, "past_key_values", None))
+            del output
         raw_samples.append(samples)
         rounds.append(statistics.mean(samples))
-    return {"round_ms": rounds, "samples_ms": raw_samples}
+    return {"round_ms": rounds, "samples_ms": raw_samples, "memory_before": memory_before, "memory_after": memory_after}
 
 
 @torch.inference_mode()
@@ -160,13 +172,17 @@ def run_decode(model, args, device):
         return model(
             input_ids=token, past_key_values=cache, use_cache=True,
             logits_to_keep=args.logits_to_keep,
-        ).logits
+        )
 
     for i in range(args.warmup):
         rollback(cache, args.context_len)
         one(steps[i])
     torch.cuda.synchronize(device)
 
+    memory_before = memory_snapshot(model, device, cache) if str(device) != "cpu" else None
+    if memory_before is not None:
+        torch.cuda.reset_peak_memory_stats(device)
+    memory_after = None
     rounds = []
     raw_samples = []
     cursor = args.warmup
@@ -179,14 +195,55 @@ def run_decode(model, args, device):
             token = steps[cursor % steps.shape[0]]
             torch.cuda.synchronize(device)
             begin = time.perf_counter()
-            one(token)
+            output = one(token)
             torch.cuda.synchronize(device)
             samples.append((time.perf_counter() - begin) * 1e3)
+            if memory_before is not None and len(raw_samples) == args.rounds - 1 and len(samples) == args.repeats:
+                memory_after = memory_snapshot(model, device, cache)
+            del output
             cursor += 1
         raw_samples.append(samples)
         rounds.append(statistics.mean(samples))
     del cache, steps
-    return {"round_ms": rounds, "samples_ms": raw_samples}
+    return {"round_ms": rounds, "samples_ms": raw_samples, "memory_before": memory_before, "memory_after": memory_after}
+
+
+@torch.inference_mode()
+def run_generation(model, args, device):
+    prefix = torch.randint(0, args.vocab_size, (args.batch_size, args.context_len), device=device)
+    # Predetermined GPU tokens; selection and allocation are excluded.
+    tokens = torch.randint(0, args.vocab_size, (args.generation_steps, args.batch_size, 1), device=device).unbind(0)
+
+    def one():
+        output = model(input_ids=prefix, use_cache=True, logits_to_keep=args.logits_to_keep)
+        for token in tokens:
+            cache = output.past_key_values
+            del output
+            output = model(input_ids=token, past_key_values=cache, use_cache=True,
+                           logits_to_keep=args.logits_to_keep)
+        return output
+
+    for _ in range(args.warmup):
+        one()
+    torch.cuda.synchronize(device)
+    before = memory_snapshot(model, device) if str(device) != "cpu" else None
+    if before is not None:
+        torch.cuda.reset_peak_memory_stats(device)
+    raw, after = [], None
+    for round_index in range(args.rounds):
+        samples = []
+        for sample_index in range(args.repeats):
+            torch.cuda.synchronize(device)
+            begin = time.perf_counter()
+            output = one()
+            torch.cuda.synchronize(device)
+            samples.append((time.perf_counter() - begin) * 1000)
+            if before is not None and round_index == args.rounds - 1 and sample_index == args.repeats - 1:
+                after = memory_snapshot(model, device, output.past_key_values)
+            del output
+        raw.append(samples)
+    return dict(round_ms=[statistics.mean(samples) for samples in raw], samples_ms=raw,
+                memory_before=before, memory_after=after)
 
 
 @torch.inference_mode()
@@ -207,7 +264,7 @@ def measure(model, args, variant, device):
     if offload:
         # Build for both shapes up front, so buffer allocation is not charged
         # to the first timed forward.
-        model.set_offload_offloader(args.batch_size, args.seq_len)
+        model.set_offload_offloader(args.batch_size, args.seq_len if args.mode == "prefill" else args.context_len)
         model.set_offload_offloader(args.batch_size, 1)
         # Report the policy of the shape this mode actually runs. prefill uses
         # (batch, seq_len); decode steps are (batch, 1), and auto policy picks
@@ -219,7 +276,7 @@ def measure(model, args, variant, device):
             model.set_offload_offloader(args.batch_size, 1)
         policy = model.model.memory_offloader.policy
 
-    runner = run_prefill if args.mode == "prefill" else run_decode
+    runner = {"prefill": run_prefill, "decode": run_decode, "generation": run_generation}[args.mode]
     # Variant-independent inputs, even when several placements share a process.
     torch.manual_seed(args.seed + 1)
     measurements = runner(model, args, device)
@@ -237,12 +294,14 @@ def measure(model, args, variant, device):
         max_ms=max(rounds),
         round_ms=rounds,
         samples_ms=measurements["samples_ms"],
+        memory_before=measurements["memory_before"],
+        memory_after=measurements["memory_after"],
         protocol_version=PROTOCOL_VERSION,
         estimator="median_of_round_means",
         sample_p50_ms=statistics.median(samples),
         sample_p95_ms=sorted(samples)[max(0, math.ceil(len(samples) * .95) - 1)],
         sample_percentile_method="nearest_rank_p95; median_p50",
-        tokens_per_second=args.batch_size * (args.seq_len if args.mode == "prefill" else 1) * 1000 / statistics.median(rounds),
+        tokens_per_second=args.batch_size * (args.seq_len if args.mode == "prefill" else args.context_len + args.generation_steps if args.mode == "generation" else 1) * 1000 / statistics.median(rounds),
         output_scope="full_logits_no_cache" if args.mode == "prefill" and args.prefill_workload == "historical" else "cached_logits",
         logits_to_keep=0 if args.mode == "prefill" and args.prefill_workload == "historical" else args.logits_to_keep,
         # Round spread is descriptive, not a significance threshold.
@@ -259,16 +318,15 @@ def measure(model, args, variant, device):
         offload_pinned_mib=0.0,
         benchmark_scope="model",
     )
+    if args.mode == "generation":
+        row["generation_steps"] = args.generation_steps
+        row["generation_timing_protocol"] = "prefill_plus_growing_decode_predetermined_tokens_no_sampling"
+        row["throughput_token_scope"] = "prefix_plus_decode_tokens"
     if args.mode == "decode":
         row["decode_timing_protocol"] = "fixed_context_v2_rollback_excluded"
-    if offload and model.model.memory_offloader is not None:
-        off = model.model.memory_offloader
-        row["offload_gpu_buffer_mib"] = sum(
-            s["gpu"].numel() * s["gpu"].element_size() for s in off.slots
-        ) / 2**20
-        row["offload_pinned_mib"] = sum(
-            s["host"].numel() * s["host"].element_size() for s in off.slots
-        ) / 2**20
+    memory = measurements["memory_after"]
+    row["offload_gpu_buffer_mib"] = memory["offload_gpu_buffer_bytes"] / 2**20
+    row["offload_pinned_mib"] = memory["offload_pinned_bytes"] / 2**20
     return row
 
 
@@ -310,12 +368,14 @@ def main():
     if device.type != "cuda":
         raise RuntimeError("this benchmark requires a CUDA device")
 
+    environment_before = environment_details()
+    sources = source_state()
     model = build(args)
     results = []
     for variant in dict.fromkeys(args.variants):
         results.append(measure(model, args, variant, device))
 
-    payload = dict(protocol_version=PROTOCOL_VERSION, config=vars(args), model_config=model.config.to_dict(), env=env_fingerprint(), results=results)
+    payload = dict(protocol_version=PROTOCOL_VERSION, config=vars(args), model_config=model.config.to_dict(), env=env_fingerprint(), source=sources, environment_before=environment_before, environment_after=environment_details(), command=sys.argv, results=results)
     args.json.parent.mkdir(parents=True, exist_ok=True)
     args.json.write_text(json.dumps(payload, indent=2, default=str), encoding="utf-8")
 
