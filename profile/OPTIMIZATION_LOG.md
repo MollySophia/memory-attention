@@ -216,3 +216,12 @@ frozen-protocol checks. Batch16/length2048 ma_offload prefill median of round
 means is 427.7873 ms, peak allocated GPU 10.5274 GiB. This is baseline scaling
 data, not a candidate gain. New raw data and R01-checkpoint-03.json preserved.
 Profiling remains deferred until matrix completion.
+
+### A0000 — complete batch sweep, length scan running (2026-10-01)
+
+All 24 batch-sweep jobs (batch1/4/8/16, length2048, prefill/decode, three
+placements) completed without failure and passed raw-data validation.
+Summary: `batch-sweep-summary.json`; exact live-state snapshot: `R01-checkpoint-04.json`.
+Controller PID 1432876 and current child verified live. Length512 scan has
+started; length4096/8192 and generation still pending. No runtime restart.
+No candidate speedup claim: these are frozen-baseline scaling measurements.
