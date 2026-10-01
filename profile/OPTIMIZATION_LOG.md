@@ -644,3 +644,14 @@ Preserve model/test patch and results,then revert paired rotary implementation.
 Three continued-campaign attempts evaluated so far,zero newly accepted gains.
 Next inspect attention kernel cost rather than continuing only small dispatch
 optimizations. Accepted incumbent remains A0002.
+
+A0006 registered before implementation: use FlashAttention KV-cache decode
+API for read-only one-token attention after existing cache update. A0002
+attention spans2.29728ms/5.586714ms instrumented wall. Arithmetic may reorder
+softmax reduction; numerical-contract.json is frozen before new outputs.
+Elementwise atol0.015625,rtol0.0078125 plusNRMS<=0.002,finite tensors,
+aggregate logits argmax>=0.99,explicit near-zero relative-error rule.
+Required existing placement/cache gates remain exact and unchanged. Retired
+A0003 scheduling-specific forward test will be archived and replaced by an
+independent arithmetic-contract gate with the same128-step coverage. This is
+a declared changed-arithmetic contract,not post-failure tolerance relaxation.

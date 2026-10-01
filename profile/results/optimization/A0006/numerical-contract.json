@@ -1,0 +1,16 @@
+{
+  "kind": "BF16 arithmetic/reduction-order change,not a placement-only claim",
+  "absolute_tolerance": 0.015625,
+  "relative_tolerance": 0.0078125,
+  "normalized_rms_limit": 0.002,
+  "near_zero_rule": "Report max relative error using denominator max(abs(reference),0.1*RMS(reference),1e-8). NRMS=RMS(error)/max(RMS(reference),1e-8).",
+  "elementwise_rule": "Every abs(error) <= absolute_tolerance + relative_tolerance*abs(reference).",
+  "finiteness": "All defined logits,hidden and KV values must be finite.",
+  "argmax": "Report logits argmax agreement on each step and aggregate; minimum aggregate0.99. Never use argmax alone.",
+  "exact_scopes": [
+    "All unchanged GOAL placement/cache tests",
+    "Prefill and generic fallback independent forward comparisons"
+  ],
+  "rationale": "One BF16 spacing at unit magnitude is0.0078125. Allow two such absolute units plus one relative unit to cover reduction-order rounding while imposing a substantially tighter0.2% aggregate tensor RMS bound. This is an inference numerical-equivalence contract,not quality validation; reject if any gate fails without relaxing thresholds.",
+  "predeclared": true
+}

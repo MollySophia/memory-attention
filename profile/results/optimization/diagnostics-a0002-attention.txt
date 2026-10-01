@@ -1,0 +1,1 @@
+{"instrumented_total_wall_ms": 5.586714018136263, "attention_cpu_ms": 0.6016488187015057, "attention_stream_ms": 2.29728002846241, "attention_calls": 24}

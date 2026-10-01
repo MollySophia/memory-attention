@@ -1,0 +1,23 @@
+{
+  "attempt_id": "A0006",
+  "parent_attempt_id": "A0002",
+  "accepted_step": null,
+  "status": null,
+  "phase": "registered",
+  "label": "Use inference KV-cache attention kernel for one-token decode",
+  "parent_sha": "149b2d636981beb3c9298341d185a6d13be7ed6d",
+  "incumbent_sha": "ec6384d2e9081ecbb2926fe8a6193bc48ea650a3",
+  "hypothesis": "A0002 attention diagnostic spans2.29728ms stream time across24calls within5.586714ms instrumented decode. FlashAttention KV-cache decode dispatch with automatic splitting may use the GPU better than the generic forward kernel.",
+  "diagnostic": "../diagnostics/a0002-attention-cost/events.json",
+  "scope": "Inference-only one-token unpadded decode with existing cache and no sliding window; read existing updated cache with k/v omitted, so no cache ownership/update change. Prefill,padding,varlen,training/window and unavailable API use original kernel.",
+  "numerical_contract": "numerical-contract.json; fixed before implementation and before inspecting any new-kernel outputs.",
+  "correctness_plan": "All GOAL named existing gates stay unchanged and exact for placement/cache comparisons. Replace retired A0003 scheduling-specific frozen-forward test with a new independent frozen-forward arithmetic-contract test of the same128-step cases, plus generic fallback exact assertions and primary check. Archive historical exact test; never modify tolerances after inspecting outputs.",
+  "risks": [
+    "Split softmax reduction may change BF16 rounding",
+    "Extra decode-kernel dispatch may not improve primary batch8",
+    "Kernel must never append/cache-write a second time",
+    "New reduction must meet predeclared elementwise,NRMS,finiteness and argmax requirements"
+  ],
+  "measurement_plan": "Run correctness first.8 fresh primary screening processes vs A0002,3/5/1; formal pairs and full acceptance gates only if promising.",
+  "next_action": "Commit registration/contract,then implement one kernel-selection change."
+}
