@@ -22,6 +22,32 @@ def save(path, value):
 
 
 
+PAIRING_PLAN_ID='balanced_order_v2'
+
+
+def implementation_order(block, workload_index, variant_index):
+    # Stable workload/variant indices: reversed traversal must not cancel the
+    # block alternation, as it did in the original R02 controller.
+    return ['baseline','candidate'] if (block+workload_index+variant_index)%2==0 else ['candidate','baseline']
+
+
+def validate_balanced_order(jobs):
+    keys={(j['batch'],j['length'],j['mode']) for j in jobs}
+    for key in keys:
+        placement_orders=[]
+        for block in (1,2,3):
+            selected=[j for j in jobs if (j['batch'],j['length'],j['mode'])==key and j['block']==block]
+            variants=list(dict.fromkeys(j['variant'] for j in selected))
+            assert set(variants)=={'ma_offload','ma_gpu'}
+            placement_orders.append(variants)
+        assert placement_orders[0]==placement_orders[2]==list(reversed(placement_orders[1]))
+        for variant in ('ma_offload','ma_gpu'):
+            orders=[[j['implementation'] for j in jobs if (j['batch'],j['length'],j['mode'])==key and j['block']==block and j['variant']==variant] for block in (1,2,3)]
+            assert all(len(order)==2 and set(order)=={'baseline','candidate'} for order in orders)
+            assert orders[0]==orders[2]==list(reversed(orders[1])),(key,variant,orders)
+    return True
+
+
 def source_hash(root):
     paths=sorted(set((root/'fla').rglob('*.py')) | set((root/'profile').glob('*.py')) |
                  {p for p in (root/'setup.py',root/'pyproject.toml') if p.exists()})
@@ -63,6 +89,8 @@ def reuse_index(path, roots, commits):
     manifest=json.loads(path.read_text())
     assert manifest['status']=='completed' and manifest['stage']=='confirmation'
     assert len(manifest['jobs'])==48 and manifest['source_commits']==commits
+    assert manifest['pairing_plan_id']==PAIRING_PLAN_ID
+    validate_balanced_order(manifest['jobs'])
     expected_env=dict(torch=importlib.metadata.version('torch'),
                       flash_attn=importlib.metadata.version('flash_attn'),
                       python=platform.python_version(),cuda_visible_devices=os.environ.get('CUDA_VISIBLE_DEVICES',''))
@@ -133,14 +161,16 @@ def main():
     variants=('ma_offload','ma_gpu') if args.stage=='confirmation' else ('ma_offload','ma_gpu','ma_gpu_unfolded')
     blocks=3 if args.stage=='confirmation' else 1
     jobs=[]
+    canonical_workloads=[(b,l,m) for b,l in shapes for m in modes]
     for block in range(blocks):
-        workloads=[(b,l,m) for b,l in shapes for m in modes]
+        workloads=canonical_workloads.copy()
         if block%2: workloads.reverse()
         for wi,(batch,length,mode) in enumerate(workloads):
+            workload_index=canonical_workloads.index((batch,length,mode))
             order=list(variants)
-            if (wi+block)%2: order.reverse()
+            if (workload_index+block)%2: order.reverse()
             for vi,variant in enumerate(order):
-                implementations=['baseline','candidate'] if (block+wi+vi)%2==0 else ['candidate','baseline']
+                implementations=implementation_order(block,workload_index,variants.index(variant))
                 for impl in implementations:
                     job=dict(mode=mode,variant=variant,batch=batch,length=length)
                     name=f'B{block+1}-J{len(jobs)+1:03d}-{impl}-{mode}-{variant}-b{batch}-l{length}'
@@ -158,11 +188,12 @@ def main():
                     if mode=='generation':latency+=128*estimate('decode')[1]
                     seconds=setup+(sample['warmup']+sample['repeats']*sample['rounds'])*latency/1000
                     jobs.append(dict(**job,name=name,implementation=impl,block=block+1,command=cmd,cwd=str(roots[impl]),candidate_sha=commits[impl],sampling_plan=sample,estimated_seconds=seconds,status='pending'))
+    if args.stage=='confirmation':validate_balanced_order(jobs)
     for job in jobs:
         refs=reused.get((job['implementation'],job['mode'],job['variant'],job['batch'],job['length']))
         if refs:
             job.update(reused_results=refs,status='reused',estimated_seconds=0,planned_command_not_executed=job.pop('command'))
-    manifest=dict(campaign_id='offload-gap-001',protocol_version='offload_gap_v1',stage=args.stage,controller_pid=os.getpid(),source_commits=commits,status='planned',jobs=jobs,planned_work=dict(jobs=len(jobs),new_process_jobs=sum(j['status']=='pending' for j in jobs),reused_points=sum(j['status']=='reused' for j in jobs),estimated_seconds=sum(j['estimated_seconds'] for j in jobs),cost_source=str(args.screen_manifest),note='Setup and call costs measured in screen; other lengths/unfolded/generation extrapolated for planning only. Full validation and generation are separate invocations. Deliberately paused setup durations replaced with median unpaused setup for the placement. Reused confirmation keeps original files/stage and all three process blocks.'))
+    manifest=dict(campaign_id='offload-gap-001',protocol_version='offload_gap_v1',pairing_plan_id=PAIRING_PLAN_ID,measurement_plan_id=('formal_v1_w10_n10_r3__'+PAIRING_PLAN_ID if args.stage=='confirmation' else args.stage+'__'+PAIRING_PLAN_ID),stage=args.stage,controller_pid=os.getpid(),source_commits=commits,status='planned',jobs=jobs,planned_work=dict(jobs=len(jobs),new_process_jobs=sum(j['status']=='pending' for j in jobs),reused_points=sum(j['status']=='reused' for j in jobs),estimated_seconds=sum(j['estimated_seconds'] for j in jobs),cost_source=str(args.screen_manifest),note='Setup and call costs measured in screen; other lengths/unfolded/generation extrapolated for planning only. Full validation and generation are separate invocations. Deliberately paused setup durations replaced with median unpaused setup for the placement. Reused confirmation keeps original files/stage and all three process blocks.'))
     path=output/'manifest.json';save(path,manifest)
     print(json.dumps(manifest['planned_work']),flush=True)
     if args.plan_only:return

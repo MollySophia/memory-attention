@@ -221,3 +221,26 @@ pause in baseline J09 setup. A sequential continuation controller waits for
 R02 to terminate, checks the predeclared statistical/memory gate, then records
 plans before launching these remaining gates. It stops for failed/inconclusive
 confirmation or failed validation and never declares acceptance automatically.
+
+
+A0001 R02 confirmation design audit: all 48 jobs completed, but this run is
+ineligible for formal acceptance. The predeclared gate stopped full validation:
+batch-1 resident decode is 0.0614 ms slower for the candidate (95% paired
+interval 0.0175–0.1053 ms), despite unchanged resident code, and offload decode
+has large between/within-run variability. Batch-1 prefill has a consistent
+~13.56 ms reduction, but no accepted claim is made from this flawed design.
+
+Inspection found a concrete controller bug: reversing workload traversal
+canceled the intended source and placement alternation. Each placement ran
+its sources in the same order in all three blocks. Full order evidence and
+all raw timings are retained in R02-design-audit.json and R02-confirmation.
+This is a measurement-design failure, not a new optimization attempt.
+
+Predeclare R03 under `formal_v1_w10_n10_r3__balanced_order_v2`: unchanged
+source commits, shapes, warmup and sample counts, but stable canonical workload
+and placement indices ensure source order and placement order alternate in
+every block. Eighteen harness tests pass, including rejection of the original
+R02 design and end-to-end validation of all eight corrected pair sequences.
+R02 will not be combined with R03 or reused for full validation. Before R03,
+collect one instrumented 10/10/3 batch-1 decode diagnostic per implementation
+for CPU gather variability; preserve it separately from inference timing.

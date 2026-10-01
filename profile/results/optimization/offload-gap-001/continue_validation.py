@@ -32,9 +32,11 @@ def main():
     p.add_argument('--baseline-root',type=Path,required=True)
     p.add_argument('--candidate-root',type=Path,required=True)
     p.add_argument('--screen-manifest',type=Path,required=True)
+    p.add_argument('--controller-name',default='validation-controller')
+    p.add_argument('--first-run-index',type=int,default=3)
     args=p.parse_args()
     attempt=ROOT/args.attempt
-    state_path=attempt/'validation-controller.json'
+    state_path=attempt/(args.controller_name+'.json')
     assert not state_path.exists(),'Refuse to duplicate an existing validation controller'
     confirmation=json.loads(args.confirmation.read_text())
     pid=confirmation['controller_pid'];initial=process_state(pid)
@@ -55,7 +57,7 @@ def main():
     def run(name,command):
         job=dict(name=name,command=command,status='running',started_unix=time.time())
         state['jobs'].append(job);state['status']=name;save(state_path,state)
-        with (attempt/(name+'-controller.txt')).open('w') as log:
+        with (attempt/(args.controller_name+'-'+name+'-controller.txt')).open('w') as log:
             proc=subprocess.Popen(command,cwd=ROOT.parents[3],stdout=log,stderr=subprocess.STDOUT)
             job['pid']=proc.pid;save(state_path,state)
             job['returncode']=proc.wait()
@@ -64,7 +66,7 @@ def main():
         if job['returncode']!=0:raise RuntimeError(name+' failed; inspect persisted output')
 
     try:
-        analysis=attempt/'confirmation-analysis.json'
+        analysis=attempt/(args.controller_name+'-confirmation-analysis.json')
         run('analyze-confirmation',[sys.executable,str(ROOT/'analyze_paired.py'),str(args.confirmation),'--output',str(analysis)])
         result=json.loads(analysis.read_text())
         if not result['confirmation_promising']:
@@ -73,7 +75,7 @@ def main():
         state['nomination']='promising confirmation; full acceptance gates remain'
         common=[sys.executable,str(ROOT/'run_paired.py'),'--baseline-root',str(args.baseline_root),
                 '--candidate-root',str(args.candidate_root),'--screen-manifest',str(args.screen_manifest)]
-        for stage,run_id in [('full_validation','R03-full-validation'),('generation_validation','R04-generation-validation')]:
+        for stage,run_id in [('full_validation',f'R{args.first_run_index:02d}-full-validation'),('generation_validation',f'R{args.first_run_index+1:02d}-generation-validation')]:
             cmd=common+['--stage',stage]
             if stage=='full_validation':cmd+=['--reuse-confirmation',str(args.confirmation)]
             run(run_id+'-plan',cmd+['--plan-only','--output',str(attempt/(run_id+'-plan'))])
@@ -82,7 +84,7 @@ def main():
             if any(j['status'] not in ('completed','reused') for j in manifest['jobs']):
                 state.update(status=run_id+'_needs_review',reason='OOM/unsupported/failure preserved; inspect matrix before additional spend')
                 save(state_path,state);return 0
-        destination=attempt/'R05-full-correctness';destination.mkdir(exist_ok=False)
+        destination=attempt/f'R{args.first_run_index+2:02d}-full-correctness';destination.mkdir(exist_ok=False)
         for batch in (1,8):
             for seed in (1234,4321):
                 outputs={}

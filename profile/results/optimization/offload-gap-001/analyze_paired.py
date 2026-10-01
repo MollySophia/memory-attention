@@ -22,6 +22,9 @@ def analyze(path):
     manifest=json.loads(path.read_text())
     assert manifest['status']=='completed'
     assert manifest['stage']=='confirmation'
+    from run_paired import validate_balanced_order,PAIRING_PLAN_ID
+    assert manifest['pairing_plan_id']==PAIRING_PLAN_ID
+    validate_balanced_order(manifest['jobs'])
     assert len(manifest['jobs'])==48
     data={}
     for job in manifest['jobs']:

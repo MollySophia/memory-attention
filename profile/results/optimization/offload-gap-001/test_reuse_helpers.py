@@ -41,3 +41,26 @@ def test_incompatible_evidence_rejected(path,value):
     for key in path[:-1]:target=target[key]
     target[path[-1]]=value
     with pytest.raises(AssertionError):driver.validate_reuse_payload(payload,job,commit,digest,env)
+
+
+def test_original_confirmation_order_is_rejected():
+    manifest=json.loads((ROOT/'A0001/R02-confirmation/manifest.json').read_text())
+    with pytest.raises(AssertionError):driver.validate_balanced_order(manifest['jobs'])
+
+
+def test_new_plan_alternates_each_workload_and_placement(tmp_path):
+    import subprocess,sys
+    destination=tmp_path/'plan'
+    subprocess.run([sys.executable,str(ROOT/'run_paired.py'),
+        '--baseline-root','/home/molly/workspace-memory-attn/offload-gap-001-A0000',
+        '--candidate-root','/home/molly/workspace-memory-attn/offload-gap-001-A0001',
+        '--screen-manifest',str(ROOT/'A0000/R01/manifest.json'),'--stage','confirmation',
+        '--plan-only','--output',str(destination)],check=True,capture_output=True,text=True)
+    manifest=json.loads((destination/'manifest.json').read_text())
+    assert len(manifest['jobs'])==48 and manifest['pairing_plan_id']=='balanced_order_v2'
+    assert driver.validate_balanced_order(manifest['jobs'])
+    for mode in ('prefill','decode'):
+        for batch in (1,8):
+            for variant in ('ma_gpu','ma_offload'):
+                firsts=[next(j['implementation'] for j in manifest['jobs'] if j['block']==block and j['mode']==mode and j['batch']==batch and j['variant']==variant) for block in (1,2,3)]
+                assert firsts[0]!=firsts[1] and firsts[1]!=firsts[2]

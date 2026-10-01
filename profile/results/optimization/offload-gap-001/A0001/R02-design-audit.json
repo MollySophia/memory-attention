@@ -1,0 +1,167 @@
+{
+  "campaign_id": "offload-gap-001",
+  "attempt_id": "A0001",
+  "run_id": "R02",
+  "status": "benchmark_failed",
+  "failure_scope": "paired experimental design, not model correctness",
+  "eligible_for_formal_acceptance": false,
+  "reason": "Reversing workload traversal canceled source and placement order alternation; each placement used the same source order in all three blocks.",
+  "evidence": [
+    {
+      "batch": 1,
+      "mode": "prefill",
+      "variant": "ma_offload",
+      "block_orders": [
+        [
+          "baseline",
+          "candidate"
+        ],
+        [
+          "baseline",
+          "candidate"
+        ],
+        [
+          "baseline",
+          "candidate"
+        ]
+      ]
+    },
+    {
+      "batch": 1,
+      "mode": "prefill",
+      "variant": "ma_gpu",
+      "block_orders": [
+        [
+          "candidate",
+          "baseline"
+        ],
+        [
+          "candidate",
+          "baseline"
+        ],
+        [
+          "candidate",
+          "baseline"
+        ]
+      ]
+    },
+    {
+      "batch": 1,
+      "mode": "decode",
+      "variant": "ma_offload",
+      "block_orders": [
+        [
+          "baseline",
+          "candidate"
+        ],
+        [
+          "baseline",
+          "candidate"
+        ],
+        [
+          "baseline",
+          "candidate"
+        ]
+      ]
+    },
+    {
+      "batch": 1,
+      "mode": "decode",
+      "variant": "ma_gpu",
+      "block_orders": [
+        [
+          "candidate",
+          "baseline"
+        ],
+        [
+          "candidate",
+          "baseline"
+        ],
+        [
+          "candidate",
+          "baseline"
+        ]
+      ]
+    },
+    {
+      "batch": 8,
+      "mode": "prefill",
+      "variant": "ma_offload",
+      "block_orders": [
+        [
+          "baseline",
+          "candidate"
+        ],
+        [
+          "baseline",
+          "candidate"
+        ],
+        [
+          "baseline",
+          "candidate"
+        ]
+      ]
+    },
+    {
+      "batch": 8,
+      "mode": "prefill",
+      "variant": "ma_gpu",
+      "block_orders": [
+        [
+          "candidate",
+          "baseline"
+        ],
+        [
+          "candidate",
+          "baseline"
+        ],
+        [
+          "candidate",
+          "baseline"
+        ]
+      ]
+    },
+    {
+      "batch": 8,
+      "mode": "decode",
+      "variant": "ma_offload",
+      "block_orders": [
+        [
+          "baseline",
+          "candidate"
+        ],
+        [
+          "baseline",
+          "candidate"
+        ],
+        [
+          "baseline",
+          "candidate"
+        ]
+      ]
+    },
+    {
+      "batch": 8,
+      "mode": "decode",
+      "variant": "ma_gpu",
+      "block_orders": [
+        [
+          "candidate",
+          "baseline"
+        ],
+        [
+          "candidate",
+          "baseline"
+        ],
+        [
+          "candidate",
+          "baseline"
+        ]
+      ]
+    }
+  ],
+  "numerical_findings": "Batch1 prefill reduction is strong, but batch1 decode resident candidate is 0.0614 ms slower and offload decode is noisy. Fixed order is a concrete potential confound; causation is not established.",
+  "action": "Preserve all R02 data and analysis as diagnostic evidence. Predeclare balanced_order_v2 with unchanged 10/10/3 sampling and rerun all four primary workloads for both placements and sources. Do not combine R02 with corrected confirmation; do not launch full validation before the corrected gate.",
+  "next_run": "R03-confirmation-v2",
+  "optimization_attempt_unchanged": true
+}

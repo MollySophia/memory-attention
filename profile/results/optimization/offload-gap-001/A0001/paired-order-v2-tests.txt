@@ -1,0 +1,21 @@
+
+profile/results/optimization/offload-gap-001/test_reuse_helpers.py::test_valid_evidence PASSED [  5%]
+profile/results/optimization/offload-gap-001/test_reuse_helpers.py::test_incompatible_evidence_rejected[path0-oom] PASSED [ 11%]
+profile/results/optimization/offload-gap-001/test_reuse_helpers.py::test_incompatible_evidence_rejected[path1-wrong] PASSED [ 16%]
+profile/results/optimization/offload-gap-001/test_reuse_helpers.py::test_incompatible_evidence_rejected[path2-screen_v1_w3_n5_r1] PASSED [ 22%]
+profile/results/optimization/offload-gap-001/test_reuse_helpers.py::test_incompatible_evidence_rejected[path3-0] PASSED [ 27%]
+profile/results/optimization/offload-gap-001/test_reuse_helpers.py::test_incompatible_evidence_rejected[path4-4321] PASSED [ 33%]
+profile/results/optimization/offload-gap-001/test_reuse_helpers.py::test_incompatible_evidence_rejected[path5-1024] PASSED [ 38%]
+profile/results/optimization/offload-gap-001/test_reuse_helpers.py::test_incompatible_evidence_rejected[path6-True] PASSED [ 44%]
+profile/results/optimization/offload-gap-001/test_reuse_helpers.py::test_incompatible_evidence_rejected[path7-8] PASSED [ 50%]
+profile/results/optimization/offload-gap-001/test_reuse_helpers.py::test_incompatible_evidence_rejected[path8-wrong] PASSED [ 55%]
+profile/results/optimization/offload-gap-001/test_reuse_helpers.py::test_incompatible_evidence_rejected[path9-wrong] PASSED [ 61%]
+profile/results/optimization/offload-gap-001/test_reuse_helpers.py::test_incompatible_evidence_rejected[path10-full_logits_no_cache] PASSED [ 66%]
+profile/results/optimization/offload-gap-001/test_reuse_helpers.py::test_incompatible_evidence_rejected[path11-value11] PASSED [ 72%]
+profile/results/optimization/offload-gap-001/test_reuse_helpers.py::test_original_confirmation_order_is_rejected PASSED [ 77%]
+profile/results/optimization/offload-gap-001/test_reuse_helpers.py::test_new_plan_alternates_each_workload_and_placement PASSED [ 83%]
+profile/results/optimization/offload-gap-001/test_matrix_collection.py::test_process_uncertainty_does_not_use_rounds_as_independent_runs PASSED [ 88%]
+profile/results/optimization/offload-gap-001/test_matrix_collection.py::test_one_process_round_range_is_not_confidence_interval PASSED [ 94%]
+profile/results/optimization/offload-gap-001/test_matrix_collection.py::test_oom_retained_without_zero_latency PASSED [100%]
+
+============================== 18 passed in 0.19s ==============================

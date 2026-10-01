@@ -1,0 +1,30 @@
+{
+  "campaign_id": "offload-gap-001",
+  "attempt_id": "A0001",
+  "status": "confirmation_needs_review",
+  "controller_pid": 1741257,
+  "confirmation_pid": 1731287,
+  "confirmation_process_identity": [
+    "S",
+    "327955361"
+  ],
+  "jobs": [
+    {
+      "name": "analyze-confirmation",
+      "command": [
+        "/home/molly/miniconda3/envs/fla-bench/bin/python",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/analyze_paired.py",
+        "profile/results/optimization/offload-gap-001/A0001/R02-confirmation/manifest.json",
+        "--output",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/confirmation-analysis.json"
+      ],
+      "status": "completed",
+      "started_unix": 1790867580.301115,
+      "pid": 1746014,
+      "returncode": 0,
+      "finished_unix": 1790867580.3275082
+    }
+  ],
+  "accepted": false,
+  "reason": "Predeclared primary statistical/memory gate did not pass"
+}
