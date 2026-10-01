@@ -22,7 +22,8 @@
   "correctness": {
     "pytest": "78 passed;correctness-pytest.txt",
     "standalone": "PASS,maxdiff0;correctness-standalone.txt",
-    "independent_reference": "A0003/reference.py loads frozen A0002 attention,which does not opt into paired rotary;128-step exact model gates passed."
+    "independent_reference": "A0003/reference.py loads frozen A0002 attention,which does not opt into paired rotary;128-step exact model gates passed.",
+    "primary": "296 exact comparisons against frozen A0002 attention plus independent A0000 cache"
   },
   "screening": {
     "run": "R01-screening",
