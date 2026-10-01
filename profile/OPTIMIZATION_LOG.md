@@ -183,3 +183,22 @@ Run all correctness gates plus automatic-policy transition checks first.
 Only promising results advance to independent confirmation; no acceptance or
 accepted-step increment from screening. Full validation/generation intentionally
 not run yet. Exact candidate/parent SHAs are recorded in A0001/record.json.
+
+
+A0001 screen complete: committed candidate `942a2a5`; 43 tests and standalone
+gate pass. All 12 isolated jobs completed. Batch-1 prefill offload 29.378 ms,
+resident 28.672 ms, gap +0.706 ms versus baseline +14.790 ms. This provisional
+screen suggests a 1.484x offload speedup; it is not an accepted/headline gain.
+Other primary and batch-16 points show no obvious screening regression;
+all offloaded peaks remain at least 2510.5 MiB below matched resident peaks.
+Full per-shape signed gaps, dispersion and memory are in screen-comparison.json.
+
+The changed batch-1 prefill diagnostic completes in 30.238 ms (instrumented),
+with 24 transfers instead of one. CPU gather spans sum to 3.481 ms and H2D
+stream spans to 6.439 ms, overlapping model work. Spans are not additive.
+Next: independent balanced baseline/candidate confirmation, 48 processes,
+three process blocks at 10/10/3, both placements at all four primary workloads.
+Use frozen source worktrees A0000=`62942a0`, A0001=`942a2a5`; this preserves
+candidate commit identity across repeated runs while result commits advance.
+No accepted step yet. Full matrix, growing generation and full-model frozen
+reference fingerprints remain gates after confirmation.
