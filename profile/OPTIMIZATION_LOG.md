@@ -225,3 +225,12 @@ Summary: `batch-sweep-summary.json`; exact live-state snapshot: `R01-checkpoint-
 Controller PID 1432876 and current child verified live. Length512 scan has
 started; length4096/8192 and generation still pending. No runtime restart.
 No candidate speedup claim: these are frozen-baseline scaling measurements.
+
+### A0000 — 512-length scan checkpoint (2026-10-01)
+
+Counts: {"completed": 30, "running": 1, "pending": 17}. All completed records validate against frozen
+source/configuration and recomputed raw-sample statistics. Controller and active
+child verified live; no restart or concurrent GPU profiling. Details and process
+observation: `R01-checkpoint-05.json`. Length4096/8192 and generation remain
+required before baseline completion. This turn is continued verified waiting
+plus preservation of newly completed measurement evidence.
