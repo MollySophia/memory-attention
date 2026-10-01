@@ -72,7 +72,7 @@ def main():
         proc=Path(f'/proc/{pid}/cmdline')
         if manifest.get('status')=='running' and proc.exists():
             cmd=proc.read_bytes()
-            assert not any(name in cmd for name in (b'run_confirmation.py',b'run_full_validation.py',b'run_small_batch_check.py',b'run_screening.py')), f'Live timing controller: {pid}'
+            assert not any(name in cmd for name in (b'run_confirmation.py',b'run_full_validation.py',b'run_small_batch_check.py',b'run_screening.py',b'run_regression_followup.py')), f'Live timing controller: {pid}'
     rows,accepted,reference=collect(root)
     args.output.mkdir(parents=True,exist_ok=False)
     payload=dict(scope='paper_v1; primary batch8/context2048; ma_offload; formal10/10/3; random weights',
@@ -123,7 +123,7 @@ def main():
         xs=[r['accepted_step'] for r in selected];ys=[r['paired_speedup'] for r in selected]
         ax.errorbar(xs,ys,yerr=[[r['paired_speedup']-r['ci95_low'] for r in selected],
                                [r['ci95_high']-r['paired_speedup'] for r in selected]],fmt='o-',capsize=4,color='#0072B2')
-        ax.axhline(1,color='gray',linestyle=':');ax.set_xticks(xs,['baseline' if x==0 else f'+step{x}\n{r["attempt_id"]}' for x,r in zip(xs,selected)])
+        ax.axhline(1,color='gray',linestyle=':');ax.set_xticks(xs,['baseline' if x==0 else f'+bounded KV reuse\n{r["attempt_id"]}' for x,r in zip(xs,selected)])
         ax.set_title(mode);ax.set_ylabel('Speedup vs matched frozen baseline');ax.grid(alpha=.2)
     fig.suptitle('Cumulative accepted steps only')
     save(fig,'accepted_steps',caption.replace('Latency bars: process range, not CI.','Speedup bars:95% paired-log t CI (3 independent pairs).'))

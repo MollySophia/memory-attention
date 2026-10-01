@@ -2,9 +2,9 @@
   "attempt_id": "A0002",
   "parent_attempt_id": "A0000",
   "informed_by_attempt": "A0001",
-  "accepted_step": null,
-  "status": null,
-  "phase": "regression_followup_preparation",
+  "accepted_step": 1,
+  "status": "accepted",
+  "phase": "accepted_documentation_and_figures",
   "candidate_sha": "7647da8c431fa4e7bf5800d7556ef2f8f6c171ed",
   "parent_sha": "384aa1a5e644d7ee2fe3fa7cc1a07cd82ca30b17",
   "label": "Bounded KV reuse for multi-item batches with batch1 concatenation",
@@ -20,7 +20,8 @@
     "screening": "screening-summary.json",
     "small_batch": "small-batch-summary.json",
     "primary_confirmation": "confirmation-summary.json",
-    "full_validation": "reports/R06-final-audit/source.json"
+    "full_validation": "reports/R06-final-audit/source.json",
+    "regression_followup": "regression-followup-summary.json"
   },
   "risks": [
     "Batch gating may forgo gains at batch1 with very long contexts; no gain claimed there.",
@@ -35,7 +36,7 @@
     "async_generation": "4 passed: batch1/2 bulk/pipeline,128 steps with GPU snapshots and end-only synchronization; async-gate-pytest.txt"
   },
   "screening_outcome": "Primary offload decode2.029x and short-context decode1.116x provisional speedup. Batch1 offload-2.45% latency, resident+2.08%; unresolved after one short process pair. Prioritize fresh small-batch confirmation before full primary confirmation.",
-  "next_action": "Three fresh alternating pairs for each of four full-matrix regression signals; no acceptance before investigation.",
+  "next_action": "Render and inspect final figures; complete reproducibility and deliverable audit.",
   "small_batch_plan": "12 fresh processes: three alternating baseline/candidate pairs per folded placement,10/10/3;95% paired-log Student-t CI df2. Any upper bound below1 triggers rejection/investigation before primary confirmation.",
   "small_batch_outcome": "Both folded placements within_noise. Resident paired speedup1.0040x,95% CI[0.9737,1.0353]. Offload1.0112x, wideCI[0.7224,1.4155]; retain all samples and do not claim equivalence. No resolved regression under predeclared criterion.",
   "primary_confirmation": {
@@ -54,7 +55,7 @@
       2.088643745947008
     ],
     "prefill": "within_noise in both placements",
-    "memory": "preserved CPU table placement and positive offload GPU peak saving; full-matrix check pending"
+    "memory": "Preserved across all16 final placement pairs;1.9524\u20132.8278GiB GPU peak saving."
   },
   "full_validation_plan": "R05-full-plan:96 records,19 verified reuses,77 new processes; estimated37.0 minutes. Reuse audit passed570 existing samples; all stages keep exact source/config/import checks.",
   "full_validation": {
@@ -70,5 +71,19 @@
     "samples": 2700,
     "memory_audit": "R06-memory-final.json",
     "regression_signals_requiring_followup": 4
-  }
+  },
+  "regression_followup": {
+    "run": "R08-regression-followup",
+    "controller_pid": 1576361,
+    "controller_log": "R08-controller.log",
+    "job_count": 24,
+    "estimated_minutes": 8.332882499787956,
+    "candidate_commit": "18c849d80f8be696de473e1aef6aeb71539dfa0d",
+    "accepted": false,
+    "status": "complete",
+    "samples": 720,
+    "summary": "regression-followup-summary.json",
+    "verdict": "four within_noise; no equivalence claim"
+  },
+  "reason": "Repeatable primary offload decode improvement, no resolved primary or investigated scaling regression, exact correctness and full matrix/generation/memory gates passed."
 }

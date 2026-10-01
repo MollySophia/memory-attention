@@ -1,6 +1,33 @@
 {
-  "accepted": true,
-  "purpose": "Completion checklist against GOAL.md; partial measurements do not establish acceptance.",
+  "implementation_matches_candidate_commit": true,
+  "source_hash": "87d1ba4b7d75b0641c4564b03bf7e30a7fe6c5545acd9e4566fd6d754862689d",
+  "full_matrix_records": 96,
+  "full_matrix_samples": 2700,
+  "followup_records": 24,
+  "followup_samples": 720,
+  "followup_resolved_regressions": false,
+  "memory_placement_pairs": 16,
+  "figures": [
+    "final-figures/history/attempt_history.png",
+    "final-figures/history/accepted_steps.png",
+    "final-figures/scaling/gpu_peak_reserved_gib.png",
+    "final-figures/scaling/tokens_per_second.png",
+    "final-figures/scaling/median_ms.png",
+    "final-figures/scaling/growing_generation.png",
+    "final-figures/scaling/host_rss_gib.png",
+    "final-figures/scaling/gpu_peak_allocated_gib.png"
+  ],
+  "figure_formats": [
+    "PNG",
+    "PDF",
+    "SVG"
+  ],
+  "visual_review": "All eight PNG figures inspected for labels, scopes, curves and legends; round ranges distinguished from paired CI.",
+  "history_incumbent_and_accepted_steps_verified": true,
+  "correctness": "41 candidate tests +4 end-only-sync generation cases; standalone diff0; primary exact check passed.",
+  "remaining": [
+    "Final commit and explicit origin branch push verification"
+  ],
   "requirements": [
     {
       "requirement": "Exact intended model, protocol, parameter placement and frozen reference",
@@ -104,6 +131,5 @@
       ],
       "remaining": "None; eight PNGs visually inspected,24 image/vector artifacts validated."
     }
-  ],
-  "deliverables_complete": false
+  ]
 }

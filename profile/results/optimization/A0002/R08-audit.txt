@@ -1,0 +1,203 @@
+{
+  "run": "R08-regression-followup",
+  "job_count": 24,
+  "sample_count": 720,
+  "rows": [
+    {
+      "case": 1,
+      "mode": "prefill",
+      "variant": "ma_offload",
+      "batch": 1,
+      "length": 2048,
+      "geometric_mean_speedup": 0.9938855961360198,
+      "ci95": [
+        0.974601261637742,
+        1.0135515077691524
+      ],
+      "verdict": "within_noise",
+      "original_single_pair_speedup": 0.9940369044409921
+    },
+    {
+      "case": 2,
+      "mode": "prefill",
+      "variant": "ma_offload",
+      "batch": 8,
+      "length": 512,
+      "geometric_mean_speedup": 1.0060349333550054,
+      "ci95": [
+        0.9685324288368556,
+        1.044989570814974
+      ],
+      "verdict": "within_noise",
+      "original_single_pair_speedup": 0.9828021786591955
+    },
+    {
+      "case": 3,
+      "mode": "prefill",
+      "variant": "ma_gpu",
+      "batch": 8,
+      "length": 512,
+      "geometric_mean_speedup": 1.0001375835375694,
+      "ci95": [
+        0.9996132973354207,
+        1.0006621447220765
+      ],
+      "verdict": "within_noise",
+      "original_single_pair_speedup": 0.9958135361249342
+    },
+    {
+      "case": 4,
+      "mode": "decode",
+      "variant": "ma_gpu_unfolded",
+      "batch": 8,
+      "length": 512,
+      "geometric_mean_speedup": 0.990216805898309,
+      "ci95": [
+        0.9500540275265973,
+        1.032077433781521
+      ],
+      "verdict": "within_noise",
+      "original_single_pair_speedup": 0.9821574861030367
+    }
+  ],
+  "pairs": [
+    {
+      "case": 1,
+      "pair": 1,
+      "mode": "prefill",
+      "variant": "ma_offload",
+      "batch": 1,
+      "length": 2048,
+      "baseline_ms": 43.65295427851379,
+      "candidate_ms": 44.1480403766036,
+      "speedup": 0.9887857740940142
+    },
+    {
+      "case": 1,
+      "pair": 2,
+      "mode": "prefill",
+      "variant": "ma_offload",
+      "batch": 1,
+      "length": 2048,
+      "baseline_ms": 43.465072149410844,
+      "candidate_ms": 43.90496578998864,
+      "speedup": 0.9899807770564737
+    },
+    {
+      "case": 1,
+      "pair": 3,
+      "mode": "prefill",
+      "variant": "ma_offload",
+      "batch": 1,
+      "length": 2048,
+      "baseline_ms": 43.58598026446998,
+      "candidate_ms": 43.45768615603447,
+      "speedup": 1.0029521615111967
+    },
+    {
+      "case": 2,
+      "pair": 1,
+      "mode": "prefill",
+      "variant": "ma_offload",
+      "batch": 8,
+      "length": 512,
+      "baseline_ms": 81.80692233145237,
+      "candidate_ms": 79.91194962523878,
+      "speedup": 1.0237132583437196
+    },
+    {
+      "case": 2,
+      "pair": 2,
+      "mode": "prefill",
+      "variant": "ma_offload",
+      "batch": 8,
+      "length": 512,
+      "baseline_ms": 81.87146252021194,
+      "candidate_ms": 81.88654058612883,
+      "speedup": 0.9998158663706029
+    },
+    {
+      "case": 2,
+      "pair": 3,
+      "mode": "prefill",
+      "variant": "ma_offload",
+      "batch": 8,
+      "length": 512,
+      "baseline_ms": 80.73758729733527,
+      "candidate_ms": 81.15867264568806,
+      "speedup": 0.9948115791618339
+    },
+    {
+      "case": 3,
+      "pair": 1,
+      "mode": "prefill",
+      "variant": "ma_gpu",
+      "batch": 8,
+      "length": 512,
+      "baseline_ms": 52.34785154461861,
+      "candidate_ms": 52.33091679401696,
+      "speedup": 1.0003236089034768
+    },
+    {
+      "case": 3,
+      "pair": 2,
+      "mode": "prefill",
+      "variant": "ma_gpu",
+      "batch": 8,
+      "length": 512,
+      "baseline_ms": 52.33137300238013,
+      "candidate_ms": 52.32190131209791,
+      "speedup": 1.0001810272571274
+    },
+    {
+      "case": 3,
+      "pair": 3,
+      "mode": "prefill",
+      "variant": "ma_gpu",
+      "batch": 8,
+      "length": 512,
+      "baseline_ms": 52.326258877292275,
+      "candidate_ms": 52.33106501400471,
+      "speedup": 0.9999081590120296
+    },
+    {
+      "case": 4,
+      "pair": 1,
+      "mode": "decode",
+      "variant": "ma_gpu_unfolded",
+      "batch": 8,
+      "length": 512,
+      "baseline_ms": 5.669918470084667,
+      "candidate_ms": 5.728186061605811,
+      "speedup": 0.9898279156971361
+    },
+    {
+      "case": 4,
+      "pair": 2,
+      "mode": "decode",
+      "variant": "ma_gpu_unfolded",
+      "batch": 8,
+      "length": 512,
+      "baseline_ms": 5.677215242758393,
+      "candidate_ms": 5.637448048219085,
+      "speedup": 1.0070541128182762
+    },
+    {
+      "case": 4,
+      "pair": 3,
+      "mode": "decode",
+      "variant": "ma_gpu_unfolded",
+      "batch": 8,
+      "length": 512,
+      "baseline_ms": 5.669301003217697,
+      "candidate_ms": 5.820377357304096,
+      "speedup": 0.9740435465242111
+    }
+  ],
+  "unresolved_failed_points": [],
+  "any_resolved_regression": false,
+  "accepted": false,
+  "original_points_pooled": false,
+  "uncertainty": "95% Student-t interval on three fresh paired log speedups,df2. Small-n normal-log assumption. within_noise does not establish equivalence.",
+  "audit": "Unique process IDs, exact source commits/hashes/imports, clean source patches, paired config/model/environment, sampling counts, finite samples and recomputed estimators verified."
+}

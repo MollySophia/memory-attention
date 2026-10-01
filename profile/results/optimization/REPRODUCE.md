@@ -75,3 +75,92 @@ Analyses describe round ranges separately from process-pair confidence
 intervals. Final acceptance and publication figures require full matrix,
 growing-generation validation, unresolved-regression review and all correctness
 gates. Never relabel partial reports or a rejected attempt as final evidence.
+
+## Full validation and regression followup
+
+A0002/R06 contains all96 baseline/candidate records (48 each),2700 samples.
+Nineteen records were reused only after checking source, scope, counts and
+recorded environment. Reused paths are explicit in the manifest. Candidate
+A0001 records are never reused as A0002 evidence. To audit these stored data:
+
+```sh
+/home/molly/miniconda3/envs/fla-bench/bin/python profile/results/optimization/A0002/analyze_full_validation.py --run profile/results/optimization/A0002/R06-full-validation --output /tmp/a0002-full-audit
+/home/molly/miniconda3/envs/fla-bench/bin/python profile/results/optimization/A0002/audit_memory.py --run profile/results/optimization/A0002/R06-full-validation --output /tmp/a0002-memory-audit.json
+```
+
+The full audit recomputes raw-sample statistics and validates each imported
+implementation, source/configuration, environment and sample count. Memory
+checks cover all96 records and16 candidate offload/resident pairs, including
+CPU tables, pinned allocations, GPU staging buffers and backing KV storage.
+Host RSS includes setup and allocator effects; offload GPU savings do not imply
+host-memory savings.
+
+The four descriptive round-range regression signals are predeclared in
+`A0002/R07-followup-plan/manifest.json`. R08 measures three fresh alternating
+pairs per signal,24 processes total. Initial full-matrix points are retained
+and excluded from the fresh paired analysis. Reproduce this followup only with
+clean committed source, after all other GPU work has exited:
+
+```sh
+/home/molly/miniconda3/envs/fla-bench/bin/python profile/results/optimization/A0002/run_regression_followup.py --audit profile/results/optimization/A0002/reports/R06-final-audit/source.json --output /tmp/a0002-replay/R08-regression-followup
+/home/molly/miniconda3/envs/fla-bench/bin/python profile/results/optimization/A0002/analyze_regression_followup.py /tmp/a0002-replay/R08-regression-followup
+```
+
+The followup analyzer writes its summary beside the run directory. The exact
+child commands, alternating order, independent process identities and source
+commits remain in the manifest. Its confidence interval is a95% Student-t
+interval on three paired log ratios (df2); this small-sample assumption must
+remain stated. A confidence interval containing1 is within_noise, not proof
+of equivalence. Do not extend the run selectively until it looks favorable.
+
+The new asynchronous correctness gate queues snapshots on GPU and synchronizes
+only at trajectory completion; existing per-step CPU snapshots otherwise
+introduce synchronization absent from generation timing. It checks128 steps,
+batch1/2, bulk/pipeline, partial groups and cache-capacity boundary crossing:
+
+```sh
+/home/molly/miniconda3/envs/fla-bench/bin/python -m pytest -q tests/test_memory_offload_regressions.py -k async_generation
+```
+
+Do not run correctness tests or render figures concurrently with GPU timings.
+All generation timings use predetermined device-resident token IDs and exclude
+sampling. They measure prefill plus128 model calls, not end-to-end serving.
+
+## Final figures
+
+After timings exit, render into new output directories:
+
+```sh
+/home/molly/miniconda3/envs/fla-bench/bin/python profile/results/optimization/plot_final_comparison.py --audit profile/results/optimization/A0002/reports/R06-final-audit/source.json --output /tmp/a0002-final-scaling
+/home/molly/miniconda3/envs/fla-bench/bin/python profile/results/optimization/plot_campaign.py --output /tmp/a0002-final-history
+```
+
+Both scripts export PNG/PDF/SVG and CSV/JSON. The full-comparison input is the
+validated R06 report. Fresh regression-confirmation results remain separate;
+no averaging selectively removes an unfavorable initial observation. See
+`RESULTS.md` for the accepted verdict, exact implementation revision and limits.
+
+## Matching baseline and final implementation timing
+
+To reproduce independent primary confirmation with both sides and alternating
+order (24 fresh processes), use a clean committed checkout and run:
+
+```sh
+mkdir -p /tmp/a0002-replay
+cp profile/results/optimization/A0002/small-batch-summary.json /tmp/a0002-replay/
+/home/molly/miniconda3/envs/fla-bench/bin/python profile/results/optimization/A0002/run_confirmation.py /tmp/a0002-replay/R03-confirmation
+/home/molly/miniconda3/envs/fla-bench/bin/python profile/results/optimization/A0002/analyze_confirmation.py /tmp/a0002-replay/R03-confirmation
+```
+
+The full-validation controller prepares both frozen-baseline and candidate
+commands and verifies every reuse against the shipped records. Its plan-only
+mode records job counts and estimated cost before launching:
+
+```sh
+/home/molly/miniconda3/envs/fla-bench/bin/python profile/results/optimization/A0002/run_full_validation.py --output /tmp/a0002-replay/full-plan --plan-only
+/home/molly/miniconda3/envs/fla-bench/bin/python profile/results/optimization/A0002/run_full_validation.py --output /tmp/a0002-replay/full-run
+```
+
+These controllers expect the accompanying campaign records and sibling frozen
+checkout; preserve that layout. The already validated R06 evidence can be used
+for the accepted identical implementation without rerunning it.

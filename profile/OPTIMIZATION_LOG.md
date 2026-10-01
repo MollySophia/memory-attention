@@ -550,3 +550,15 @@ Round-range signals are not confirmed regressions. Predeclare three new alternat
 pairs per point,24 processes, keeping initial observations separate and retaining
 all outcomes. A0002 remains unaccepted. Initial plan-only preflight refused
 uncommitted nested result scripts; no measurements started. Commit evidence first.
+
+A0002 R08 completed24 fresh processes/720 samples. Exact-source/import/config/
+environment/raw-statistics audit passed. Four followups are within_noise under
+the predeclared95% paired-log t criterion: b1offload prefill0.99389x
+[0.97460,1.01355]; b8l512offload prefill1.00603x[0.96853,1.04499];
+resident prefill1.00014x[0.99961,1.00066]; unfolded decode0.99022x
+[0.95005,1.03208]. Initial matrix points were not pooled; no optional repeats.
+Accept A0002 as cumulative step1: primary offload decode1.99048x confirmed;
+other primary within_noise; full matrix and generation complete; exact gates
+passed; offload memory saving preserved; no resolved investigated regression.
+Keep wide batch1offload uncertainty and all failed A0001 evidence. No equivalence
+or text-quality claim. Final plots and deliverable audit remain to finish.
