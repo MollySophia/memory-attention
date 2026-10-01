@@ -146,3 +146,24 @@ These 1-warmup/2-sample/2-round smoke runs are **not baseline measurements**
 and support no performance claim. Details: `A0000/telemetry-validation.json`.
 Next: primary-shape correctness, explicit failure/OOM records and frozen
 matrix orchestration, then freeze A0000 and perform formal measurements.
+
+### A0000 — frozen paper_v1 baseline launched (2026-10-01)
+
+Candidate SHA: `d949640ebf2f13f56021bd08c5c9f10e65d571c3`. Protocol: `A0000/protocol.json`.
+Independent frozen checkout: `/home/molly/workspace-memory-attn/baseline-paper-001`.
+26 regression tests pass, standalone gate passes, and committed-source primary
+check passes: batch8/length2048, 24 layers, plus 3 growing decode steps,
+296 exact tensor comparisons covering logits, all hidden states and complete KV.
+Small-model 128-step multi-seed padded/unpadded coverage was retained.
+
+R01 runs 48 isolated jobs (7 unique batch/length shapes x 2 modes x 3 placements,
+plus 2 generation batches x 3 placements), 30 warmups, 30 samples, 5 rounds.
+Each job records its PID, command, return code, raw results and log. Exceptions
+produce structured oom/benchmark_failed status; missing process output is a
+failure, never a zero measurement. The complete plan is preserved.
+
+R01 is running; no baseline estimate or optimization claim yet. See
+`A0000/R01/manifest.json` and `A0000/R01-controller.txt`; poll the controller
+and current child PIDs before taking any restart action. This campaign will
+profile then evaluate at most three focused candidates before full-matrix
+confirmation; failure/noise never satisfies the optimization objective.

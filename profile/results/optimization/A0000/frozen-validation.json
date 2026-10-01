@@ -1,0 +1,16 @@
+{
+  "candidate_sha": "d949640ebf2f13f56021bd08c5c9f10e65d571c3",
+  "pytest": "26 passed",
+  "standalone_gate": "PASS",
+  "primary_gate": "PASS: exact all 296 tensor comparisons; primary prefill plus 3 growing steps",
+  "primary_scope": "24 layers, 2048 hidden, batch8/prefix2048, last-token logits, all hidden states and complete KV",
+  "small_model_growing": "128 steps, two seeds, padded/unpadded, QK norm and gating, bulk/pipeline",
+  "commands": [
+    "/home/molly/miniconda3/envs/fla-bench/bin/python -m pytest -q tests/test_decode_benchmark.py tests/test_memory_offload_regressions.py",
+    "/home/molly/miniconda3/envs/fla-bench/bin/python profile/test_memory_offload.py",
+    "/home/molly/miniconda3/envs/fla-bench/bin/python profile/verify_primary.py --output profile/results/optimization/A0000/primary-correctness.json"
+  ],
+  "baseline_worktree": "/home/molly/workspace-memory-attn/baseline-paper-001",
+  "matrix_command": "/home/molly/miniconda3/envs/fla-bench/bin/python profile/run_paper_matrix.py --output /home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/A0000/R01",
+  "execution_session": 14345
+}
