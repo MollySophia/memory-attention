@@ -13,6 +13,7 @@ import hashlib
 import json
 import math
 from pathlib import Path
+import platform
 import subprocess
 import sys
 import time
@@ -22,6 +23,60 @@ def write_json(path, data):
     temp = path.with_suffix(path.suffix + '.tmp')
     temp.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding='utf-8')
     temp.replace(path)
+
+
+def git_commit():
+    try:
+        out = subprocess.run(['git', 'rev-parse', '--short', 'HEAD'],
+                             capture_output=True, text=True, timeout=5)
+        return out.stdout.strip() or 'unknown'
+    except (OSError, subprocess.SubprocessError):
+        return 'unknown'
+
+
+def git_dirty():
+    try:
+        out = subprocess.run(['git', 'status', '--porcelain'],
+                             capture_output=True, text=True, timeout=5)
+        return bool(out.stdout.strip())
+    except (OSError, subprocess.SubprocessError):
+        return None
+
+
+def probe_env(bmk):
+    """Runtime identity for this sweep. Written to <output>/env.json.
+
+    Everything here can move a latency number on its own, so a sweep whose
+    environment changed is treated as a different experiment rather than
+    resumed into the old summary.
+    """
+    env = {}
+    try:
+        import torch
+        env['torch'] = torch.__version__
+        env['torch_cuda'] = torch.version.cuda
+        if torch.cuda.is_available():
+            env['gpu'] = torch.cuda.get_device_name(0)
+            cap = torch.cuda.get_device_capability(0)
+            env['gpu_capability'] = f'sm_{cap[0]}{cap[1]}'
+            env['gpu_count'] = torch.cuda.device_count()
+    except ImportError:
+        pass
+    try:
+        import flash_attn
+        env['flash_attn'] = flash_attn.__version__
+    except Exception:
+        env['flash_attn'] = 'none'
+    try:
+        import fla
+        env['fla'] = fla.__version__
+    except ImportError:
+        pass
+    env['python'] = platform.python_version()
+    env['git_commit'] = git_commit()
+    env['git_dirty'] = git_dirty()
+    env['driver'] = bmk.name
+    return dict(env=env)
 
 
 def read_result(path, job):
@@ -230,6 +285,9 @@ def main():
     p.add_argument('--rounds', type=int, default=5)
     p.add_argument('--logits-to-keep', type=int, default=0)
     p.add_argument('--resume', action='store_true', help='skip valid successful jobs with identical configuration/code')
+    p.add_argument('--allow-env-change', action='store_true',
+                   help='overwrite env.json and re-measure even if the output '
+                        'directory was produced in a different environment')
     p.add_argument('--dry-run', action='store_true', help='write plan without running benchmarks')
     p.add_argument('--plot-only', action='store_true', help='plot existing summary.json without running benchmarks')
     p.add_argument('--extra-args', nargs=argparse.REMAINDER, default=[],
@@ -256,6 +314,30 @@ def main():
         p.error(f'Benchmark script not found: {bmk}')
     output = args.output.resolve()
     (output / 'runs').mkdir(parents=True, exist_ok=True)
+
+    # Fingerprint the tree and the runtime. Timings are only comparable within
+    # one environment: a different GPU, torch build or flash-attn changes the
+    # numbers by more than any optimization under test. Recorded once here and
+    # folded into every job signature, so --resume cannot silently reuse rows
+    # measured elsewhere.
+    env = probe_env(bmk)
+    recorded = output / 'env.json'
+    if recorded.exists() and not args.allow_env_change:
+        previous = json.loads(recorded.read_text(encoding='utf-8'))
+        drift = {k: (previous.get('env', {}).get(k), env['env'].get(k))
+                 for k in env['env']
+                 if previous.get('env', {}).get(k) != env['env'].get(k)}
+        if drift:
+            changed = ', '.join(f'{k}: {a} -> {b}' for k, (a, b) in drift.items())
+            p.error(
+                f'{output} was measured in a different environment ({changed}). '
+                f'Use a fresh --output, or pass --allow-env-change to discard it.'
+            )
+    write_json(recorded, env)
+    if env['env'].get('git_commit') in (None, '', 'unknown'):
+        print('warning: could not determine git commit; results will not be '
+              'attributable to a tree', file=sys.stderr)
+
     script_hashes = {bmk.name: hashlib.sha256(bmk.read_bytes()).hexdigest()}
     helper = bmk.with_name('ma_profile.py')
     if helper.exists():
@@ -279,14 +361,18 @@ def main():
                            '--warmup', str(args.warmup), '--repeats', str(args.repeats),
                            '--rounds', str(args.rounds), '--logits-to-keep', str(args.logits_to_keep),
                            '--json', str(result), *args.extra_args]
+                # The signature covers the environment as well as the command,
+                # so --resume never mixes rows measured on different hardware
+                # or a different checkout into one summary.
                 signature = hashlib.sha256(json.dumps(
-                    [command, script_hashes], sort_keys=True).encode()).hexdigest()
+                    [command, script_hashes, env['env']], sort_keys=True).encode()).hexdigest()
                 jobs.append(dict(key=key, batch_size=batch, length=length, sweep_axes=','.join(axes),
                                  mode=mode, variant=variant, command=command,
                                  signature=signature, result=str(result),
                                  log=str(result.with_suffix('.log'))))
-    write_json(output / 'plan.json', dict(script_hashes=script_hashes, jobs=jobs))
+    write_json(output / 'plan.json', dict(script_hashes=script_hashes, env=env, jobs=jobs))
     print(f'{len(jobs)} isolated runs; output: {output}', flush=True)
+    print('env: ' + ', '.join(f'{k}={v}' for k, v in env['env'].items()), flush=True)
     print('Length = prefill sequence length AND decode prefix length; logits-to-keep=' + str(args.logits_to_keep), flush=True)
     if args.dry_run:
         return

@@ -40,9 +40,29 @@ python profile/sweep_bmk.py --bmk bench_fla.py --output sweep_results \
 (no `v_proj`), so `ma_gpu` — the resident, norm-folded table — is the baseline
 where the only difference is the transfer itself.
 
+### Environment convention
+
+Each sweep writes `<output>/env.json` recording the git commit, whether the
+tree was dirty, torch / torch_cuda / flash-attn / fla versions, python, GPU
+name, capability and count. On a later run against the same directory:
+
+- any difference in those fields is **rejected** with a diff of what changed,
+  because a different GPU or torch build moves timings by more than any
+  optimization under test;
+- the environment is folded into every job signature, so `--resume` cannot
+  reuse rows measured elsewhere;
+- pass `--allow-env-change` to deliberately re-measure in a new environment.
+
+**One sweep directory = one environment = one experiment.** When comparing
+across optimization steps, compare the summary CSVs and check that their
+`env.json` files agree; if the commit differs, the numbers are from a different
+tree and are not directly comparable. Record the commit in the log entry.
+
 ## Established baseline
 
-Recorded on the environment below, at commit `e99a271`.
+Recorded on the environment below, at commit `300ebb9` (tree dirty: the
+sweep harness changes were uncommitted during the run). See `env.json` in
+`results/sweep_baseline/` for the machine-readable form.
 
 | env | |
 |---|---|
@@ -58,19 +78,23 @@ BF16. `ma_gpu` is the 1.00x reference. Raw data:
 
 | mode | batch | ma_gpu (ms) | ma_offload (ms) | rel | offload spread |
 |---|---|---|---|---|---|
-| prefill | 4 | 110.093 | 114.245 | 0.96x | 1.79% |
-| prefill | 8 | 216.879 | 220.620 | 0.98x | 0.84% |
-| prefill | 16 | 438.721 | 446.005 | 0.98x | 1.41% |
-| decode | 4 | 7.281 | 7.372 | 0.99x | 0.19% |
-| decode | 8 | 10.988 | 11.077 | 0.99x | 0.63% |
-| decode | 16 | 20.428 | 20.385 | **1.00x** | 0.23% |
+| prefill | 4 | 110.159 | 113.277 | 0.97x | 0.81% |
+| prefill | 8 | 217.244 | 220.549 | 0.99x | 0.93% |
+| prefill | 16 | 438.525 | 446.003 | 0.98x | 1.42% |
+| decode | 4 | 7.277 | 7.370 | 0.99x | 0.20% |
+| decode | 8 | 11.004 | 11.124 | 0.99x | 0.88% |
+| decode | 16 | 20.423 | 20.394 | **1.00x** | 0.57% |
 
-Offload overhead: ~2–4% at prefill, ≤1% at decode, and at batch 16 decode it
-falls inside the noise floor entirely. Reference spread is 0.04–1.96%; treat
-anything under ~2% at prefill and ~0.6% at decode as unresolved at this
-sample size.
+Offload overhead: ~1–3% at prefill, ≤1% at decode, and at batch 16 decode it
+falls inside the noise floor. Reference spread is 0.05–1.93%; treat anything
+under ~2% at prefill and ~0.9% at decode as unresolved at this sample size.
 
-Throughput at batch 16 decode: 785 tok/s offloaded vs 783 resident.
+Throughput at batch 16 decode: 784 tok/s offloaded vs 784 resident.
+
+An earlier run of this same sweep gave 216.9 / 220.6 ms at bs8 prefill against
+217.2 / 220.5 here — agreement to 0.5%. That is the spread column doing its job:
+run-to-run variation is comparable to the effects being measured, so no single
+point should be quoted as evidence on its own.
 
 Memory: GPU-resident parameters drop 2836.5M → 1263.6M, and the 3000 MiB table
 moves to pinned host memory. That is the actual trade — the offload is
@@ -90,5 +114,17 @@ them. If the goal is a large model on a small GPU, the prefill cost is the
 number to argue about — at batch 16 that is 7.3 ms of 446 ms.
 
 ## Entries
+
+One per optimization step, newest last. Copy this template:
+
+```markdown
+### <short title> — <commit>
+
+**Change.** What changed and why.
+**Correctness.** `PASS` / failure, and anything the gate does not cover.
+**Data.** `<output dir>` — prefill median vs baseline, decode median vs
+baseline, spread, GPU parameters.
+**Verdict.** Better / worse / within noise, against the spread column.
+```
 
 _(none yet — append one per optimization step)_

@@ -1,0 +1,68 @@
+{
+  "config": {
+    "mode": "decode",
+    "variants": [
+      "ma_offload"
+    ],
+    "batch_size": 4,
+    "seq_len": 2048,
+    "context_len": 2048,
+    "warmup": 10,
+    "repeats": 20,
+    "rounds": 5,
+    "logits_to_keep": 0,
+    "hidden_size": 2048,
+    "num_heads": 32,
+    "num_kv_heads": null,
+    "num_layers": 24,
+    "vocab_size": 32000,
+    "hidden_ratio": 4,
+    "intermediate_size": null,
+    "group_size": 1,
+    "prefetch_depth": 4,
+    "policy": "auto",
+    "seed": 1234,
+    "device": "cuda:0",
+    "json": "/home/molly/workspace-memory-attn/memory-attention/profile/results/sweep_baseline/runs/bs4_len2048_decode_ma_offload.json"
+  },
+  "env": {
+    "git_commit": "300ebb9",
+    "torch": "2.9.0+cu130",
+    "torch_cuda": "13.0",
+    "flash_attn": "2.8.3",
+    "fla": "0.4.2",
+    "python": "3.12.2",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "gpu_capability": "sm_120",
+    "cuda_visible_devices": ""
+  },
+  "results": [
+    {
+      "variant": "ma_offload",
+      "mode": "decode",
+      "median_ms": 7.370216492563486,
+      "mean_ms": 7.370808618143201,
+      "min_ms": 7.36401358153671,
+      "max_ms": 7.378510548733175,
+      "round_ms": [
+        7.378510548733175,
+        7.36401358153671,
+        7.370216492563486,
+        7.372517744079232,
+        7.368784723803401
+      ],
+      "spread_pct": 0.19668082496105435,
+      "seq_len": 1,
+      "context_len": 2048,
+      "group_size": 1,
+      "offload_policy": "pipeline",
+      "gpu_parameters": 1263635968,
+      "cpu_parameters": 1572864000,
+      "gpu_parameter_mib": 2410.1943359375,
+      "cpu_parameter_mib": 3000.0,
+      "offload_gpu_buffer_mib": 0.375,
+      "offload_pinned_mib": 0.375,
+      "benchmark_scope": "model"
+    }
+  ]
+}
