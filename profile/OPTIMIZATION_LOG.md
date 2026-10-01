@@ -412,3 +412,12 @@ status/accepted_step remain unset. Full validation plan:88 new processes plus
 8 reused first-pair primary results, ~40.6 minutes from measured setup/model
 costs; non-generation10/10/3 and generation2/5/3. All three primary pairs remain
 available for uncertainty. No full matrix or generation performance started yet.
+
+A0001 full-validation controller: 48 points per side, 96 total records; reuse
+the eight first-pair primary records from R04 and launch88 new processes.
+Verify source hashes identical to confirmation before launch, plus actual
+checkout import paths and exact commits. Alternate baseline/candidate order
+across points. Non-generation10/10/3, generation2/5/3. Keep OOM/unsupported
+and failed points explicitly; investigate regressions before acceptance.
+Estimated cost40.6 minutes, dominated by repeated full-model setup. No source
+or candidate changes during timing. Conditional plan from prior stage retained.
