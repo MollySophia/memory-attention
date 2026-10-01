@@ -242,3 +242,12 @@ validation. Controller/current child verified live; original run continues
 without restart or additional GPU work. New raw results and live process
 observation are preserved in R01 and `R01-checkpoint-06.json`. The remaining
 8192-length and growing-generation workloads are still required.
+
+### A0000 — 8192-length checkpoint (2026-10-01)
+
+Counts: {"completed": 42, "running": 1, "pending": 5}. Completed raw records validate against frozen
+source/configuration and recomputed statistics. No completed measurement has
+failed so far. Controller and active child verified live; no restart or
+concurrent GPU profiling. Raw 8192-length measurements and process observation
+preserved in `R01-checkpoint-07.json`. Generation remains required before
+completion of the baseline and subsequent profiling/candidate experiments.
