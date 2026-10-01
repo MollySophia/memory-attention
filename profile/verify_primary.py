@@ -3,6 +3,9 @@
 Keeps reference tensors on CPU so reference retention cannot cause GPU OOM.
 This is correctness work, never a latency measurement.
 """
+from contextlib import nullcontext
+from frozen_cache_reference import frozen_cache_updates, BASELINE_SHA
+
 import argparse
 import json
 from pathlib import Path
@@ -48,8 +51,9 @@ def main():
                 model.enable_memory_offload()
             cache = None
             for step, ids in enumerate((prefix, *tokens)):
-                out = model(input_ids=ids, past_key_values=cache, use_cache=True,
-                            logits_to_keep=1, output_hidden_states=True)
+                with frozen_cache_updates() if placement == "ma_gpu" else nullcontext():
+                    out = model(input_ids=ids, past_key_values=cache, use_cache=True,
+                                logits_to_keep=1, output_hidden_states=True)
                 cache = out.past_key_values
                 assert cache.get_seq_length() == 2048 + step
                 if placement == 'ma_gpu':
@@ -67,7 +71,7 @@ def main():
                 del out
             del cache
             torch.cuda.empty_cache()
-        payload = dict(status='passed', source=source_state(), config=model.config.to_dict(),
+        payload = dict(reference_cache_sha=BASELINE_SHA, status='passed', source=source_state(), config=model.config.to_dict(),
                        batch=8, prefix_length=2048, decode_steps=args.decode_steps,
                        comparison='bit exact all logits, hidden states and KV entries', comparisons=comparisons)
         args.output.parent.mkdir(parents=True, exist_ok=True)

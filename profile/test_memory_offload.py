@@ -12,13 +12,13 @@ from fla.models.memory.configuration_memory import MemoryConfig
 from fla.models.memory.modeling_memory import MemoryForCausalLM
 
 
-def build(seed=1234, layers=4, hidden=512, heads=8, vocab=2048):
+def build(seed=1234, layers=4, hidden=512, heads=8, vocab=2048, kv_heads=None):
     torch.manual_seed(seed)
     config = MemoryConfig(
         hidden_size=hidden,
         num_hidden_layers=layers,
         num_heads=heads,
-        num_kv_heads=heads,
+        num_kv_heads=heads if kv_heads is None else kv_heads,
         vocab_size=vocab,
         qk_norm=True,
         use_gate=True,

@@ -176,12 +176,13 @@ def test_cached_prefill_last_token_scope(model, offload):
 @pytest.mark.parametrize('policy', ['bulk', 'pipeline'])
 @pytest.mark.parametrize('seed', [1234, 4321])
 @pytest.mark.parametrize('left_padded', [False, True])
-def test_growing_cache_128_steps_exact(policy, seed, left_padded):
+@pytest.mark.parametrize('kv_heads', [1, 2])
+def test_growing_cache_128_steps_exact(policy, seed, left_padded, kv_heads):
     if not torch.cuda.is_available():
         pytest.skip('requires CUDA')
     gate = load_script('test_memory_offload')
     with torch.inference_mode():
-        model, config = gate.build(seed=seed, layers=3, hidden=128, heads=2, vocab=128)
+        model, config = gate.build(seed=seed, layers=3, hidden=128, heads=2, vocab=128, kv_heads=kv_heads)
         config.memory_offload_policy = policy
         config.memory_offload_group_size = 2  # Partial final group.
         config.memory_offload_prefetch_depth = 1  # Forces repeated slot reuse.
@@ -214,7 +215,8 @@ def test_growing_cache_128_steps_exact(policy, seed, left_padded):
 
         try:
             model.fold_memory_table_on_gpu()
-            reference = capture()
+            with load_script("frozen_cache_reference").frozen_cache_updates():
+                reference = capture()
             model.close_memory_offload()
             model.enable_memory_offload()
             actual = capture()

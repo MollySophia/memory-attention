@@ -4,9 +4,9 @@
   "accepted_step": null,
   "label": "Amortized KV cache append with bounded spare capacity",
   "status": null,
-  "phase": "registered",
+  "phase": "correctness",
   "candidate_sha": null,
-  "parent_sha": "89f67a0ba80f78a35a4ca6ddb74f16ab3d846d0e",
+  "parent_sha": "b270b86281ae65dff93be3a5b1633bd8be8b654b",
   "hypothesis": "Primary decode repeatedly copies the full history via 48 torch.cat calls. Append new K/V into reusable capacity without changing stored values, attention scope, precision or offload placement.",
   "evidence": "A0000/diagnostics/decode-ma_offload-events/events.json: 3222798336 output bytes across 48 cats, 5.9039 ms summed instrumented stream spans out of 11.2209 ms total. These are diagnostic spans, not kernel timing or speedup claims.",
   "planned_change": "Inference-only append with bounded chunked spare capacity, lazy allocation on decode to preserve prefill path; fall back for unsupported/cache-transformation cases. No cached model outputs or token lookups.",
@@ -21,5 +21,13 @@
     "Spare cache storage raises GPU memory; record backing capacity and peaks.",
     "Cache views/rollback/reordering must not reuse stale or incompatible storage.",
     "Noncontiguous batch strides must preserve exact attention results."
-  ]
+  ],
+  "implementation": "MemoryAttention opts into modern FLALayer inference-only cache-owned chunks of 128 positions. Prefill remains pass-through; grad-enabled/no_grad and sliding-window paths concatenate as before; LegacyFLACache retains frozen behavior. Cache transforms invalidate buffer identity, offload/prefetch release ownership, legacy exports clone active KV to isolate branches.",
+  "correctness": {
+    "pytest": "39 passed; tests/test_memory_kv_cache.py tests/test_memory_offload_regressions.py tests/test_decode_benchmark.py",
+    "standalone": "PASS, worst max diff 0",
+    "reference": "git show d949640ebf2f13f56021bd08c5c9f10e65d571c3:fla/models/utils.py; frozen update methods for resident growing-cache reference",
+    "primary": "pending"
+  },
+  "development_failure": "Initial capacity test failed after large rollback: 384-slot buffer retained for 129 tokens. Fixed reuse condition to require spare capacity <128; original log retained. Numerical comparisons passed."
 }

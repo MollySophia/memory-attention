@@ -355,3 +355,14 @@ Resident decode event diagnostic completed: 48 cats, same 3,222,798,336
 output bytes, 5.9004 ms summed cat spans / 11.1230 ms total. This corroborates
 a model-wide copy cost rather than offload-only transfer. All trace/event
 artifacts and failures retained; no candidate timing claim yet.
+
+A0001 implementation: modern inference cache owns 128-position capacity chunks,
+lazily allocated on first append; prefill, training and window paths unchanged.
+Legacy cache versions fall back to existing concatenation. Legacy exports clone
+active values to prevent cross-branch overwrite; cache transforms invalidate
+ownership and offload/prefetch release owned buffers. Independent reference
+loads cache updates directly from the frozen baseline Git object.
+39 regression tests passed, covering GQA, two seeds, left padding, both offload
+policies, 128 growing steps, rollback/reorder, gradients and cache ownership.
+Standalone gate PASS (worst difference zero). Initial large-rollback spare
+capacity failure was fixed; original failure log retained. No timing yet.

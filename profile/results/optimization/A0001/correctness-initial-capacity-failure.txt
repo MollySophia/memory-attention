@@ -1,0 +1,66 @@
+
+----------------------------- live log collection ------------------------------
+INFO     numexpr.utils:utils.py:149 Note: NumExpr detected 32 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+INFO     numexpr.utils:utils.py:162 NumExpr defaulting to 16 threads.
+
+tests/test_memory_kv_cache.py::test_growing_rollback_and_transformed_cache FAILED [  3%]
+tests/test_memory_kv_cache.py::test_training_keeps_gradients PASSED      [  6%]
+tests/test_memory_kv_cache.py::test_legacy_export_is_independent_of_rollback_append PASSED [ 10%]
+tests/test_memory_kv_cache.py::test_sliding_window_stays_on_original_path PASSED [ 13%]
+tests/test_memory_offload_regressions.py::test_offloaded_hidden_states[True-bulk] PASSED [ 16%]
+tests/test_memory_offload_regressions.py::test_offloaded_hidden_states[True-pipeline] PASSED [ 20%]
+tests/test_memory_offload_regressions.py::test_offloaded_hidden_states[False-bulk] PASSED [ 23%]
+tests/test_memory_offload_regressions.py::test_offloaded_hidden_states[False-pipeline] PASSED [ 26%]
+tests/test_memory_offload_regressions.py::test_fold_close_restores_weights_logits_and_device PASSED [ 30%]
+tests/test_memory_offload_regressions.py::test_each_prefill_case_uses_resident_reference PASSED [ 33%]
+tests/test_memory_offload_regressions.py::test_source_fingerprint_tracks_model_edits_and_ignores_results PASSED [ 36%]
+tests/test_memory_offload_regressions.py::test_resume_reruns_after_dirty_model_edit PASSED [ 40%]
+tests/test_memory_offload_regressions.py::test_cached_prefill_last_token_scope[False] PASSED [ 43%]
+tests/test_memory_offload_regressions.py::test_cached_prefill_last_token_scope[True] PASSED [ 46%]
+tests/test_memory_offload_regressions.py::test_growing_cache_128_steps_exact[False-1234-bulk] PASSED [ 50%]
+tests/test_memory_offload_regressions.py::test_growing_cache_128_steps_exact[False-1234-pipeline] PASSED [ 53%]
+tests/test_memory_offload_regressions.py::test_growing_cache_128_steps_exact[False-4321-bulk] PASSED [ 56%]
+tests/test_memory_offload_regressions.py::test_growing_cache_128_steps_exact[False-4321-pipeline] PASSED [ 60%]
+tests/test_memory_offload_regressions.py::test_growing_cache_128_steps_exact[True-1234-bulk] PASSED [ 63%]
+tests/test_memory_offload_regressions.py::test_growing_cache_128_steps_exact[True-1234-pipeline] PASSED [ 66%]
+tests/test_memory_offload_regressions.py::test_growing_cache_128_steps_exact[True-4321-bulk] PASSED [ 70%]
+tests/test_memory_offload_regressions.py::test_growing_cache_128_steps_exact[True-4321-pipeline] PASSED [ 73%]
+tests/test_memory_offload_regressions.py::test_telemetry_counts_all_cached_offloaders_and_snapshot PASSED [ 76%]
+tests/test_decode_benchmark.py::test_decode_excludes_rollback_and_keeps_context_fixed PASSED [ 80%]
+tests/test_decode_benchmark.py::test_prefill_scope_and_raw_samples[inference-1-True] PASSED [ 83%]
+tests/test_decode_benchmark.py::test_prefill_scope_and_raw_samples[historical-0-False] PASSED [ 86%]
+tests/test_decode_benchmark.py::test_generation_grows_and_restarts_cache PASSED [ 90%]
+tests/test_decode_benchmark.py::test_benchmark_persists_setup_failure[False] PASSED [ 93%]
+tests/test_decode_benchmark.py::test_benchmark_persists_setup_failure[True] PASSED [ 96%]
+tests/test_decode_benchmark.py::test_paper_matrix_covers_goal PASSED     [100%]
+
+=================================== FAILURES ===================================
+_________________ test_growing_rollback_and_transformed_cache __________________
+
+    @torch.inference_mode()
+    def test_growing_rollback_and_transformed_cache():
+        torch.manual_seed(19)
+        layer = FLALayer()
+        expected = tuple(torch.randn(3, 127, 16) for _ in range(2))
+        append(layer, expected)
+        for i in range(260):
+            if i == 130:
+                layer.state['attn_state'] = tuple(x[:, :128] for x in layer.state['attn_state'])
+                expected = tuple(x[:, :128] for x in expected)
+            if i == 160:
+                # Simulate a batch reorder; old backing storage must not be reused.
+                indices = torch.tensor([2, 0, 1])
+                layer.state['attn_state'] = tuple(x[indices] for x in layer.state['attn_state'])
+                expected = tuple(x[indices] for x in expected)
+            new = tuple(torch.randn(3, 1, 16) for _ in range(2))
+            expected = tuple(torch.cat((x, y), 1) for x, y in zip(expected, new))
+            actual = append(layer, new)
+            for x, y, buf in zip(actual, expected, layer._memory_kv_buffers):
+                assert torch.equal(x, y)
+>               assert 0 <= buf.shape[1] - x.shape[1] < 128
+E               assert (384 - 129) < 128
+
+tests/test_memory_kv_cache.py:30: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_memory_kv_cache.py::test_growing_rollback_and_transformed_cache
+========================= 1 failed, 29 passed in 7.52s =========================
