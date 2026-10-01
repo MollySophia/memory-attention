@@ -43,6 +43,23 @@ def git_dirty():
         return None
 
 
+def source_fingerprint(bmk):
+    """Hash benchmark sources and model code, including uncommitted edits.
+
+    Generated results are excluded so writing a sweep cannot invalidate itself.
+    Paths are included to detect additions, deletions and renames as well.
+    """
+    root = bmk.parent.parent
+    paths = set(bmk.parent.glob('*.py')) | set((root / 'fla').rglob('*.py'))
+    paths.add(bmk)
+    paths.update(p for p in (root / 'setup.py', root / 'pyproject.toml') if p.is_file())
+    digest = hashlib.sha256()
+    for path in sorted(paths):
+        digest.update(path.relative_to(root).as_posix().encode() + b'\0')
+        digest.update(path.read_bytes() + b'\0')
+    return digest.hexdigest()
+
+
 def probe_env(bmk):
     """Runtime identity for this sweep. Written to <output>/env.json.
 
@@ -75,6 +92,7 @@ def probe_env(bmk):
     env['python'] = platform.python_version()
     env['git_commit'] = git_commit()
     env['git_dirty'] = git_dirty()
+    env['source_sha256'] = source_fingerprint(bmk)
     env['driver'] = bmk.name
     return dict(env=env)
 
@@ -325,7 +343,7 @@ def main():
     if recorded.exists() and not args.allow_env_change:
         previous = json.loads(recorded.read_text(encoding='utf-8'))
         drift = {k: (previous.get('env', {}).get(k), env['env'].get(k))
-                 for k in env['env']
+                 for k in previous.get('env', {}).keys() | env['env'].keys()
                  if previous.get('env', {}).get(k) != env['env'].get(k)}
         if drift:
             changed = ', '.join(f'{k}: {a} -> {b}' for k, (a, b) in drift.items())

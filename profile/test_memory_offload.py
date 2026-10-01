@@ -30,6 +30,17 @@ def build(seed=1234, layers=4, hidden=512, heads=8, vocab=2048):
 
 
 @torch.inference_mode()
+def resident_prefill(model, ids):
+    """Capture an independent folded resident reference for every case."""
+    model.close_memory_offload()
+    model.fold_memory_table_on_gpu(dtype=torch.bfloat16)
+    try:
+        return model(input_ids=ids, use_cache=False).logits.float().clone()
+    finally:
+        model.close_memory_offload()
+
+
+@torch.inference_mode()
 def run_case(policy, batch, seq_len, model, config, ids, ref):
     model.close_memory_offload()
     model.enable_memory_offload(device="cuda:0", dtype=torch.bfloat16, fold_norm=True)
@@ -167,7 +178,7 @@ def main():
         ("pipeline", 1, 2048),  # long sequence
     ]:
         ids = torch.randint(0, config.vocab_size, (batch, seq_len), device="cuda:0")
-        ref = model(input_ids=ids, use_cache=False).logits.float().clone()
+        ref = resident_prefill(model, ids)
         if policy == "bulk" and batch == 2 and seq_len == 128:
             print(f"  reference logits captured for max |logit| = {ref.abs().max().item():.3f}")
         d, _ = run_case(policy, batch, seq_len, model, config, ids, ref)

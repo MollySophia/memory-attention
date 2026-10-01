@@ -213,6 +213,8 @@ class MemoryModel(MemoryPreTrainedModel):
             raise RuntimeError(
                 "m_proj is already offloaded; call close_memory_offload() before re-enabling"
             )
+        if any(layer.attn.memory_table_folded for layer in self.layers):
+            raise RuntimeError("close_memory_offload() before enabling offload from a folded table")
         # Snapshot the raw weights so the unfolded resident path can be restored.
         # Guard against snapshotting an already-folded table.
         if getattr(self, "_raw_m_proj_weights", None) is None:
@@ -294,6 +296,15 @@ class MemoryModel(MemoryPreTrainedModel):
             raise RuntimeError("close_memory_offload() before folding a resident table")
         if any(layer.attn.m_proj is None for layer in self.layers):
             raise RuntimeError("memory table is already offloaded")
+        if any(layer.attn.memory_table_folded for layer in self.layers):
+            raise RuntimeError("memory table is already folded")
+        if self.training or torch.is_grad_enabled():
+            raise RuntimeError("memory table folding is inference-only; call under torch.inference_mode()")
+        if getattr(self, "_raw_m_proj_weights", None) is None:
+            self._raw_m_proj_weights = [
+                layer.attn.m_proj.weight.detach().to("cpu", copy=True)
+                for layer in self.layers
+            ]
 
         config = self.config
         head_dim = config.hidden_size // config.num_heads
@@ -301,7 +312,7 @@ class MemoryModel(MemoryPreTrainedModel):
             m_proj, norm = layer.attn.m_proj, layer.attn.m_norm
             vocab, kv_dim = m_proj.weight.shape
             raw = m_proj.weight.detach().reshape(vocab, kv_dim // head_dim, head_dim)
-            folded = fold_memory_table(norm, raw.float(), config.memory_offload_chunk_size, dtype)
+            folded = fold_memory_table(norm, raw.to(norm.weight.dtype), config.memory_offload_chunk_size, dtype)
             device = m_proj.weight.device
             layer.attn.m_proj = nn.Embedding.from_pretrained(
                 folded.to(device=device, dtype=dtype), freeze=True
@@ -362,22 +373,23 @@ class MemoryModel(MemoryPreTrainedModel):
             self.memory_offloader.close()
             self.memory_offloader = None
         self.memory_table = None
-        for layer in self.layers:
-            layer.attn.memory_table_folded = False
         if getattr(self, "_resident_m_projs", None) is not None:
             device = getattr(self, "_offload_device", torch.device("cpu"))
             for layer, m in zip(self.layers, self._resident_m_projs):
                 layer.attn.m_proj = nn.Embedding.from_pretrained(
                     m.weight.detach().to(device), freeze=True
                 )
+                layer.attn.memory_table_folded = False
             self._resident_m_projs = None
-        elif getattr(self, "_raw_m_proj_weights", None) is not None:
-            # A fold happened without a subsequent enable: restore raw weights
-            # so the per-token m_norm path stays correct.
-            self._restore_unfolded_table(
-                getattr(self, "_offload_device", torch.device("cpu")),
-                getattr(self, "_offload_dtype", torch.bfloat16),
-            )
+        elif any(layer.attn.memory_table_folded for layer in self.layers):
+            # Restore each resident table on its current device and dtype.
+            for layer, weight in zip(self.layers, self._raw_m_proj_weights):
+                current = layer.attn.m_proj.weight
+                layer.attn.m_proj = nn.Embedding.from_pretrained(
+                    weight.to(device=current.device, dtype=current.dtype), freeze=True
+                )
+                layer.attn.memory_table_folded = False
+        self._table_folded = False
 
     def get_input_embeddings(self):
         return self.embeddings
@@ -506,6 +518,7 @@ class MemoryModel(MemoryPreTrainedModel):
         all_hidden_states = () if output_hidden_states else None
 
         def consume(index: int, memory_table) -> None:
+            nonlocal all_hidden_states
             layer = self.layers[index]
             if output_hidden_states:
                 all_hidden_states += (state["hidden"],)

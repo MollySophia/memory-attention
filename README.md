@@ -29,7 +29,16 @@ See the [Flash Linear Attention repository](https://github.com/fla-org/flash-lin
 
 ## Performance Profiling
 
-The [`profile/`](profile/) directory contains standalone inference experiments comparing standard attention (`standard`), GPU-resident memory tables (`ma_gpu`), and CPU-offloaded memory tables (`ma_offload`). The offloading implementation belongs to the benchmark and is not integrated into `MemoryForCausalLM`.
+The [`profile/`](profile/) directory contains standalone inference experiments comparing standard attention (`standard`), GPU-resident memory tables (`ma_gpu`), and CPU-offloaded memory tables (`ma_offload`). `MemoryForCausalLM` also supports inference-only CPU offload through `enable_memory_offload()` and restoration through `close_memory_offload()`. Its model benchmark is `profile/bench_fla.py`, with `ma_gpu` as the folded resident reference; the model has no `standard` variant.
+
+Regression tests for table restoration, offloaded hidden states and sweep resume:
+
+```bash
+python -m pytest -q tests/test_memory_offload_regressions.py
+python profile/test_memory_offload.py
+```
+
+Model tests require CUDA and FlashAttention. The pytest suite skips those cases when either is unavailable; the standalone correctness gate requires both.
 
 Run the prefill and decode benchmark with the default configuration and save the results:
 

@@ -144,13 +144,13 @@ def run_decode(model, args, device):
     del out, prefix
 
     def one(token):
-        rollback(cache, args.context_len)
         return model(
             input_ids=token, past_key_values=cache, use_cache=True,
             logits_to_keep=1 if args.logits_to_keep else 0,
         ).logits
 
     for i in range(args.warmup):
+        rollback(cache, args.context_len)
         one(steps[i])
     torch.cuda.synchronize(device)
 
@@ -159,9 +159,13 @@ def run_decode(model, args, device):
     for _ in range(args.rounds):
         samples = []
         for _ in range(args.repeats):
+            # Restore the fixed context and select the test token before
+            # timing. The model's own KV-cache update stays inside one().
+            rollback(cache, args.context_len)
+            token = steps[cursor % steps.shape[0]]
             torch.cuda.synchronize(device)
             begin = time.perf_counter()
-            one(steps[cursor % steps.shape[0]])
+            one(token)
             torch.cuda.synchronize(device)
             samples.append((time.perf_counter() - begin) * 1e3)
             cursor += 1
@@ -190,7 +194,14 @@ def measure(model, args, variant, device):
         # to the first timed forward.
         model.set_offload_offloader(args.batch_size, args.seq_len)
         model.set_offload_offloader(args.batch_size, 1)
-        model.set_offload_offloader(args.batch_size, args.seq_len)
+        # Report the policy of the shape this mode actually runs. prefill uses
+        # (batch, seq_len); decode steps are (batch, 1), and auto policy picks
+        # bulk there because a decode step touches few enough rows that the
+        # pipeline's per-layer coordination would dominate.
+        if args.mode == 'prefill':
+            model.set_offload_offloader(args.batch_size, args.seq_len)
+        else:
+            model.set_offload_offloader(args.batch_size, 1)
         policy = model.model.memory_offloader.policy
 
     runner = run_prefill if args.mode == "prefill" else run_decode
@@ -221,6 +232,8 @@ def measure(model, args, variant, device):
         offload_pinned_mib=0.0,
         benchmark_scope="model",
     )
+    if args.mode == "decode":
+        row["decode_timing_protocol"] = "fixed_context_v2_rollback_excluded"
     if offload and model.model.memory_offloader is not None:
         off = model.model.memory_offloader
         row["offload_gpu_buffer_mib"] = sum(
