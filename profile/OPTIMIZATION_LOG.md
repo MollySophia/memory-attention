@@ -523,3 +523,18 @@ controller will reuse current first formal pairs plus unchanged frozen-baseline
 records only when source/counts/scope/recorded environment agree. Never reuse
 A0001 candidate results. Estimate remaining cost from raw baseline latencies
 and recent process setup durations before launching the matrix.
+
+A0002 full-plan preflight first failed before launch due to a shadowed list
+variable; saved R04 failure, corrected controller and verified R05 plan.
+R05 reuse audit passed19 records/570 raw samples with matching source, scope,
+counts and recorded environment.77 new processes remain; estimated37.0 minutes
+including748.7 seconds of model work and measured16.1-second setup plus3-second
+import probe per process. Counts/cost frozen before launching R06.
+
+Separate prefill CUDA-event diagnostics completed after R03 exited. Offload
+instrumented total212.201 ms, attention75.835, MLP127.854; resident total207.077,
+attention71.857, MLP127.307. Nested linear spans126.106/125.483 ms overlap these
+coarse categories; never add them together. These are stream spans including
+CPU launch gaps/instrumentation, not pure kernels or headline speedups. They
+support prefill being dominated by work unaffected by KV append reuse. Raw
+spans, environments, source and memory snapshots retained. No concurrent timing.

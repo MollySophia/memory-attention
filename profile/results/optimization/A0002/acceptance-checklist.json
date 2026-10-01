@@ -68,11 +68,13 @@
     },
     {
       "requirement": "Profiles identify bottleneck, separate from headline timing",
-      "state": "partial",
+      "state": "diagnostics_completed_with_limitations",
       "evidence": [
-        "../A0000/diagnostics/decode-ma_offload-events/events.json"
+        "../A0000/diagnostics/decode-ma_offload-events/events.json",
+        "diagnostics/prefill-ma_offload/events.json",
+        "diagnostics/prefill-ma_gpu/events.json"
       ],
-      "remaining": "Retain documented profiler limitations; prefill diagnostic remains pending. CUDA-event spans are not pure kernel times."
+      "remaining": "CUDA-event spans include CPU launch gaps/instrumentation; no pure-kernel attribution or profiling speedup claims."
     },
     {
       "requirement": "Complete attempt ledger, failures, exact source and reproducible commands",

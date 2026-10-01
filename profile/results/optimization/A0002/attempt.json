@@ -4,7 +4,7 @@
   "informed_by_attempt": "A0001",
   "accepted_step": null,
   "status": null,
-  "phase": "nominated_for_full_validation",
+  "phase": "full_validation_planned",
   "candidate_sha": "7647da8c431fa4e7bf5800d7556ef2f8f6c171ed",
   "parent_sha": "384aa1a5e644d7ee2fe3fa7cc1a07cd82ca30b17",
   "label": "Bounded KV reuse for multi-item batches with batch1 concatenation",
@@ -53,5 +53,6 @@
     ],
     "prefill": "within_noise in both placements",
     "memory": "preserved CPU table placement and positive offload GPU peak saving; full-matrix check pending"
-  }
+  },
+  "full_validation_plan": "R05-full-plan:96 records,19 verified reuses,77 new processes; estimated37.0 minutes. Reuse audit passed570 existing samples; all stages keep exact source/config/import checks."
 }

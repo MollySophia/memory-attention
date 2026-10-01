@@ -1,0 +1,16 @@
+{
+  "status": "ready_after_primary_nomination",
+  "source_plan": "R05-full-plan/manifest.json",
+  "new_processes": 77,
+  "reused_processes": 19,
+  "estimated_cost": {
+    "new_processes": 77,
+    "reused_processes": 19,
+    "estimated_model_work_seconds": 748.7260563236507,
+    "setup_seconds_per_process": 16.112791182807026,
+    "import_probe_seconds_per_process": 3,
+    "estimated_total_minutes": 37.00684962332986,
+    "assumptions": "Original baseline latencies for both sides (ignores expected candidate decode gain); median R02 setup overhead plus3s import probe; include warmups, trajectories and decode prefixes. Estimate only, never a timeout."
+  },
+  "reuse_policy": "Deterministic priority: current first primary/batch1 formal pairs, then completed frozen-baseline points from A0001/R06. Never reuse A0001 candidate data. Verify source hash, counts, scope and recorded environment; otherwise rerun. All formal pairs retained for uncertainty."
+}

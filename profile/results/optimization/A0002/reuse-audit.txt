@@ -1,0 +1,25 @@
+{
+  "status_counts": {
+    "completed": 19,
+    "pending": 77
+  },
+  "samples": 570,
+  "regression_signals": [
+    {
+      "mode": "decode",
+      "variant": "ma_gpu",
+      "batch": 1,
+      "length": 2048,
+      "baseline_status": "completed",
+      "candidate_status": "completed",
+      "baseline_ms": 4.513850528746843,
+      "candidate_ms": 4.548915661871433,
+      "speedup": 0.992291540285413,
+      "round_extreme_ratio_low": 0.9885558589286433,
+      "round_extreme_ratio_high": 0.9965161289173005,
+      "regression_signal": true,
+      "independent_confirmation_verdict": "within_noise",
+      "requires_investigation": false
+    }
+  ]
+}
