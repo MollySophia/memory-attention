@@ -128,18 +128,27 @@ class MemoryAttention(nn.Module):
         # that resolves to one. It lets the CPU->GPU transfer overlap the Q/K
         # kernels instead of serializing before them.
         pending_m = memory_table if isinstance(memory_table, PendingM) else None
-        # Preserve the original unnormalized, unrotated K for V. PendingM
-        # only depends on the table transfer; norm/rotary can be queued first.
-        value_key = k if pending_m is not None else None
-        if pending_m is None:
-            if memory_table is not None:
-                m = memory_table
-            else:
-                if input_ids is None:
-                    raise ValueError("MemoryAttention requires either input_ids or memory_table")
-                m = self.m_proj(input_ids)
-            m = rearrange(m, '... (h d) -> ... h d', d=self.head_dim)
-            v = k + m if self.memory_table_folded else k + self.m_norm(m)
+        if pending_m is not None:
+            m = pending_m.acquire()
+        elif memory_table is not None:
+            m = memory_table
+        else:
+            if input_ids is None:
+                raise ValueError("MemoryAttention requires either input_ids or memory_table")
+            m = self.m_proj(input_ids)
+
+        m = rearrange(m, '... (h d) -> ... h d', d=self.head_dim)
+
+        if self.memory_table_folded:
+            # Table already carries m_norm, so skip the per-token norm.
+            v = k + m
+        else:
+            v = k + self.m_norm(m)
+
+        if pending_m is not None:
+            # Safe to hand the buffer back: the copy already happened before
+            # this point, and the only consumer is the k + m kernel above.
+            pending_m.release()
 
         if self.qk_norm:
             q, k = self.q_norm(q), self.k_norm(k)
@@ -160,12 +169,6 @@ class MemoryAttention(nn.Module):
         if self.max_position_embeddings is not None:
             max_seqlen = max(max_seqlen, self.max_position_embeddings)
         q, k = self.rotary(q, k, seqlen_offset=seqlen_offset, max_seqlen=max_seqlen, cu_seqlens=cu_seqlens)
-
-        if pending_m is not None:
-            m = rearrange(pending_m.acquire(), '... (h d) -> ... h d', d=self.head_dim)
-            v = value_key + m if self.memory_table_folded else value_key + self.m_norm(m)
-            pending_m.release()
-            del value_key
 
         if past_key_values is not None:
             cache_has_content = past_key_values.get_seq_length(self.layer_idx) > 0
