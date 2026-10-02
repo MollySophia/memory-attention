@@ -7,7 +7,7 @@
   "parent_sha": "eedd189a84b5b1c20144bb1c90367014c42ae7ae",
   "accepted_step": null,
   "label": "write-combined pinned pipeline buffers for large inputs",
-  "workflow_stage": "confirmation",
+  "workflow_stage": "final_verdict",
   "hypothesis": "Use write-combined CUDA host allocation for large pipeline gather destinations, preserving fresh CPU gather and H2D while reducing the combined transport cost.",
   "expected_bottleneck": "Frozen A0001 component diagnostic:16384/32768-token gather+H2D means3.869776/7.856003 ms torch pinned versus2.983973/5.945323 write-combined; native default allocation3.892142/7.923771 controls allocation API.2048 tokens slightly worse with WC, so exclude small inputs.",
   "profile_evidence": [
@@ -44,9 +44,10 @@
     "reason_batch16": "Pinned transport change"
   },
   "not_run": {
-    "confirmation": "Fixed48-process parent confirmation now starting; no outcome yet.",
-    "full_validation": "Draft only; staged gates required.",
-    "generation_validation": "Draft only; staged gates required."
+    "frozen_baseline_confirmation": "Not run: fixed parent gap gate failed; conditional controller stopped.",
+    "full_validation": "Not run: not nominated for retention.",
+    "generation_validation": "Not run: not nominated for retention.",
+    "full_model_correctness": "Not run: small-model exactness passed, but candidate not nominated for retention."
   },
   "draft_root": "/tmp/offload-gap-A0017-draft-bvzdv8sk",
   "draft_condition": "Activated after A0016 accepted verdict; conditional merge preserves its small-prefill policy and all tests.",
@@ -77,5 +78,12 @@
   "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json",
   "conditional_validation_plan": "conditional-validation-plan.json",
   "conditional_controller": "conditional-controller.json",
-  "secondary_regression_policy": "secondary-regression-policy.json"
+  "secondary_regression_policy": "secondary-regression-policy.json",
+  "status": "within_noise",
+  "parent_confirmation_analysis": "parent-confirmation-analysis.json",
+  "decision": "Within noise: changed b8 prefill offload reduction1.765735 ms CI[0.688570,2.842900] passes latency alone, but absolute-gap reduction1.567970 ms CI[-0.678259,3.814199] fails the required positive lower bound. Preserve all three positive gap observations without claiming a repeatable gap gain. No plan extension; restore verified A0016.",
+  "limitations": [
+    "b1 decode slower in all3 blocks: offload reduction-0.393447 ms CI[-1.099139,0.312246], gap-0.430818 CI[-1.174233,0.312597]. Unresolved adverse direction retained.",
+    "WC component and model-latency improvements do not establish the required independently resolved absolute-gap reduction."
+  ]
 }

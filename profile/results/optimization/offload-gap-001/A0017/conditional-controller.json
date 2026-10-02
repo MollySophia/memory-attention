@@ -1,0 +1,14 @@
+{
+  "campaign_id": "offload-gap-001",
+  "attempt_id": "A0017",
+  "controller_pid": 2353396,
+  "parent_pid": 2342405,
+  "parent_process_identity": [
+    "S",
+    "334836806"
+  ],
+  "status": "parent_not_promising_needs_verdict",
+  "driver_sha256": "50e7d855d9f2a1d26bb3fad6aca4d3bcb62414ab3672fbd2d82e1305ac1f3d2a",
+  "accepted": false,
+  "jobs": []
+}

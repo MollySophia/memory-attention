@@ -1,0 +1,97 @@
+{"jobs": 48, "new_process_jobs": 48, "reused_points": 0, "estimated_seconds": 901.0094449281693, "cost_source": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0017/R01/manifest.json", "note": "Setup and call costs measured in screen; other lengths/unfolded/generation extrapolated for planning only. Full validation and generation are separate invocations. Deliberately paused setup durations replaced with median unpaused setup for the placement. Reused confirmation keeps original files/stage and all three process blocks."}
+START B1-J001-baseline-prefill-ma_offload-b1-l2048
+END B1-J001-baseline-prefill-ma_offload-b1-l2048 completed
+START B1-J002-candidate-prefill-ma_offload-b1-l2048
+END B1-J002-candidate-prefill-ma_offload-b1-l2048 completed
+START B1-J003-candidate-prefill-ma_gpu-b1-l2048
+END B1-J003-candidate-prefill-ma_gpu-b1-l2048 completed
+START B1-J004-baseline-prefill-ma_gpu-b1-l2048
+END B1-J004-baseline-prefill-ma_gpu-b1-l2048 completed
+START B1-J005-baseline-decode-ma_gpu-b1-l2048
+END B1-J005-baseline-decode-ma_gpu-b1-l2048 completed
+START B1-J006-candidate-decode-ma_gpu-b1-l2048
+END B1-J006-candidate-decode-ma_gpu-b1-l2048 completed
+START B1-J007-candidate-decode-ma_offload-b1-l2048
+END B1-J007-candidate-decode-ma_offload-b1-l2048 completed
+START B1-J008-baseline-decode-ma_offload-b1-l2048
+END B1-J008-baseline-decode-ma_offload-b1-l2048 completed
+START B1-J009-baseline-prefill-ma_offload-b8-l2048
+END B1-J009-baseline-prefill-ma_offload-b8-l2048 completed
+START B1-J010-candidate-prefill-ma_offload-b8-l2048
+END B1-J010-candidate-prefill-ma_offload-b8-l2048 completed
+START B1-J011-candidate-prefill-ma_gpu-b8-l2048
+END B1-J011-candidate-prefill-ma_gpu-b8-l2048 completed
+START B1-J012-baseline-prefill-ma_gpu-b8-l2048
+END B1-J012-baseline-prefill-ma_gpu-b8-l2048 completed
+START B1-J013-baseline-decode-ma_gpu-b8-l2048
+END B1-J013-baseline-decode-ma_gpu-b8-l2048 completed
+START B1-J014-candidate-decode-ma_gpu-b8-l2048
+END B1-J014-candidate-decode-ma_gpu-b8-l2048 completed
+START B1-J015-candidate-decode-ma_offload-b8-l2048
+END B1-J015-candidate-decode-ma_offload-b8-l2048 completed
+START B1-J016-baseline-decode-ma_offload-b8-l2048
+END B1-J016-baseline-decode-ma_offload-b8-l2048 completed
+START B2-J017-baseline-decode-ma_offload-b8-l2048
+END B2-J017-baseline-decode-ma_offload-b8-l2048 completed
+START B2-J018-candidate-decode-ma_offload-b8-l2048
+END B2-J018-candidate-decode-ma_offload-b8-l2048 completed
+START B2-J019-candidate-decode-ma_gpu-b8-l2048
+END B2-J019-candidate-decode-ma_gpu-b8-l2048 completed
+START B2-J020-baseline-decode-ma_gpu-b8-l2048
+END B2-J020-baseline-decode-ma_gpu-b8-l2048 completed
+START B2-J021-baseline-prefill-ma_gpu-b8-l2048
+END B2-J021-baseline-prefill-ma_gpu-b8-l2048 completed
+START B2-J022-candidate-prefill-ma_gpu-b8-l2048
+END B2-J022-candidate-prefill-ma_gpu-b8-l2048 completed
+START B2-J023-candidate-prefill-ma_offload-b8-l2048
+END B2-J023-candidate-prefill-ma_offload-b8-l2048 completed
+START B2-J024-baseline-prefill-ma_offload-b8-l2048
+END B2-J024-baseline-prefill-ma_offload-b8-l2048 completed
+START B2-J025-baseline-decode-ma_offload-b1-l2048
+END B2-J025-baseline-decode-ma_offload-b1-l2048 completed
+START B2-J026-candidate-decode-ma_offload-b1-l2048
+END B2-J026-candidate-decode-ma_offload-b1-l2048 completed
+START B2-J027-candidate-decode-ma_gpu-b1-l2048
+END B2-J027-candidate-decode-ma_gpu-b1-l2048 completed
+START B2-J028-baseline-decode-ma_gpu-b1-l2048
+END B2-J028-baseline-decode-ma_gpu-b1-l2048 completed
+START B2-J029-baseline-prefill-ma_gpu-b1-l2048
+END B2-J029-baseline-prefill-ma_gpu-b1-l2048 completed
+START B2-J030-candidate-prefill-ma_gpu-b1-l2048
+END B2-J030-candidate-prefill-ma_gpu-b1-l2048 completed
+START B2-J031-candidate-prefill-ma_offload-b1-l2048
+END B2-J031-candidate-prefill-ma_offload-b1-l2048 completed
+START B2-J032-baseline-prefill-ma_offload-b1-l2048
+END B2-J032-baseline-prefill-ma_offload-b1-l2048 completed
+START B3-J033-baseline-prefill-ma_offload-b1-l2048
+END B3-J033-baseline-prefill-ma_offload-b1-l2048 completed
+START B3-J034-candidate-prefill-ma_offload-b1-l2048
+END B3-J034-candidate-prefill-ma_offload-b1-l2048 completed
+START B3-J035-candidate-prefill-ma_gpu-b1-l2048
+END B3-J035-candidate-prefill-ma_gpu-b1-l2048 completed
+START B3-J036-baseline-prefill-ma_gpu-b1-l2048
+END B3-J036-baseline-prefill-ma_gpu-b1-l2048 completed
+START B3-J037-baseline-decode-ma_gpu-b1-l2048
+END B3-J037-baseline-decode-ma_gpu-b1-l2048 completed
+START B3-J038-candidate-decode-ma_gpu-b1-l2048
+END B3-J038-candidate-decode-ma_gpu-b1-l2048 completed
+START B3-J039-candidate-decode-ma_offload-b1-l2048
+END B3-J039-candidate-decode-ma_offload-b1-l2048 completed
+START B3-J040-baseline-decode-ma_offload-b1-l2048
+END B3-J040-baseline-decode-ma_offload-b1-l2048 completed
+START B3-J041-baseline-prefill-ma_offload-b8-l2048
+END B3-J041-baseline-prefill-ma_offload-b8-l2048 completed
+START B3-J042-candidate-prefill-ma_offload-b8-l2048
+END B3-J042-candidate-prefill-ma_offload-b8-l2048 completed
+START B3-J043-candidate-prefill-ma_gpu-b8-l2048
+END B3-J043-candidate-prefill-ma_gpu-b8-l2048 completed
+START B3-J044-baseline-prefill-ma_gpu-b8-l2048
+END B3-J044-baseline-prefill-ma_gpu-b8-l2048 completed
+START B3-J045-baseline-decode-ma_gpu-b8-l2048
+END B3-J045-baseline-decode-ma_gpu-b8-l2048 completed
+START B3-J046-candidate-decode-ma_gpu-b8-l2048
+END B3-J046-candidate-decode-ma_gpu-b8-l2048 completed
+START B3-J047-candidate-decode-ma_offload-b8-l2048
+END B3-J047-candidate-decode-ma_offload-b8-l2048 completed
+START B3-J048-baseline-decode-ma_offload-b8-l2048
+END B3-J048-baseline-decode-ma_offload-b8-l2048 completed
