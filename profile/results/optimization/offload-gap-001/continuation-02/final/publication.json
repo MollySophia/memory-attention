@@ -1,0 +1,18 @@
+{
+  "campaign_id": "offload-gap-001",
+  "continuation_id": "continuation-02",
+  "remote": "origin",
+  "branch": "exp-0/attempts/offload-gap-001",
+  "verified_report_commit": "fc1c56913b8ce38813deb84fc3be9c946b115949",
+  "remote_head_at_verification": "fc1c56913b8ce38813deb84fc3be9c946b115949",
+  "verified_at_utc": "2026-10-02T11:12:37.504706+00:00",
+  "status": "report_and_all_ten_additional_attempts_published",
+  "retained_source": "0ce6645eb4c4bc3992258ad0878c72ea3c37a64e",
+  "audits": [
+    "core-audit.json",
+    "additional-raw-audit.json",
+    "manual-audit.json",
+    "reproduction-checks.json"
+  ],
+  "upstream_published": false
+}
