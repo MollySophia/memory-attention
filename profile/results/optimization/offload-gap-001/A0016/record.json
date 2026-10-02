@@ -7,7 +7,7 @@
   "parent_sha": "ce765f0cdfdf0368ad720fd93e891d6accbd3145",
   "accepted_step": null,
   "label": "single-slot automatic pipeline for small prefill only",
-  "workflow_stage": "frozen_baseline_confirmation",
+  "workflow_stage": "full_validation",
   "hypothesis": "Restrict one-slot automatic pipeline to <=2048-token calls. Preserve the evidenced b1 prefill overlap/working-set improvement from A0014 while leaving the high-volume b8 pipeline capacity and complete b8 primary execution path unchanged.",
   "expected_bottleneck": "A0014 independently confirms b1 prefill latency/gap reductions but fails on b8 decode after its changed prefix allocation. Applying the small working set only in the measured small-prefill regime tests a shape-specific scheduling policy.",
   "profile_evidence": [
@@ -43,9 +43,7 @@
     "reason_batch16": "Shape-specific pipeline policy"
   },
   "not_run": {
-    "full_validation": "Parent confirmation passed; gated follow-up pending independent frozen-baseline confirmation.",
-    "generation_validation": "Parent confirmation passed; gated follow-up pending independent frozen-baseline confirmation.",
-    "full_model_correctness": "Parent confirmation passed; gated follow-up pending independent frozen-baseline confirmation."
+    "generation_validation": "Queued after complete full matrix; not yet run."
   },
   "draft_root": "/tmp/offload-gap-A0016-draft-81086aqd",
   "draft_condition": "Activated from verified A0001 after A0015 within_noise verdict and code-only reversion. GPU tests wait for the sequential diagnostic batch.",
@@ -59,7 +57,8 @@
     "logs": [
       "correctness-tests.txt",
       "standalone-correctness.txt"
-    ]
+    ],
+    "full_model": "Four comparisons bit-exact at b1/b8 and seeds1234/4321:129 logits each, complete hidden/KV at0/1/2/128."
   },
   "screen_manifest": "R01/manifest.json",
   "screen_summary": "R01-summary.json",
@@ -72,5 +71,9 @@
   "confirmation_manifest": "R03-baseline-confirmation/manifest.json",
   "confirmation_plan_id": "formal_v1_w10_n10_r3__balanced_order_v2",
   "conditional_validation_plan": "conditional-validation-plan.json",
-  "validation_controller": "validation-v3.json"
+  "validation_controller": "validation-v3.json",
+  "confirmation_analysis": "validation-v3-confirmation-analysis.json",
+  "frozen_baseline_confirmation_decision": "Passes fixed primary gates against A0000. b1 prefill cumulative offload reduction14.021136 ms CI[13.510024,14.532248], gap14.015407 CI[13.549947,14.480867]. Other primary comparisons unresolved without resolved regression; memory preserved. Incremental gain remains parent-relative0.430878 ms, not14.02 ms. Full validation/correctness/generation and regression audit remain before acceptance.",
+  "correctness_directory": "R06-full-correctness",
+  "validation_matrix_manifest": "R04-full-validation/manifest.json"
 }

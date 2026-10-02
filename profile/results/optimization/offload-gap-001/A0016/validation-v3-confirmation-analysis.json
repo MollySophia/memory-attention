@@ -1,0 +1,1603 @@
+{
+  "campaign_id": "offload-gap-001",
+  "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R03-baseline-confirmation/manifest.json",
+  "rows": [
+    {
+      "batch": 1,
+      "mode": "prefill",
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "values": [
+            13.785603952904545,
+            14.111947656298675,
+            14.165857310096424
+          ],
+          "mean": 14.021136306433215,
+          "lower_95": 13.510024263731205,
+          "upper_95": 14.532248349135225,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "gpu_reduction_ms": {
+          "values": [
+            -0.01522093079984188,
+            0.01321433422466356,
+            0.01919333202143747
+          ],
+          "mean": 0.005728911815419717,
+          "lower_95": -0.03994876996935729,
+          "upper_95": 0.05140659360019672,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "gap_reduction_ms": {
+          "values": [
+            13.800824883704387,
+            14.098733322074011,
+            14.146663978074987
+          ],
+          "mean": 14.015407394617794,
+          "lower_95": 13.549947481331264,
+          "upper_95": 14.480867307904324,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "offload_speedup": {
+          "values": [
+            1.4707359424299067,
+            1.480672999835253,
+            1.473464131864818
+          ],
+          "mean": 1.4749576913766593,
+          "lower_95": 1.4622037989851833,
+          "upper_95": 1.4877115837681354,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "baseline_gap_ms": {
+          "values": [
+            14.058387729649745,
+            14.333461411297318,
+            15.043974419434864
+          ],
+          "mean": 14.478607853460643,
+          "lower_95": 13.215243946151745,
+          "upper_95": 15.741971760769541,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "candidate_gap_ms": {
+          "values": [
+            0.2575628459453583,
+            0.23472808922330657,
+            0.8973104413598776
+          ],
+          "mean": 0.4632004588428475,
+          "lower_95": -0.4711423659854331,
+          "upper_95": 1.3975432836711281,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "baseline_relative_overhead": {
+          "values": [
+            0.48456425217009014,
+            0.4919297190984675,
+            0.5180167492796357
+          ],
+          "mean": 0.4981702401827311,
+          "lower_95": 0.45450481760243444,
+          "upper_95": 0.5418356627630277,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "candidate_relative_overhead": {
+          "values": [
+            0.0088730163892623,
+            0.008059610401832673,
+            0.03091797592374479
+          ],
+          "mean": 0.015950200904946588,
+          "lower_95": -0.0162662136083181,
+          "upper_95": 0.048166615418211274,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        }
+      },
+      "memory": [
+        {
+          "baseline": {
+            "ma_offload": {
+              "gpu_allocated_bytes": 3148360192,
+              "gpu_reserved_bytes": 6192889856,
+              "gpu_peak_allocated_bytes": 3259445248,
+              "gpu_peak_reserved_bytes": 6192889856,
+              "host_rss_bytes": 11710402560,
+              "host_process_high_water_bytes": 12891897856,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 3145728000,
+              "offload_pinned_bytes": 201424896,
+              "offload_gpu_buffer_bytes": 201424896,
+              "offloader_capacities": [
+                {
+                  "batch": 1,
+                  "length": 2048,
+                  "policy": "bulk",
+                  "host_bytes": 201326592,
+                  "gpu_bytes": 201326592
+                },
+                {
+                  "batch": 1,
+                  "length": 1,
+                  "policy": "bulk",
+                  "host_bytes": 98304,
+                  "gpu_bytes": 98304
+                }
+              ],
+              "kv_cache_storage_bytes": 402653184
+            },
+            "ma_gpu": {
+              "gpu_allocated_bytes": 6117829120,
+              "gpu_reserved_bytes": 6568280064,
+              "gpu_peak_allocated_bytes": 6228914176,
+              "gpu_peak_reserved_bytes": 6568280064,
+              "host_rss_bytes": 5146267648,
+              "host_process_high_water_bytes": 12891074560,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 0,
+              "offload_pinned_bytes": 0,
+              "offload_gpu_buffer_bytes": 0,
+              "offloader_capacities": [],
+              "kv_cache_storage_bytes": 402653184
+            }
+          },
+          "candidate": {
+            "ma_offload": {
+              "gpu_allocated_bytes": 2955422208,
+              "gpu_reserved_bytes": 5991563264,
+              "gpu_peak_allocated_bytes": 3066507264,
+              "gpu_peak_reserved_bytes": 5991563264,
+              "host_rss_bytes": 11451146240,
+              "host_process_high_water_bytes": 12892164096,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 3145728000,
+              "offload_pinned_bytes": 8486912,
+              "offload_gpu_buffer_bytes": 8486912,
+              "offloader_capacities": [
+                {
+                  "batch": 1,
+                  "length": 2048,
+                  "policy": "pipeline",
+                  "host_bytes": 8388608,
+                  "gpu_bytes": 8388608
+                },
+                {
+                  "batch": 1,
+                  "length": 1,
+                  "policy": "bulk",
+                  "host_bytes": 98304,
+                  "gpu_bytes": 98304
+                }
+              ],
+              "kv_cache_storage_bytes": 402653184
+            },
+            "ma_gpu": {
+              "gpu_allocated_bytes": 6117829120,
+              "gpu_reserved_bytes": 6568280064,
+              "gpu_peak_allocated_bytes": 6228914176,
+              "gpu_peak_reserved_bytes": 6568280064,
+              "host_rss_bytes": 5146292224,
+              "host_process_high_water_bytes": 12891713536,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 0,
+              "offload_pinned_bytes": 0,
+              "offload_gpu_buffer_bytes": 0,
+              "offloader_capacities": [],
+              "kv_cache_storage_bytes": 402653184
+            }
+          }
+        },
+        {
+          "baseline": {
+            "ma_offload": {
+              "gpu_allocated_bytes": 3148360192,
+              "gpu_reserved_bytes": 6192889856,
+              "gpu_peak_allocated_bytes": 3259445248,
+              "gpu_peak_reserved_bytes": 6192889856,
+              "host_rss_bytes": 11710226432,
+              "host_process_high_water_bytes": 12891328512,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 3145728000,
+              "offload_pinned_bytes": 201424896,
+              "offload_gpu_buffer_bytes": 201424896,
+              "offloader_capacities": [
+                {
+                  "batch": 1,
+                  "length": 2048,
+                  "policy": "bulk",
+                  "host_bytes": 201326592,
+                  "gpu_bytes": 201326592
+                },
+                {
+                  "batch": 1,
+                  "length": 1,
+                  "policy": "bulk",
+                  "host_bytes": 98304,
+                  "gpu_bytes": 98304
+                }
+              ],
+              "kv_cache_storage_bytes": 402653184
+            },
+            "ma_gpu": {
+              "gpu_allocated_bytes": 6117829120,
+              "gpu_reserved_bytes": 6568280064,
+              "gpu_peak_allocated_bytes": 6228914176,
+              "gpu_peak_reserved_bytes": 6568280064,
+              "host_rss_bytes": 5146443776,
+              "host_process_high_water_bytes": 12890275840,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 0,
+              "offload_pinned_bytes": 0,
+              "offload_gpu_buffer_bytes": 0,
+              "offloader_capacities": [],
+              "kv_cache_storage_bytes": 402653184
+            }
+          },
+          "candidate": {
+            "ma_offload": {
+              "gpu_allocated_bytes": 2955422208,
+              "gpu_reserved_bytes": 5991563264,
+              "gpu_peak_allocated_bytes": 3066507264,
+              "gpu_peak_reserved_bytes": 5991563264,
+              "host_rss_bytes": 11451183104,
+              "host_process_high_water_bytes": 12891447296,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 3145728000,
+              "offload_pinned_bytes": 8486912,
+              "offload_gpu_buffer_bytes": 8486912,
+              "offloader_capacities": [
+                {
+                  "batch": 1,
+                  "length": 2048,
+                  "policy": "pipeline",
+                  "host_bytes": 8388608,
+                  "gpu_bytes": 8388608
+                },
+                {
+                  "batch": 1,
+                  "length": 1,
+                  "policy": "bulk",
+                  "host_bytes": 98304,
+                  "gpu_bytes": 98304
+                }
+              ],
+              "kv_cache_storage_bytes": 402653184
+            },
+            "ma_gpu": {
+              "gpu_allocated_bytes": 6117829120,
+              "gpu_reserved_bytes": 6568280064,
+              "gpu_peak_allocated_bytes": 6228914176,
+              "gpu_peak_reserved_bytes": 6568280064,
+              "host_rss_bytes": 5146591232,
+              "host_process_high_water_bytes": 12891242496,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 0,
+              "offload_pinned_bytes": 0,
+              "offload_gpu_buffer_bytes": 0,
+              "offloader_capacities": [],
+              "kv_cache_storage_bytes": 402653184
+            }
+          }
+        },
+        {
+          "baseline": {
+            "ma_offload": {
+              "gpu_allocated_bytes": 3148360192,
+              "gpu_reserved_bytes": 6192889856,
+              "gpu_peak_allocated_bytes": 3259445248,
+              "gpu_peak_reserved_bytes": 6192889856,
+              "host_rss_bytes": 11710525440,
+              "host_process_high_water_bytes": 12891914240,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 3145728000,
+              "offload_pinned_bytes": 201424896,
+              "offload_gpu_buffer_bytes": 201424896,
+              "offloader_capacities": [
+                {
+                  "batch": 1,
+                  "length": 2048,
+                  "policy": "bulk",
+                  "host_bytes": 201326592,
+                  "gpu_bytes": 201326592
+                },
+                {
+                  "batch": 1,
+                  "length": 1,
+                  "policy": "bulk",
+                  "host_bytes": 98304,
+                  "gpu_bytes": 98304
+                }
+              ],
+              "kv_cache_storage_bytes": 402653184
+            },
+            "ma_gpu": {
+              "gpu_allocated_bytes": 6117829120,
+              "gpu_reserved_bytes": 6568280064,
+              "gpu_peak_allocated_bytes": 6228914176,
+              "gpu_peak_reserved_bytes": 6568280064,
+              "host_rss_bytes": 5146198016,
+              "host_process_high_water_bytes": 12891115520,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 0,
+              "offload_pinned_bytes": 0,
+              "offload_gpu_buffer_bytes": 0,
+              "offloader_capacities": [],
+              "kv_cache_storage_bytes": 402653184
+            }
+          },
+          "candidate": {
+            "ma_offload": {
+              "gpu_allocated_bytes": 2955422208,
+              "gpu_reserved_bytes": 5991563264,
+              "gpu_peak_allocated_bytes": 3066507264,
+              "gpu_peak_reserved_bytes": 5991563264,
+              "host_rss_bytes": 11451396096,
+              "host_process_high_water_bytes": 12891820032,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 3145728000,
+              "offload_pinned_bytes": 8486912,
+              "offload_gpu_buffer_bytes": 8486912,
+              "offloader_capacities": [
+                {
+                  "batch": 1,
+                  "length": 2048,
+                  "policy": "pipeline",
+                  "host_bytes": 8388608,
+                  "gpu_bytes": 8388608
+                },
+                {
+                  "batch": 1,
+                  "length": 1,
+                  "policy": "bulk",
+                  "host_bytes": 98304,
+                  "gpu_bytes": 98304
+                }
+              ],
+              "kv_cache_storage_bytes": 402653184
+            },
+            "ma_gpu": {
+              "gpu_allocated_bytes": 6117829120,
+              "gpu_reserved_bytes": 6568280064,
+              "gpu_peak_allocated_bytes": 6228914176,
+              "gpu_peak_reserved_bytes": 6568280064,
+              "host_rss_bytes": 5146165248,
+              "host_process_high_water_bytes": 12890968064,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 0,
+              "offload_pinned_bytes": 0,
+              "offload_gpu_buffer_bytes": 0,
+              "offloader_capacities": [],
+              "kv_cache_storage_bytes": 402653184
+            }
+          }
+        }
+      ],
+      "memory_savings_preserved": true,
+      "repeatable_offload_and_gap_reduction": true,
+      "resolved_offload_regression": false,
+      "resolved_resident_slowdown": false
+    },
+    {
+      "batch": 1,
+      "mode": "decode",
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "values": [
+            0.06242976523935795,
+            -0.00890134833753109,
+            -0.3660053325196113
+          ],
+          "mean": -0.10415897187259482,
+          "lower_95": -0.6744007206864888,
+          "upper_95": 0.4660827769412992,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "gpu_reduction_ms": {
+          "values": [
+            -0.17159834193686674,
+            0.046937152122457526,
+            -0.023913259307542845
+          ],
+          "mean": -0.04952481637398402,
+          "lower_95": -0.3264967517740625,
+          "upper_95": 0.22744711902609446,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "gap_reduction_ms": {
+          "values": [
+            0.2340281071762247,
+            -0.055838500459988616,
+            -0.34209207321206847
+          ],
+          "mean": -0.0546341554986108,
+          "lower_95": -0.7702197793818654,
+          "upper_95": 0.6609514683846437,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "offload_speedup": {
+          "values": [
+            1.0127660571660506,
+            0.9981382543823906,
+            0.9318616628297159
+          ],
+          "mean": 0.9809219914593857,
+          "lower_95": 0.8738248238533084,
+          "upper_95": 1.088019159065463,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "baseline_gap_ms": {
+          "values": [
+            0.391788051153223,
+            0.13129169431825538,
+            0.48121904643873314
+          ],
+          "mean": 0.33476626397007053,
+          "lower_95": -0.11684765665607044,
+          "upper_95": 0.7863801845962115,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "candidate_gap_ms": {
+          "values": [
+            0.15775994397699833,
+            0.187130194778244,
+            0.8233111196508016
+          ],
+          "mean": 0.3894004194686813,
+          "lower_95": -0.5447956417191592,
+          "upper_95": 1.323596480656522,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "baseline_relative_overhead": {
+          "values": [
+            0.0859008164853643,
+            0.028289582085152976,
+            0.10636368992828227
+          ],
+          "mean": 0.07351802949959985,
+          "lower_95": -0.027047880489052878,
+          "upper_95": 0.17408393948825257,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "candidate_relative_overhead": {
+          "values": [
+            0.03333519880785518,
+            0.04073313095177977,
+            0.18101940474203193
+          ],
+          "mean": 0.08502924483388896,
+          "lower_95": -0.12168124793108062,
+          "upper_95": 0.2917397375988585,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        }
+      },
+      "memory": [
+        {
+          "baseline": {
+            "ma_offload": {
+              "gpu_allocated_bytes": 3148565504,
+              "gpu_reserved_bytes": 6192889856,
+              "gpu_peak_allocated_bytes": 3165311488,
+              "gpu_peak_reserved_bytes": 6192889856,
+              "host_rss_bytes": 11885424640,
+              "host_process_high_water_bytes": 12891885568,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 3145728000,
+              "offload_pinned_bytes": 201424896,
+              "offload_gpu_buffer_bytes": 201424896,
+              "offloader_capacities": [
+                {
+                  "batch": 1,
+                  "length": 2048,
+                  "policy": "bulk",
+                  "host_bytes": 201326592,
+                  "gpu_bytes": 201326592
+                },
+                {
+                  "batch": 1,
+                  "length": 1,
+                  "policy": "bulk",
+                  "host_bytes": 98304,
+                  "gpu_bytes": 98304
+                }
+              ],
+              "kv_cache_storage_bytes": 402849792
+            },
+            "ma_gpu": {
+              "gpu_allocated_bytes": 6118034432,
+              "gpu_reserved_bytes": 6650068992,
+              "gpu_peak_allocated_bytes": 6134784512,
+              "gpu_peak_reserved_bytes": 6650068992,
+              "host_rss_bytes": 5321265152,
+              "host_process_high_water_bytes": 12891127808,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 0,
+              "offload_pinned_bytes": 0,
+              "offload_gpu_buffer_bytes": 0,
+              "offloader_capacities": [],
+              "kv_cache_storage_bytes": 402849792
+            }
+          },
+          "candidate": {
+            "ma_offload": {
+              "gpu_allocated_bytes": 2955627520,
+              "gpu_reserved_bytes": 5991563264,
+              "gpu_peak_allocated_bytes": 2972373504,
+              "gpu_peak_reserved_bytes": 5991563264,
+              "host_rss_bytes": 11626672128,
+              "host_process_high_water_bytes": 12891127808,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 3145728000,
+              "offload_pinned_bytes": 8486912,
+              "offload_gpu_buffer_bytes": 8486912,
+              "offloader_capacities": [
+                {
+                  "batch": 1,
+                  "length": 2048,
+                  "policy": "pipeline",
+                  "host_bytes": 8388608,
+                  "gpu_bytes": 8388608
+                },
+                {
+                  "batch": 1,
+                  "length": 1,
+                  "policy": "bulk",
+                  "host_bytes": 98304,
+                  "gpu_bytes": 98304
+                }
+              ],
+              "kv_cache_storage_bytes": 402849792
+            },
+            "ma_gpu": {
+              "gpu_allocated_bytes": 6118034432,
+              "gpu_reserved_bytes": 6650068992,
+              "gpu_peak_allocated_bytes": 6134784512,
+              "gpu_peak_reserved_bytes": 6650068992,
+              "host_rss_bytes": 5321539584,
+              "host_process_high_water_bytes": 12891283456,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 0,
+              "offload_pinned_bytes": 0,
+              "offload_gpu_buffer_bytes": 0,
+              "offloader_capacities": [],
+              "kv_cache_storage_bytes": 402849792
+            }
+          }
+        },
+        {
+          "baseline": {
+            "ma_offload": {
+              "gpu_allocated_bytes": 3148565504,
+              "gpu_reserved_bytes": 6192889856,
+              "gpu_peak_allocated_bytes": 3165311488,
+              "gpu_peak_reserved_bytes": 6192889856,
+              "host_rss_bytes": 11885461504,
+              "host_process_high_water_bytes": 12890836992,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 3145728000,
+              "offload_pinned_bytes": 201424896,
+              "offload_gpu_buffer_bytes": 201424896,
+              "offloader_capacities": [
+                {
+                  "batch": 1,
+                  "length": 2048,
+                  "policy": "bulk",
+                  "host_bytes": 201326592,
+                  "gpu_bytes": 201326592
+                },
+                {
+                  "batch": 1,
+                  "length": 1,
+                  "policy": "bulk",
+                  "host_bytes": 98304,
+                  "gpu_bytes": 98304
+                }
+              ],
+              "kv_cache_storage_bytes": 402849792
+            },
+            "ma_gpu": {
+              "gpu_allocated_bytes": 6118034432,
+              "gpu_reserved_bytes": 6650068992,
+              "gpu_peak_allocated_bytes": 6134784512,
+              "gpu_peak_reserved_bytes": 6650068992,
+              "host_rss_bytes": 5321355264,
+              "host_process_high_water_bytes": 12891062272,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 0,
+              "offload_pinned_bytes": 0,
+              "offload_gpu_buffer_bytes": 0,
+              "offloader_capacities": [],
+              "kv_cache_storage_bytes": 402849792
+            }
+          },
+          "candidate": {
+            "ma_offload": {
+              "gpu_allocated_bytes": 2955627520,
+              "gpu_reserved_bytes": 5991563264,
+              "gpu_peak_allocated_bytes": 2972373504,
+              "gpu_peak_reserved_bytes": 5991563264,
+              "host_rss_bytes": 11626422272,
+              "host_process_high_water_bytes": 12891123712,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 3145728000,
+              "offload_pinned_bytes": 8486912,
+              "offload_gpu_buffer_bytes": 8486912,
+              "offloader_capacities": [
+                {
+                  "batch": 1,
+                  "length": 2048,
+                  "policy": "pipeline",
+                  "host_bytes": 8388608,
+                  "gpu_bytes": 8388608
+                },
+                {
+                  "batch": 1,
+                  "length": 1,
+                  "policy": "bulk",
+                  "host_bytes": 98304,
+                  "gpu_bytes": 98304
+                }
+              ],
+              "kv_cache_storage_bytes": 402849792
+            },
+            "ma_gpu": {
+              "gpu_allocated_bytes": 6118034432,
+              "gpu_reserved_bytes": 6650068992,
+              "gpu_peak_allocated_bytes": 6134784512,
+              "gpu_peak_reserved_bytes": 6650068992,
+              "host_rss_bytes": 5321220096,
+              "host_process_high_water_bytes": 12891201536,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 0,
+              "offload_pinned_bytes": 0,
+              "offload_gpu_buffer_bytes": 0,
+              "offloader_capacities": [],
+              "kv_cache_storage_bytes": 402849792
+            }
+          }
+        },
+        {
+          "baseline": {
+            "ma_offload": {
+              "gpu_allocated_bytes": 3148565504,
+              "gpu_reserved_bytes": 6192889856,
+              "gpu_peak_allocated_bytes": 3165311488,
+              "gpu_peak_reserved_bytes": 6192889856,
+              "host_rss_bytes": 11885518848,
+              "host_process_high_water_bytes": 12891029504,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 3145728000,
+              "offload_pinned_bytes": 201424896,
+              "offload_gpu_buffer_bytes": 201424896,
+              "offloader_capacities": [
+                {
+                  "batch": 1,
+                  "length": 2048,
+                  "policy": "bulk",
+                  "host_bytes": 201326592,
+                  "gpu_bytes": 201326592
+                },
+                {
+                  "batch": 1,
+                  "length": 1,
+                  "policy": "bulk",
+                  "host_bytes": 98304,
+                  "gpu_bytes": 98304
+                }
+              ],
+              "kv_cache_storage_bytes": 402849792
+            },
+            "ma_gpu": {
+              "gpu_allocated_bytes": 6118034432,
+              "gpu_reserved_bytes": 6650068992,
+              "gpu_peak_allocated_bytes": 6134784512,
+              "gpu_peak_reserved_bytes": 6650068992,
+              "host_rss_bytes": 5321318400,
+              "host_process_high_water_bytes": 12890959872,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 0,
+              "offload_pinned_bytes": 0,
+              "offload_gpu_buffer_bytes": 0,
+              "offloader_capacities": [],
+              "kv_cache_storage_bytes": 402849792
+            }
+          },
+          "candidate": {
+            "ma_offload": {
+              "gpu_allocated_bytes": 2955627520,
+              "gpu_reserved_bytes": 5991563264,
+              "gpu_peak_allocated_bytes": 2972373504,
+              "gpu_peak_reserved_bytes": 5991563264,
+              "host_rss_bytes": 11626467328,
+              "host_process_high_water_bytes": 12891164672,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 3145728000,
+              "offload_pinned_bytes": 8486912,
+              "offload_gpu_buffer_bytes": 8486912,
+              "offloader_capacities": [
+                {
+                  "batch": 1,
+                  "length": 2048,
+                  "policy": "pipeline",
+                  "host_bytes": 8388608,
+                  "gpu_bytes": 8388608
+                },
+                {
+                  "batch": 1,
+                  "length": 1,
+                  "policy": "bulk",
+                  "host_bytes": 98304,
+                  "gpu_bytes": 98304
+                }
+              ],
+              "kv_cache_storage_bytes": 402849792
+            },
+            "ma_gpu": {
+              "gpu_allocated_bytes": 6118034432,
+              "gpu_reserved_bytes": 6650068992,
+              "gpu_peak_allocated_bytes": 6134784512,
+              "gpu_peak_reserved_bytes": 6650068992,
+              "host_rss_bytes": 5321445376,
+              "host_process_high_water_bytes": 12890292224,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 0,
+              "offload_pinned_bytes": 0,
+              "offload_gpu_buffer_bytes": 0,
+              "offloader_capacities": [],
+              "kv_cache_storage_bytes": 402849792
+            }
+          }
+        }
+      ],
+      "memory_savings_preserved": true,
+      "repeatable_offload_and_gap_reduction": false,
+      "resolved_offload_regression": false,
+      "resolved_resident_slowdown": false
+    },
+    {
+      "batch": 8,
+      "mode": "prefill",
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "values": [
+            -0.15644477680325508,
+            0.08427098703882052,
+            0.014678140481322544
+          ],
+          "mean": -0.019165216427704006,
+          "lower_95": -0.3268881135923295,
+          "upper_95": 0.28855768073692145,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "gpu_reduction_ms": {
+          "values": [
+            -0.671181672563165,
+            0.43538783987364127,
+            0.18305530150732352
+          ],
+          "mean": -0.017579510394066727,
+          "lower_95": -1.4581968459851984,
+          "upper_95": 1.4230378251970648,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "gap_reduction_ms": {
+          "values": [
+            0.5147368957599099,
+            -0.35111685283482075,
+            -0.16837716102600098
+          ],
+          "mean": -0.0015857060336372797,
+          "lower_95": -1.135316930577043,
+          "upper_95": 1.1321455185097684,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "offload_speedup": {
+          "values": [
+            0.9992562925198726,
+            1.000401867247762,
+            1.0000697248749708
+          ],
+          "mean": 0.9999092948808684,
+          "lower_95": 0.9984451518231416,
+          "upper_95": 1.0013734379385952,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "baseline_gap_ms": {
+          "values": [
+            3.7242879314969173,
+            2.5231671830018456,
+            4.022024742638081
+          ],
+          "mean": 3.4231599523789478,
+          "lower_95": 1.451981352392411,
+          "upper_95": 5.394338552365484,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "candidate_gap_ms": {
+          "values": [
+            3.2095510357370074,
+            2.8742840358366664,
+            4.190401903664082
+          ],
+          "mean": 3.424745658412585,
+          "lower_95": 1.725745998892291,
+          "upper_95": 5.12374531793288,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "baseline_relative_overhead": {
+          "values": [
+            0.01803728314519959,
+            0.01217394170865993,
+            0.019476384156118076
+          ],
+          "mean": 0.0165625363366592,
+          "lower_95": 0.006953522060422962,
+          "upper_95": 0.026171550612895438,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "candidate_relative_overhead": {
+          "values": [
+            0.01549397020462262,
+            0.013897226950456698,
+            0.020309742453035184
+          ],
+          "mean": 0.0165669798693715,
+          "lower_95": 0.008274423236063165,
+          "upper_95": 0.024859536502679837,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        }
+      },
+      "memory": [
+        {
+          "baseline": {
+            "ma_offload": {
+              "gpu_allocated_bytes": 6035292160,
+              "gpu_reserved_bytes": 9684647936,
+              "gpu_peak_allocated_bytes": 6923972608,
+              "gpu_peak_reserved_bytes": 9684647936,
+              "host_rss_bytes": 11709235200,
+              "host_process_high_water_bytes": 12890918912,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 3145728000,
+              "offload_pinned_bytes": 269221888,
+              "offload_gpu_buffer_bytes": 269221888,
+              "offloader_capacities": [
+                {
+                  "batch": 8,
+                  "length": 2048,
+                  "policy": "pipeline",
+                  "host_bytes": 268435456,
+                  "gpu_bytes": 268435456
+                },
+                {
+                  "batch": 8,
+                  "length": 1,
+                  "policy": "bulk",
+                  "host_bytes": 786432,
+                  "gpu_bytes": 786432
+                }
+              ],
+              "kv_cache_storage_bytes": 3221225472
+            },
+            "ma_gpu": {
+              "gpu_allocated_bytes": 8936964096,
+              "gpu_reserved_bytes": 11444158464,
+              "gpu_peak_allocated_bytes": 9825644544,
+              "gpu_peak_reserved_bytes": 11444158464,
+              "host_rss_bytes": 5144182784,
+              "host_process_high_water_bytes": 12891533312,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 0,
+              "offload_pinned_bytes": 0,
+              "offload_gpu_buffer_bytes": 0,
+              "offloader_capacities": [],
+              "kv_cache_storage_bytes": 3221225472
+            }
+          },
+          "candidate": {
+            "ma_offload": {
+              "gpu_allocated_bytes": 6035292160,
+              "gpu_reserved_bytes": 9684647936,
+              "gpu_peak_allocated_bytes": 6923972608,
+              "gpu_peak_reserved_bytes": 9684647936,
+              "host_rss_bytes": 11709485056,
+              "host_process_high_water_bytes": 12891299840,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 3145728000,
+              "offload_pinned_bytes": 269221888,
+              "offload_gpu_buffer_bytes": 269221888,
+              "offloader_capacities": [
+                {
+                  "batch": 8,
+                  "length": 2048,
+                  "policy": "pipeline",
+                  "host_bytes": 268435456,
+                  "gpu_bytes": 268435456
+                },
+                {
+                  "batch": 8,
+                  "length": 1,
+                  "policy": "bulk",
+                  "host_bytes": 786432,
+                  "gpu_bytes": 786432
+                }
+              ],
+              "kv_cache_storage_bytes": 3221225472
+            },
+            "ma_gpu": {
+              "gpu_allocated_bytes": 8936964096,
+              "gpu_reserved_bytes": 11444158464,
+              "gpu_peak_allocated_bytes": 9825644544,
+              "gpu_peak_reserved_bytes": 11444158464,
+              "host_rss_bytes": 5144297472,
+              "host_process_high_water_bytes": 12890980352,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 0,
+              "offload_pinned_bytes": 0,
+              "offload_gpu_buffer_bytes": 0,
+              "offloader_capacities": [],
+              "kv_cache_storage_bytes": 3221225472
+            }
+          }
+        },
+        {
+          "baseline": {
+            "ma_offload": {
+              "gpu_allocated_bytes": 6035292160,
+              "gpu_reserved_bytes": 9684647936,
+              "gpu_peak_allocated_bytes": 6923972608,
+              "gpu_peak_reserved_bytes": 9684647936,
+              "host_rss_bytes": 11709382656,
+              "host_process_high_water_bytes": 12890832896,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 3145728000,
+              "offload_pinned_bytes": 269221888,
+              "offload_gpu_buffer_bytes": 269221888,
+              "offloader_capacities": [
+                {
+                  "batch": 8,
+                  "length": 2048,
+                  "policy": "pipeline",
+                  "host_bytes": 268435456,
+                  "gpu_bytes": 268435456
+                },
+                {
+                  "batch": 8,
+                  "length": 1,
+                  "policy": "bulk",
+                  "host_bytes": 786432,
+                  "gpu_bytes": 786432
+                }
+              ],
+              "kv_cache_storage_bytes": 3221225472
+            },
+            "ma_gpu": {
+              "gpu_allocated_bytes": 8936964096,
+              "gpu_reserved_bytes": 11444158464,
+              "gpu_peak_allocated_bytes": 9825644544,
+              "gpu_peak_reserved_bytes": 11444158464,
+              "host_rss_bytes": 5144195072,
+              "host_process_high_water_bytes": 12891181056,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 0,
+              "offload_pinned_bytes": 0,
+              "offload_gpu_buffer_bytes": 0,
+              "offloader_capacities": [],
+              "kv_cache_storage_bytes": 3221225472
+            }
+          },
+          "candidate": {
+            "ma_offload": {
+              "gpu_allocated_bytes": 6035292160,
+              "gpu_reserved_bytes": 9684647936,
+              "gpu_peak_allocated_bytes": 6923972608,
+              "gpu_peak_reserved_bytes": 9684647936,
+              "host_rss_bytes": 11709448192,
+              "host_process_high_water_bytes": 12891017216,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 3145728000,
+              "offload_pinned_bytes": 269221888,
+              "offload_gpu_buffer_bytes": 269221888,
+              "offloader_capacities": [
+                {
+                  "batch": 8,
+                  "length": 2048,
+                  "policy": "pipeline",
+                  "host_bytes": 268435456,
+                  "gpu_bytes": 268435456
+                },
+                {
+                  "batch": 8,
+                  "length": 1,
+                  "policy": "bulk",
+                  "host_bytes": 786432,
+                  "gpu_bytes": 786432
+                }
+              ],
+              "kv_cache_storage_bytes": 3221225472
+            },
+            "ma_gpu": {
+              "gpu_allocated_bytes": 8936964096,
+              "gpu_reserved_bytes": 11444158464,
+              "gpu_peak_allocated_bytes": 9825644544,
+              "gpu_peak_reserved_bytes": 11444158464,
+              "host_rss_bytes": 5144477696,
+              "host_process_high_water_bytes": 12891574272,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 0,
+              "offload_pinned_bytes": 0,
+              "offload_gpu_buffer_bytes": 0,
+              "offloader_capacities": [],
+              "kv_cache_storage_bytes": 3221225472
+            }
+          }
+        },
+        {
+          "baseline": {
+            "ma_offload": {
+              "gpu_allocated_bytes": 6035292160,
+              "gpu_reserved_bytes": 9684647936,
+              "gpu_peak_allocated_bytes": 6923972608,
+              "gpu_peak_reserved_bytes": 9684647936,
+              "host_rss_bytes": 11709341696,
+              "host_process_high_water_bytes": 12891336704,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 3145728000,
+              "offload_pinned_bytes": 269221888,
+              "offload_gpu_buffer_bytes": 269221888,
+              "offloader_capacities": [
+                {
+                  "batch": 8,
+                  "length": 2048,
+                  "policy": "pipeline",
+                  "host_bytes": 268435456,
+                  "gpu_bytes": 268435456
+                },
+                {
+                  "batch": 8,
+                  "length": 1,
+                  "policy": "bulk",
+                  "host_bytes": 786432,
+                  "gpu_bytes": 786432
+                }
+              ],
+              "kv_cache_storage_bytes": 3221225472
+            },
+            "ma_gpu": {
+              "gpu_allocated_bytes": 8936964096,
+              "gpu_reserved_bytes": 11444158464,
+              "gpu_peak_allocated_bytes": 9825644544,
+              "gpu_peak_reserved_bytes": 11444158464,
+              "host_rss_bytes": 5144170496,
+              "host_process_high_water_bytes": 12890632192,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 0,
+              "offload_pinned_bytes": 0,
+              "offload_gpu_buffer_bytes": 0,
+              "offloader_capacities": [],
+              "kv_cache_storage_bytes": 3221225472
+            }
+          },
+          "candidate": {
+            "ma_offload": {
+              "gpu_allocated_bytes": 6035292160,
+              "gpu_reserved_bytes": 9684647936,
+              "gpu_peak_allocated_bytes": 6923972608,
+              "gpu_peak_reserved_bytes": 9684647936,
+              "host_rss_bytes": 11709665280,
+              "host_process_high_water_bytes": 12891037696,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 3145728000,
+              "offload_pinned_bytes": 269221888,
+              "offload_gpu_buffer_bytes": 269221888,
+              "offloader_capacities": [
+                {
+                  "batch": 8,
+                  "length": 2048,
+                  "policy": "pipeline",
+                  "host_bytes": 268435456,
+                  "gpu_bytes": 268435456
+                },
+                {
+                  "batch": 8,
+                  "length": 1,
+                  "policy": "bulk",
+                  "host_bytes": 786432,
+                  "gpu_bytes": 786432
+                }
+              ],
+              "kv_cache_storage_bytes": 3221225472
+            },
+            "ma_gpu": {
+              "gpu_allocated_bytes": 8936964096,
+              "gpu_reserved_bytes": 11444158464,
+              "gpu_peak_allocated_bytes": 9825644544,
+              "gpu_peak_reserved_bytes": 11444158464,
+              "host_rss_bytes": 5144223744,
+              "host_process_high_water_bytes": 12891054080,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 0,
+              "offload_pinned_bytes": 0,
+              "offload_gpu_buffer_bytes": 0,
+              "offloader_capacities": [],
+              "kv_cache_storage_bytes": 3221225472
+            }
+          }
+        }
+      ],
+      "memory_savings_preserved": true,
+      "repeatable_offload_and_gap_reduction": false,
+      "resolved_offload_regression": false,
+      "resolved_resident_slowdown": false
+    },
+    {
+      "batch": 8,
+      "mode": "decode",
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "values": [
+            0.0021566636860370636,
+            -0.05098062877853771,
+            0.005495268851518631
+          ],
+          "mean": -0.014442898746994004,
+          "lower_95": -0.09315678611384852,
+          "upper_95": 0.06427098861986051,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "gpu_reduction_ms": {
+          "values": [
+            0.02507180906832218,
+            -0.001251619930069836,
+            0.018005616342028574
+          ],
+          "mean": 0.01394193516009364,
+          "lower_95": -0.0199021832233024,
+          "upper_95": 0.047786053543489686,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "gap_reduction_ms": {
+          "values": [
+            -0.022915145382285118,
+            -0.04972900884846787,
+            -0.012510347490509943
+          ],
+          "mean": -0.028384833907087643,
+          "lower_95": -0.07608708996001937,
+          "upper_95": 0.019317422145844084,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "offload_speedup": {
+          "values": [
+            1.0001957664313696,
+            0.9953884225463748,
+            1.0004992187395234
+          ],
+          "mean": 0.9986944692390893,
+          "lower_95": 0.9915721040130222,
+          "upper_95": 1.0058168344651566,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "baseline_gap_ms": {
+          "values": [
+            0.06349269921581069,
+            0.08053965866565704,
+            0.06987311256428441
+          ],
+          "mean": 0.07130182348191738,
+          "lower_95": 0.0499063998068887,
+          "upper_95": 0.09269724715694606,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "candidate_gap_ms": {
+          "values": [
+            0.0864078445980958,
+            0.13026866751412491,
+            0.08238346005479436
+          ],
+          "mean": 0.09968665738900502,
+          "lower_95": 0.03370516211740336,
+          "upper_95": 0.1656681526606067,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "baseline_relative_overhead": {
+          "values": [
+            0.00579567925043567,
+            0.007373129837563663,
+            0.006384978161041666
+          ],
+          "mean": 0.006517929083013667,
+          "lower_95": 0.004537860093592224,
+          "upper_95": 0.00849799807243511,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "candidate_relative_overhead": {
+          "values": [
+            0.007905489771460328,
+            0.011924283933145041,
+            0.007540575763118174
+          ],
+          "mean": 0.009123449822574514,
+          "lower_95": 0.0030809185726047546,
+          "upper_95": 0.015165981072544275,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        }
+      },
+      "memory": [
+        {
+          "baseline": {
+            "ma_offload": {
+              "gpu_allocated_bytes": 6036760064,
+              "gpu_reserved_bytes": 9684647936,
+              "gpu_peak_allocated_bytes": 6170727936,
+              "gpu_peak_reserved_bytes": 9684647936,
+              "host_rss_bytes": 11895197696,
+              "host_process_high_water_bytes": 12893073408,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 3145728000,
+              "offload_pinned_bytes": 269221888,
+              "offload_gpu_buffer_bytes": 269221888,
+              "offloader_capacities": [
+                {
+                  "batch": 8,
+                  "length": 2048,
+                  "policy": "pipeline",
+                  "host_bytes": 268435456,
+                  "gpu_bytes": 268435456
+                },
+                {
+                  "batch": 8,
+                  "length": 1,
+                  "policy": "bulk",
+                  "host_bytes": 786432,
+                  "gpu_bytes": 786432
+                }
+              ],
+              "kv_cache_storage_bytes": 3222798336
+            },
+            "ma_gpu": {
+              "gpu_allocated_bytes": 8938432000,
+              "gpu_reserved_bytes": 11446255616,
+              "gpu_peak_allocated_bytes": 9072432640,
+              "gpu_peak_reserved_bytes": 11446255616,
+              "host_rss_bytes": 5328322560,
+              "host_process_high_water_bytes": 12891566080,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 0,
+              "offload_pinned_bytes": 0,
+              "offload_gpu_buffer_bytes": 0,
+              "offloader_capacities": [],
+              "kv_cache_storage_bytes": 3222798336
+            }
+          },
+          "candidate": {
+            "ma_offload": {
+              "gpu_allocated_bytes": 6036760064,
+              "gpu_reserved_bytes": 9684647936,
+              "gpu_peak_allocated_bytes": 6170727936,
+              "gpu_peak_reserved_bytes": 9684647936,
+              "host_rss_bytes": 11893362688,
+              "host_process_high_water_bytes": 12890677248,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 3145728000,
+              "offload_pinned_bytes": 269221888,
+              "offload_gpu_buffer_bytes": 269221888,
+              "offloader_capacities": [
+                {
+                  "batch": 8,
+                  "length": 2048,
+                  "policy": "pipeline",
+                  "host_bytes": 268435456,
+                  "gpu_bytes": 268435456
+                },
+                {
+                  "batch": 8,
+                  "length": 1,
+                  "policy": "bulk",
+                  "host_bytes": 786432,
+                  "gpu_bytes": 786432
+                }
+              ],
+              "kv_cache_storage_bytes": 3222798336
+            },
+            "ma_gpu": {
+              "gpu_allocated_bytes": 8938432000,
+              "gpu_reserved_bytes": 11446255616,
+              "gpu_peak_allocated_bytes": 9072432640,
+              "gpu_peak_reserved_bytes": 11446255616,
+              "host_rss_bytes": 5328240640,
+              "host_process_high_water_bytes": 12891570176,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 0,
+              "offload_pinned_bytes": 0,
+              "offload_gpu_buffer_bytes": 0,
+              "offloader_capacities": [],
+              "kv_cache_storage_bytes": 3222798336
+            }
+          }
+        },
+        {
+          "baseline": {
+            "ma_offload": {
+              "gpu_allocated_bytes": 6036760064,
+              "gpu_reserved_bytes": 9684647936,
+              "gpu_peak_allocated_bytes": 6170727936,
+              "gpu_peak_reserved_bytes": 9684647936,
+              "host_rss_bytes": 11893071872,
+              "host_process_high_water_bytes": 12890533888,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 3145728000,
+              "offload_pinned_bytes": 269221888,
+              "offload_gpu_buffer_bytes": 269221888,
+              "offloader_capacities": [
+                {
+                  "batch": 8,
+                  "length": 2048,
+                  "policy": "pipeline",
+                  "host_bytes": 268435456,
+                  "gpu_bytes": 268435456
+                },
+                {
+                  "batch": 8,
+                  "length": 1,
+                  "policy": "bulk",
+                  "host_bytes": 786432,
+                  "gpu_bytes": 786432
+                }
+              ],
+              "kv_cache_storage_bytes": 3222798336
+            },
+            "ma_gpu": {
+              "gpu_allocated_bytes": 8938432000,
+              "gpu_reserved_bytes": 11446255616,
+              "gpu_peak_allocated_bytes": 9072432640,
+              "gpu_peak_reserved_bytes": 11446255616,
+              "host_rss_bytes": 5328162816,
+              "host_process_high_water_bytes": 12891070464,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 0,
+              "offload_pinned_bytes": 0,
+              "offload_gpu_buffer_bytes": 0,
+              "offloader_capacities": [],
+              "kv_cache_storage_bytes": 3222798336
+            }
+          },
+          "candidate": {
+            "ma_offload": {
+              "gpu_allocated_bytes": 6036760064,
+              "gpu_reserved_bytes": 9684647936,
+              "gpu_peak_allocated_bytes": 6170727936,
+              "gpu_peak_reserved_bytes": 9684647936,
+              "host_rss_bytes": 11893227520,
+              "host_process_high_water_bytes": 12890984448,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 3145728000,
+              "offload_pinned_bytes": 269221888,
+              "offload_gpu_buffer_bytes": 269221888,
+              "offloader_capacities": [
+                {
+                  "batch": 8,
+                  "length": 2048,
+                  "policy": "pipeline",
+                  "host_bytes": 268435456,
+                  "gpu_bytes": 268435456
+                },
+                {
+                  "batch": 8,
+                  "length": 1,
+                  "policy": "bulk",
+                  "host_bytes": 786432,
+                  "gpu_bytes": 786432
+                }
+              ],
+              "kv_cache_storage_bytes": 3222798336
+            },
+            "ma_gpu": {
+              "gpu_allocated_bytes": 8938432000,
+              "gpu_reserved_bytes": 11446255616,
+              "gpu_peak_allocated_bytes": 9072432640,
+              "gpu_peak_reserved_bytes": 11446255616,
+              "host_rss_bytes": 5328412672,
+              "host_process_high_water_bytes": 12891656192,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 0,
+              "offload_pinned_bytes": 0,
+              "offload_gpu_buffer_bytes": 0,
+              "offloader_capacities": [],
+              "kv_cache_storage_bytes": 3222798336
+            }
+          }
+        },
+        {
+          "baseline": {
+            "ma_offload": {
+              "gpu_allocated_bytes": 6036760064,
+              "gpu_reserved_bytes": 9684647936,
+              "gpu_peak_allocated_bytes": 6170727936,
+              "gpu_peak_reserved_bytes": 9684647936,
+              "host_rss_bytes": 11893084160,
+              "host_process_high_water_bytes": 12890738688,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 3145728000,
+              "offload_pinned_bytes": 269221888,
+              "offload_gpu_buffer_bytes": 269221888,
+              "offloader_capacities": [
+                {
+                  "batch": 8,
+                  "length": 2048,
+                  "policy": "pipeline",
+                  "host_bytes": 268435456,
+                  "gpu_bytes": 268435456
+                },
+                {
+                  "batch": 8,
+                  "length": 1,
+                  "policy": "bulk",
+                  "host_bytes": 786432,
+                  "gpu_bytes": 786432
+                }
+              ],
+              "kv_cache_storage_bytes": 3222798336
+            },
+            "ma_gpu": {
+              "gpu_allocated_bytes": 8938432000,
+              "gpu_reserved_bytes": 11446255616,
+              "gpu_peak_allocated_bytes": 9072432640,
+              "gpu_peak_reserved_bytes": 11446255616,
+              "host_rss_bytes": 5328433152,
+              "host_process_high_water_bytes": 12891283456,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 0,
+              "offload_pinned_bytes": 0,
+              "offload_gpu_buffer_bytes": 0,
+              "offloader_capacities": [],
+              "kv_cache_storage_bytes": 3222798336
+            }
+          },
+          "candidate": {
+            "ma_offload": {
+              "gpu_allocated_bytes": 6036760064,
+              "gpu_reserved_bytes": 9684647936,
+              "gpu_peak_allocated_bytes": 6170727936,
+              "gpu_peak_reserved_bytes": 9684647936,
+              "host_rss_bytes": 11893460992,
+              "host_process_high_water_bytes": 12891906048,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 3145728000,
+              "offload_pinned_bytes": 269221888,
+              "offload_gpu_buffer_bytes": 269221888,
+              "offloader_capacities": [
+                {
+                  "batch": 8,
+                  "length": 2048,
+                  "policy": "pipeline",
+                  "host_bytes": 268435456,
+                  "gpu_bytes": 268435456
+                },
+                {
+                  "batch": 8,
+                  "length": 1,
+                  "policy": "bulk",
+                  "host_bytes": 786432,
+                  "gpu_bytes": 786432
+                }
+              ],
+              "kv_cache_storage_bytes": 3222798336
+            },
+            "ma_gpu": {
+              "gpu_allocated_bytes": 8938432000,
+              "gpu_reserved_bytes": 11446255616,
+              "gpu_peak_allocated_bytes": 9072432640,
+              "gpu_peak_reserved_bytes": 11446255616,
+              "host_rss_bytes": 5328482304,
+              "host_process_high_water_bytes": 12891348992,
+              "host_high_water_scope": "process lifetime, including model loading",
+              "raw_table_snapshot_bytes": 3145728000,
+              "cpu_table_bytes": 0,
+              "offload_pinned_bytes": 0,
+              "offload_gpu_buffer_bytes": 0,
+              "offloader_capacities": [],
+              "kv_cache_storage_bytes": 3222798336
+            }
+          }
+        }
+      ],
+      "memory_savings_preserved": true,
+      "repeatable_offload_and_gap_reduction": false,
+      "resolved_offload_regression": false,
+      "resolved_resident_slowdown": false
+    }
+  ],
+  "confirmation_promising": true,
+  "accepted": false,
+  "remaining_gates": [
+    "full matrix regression and placement/folding references",
+    "growing generation performance",
+    "full model independent-reference correctness at primary shapes",
+    "source/resident-behavior audit"
+  ],
+  "uncertainty_note": "Intervals use independent process blocks; not within-process rounds. n=3, normality assumption unverified; no multiple-comparison correction. All four prespecified workloads are reported."
+}

@@ -1,0 +1,28 @@
+{
+  "campaign_id": "offload-gap-001",
+  "status": "source_environment_and_complete_fingerprint_scope_verified",
+  "source_confirmation": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R03-baseline-confirmation/manifest.json",
+  "references": [
+    {
+      "batch": 1,
+      "seed": 1234,
+      "path": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R06-full-correctness/correctness-b1-s1234-baseline.json"
+    },
+    {
+      "batch": 1,
+      "seed": 4321,
+      "path": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R06-full-correctness/correctness-b1-s4321-baseline.json"
+    },
+    {
+      "batch": 8,
+      "seed": 1234,
+      "path": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R06-full-correctness/correctness-b8-s1234-baseline.json"
+    },
+    {
+      "batch": 8,
+      "seed": 4321,
+      "path": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R06-full-correctness/correctness-b8-s4321-baseline.json"
+    }
+  ],
+  "note": "Only frozen resident correctness is reused. Candidate fingerprints are rerun; no timing results are reused here."
+}

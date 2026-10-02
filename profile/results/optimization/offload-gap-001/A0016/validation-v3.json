@@ -1,0 +1,274 @@
+{
+  "campaign_id": "offload-gap-001",
+  "attempt_id": "A0016",
+  "status": "R04-full-validation",
+  "driver_command": [
+    "profile/results/optimization/offload-gap-001/continue_validation.py",
+    "--attempt",
+    "A0016",
+    "--confirmation",
+    "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R03-baseline-confirmation/manifest.json",
+    "--baseline-root",
+    "/home/molly/workspace-memory-attn/offload-gap-001-A0000",
+    "--candidate-root",
+    "/home/molly/workspace-memory-attn/offload-gap-001-A0016",
+    "--screen-manifest",
+    "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R01/manifest.json",
+    "--controller-name",
+    "validation-v3",
+    "--first-run-index",
+    "4",
+    "--correctness-first",
+    "--reuse-resident-correctness",
+    "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R06-full-correctness"
+  ],
+  "driver_source_sha256": "c34c4f94074857b9e1ef4a895f93d979903886d046c8969c4853ca29dc454b51",
+  "controller_pid": 2268398,
+  "confirmation_pid": 2259716,
+  "confirmation_process_identity": [
+    "S",
+    "334265907"
+  ],
+  "jobs": [
+    {
+      "name": "analyze-confirmation",
+      "command": [
+        "/home/molly/miniconda3/envs/fla-bench/bin/python",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/analyze_paired.py",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R03-baseline-confirmation/manifest.json",
+        "--output",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/validation-v3-confirmation-analysis.json"
+      ],
+      "status": "completed",
+      "started_unix": 1790930685.5129206,
+      "pid": 2273563,
+      "returncode": 0,
+      "finished_unix": 1790930685.5593581
+    },
+    {
+      "name": "correctness-b1-s1234-baseline",
+      "status": "reused",
+      "source_result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R06-full-correctness/correctness-b1-s1234-baseline.json",
+      "reason": "Frozen independent resident byte fingerprints; full source/environment/scope checks passed"
+    },
+    {
+      "name": "correctness-b1-s1234-candidate",
+      "command": [
+        "/home/molly/miniconda3/envs/fla-bench/bin/python",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/full_correctness.py",
+        "--source-root",
+        "/home/molly/workspace-memory-attn/offload-gap-001-A0016",
+        "--variant",
+        "ma_offload",
+        "--batch-size",
+        "1",
+        "--seed",
+        "1234",
+        "--output",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R06-full-correctness/correctness-b1-s1234-candidate.json"
+      ],
+      "status": "completed",
+      "started_unix": 1790930685.593449,
+      "pid": 2273565,
+      "returncode": 0,
+      "finished_unix": 1790930703.849467
+    },
+    {
+      "name": "compare-correctness-b1-s1234",
+      "command": [
+        "/home/molly/miniconda3/envs/fla-bench/bin/python",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/compare_correctness.py",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R06-full-correctness/correctness-b1-s1234-baseline.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R06-full-correctness/correctness-b1-s1234-candidate.json",
+        "--output",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R06-full-correctness/comparison-b1-s1234.json"
+      ],
+      "status": "completed",
+      "started_unix": 1790930703.8497357,
+      "pid": 2273927,
+      "returncode": 0,
+      "finished_unix": 1790930703.870819
+    },
+    {
+      "name": "correctness-b1-s4321-baseline",
+      "status": "reused",
+      "source_result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R06-full-correctness/correctness-b1-s4321-baseline.json",
+      "reason": "Frozen independent resident byte fingerprints; full source/environment/scope checks passed"
+    },
+    {
+      "name": "correctness-b1-s4321-candidate",
+      "command": [
+        "/home/molly/miniconda3/envs/fla-bench/bin/python",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/full_correctness.py",
+        "--source-root",
+        "/home/molly/workspace-memory-attn/offload-gap-001-A0016",
+        "--variant",
+        "ma_offload",
+        "--batch-size",
+        "1",
+        "--seed",
+        "4321",
+        "--output",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R06-full-correctness/correctness-b1-s4321-candidate.json"
+      ],
+      "status": "completed",
+      "started_unix": 1790930703.8709931,
+      "pid": 2273928,
+      "returncode": 0,
+      "finished_unix": 1790930722.1144464
+    },
+    {
+      "name": "compare-correctness-b1-s4321",
+      "command": [
+        "/home/molly/miniconda3/envs/fla-bench/bin/python",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/compare_correctness.py",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R06-full-correctness/correctness-b1-s4321-baseline.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R06-full-correctness/correctness-b1-s4321-candidate.json",
+        "--output",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R06-full-correctness/comparison-b1-s4321.json"
+      ],
+      "status": "completed",
+      "started_unix": 1790930722.1147363,
+      "pid": 2274256,
+      "returncode": 0,
+      "finished_unix": 1790930722.1365135
+    },
+    {
+      "name": "correctness-b8-s1234-baseline",
+      "status": "reused",
+      "source_result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R06-full-correctness/correctness-b8-s1234-baseline.json",
+      "reason": "Frozen independent resident byte fingerprints; full source/environment/scope checks passed"
+    },
+    {
+      "name": "correctness-b8-s1234-candidate",
+      "command": [
+        "/home/molly/miniconda3/envs/fla-bench/bin/python",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/full_correctness.py",
+        "--source-root",
+        "/home/molly/workspace-memory-attn/offload-gap-001-A0016",
+        "--variant",
+        "ma_offload",
+        "--batch-size",
+        "8",
+        "--seed",
+        "1234",
+        "--output",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R06-full-correctness/correctness-b8-s1234-candidate.json"
+      ],
+      "status": "completed",
+      "started_unix": 1790930722.1366928,
+      "pid": 2274257,
+      "returncode": 0,
+      "finished_unix": 1790930746.519455
+    },
+    {
+      "name": "compare-correctness-b8-s1234",
+      "command": [
+        "/home/molly/miniconda3/envs/fla-bench/bin/python",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/compare_correctness.py",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R06-full-correctness/correctness-b8-s1234-baseline.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R06-full-correctness/correctness-b8-s1234-candidate.json",
+        "--output",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R06-full-correctness/comparison-b8-s1234.json"
+      ],
+      "status": "completed",
+      "started_unix": 1790930746.5197606,
+      "pid": 2274674,
+      "returncode": 0,
+      "finished_unix": 1790930746.5427911
+    },
+    {
+      "name": "correctness-b8-s4321-baseline",
+      "status": "reused",
+      "source_result": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R06-full-correctness/correctness-b8-s4321-baseline.json",
+      "reason": "Frozen independent resident byte fingerprints; full source/environment/scope checks passed"
+    },
+    {
+      "name": "correctness-b8-s4321-candidate",
+      "command": [
+        "/home/molly/miniconda3/envs/fla-bench/bin/python",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/full_correctness.py",
+        "--source-root",
+        "/home/molly/workspace-memory-attn/offload-gap-001-A0016",
+        "--variant",
+        "ma_offload",
+        "--batch-size",
+        "8",
+        "--seed",
+        "4321",
+        "--output",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R06-full-correctness/correctness-b8-s4321-candidate.json"
+      ],
+      "status": "completed",
+      "started_unix": 1790930746.5429935,
+      "pid": 2274675,
+      "returncode": 0,
+      "finished_unix": 1790930770.8396814
+    },
+    {
+      "name": "compare-correctness-b8-s4321",
+      "command": [
+        "/home/molly/miniconda3/envs/fla-bench/bin/python",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/compare_correctness.py",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R06-full-correctness/correctness-b8-s4321-baseline.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R06-full-correctness/correctness-b8-s4321-candidate.json",
+        "--output",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R06-full-correctness/comparison-b8-s4321.json"
+      ],
+      "status": "completed",
+      "started_unix": 1790930770.840018,
+      "pid": 2275072,
+      "returncode": 0,
+      "finished_unix": 1790930770.8622484
+    },
+    {
+      "name": "R04-full-validation-plan",
+      "command": [
+        "/home/molly/miniconda3/envs/fla-bench/bin/python",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/run_paired.py",
+        "--baseline-root",
+        "/home/molly/workspace-memory-attn/offload-gap-001-A0000",
+        "--candidate-root",
+        "/home/molly/workspace-memory-attn/offload-gap-001-A0016",
+        "--screen-manifest",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R01/manifest.json",
+        "--stage",
+        "full_validation",
+        "--reuse-confirmation",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R03-baseline-confirmation/manifest.json",
+        "--plan-only",
+        "--output",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R04-full-validation-plan"
+      ],
+      "status": "completed",
+      "started_unix": 1790930770.8623693,
+      "pid": 2275073,
+      "returncode": 0,
+      "finished_unix": 1790930770.94386
+    },
+    {
+      "name": "R04-full-validation",
+      "command": [
+        "/home/molly/miniconda3/envs/fla-bench/bin/python",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/run_paired.py",
+        "--baseline-root",
+        "/home/molly/workspace-memory-attn/offload-gap-001-A0000",
+        "--candidate-root",
+        "/home/molly/workspace-memory-attn/offload-gap-001-A0016",
+        "--screen-manifest",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R01/manifest.json",
+        "--stage",
+        "full_validation",
+        "--reuse-confirmation",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R03-baseline-confirmation/manifest.json",
+        "--output",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R04-full-validation"
+      ],
+      "status": "running",
+      "started_unix": 1790930770.9440842,
+      "pid": 2275087
+    }
+  ],
+  "accepted": false,
+  "nomination": "promising confirmation; full acceptance gates remain"
+}

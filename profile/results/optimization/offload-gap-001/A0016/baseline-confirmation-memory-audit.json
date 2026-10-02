@@ -1,0 +1,128 @@
+{
+  "campaign_id": "offload-gap-001",
+  "attempt_id": "A0016",
+  "jobs_verified": 48,
+  "status": "source_hash_and_memory_verified",
+  "observations": [
+    {
+      "job": "B1-J001-baseline-prefill-ma_offload-b1-l2048",
+      "pinned_bytes": 201424896,
+      "gpu_buffer_bytes": 201424896
+    },
+    {
+      "job": "B1-J002-candidate-prefill-ma_offload-b1-l2048",
+      "pinned_bytes": 8486912,
+      "gpu_buffer_bytes": 8486912
+    },
+    {
+      "job": "B1-J007-candidate-decode-ma_offload-b1-l2048",
+      "pinned_bytes": 8486912,
+      "gpu_buffer_bytes": 8486912
+    },
+    {
+      "job": "B1-J008-baseline-decode-ma_offload-b1-l2048",
+      "pinned_bytes": 201424896,
+      "gpu_buffer_bytes": 201424896
+    },
+    {
+      "job": "B1-J009-baseline-prefill-ma_offload-b8-l2048",
+      "pinned_bytes": 269221888,
+      "gpu_buffer_bytes": 269221888
+    },
+    {
+      "job": "B1-J010-candidate-prefill-ma_offload-b8-l2048",
+      "pinned_bytes": 269221888,
+      "gpu_buffer_bytes": 269221888
+    },
+    {
+      "job": "B1-J015-candidate-decode-ma_offload-b8-l2048",
+      "pinned_bytes": 269221888,
+      "gpu_buffer_bytes": 269221888
+    },
+    {
+      "job": "B1-J016-baseline-decode-ma_offload-b8-l2048",
+      "pinned_bytes": 269221888,
+      "gpu_buffer_bytes": 269221888
+    },
+    {
+      "job": "B2-J017-baseline-decode-ma_offload-b8-l2048",
+      "pinned_bytes": 269221888,
+      "gpu_buffer_bytes": 269221888
+    },
+    {
+      "job": "B2-J018-candidate-decode-ma_offload-b8-l2048",
+      "pinned_bytes": 269221888,
+      "gpu_buffer_bytes": 269221888
+    },
+    {
+      "job": "B2-J023-candidate-prefill-ma_offload-b8-l2048",
+      "pinned_bytes": 269221888,
+      "gpu_buffer_bytes": 269221888
+    },
+    {
+      "job": "B2-J024-baseline-prefill-ma_offload-b8-l2048",
+      "pinned_bytes": 269221888,
+      "gpu_buffer_bytes": 269221888
+    },
+    {
+      "job": "B2-J025-baseline-decode-ma_offload-b1-l2048",
+      "pinned_bytes": 201424896,
+      "gpu_buffer_bytes": 201424896
+    },
+    {
+      "job": "B2-J026-candidate-decode-ma_offload-b1-l2048",
+      "pinned_bytes": 8486912,
+      "gpu_buffer_bytes": 8486912
+    },
+    {
+      "job": "B2-J031-candidate-prefill-ma_offload-b1-l2048",
+      "pinned_bytes": 8486912,
+      "gpu_buffer_bytes": 8486912
+    },
+    {
+      "job": "B2-J032-baseline-prefill-ma_offload-b1-l2048",
+      "pinned_bytes": 201424896,
+      "gpu_buffer_bytes": 201424896
+    },
+    {
+      "job": "B3-J033-baseline-prefill-ma_offload-b1-l2048",
+      "pinned_bytes": 201424896,
+      "gpu_buffer_bytes": 201424896
+    },
+    {
+      "job": "B3-J034-candidate-prefill-ma_offload-b1-l2048",
+      "pinned_bytes": 8486912,
+      "gpu_buffer_bytes": 8486912
+    },
+    {
+      "job": "B3-J039-candidate-decode-ma_offload-b1-l2048",
+      "pinned_bytes": 8486912,
+      "gpu_buffer_bytes": 8486912
+    },
+    {
+      "job": "B3-J040-baseline-decode-ma_offload-b1-l2048",
+      "pinned_bytes": 201424896,
+      "gpu_buffer_bytes": 201424896
+    },
+    {
+      "job": "B3-J041-baseline-prefill-ma_offload-b8-l2048",
+      "pinned_bytes": 269221888,
+      "gpu_buffer_bytes": 269221888
+    },
+    {
+      "job": "B3-J042-candidate-prefill-ma_offload-b8-l2048",
+      "pinned_bytes": 269221888,
+      "gpu_buffer_bytes": 269221888
+    },
+    {
+      "job": "B3-J047-candidate-decode-ma_offload-b8-l2048",
+      "pinned_bytes": 269221888,
+      "gpu_buffer_bytes": 269221888
+    },
+    {
+      "job": "B3-J048-baseline-decode-ma_offload-b8-l2048",
+      "pinned_bytes": 269221888,
+      "gpu_buffer_bytes": 269221888
+    }
+  ]
+}
