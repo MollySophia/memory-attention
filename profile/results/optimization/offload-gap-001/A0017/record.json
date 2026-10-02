@@ -7,7 +7,7 @@
   "parent_sha": "eedd189a84b5b1c20144bb1c90367014c42ae7ae",
   "accepted_step": null,
   "label": "write-combined pinned pipeline buffers for large inputs",
-  "workflow_stage": "screening",
+  "workflow_stage": "confirmation",
   "hypothesis": "Use write-combined CUDA host allocation for large pipeline gather destinations, preserving fresh CPU gather and H2D while reducing the combined transport cost.",
   "expected_bottleneck": "Frozen A0001 component diagnostic:16384/32768-token gather+H2D means3.869776/7.856003 ms torch pinned versus2.983973/5.945323 write-combined; native default allocation3.892142/7.923771 controls allocation API.2048 tokens slightly worse with WC, so exclude small inputs.",
   "profile_evidence": [
@@ -44,7 +44,7 @@
     "reason_batch16": "Pinned transport change"
   },
   "not_run": {
-    "confirmation": "Draft only; staged gates required.",
+    "confirmation": "Fixed48-process parent confirmation now starting; no outcome yet.",
     "full_validation": "Draft only; staged gates required.",
     "generation_validation": "Draft only; staged gates required."
   },
@@ -70,5 +70,9 @@
       "standalone-correctness.txt"
     ]
   },
-  "screen_manifest": "R01/manifest.json"
+  "screen_manifest": "R01/manifest.json",
+  "screen_summary": "R01-summary.json",
+  "performance": "screen-comparison.json",
+  "screen_decision": "Target b8 prefill offload/gap reductions2.020062/1.692548 ms versus A0016; b1/b16 decode slower0.370803/0.431870 ms preserved. Predeclare fixed48 parent confirmation; only b8 prefill may qualify.",
+  "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json"
 }
