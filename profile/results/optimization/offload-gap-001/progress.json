@@ -1,7 +1,7 @@
 {
   "campaign_id": "offload-gap-001",
-  "goal_progress": "Five additional attempts completed and audited: A0006 within_noise; A0007-A0010 rejected. A0001 retained. Final publication verification pending.",
-  "workflow_stage": "publishing",
+  "goal_progress": "Five additional optimization attempts A0006-A0010 completed, audited and published. A0006 within_noise; A0007-A0010 rejected. No new accepted step; verified A0001 retained. Cumulative ten attempts.",
+  "workflow_stage": "complete",
   "completed_optimization_verdicts": 10,
   "accepted_steps": 1,
   "active_attempt": null,
@@ -10,16 +10,13 @@
   "source_final": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
   "final_report": "continuation-01/final/REPORT.md",
   "final_audit": "continuation-01/final/core-audit.json",
-  "status": "active",
+  "status": "complete",
   "publication": "continuation-01/final/publication.json",
   "continuation": "continuation-01/manifest.json",
   "source_candidate": null,
   "live_manifest": null,
   "exec_session_id": null,
-  "next_actions": [
-    "Commit and push continuation artifacts; verify origin branch.",
-    "Record publication, push seal, verify clean source and remote before completing goal."
-  ],
+  "next_actions": [],
   "additional_completed_verdicts": 5,
   "additional_attempt_target": [
     5,

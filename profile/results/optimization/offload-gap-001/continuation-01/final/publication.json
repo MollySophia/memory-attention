@@ -1,0 +1,11 @@
+{
+  "campaign_id": "offload-gap-001",
+  "continuation_id": "continuation-01",
+  "remote": "origin",
+  "branch": "exp-0/attempts/offload-gap-001",
+  "verified_report_commit": "57ba2396e17c236b892504df3fe678357271f4cf",
+  "remote_head_at_verification": "57ba2396e17c236b892504df3fe678357271f4cf",
+  "verified_at_utc": "2026-10-02T05:43:15.070269+00:00",
+  "status": "report_and_all_additional_attempt_evidence_published",
+  "upstream_published": false
+}

@@ -11,7 +11,7 @@
   "campaign_head_at_start": "9661acda594b2b9a1fc0d13e94cab2922f68f989",
   "protocol": "offload_gap_v1",
   "scope": "Continue same campaign with monotonic IDs and unchanged acceptance/correctness/memory criteria. Preserve prior final report as the completed first tranche; later report separately covers continuation and cumulative results.",
-  "status": "experiments_and_audit_complete_publication_pending",
+  "status": "complete",
   "candidate_directions": [
     "A0006 registered: decouple host refill from prior GPU consumer release.",
     "Investigate precomputing per-group pinned/device views;96 operations cost0.316/1.089ms instrumented atb1/b8.",
