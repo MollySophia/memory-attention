@@ -7,7 +7,7 @@
   "parent_sha": "ce765f0cdfdf0368ad720fd93e891d6accbd3145",
   "accepted_step": null,
   "label": "single-slot automatic pipeline for small prefill only",
-  "workflow_stage": "parent_confirmation",
+  "workflow_stage": "frozen_baseline_confirmation",
   "hypothesis": "Restrict one-slot automatic pipeline to <=2048-token calls. Preserve the evidenced b1 prefill overlap/working-set improvement from A0014 while leaving the high-volume b8 pipeline capacity and complete b8 primary execution path unchanged.",
   "expected_bottleneck": "A0014 independently confirms b1 prefill latency/gap reductions but fails on b8 decode after its changed prefix allocation. Applying the small working set only in the measured small-prefill regime tests a shape-specific scheduling policy.",
   "profile_evidence": [
@@ -43,9 +43,9 @@
     "reason_batch16": "Shape-specific pipeline policy"
   },
   "not_run": {
-    "confirmation": "Draft only; staged nomination gates required.",
-    "full_validation": "Draft only; staged nomination gates required.",
-    "generation_validation": "Draft only; staged nomination gates required."
+    "full_validation": "Parent confirmation passed; gated follow-up pending independent frozen-baseline confirmation.",
+    "generation_validation": "Parent confirmation passed; gated follow-up pending independent frozen-baseline confirmation.",
+    "full_model_correctness": "Parent confirmation passed; gated follow-up pending independent frozen-baseline confirmation."
   },
   "draft_root": "/tmp/offload-gap-A0016-draft-81086aqd",
   "draft_condition": "Activated from verified A0001 after A0015 within_noise verdict and code-only reversion. GPU tests wait for the sequential diagnostic batch.",
@@ -66,5 +66,9 @@
   "performance": "screen-comparison.json",
   "screen_decision": "Target b1 prefill offload/gap reductions0.436107/0.411638 ms versus A0001. b1 decode slower0.451537 ms; preserve and test under fixed independent confirmation across all primary workloads. Other unchanged paths cannot nominate gains.",
   "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json",
-  "memory_observation": "Verified one-slot b1 prefill and original four-slot b8/b16 capacities. All12 sources and buffer totals audited."
+  "memory_observation": "Verified one-slot b1 prefill and original four-slot b8/b16 capacities. All12 sources and buffer totals audited.",
+  "parent_confirmation_analysis": "parent-confirmation-analysis.json",
+  "parent_confirmation_decision": "Passes prespecified primary gates: b1 prefill offload reduction0.430878 ms CI[0.153321,0.708434], gap0.451613 CI[0.304395,0.598832]. No resolved primary offload/resident regression and memory savings preserved. b8 decode slower in all three blocks, mean reduction-0.038070 CI[-0.100821,0.024682], unresolved and retained as a limitation. Not accepted; independent frozen-baseline confirmation and all full gates remain.",
+  "confirmation_manifest": "R03-baseline-confirmation/manifest.json",
+  "confirmation_plan_id": "formal_v1_w10_n10_r3__balanced_order_v2"
 }
