@@ -6,7 +6,7 @@
   "parent_sha": "0936d6de82ba57a7c7c8b94a6fcaad9747cc8cf1",
   "accepted_step": null,
   "label": "serial byte copies for tiny CPU lookups",
-  "workflow_stage": "registered",
+  "workflow_stage": "screening",
   "hypothesis": "Avoid torch CPU dispatch/thread-pool overhead for bulk gathers of <=8 tokens using serial byte copies into the existing pinned buffer. Baseline model profiles show 24/44 us CPU gather at b1/b8 decode; CPU microdiagnostic shows 4.68->2.70 us and 24.56->17.21 us for hot lookups. Confirm end-to-end effects independently.",
   "expected_bottleneck": "tiny bulk CPU table gather and associated CPU scheduling overhead",
   "change": "Precreate zero-copy uint8 NumPy views; copy each requested row for <=8 tokens when CPU table is contiguous. Fall back to torch index_select for other inputs. No value/lookup caching, dtype conversion, global thread changes or extra table storage.",
@@ -42,5 +42,17 @@
   },
   "limitations": [
     "Microdiagnostic uses hot rows and does not establish model gain; generation CPU scheduling causality remains unproven."
-  ]
+  ],
+  "candidate_sha": "ac6fbc2cbf534c804bb34227aa3ddee3e08728d9",
+  "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0002",
+  "correctness": {
+    "pytest": "51 passed in 9.62s",
+    "standalone": "PASS; worst max diff 0",
+    "logs": [
+      "correctness-tests.txt",
+      "standalone-correctness.txt"
+    ]
+  },
+  "screen_manifest": "R01/manifest.json",
+  "screen_summary": "R01-summary.json"
 }
