@@ -7,7 +7,7 @@
   "parent_sha": "85f530f0698617dc8885e0ccd8f0efe3c5c2b422",
   "accepted_step": null,
   "label": "one-slot automatic pipeline lookahead",
-  "workflow_stage": "parent_confirmation",
+  "workflow_stage": "final_verdict",
   "hypothesis": "Reduce automatic pipeline host/device working set to one slot while using the interval after k+m release for the next gather/H2D; test whether four-group lookahead is unnecessary and adds memory/cache pressure.",
   "expected_bottleneck": "Four pinned and device slots retain 32/256/512 MiB each at b1/b8/b16; actual producer/consumer wait profiles and component transfer costs motivate testing a smaller bounded working set.",
   "profile_evidence": [
@@ -42,9 +42,9 @@
     "reason_batch16": "Pipeline scheduling and buffer-capacity tradeoff"
   },
   "not_run": {
-    "confirmation": "Not yet nominated; staged gates required.",
-    "full_validation": "Not yet nominated; staged gates required.",
-    "generation_validation": "Not yet nominated; staged gates required."
+    "frozen_baseline_confirmation": "Primary regression in parent confirmation; candidate not nominated, intentionally not run.",
+    "full_validation": "Primary regression in parent confirmation; candidate not nominated, intentionally not run.",
+    "generation_validation": "Primary regression in parent confirmation; candidate not nominated, intentionally not run."
   },
   "candidate_sha": "b9938ebc46d7a92fc07898a09c72edc547f5f8f3",
   "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0014",
@@ -61,5 +61,9 @@
   "performance": "screen-comparison.json",
   "screen_decision": "b1/b8 prefill offload reductions 0.372477/2.090906 ms and gap reductions 0.452067/1.876710 ms versus A0001. All primary workloads and placements require fixed independent confirmation; no acceptance from screen or lower memory alone.",
   "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json",
-  "memory_observation": "Pipeline host and GPU capacity reduced to one layer; total cached buffers 8.09375/64.75/129.5 MiB each at b1/b8/b16, including bulk decode. Verified in screen-memory-audit.json."
+  "memory_observation": "Pipeline host and GPU capacity reduced to one layer; total cached buffers 8.09375/64.75/129.5 MiB each at b1/b8/b16, including bulk decode. Verified in screen-memory-audit.json.",
+  "status": "rejected",
+  "parent_confirmation_analysis": "parent-confirmation-analysis.json",
+  "decision": "All 48 fixed-plan jobs completed. Both prefill workloads show repeatable offload/gap reductions: b1 0.349586/0.373642 ms and b8 1.917756/1.698489 ms. However b8 decode is slower in all three blocks: offload reduction -0.040589 ms CI[-0.057702,-0.023475]. This resolved primary regression fails the prespecified gate despite unchanged bulk decode code and lower pipeline capacities. Do not discard the regression or extend until favorable. Reject and restore A0001.",
+  "next_insight": "One-slot prefill overlap is promising but the complete cached-offloader workload has a resolved decode regression. Capacity and placement effects may persist after prefix; mechanism is not established. Any different scheduling/capacity policy needs a separately registered hypothesis."
 }
