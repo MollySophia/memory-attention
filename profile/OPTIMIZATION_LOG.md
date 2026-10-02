@@ -354,3 +354,9 @@ A0004 screen: offload/resident b1 prefill29.027/28.714 ms, decode4.615/4.573; b8
 Separate b1 instrumented diagnostic: gather sum3.202 ms versus A0001 3.481; ticket acquisition CPU sum0.186 versus10.555 ms, H2D submit0.128 versus0.379 ms. Instrumented wall29.066 versus30.238 ms. Nonadditive and single-call, supporting only the mechanism.
 
 Declare R02 parent confirmation: A0001 vs A0004, all four primary workloads, both placements, three balanced independent blocks, formal10/10/3, 48 processes. Estimated896.05 seconds from measured A0004 setup/call costs. No extension until favorable. If incremental gain does not pass, revert; otherwise independent frozen-A0000 comparison and full retention gates remain.
+
+### A0004 final verdict: within_noise (gap confirmation insufficient), accepted_step null (offload-gap-001)
+
+All 48 parent-relative processes completed. b1 prefill offload reduction 0.23508 ms, 95% CI [0.05842,0.41173], but gap reduction 0.29297 [-0.11176,0.69770]. The latency criterion passes; the mandatory absolute-gap criterion does not. b8 prefill offload reduction 0.79212 [-0.67606,2.26030], gap reduction 0.78384 [-0.87571,2.44339]. Decode changes unresolved. All estimates and positive latency evidence remain recorded.
+
+No workload meets both lower confidence bounds, so classify the optimization objective as within_noise and close the predeclared plan without extending until favorable. No frozen-baseline confirmation/full matrix/generation escalation. Preserve source29a0d4f, all 48 raw results and profiles, then restore only offloader/test code from accepted A0001. A0001 remains incumbent; four verdicts complete.
