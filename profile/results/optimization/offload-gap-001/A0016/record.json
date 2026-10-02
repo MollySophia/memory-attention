@@ -5,9 +5,9 @@
   "parent_attempt_id": "A0001",
   "parent_source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
   "parent_sha": "ce765f0cdfdf0368ad720fd93e891d6accbd3145",
-  "accepted_step": null,
+  "accepted_step": 2,
   "label": "single-slot automatic pipeline for small prefill only",
-  "workflow_stage": "full_validation",
+  "workflow_stage": "final_verdict",
   "hypothesis": "Restrict one-slot automatic pipeline to <=2048-token calls. Preserve the evidenced b1 prefill overlap/working-set improvement from A0014 while leaving the high-volume b8 pipeline capacity and complete b8 primary execution path unchanged.",
   "expected_bottleneck": "A0014 independently confirms b1 prefill latency/gap reductions but fails on b8 decode after its changed prefix allocation. Applying the small working set only in the measured small-prefill regime tests a shape-specific scheduling policy.",
   "profile_evidence": [
@@ -73,7 +73,7 @@
   "confirmation_analysis": "validation-v3-confirmation-analysis.json",
   "frozen_baseline_confirmation_decision": "Passes fixed primary gates against A0000. b1 prefill cumulative offload reduction14.021136 ms CI[13.510024,14.532248], gap14.015407 CI[13.549947,14.480867]. Other primary comparisons unresolved without resolved regression; memory preserved. Incremental gain remains parent-relative0.430878 ms, not14.02 ms. Full validation/correctness/generation and regression audit remain before acceptance.",
   "correctness_directory": "R06-full-correctness",
-  "validation_matrix_manifest": "R04-full-validation/manifest.json",
+  "validation_matrix_manifest": "full-evidence-manifest.json",
   "eligible_gain_workloads": [
     {
       "mode": "prefill",
@@ -81,11 +81,28 @@
     }
   ],
   "eligible_gain_note": "Structured representation of the primary target already declared at registration; unchanged scope.",
-  "generation_manifest": "R05-generation-validation/manifest.json",
+  "generation_manifest": "generation-evidence-manifest.json",
   "secondary_regression_policy": "secondary-regression-policy.json",
   "secondary_regression_selection": [
     "full-regression-selection.json",
     "generation-regression-selection.json"
   ],
-  "validation_progress": "All84 full-matrix points and12 generation points completed. Exactly64 full-matrix and8 generation extra processes predeclared by the prior any-negative secondary trigger; original pairs retained. Final acceptance awaits bounded regression results and source/memory audit."
+  "validation_progress": "All fixed primary, exactness, full/generation, bounded regression and source/memory gates completed.",
+  "status": "accepted",
+  "full_summary": "full-audited-summary.json",
+  "generation_summary": "generation-audited-summary.json",
+  "regression_analyses": [
+    "full-regression-analysis.json",
+    "generation-regression-analysis.json"
+  ],
+  "source_audit": "source-correctness-audit.json",
+  "decision": "Accepted: changed b1 prefill independently reduces offload latency and gap against verified A0001; cumulative A0000 confirmation also passes. Full exactness, all84 matrix/12 generation points, fixed secondary regression investigations, source/environment and memory gates pass. Retain all adverse observations and uncertainty; no broad decode/generation gain claim.",
+  "limitations": [
+    "Incremental b1 prefill offload reduction0.430878 ms CI[0.153321,0.708434], gap0.451613 CI[0.304395,0.598832]. Cumulative A0000 reduction14.021136 ms includes A0001 and is not this step alone.",
+    "Parent-relative b8 decode slower in all3 pairs, mean reduction-0.038070 ms CI[-0.100821,0.024682]; unresolved.",
+    "A0000-relative b16 decode slower in all3 secondary pairs: reduction-0.033485 ms CI[-0.082574,0.015604]. b8/4096 prefill slower in all3: reduction-0.937146 ms CI[-2.972030,1.097739]. No resolved regression under the predeclared rule; adverse directions retained.",
+    "b8/8192 prefill reduction-4.475341 ms CI[-15.449950,6.499268] remains uncertain. No additional extension.",
+    "b8 generation reduction0.438272 ms CI[-4.831173,5.707717]; no generation gain claim. b1 generation has only the original single pair.",
+    "Three paired blocks yield wide intervals; n=3 symmetry assumption unverified. Seeded random weights test equivalence/performance, not language quality."
+  ]
 }

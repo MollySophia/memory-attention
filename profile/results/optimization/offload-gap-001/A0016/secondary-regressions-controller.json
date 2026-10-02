@@ -1,0 +1,62 @@
+{
+  "attempt_id": "A0016",
+  "campaign_id": "offload-gap-001",
+  "controller_pid": 2307310,
+  "status": "completed_needs_analysis_and_audit",
+  "accepted": false,
+  "jobs": [
+    {
+      "name": "R07-regression",
+      "command": [
+        "/home/molly/miniconda3/envs/fla-bench/bin/python",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/extend_pairs.py",
+        "--manifest",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R04-full-validation/manifest.json",
+        "--select",
+        "decode:8:512",
+        "decode:8:8192",
+        "decode:16:2048",
+        "prefill:4:2048",
+        "prefill:8:512",
+        "prefill:8:4096",
+        "prefill:8:8192",
+        "prefill:16:2048",
+        "--output",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R07-regression"
+      ],
+      "status": "completed",
+      "started_unix": 1790932887.8194366,
+      "planned_work": {
+        "new_processes": 64,
+        "reused_processes": 32,
+        "estimated_seconds": 1725.7234191894531
+      },
+      "pid": 2307320,
+      "returncode": 0,
+      "finished_unix": 1790934616.710463
+    },
+    {
+      "name": "R08-regression",
+      "command": [
+        "/home/molly/miniconda3/envs/fla-bench/bin/python",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/extend_pairs.py",
+        "--manifest",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R05-generation-validation/manifest.json",
+        "--select",
+        "generation:8:2048",
+        "--output",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R08-regression"
+      ],
+      "status": "completed",
+      "started_unix": 1790934616.7111108,
+      "planned_work": {
+        "new_processes": 8,
+        "reused_processes": 4,
+        "estimated_seconds": 316.22823905944824
+      },
+      "pid": 2331621,
+      "returncode": 0,
+      "finished_unix": 1790934933.3930118
+    }
+  ]
+}
