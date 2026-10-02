@@ -448,3 +448,7 @@ Completed five additional attempts A0006-A0010: one within_noise and four reject
 ## Continuation 02 (offload-gap-001)
 
 New user request: another ten optimization attempts, A0011-A0020. Current clean source equals verified A0001; prior reports and evidence are immutable historical tranches. Keep all original correctness, staged sampling, dual latency/gap, primary regression and CPU-offload memory gates. First investigate whether the token-major CPU table layout penalizes per-layer gathers, then ID staging and pipeline scheduling; register each concrete hypothesis before implementation. No numeric gain or deadline requirement.
+
+### A0011 registration (offload-gap-001; continuation-02)
+
+Test reusable pinned input-ID staging per cached offloader. Fresh-ID microdiagnostic shows b1/b8 prefill staging 0.00670/0.01341 ms with to(cpu), versus 0.00521/0.00690 ms using blocking copies into pinned storage; decode saves under 1 us. Preserve staging before embedding and CPU lookup; guard whole offloaded model call against concurrent buffer reuse. Count additional pinned IDs for every cached shape. All twelve b1/b8/b16 offload/resident screen jobs are predeclared; only independent dual latency/gap confirmation can establish a gain. Prior layout/rank diagnostics are not attempts.

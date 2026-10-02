@@ -124,6 +124,7 @@ class MemoryTableOffloader:
         self.weights = weights
         self.batch = batch
         self.seq_len = seq_len
+        self.ids_host = torch.empty((batch, seq_len), dtype=torch.long, pin_memory=True)
         self.tokens = batch * seq_len
         self.layers, self.dim = weights.shape[1:]
         self.group = min(group_size, self.layers)
@@ -278,6 +279,7 @@ class BulkMemoryTableOffloader:
         self.weights = weights
         self.batch = batch
         self.seq_len = seq_len
+        self.ids_host = torch.empty((batch, seq_len), dtype=torch.long, pin_memory=True)
         self.layers, self.dim = weights.shape[1:]
         self.group = self.layers
         self.device = torch.device(device)

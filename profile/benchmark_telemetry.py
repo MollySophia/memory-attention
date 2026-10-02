@@ -42,10 +42,10 @@ def memory_snapshot(model, device, cache=None):
         host_high_water_scope='process lifetime, including model loading',
         raw_table_snapshot_bytes=storage_bytes(getattr(body, '_raw_m_proj_weights', None) or []),
         cpu_table_bytes=storage_bytes([getattr(body, 'memory_table', None)]),
-        offload_pinned_bytes=storage_bytes(s['host'] for s in slots),
+        offload_pinned_bytes=storage_bytes([s['host'] for s in slots] + [off.ids_host for off in offloaders]),
         offload_gpu_buffer_bytes=storage_bytes(s['gpu'] for s in slots),
         offloader_capacities=[dict(batch=off.batch, length=off.seq_len, policy=off.policy,
-                                  host_bytes=storage_bytes(s['host'] for s in off.slots),
+                                  host_bytes=storage_bytes([s['host'] for s in off.slots] + [off.ids_host]),
                                   gpu_bytes=storage_bytes(s['gpu'] for s in off.slots)) for off in offloaders],
         kv_cache_storage_bytes=cache_bytes(cache),
     )
