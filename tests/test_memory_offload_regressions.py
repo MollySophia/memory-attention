@@ -263,3 +263,66 @@ def test_single_slot_limit_can_be_disabled_and_validated(model):
     model.enable_memory_offload()
     model.set_offload_offloader(1,1025)
     assert len(model.model.memory_offloader.slots) == min(4,len(model.model.layers))
+
+
+
+@pytest.mark.parametrize('group,depth', [(1,1),(2,1),(2,3)])
+def test_ticket_pool_cross_generation_streams_and_fresh_rows(group, depth):
+    from fla.layers.memory_offload import MemoryTableOffloader
+    with torch.inference_mode():
+        weights = torch.randn(32,5,64,dtype=torch.bfloat16)
+        off = MemoryTableOffloader(weights,2,4,group_size=group,prefetch_depth=depth)
+        identities = [id(ticket) for ticket in off.tickets]
+        streams = [torch.cuda.Stream(),torch.cuda.Stream()]
+        retained = []
+        try:
+            for iteration in range(8):
+                weights.add_(0.25)
+                ids = torch.randint(0,32,(2,4))
+                expected = [weights[ids,layer].clone() for layer in range(5)]
+                with torch.cuda.stream(streams[iteration%2]):
+                    outputs = []
+                    def consume(layer,handle):
+                        torch.cuda._sleep(100000)
+                        outputs.append(handle.acquire().clone())
+                        handle.release()
+                    off.forward(ids,consume)
+                assert off.generation == iteration + 1
+                assert [id(ticket) for ticket in off.tickets] == identities
+                assert all(slot['previous'][1] == off.generation for slot in off.slots)
+                retained.append((outputs,expected))
+            torch.cuda.synchronize()
+            for outputs,expected in retained:
+                for actual,reference in zip(outputs,expected):
+                    torch.testing.assert_close(actual.cpu(),reference,rtol=0,atol=0)
+        finally:
+            off.close()
+
+
+@pytest.mark.parametrize('failure', ['producer', 'consumer'])
+def test_ticket_pool_failure_poisoning_and_cleanup(failure):
+    from fla.layers.memory_offload import MemoryTableOffloader
+    with torch.inference_mode():
+        weights = torch.randn(32,5,64,dtype=torch.bfloat16)
+        off = MemoryTableOffloader(weights,2,4,group_size=2,prefetch_depth=1)
+        ids = torch.zeros((2,4),dtype=torch.long)
+        def good(layer,handle):
+            handle.acquire().clone()
+            handle.release()
+        try:
+            off.forward(ids,good)
+            if failure == 'producer':
+                ids.fill_(32)
+                consumer = good
+            else:
+                def consumer(layer,handle):
+                    if layer == 2:
+                        raise RuntimeError('injected consumer failure')
+                    good(layer,handle)
+            with pytest.raises(RuntimeError):
+                off.forward(ids,consumer)
+            assert off.broken
+            with pytest.raises(RuntimeError,match='closed or failed'):
+                off.forward(torch.zeros_like(ids),good)
+        finally:
+            off.close()

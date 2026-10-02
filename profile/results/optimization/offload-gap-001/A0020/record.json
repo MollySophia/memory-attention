@@ -2,12 +2,12 @@
   "campaign_id": "offload-gap-001",
   "continuation_id": "continuation-02",
   "attempt_id": "A0020",
-  "parent_attempt_id": "A0001",
-  "parent_source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
-  "parent_sha": "82d01319199c89773e155d69fccba5afdff8c292",
+  "parent_attempt_id": "A0016",
+  "parent_source_sha": "0ce6645eb4c4bc3992258ad0878c72ea3c37a64e",
+  "parent_sha": "3ea6e6d5fe4ad2525f1635e0c4e1a91c8a8a5064",
   "accepted_step": null,
   "label": "reuse per-layer pipeline coordination tickets",
-  "workflow_stage": "implementation_draft",
+  "workflow_stage": "correctness",
   "hypothesis": "Reuse pipeline GroupTicket objects and their threading events per shape instead of allocating24 tickets and48 Python events for each call; reset state under the existing serialized forward lock.",
   "expected_bottleneck": "Frozen A0001 coordination profiles attribute0.029966/0.032549 ms CPU to24 ticket constructions at b1/b8. Small potential gain; resetting events may cost as much. A0007 tensor-view caching was rejected and is not included.",
   "profile_evidence": [
@@ -50,7 +50,7 @@
     "generation_validation": "Draft only; staged gates required."
   },
   "draft_root": "/tmp/offload-gap-A0020-draft-a1crcszz",
-  "draft_condition": "Isolated draft only; activate after A0019 final verdict from best verified parent, merging any accepted changes. Registering A0020 does not complete ten attempts: final outcomes for A0016-A0020 remain required.",
+  "draft_condition": "Activated from verified A0016 after A0019 screen rejection and code-only reversion. New ticket tests appended, preserving all A0016 tests. No A0017/A0018/A0019 changes retained.",
   "draft_patch": "isolated-draft.patch",
   "draft_validation": "Syntax compile only; generation/stream safety and cancellation need GPU runtime gates before timing.",
   "eligible_gain_workloads": [
