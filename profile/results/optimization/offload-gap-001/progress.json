@@ -1,11 +1,11 @@
 {
   "campaign_id": "offload-gap-001",
-  "goal_progress": "Three of ten additional verdicts complete: A0011/A0012 within_noise; A0013 rejected at screen. A0001 remains retained. A0014-A0020 and final reporting remain.",
-  "workflow_stage": "profiling",
+  "goal_progress": "Three of ten additional verdicts complete: A0011/A0012 within_noise, A0013 rejected. A0014 one-slot automatic pipeline passes 48 tests and standalone zero error; twelve-job screen starting.",
+  "workflow_stage": "screening",
   "completed_optimization_verdicts": 13,
   "accepted_steps": 1,
-  "active_attempt": null,
-  "controller_pid": null,
+  "active_attempt": "A0014",
+  "controller_pid": 2200820,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
   "final_report": "continuation-01/final/REPORT.md",
@@ -13,13 +13,14 @@
   "status": "active",
   "publication": "continuation-01/final/publication.json",
   "continuation": "continuation-02/manifest.json",
-  "source_candidate": "5d5eb4858f5102b5e7c0c004e359304b13ac38c8",
-  "live_manifest": null,
-  "exec_session_id": null,
+  "source_candidate": "b9938ebc46d7a92fc07898a09c72edc547f5f8f3",
+  "live_manifest": "profile/results/optimization/offload-gap-001/A0014/R01/manifest.json",
+  "exec_session_id": 29843,
   "next_actions": [
-    "Poll A0013 fixed 12-job screen, preserving all samples. Only b8 decode is the changed primary target.",
-    "If promising, fixed 48-process parent confirmation; full retention gates unchanged. Commit verdict/evidence before any revert.",
-    "Continue A0014-A0020 with profiling-supported hypotheses. Chunked CPU gather/H2D diagnostic is slower at every tested shape and is not an attempt."
+    "Poll A0014 fixed 12-job screen, compare A0000 and A0001; only changed prefill paths may nominate gain.",
+    "If promising, fixed 48-process independent parent confirmation and all retention gates; otherwise commit evidence before reverting.",
+    "Continue A0015-A0020 with concrete offload hypotheses. Potential next diagnostic: profile GPU inverse-index materialization in frozen A0009 before considering fused within-call expansion plus k+m. Prior dedup screen loses 2.017 ms at b8; do not assume this cost is removable.",
+    "Other component directions with negative evidence (CPU layout/rank/chunk/native pools and chunked H2D) remain diagnostics, not counted attempts."
   ],
   "additional_completed_verdicts": 3,
   "additional_attempt_target": [

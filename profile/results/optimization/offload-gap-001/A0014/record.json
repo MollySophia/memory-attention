@@ -7,7 +7,7 @@
   "parent_sha": "85f530f0698617dc8885e0ccd8f0efe3c5c2b422",
   "accepted_step": null,
   "label": "one-slot automatic pipeline lookahead",
-  "workflow_stage": "registered",
+  "workflow_stage": "screening",
   "hypothesis": "Reduce automatic pipeline host/device working set to one slot while using the interval after k+m release for the next gather/H2D; test whether four-group lookahead is unnecessary and adds memory/cache pressure.",
   "expected_bottleneck": "Four pinned and device slots retain 32/256/512 MiB each at b1/b8/b16; actual producer/consumer wait profiles and component transfer costs motivate testing a smaller bounded working set.",
   "profile_evidence": [
@@ -45,5 +45,17 @@
     "confirmation": "Not yet nominated; staged gates required.",
     "full_validation": "Not yet nominated; staged gates required.",
     "generation_validation": "Not yet nominated; staged gates required."
-  }
+  },
+  "candidate_sha": "b9938ebc46d7a92fc07898a09c72edc547f5f8f3",
+  "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0014",
+  "correctness": {
+    "pytest": "48 passed in 13.03s",
+    "standalone": "PASS; worst max error 0",
+    "logs": [
+      "correctness-tests.txt",
+      "standalone-correctness.txt"
+    ]
+  },
+  "screen_manifest": "R01/manifest.json",
+  "screen_summary": "R01-summary.json"
 }
