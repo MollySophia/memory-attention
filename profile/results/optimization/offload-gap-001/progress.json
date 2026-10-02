@@ -1,11 +1,11 @@
 {
   "campaign_id": "offload-gap-001",
-  "goal_progress": "One of ten additional verdicts complete (A0011 within_noise). A0012 correctness and wait-CPU diagnostic pass; fixed 12-job screen next.",
-  "workflow_stage": "screening",
+  "goal_progress": "Exactly ten additional verdicts required. A0011 completed within_noise and reverted. A0012 passed correctness, reduced diagnostic wait CPU time, and has a mixed 12-job screen; fixed 48-process parent confirmation is live. One of ten final verdicts complete.",
+  "workflow_stage": "parent_confirmation",
   "completed_optimization_verdicts": 11,
   "accepted_steps": 1,
   "active_attempt": "A0012",
-  "controller_pid": 2174500,
+  "controller_pid": 2178553,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
   "final_report": "continuation-01/final/REPORT.md",
@@ -14,11 +14,14 @@
   "publication": "continuation-01/final/publication.json",
   "continuation": "continuation-02/manifest.json",
   "source_candidate": "817cc6b5081acdcc7d50935f98e0a4b8c0b71b3a",
-  "live_manifest": "profile/results/optimization/offload-gap-001/A0012/R01/manifest.json",
-  "exec_session_id": 41499,
+  "live_manifest": "profile/results/optimization/offload-gap-001/A0012/R02-parent-confirmation/manifest.json",
+  "exec_session_id": 57644,
   "next_actions": [
-    "Poll A0012 screen; only changed prefill path can nominate this candidate for confirmation.",
-    "After final verdict/evidence restore best verified source before A0013. Mapped bulk b8 diagnostic is a supported next direction."
+    "Poll session 57644 / controller 2178553 and A0012/R02-parent-confirmation; never restart while live.",
+    "After all 48 jobs terminate, analyze with analyze_paired.py. Only changed prefill workloads can qualify; original dual latency/gap, no resolved primary regression and memory gates apply.",
+    "Commit final evidence before reverting if inconclusive/rejected; if nominated, frozen-A0000 confirmation and full validation/correctness/generation remain mandatory.",
+    "Then register A0013 using continuation-02/mapped-bulk-design.json and mapped-bulk.json if still supported; no new GPU timing during A0012 confirmation.",
+    "Continue through A0020 and final cumulative report/audits/publication; do not stop after five or count diagnostics."
   ],
   "additional_completed_verdicts": 1,
   "additional_attempt_target": [

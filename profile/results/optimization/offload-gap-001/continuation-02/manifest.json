@@ -10,7 +10,7 @@
   "starting_source": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
   "campaign_head_at_start": "4088de5adf8e473ec6137c1b32f99dcaca40efb1",
   "protocol": "offload_gap_v1",
-  "status": "A0011_parent_confirmation",
+  "status": "A0012_parent_confirmation",
   "scope": "Exactly ten additional focused attempts A0011-A0020. Preserve both earlier tranches, frozen A0000, unchanged acceptance and staged measurement gates.",
   "candidate_directions": [
     "CPU table physical layout and per-layer gather locality.",
@@ -19,5 +19,9 @@
     "Producer wait/event and recurring per-forward control work.",
     "Tiny bulk transfer lookup/layout and submission costs."
   ],
-  "note": "Directions require evidence and individual registration before code changes; diagnostics/repeats are not attempts."
+  "note": "Directions require evidence and individual registration before code changes; diagnostics/repeats are not attempts.",
+  "completed_additional_attempts": 1,
+  "final_outcomes": {
+    "A0011": "within_noise"
+  }
 }
