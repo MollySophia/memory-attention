@@ -1,0 +1,1 @@
+ma_gpu_unfolded  decode   median=   20.399 ms  min=   20.398  max=   20.399  spread=0.00%  policy=none

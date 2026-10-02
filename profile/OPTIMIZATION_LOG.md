@@ -265,3 +265,28 @@ incumbent is one whole model, failures are not zero latency, partial valid
 measurements survive a failed resident partner, and accepted-step plots require
 explicit eligible confirmation. Preview layout inspected; final publication
 figures remain pending the completed campaign.
+
+
+A0001 full-gate audit (2026-10-02): R04 completed all 68 new jobs plus 16
+reused primary points; R05 completed all 12 generation jobs. R06 independently
+compares frozen resident vs candidate offload at batches 1/8, seeds1234/4321:
+all 129 logit checkpoints and selected complete hidden/KV checkpoints are
+bit-exact and finite. Minimum matched peak allocated GPU saving is ~1999 MiB
+in the full matrix. No OOM or unsupported points were omitted.
+
+Acceptance remains pending: one-process full validation shows prefill increases
+at b4/context2048 (+1.18%), b16/context2048 (+0.51%), and b8/context8192
+(+0.88%). Those paths have the same policy on both sources, but the observation
+needs investigation rather than omission. Batch-1 generation was +6.78% in R05.
+A separate two-warmup generation diagnostic reverses that difference (baseline
+664.04 ms vs candidate619.91 ms); GC contributes only ~0.02 ms. Aggregate CPU
+time is much larger than wall time on both sources. This diagnostic does not
+establish a unique cause and is not performance acceptance evidence.
+
+Predeclare R07 generation regression audit: preserve the original b1 pair for
+both placements and add exactly two independently alternating pairs per
+placement under unchanged 2/5/3 whole-trajectory sampling. Eight new processes,
+four reused process records, estimated218 seconds. No outliers removed and no
+open-ended extension until favorable. If generation is not a resolved regression,
+follow with the same bounded audit at the three flagged prefill points before
+acceptance. This is validation of unchanged A0001, not a new optimization attempt.
