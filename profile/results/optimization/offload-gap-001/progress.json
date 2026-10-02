@@ -6,11 +6,11 @@
   "completed_optimization_verdicts": 1,
   "accepted_steps": 1,
   "live_manifest": "profile/results/optimization/offload-gap-001/A0002/R02-parent-confirmation/manifest.json",
-  "controller_pid": 1990141,
-  "exec_session_id": null,
+  "controller_pid": 2013718,
+  "exec_session_id": 82300,
   "validation_controller": "profile/results/optimization/offload-gap-001/A0001/validation-v2.json",
   "source_baseline": "62942a0",
-  "source_candidate": "942a2a5",
+  "source_candidate": "ac6fbc2cbf534c804bb34227aa3ddee3e08728d9",
   "next_actions": [
     "Inspect existing A0002/R02-parent-confirmation controller; do not duplicate live jobs.",
     "Analyze completed 48-process comparison with analyze_paired.py. Here baseline=A0001, candidate=A0002; no frozen-A0000 cumulative claim from this run.",
@@ -25,5 +25,6 @@
     "Frozen worktrees: /home/molly/workspace-memory-attn/offload-gap-001-A0000 and -A0001. Model source unchanged since 942a2a5.",
     "Latest pushed campaign commit 6e2f1a0; current controllers preserve all new raw outputs automatically."
   ],
-  "execution_observation": "A0001/R08-observation-unavailable.json"
+  "execution_observation": "A0001/R08-observation-unavailable.json",
+  "source_comparison_parent": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb"
 }

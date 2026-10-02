@@ -1,0 +1,32 @@
+{
+  "campaign_id": "offload-gap-001",
+  "scope": "CPU storage accounting for audited A0000/A0001/A0002 sources; no new timing run",
+  "source_proof": {
+    "A0000": {
+      "candidate_sha": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
+      "retained_restore_source": "        self._resident_m_projs = [\n            nn.Embedding.from_pretrained(m.weight.detach().to(\"cpu\"), freeze=True)\n            for m in m_projs\n        ]\n"
+    },
+    "A0001": {
+      "candidate_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
+      "retained_restore_source": "        self._resident_m_projs = [\n            nn.Embedding.from_pretrained(m.weight.detach().to(\"cpu\"), freeze=True)\n            for m in m_projs\n        ]\n"
+    },
+    "A0002": {
+      "candidate_sha": "ac6fbc2cbf534c804bb34227aa3ddee3e08728d9",
+      "retained_restore_source": "        self._resident_m_projs = [\n            nn.Embedding.from_pretrained(m.weight.detach().to(\"cpu\"), freeze=True)\n            for m in m_projs\n        ]\n"
+    }
+  },
+  "table_bytes": 3145728000,
+  "ma_offload": {
+    "active_folded_cpu_table_bytes": 3145728000,
+    "raw_snapshot_bytes": 3145728000,
+    "retained_restore_embedding_bytes_inferred": 3145728000,
+    "total_table_storage_bytes_inferred": 9437184000
+  },
+  "ma_gpu_and_unfolded": {
+    "raw_snapshot_bytes": 3145728000,
+    "retained_restore_embedding_bytes": 0,
+    "active_cpu_table_bytes": 0
+  },
+  "method": "Raw payloads measure cpu_table_bytes and raw_table_snapshot_bytes. The additional restore embedding copy is derived from source: GPU weights are independently copied to CPU after the raw snapshot; 32000*24*2048 BF16 entries. The measured process RSS includes all three copies, pinned buffers, runtime and allocator overhead. Do not add these capacity counts to RSS, which would double-count them.",
+  "caveat": "Inferred capacities are explicitly distinguished from raw measured counters. Reaudit if a later candidate changes table/snapshot/restore ownership."
+}
