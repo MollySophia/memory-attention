@@ -7,7 +7,7 @@
   "parent_sha": "3ea6e6d5fe4ad2525f1635e0c4e1a91c8a8a5064",
   "accepted_step": null,
   "label": "reuse per-layer pipeline coordination tickets",
-  "workflow_stage": "screening",
+  "workflow_stage": "confirmation",
   "hypothesis": "Reuse pipeline GroupTicket objects and their threading events per shape instead of allocating24 tickets and48 Python events for each call; reset state under the existing serialized forward lock.",
   "expected_bottleneck": "Frozen A0001 coordination profiles attribute0.029966/0.032549 ms CPU to24 ticket constructions at b1/b8. Small potential gain; resetting events may cost as much. A0007 tensor-view caching was rejected and is not included.",
   "profile_evidence": [
@@ -45,7 +45,7 @@
     "reason_batch16": "Pipeline coordination and slot-lifetime change"
   },
   "not_run": {
-    "confirmation": "Draft only; staged gates required.",
+    "confirmation": "Fixed48-process parent confirmation now running; no verdict yet.",
     "full_validation": "Draft only; staged gates required.",
     "generation_validation": "Draft only; staged gates required."
   },
@@ -74,5 +74,9 @@
       "standalone-correctness.txt"
     ]
   },
-  "screen_manifest": "R01/manifest.json"
+  "screen_manifest": "R01/manifest.json",
+  "screen_summary": "R01-summary.json",
+  "performance": "screen-comparison.json",
+  "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json",
+  "screen_decision": "Small eligible b1/b8 prefill offload reductions0.030696/0.048966 ms and gap reductions0.073350/0.276661 ms. Both near sample dispersion; not gains yet. b1/b8 decode slower0.271334/0.035761 ms preserved. Fixed48-process parent confirmation tests repeatability and all primary regressions without extending until favorable."
 }
