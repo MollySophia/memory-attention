@@ -3,7 +3,7 @@
 Compare ordinary CPU gather/H2D, direct mapped-host GPU gather, and per-call
 ID deduplication plus GPU expansion. Not an optimization attempt or acceptance.
 """
-import argparse,json,sys,time,statistics
+import argparse,json,sys,time,statistics,hashlib
 from pathlib import Path
 import torch
 import triton
@@ -24,7 +24,7 @@ def main():
     sys.path.insert(0,str(a.source_root/'profile'))
     from benchmark_telemetry import environment_details,source_state
     from bench_fla import env_fingerprint
-    payload=dict(campaign_id='offload-gap-001',purpose=__doc__,environment=environment_details(),source=source_state(),env=env_fingerprint(),warmup=10,repeats=10,records=[],limitations=['One layer, no compute overlap or whole-model claim.','Fresh IDs per trial; all three methods receive identical IDs within a trial. CPU ID staging is outside this component diagnostic.','Mapped table is fully pinned;3000MiB host capacity. No table data is cached in GPU between calls.','Dedup includes unique/inverse creation, inverse H2D and GPU expansion.','Normal finite BF16 weights only; full model correctness gates remain required.'])
+    payload=dict(command=sys.argv,helper_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),seed=1234,campaign_id='offload-gap-001',purpose=__doc__,environment=environment_details(),source=source_state(),env=env_fingerprint(),warmup=10,repeats=10,records=[],limitations=['One layer, no compute overlap or whole-model claim.','Fresh IDs per trial; all three methods receive identical IDs within a trial. CPU ID staging is outside this component diagnostic.','Mapped table is fully pinned;3000MiB host capacity. Output buffers are reused, but every call performs fresh lookup; no persistent GPU lookup cache.','Dedup includes unique/inverse creation, inverse H2D and GPU expansion.','Normal finite BF16 weights only; full model correctness gates remain required.'])
     a.output.parent.mkdir(parents=True,exist_ok=True)
     def save():a.output.write_text(json.dumps(payload,indent=2)+'\n')
     with torch.inference_mode():

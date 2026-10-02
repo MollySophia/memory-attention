@@ -22,6 +22,7 @@ def audit(root, repository, artifacts, continuation=None):
     records = {p.parent.name: read(p) for p in sorted(root.glob('A[0-9][0-9][0-9][0-9]/record.json'))}
     attempts = {k: v for k, v in records.items() if k != 'A0000'}
     if continuation is None:
+        assert not any(r.get('continuation_id') for r in attempts.values()), 'Explicit --continuation required for an additional-attempt campaign'
         assert 5 <= len(attempts) <= 10, 'Five to ten actual attempts required'
     else:
         tranche = read(root / continuation / 'manifest.json')
