@@ -10,7 +10,7 @@
   "starting_source": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
   "campaign_head_at_start": "4088de5adf8e473ec6137c1b32f99dcaca40efb1",
   "protocol": "offload_gap_v1",
-  "status": "A0015_implementation",
+  "status": "A0015_parent_confirmation",
   "scope": "Exactly ten additional focused attempts A0011-A0020. Preserve both earlier tranches, frozen A0000, unchanged acceptance and staged measurement gates.",
   "candidate_directions": [
     "CPU table physical layout and per-layer gather locality.",

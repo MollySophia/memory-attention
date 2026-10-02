@@ -7,7 +7,7 @@
   "parent_sha": "52aa4f283a4f7f8ab5b3e8ae49ac6c5eaf51b3ff",
   "accepted_step": null,
   "label": "fuse compressed-row expansion with memory addition",
-  "workflow_stage": "screening",
+  "workflow_stage": "parent_confirmation",
   "hypothesis": "Preserve within-call deduplicated CPU lookup/H2D but fuse GPU inverse-index expansion into required k+m, avoiding a full temporary and separate expansion kernel on each layer.",
   "expected_bottleneck": "Frozen A0009 b8 profile: 24 expansions, 1.50928 ms summed CUDA stream intervals and 1.55864 ms CPU spans, overlapping. A0009 unfused screen was 2.01742 ms slower than A0001; no claim that all expansion time is removable.",
   "profile_evidence": [
@@ -65,5 +65,11 @@
       "correctness-tests.txt",
       "standalone-correctness.txt"
     ]
-  }
+  },
+  "screen_manifest": "R01/manifest.json",
+  "screen_summary": "R01-summary.json",
+  "performance": "screen-comparison.json",
+  "screen_decision": "Target b8 prefill offload/gap reductions 0.273381/0.382040 ms versus verified A0001. Requires fixed independent 48-process parent confirmation. Unchanged b1 and decode paths cannot nominate a gain; unfavorable b1 decode preserved. Old A0009 unfused b8 screen is 2.290803 ms slower, descriptive only.",
+  "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json",
+  "memory_observation": "All 12 source/capacity checks pass. Full four-slot buffers retained; additional inverse bytes 0/131072/262144 at b1/b8/b16 counted. No cross-call lookup caching."
 }
