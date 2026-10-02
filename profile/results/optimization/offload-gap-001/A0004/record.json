@@ -6,7 +6,7 @@
   "parent_sha": "a6da6e541fb4fb3f53191c63f745b9be9ed9c6b2",
   "accepted_step": null,
   "label": "caller-thread pipeline producer",
-  "workflow_stage": "screening",
+  "workflow_stage": "parent_confirmation",
   "hypothesis": "Prepare each one-layer group on the calling CPU thread before its consumer, retaining copy-stream overlap with previously queued GPU work. Avoid worker dispatch, separate thread CUDA context and main/producer handshakes. A0001 b1 profile spends 10.55 ms summed CPU ticket acquisition; b8 baseline 92.8 ms. These overlaps are not additive, so measure end-to-end.",
   "expected_bottleneck": "producer/main-thread coordination and CPU scheduling",
   "change": "Replace background producer submission with per-group inline production, keeping identical gather, copy stream, buffer slots, events, group size and arithmetic. No A0002 byte-copy or A0003 grouping changes.",
@@ -37,9 +37,9 @@
     "reason_batch16": "Pipeline scheduling change"
   },
   "not_run": {
-    "confirmation": "screen first",
-    "full_validation": "only after confirmation",
-    "generation_validation": "only if nominated"
+    "frozen_baseline_confirmation": "Only if incremental parent gain passes",
+    "full_validation": "Only after confirmation against parent and frozen baseline",
+    "generation_validation": "Only if nominated"
   },
   "tradeoffs": [
     "CPU gather can now delay compute submission; per-group stream context switching may cost more than worker coordination.",
@@ -56,5 +56,10 @@
     ]
   },
   "screen_manifest": "R01/manifest.json",
-  "screen_summary": "R01-summary.json"
+  "screen_summary": "R01-summary.json",
+  "performance": "screen-comparison.json",
+  "diagnostic": "diagnostic-comparison.json",
+  "decision": "Promising screen b1 prefill incremental offload/gap reduction; candidate producer diagnostic supports lower coordination overhead. Require independent parent comparison.",
+  "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json",
+  "parent_confirmation_analysis": "parent-confirmation-analysis.json"
 }

@@ -1,0 +1,473 @@
+{
+  "campaign_id": "offload-gap-001",
+  "batch_size": 1,
+  "mode": "prefill",
+  "variant": "ma_offload",
+  "diagnostic_wall_ms": 29.066314920783043,
+  "cpu_spans": [
+    {
+      "label": "id_d2h_staging",
+      "cpu_ms": 0.03224983811378479,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 0.1434609293937683,
+      "thread": "MainThread"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.006150919944047928,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.010580290108919144,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 0.1381710171699524,
+      "thread": "MainThread"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.006392132490873337,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.009537674486637115,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 0.1380210742354393,
+      "thread": "MainThread"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.005431007593870163,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.008155126124620438,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 0.13881176710128784,
+      "thread": "MainThread"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.0053299590945243835,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.008256174623966217,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 0.13315118849277496,
+      "thread": "MainThread"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.005228910595178604,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.007485039532184601,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 0.1319493167102337,
+      "thread": "MainThread"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.004909001290798187,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.007344409823417664,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 0.132010318338871,
+      "thread": "MainThread"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.0050798989832401276,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.0072838738560676575,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 0.12950506061315536,
+      "thread": "MainThread"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.004938803613185883,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.007434282451868057,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 0.1306268386542797,
+      "thread": "MainThread"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.0051800161600112915,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.007183291018009186,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 0.19401637837290764,
+      "thread": "MainThread"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.005159992724657059,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.007143709808588028,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 0.13029715046286583,
+      "thread": "MainThread"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.005248934030532837,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.0072731636464595795,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 0.12665893882513046,
+      "thread": "MainThread"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.005200039595365524,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.007282942533493042,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 0.12738117948174477,
+      "thread": "MainThread"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.004759058356285095,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.007504131644964218,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 0.12627802789211273,
+      "thread": "MainThread"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.005019828677177429,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.007524155080318451,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 0.12837210670113564,
+      "thread": "MainThread"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.004979316145181656,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.007595401257276535,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 0.12815184891223907,
+      "thread": "MainThread"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.006062444299459457,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.008194707334041595,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 0.1291041262447834,
+      "thread": "MainThread"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.005309935659170151,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.007453840225934982,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 0.12616906315088272,
+      "thread": "MainThread"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.005189795047044754,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.0075749121606349945,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 0.12793205678462982,
+      "thread": "MainThread"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.005339737981557846,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.007695052772760391,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 0.12738024815917015,
+      "thread": "MainThread"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.005078967660665512,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.007092952728271484,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 0.12826314195990562,
+      "thread": "MainThread"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.005159061402082443,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.007614027708768845,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 0.12695975601673126,
+      "thread": "MainThread"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.005189795047044754,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.0075339339673519135,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 0.12971507385373116,
+      "thread": "MainThread"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.005490146577358246,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.007505062967538834,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 0.12938538566231728,
+      "thread": "MainThread"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.005741138011217117,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.007905066013336182,
+      "thread": "MainThread"
+    }
+  ],
+  "transfers": [
+    {
+      "stream_ms": 0.26470398902893066,
+      "bytes": 8388608
+    },
+    {
+      "stream_ms": 0.26364800333976746,
+      "bytes": 8388608
+    },
+    {
+      "stream_ms": 0.2635200023651123,
+      "bytes": 8388608
+    },
+    {
+      "stream_ms": 0.2639999985694885,
+      "bytes": 8388608
+    },
+    {
+      "stream_ms": 0.2637439966201782,
+      "bytes": 8388608
+    },
+    {
+      "stream_ms": 0.26335999369621277,
+      "bytes": 8388608
+    },
+    {
+      "stream_ms": 0.2643199861049652,
+      "bytes": 8388608
+    },
+    {
+      "stream_ms": 0.27401599287986755,
+      "bytes": 8388608
+    },
+    {
+      "stream_ms": 0.2602880001068115,
+      "bytes": 8388608
+    },
+    {
+      "stream_ms": 0.2595840096473694,
+      "bytes": 8388608
+    },
+    {
+      "stream_ms": 0.2566719949245453,
+      "bytes": 8388608
+    },
+    {
+      "stream_ms": 0.255840003490448,
+      "bytes": 8388608
+    },
+    {
+      "stream_ms": 0.26073598861694336,
+      "bytes": 8388608
+    },
+    {
+      "stream_ms": 0.25699201226234436,
+      "bytes": 8388608
+    },
+    {
+      "stream_ms": 0.25763198733329773,
+      "bytes": 8388608
+    },
+    {
+      "stream_ms": 0.2571200132369995,
+      "bytes": 8388608
+    },
+    {
+      "stream_ms": 0.2603839933872223,
+      "bytes": 8388608
+    },
+    {
+      "stream_ms": 0.2571519911289215,
+      "bytes": 8388608
+    },
+    {
+      "stream_ms": 0.2597759962081909,
+      "bytes": 8388608
+    },
+    {
+      "stream_ms": 0.26096001267433167,
+      "bytes": 8388608
+    },
+    {
+      "stream_ms": 0.2616640031337738,
+      "bytes": 8388608
+    },
+    {
+      "stream_ms": 0.2653439939022064,
+      "bytes": 8388608
+    },
+    {
+      "stream_ms": 0.2614719867706299,
+      "bytes": 8388608
+    },
+    {
+      "stream_ms": 0.2683520019054413,
+      "bytes": 8388608
+    }
+  ],
+  "caveat": "Instrumented single call. CPU spans overlap; stream spans include submission gaps; not headline timings."
+}

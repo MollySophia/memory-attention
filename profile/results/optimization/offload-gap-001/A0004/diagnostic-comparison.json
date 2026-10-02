@@ -1,0 +1,57 @@
+{
+  "rows": [
+    {
+      "attempt": "A0001",
+      "diagnostic_wall_ms": 30.237858649343252,
+      "cpu_spans": {
+        "id_d2h_staging": {
+          "count": 1,
+          "sum_ms": 0.08077314123511314,
+          "first_ms": 0.08077314123511314
+        },
+        "cpu_table_gather": {
+          "count": 24,
+          "sum_ms": 3.480557817965746,
+          "first_ms": 0.14590471982955933
+        },
+        "h2d_submit": {
+          "count": 24,
+          "sum_ms": 0.37882570177316666,
+          "first_ms": 0.003977678716182709
+        },
+        "ticket_acquire": {
+          "count": 24,
+          "sum_ms": 10.554858949035406,
+          "first_ms": 0.19369600340723991
+        }
+      }
+    },
+    {
+      "attempt": "A0004",
+      "diagnostic_wall_ms": 29.066314920783043,
+      "cpu_spans": {
+        "id_d2h_staging": {
+          "count": 1,
+          "sum_ms": 0.03224983811378479,
+          "first_ms": 0.03224983811378479
+        },
+        "cpu_table_gather": {
+          "count": 24,
+          "sum_ms": 3.20177199319005,
+          "first_ms": 0.1434609293937683
+        },
+        "h2d_submit": {
+          "count": 24,
+          "sum_ms": 0.12756884098052979,
+          "first_ms": 0.006150919944047928
+        },
+        "ticket_acquire": {
+          "count": 24,
+          "sum_ms": 0.18615322187542915,
+          "first_ms": 0.010580290108919144
+        }
+      }
+    }
+  ],
+  "note": "Instrumented single-call diagnostics, not headline performance. Overlapping spans cannot be added."
+}
