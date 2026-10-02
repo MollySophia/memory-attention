@@ -1,0 +1,51 @@
+{
+  "campaign_id": "offload-gap-001",
+  "continuation_id": "continuation-01",
+  "attempt_id": "A0010",
+  "parent_attempt_id": "A0001",
+  "parent_source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
+  "parent_sha": "1835ebe802504955a6146141a1aa7ebe5f3fcc16",
+  "accepted_step": null,
+  "label": "alternate pinned host buffers per GPU slot",
+  "workflow_stage": "implementation",
+  "hypothesis": "Decouple pinnedhost reuse fromGPUslot reuse by retainingtwohostbuffers perGPUslot. CPUgather canusealternatehoststorage withoutwaiting forimmediatelyprecedingH2D.",
+  "expected_bottleneck": "Instrumentedproducer DMAwait12.763ms atb1 and60.918ms atb8; spans overlapGPUcompute andcannotbeassumedremovablewalltime.",
+  "profile_evidence": [
+    "../continuation-01/coordination-b1.json",
+    "../continuation-01/coordination-b8.json",
+    "../continuation-01/independent-host-ring-design.json"
+  ],
+  "change": "Doublepipelinehostbuffers only; retainGPUslotcount/group/bytes andA0001 release-before-gather order. Eachhostbuffer hasitsownH2Dcompletionevent; consumerwaitsselectedevent. NoA0006early-refill,A0007viewcache,A0008mappedreads orA0009dedup.",
+  "tradeoffs": [
+    "Pinnedhostcapacitydoubles; GPUbuffercapacityunchanged. Includeallalternatehosts inmeasuredpinnedcapacity andRSS.",
+    "ExtraCPUlookahead maynotimprovealreadyoverlappedmodel; requirebothlatency/gap confirmation."
+  ],
+  "protocol_version": "offload_gap_v1",
+  "original_protocol_version": "offload_gap_v1",
+  "measurement_plan_id": "screen_v1_w3_n5_r1",
+  "screen": {
+    "batches": [
+      1,
+      8,
+      16
+    ],
+    "length": 2048,
+    "modes": [
+      "prefill",
+      "decode"
+    ],
+    "variants": [
+      "ma_offload",
+      "ma_gpu"
+    ],
+    "jobs": 12,
+    "reason_batch16": "Pipelinebuffering/scheduling change"
+  },
+  "not_run": {
+    "confirmation": "Only ifscreenpromising",
+    "full_validation": "Only ifnominated",
+    "generation_validation": "Only ifnominated"
+  },
+  "candidate_sha": null,
+  "decision": "Registered beforecode; preserveDMAread/CPUoverwrite ordering andGPUconsumptionfences."
+}

@@ -430,3 +430,7 @@ A0009 source0ac06a0f7ce6c3ce77fd5a878c4a34c991527ec2 frozen.47tests pass9.57sec 
 ### A0009 final verdict: rejected (offload-gap-001; continuation-01)
 
 All12screenjobscomplete. Offload/resident ms:b1prefill29.681/28.734,decode4.716/4.582;b8prefill211.480/206.651,decode11.011/10.930;b16prefill419.581/415.231,decode20.256/20.246. Targetb8prefill slower2.01742ms vsA0001 andgapworse1.17298; b16slower2.02706/gapworse1.72058. Rejectatfixedscreenwithoutformal/full/generation. Within-calltransfercompression doesnottranslate toend-to-endgain; unique/expansionwork andoverlap requireconsideration, noisolatedcausalclaim. Fouradditionalverdictscomplete. Commitallevidence thenrestorefivechangedexecution/testfiles toA0001.
+
+### A0010 registration (offload-gap-001; continuation-01)
+
+ParentA0001 afterA0009revert. Alternate two pinnedhostbuffers foreachunchangedGPUslot. ProfileproducerDMAwait12.763/60.918ms b1/b8 motivatesmoreCPUlookahead. PreserveA0001 release-before-gather ordering, isolatinghostreusefromA0006earlyrefill. Separatehostcompletionevents, one eventrecordpercopy, consumerpointsselectedevent. Hostpinningdoubles;GPUcapacityandtransferbytes unchanged. No earlierrejectedoptimizations combined. Test inflightreusewithdelayedGPUconsumers,freshweights/IDs,partialgroups,crossstreams,errorcleanup andcompletehostmemoryaccounting. Twelve-jobscreen andunchangedretentiongates.
