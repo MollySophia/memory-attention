@@ -225,3 +225,33 @@ def test_auto_policy_boundary_and_shape_reuse(model):
             actual = model(input_ids=ids, use_cache=False).logits.float()
             assert model.model.memory_offloader.policy == policy
             torch.testing.assert_close(actual, ref, rtol=0, atol=0)
+
+
+@pytest.mark.parametrize('depth', [1, 2])
+def test_pipeline_sleeping_dma_waits_preserve_cross_stream_generations(depth):
+    from fla.layers.memory_offload import MemoryTableOffloader
+    with torch.inference_mode():
+        weights=torch.randn(71,5,64,dtype=torch.bfloat16)
+        off=MemoryTableOffloader(weights,2,13,group_size=2,prefetch_depth=depth)
+        streams=[torch.cuda.Stream(),torch.cuda.Stream()]
+        for stream in streams:stream.wait_stream(torch.cuda.current_stream())
+        try:
+            for iteration in range(4):
+                ids=torch.randint(0,71,(2,13));expected=weights.index_select(0,ids.flatten()).clone()
+                values=[]
+                with torch.cuda.stream(streams[iteration%2]):
+                    def consume(layer,handle):
+                        value=handle.acquire()
+                        torch.cuda._sleep(100000)
+                        values.append(value.clone())
+                        handle.release()
+                    off.forward(ids,consume)
+                streams[iteration%2].synchronize()
+                actual=torch.stack(values,dim=2).reshape(26,5,64).cpu()
+                torch.testing.assert_close(actual,expected,rtol=0,atol=0)
+                weights.add_(torch.tensor(.125,dtype=weights.dtype))
+            with pytest.raises(ValueError,match='consumer failure'):
+                off.forward(ids,lambda *unused: (_ for _ in ()).throw(ValueError('consumer failure')))
+            with pytest.raises(RuntimeError,match='closed or failed'):
+                off.forward(ids,lambda *unused: None)
+        finally:off.close()

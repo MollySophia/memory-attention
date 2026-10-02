@@ -139,7 +139,7 @@ class MemoryTableOffloader:
             dict(
                 host=torch.empty(capacity, dtype=weights.dtype, pin_memory=True),
                 gpu=torch.empty(capacity, dtype=weights.dtype, device=self.device),
-                copied=torch.cuda.Event(),
+                copied=torch.cuda.Event(blocking=True),
                 consumed=torch.cuda.Event(),
                 previous=None,
             )

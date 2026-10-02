@@ -1,0 +1,48 @@
+{
+  "campaign_id": "offload-gap-001",
+  "continuation_id": "continuation-02",
+  "attempt_id": "A0012",
+  "parent_attempt_id": "A0001",
+  "parent_source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
+  "parent_sha": "1b64fe9c7e140c5c66af45df41abd9c044d792d8",
+  "accepted_step": null,
+  "label": "blocking producer DMA completion events",
+  "workflow_stage": "registered",
+  "hypothesis": "Use blocking CUDA completion events for producer host-buffer reuse, reducing CPU consumption during DMA waits and potential competition with lookup/model submission.",
+  "expected_bottleneck": "Instrumented frozen A0001 producer event waits consume 13.1856/59.5677 ms thread CPU time within 13.2182/59.8416 ms wall wait at b1/b8. Overlapping wait spans are not additive removable model latency.",
+  "profile_evidence": [
+    "../continuation-02/wait-cpu-b1.json",
+    "../continuation-02/wait-cpu-b8.json"
+  ],
+  "change": "Create only pipeline copied events with blocking=True. Keep GPU consumed events, producer ordering, CPU gathers, group size/depth and all buffer capacities unchanged. Bulk decode stays unchanged.",
+  "tradeoffs": [
+    "Sleeping waits may introduce wakeup latency; lower CPU usage is not itself a retained optimization.",
+    "Require lower target prefill wall latency and absolute offload gap under the original independent confirmation."
+  ],
+  "protocol_version": "offload_gap_v1",
+  "original_protocol_version": "offload_gap_v1",
+  "measurement_plan_id": "screen_v1_w3_n5_r1",
+  "screen": {
+    "batches": [
+      1,
+      8,
+      16
+    ],
+    "length": 2048,
+    "modes": [
+      "prefill",
+      "decode"
+    ],
+    "variants": [
+      "ma_offload",
+      "ma_gpu"
+    ],
+    "jobs": 12,
+    "reason_batch16": "Producer pipeline wait scheduling change"
+  },
+  "not_run": {
+    "confirmation": "Not yet nominated; staged gates required.",
+    "full_validation": "Not yet nominated; staged gates required.",
+    "generation_validation": "Not yet nominated; staged gates required."
+  }
+}

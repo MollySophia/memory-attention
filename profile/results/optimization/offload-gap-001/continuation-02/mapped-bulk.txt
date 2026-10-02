@@ -1,0 +1,1 @@
+[{"batch": 1, "mean_ms": {"d2h_gather_h2d": 0.017015250000000003, "mapped_bulk": 0.01846525}}, {"batch": 8, "mean_ms": {"d2h_gather_h2d": 0.06144960000000001, "mapped_bulk": 0.03329135}}, {"batch": 16, "mean_ms": {"d2h_gather_h2d": 0.1058138, "mapped_bulk": 0.048238949999999996}}]
