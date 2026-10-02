@@ -7,7 +7,7 @@
   "parent_sha": "853a10499662e673052f800f3bbe25f2b2bdb638",
   "accepted_step": null,
   "label": "mapped-host GPU gather for pipeline",
-  "workflow_stage": "screening",
+  "workflow_stage": "final_verdict",
   "hypothesis": "GPU gathers directly from mapped pinned CPU table into bounded device slots, avoiding CPU gather/intermediate H2D and GPU-ID D2H. A bounded64-CTA kernel should leave resources for concurrent model computation.",
   "expected_bottleneck": "CPU gather and explicit H2D in prefill pipeline; b8 diagnostic75ms CPUgather and42ms transfer spans overlap compute but leave residualcriticalpath.",
   "profile_evidence": [
@@ -43,12 +43,12 @@
     "reason_batch16": "Transfermechanism andpipeline scheduling change"
   },
   "not_run": {
-    "confirmation": "Only if screenpromising",
-    "full_validation": "Only ifnominated",
-    "generation_validation": "Only ifnominated"
+    "confirmation": "Notnominated: no targetprefill speedup andlarger-batch screenregression; intentionallynotrun.",
+    "full_validation": "Notnominated: no targetprefill speedup andlarger-batch screenregression; intentionallynotrun.",
+    "generation_validation": "Notnominated: no targetprefill speedup andlarger-batch screenregression; intentionallynotrun."
   },
   "candidate_sha": "fb17afb2a97b68ec61ef517622707f68ce33e051",
-  "decision": "50 tests and standalone exactzero pass. Freeze12-job screen; alltiming usesfb17afb. Setup estimate30sec = prior measured~20sec plus10sec allowance for newJIT/pinning, not a measuredcandidatecost.",
+  "decision": "All12screen jobs complete. RelativeA0001 prefill offload reductions b1 -0.04468ms,b8 -3.63808,b16 -11.16123; b8/b16 gaps worsen2.86459/11.01584ms. No targetedprefill latencygain. Reject atscreen, preserve50-test exactness andmicrodiagnostics, noformal/full/generation escalation.",
   "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0008",
   "correctness": {
     "pytest": "50 passed in9.80s",
@@ -73,5 +73,9 @@
     }
   ],
   "screen_manifest": "R01/manifest.json",
-  "screen_summary": "R01-summary.json"
+  "screen_summary": "R01-summary.json",
+  "status": "rejected",
+  "performance": "screen-comparison.json",
+  "next_insight": "Faster isolated mappedreads do not improve overlappedmodelpipeline. GPUresource/stream interaction andfinalhost-read safety synchronization may offset CPUgather removal; causalbreakdown notmeasured. Keep page-locking cost explicit.",
+  "memory_observation": "Rawoffload_pinned_bytes includes3000MiBtable plusbulkdecode buffers:3000.09375MiB atb1,3000.75MiB atb8. Table remainsCPUresident; source/arithmeticbitexact but performancegatefails."
 }

@@ -1,11 +1,11 @@
 {
   "campaign_id": "offload-gap-001",
-  "goal_progress": "Additional2/5minimum verdicts complete. A0008 mapped-host pipeline passes50tests andstandaloneexactness;12-job screen next.",
-  "workflow_stage": "screening",
-  "completed_optimization_verdicts": 7,
+  "goal_progress": "Threeadditionalverdicts: A0006 within_noise, A0007/A0008 rejected. A0001 incumbent. Nextwithin-call dedup.",
+  "workflow_stage": "implementation",
+  "completed_optimization_verdicts": 8,
   "accepted_steps": 1,
-  "active_attempt": "A0008",
-  "controller_pid": 2116391,
+  "active_attempt": null,
+  "controller_pid": null,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
   "final_report": "final/REPORT.md",
@@ -15,7 +15,7 @@
   "continuation": "continuation-01/manifest.json",
   "source_candidate": "fb17afb2a97b68ec61ef517622707f68ce33e051",
   "live_manifest": "profile/results/optimization/offload-gap-001/A0008/R01/manifest.json",
-  "exec_session_id": 4813,
+  "exec_session_id": null,
   "next_actions": [
     "Poll existingA0008screen; no duplicateGPUwork.",
     "After12jobs summarize/compare toA0000/A0001. Any proposedgain needsparentconfirmation andfreshA0000confirmation/fullgates.",
@@ -24,7 +24,7 @@
     "Mappedcandidatepins3000MiBtable; cpu_table_pinned_bytes and totaloffload_pinned_bytes includeit. FinalCPUtable-readstreamsync protectsCPUweightmutationafterreturn. Preservememorytradeoff inverdict.",
     "Originalfinalreport remains immutable; continuationfinal artifacts andaudit --continuation continuation-01 required."
   ],
-  "additional_completed_verdicts": 2,
+  "additional_completed_verdicts": 3,
   "additional_attempt_target": [
     5,
     10
