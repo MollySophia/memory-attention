@@ -1,0 +1,55 @@
+{
+  "campaign_id": "offload-gap-001",
+  "continuation_id": "continuation-02",
+  "reviewed_at_utc": "2026-10-02T11:11:43.963282+00:00",
+  "status": "manual_review_passed",
+  "reviewer": "Codex",
+  "additional_verdicts": {
+    "A0011": "within_noise",
+    "A0012": "within_noise",
+    "A0013": "rejected",
+    "A0014": "rejected",
+    "A0015": "within_noise",
+    "A0016": "accepted",
+    "A0017": "within_noise",
+    "A0018": "rejected",
+    "A0019": "rejected",
+    "A0020": "within_noise"
+  },
+  "retained_source": "0ce6645eb4c4bc3992258ad0878c72ea3c37a64e",
+  "source_equivalence": "git diff retained source -- fla tests and explicit top-level profile Python paths is empty; core source hash matches retained evidence.",
+  "historical_artifacts": "Original final unchanged from seal 9661acda594b2b9a1fc0d13e94cab2922f68f989; continuation-01/final unchanged from seal 4088de5adf8e473ec6137c1b32f99dcaca40efb1.",
+  "visual_review": {
+    "files": [
+      "history/accepted-steps-absolute-gap.png",
+      "history/accepted-steps-latency.png",
+      "history/accepted-steps-relative-overhead.png",
+      "history/accepted-steps-speedup.png",
+      "history/attempt-history-screen_v1_w3_n5_r1.png",
+      "validation/absolute-gap.png",
+      "validation/generation.png",
+      "validation/memory-batch.png",
+      "validation/memory-length.png",
+      "validation/relative-overhead.png",
+      "validation/scaling-batch.png",
+      "validation/scaling-length.png"
+    ],
+    "checks": [
+      "All 12 PNGs visually inspected; readable labels/captions, all A0000\u2013A0020 ticks visible.",
+      "Accepted sequence baseline, A0001, A0016 uses independent confirmations; incremental gain comes from explicit parent comparison.",
+      "Negative directions and uncertainty preserved; screen SD distinguished from process-block intervals.",
+      "PDF/SVG and source CSV/JSON exports checked by core audit."
+    ]
+  },
+  "reproduction_review": "All fenced Bash blocks pass bash -n; CLI options checked against parsers; fresh 12-job/96-call screen plan and 48-process parent plan generated without GPU timing. See reproduction-checks.json.",
+  "evidence_review": [
+    "Core audit passes 20 attempts, two accepted steps, 200 final raw references and both retained implementations.",
+    "Additional audit passes 456 raw screen/parent references; 72 evidence-helper tests pass.",
+    "Candidate source commits precede timing as checked by raw source audit. Nine evidence commits precede their code-only reverts; ancestry and changed paths checked.",
+    "A0016 incremental b1 prefill reduction 0.430878 ms and gap reduction 0.451613 ms have positive lower intervals. Cumulative A0000 gain is separately labeled.",
+    "Unresolved primary/secondary adverse directions and generation limitations disclosed; no extra primary pairs pursued.",
+    "Pinned IDs, mapped table, inverse storage, selective depth, WC buffers and async pipeline IDs have explicit per-attempt capacity checks.",
+    "Four new full-size A0016 correctness trajectories match strictly validated resident fingerprints.",
+    "Final artifacts reuse verified A0016 matrix/generation; no identical GPU reruns during final review."
+  ]
+}

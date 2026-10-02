@@ -1,0 +1,3472 @@
+{
+  "history": [
+    {
+      "attempt": "A0000",
+      "label": "restored model with verified measurement harness",
+      "status": "baseline",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 43.60288484022021,
+      "sample_sd_ms": 0.1335433115404926,
+      "incumbent_attempt": "A0000",
+      "incumbent_ms": 43.60288484022021
+    },
+    {
+      "attempt": "A0001",
+      "label": "pipeline above 1024 tokens",
+      "status": "accepted",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 29.37809396535158,
+      "sample_sd_ms": 0.43202527240237043,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 29.37809396535158
+    },
+    {
+      "attempt": "A0002",
+      "label": "serial byte copies for tiny CPU lookups",
+      "status": "within_noise",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 29.43675108253956,
+      "sample_sd_ms": 0.055349668595151905,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 29.37809396535158
+    },
+    {
+      "attempt": "A0003",
+      "label": "two-layer groups in automatic pipeline",
+      "status": "rejected",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 31.843384448438883,
+      "sample_sd_ms": 1.276848331012971,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 29.37809396535158
+    },
+    {
+      "attempt": "A0004",
+      "label": "caller-thread pipeline producer",
+      "status": "within_noise",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 29.026863165199757,
+      "sample_sd_ms": 0.06267518938346243,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 29.37809396535158
+    },
+    {
+      "attempt": "A0005",
+      "label": "compute-stream copies for tiny bulk transfers",
+      "status": "within_noise",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 29.242638871073723,
+      "sample_sd_ms": 0.07830530887238196,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 29.37809396535158
+    },
+    {
+      "attempt": "A0006",
+      "label": "refill host slot before consumer release",
+      "status": "within_noise",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 29.144953936338425,
+      "sample_sd_ms": 0.05450353804917386,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 29.37809396535158
+    },
+    {
+      "attempt": "A0007",
+      "label": "precompute immutable pipeline tensor views",
+      "status": "rejected",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 29.411230608820915,
+      "sample_sd_ms": 0.14169696053871902,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 29.37809396535158
+    },
+    {
+      "attempt": "A0008",
+      "label": "mapped-host GPU gather for pipeline",
+      "status": "rejected",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 29.42277453839779,
+      "sample_sd_ms": 0.0506216965367489,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 29.37809396535158
+    },
+    {
+      "attempt": "A0009",
+      "label": "within-call token dedup for large pipeline inputs",
+      "status": "rejected",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 29.681336414068937,
+      "sample_sd_ms": 0.7403451742581575,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 29.37809396535158
+    },
+    {
+      "attempt": "A0010",
+      "label": "alternate pinned host buffers per GPU slot",
+      "status": "rejected",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 31.109227053821087,
+      "sample_sd_ms": 0.18266807797334106,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 29.37809396535158
+    },
+    {
+      "attempt": "A0011",
+      "label": "reuse pinned input-ID staging buffers",
+      "status": "within_noise",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 29.42592641338706,
+      "sample_sd_ms": 0.11657497472754737,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 29.37809396535158
+    },
+    {
+      "attempt": "A0012",
+      "label": "blocking producer DMA completion events",
+      "status": "within_noise",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 29.23710932955146,
+      "sample_sd_ms": 0.043960462586658255,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 29.37809396535158
+    },
+    {
+      "attempt": "A0013",
+      "label": "mapped-host all-layer gather for small bulk inputs",
+      "status": "rejected",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 30.033439863473177,
+      "sample_sd_ms": 1.2082494830198165,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 29.37809396535158
+    },
+    {
+      "attempt": "A0014",
+      "label": "one-slot automatic pipeline lookahead",
+      "status": "rejected",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 29.00561662390828,
+      "sample_sd_ms": 0.04198067076049065,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 29.37809396535158
+    },
+    {
+      "attempt": "A0015",
+      "label": "fuse compressed-row expansion with memory addition",
+      "status": "within_noise",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 29.27270131185651,
+      "sample_sd_ms": 0.18509655272517386,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 29.37809396535158
+    },
+    {
+      "attempt": "A0016",
+      "label": "single-slot automatic pipeline for small prefill only",
+      "status": "accepted",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 28.941986802965403,
+      "sample_sd_ms": 0.010548051624232262,
+      "incumbent_attempt": "A0016",
+      "incumbent_ms": 28.941986802965403
+    },
+    {
+      "attempt": "A0017",
+      "label": "write-combined pinned pipeline buffers for large inputs",
+      "status": "within_noise",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 29.00316994637251,
+      "sample_sd_ms": 0.034090527204124935,
+      "incumbent_attempt": "A0016",
+      "incumbent_ms": 28.941986802965403
+    },
+    {
+      "attempt": "A0018",
+      "label": "submit embedding before waiting for pipeline input IDs",
+      "status": "rejected",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 28.93447820097208,
+      "sample_sd_ms": 0.01953443638690804,
+      "incumbent_attempt": "A0016",
+      "incumbent_ms": 28.941986802965403
+    },
+    {
+      "attempt": "A0019",
+      "label": "start pipeline producer before embedding dispatch",
+      "status": "rejected",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 28.98460617288947,
+      "sample_sd_ms": 0.043891221555199394,
+      "incumbent_attempt": "A0016",
+      "incumbent_ms": 28.941986802965403
+    },
+    {
+      "attempt": "A0020",
+      "label": "reuse per-layer pipeline coordination tickets",
+      "status": "within_noise",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 28.91129031777382,
+      "sample_sd_ms": 0.03350139848001991,
+      "incumbent_attempt": "A0016",
+      "incumbent_ms": 28.941986802965403
+    },
+    {
+      "attempt": "A0000",
+      "label": "restored model with verified measurement harness",
+      "status": "baseline",
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 4.680408537387848,
+      "sample_sd_ms": 0.03625942888342132,
+      "incumbent_attempt": "A0000",
+      "incumbent_ms": 4.680408537387848
+    },
+    {
+      "attempt": "A0001",
+      "label": "pipeline above 1024 tokens",
+      "status": "accepted",
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 4.620579164475203,
+      "sample_sd_ms": 0.06799069901388392,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 4.620579164475203
+    },
+    {
+      "attempt": "A0002",
+      "label": "serial byte copies for tiny CPU lookups",
+      "status": "within_noise",
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 4.609972238540649,
+      "sample_sd_ms": 0.06474760885699228,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 4.620579164475203
+    },
+    {
+      "attempt": "A0003",
+      "label": "two-layer groups in automatic pipeline",
+      "status": "rejected",
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 4.780148807913065,
+      "sample_sd_ms": 0.41265621580905504,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 4.620579164475203
+    },
+    {
+      "attempt": "A0004",
+      "label": "caller-thread pipeline producer",
+      "status": "within_noise",
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 4.614540189504623,
+      "sample_sd_ms": 0.07508650686919925,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 4.620579164475203
+    },
+    {
+      "attempt": "A0005",
+      "label": "compute-stream copies for tiny bulk transfers",
+      "status": "within_noise",
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 4.586316272616386,
+      "sample_sd_ms": 0.08242891479504098,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 4.620579164475203
+    },
+    {
+      "attempt": "A0006",
+      "label": "refill host slot before consumer release",
+      "status": "within_noise",
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 4.658252373337746,
+      "sample_sd_ms": 0.05620729435456619,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 4.620579164475203
+    },
+    {
+      "attempt": "A0007",
+      "label": "precompute immutable pipeline tensor views",
+      "status": "rejected",
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 5.536122154444456,
+      "sample_sd_ms": 0.3548524925981378,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 4.620579164475203
+    },
+    {
+      "attempt": "A0008",
+      "label": "mapped-host GPU gather for pipeline",
+      "status": "rejected",
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 5.354337953031063,
+      "sample_sd_ms": 0.033009301947367335,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 4.620579164475203
+    },
+    {
+      "attempt": "A0009",
+      "label": "within-call token dedup for large pipeline inputs",
+      "status": "rejected",
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 4.716119170188904,
+      "sample_sd_ms": 0.20085764811107726,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 4.620579164475203
+    },
+    {
+      "attempt": "A0010",
+      "label": "alternate pinned host buffers per GPU slot",
+      "status": "rejected",
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 4.694057442247868,
+      "sample_sd_ms": 0.0760907527394704,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 4.620579164475203
+    },
+    {
+      "attempt": "A0011",
+      "label": "reuse pinned input-ID staging buffers",
+      "status": "within_noise",
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 4.981116950511932,
+      "sample_sd_ms": 0.39183158138296975,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 4.620579164475203
+    },
+    {
+      "attempt": "A0012",
+      "label": "blocking producer DMA completion events",
+      "status": "within_noise",
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 4.880111385136843,
+      "sample_sd_ms": 0.08010535226770694,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 4.620579164475203
+    },
+    {
+      "attempt": "A0013",
+      "label": "mapped-host all-layer gather for small bulk inputs",
+      "status": "rejected",
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 4.631976410746574,
+      "sample_sd_ms": 0.07616797064587055,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 4.620579164475203
+    },
+    {
+      "attempt": "A0014",
+      "label": "one-slot automatic pipeline lookahead",
+      "status": "rejected",
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 4.733304958790541,
+      "sample_sd_ms": 0.14396827251230213,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 4.620579164475203
+    },
+    {
+      "attempt": "A0015",
+      "label": "fuse compressed-row expansion with memory addition",
+      "status": "within_noise",
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 4.868637397885323,
+      "sample_sd_ms": 0.0843641006383641,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 4.620579164475203
+    },
+    {
+      "attempt": "A0016",
+      "label": "single-slot automatic pipeline for small prefill only",
+      "status": "accepted",
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 5.0721158273518085,
+      "sample_sd_ms": 0.31990271001151954,
+      "incumbent_attempt": "A0016",
+      "incumbent_ms": 5.0721158273518085
+    },
+    {
+      "attempt": "A0017",
+      "label": "write-combined pinned pipeline buffers for large inputs",
+      "status": "within_noise",
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 5.442919209599495,
+      "sample_sd_ms": 0.26105320288215383,
+      "incumbent_attempt": "A0016",
+      "incumbent_ms": 5.0721158273518085
+    },
+    {
+      "attempt": "A0018",
+      "label": "submit embedding before waiting for pipeline input IDs",
+      "status": "rejected",
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 5.3214602172374725,
+      "sample_sd_ms": 0.47476369889469905,
+      "incumbent_attempt": "A0016",
+      "incumbent_ms": 5.0721158273518085
+    },
+    {
+      "attempt": "A0019",
+      "label": "start pipeline producer before embedding dispatch",
+      "status": "rejected",
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 4.694135207682848,
+      "sample_sd_ms": 0.0667747022596898,
+      "incumbent_attempt": "A0016",
+      "incumbent_ms": 5.0721158273518085
+    },
+    {
+      "attempt": "A0020",
+      "label": "reuse per-layer pipeline coordination tickets",
+      "status": "within_noise",
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 5.343450326472521,
+      "sample_sd_ms": 0.03966589794388784,
+      "incumbent_attempt": "A0016",
+      "incumbent_ms": 5.0721158273518085
+    },
+    {
+      "attempt": "A0000",
+      "label": "restored model with verified measurement harness",
+      "status": "baseline",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 209.1618636623025,
+      "sample_sd_ms": 0.45023637244545023,
+      "incumbent_attempt": "A0000",
+      "incumbent_ms": 209.1618636623025
+    },
+    {
+      "attempt": "A0001",
+      "label": "pipeline above 1024 tokens",
+      "status": "accepted",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 209.46270804852247,
+      "sample_sd_ms": 0.7164509828592313,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 209.46270804852247
+    },
+    {
+      "attempt": "A0002",
+      "label": "serial byte copies for tiny CPU lookups",
+      "status": "within_noise",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 209.8816559650004,
+      "sample_sd_ms": 0.1931345149351365,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 209.46270804852247
+    },
+    {
+      "attempt": "A0003",
+      "label": "two-layer groups in automatic pipeline",
+      "status": "rejected",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 213.51997638121247,
+      "sample_sd_ms": 0.12858964132972123,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 209.46270804852247
+    },
+    {
+      "attempt": "A0004",
+      "label": "caller-thread pipeline producer",
+      "status": "within_noise",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 209.16501358151436,
+      "sample_sd_ms": 0.17931906377304757,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 209.46270804852247
+    },
+    {
+      "attempt": "A0005",
+      "label": "compute-stream copies for tiny bulk transfers",
+      "status": "within_noise",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 210.35980824381113,
+      "sample_sd_ms": 0.3400889437135752,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 209.46270804852247
+    },
+    {
+      "attempt": "A0006",
+      "label": "refill host slot before consumer release",
+      "status": "within_noise",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 209.7764796577394,
+      "sample_sd_ms": 0.16292688927115284,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 209.46270804852247
+    },
+    {
+      "attempt": "A0007",
+      "label": "precompute immutable pipeline tensor views",
+      "status": "rejected",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 209.99673306941986,
+      "sample_sd_ms": 0.2679079163717672,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 209.46270804852247
+    },
+    {
+      "attempt": "A0008",
+      "label": "mapped-host GPU gather for pipeline",
+      "status": "rejected",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 213.10078306123614,
+      "sample_sd_ms": 0.22900154961800612,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 209.46270804852247
+    },
+    {
+      "attempt": "A0009",
+      "label": "within-call token dedup for large pipeline inputs",
+      "status": "rejected",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 211.4801300689578,
+      "sample_sd_ms": 0.16612503940625323,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 209.46270804852247
+    },
+    {
+      "attempt": "A0010",
+      "label": "alternate pinned host buffers per GPU slot",
+      "status": "rejected",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 210.2196790277958,
+      "sample_sd_ms": 0.27966041604938274,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 209.46270804852247
+    },
+    {
+      "attempt": "A0011",
+      "label": "reuse pinned input-ID staging buffers",
+      "status": "within_noise",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 209.07495021820068,
+      "sample_sd_ms": 0.17348064120133438,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 209.46270804852247
+    },
+    {
+      "attempt": "A0012",
+      "label": "blocking producer DMA completion events",
+      "status": "within_noise",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 209.81948915868998,
+      "sample_sd_ms": 0.21861384935866113,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 209.46270804852247
+    },
+    {
+      "attempt": "A0013",
+      "label": "mapped-host all-layer gather for small bulk inputs",
+      "status": "rejected",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 209.7273524850607,
+      "sample_sd_ms": 0.23440536807907894,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 209.46270804852247
+    },
+    {
+      "attempt": "A0014",
+      "label": "one-slot automatic pipeline lookahead",
+      "status": "rejected",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 207.3718019761145,
+      "sample_sd_ms": 0.9400097864055902,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 209.46270804852247
+    },
+    {
+      "attempt": "A0015",
+      "label": "fuse compressed-row expansion with memory addition",
+      "status": "within_noise",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 209.18932734057307,
+      "sample_sd_ms": 0.3292421341397009,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 209.46270804852247
+    },
+    {
+      "attempt": "A0016",
+      "label": "single-slot automatic pipeline for small prefill only",
+      "status": "accepted",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 209.8441068083048,
+      "sample_sd_ms": 0.18427073722124165,
+      "incumbent_attempt": "A0016",
+      "incumbent_ms": 209.8441068083048
+    },
+    {
+      "attempt": "A0017",
+      "label": "write-combined pinned pipeline buffers for large inputs",
+      "status": "within_noise",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 207.8240447677672,
+      "sample_sd_ms": 0.1267395936016108,
+      "incumbent_attempt": "A0016",
+      "incumbent_ms": 209.8441068083048
+    },
+    {
+      "attempt": "A0018",
+      "label": "submit embedding before waiting for pipeline input IDs",
+      "status": "rejected",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 210.0050332956016,
+      "sample_sd_ms": 0.3200269277627206,
+      "incumbent_attempt": "A0016",
+      "incumbent_ms": 209.8441068083048
+    },
+    {
+      "attempt": "A0019",
+      "label": "start pipeline producer before embedding dispatch",
+      "status": "rejected",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 210.21057488396764,
+      "sample_sd_ms": 0.5671956583384248,
+      "incumbent_attempt": "A0016",
+      "incumbent_ms": 209.8441068083048
+    },
+    {
+      "attempt": "A0020",
+      "label": "reuse per-layer pipeline coordination tickets",
+      "status": "within_noise",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 209.79514056816697,
+      "sample_sd_ms": 0.0994841804275117,
+      "incumbent_attempt": "A0016",
+      "incumbent_ms": 209.8441068083048
+    },
+    {
+      "attempt": "A0000",
+      "label": "restored model with verified measurement harness",
+      "status": "baseline",
+      "mode": "decode",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 11.02176634594798,
+      "sample_sd_ms": 0.0211247494037617,
+      "incumbent_attempt": "A0000",
+      "incumbent_ms": 11.02176634594798
+    },
+    {
+      "attempt": "A0001",
+      "label": "pipeline above 1024 tokens",
+      "status": "accepted",
+      "mode": "decode",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 11.029212363064289,
+      "sample_sd_ms": 0.026242426020020155,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 11.029212363064289
+    },
+    {
+      "attempt": "A0002",
+      "label": "serial byte copies for tiny CPU lookups",
+      "status": "within_noise",
+      "mode": "decode",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 10.99107600748539,
+      "sample_sd_ms": 0.010654180077795148,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 11.029212363064289
+    },
+    {
+      "attempt": "A0003",
+      "label": "two-layer groups in automatic pipeline",
+      "status": "rejected",
+      "mode": "decode",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 11.008177977055311,
+      "sample_sd_ms": 0.02910316640014343,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 11.029212363064289
+    },
+    {
+      "attempt": "A0004",
+      "label": "caller-thread pipeline producer",
+      "status": "within_noise",
+      "mode": "decode",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 11.041998583823442,
+      "sample_sd_ms": 0.024107978915256307,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 11.029212363064289
+    },
+    {
+      "attempt": "A0005",
+      "label": "compute-stream copies for tiny bulk transfers",
+      "status": "within_noise",
+      "mode": "decode",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 11.001310404390097,
+      "sample_sd_ms": 0.01303693545033228,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 11.029212363064289
+    },
+    {
+      "attempt": "A0006",
+      "label": "refill host slot before consumer release",
+      "status": "within_noise",
+      "mode": "decode",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 11.004539579153061,
+      "sample_sd_ms": 0.024696122846473257,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 11.029212363064289
+    },
+    {
+      "attempt": "A0007",
+      "label": "precompute immutable pipeline tensor views",
+      "status": "rejected",
+      "mode": "decode",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 11.050802748650312,
+      "sample_sd_ms": 0.021249816343031337,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 11.029212363064289
+    },
+    {
+      "attempt": "A0008",
+      "label": "mapped-host GPU gather for pipeline",
+      "status": "rejected",
+      "mode": "decode",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 11.010202765464783,
+      "sample_sd_ms": 0.026229479068843042,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 11.029212363064289
+    },
+    {
+      "attempt": "A0009",
+      "label": "within-call token dedup for large pipeline inputs",
+      "status": "rejected",
+      "mode": "decode",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 11.011401750147343,
+      "sample_sd_ms": 0.01596768740001814,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 11.029212363064289
+    },
+    {
+      "attempt": "A0010",
+      "label": "alternate pinned host buffers per GPU slot",
+      "status": "rejected",
+      "mode": "decode",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 11.010199412703514,
+      "sample_sd_ms": 0.017325197367697397,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 11.029212363064289
+    },
+    {
+      "attempt": "A0011",
+      "label": "reuse pinned input-ID staging buffers",
+      "status": "within_noise",
+      "mode": "decode",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 11.018476635217667,
+      "sample_sd_ms": 0.02360490826535965,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 11.029212363064289
+    },
+    {
+      "attempt": "A0012",
+      "label": "blocking producer DMA completion events",
+      "status": "within_noise",
+      "mode": "decode",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 10.99939625710249,
+      "sample_sd_ms": 0.0318547340314962,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 11.029212363064289
+    },
+    {
+      "attempt": "A0013",
+      "label": "mapped-host all-layer gather for small bulk inputs",
+      "status": "rejected",
+      "mode": "decode",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 11.054449994117022,
+      "sample_sd_ms": 0.03638607614175885,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 11.029212363064289
+    },
+    {
+      "attempt": "A0014",
+      "label": "one-slot automatic pipeline lookahead",
+      "status": "rejected",
+      "mode": "decode",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 11.04356488212943,
+      "sample_sd_ms": 0.017093231795637903,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 11.029212363064289
+    },
+    {
+      "attempt": "A0015",
+      "label": "fuse compressed-row expansion with memory addition",
+      "status": "within_noise",
+      "mode": "decode",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 11.00138584151864,
+      "sample_sd_ms": 0.024744765969985445,
+      "incumbent_attempt": "A0001",
+      "incumbent_ms": 11.029212363064289
+    },
+    {
+      "attempt": "A0016",
+      "label": "single-slot automatic pipeline for small prefill only",
+      "status": "accepted",
+      "mode": "decode",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 11.006531026214361,
+      "sample_sd_ms": 0.018868251774215868,
+      "incumbent_attempt": "A0016",
+      "incumbent_ms": 11.006531026214361
+    },
+    {
+      "attempt": "A0017",
+      "label": "write-combined pinned pipeline buffers for large inputs",
+      "status": "within_noise",
+      "mode": "decode",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 11.005143821239471,
+      "sample_sd_ms": 0.02197299815188709,
+      "incumbent_attempt": "A0016",
+      "incumbent_ms": 11.006531026214361
+    },
+    {
+      "attempt": "A0018",
+      "label": "submit embedding before waiting for pipeline input IDs",
+      "status": "rejected",
+      "mode": "decode",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 11.026327684521675,
+      "sample_sd_ms": 0.02278404652256203,
+      "incumbent_attempt": "A0016",
+      "incumbent_ms": 11.006531026214361
+    },
+    {
+      "attempt": "A0019",
+      "label": "start pipeline producer before embedding dispatch",
+      "status": "rejected",
+      "mode": "decode",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 11.009723879396915,
+      "sample_sd_ms": 0.02041515848780148,
+      "incumbent_attempt": "A0016",
+      "incumbent_ms": 11.006531026214361
+    },
+    {
+      "attempt": "A0020",
+      "label": "reuse per-layer pipeline coordination tickets",
+      "status": "within_noise",
+      "mode": "decode",
+      "batch": 8,
+      "length": 2048,
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "measured_ms": 11.042291764169931,
+      "sample_sd_ms": 0.014461140985616768,
+      "incumbent_attempt": "A0016",
+      "incumbent_ms": 11.006531026214361
+    }
+  ],
+  "accepted_steps": [
+    {
+      "accepted_step": 0,
+      "label": "baseline",
+      "attempt": "A0000",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "metric": "latency",
+      "mean": 43.57269729177157,
+      "lower_95": 43.18540489997531,
+      "upper_95": 43.95998968356783,
+      "process_values": [
+        43.39739331044257,
+        43.695819253722824,
+        43.62487931114932
+      ]
+    },
+    {
+      "accepted_step": 0,
+      "label": "baseline",
+      "attempt": "A0000",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "metric": "speedup",
+      "mean": 1.0,
+      "lower_95": 1.0,
+      "upper_95": 1.0,
+      "process_values": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "accepted_step": 0,
+      "label": "baseline",
+      "attempt": "A0000",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "metric": "absolute-gap",
+      "mean": 14.490119859369264,
+      "lower_95": 14.227662719077056,
+      "upper_95": 14.752576999661471,
+      "process_values": [
+        14.370462965841096,
+        14.570546196773645,
+        14.529350415493052
+      ]
+    },
+    {
+      "accepted_step": 0,
+      "label": "baseline",
+      "attempt": "A0000",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "metric": "relative-overhead",
+      "mean": 49.823738552184,
+      "lower_95": 49.13386761792019,
+      "upper_95": 50.513609486447805,
+      "process_values": [
+        49.50734643738781,
+        50.027157404785825,
+        49.936711814378356
+      ]
+    },
+    {
+      "accepted_step": 0,
+      "label": "baseline",
+      "attempt": "A0000",
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "metric": "latency",
+      "mean": 4.6131766142530575,
+      "lower_95": 4.591381451749521,
+      "upper_95": 4.634971776756594,
+      "process_values": [
+        4.6040742347637815,
+        4.613875737413764,
+        4.621579870581627
+      ]
+    },
+    {
+      "accepted_step": 0,
+      "label": "baseline",
+      "attempt": "A0000",
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "metric": "speedup",
+      "mean": 1.0,
+      "lower_95": 1.0,
+      "upper_95": 1.0,
+      "process_values": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "accepted_step": 0,
+      "label": "baseline",
+      "attempt": "A0000",
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "metric": "absolute-gap",
+      "mean": -0.010968330833646789,
+      "lower_95": -0.15999021493191984,
+      "upper_95": 0.13805355326462626,
+      "process_values": [
+        0.012472194309036233,
+        0.0337616695712013,
+        -0.0791388563811779
+      ]
+    },
+    {
+      "accepted_step": 0,
+      "label": "baseline",
+      "attempt": "A0000",
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "metric": "relative-overhead",
+      "mean": -0.22492714922255352,
+      "lower_95": -3.4157195380710546,
+      "upper_95": 2.9658652396259475,
+      "process_values": [
+        0.2716305594245405,
+        0.7371359986041659,
+        -1.683548005696367
+      ]
+    },
+    {
+      "accepted_step": 0,
+      "label": "baseline",
+      "attempt": "A0000",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 2048,
+      "metric": "latency",
+      "mean": 210.09961004989842,
+      "lower_95": 209.1244346351712,
+      "upper_95": 211.07478546462562,
+      "process_values": [
+        210.20707592057684,
+        209.66450800187886,
+        210.42724622723958
+      ]
+    },
+    {
+      "accepted_step": 0,
+      "label": "baseline",
+      "attempt": "A0000",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 2048,
+      "metric": "speedup",
+      "mean": 1.0,
+      "lower_95": 1.0,
+      "upper_95": 1.0,
+      "process_values": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "accepted_step": 0,
+      "label": "baseline",
+      "attempt": "A0000",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 2048,
+      "metric": "absolute-gap",
+      "mean": 3.333055150384704,
+      "lower_95": 1.168176141082351,
+      "upper_95": 5.497934159687057,
+      "process_values": [
+        3.782106920455874,
+        2.328629496817797,
+        3.888429033880442
+      ]
+    },
+    {
+      "accepted_step": 0,
+      "label": "baseline",
+      "attempt": "A0000",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 2048,
+      "metric": "relative-overhead",
+      "mean": 1.6126588304258875,
+      "lower_95": 0.5576358943216952,
+      "upper_95": 2.66768176653008,
+      "process_values": [
+        1.832194496031958,
+        1.1231194106913645,
+        1.8826625845543399
+      ]
+    },
+    {
+      "accepted_step": 0,
+      "label": "baseline",
+      "attempt": "A0000",
+      "mode": "decode",
+      "batch": 8,
+      "length": 2048,
+      "metric": "latency",
+      "mean": 11.088157874635524,
+      "lower_95": 10.974258119147887,
+      "upper_95": 11.20205763012316,
+      "process_values": [
+        11.068163936336836,
+        11.140610463917255,
+        11.055699223652482
+      ]
+    },
+    {
+      "accepted_step": 0,
+      "label": "baseline",
+      "attempt": "A0000",
+      "mode": "decode",
+      "batch": 8,
+      "length": 2048,
+      "metric": "speedup",
+      "mean": 1.0,
+      "lower_95": 1.0,
+      "upper_95": 1.0,
+      "process_values": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "accepted_step": 0,
+      "label": "baseline",
+      "attempt": "A0000",
+      "mode": "decode",
+      "batch": 8,
+      "length": 2048,
+      "metric": "absolute-gap",
+      "mean": 0.15404186625447558,
+      "lower_95": 0.023326452769495326,
+      "upper_95": 0.28475727973945586,
+      "process_values": [
+        0.12710498025020023,
+        0.21467672971387763,
+        0.12034388879934887
+      ]
+    },
+    {
+      "accepted_step": 0,
+      "label": "baseline",
+      "attempt": "A0000",
+      "mode": "decode",
+      "batch": 8,
+      "length": 2048,
+      "metric": "relative-overhead",
+      "mean": 1.4090212991994422,
+      "lower_95": 0.21086602853287628,
+      "upper_95": 2.607176569866008,
+      "process_values": [
+        1.1617246626707045,
+        1.9648364609959001,
+        1.100502773931722
+      ]
+    },
+    {
+      "accepted_step": 1,
+      "label": "+pipeline above 1024 tokens",
+      "attempt": "A0001",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "metric": "latency",
+      "mean": 29.77397300096022,
+      "lower_95": 29.65839215085236,
+      "upper_95": 29.889553851068076,
+      "process_values": [
+        29.721459637706477,
+        29.810056850935023,
+        29.79040251423915
+      ]
+    },
+    {
+      "accepted_step": 1,
+      "label": "+pipeline above 1024 tokens",
+      "attempt": "A0001",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "metric": "speedup",
+      "mean": 1.463446136742048,
+      "lower_95": 1.45611292012808,
+      "upper_95": 1.4707793533560158,
+      "process_values": [
+        1.4601366769815691,
+        1.4658079812535567,
+        1.4643937519910177
+      ]
+    },
+    {
+      "accepted_step": 1,
+      "label": "+pipeline above 1024 tokens",
+      "attempt": "A0001",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "metric": "absolute-gap",
+      "mean": 0.7062625916053852,
+      "lower_95": 0.6778245868596455,
+      "upper_95": 0.7347005963511248,
+      "process_values": [
+        0.7159387071927377,
+        0.6936250099291428,
+        0.709224057694275
+      ]
+    },
+    {
+      "accepted_step": 1,
+      "label": "+pipeline above 1024 tokens",
+      "attempt": "A0001",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "metric": "relative-overhead",
+      "mean": 2.429767874865233,
+      "lower_95": 2.321160360245739,
+      "upper_95": 2.5383753894847274,
+      "process_values": [
+        2.4682842583929387,
+        2.3822459211924496,
+        2.4387734450103116
+      ]
+    },
+    {
+      "accepted_step": 1,
+      "label": "+pipeline above 1024 tokens",
+      "attempt": "A0001",
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "metric": "latency",
+      "mean": 4.7908320971247225,
+      "lower_95": 4.325751911030213,
+      "upper_95": 5.2559122832192315,
+      "process_values": [
+        4.7207339977224665,
+        4.6487766318023205,
+        5.0029856618493795
+      ]
+    },
+    {
+      "accepted_step": 1,
+      "label": "+pipeline above 1024 tokens",
+      "attempt": "A0001",
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "metric": "speedup",
+      "mean": 0.9638482040462779,
+      "lower_95": 0.875006472937543,
+      "upper_95": 1.052689935155013,
+      "process_values": [
+        0.9752877914716297,
+        0.9924924561550669,
+        0.9237643645121373
+      ]
+    },
+    {
+      "accepted_step": 1,
+      "label": "+pipeline above 1024 tokens",
+      "attempt": "A0001",
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "metric": "absolute-gap",
+      "mean": 0.16067661862406446,
+      "lower_95": -0.32061784560862167,
+      "upper_95": 0.6419710828567506,
+      "process_values": [
+        0.03449314584334662,
+        0.06378012088437846,
+        0.3837565891444683
+      ]
+    },
+    {
+      "accepted_step": 1,
+      "label": "+pipeline above 1024 tokens",
+      "attempt": "A0001",
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "metric": "relative-overhead",
+      "mean": 3.4783063224618584,
+      "lower_95": -6.943327827654571,
+      "upper_95": 13.899940472578287,
+      "process_values": [
+        0.7360514948674846,
+        1.3910614922498343,
+        8.307805980268256
+      ]
+    },
+    {
+      "accepted_step": 1,
+      "label": "+pipeline above 1024 tokens",
+      "attempt": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 2048,
+      "metric": "latency",
+      "mean": 209.69514791439806,
+      "lower_95": 209.38865401899213,
+      "upper_95": 210.001641809804,
+      "process_values": [
+        209.56034165186188,
+        209.72263643828532,
+        209.80246565304697
+      ]
+    },
+    {
+      "accepted_step": 1,
+      "label": "+pipeline above 1024 tokens",
+      "attempt": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 2048,
+      "metric": "speedup",
+      "mean": 1.001928975599585,
+      "lower_95": 0.997180937980792,
+      "upper_95": 1.006677013218378,
+      "process_values": [
+        1.0030861481882358,
+        0.9997228318440314,
+        1.0029779467664877
+      ]
+    },
+    {
+      "accepted_step": 1,
+      "label": "+pipeline above 1024 tokens",
+      "attempt": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 2048,
+      "metric": "absolute-gap",
+      "mean": 3.1967179073641794,
+      "lower_95": 2.514917517792423,
+      "upper_95": 3.878518296935936,
+      "process_values": [
+        2.8849159522603145,
+        3.3034882352997954,
+        3.401749534532428
+      ]
+    },
+    {
+      "accepted_step": 1,
+      "label": "+pipeline above 1024 tokens",
+      "attempt": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 2048,
+      "metric": "relative-overhead",
+      "mean": 1.5481251448312399,
+      "lower_95": 1.2152440795835597,
+      "upper_95": 1.88100621007892,
+      "process_values": [
+        1.3958679134177698,
+        1.6003787749629073,
+        1.6481287461130423
+      ]
+    },
+    {
+      "accepted_step": 1,
+      "label": "+pipeline above 1024 tokens",
+      "attempt": "A0001",
+      "mode": "decode",
+      "batch": 8,
+      "length": 2048,
+      "metric": "latency",
+      "mean": 11.01311211888161,
+      "lower_95": 10.985799774262786,
+      "upper_95": 11.040424463500434,
+      "process_values": [
+        11.004542217900356,
+        11.009285288552443,
+        11.02550885019203
+      ]
+    },
+    {
+      "accepted_step": 1,
+      "label": "+pipeline above 1024 tokens",
+      "attempt": "A0001",
+      "mode": "decode",
+      "batch": 8,
+      "length": 2048,
+      "metric": "speedup",
+      "mean": 1.0068160726495912,
+      "lower_95": 0.9951860220341101,
+      "upper_95": 1.0184461232650721,
+      "process_values": [
+        1.0057814052758134,
+        1.0119285831843567,
+        1.0027382294886031
+      ]
+    },
+    {
+      "accepted_step": 1,
+      "label": "+pipeline above 1024 tokens",
+      "attempt": "A0001",
+      "mode": "decode",
+      "batch": 8,
+      "length": 2048,
+      "metric": "absolute-gap",
+      "mean": 0.09122175268000987,
+      "lower_95": 0.05622157733775276,
+      "upper_95": 0.12622192802226698,
+      "process_values": [
+        0.07503046654164791,
+        0.09794089322288713,
+        0.10069389827549458
+      ]
+    },
+    {
+      "accepted_step": 1,
+      "label": "+pipeline above 1024 tokens",
+      "attempt": "A0001",
+      "mode": "decode",
+      "batch": 8,
+      "length": 2048,
+      "metric": "relative-overhead",
+      "mean": 0.8352664050488586,
+      "lower_95": 0.5138129601040113,
+      "upper_95": 1.156719849993706,
+      "process_values": [
+        0.6864942208632652,
+        0.8976061031013671,
+        0.9216988911819435
+      ]
+    },
+    {
+      "accepted_step": 2,
+      "label": "+single-slot automatic pipeline for small prefill only",
+      "attempt": "A0016",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "metric": "latency",
+      "mean": 29.5211812429544,
+      "lower_95": 28.659203575412672,
+      "upper_95": 30.383158910496125,
+      "process_values": [
+        29.28521642461419,
+        29.35872757807374,
+        29.919599726175267
+      ]
+    },
+    {
+      "accepted_step": 2,
+      "label": "+single-slot automatic pipeline for small prefill only",
+      "attempt": "A0016",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "metric": "speedup",
+      "mean": 1.4749576913766593,
+      "lower_95": 1.4622037989851833,
+      "upper_95": 1.4877115837681354,
+      "process_values": [
+        1.4707359424299067,
+        1.480672999835253,
+        1.473464131864818
+      ]
+    },
+    {
+      "accepted_step": 2,
+      "label": "+single-slot automatic pipeline for small prefill only",
+      "attempt": "A0016",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "metric": "absolute-gap",
+      "mean": 0.4632004588428475,
+      "lower_95": -0.4711423659854331,
+      "upper_95": 1.3975432836711281,
+      "process_values": [
+        0.2575628459453583,
+        0.23472808922330657,
+        0.8973104413598776
+      ]
+    },
+    {
+      "accepted_step": 2,
+      "label": "+single-slot automatic pipeline for small prefill only",
+      "attempt": "A0016",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "metric": "relative-overhead",
+      "mean": 1.5950200904946588,
+      "lower_95": -1.6266213608318099,
+      "upper_95": 4.816661541821127,
+      "process_values": [
+        0.88730163892623,
+        0.8059610401832673,
+        3.091797592374479
+      ]
+    },
+    {
+      "accepted_step": 2,
+      "label": "+single-slot automatic pipeline for small prefill only",
+      "attempt": "A0016",
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "metric": "latency",
+      "mean": 5.014327044288318,
+      "lower_95": 4.234064145699565,
+      "upper_95": 5.79458994287707,
+      "process_values": [
+        4.890293410668771,
+        4.781183988476793,
+        5.371503733719389
+      ]
+    },
+    {
+      "accepted_step": 2,
+      "label": "+single-slot automatic pipeline for small prefill only",
+      "attempt": "A0016",
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "metric": "speedup",
+      "mean": 0.9809219914593857,
+      "lower_95": 0.8738248238533084,
+      "upper_95": 1.088019159065463,
+      "process_values": [
+        1.0127660571660506,
+        0.9981382543823906,
+        0.9318616628297159
+      ]
+    },
+    {
+      "accepted_step": 2,
+      "label": "+single-slot automatic pipeline for small prefill only",
+      "attempt": "A0016",
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "metric": "absolute-gap",
+      "mean": 0.3894004194686813,
+      "lower_95": -0.5447956417191592,
+      "upper_95": 1.323596480656522,
+      "process_values": [
+        0.15775994397699833,
+        0.187130194778244,
+        0.8233111196508016
+      ]
+    },
+    {
+      "accepted_step": 2,
+      "label": "+single-slot automatic pipeline for small prefill only",
+      "attempt": "A0016",
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "metric": "relative-overhead",
+      "mean": 8.502924483388895,
+      "lower_95": -12.16812479310806,
+      "upper_95": 29.17397375988585,
+      "process_values": [
+        3.333519880785518,
+        4.073313095177977,
+        18.101940474203193
+      ]
+    },
+    {
+      "accepted_step": 2,
+      "label": "+single-slot automatic pipeline for small prefill only",
+      "attempt": "A0016",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 2048,
+      "metric": "latency",
+      "mean": 210.19054498626954,
+      "lower_95": 209.11429131389008,
+      "upper_95": 211.266798658649,
+      "process_values": [
+        210.35794446555278,
+        209.6985696349293,
+        210.51512085832655
+      ]
+    },
+    {
+      "accepted_step": 2,
+      "label": "+single-slot automatic pipeline for small prefill only",
+      "attempt": "A0016",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 2048,
+      "metric": "speedup",
+      "mean": 0.9999092948808684,
+      "lower_95": 0.9984451518231416,
+      "upper_95": 1.0013734379385952,
+      "process_values": [
+        0.9992562925198726,
+        1.000401867247762,
+        1.0000697248749708
+      ]
+    },
+    {
+      "accepted_step": 2,
+      "label": "+single-slot automatic pipeline for small prefill only",
+      "attempt": "A0016",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 2048,
+      "metric": "absolute-gap",
+      "mean": 3.424745658412585,
+      "lower_95": 1.725745998892291,
+      "upper_95": 5.12374531793288,
+      "process_values": [
+        3.2095510357370074,
+        2.8742840358366664,
+        4.190401903664082
+      ]
+    },
+    {
+      "accepted_step": 2,
+      "label": "+single-slot automatic pipeline for small prefill only",
+      "attempt": "A0016",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 2048,
+      "metric": "relative-overhead",
+      "mean": 1.65669798693715,
+      "lower_95": 0.8274423236063165,
+      "upper_95": 2.4859536502679838,
+      "process_values": [
+        1.549397020462262,
+        1.3897226950456698,
+        2.0309742453035184
+      ]
+    },
+    {
+      "accepted_step": 2,
+      "label": "+single-slot automatic pipeline for small prefill only",
+      "attempt": "A0016",
+      "mode": "decode",
+      "batch": 8,
+      "length": 2048,
+      "metric": "latency",
+      "mean": 11.026391247287393,
+      "lower_95": 10.964051849952728,
+      "upper_95": 11.088730644622057,
+      "process_values": [
+        11.01651427646478,
+        11.054921941831708,
+        11.00773752356569
+      ]
+    },
+    {
+      "accepted_step": 2,
+      "label": "+single-slot automatic pipeline for small prefill only",
+      "attempt": "A0016",
+      "mode": "decode",
+      "batch": 8,
+      "length": 2048,
+      "metric": "speedup",
+      "mean": 0.9986944692390893,
+      "lower_95": 0.9915721040130222,
+      "upper_95": 1.0058168344651566,
+      "process_values": [
+        1.0001957664313696,
+        0.9953884225463748,
+        1.0004992187395234
+      ]
+    },
+    {
+      "accepted_step": 2,
+      "label": "+single-slot automatic pipeline for small prefill only",
+      "attempt": "A0016",
+      "mode": "decode",
+      "batch": 8,
+      "length": 2048,
+      "metric": "absolute-gap",
+      "mean": 0.09968665738900502,
+      "lower_95": 0.03370516211740336,
+      "upper_95": 0.1656681526606067,
+      "process_values": [
+        0.0864078445980958,
+        0.13026866751412491,
+        0.08238346005479436
+      ]
+    },
+    {
+      "accepted_step": 2,
+      "label": "+single-slot automatic pipeline for small prefill only",
+      "attempt": "A0016",
+      "mode": "decode",
+      "batch": 8,
+      "length": 2048,
+      "metric": "relative-overhead",
+      "mean": 0.9123449822574514,
+      "lower_95": 0.3080918572604753,
+      "upper_95": 1.5165981072544277,
+      "process_values": [
+        0.7905489771460328,
+        1.1924283933145041,
+        0.7540575763118174
+      ]
+    }
+  ],
+  "records": [
+    {
+      "campaign_id": "offload-gap-001",
+      "attempt_id": "A0000",
+      "parent_attempt_id": null,
+      "accepted_step": 0,
+      "label": "restored model with verified measurement harness",
+      "parent_sha": "81684d34e44db04a0511698081cab336abf4a60d",
+      "original_protocol_version": "fixed_context_v2_rollback_excluded; legacy full logits prefill",
+      "protocol_version": "offload_gap_v1",
+      "workflow_stage": "baseline_screen_complete",
+      "performance": "R01-summary.json",
+      "not_run": {
+        "confirmation": "baseline screening first",
+        "full_validation": "only for retention nomination",
+        "generation_validation": "only for retention nomination"
+      },
+      "correctness": {
+        "pytest": "42 passed",
+        "standalone": "PASS; max difference 0"
+      },
+      "source_note": "Exact frozen source commit and checkout recorded in campaign manifest after commit.",
+      "candidate_sha": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
+      "status": "accepted",
+      "status_scope": "frozen baseline only, accepted_step=0; no optimization gain",
+      "source_audit": "All 16 jobs have identical prepared source SHA256 and required 2,836,499,968 parameters. Differing Git HEADs are result-only commits; fla/ remains at restored implementation."
+    },
+    {
+      "campaign_id": "offload-gap-001",
+      "attempt_id": "A0001",
+      "parent_attempt_id": "A0000",
+      "parent_sha": "7e2990ef8ec14b9320dc752629a329d2ffff0552",
+      "accepted_step": 1,
+      "label": "pipeline above 1024 tokens",
+      "workflow_stage": "final_verdict",
+      "hypothesis": "The batch-1 prefill bulk path serializes ~11.17 ms CPU gather and ~3.50 ms H2D before layers. Route medium prefill to existing bounded pipeline to overlap this work; preserve bulk for decode.",
+      "expected_bottleneck": "unoverlapped CPU gather and H2D at batch1 length2048",
+      "change": "Lower default auto-policy bulk cutoff from 4096 to 1024 tokens; no arithmetic/table/precision changes.",
+      "profile_evidence": "../A0000/diagnostics-summary.json",
+      "original_protocol_version": "offload_gap_v1",
+      "protocol_version": "offload_gap_v1",
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "screen": {
+        "batches": [
+          1,
+          8,
+          16
+        ],
+        "length": 2048,
+        "modes": [
+          "prefill",
+          "decode"
+        ],
+        "variants": [
+          "ma_offload",
+          "ma_gpu"
+        ],
+        "jobs": 12,
+        "reason_batch16": "Pipeline scheduling change"
+      },
+      "not_run": {},
+      "performance": "screen-comparison.json",
+      "candidate_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
+      "correctness": {
+        "pytest": "43 passed",
+        "standalone": "PASS; max difference 0"
+      },
+      "decision": "Accepted: primary b1 prefill offload latency and absolute gap repeatably reduced; exactness, full matrix, generation and memory gates passed under predeclared uncertainty criteria.",
+      "commands": {
+        "pytest": "/home/molly/miniconda3/envs/fla-bench/bin/python -m pytest -q tests/test_memory_offload_regressions.py tests/test_decode_benchmark.py tests/test_sampling_plans.py",
+        "standalone": "/home/molly/miniconda3/envs/fla-bench/bin/python profile/test_memory_offload.py",
+        "screen": "see R01/manifest.json for exact commands",
+        "diagnostic": "/home/molly/miniconda3/envs/fla-bench/bin/python profile/profile_paper.py --batch-size 1 --mode prefill --variant ma_offload --backend offload --matrix profile/results/optimization/offload-gap-001/A0001/R01/manifest.json --output profile/results/optimization/offload-gap-001/A0001/diagnostic-b1-prefill"
+      },
+      "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0001",
+      "confirmation_run_outcome": "R02 benchmark_failed: nonalternating paired design; preserved",
+      "confirmation_plan_id": "formal_v1_w10_n10_r3__balanced_order_v2",
+      "confirmation_manifest": "R03-confirmation-v2/manifest.json",
+      "confirmation_analysis": "validation-v2-confirmation-analysis.json",
+      "screen_manifest": "R01/manifest.json",
+      "screen_summary": "R01-summary.json",
+      "validation_matrix_manifest": "full-evidence-manifest.json",
+      "generation_manifest": "generation-evidence-manifest.json",
+      "correctness_directory": "R06-full-correctness",
+      "status": "accepted",
+      "regression_analyses": [
+        "R07-analysis.json",
+        "R08-analysis.json"
+      ],
+      "full_summary": "full-audited-summary.json",
+      "generation_summary": "generation-audited-summary.json",
+      "source_audit": "source-correctness-audit.json",
+      "limitations": [
+        "Three independent blocks give wide intervals for small effects. No decode, b8 prefill or generation gain claim.",
+        "b16 prefill offload is slower in all three audit pairs (mean 3.393 ms, reduction CI [-9.406,2.619]); unresolved under the declared criterion, preserved as a limitation.",
+        "GPU operator profiler unavailable; separate CUDA events cover transfers, CPU traces cover gather and coordination.",
+        "Seeded random weights establish equivalence/performance, not language quality."
+      ]
+    },
+    {
+      "campaign_id": "offload-gap-001",
+      "attempt_id": "A0002",
+      "parent_attempt_id": "A0001",
+      "parent_source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
+      "parent_sha": "0936d6de82ba57a7c7c8b94a6fcaad9747cc8cf1",
+      "accepted_step": null,
+      "label": "serial byte copies for tiny CPU lookups",
+      "workflow_stage": "final_verdict",
+      "hypothesis": "Avoid torch CPU dispatch/thread-pool overhead for bulk gathers of <=8 tokens using serial byte copies into the existing pinned buffer. Baseline model profiles show 24/44 us CPU gather at b1/b8 decode; CPU microdiagnostic shows 4.68->2.70 us and 24.56->17.21 us for hot lookups. Confirm end-to-end effects independently.",
+      "expected_bottleneck": "tiny bulk CPU table gather and associated CPU scheduling overhead",
+      "change": "Precreate zero-copy uint8 NumPy views; copy each requested row for <=8 tokens when CPU table is contiguous. Fall back to torch index_select for other inputs. No value/lookup caching, dtype conversion, global thread changes or extra table storage.",
+      "profile_evidence": [
+        "../A0000/diagnostics-summary.json",
+        "../A0001/small-lookup-diagnostic.json",
+        "../A0001/generation-diagnostic-baseline.json"
+      ],
+      "protocol_version": "offload_gap_v1",
+      "original_protocol_version": "offload_gap_v1",
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "screen": {
+        "batches": [
+          1,
+          8
+        ],
+        "length": 2048,
+        "modes": [
+          "prefill",
+          "decode"
+        ],
+        "variants": [
+          "ma_offload",
+          "ma_gpu"
+        ],
+        "jobs": 8,
+        "reason_no_batch16": "Only CPU lookup implementation for <=8 tokens changes; transfer volume and pipeline scheduling remain fixed."
+      },
+      "not_run": {
+        "frozen_baseline_confirmation": "Parent-relative confirmation failed retention criterion; inherited A0001 gain is not an A0002 gain",
+        "full_validation": "Not nominated after parent confirmation",
+        "generation_validation": "Not nominated after parent confirmation",
+        "full_model_correctness": "No retention nomination; small/model correctness gates already passed"
+      },
+      "limitations": [
+        "Microdiagnostic uses hot rows and does not establish model gain; generation CPU scheduling causality remains unproven."
+      ],
+      "candidate_sha": "ac6fbc2cbf534c804bb34227aa3ddee3e08728d9",
+      "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0002",
+      "correctness": {
+        "pytest": "51 passed in 9.62s",
+        "standalone": "PASS; worst max diff 0",
+        "logs": [
+          "correctness-tests.txt",
+          "standalone-correctness.txt"
+        ]
+      },
+      "screen_manifest": "R01/manifest.json",
+      "screen_summary": "R01-summary.json",
+      "performance": "screen-comparison.json",
+      "decision": "Three independent parent-relative pairs did not establish both offload latency and absolute-gap reduction in any primary workload. Preserve modest positive decode estimates without acceptance; no measurement extension.",
+      "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json",
+      "status": "within_noise",
+      "parent_confirmation_analysis": "parent-confirmation-analysis.json"
+    },
+    {
+      "campaign_id": "offload-gap-001",
+      "attempt_id": "A0003",
+      "parent_attempt_id": "A0001",
+      "parent_source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
+      "parent_sha": "f30a155a2a649a9a9f0056ab8491bc32ba65541d",
+      "accepted_step": null,
+      "label": "two-layer groups in automatic pipeline",
+      "workflow_stage": "final_verdict",
+      "hypothesis": "Amortize pipeline producer/event/copy coordination across two adjacent layers. A0001 b1 prefill uses 24 group submissions; baseline b8 profile records 24 acquisitions with 92.8 ms summed CPU wait and 24 copy submissions. Halving group count may reduce scheduling overhead, at the cost of larger first transfer and doubled slot capacity.",
+      "expected_bottleneck": "per-group CPU producer and H2D coordination",
+      "change": "Automatic pipeline uses minimum group size 2; explicit pipeline policy preserves requested group size. Bulk decode unchanged. Add configurable automatic minimum, default 2. No arithmetic change.",
+      "profile_evidence": [
+        "../A0001/diagnostic-b1-prefill/offload.json",
+        "../A0000/diagnostics-summary.json",
+        "../A0000/lookup-layout-diagnostic.json"
+      ],
+      "protocol_version": "offload_gap_v1",
+      "original_protocol_version": "offload_gap_v1",
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "screen": {
+        "batches": [
+          1,
+          8,
+          16
+        ],
+        "length": 2048,
+        "modes": [
+          "prefill",
+          "decode"
+        ],
+        "variants": [
+          "ma_offload",
+          "ma_gpu"
+        ],
+        "jobs": 12,
+        "reason_batch16": "Pipeline grouping/scheduling and cached buffer capacity change"
+      },
+      "not_run": {
+        "confirmation": "Rejected screen: prefill +2.465/+4.057/+9.968 ms at b1/b8/b16",
+        "full_validation": "Rejected screen",
+        "generation_validation": "Rejected screen",
+        "full_model_correctness": "Not nominated; existing correctness tests exact"
+      },
+      "tradeoffs": [
+        "Doubles per-slot host/GPU capacity with default prefetch depth, reduces memory saving while preserving offload placement.",
+        "CPU layout diagnostic suggests two-layer gather can cost more than two one-layer gathers; larger initial transfer may outweigh coordination savings. Test actual model rather than infer sums of overlapping spans."
+      ],
+      "candidate_sha": "986e000b1d973a2a76155ff932aba2d367d03dc0",
+      "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0003",
+      "correctness": {
+        "pytest": "45 passed in 9.54s",
+        "standalone": "PASS; worst max diff 0",
+        "logs": [
+          "correctness-tests.txt",
+          "standalone-correctness.txt"
+        ]
+      },
+      "screen_manifest": "R01/manifest.json",
+      "screen_summary": "R01-summary.json",
+      "effective_group_settings": {
+        "requested_group_size": 1,
+        "automatic_pipeline_group_size": 2,
+        "bulk_group_size": 24,
+        "note": "Raw benchmark group_size is the requested setting; model_config records new automatic minimum and actual policy determines effective group count."
+      },
+      "status": "rejected",
+      "decision": "Clear prefill screen regressions against accepted A0001 at all three batches, larger cached buffers, and no compensating supported offload gain. Do not escalate.",
+      "performance": "screen-comparison.json",
+      "diagnostic": "diagnostic-comparison.json"
+    },
+    {
+      "campaign_id": "offload-gap-001",
+      "attempt_id": "A0004",
+      "parent_attempt_id": "A0001",
+      "parent_source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
+      "parent_sha": "a6da6e541fb4fb3f53191c63f745b9be9ed9c6b2",
+      "accepted_step": null,
+      "label": "caller-thread pipeline producer",
+      "workflow_stage": "final_verdict",
+      "hypothesis": "Prepare each one-layer group on the calling CPU thread before its consumer, retaining copy-stream overlap with previously queued GPU work. Avoid worker dispatch, separate thread CUDA context and main/producer handshakes. A0001 b1 profile spends 10.55 ms summed CPU ticket acquisition; b8 baseline 92.8 ms. These overlaps are not additive, so measure end-to-end.",
+      "expected_bottleneck": "producer/main-thread coordination and CPU scheduling",
+      "change": "Replace background producer submission with per-group inline production, keeping identical gather, copy stream, buffer slots, events, group size and arithmetic. No A0002 byte-copy or A0003 grouping changes.",
+      "profile_evidence": [
+        "../A0001/diagnostic-b1-prefill/offload.json",
+        "../A0000/diagnostics-summary.json",
+        "../A0003/diagnostic-comparison.json"
+      ],
+      "protocol_version": "offload_gap_v1",
+      "original_protocol_version": "offload_gap_v1",
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "screen": {
+        "batches": [
+          1,
+          8,
+          16
+        ],
+        "length": 2048,
+        "modes": [
+          "prefill",
+          "decode"
+        ],
+        "variants": [
+          "ma_offload",
+          "ma_gpu"
+        ],
+        "jobs": 12,
+        "reason_batch16": "Pipeline scheduling change"
+      },
+      "not_run": {
+        "frozen_baseline_confirmation": "Parent-relative absolute-gap criterion failed",
+        "full_validation": "Not nominated after parent confirmation",
+        "generation_validation": "Not nominated after parent confirmation",
+        "full_model_correctness": "No retention nomination; small-model/stream/exception correctness gates passed"
+      },
+      "tradeoffs": [
+        "CPU gather can now delay compute submission; per-group stream context switching may cost more than worker coordination.",
+        "Host/GPU slot capacities and all lookup/transfer bytes remain unchanged."
+      ],
+      "candidate_sha": "29a0d4ff761e862423e5cd22a8d2a475d9a99a78",
+      "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0004",
+      "correctness": {
+        "pytest": "45 passed in 9.54s",
+        "standalone": "PASS; worst max diff 0",
+        "logs": [
+          "correctness-tests.txt",
+          "standalone-correctness.txt"
+        ]
+      },
+      "screen_manifest": "R01/manifest.json",
+      "screen_summary": "R01-summary.json",
+      "performance": "screen-comparison.json",
+      "diagnostic": "diagnostic-comparison.json",
+      "decision": "b1 prefill latency reduction is repeatable, but paired absolute-gap reduction remains unresolved. No primary meets both required confidence bounds; do not retain or extend the declared three-block plan.",
+      "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json",
+      "parent_confirmation_analysis": "parent-confirmation-analysis.json",
+      "status": "within_noise"
+    },
+    {
+      "campaign_id": "offload-gap-001",
+      "attempt_id": "A0005",
+      "parent_attempt_id": "A0001",
+      "parent_source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
+      "parent_sha": "5c73b2851c575ebacbf8d9f64e9f777e59b89bfc",
+      "accepted_step": null,
+      "label": "compute-stream copies for tiny bulk transfers",
+      "workflow_stage": "final_verdict",
+      "hypothesis": "For <=8 tokens, place the tiny H2D directly on the consuming compute stream and skip the redundant first-layer cross-stream wait. Baseline decode profiles show ~5.5/5.8 us CPU H2D submission and ~11/22 us transfer spans at b1/b8. Reduced stream coordination may exceed the lost Q/K overlap for such small transfers.",
+      "expected_bottleneck": "tiny bulk H2D stream switching and dependency coordination",
+      "change": "Use compute-stream H2D only for <=8 token bulk calls, preserving copied/consumed events for pinned-host and cross-call buffer safety. Keep separate-copy-stream path for larger bulk calls and pipeline unchanged. Fresh torch gather every call; no A0002/A0003/A0004 changes.",
+      "profile_evidence": [
+        "../A0000/diagnostics-summary.json",
+        "../A0002/parent-confirmation-analysis.json"
+      ],
+      "protocol_version": "offload_gap_v1",
+      "original_protocol_version": "offload_gap_v1",
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "screen": {
+        "batches": [
+          1,
+          8,
+          16
+        ],
+        "length": 2048,
+        "modes": [
+          "prefill",
+          "decode"
+        ],
+        "variants": [
+          "ma_offload",
+          "ma_gpu"
+        ],
+        "jobs": 12,
+        "reason_batch16": "H2D scheduling change, including unchanged larger-batch control"
+      },
+      "not_run": {
+        "frozen_baseline_confirmation": "Not nominated: parent-relative latency and gap criterion unresolved; intentionally not run.",
+        "full_validation": "Not nominated: parent-relative latency and gap criterion unresolved; intentionally not run.",
+        "generation_validation": "Not nominated: parent-relative latency and gap criterion unresolved; intentionally not run."
+      },
+      "tradeoffs": [
+        "Serializes tiny transfer before Q/K kernels, potentially losing more overlap than saved CPU submission time.",
+        "Transfer byte count, table precision and buffer capacities unchanged."
+      ],
+      "candidate_sha": "f33b0e383f2b3d9d7121ea3b92d1e45157aad1de",
+      "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0005",
+      "correctness": {
+        "pytest": "46 passed in 9.58s",
+        "standalone": "PASS; worst max diff 0",
+        "logs": [
+          "correctness-tests.txt",
+          "standalone-correctness.txt"
+        ]
+      },
+      "screen_manifest": "R01/manifest.json",
+      "screen_summary": "R01-summary.json",
+      "implementation_revisions": [
+        {
+          "sha": "1f614dbbab4903d395dc7a284baf665f2cb502f1",
+          "phase": "implementation before timing freeze",
+          "correctness_log": "correctness-tests-before-allocation-order.txt",
+          "performance": null
+        },
+        {
+          "sha": "f33b0e383f2b3d9d7121ea3b92d1e45157aad1de",
+          "phase": "final candidate freeze before all performance measurement",
+          "change": "Preserve first-call allocation-stream dependency for cross-stream callers; same scheduling hypothesis."
+        }
+      ],
+      "performance": "screen-comparison.json",
+      "diagnostic": "diagnostic-b1-decode/offload.json",
+      "decision": "No target decode workload passes both paired latency and absolute-gap reduction. b1 decode reduction 0.372980 ms CI [-0.275798,1.021758], gap 0.436864 [-0.218786,1.092514]; b8 decode reduction 0.021608 [-0.168654,0.211869], gap 0.003542 [-0.183501,0.190584]. Preserve all 48 processes; no extension. Restore A0001 after committing evidence.",
+      "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json",
+      "parent_confirmation_analysis": "parent-confirmation-analysis.json",
+      "status": "within_noise",
+      "next_insight": "Tiny-copy coordination savings remain unresolved at model scale; b1 process variability dominates. No additional step retained."
+    },
+    {
+      "campaign_id": "offload-gap-001",
+      "attempt_id": "A0006",
+      "continuation_id": "continuation-01",
+      "parent_attempt_id": "A0001",
+      "parent_source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
+      "parent_sha": "0cc9066fc7fefb3d5f5a728de2474d2896d0a043",
+      "accepted_step": null,
+      "label": "refill host slot before consumer release",
+      "workflow_stage": "final_verdict",
+      "hypothesis": "Producer waits for previous GPU consumer release before refilling host storage, although host storage is safe as soon as previous DMA completes. Move release wait after fresh CPU gather to overlap it with ongoing consumption.",
+      "expected_bottleneck": "CPU producer release waits serialize next gather unnecessarily",
+      "profile_evidence": [
+        "../continuation-01/coordination-b1.json",
+        "../A0000/diagnostics-summary.json",
+        "../continuation-01/coordination-b8.json"
+      ],
+      "change": "Reorder only pipeline pinned-host refill and consumer-release wait. Preserve copied.synchronize before host overwrite and consumed-event wait before device overwrite; no added buffers, table layout change or lookup cache.",
+      "protocol_version": "offload_gap_v1",
+      "original_protocol_version": "offload_gap_v1",
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "screen": {
+        "batches": [
+          1,
+          8,
+          16
+        ],
+        "length": 2048,
+        "modes": [
+          "prefill",
+          "decode"
+        ],
+        "variants": [
+          "ma_offload",
+          "ma_gpu"
+        ],
+        "jobs": 12,
+        "reason_batch16": "Pipeline scheduling change"
+      },
+      "tradeoffs": [
+        "More CPU work may occur before cancellation is observed; retain cancellation checks and exact exception cleanup.",
+        "Overlap opportunity may be hidden by DMA/compute; require paired wall-time and gap confirmation."
+      ],
+      "not_run": {
+        "frozen_baseline_confirmation": "Not nominated: parent-relative latency/gap gain unresolved; intentionally not run.",
+        "full_validation": "Not nominated: parent-relative latency/gap gain unresolved; intentionally not run.",
+        "generation_validation": "Not nominated: parent-relative latency/gap gain unresolved; intentionally not run."
+      },
+      "candidate_sha": "b58cdb8640fb2d6a57631e0c26fc6f9a72761f74",
+      "decision": "All48 parent-confirmation jobs complete. b1 prefill latency reduction0.148526ms CI[-0.160371,0.457424], gap reduction0.159473 CI[-0.193442,0.512389]. Neither lower bound is positive. No other primary meets both criteria; no resolved regression or memory loss. Close fixed plan without extension and restore A0001 after evidence commit.",
+      "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0006",
+      "correctness": {
+        "pytest": "46 passed in9.49s",
+        "standalone": "PASS; worst max error0",
+        "logs": [
+          "correctness-tests.txt",
+          "standalone-correctness.txt"
+        ]
+      },
+      "screen_manifest": "R01/manifest.json",
+      "screen_summary": "R01-summary.json",
+      "performance": "screen-comparison.json",
+      "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json",
+      "parent_confirmation_analysis": "parent-confirmation-analysis.json",
+      "status": "within_noise",
+      "next_insight": "Earlier host refill has at most a small unresolved model-level effect; buffer metadata and distinct transfer mechanisms remain worth investigating."
+    },
+    {
+      "campaign_id": "offload-gap-001",
+      "continuation_id": "continuation-01",
+      "attempt_id": "A0007",
+      "parent_attempt_id": "A0001",
+      "parent_source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
+      "parent_sha": "44ea50bc6ca484379b37db22961682b2cb1baf36",
+      "accepted_step": null,
+      "label": "precompute immutable pipeline tensor views",
+      "workflow_stage": "final_verdict",
+      "hypothesis": "Repeated slicing/view creation on producer and consumer threads adds Python/ATen overhead. Precompute zero-copy source, host and GPU views during offloader construction, while performing fresh gathers every call.",
+      "expected_bottleneck": "96 instrumented buffer-view operations perprefill total0.316ms atb1 and1.089ms atb8, plus uninstrumented source/layer slices.",
+      "profile_evidence": [
+        "../continuation-01/coordination-b1.json",
+        "../continuation-01/coordination-b8.json"
+      ],
+      "change": "Cache tensor metadata aliases for fixed-capacity buffers/source groups; keep A0001 producer, DMA/release order, slot count and arithmetic unchanged.",
+      "tradeoffs": [
+        "Extra small Python/view metadata persists for cached offloaders; backing storage unchanged.",
+        "Measured view spans include instrumentation/GIL interactions and overlap compute; model-level gain may remain unresolved."
+      ],
+      "protocol_version": "offload_gap_v1",
+      "original_protocol_version": "offload_gap_v1",
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "screen": {
+        "batches": [
+          1,
+          8,
+          16
+        ],
+        "length": 2048,
+        "modes": [
+          "prefill",
+          "decode"
+        ],
+        "variants": [
+          "ma_offload",
+          "ma_gpu"
+        ],
+        "jobs": 12,
+        "reason_batch16": "Pipeline execution integration; retain batch16 scheduling control"
+      },
+      "not_run": {
+        "confirmation": "Not nominated: no target prefill offload speedup at screen; intentionally notrun.",
+        "full_validation": "Not nominated: no target prefill offload speedup at screen; intentionally notrun.",
+        "generation_validation": "Not nominated: no target prefill offload speedup at screen; intentionally notrun."
+      },
+      "candidate_sha": "2bcbe8d197ef3244af1f51beb1214e4f3ecf6ffc",
+      "decision": "Twelve-job screen unpromising: b1/b8 prefill offload slower0.0331/0.5340ms versusA0001. b1 gap worsens0.0336ms; b8 gap improves0.1394 only with slower offload, failing objective. b16 slower1.3155ms. Stop atscreen; no confirmation/full/generation. b1 decode mean5.536ms fluctuates despite unchanged bulkpath and is not attributed causally to thischange.",
+      "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0007",
+      "correctness": {
+        "pytest": "47 passed in9.55s",
+        "standalone": "PASS; worst max error0",
+        "logs": [
+          "correctness-tests.txt",
+          "standalone-correctness.txt"
+        ]
+      },
+      "screen_manifest": "R01/manifest.json",
+      "screen_summary": "R01-summary.json",
+      "status": "rejected",
+      "performance": "screen-comparison.json",
+      "next_insight": "Reducing tensor metadata alone does not show model-level benefit; focus on CPU gather/transfer execution alternatives."
+    },
+    {
+      "campaign_id": "offload-gap-001",
+      "continuation_id": "continuation-01",
+      "attempt_id": "A0008",
+      "parent_attempt_id": "A0001",
+      "parent_source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
+      "parent_sha": "853a10499662e673052f800f3bbe25f2b2bdb638",
+      "accepted_step": null,
+      "label": "mapped-host GPU gather for pipeline",
+      "workflow_stage": "final_verdict",
+      "hypothesis": "GPU gathers directly from mapped pinned CPU table into bounded device slots, avoiding CPU gather/intermediate H2D and GPU-ID D2H. A bounded64-CTA kernel should leave resources for concurrent model computation.",
+      "expected_bottleneck": "CPU gather and explicit H2D in prefill pipeline; b8 diagnostic75ms CPUgather and42ms transfer spans overlap compute but leave residualcriticalpath.",
+      "profile_evidence": [
+        "../continuation-01/transfer-alternatives.json",
+        "../continuation-01/transfer-alternatives-bounded.json",
+        "../A0000/diagnostics-summary.json"
+      ],
+      "change": "Replace pipeline backend with direct mapped-host gather on separate CUDAstream,64persistentCTAs, existinggroup/depth/capacity. Keep tinybulk algorithm and resident paths. Pin foldedCPUtable once; no GPUtablecache or approximate arithmetic.",
+      "tradeoffs": [
+        "Entire3000MiB table page-locked, replacing smallstagingpinning; account totalpinnedtable andallCPUcopies.",
+        "Mapped kernels consumeSMresources and may contendwithmodelcompute; microbenchbenefit notsufficient.",
+        "Synchronize finaltable-read stream beforeforwardreturns to preserve subsequentCPUtablemutation/lifetime safety."
+      ],
+      "protocol_version": "offload_gap_v1",
+      "original_protocol_version": "offload_gap_v1",
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "screen": {
+        "batches": [
+          1,
+          8,
+          16
+        ],
+        "length": 2048,
+        "modes": [
+          "prefill",
+          "decode"
+        ],
+        "variants": [
+          "ma_offload",
+          "ma_gpu"
+        ],
+        "jobs": 12,
+        "reason_batch16": "Transfermechanism andpipeline scheduling change"
+      },
+      "not_run": {
+        "confirmation": "Notnominated: no targetprefill speedup andlarger-batch screenregression; intentionallynotrun.",
+        "full_validation": "Notnominated: no targetprefill speedup andlarger-batch screenregression; intentionallynotrun.",
+        "generation_validation": "Notnominated: no targetprefill speedup andlarger-batch screenregression; intentionallynotrun."
+      },
+      "candidate_sha": "fb17afb2a97b68ec61ef517622707f68ce33e051",
+      "decision": "All12screen jobs complete. RelativeA0001 prefill offload reductions b1 -0.04468ms,b8 -3.63808,b16 -11.16123; b8/b16 gaps worsen2.86459/11.01584ms. No targetedprefill latencygain. Reject atscreen, preserve50-test exactness andmicrodiagnostics, noformal/full/generation escalation.",
+      "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0008",
+      "correctness": {
+        "pytest": "50 passed in9.80s",
+        "standalone": "PASS; worst max error0",
+        "logs": [
+          "correctness-tests.txt",
+          "standalone-correctness.txt"
+        ],
+        "note": "Correctness model source unchanged by final print-only correction; initialstandalonelog preserved separately."
+      },
+      "implementation_revisions": [
+        {
+          "sha": "67395ae97b2601f52a2a0806d863643d1278e59d",
+          "phase": "implementation before performance",
+          "change": "Mapped pipeline, model integration, memory telemetry and tests",
+          "performance": null
+        },
+        {
+          "sha": "fb17afb2a97b68ec61ef517622707f68ce33e051",
+          "phase": "final source freeze before allmodeltiming",
+          "change": "Correct standalone printer to distinguish pinned vs ordinary CPU table; no execution change."
+        }
+      ],
+      "screen_manifest": "R01/manifest.json",
+      "screen_summary": "R01-summary.json",
+      "status": "rejected",
+      "performance": "screen-comparison.json",
+      "next_insight": "Faster isolated mappedreads do not improve overlappedmodelpipeline. GPUresource/stream interaction andfinalhost-read safety synchronization may offset CPUgather removal; causalbreakdown notmeasured. Keep page-locking cost explicit.",
+      "memory_observation": "Rawoffload_pinned_bytes includes3000MiBtable plusbulkdecode buffers:3000.09375MiB atb1,3000.75MiB atb8. Table remainsCPUresident; source/arithmeticbitexact but performancegatefails."
+    },
+    {
+      "campaign_id": "offload-gap-001",
+      "continuation_id": "continuation-01",
+      "attempt_id": "A0009",
+      "parent_attempt_id": "A0001",
+      "parent_source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
+      "parent_sha": "550aa0e8b9e8de0463e74153a7a03bbeec4337f5",
+      "accepted_step": null,
+      "label": "within-call token dedup for large pipeline inputs",
+      "workflow_stage": "final_verdict",
+      "hypothesis": "Sort/deduplicate CPU tokenIDs onceperforward, gather/transfer unique rows perlayergroup, expand originaltokenorder onGPU. Reduce b8/b16 transfer/gather work without caching values acrosscalls.",
+      "expected_bottleneck": "b8 CPUgather75ms andH2D41.8ms instrumentedspans; uniform-ID expected duplicates21.7% atb8 and37.4% atb16. Actualsinglelayerdedup diagnostic improvesb16, nearlyneutralb8, regressesb1.",
+      "profile_evidence": [
+        "../continuation-01/transfer-alternatives.json",
+        "../continuation-01/transfer-alternatives-bounded.json",
+        "../continuation-01/within-call-dedup-feasibility.json",
+        "../A0000/diagnostics-summary.json"
+      ],
+      "change": "Enable percalldedup for pipeline inputs>=8192tokens;thresholddeclaredbeforeimplementation frommicrodiagnostic. Keepb1pipeline/tinybulk/resident algorithms. Account inverseGPUindexbuffer andexpanded-row temporarymemory.",
+      "target_workloads": [
+        {
+          "mode": "prefill",
+          "batch": 8,
+          "length": 2048
+        }
+      ],
+      "tradeoffs": [
+        "CPUunique/inverse andGPUexpansion addcriticalpath latency; sortingcost amortized across24layers.",
+        "ExpandedM temporary andretainedinverseindexbuffer increaseGPUmemory; peaks/capacities must include them.",
+        "Do notattribute unchangedb1prefill ordecode fluctuations to thisoptimization."
+      ],
+      "protocol_version": "offload_gap_v1",
+      "original_protocol_version": "offload_gap_v1",
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "screen": {
+        "batches": [
+          1,
+          8,
+          16
+        ],
+        "length": 2048,
+        "modes": [
+          "prefill",
+          "decode"
+        ],
+        "variants": [
+          "ma_offload",
+          "ma_gpu"
+        ],
+        "jobs": 12,
+        "reason_batch16": "Transfer volume changes"
+      },
+      "not_run": {
+        "confirmation": "Notnominated: targetb8prefill screenregression; intentionallynotrun.",
+        "full_validation": "Notnominated: targetb8prefill screenregression; intentionallynotrun.",
+        "generation_validation": "Notnominated: targetb8prefill screenregression; intentionallynotrun."
+      },
+      "candidate_sha": "0ac06a0f7ce6c3ce77fd5a878c4a34c991527ec2",
+      "decision": "Targetb8prefill screen offload211.480ms vsA0001 209.463, slower2.01742ms; gap4.829ms worsens1.17298. b16slower2.02706ms/gapworse1.72058. No targetbenefit; rejectwithoutconfirmation/full/generation. Unchangedb1/decode fluctuations notincrementalgains.",
+      "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0009",
+      "correctness": {
+        "pytest": "47 passed in9.57s",
+        "standalone": "PASS; worst maxerror0",
+        "logs": [
+          "correctness-tests.txt",
+          "standalone-correctness.txt"
+        ],
+        "scope": "128-step gated/QKnormalized/GQA/padded tests force dedup_min_tokens1 onsmallmodel. Additionalchangingunique-count andcrossstreamtests pass."
+      },
+      "screen_manifest": "R01/manifest.json",
+      "screen_summary": "R01-summary.json",
+      "status": "rejected",
+      "performance": "screen-comparison.json",
+      "next_insight": "Transfer reduction alone does not improve thisalreadyoverlappedpipeline; CPUunique/GPUexpansion addwork. Componentb16gain didnottranslate towholemodel. Preserveactualmemorydata andallpoints."
+    },
+    {
+      "campaign_id": "offload-gap-001",
+      "continuation_id": "continuation-01",
+      "attempt_id": "A0010",
+      "parent_attempt_id": "A0001",
+      "parent_source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
+      "parent_sha": "1835ebe802504955a6146141a1aa7ebe5f3fcc16",
+      "accepted_step": null,
+      "label": "alternate pinned host buffers per GPU slot",
+      "workflow_stage": "final_verdict",
+      "hypothesis": "Decouple pinnedhost reuse fromGPUslot reuse by retainingtwohostbuffers perGPUslot. CPUgather canusealternatehoststorage withoutwaiting forimmediatelyprecedingH2D.",
+      "expected_bottleneck": "Instrumentedproducer DMAwait12.763ms atb1 and60.918ms atb8; spans overlapGPUcompute andcannotbeassumedremovablewalltime.",
+      "profile_evidence": [
+        "../continuation-01/coordination-b1.json",
+        "../continuation-01/coordination-b8.json",
+        "../continuation-01/independent-host-ring-design.json"
+      ],
+      "change": "Doublepipelinehostbuffers only; retainGPUslotcount/group/bytes andA0001 release-before-gather order. Eachhostbuffer hasitsownH2Dcompletionevent; consumerwaitsselectedevent. NoA0006early-refill,A0007viewcache,A0008mappedreads orA0009dedup.",
+      "tradeoffs": [
+        "Pinnedhostcapacitydoubles; GPUbuffercapacityunchanged. Includeallalternatehosts inmeasuredpinnedcapacity andRSS.",
+        "ExtraCPUlookahead maynotimprovealreadyoverlappedmodel; requirebothlatency/gap confirmation."
+      ],
+      "protocol_version": "offload_gap_v1",
+      "original_protocol_version": "offload_gap_v1",
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "screen": {
+        "batches": [
+          1,
+          8,
+          16
+        ],
+        "length": 2048,
+        "modes": [
+          "prefill",
+          "decode"
+        ],
+        "variants": [
+          "ma_offload",
+          "ma_gpu"
+        ],
+        "jobs": 12,
+        "reason_batch16": "Pipelinebuffering/scheduling change"
+      },
+      "not_run": {
+        "confirmation": "Notnominated: targetprefill screenunpromising withhigherhostmemory; intentionallynotrun.",
+        "full_validation": "Notnominated: targetprefill screenunpromising withhigherhostmemory; intentionallynotrun.",
+        "generation_validation": "Notnominated: targetprefill screenunpromising withhigherhostmemory; intentionallynotrun."
+      },
+      "candidate_sha": "b22f8f616ee933ddc4ad2dd09c3eb91e60ef477b",
+      "decision": "All12screen jobs complete. Prefill offload slower1.73113/0.75697/1.30852ms atb1/b8/b16 vsA0001; gaps worsen1.68401/0.07212/1.00406ms. No targetprefill gain. Rejectatfixedscreen; noformal/full/generation. Extra pinnedhostmemory doesnotbuy amodel-level improvement.",
+      "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0010",
+      "correctness": {
+        "pytest": "47 passed in9.62s",
+        "standalone": "PASS; worst maxerror0",
+        "logs": [
+          "correctness-tests.txt",
+          "standalone-correctness.txt"
+        ]
+      },
+      "screen_manifest": "R01/manifest.json",
+      "screen_summary": "R01-summary.json",
+      "status": "rejected",
+      "performance": "screen-comparison.json",
+      "next_insight": "Largerhostlookahead is notbeneficial inthismeasuredpipeline. Preserveoriginalhost/GPUbufferpairing inA0001; noacceptednewstep.",
+      "memory_observation": "Pipelinepinnedcapacity doubles whileGPUcapacityunchanged. TotalcachedoffloaderpinnedMiB b1 64.09375,b8 512.75,b16 1025.5 includingunchangedbulkdecode buffers."
+    },
+    {
+      "campaign_id": "offload-gap-001",
+      "continuation_id": "continuation-02",
+      "attempt_id": "A0011",
+      "parent_attempt_id": "A0001",
+      "parent_source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
+      "parent_sha": "c678ecffc56d3a80da8b8506241e0d58f7059ea0",
+      "accepted_step": null,
+      "label": "reuse pinned input-ID staging buffers",
+      "workflow_stage": "final_verdict",
+      "hypothesis": "Replace a fresh pageable CPU ID tensor on every GPU-input call with a preallocated pinned int64 staging buffer per cached offloader, preserving synchronous readiness before embedding and CPU gather.",
+      "expected_bottleneck": "Fresh GPU-to-CPU ID staging allocation and pageable transfer overhead; isolated b8 prefill staging 0.0134 ms versus 0.0069 ms with reusable pinned storage.",
+      "profile_evidence": [
+        "../continuation-02/id-staging.json"
+      ],
+      "change": "One bounded pinned ID tensor per cached shape; blocking copy before embedding; input-stage/model-call lock prevents concurrent reuse. No lookup/output caching, no embedding reorder or new transfer stream.",
+      "tradeoffs": [
+        "Pinned IDs add batch*length*8 bytes per cached offloader; include in host capacity counters.",
+        "Small staging gain can disappear into model variability or locking overhead."
+      ],
+      "protocol_version": "offload_gap_v1",
+      "original_protocol_version": "offload_gap_v1",
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "screen": {
+        "batches": [
+          1,
+          8,
+          16
+        ],
+        "length": 2048,
+        "modes": [
+          "prefill",
+          "decode"
+        ],
+        "variants": [
+          "ma_offload",
+          "ma_gpu"
+        ],
+        "jobs": 12,
+        "reason_batch16": "ID transfer/staging change"
+      },
+      "not_run": {
+        "frozen_baseline_confirmation": "Parent confirmation inconclusive; no nominated candidate, intentionally not run.",
+        "full_validation": "Parent confirmation inconclusive; no nominated candidate, intentionally not run.",
+        "generation_validation": "Parent confirmation inconclusive; no nominated candidate, intentionally not run."
+      },
+      "candidate_sha": "812ac2decafaf2d9919028a7bbd0c740db07ba1a",
+      "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0011",
+      "correctness": {
+        "pytest": "45 passed in 9.95s",
+        "standalone": "PASS; worst max error 0",
+        "logs": [
+          "correctness-tests.txt",
+          "standalone-correctness.txt"
+        ]
+      },
+      "screen_manifest": "R01/manifest.json",
+      "screen_summary": "R01-summary.json",
+      "performance": "screen-comparison.json",
+      "screen_decision": "Weak positive b8 prefill latency/gap reductions 0.387758/0.044000 ms; b1 decode slower 0.360538 ms. Fixed independent confirmation required; no gain claim.",
+      "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json",
+      "status": "within_noise",
+      "decision": "All 48 predeclared independent parent-confirmation jobs completed. None of the four primary workloads resolves both positive offload latency and absolute-gap reduction. Prefill b1 reductions 0.179730/0.186672 ms, intervals cross zero; b8 0.319383/0.269243 ms, intervals cross zero. Both decode comparisons unresolved. No resolved primary offload regression or loss of measured GPU savings. Close without extension and restore A0001.",
+      "parent_confirmation_analysis": "parent-confirmation-analysis.json",
+      "next_insight": "Microsecond ID staging improvement is insufficient for a confirmed model-level gain. Retain A0001; investigate remaining wait policy and tiny-transfer paths.",
+      "memory_observation": "Extra pinned IDs across prefill/decode cached shapes: 16392/131136/262272 bytes for b1/b8/b16; GPU buffers unchanged. Verified in screen-memory-audit.json."
+    },
+    {
+      "campaign_id": "offload-gap-001",
+      "continuation_id": "continuation-02",
+      "attempt_id": "A0012",
+      "parent_attempt_id": "A0001",
+      "parent_source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
+      "parent_sha": "1b64fe9c7e140c5c66af45df41abd9c044d792d8",
+      "accepted_step": null,
+      "label": "blocking producer DMA completion events",
+      "workflow_stage": "final_verdict",
+      "hypothesis": "Use blocking CUDA completion events for producer host-buffer reuse, reducing CPU consumption during DMA waits and potential competition with lookup/model submission.",
+      "expected_bottleneck": "Instrumented frozen A0001 producer event waits consume 13.1856/59.5677 ms thread CPU time within 13.2182/59.8416 ms wall wait at b1/b8. Overlapping wait spans are not additive removable model latency.",
+      "profile_evidence": [
+        "../continuation-02/wait-cpu-b1.json",
+        "../continuation-02/wait-cpu-b8.json"
+      ],
+      "change": "Create only pipeline copied events with blocking=True. Keep GPU consumed events, producer ordering, CPU gathers, group size/depth and all buffer capacities unchanged. Bulk decode stays unchanged.",
+      "tradeoffs": [
+        "Sleeping waits may introduce wakeup latency; lower CPU usage is not itself a retained optimization.",
+        "Require lower target prefill wall latency and absolute offload gap under the original independent confirmation."
+      ],
+      "protocol_version": "offload_gap_v1",
+      "original_protocol_version": "offload_gap_v1",
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "screen": {
+        "batches": [
+          1,
+          8,
+          16
+        ],
+        "length": 2048,
+        "modes": [
+          "prefill",
+          "decode"
+        ],
+        "variants": [
+          "ma_offload",
+          "ma_gpu"
+        ],
+        "jobs": 12,
+        "reason_batch16": "Producer pipeline wait scheduling change"
+      },
+      "not_run": {
+        "frozen_baseline_confirmation": "Parent confirmation inconclusive; no nominated candidate, intentionally not run.",
+        "full_validation": "Parent confirmation inconclusive; no nominated candidate, intentionally not run.",
+        "generation_validation": "Parent confirmation inconclusive; no nominated candidate, intentionally not run."
+      },
+      "candidate_sha": "817cc6b5081acdcc7d50935f98e0a4b8c0b71b3a",
+      "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0012",
+      "correctness": {
+        "pytest": "45 passed in 9.87s",
+        "standalone": "PASS; worst max error 0",
+        "logs": [
+          "correctness-tests.txt",
+          "standalone-correctness.txt"
+        ]
+      },
+      "screen_manifest": "R01/manifest.json",
+      "screen_summary": "R01-summary.json",
+      "mechanism_diagnostic": "wait-cpu-b8.json",
+      "mechanism_observation": "At b8, instrumented producer waits still span 60.2107 ms wall but consume 0.2281 ms thread CPU, versus A0001 59.8416 wall / 59.5677 CPU. This validates reduced CPU consumption, not model latency benefit.",
+      "performance": "screen-comparison.json",
+      "screen_decision": "b1 prefill offload and gap reductions 0.140985/0.148229 ms vs A0001; b8 prefill slower 0.356781 ms with gap worse 0.174065 ms. Requires fixed independent confirmation across all four primary workloads. Decode algorithm unchanged; decode fluctuations cannot nominate this optimization.",
+      "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json",
+      "status": "within_noise",
+      "decision": "All 48 parent-confirmation jobs complete. b1 prefill offload reduction 0.044804 ms CI[-0.353767,0.443376], gap reduction 0.079503 CI[-0.366290,0.525296]; b8 prefill offload 0.132066 CI[-0.836286,1.100418], gap -0.066083 CI[-1.142762,1.010595]. No primary meets both positive lower-bound criteria; decode comparisons unresolved. Lower producer CPU time alone does not meet the campaign latency/gap objective. Close fixed plan without extension and restore A0001.",
+      "parent_confirmation_analysis": "parent-confirmation-analysis.json",
+      "next_insight": "CUDA blocking waits free CPU cycles but yield no confirmed model gain here. Keep original wait behavior; proceed to separately registered tiny mapped-bulk transport."
+    },
+    {
+      "campaign_id": "offload-gap-001",
+      "continuation_id": "continuation-02",
+      "attempt_id": "A0013",
+      "parent_attempt_id": "A0001",
+      "parent_source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
+      "parent_sha": "4fa6b2fc7b0220d89dae754a3a602860e6382899",
+      "accepted_step": null,
+      "label": "mapped-host all-layer gather for small bulk inputs",
+      "workflow_stage": "final_verdict",
+      "hypothesis": "For 8..16-token bulk inputs, gather all layers directly from the pinned CPU table using GPU IDs in one kernel, avoiding CPU ID staging, gather and separate H2D.",
+      "expected_bottleneck": "Mapped-bulk diagnostic b8 0.061450 to 0.033291 ms; b16 0.105814 to 0.048239 ms. b1 is slightly slower, so exclude it before model timing.",
+      "profile_evidence": [
+        "../continuation-02/mapped-bulk.json",
+        "../continuation-02/mapped-bulk-design.json"
+      ],
+      "change": "Mapped bulk only for existing bulk policy and 8..16 tokens. Pin CPU table during setup; preserve ordinary pipeline and other bulk lookup algorithms. Fresh IDs and CPU table values on every call. Final read-stream synchronization preserves host mutation/lifetime safety.",
+      "tradeoffs": [
+        "3000 MiB folded CPU table becomes pinned; count it once alongside every cached host buffer.",
+        "Mapped reads use GPU resources; microbench improvement may not translate to model latency.",
+        "Primary target is b8 decode only; b1/decode and prefill algorithm fluctuations cannot qualify as the proposed gain."
+      ],
+      "protocol_version": "offload_gap_v1",
+      "original_protocol_version": "offload_gap_v1",
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "screen": {
+        "batches": [
+          1,
+          8,
+          16
+        ],
+        "length": 2048,
+        "modes": [
+          "prefill",
+          "decode"
+        ],
+        "variants": [
+          "ma_offload",
+          "ma_gpu"
+        ],
+        "jobs": 12,
+        "reason_batch16": "Bulk transport change; b16 is in declared mapped range"
+      },
+      "not_run": {
+        "confirmation": "Target b8 decode screen unpromising; intentionally not run.",
+        "full_validation": "Target b8 decode screen unpromising; intentionally not run.",
+        "generation_validation": "Target b8 decode screen unpromising; intentionally not run."
+      },
+      "draft_root": "/tmp/offload-gap-A0013-draft-1e5za0xw",
+      "draft_condition": "Do not activate or run GPU tests while A0012 confirmation is live. Reconcile against best verified parent after A0012 verdict; record actual implementation commit before any timing.",
+      "draft_patch": "implementation-draft.patch",
+      "draft_static_check": "All six draft Python files compile; GPU tests and timing intentionally pending A0012 verdict.",
+      "draft_registration_parent_sha": "74e5d88d09fe0c7995cc24580c9500aba1536307",
+      "draft_activation": "A0012 finalized within_noise and reverted to A0001 before activation; patch applied cleanly to the verified parent.",
+      "candidate_sha": "5d5eb4858f5102b5e7c0c004e359304b13ac38c8",
+      "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0013",
+      "correctness": {
+        "pytest": "49 passed in 9.93s",
+        "standalone": "PASS; worst max error 0",
+        "logs": [
+          "correctness-tests.txt",
+          "standalone-correctness.txt"
+        ]
+      },
+      "screen_manifest": "R01/manifest.json",
+      "screen_summary": "R01-summary.json",
+      "status": "rejected",
+      "performance": "screen-comparison.json",
+      "decision": "All twelve screen jobs completed. Target b8 decode slower 0.025238 ms versus A0001 and absolute gap worse 0.006473 ms. No target benefit; reject without confirmation/full/generation. b16 decode descriptive improvement is secondary and cannot substitute for the fixed primary target. Prefill and b1 algorithms do not establish a mapped-bulk gain.",
+      "next_insight": "Tiny mapped-bulk component savings do not establish whole-model improvement; GPU launch/dependency and host-lifetime costs were not causally isolated. Restore ordinary CPU table and A0001 transport.",
+      "memory_observation": "Complete 3000 MiB folded CPU table pinned and counted once. Total cached pinned MiB b1/b8/b16: 3032.09375/3256/3512. Mapped bulk output stays on GPU with no gathered host buffer; all sources/capacities checked in screen-memory-audit.json."
+    },
+    {
+      "campaign_id": "offload-gap-001",
+      "continuation_id": "continuation-02",
+      "attempt_id": "A0014",
+      "parent_attempt_id": "A0001",
+      "parent_source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
+      "parent_sha": "85f530f0698617dc8885e0ccd8f0efe3c5c2b422",
+      "accepted_step": null,
+      "label": "one-slot automatic pipeline lookahead",
+      "workflow_stage": "final_verdict",
+      "hypothesis": "Reduce automatic pipeline host/device working set to one slot while using the interval after k+m release for the next gather/H2D; test whether four-group lookahead is unnecessary and adds memory/cache pressure.",
+      "expected_bottleneck": "Four pinned and device slots retain 32/256/512 MiB each at b1/b8/b16; actual producer/consumer wait profiles and component transfer costs motivate testing a smaller bounded working set.",
+      "profile_evidence": [
+        "../continuation-02/single-slot-feasibility.json",
+        "../continuation-01/coordination-b1.json",
+        "../continuation-01/coordination-b8.json"
+      ],
+      "change": "Add automatic pipeline depth limit=1. Leave explicit manual pipeline depth, bulk decode, group size, event flags/order and lookup semantics unchanged.",
+      "tradeoffs": [
+        "Pipeline pinned and GPU buffers decrease 75%; lost lookahead can cause compute stalls.",
+        "Memory savings alone do not qualify: require repeated primary prefill latency and gap reduction."
+      ],
+      "protocol_version": "offload_gap_v1",
+      "original_protocol_version": "offload_gap_v1",
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "screen": {
+        "batches": [
+          1,
+          8,
+          16
+        ],
+        "length": 2048,
+        "modes": [
+          "prefill",
+          "decode"
+        ],
+        "variants": [
+          "ma_offload",
+          "ma_gpu"
+        ],
+        "jobs": 12,
+        "reason_batch16": "Pipeline scheduling and buffer-capacity tradeoff"
+      },
+      "not_run": {
+        "frozen_baseline_confirmation": "Primary regression in parent confirmation; candidate not nominated, intentionally not run.",
+        "full_validation": "Primary regression in parent confirmation; candidate not nominated, intentionally not run.",
+        "generation_validation": "Primary regression in parent confirmation; candidate not nominated, intentionally not run."
+      },
+      "candidate_sha": "b9938ebc46d7a92fc07898a09c72edc547f5f8f3",
+      "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0014",
+      "correctness": {
+        "pytest": "48 passed in 13.03s",
+        "standalone": "PASS; worst max error 0",
+        "logs": [
+          "correctness-tests.txt",
+          "standalone-correctness.txt"
+        ]
+      },
+      "screen_manifest": "R01/manifest.json",
+      "screen_summary": "R01-summary.json",
+      "performance": "screen-comparison.json",
+      "screen_decision": "b1/b8 prefill offload reductions 0.372477/2.090906 ms and gap reductions 0.452067/1.876710 ms versus A0001. All primary workloads and placements require fixed independent confirmation; no acceptance from screen or lower memory alone.",
+      "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json",
+      "memory_observation": "Pipeline host and GPU capacity reduced to one layer; total cached buffers 8.09375/64.75/129.5 MiB each at b1/b8/b16, including bulk decode. Verified in screen-memory-audit.json.",
+      "status": "rejected",
+      "parent_confirmation_analysis": "parent-confirmation-analysis.json",
+      "decision": "All 48 fixed-plan jobs completed. Both prefill workloads show repeatable offload/gap reductions: b1 0.349586/0.373642 ms and b8 1.917756/1.698489 ms. However b8 decode is slower in all three blocks: offload reduction -0.040589 ms CI[-0.057702,-0.023475]. This resolved primary regression fails the prespecified gate despite unchanged bulk decode code and lower pipeline capacities. Do not discard the regression or extend until favorable. Reject and restore A0001.",
+      "next_insight": "One-slot prefill overlap is promising but the complete cached-offloader workload has a resolved decode regression. Capacity and placement effects may persist after prefix; mechanism is not established. Any different scheduling/capacity policy needs a separately registered hypothesis."
+    },
+    {
+      "campaign_id": "offload-gap-001",
+      "continuation_id": "continuation-02",
+      "attempt_id": "A0015",
+      "parent_attempt_id": "A0001",
+      "parent_source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
+      "parent_sha": "52aa4f283a4f7f8ab5b3e8ae49ac6c5eaf51b3ff",
+      "accepted_step": null,
+      "label": "fuse compressed-row expansion with memory addition",
+      "workflow_stage": "final_verdict",
+      "hypothesis": "Preserve within-call deduplicated CPU lookup/H2D but fuse GPU inverse-index expansion into required k+m, avoiding a full temporary and separate expansion kernel on each layer.",
+      "expected_bottleneck": "Frozen A0009 b8 profile: 24 expansions, 1.50928 ms summed CUDA stream intervals and 1.55864 ms CPU spans, overlapping. A0009 unfused screen was 2.01742 ms slower than A0001; no claim that all expansion time is removable.",
+      "profile_evidence": [
+        "../continuation-02/dedup-expansion-b8-events.json",
+        "../continuation-02/fused-dedup-feasibility.json",
+        "../A0009/record.json"
+      ],
+      "change": "Compressed offload consumption only for pipeline inputs >=8192 tokens. Use a fused gather-plus-add handle for folded tables; preserve materializing acquire API and unfolded normalization fallback. No lookup/output caching across calls.",
+      "tradeoffs": [
+        "Additional inverse-index storage remains counted; compressed buffers retain their full capacity.",
+        "Indirect GPU loads and Triton dispatch may offset saved materialization; CPU unique cost persists.",
+        "Primary target b8 prefill; unchanged b1 and decode paths cannot nominate a gain."
+      ],
+      "arithmetic_contract": "Zero absolute/relative tolerance against folded reference, declared before results. Load BF16 K and selected M, FP32 elementwise addition, cast to K dtype; no reduction/reassociation. Tests must prove exactness before timing; no tolerance relaxation.",
+      "ablation": {
+        "unfused_attempt": "A0009",
+        "scope": "Prior stored screen supplies descriptive unfused comparison on the same source/protocol/environment; do not claim a confirmed fusion-only speedup from it. Retention requires independent parent/frozen-baseline and full gates."
+      },
+      "protocol_version": "offload_gap_v1",
+      "original_protocol_version": "offload_gap_v1",
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "screen": {
+        "batches": [
+          1,
+          8,
+          16
+        ],
+        "length": 2048,
+        "modes": [
+          "prefill",
+          "decode"
+        ],
+        "variants": [
+          "ma_offload",
+          "ma_gpu"
+        ],
+        "jobs": 12,
+        "reason_batch16": "Compressed transfer and fused consumption change"
+      },
+      "not_run": {
+        "frozen_baseline_confirmation": "Parent confirmation inconclusive; candidate not nominated, intentionally not run.",
+        "full_validation": "Parent confirmation inconclusive; candidate not nominated, intentionally not run.",
+        "generation_validation": "Parent confirmation inconclusive; candidate not nominated, intentionally not run."
+      },
+      "draft_root": "/tmp/offload-gap-A0015-draft-pewlt22s",
+      "draft_condition": "Activated after A0014 rejected and code-only restored to A0001.",
+      "draft_patch": "isolated-draft.patch",
+      "draft_validation": "Syntax compilation only; GPU tests pending completion of A0014 timing and reconciliation with best verified parent.",
+      "candidate_sha": "0436370506e82e3a32d6ccbc6bb5217bc0e84637",
+      "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0015",
+      "correctness": {
+        "pytest": "42 passed in 10.07s",
+        "standalone": "PASS; worst max error 0",
+        "logs": [
+          "correctness-tests.txt",
+          "standalone-correctness.txt"
+        ]
+      },
+      "screen_manifest": "R01/manifest.json",
+      "screen_summary": "R01-summary.json",
+      "performance": "screen-comparison.json",
+      "screen_decision": "Target b8 prefill offload/gap reductions 0.273381/0.382040 ms versus verified A0001. Requires fixed independent 48-process parent confirmation. Unchanged b1 and decode paths cannot nominate a gain; unfavorable b1 decode preserved. Old A0009 unfused b8 screen is 2.290803 ms slower, descriptive only.",
+      "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json",
+      "memory_observation": "All 12 source/capacity checks pass. Full four-slot buffers retained; additional inverse bytes 0/131072/262144 at b1/b8/b16 counted. No cross-call lookup caching.",
+      "status": "within_noise",
+      "parent_confirmation_analysis": "parent-confirmation-analysis.json",
+      "decision": "All 48 fixed parent-confirmation jobs complete. Target b8 prefill offload reduction 0.366669 ms CI[-0.645449,1.378787], gap reduction 0.158634 CI[-0.449015,0.766283]. Neither lower bound is positive. Other primary workloads unresolved; no resolved primary regression. Close the fixed plan without extension and restore A0001. Unfused A0009 screen comparison does not establish an accepted parent-relative gain.",
+      "next_insight": "Fused expansion avoids the explicit index_select intermediate but CPU deduplication, indirect GPU reads and dispatch remain. Model-level latency and gap improvement are unresolved. Continue from A0001 with separately registered small-prefill depth policy."
+    },
+    {
+      "campaign_id": "offload-gap-001",
+      "continuation_id": "continuation-02",
+      "attempt_id": "A0016",
+      "parent_attempt_id": "A0001",
+      "parent_source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
+      "parent_sha": "ce765f0cdfdf0368ad720fd93e891d6accbd3145",
+      "accepted_step": 2,
+      "label": "single-slot automatic pipeline for small prefill only",
+      "workflow_stage": "final_verdict",
+      "hypothesis": "Restrict one-slot automatic pipeline to <=2048-token calls. Preserve the evidenced b1 prefill overlap/working-set improvement from A0014 while leaving the high-volume b8 pipeline capacity and complete b8 primary execution path unchanged.",
+      "expected_bottleneck": "A0014 independently confirms b1 prefill latency/gap reductions but fails on b8 decode after its changed prefix allocation. Applying the small working set only in the measured small-prefill regime tests a shape-specific scheduling policy.",
+      "profile_evidence": [
+        "../continuation-02/selective-depth-feasibility.json",
+        "../A0014/parent-confirmation-analysis.json",
+        "../A0014/confirmation-memory-audit.json"
+      ],
+      "change": "Automatic pipeline uses min(configured depth,1) only at total input tokens <=2048. Preserve bulk cutoff1024, manual pipeline depth, group size, transfers/events and arithmetic. Larger calls retain original depth.",
+      "tradeoffs": [
+        "A0014 does not establish why b8 decode regressed. All four primary workloads still require independent confirmation.",
+        "The fixed2048-token boundary must be tested; no post-result threshold tuning within this attempt."
+      ],
+      "primary_target": "b1 prefill only; other unchanged primary paths cannot nominate gain",
+      "protocol_version": "offload_gap_v1",
+      "original_protocol_version": "offload_gap_v1",
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "screen": {
+        "batches": [
+          1,
+          8,
+          16
+        ],
+        "length": 2048,
+        "modes": [
+          "prefill",
+          "decode"
+        ],
+        "variants": [
+          "ma_offload",
+          "ma_gpu"
+        ],
+        "jobs": 12,
+        "reason_batch16": "Shape-specific pipeline policy"
+      },
+      "not_run": {},
+      "draft_root": "/tmp/offload-gap-A0016-draft-81086aqd",
+      "draft_condition": "Activated from verified A0001 after A0015 within_noise verdict and code-only reversion. GPU tests wait for the sequential diagnostic batch.",
+      "draft_patch": "isolated-draft.patch",
+      "draft_validation": "Syntax compile only; GPU tests pending A0015 final verdict and parent reconciliation.",
+      "candidate_sha": "0ce6645eb4c4bc3992258ad0878c72ea3c37a64e",
+      "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0016",
+      "correctness": {
+        "pytest": "31 passed in 14.58s",
+        "standalone": "PASS; worst max error 0",
+        "logs": [
+          "correctness-tests.txt",
+          "standalone-correctness.txt"
+        ],
+        "full_model": "Four comparisons bit-exact at b1/b8 and seeds1234/4321:129 logits each, complete hidden/KV at0/1/2/128."
+      },
+      "screen_manifest": "R01/manifest.json",
+      "screen_summary": "R01-summary.json",
+      "performance": "screen-comparison.json",
+      "screen_decision": "Target b1 prefill offload/gap reductions0.436107/0.411638 ms versus A0001. b1 decode slower0.451537 ms; preserve and test under fixed independent confirmation across all primary workloads. Other unchanged paths cannot nominate gains.",
+      "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json",
+      "memory_observation": "Verified one-slot b1 prefill and original four-slot b8/b16 capacities. All12 sources and buffer totals audited.",
+      "parent_confirmation_analysis": "parent-confirmation-analysis.json",
+      "parent_confirmation_decision": "Passes prespecified primary gates: b1 prefill offload reduction0.430878 ms CI[0.153321,0.708434], gap0.451613 CI[0.304395,0.598832]. No resolved primary offload/resident regression and memory savings preserved. b8 decode slower in all three blocks, mean reduction-0.038070 CI[-0.100821,0.024682], unresolved and retained as a limitation. Not accepted; independent frozen-baseline confirmation and all full gates remain.",
+      "confirmation_manifest": "R03-baseline-confirmation/manifest.json",
+      "confirmation_plan_id": "formal_v1_w10_n10_r3__balanced_order_v2",
+      "conditional_validation_plan": "conditional-validation-plan.json",
+      "validation_controller": "validation-v3.json",
+      "confirmation_analysis": "validation-v3-confirmation-analysis.json",
+      "frozen_baseline_confirmation_decision": "Passes fixed primary gates against A0000. b1 prefill cumulative offload reduction14.021136 ms CI[13.510024,14.532248], gap14.015407 CI[13.549947,14.480867]. Other primary comparisons unresolved without resolved regression; memory preserved. Incremental gain remains parent-relative0.430878 ms, not14.02 ms. Full validation/correctness/generation and regression audit remain before acceptance.",
+      "correctness_directory": "R06-full-correctness",
+      "validation_matrix_manifest": "full-evidence-manifest.json",
+      "eligible_gain_workloads": [
+        {
+          "mode": "prefill",
+          "batch": 1
+        }
+      ],
+      "eligible_gain_note": "Structured representation of the primary target already declared at registration; unchanged scope.",
+      "generation_manifest": "generation-evidence-manifest.json",
+      "secondary_regression_policy": "secondary-regression-policy.json",
+      "secondary_regression_selection": [
+        "full-regression-selection.json",
+        "generation-regression-selection.json"
+      ],
+      "validation_progress": "All fixed primary, exactness, full/generation, bounded regression and source/memory gates completed.",
+      "status": "accepted",
+      "full_summary": "full-audited-summary.json",
+      "generation_summary": "generation-audited-summary.json",
+      "regression_analyses": [
+        "full-regression-analysis.json",
+        "generation-regression-analysis.json"
+      ],
+      "source_audit": "source-correctness-audit.json",
+      "decision": "Accepted: changed b1 prefill independently reduces offload latency and gap against verified A0001; cumulative A0000 confirmation also passes. Full exactness, all84 matrix/12 generation points, fixed secondary regression investigations, source/environment and memory gates pass. Retain all adverse observations and uncertainty; no broad decode/generation gain claim.",
+      "limitations": [
+        "Incremental b1 prefill offload reduction0.430878 ms CI[0.153321,0.708434], gap0.451613 CI[0.304395,0.598832]. Cumulative A0000 reduction14.021136 ms includes A0001 and is not this step alone.",
+        "Parent-relative b8 decode slower in all3 pairs, mean reduction-0.038070 ms CI[-0.100821,0.024682]; unresolved.",
+        "A0000-relative b16 decode slower in all3 secondary pairs: reduction-0.033485 ms CI[-0.082574,0.015604]. b8/4096 prefill slower in all3: reduction-0.937146 ms CI[-2.972030,1.097739]. No resolved regression under the predeclared rule; adverse directions retained.",
+        "b8/8192 prefill reduction-4.475341 ms CI[-15.449950,6.499268] remains uncertain. No additional extension.",
+        "b8 generation reduction0.438272 ms CI[-4.831173,5.707717]; no generation gain claim. b1 generation has only the original single pair.",
+        "Three paired blocks yield wide intervals; n=3 symmetry assumption unverified. Seeded random weights test equivalence/performance, not language quality."
+      ]
+    },
+    {
+      "campaign_id": "offload-gap-001",
+      "continuation_id": "continuation-02",
+      "attempt_id": "A0017",
+      "parent_attempt_id": "A0016",
+      "parent_source_sha": "0ce6645eb4c4bc3992258ad0878c72ea3c37a64e",
+      "parent_sha": "eedd189a84b5b1c20144bb1c90367014c42ae7ae",
+      "accepted_step": null,
+      "label": "write-combined pinned pipeline buffers for large inputs",
+      "workflow_stage": "final_verdict",
+      "hypothesis": "Use write-combined CUDA host allocation for large pipeline gather destinations, preserving fresh CPU gather and H2D while reducing the combined transport cost.",
+      "expected_bottleneck": "Frozen A0001 component diagnostic:16384/32768-token gather+H2D means3.869776/7.856003 ms torch pinned versus2.983973/5.945323 write-combined; native default allocation3.892142/7.923771 controls allocation API.2048 tokens slightly worse with WC, so exclude small inputs.",
+      "profile_evidence": [
+        "../continuation-02/write-combined.json",
+        "../continuation-02/pending-diagnostics.json"
+      ],
+      "change": "Pipeline inputs >=8192 tokens use cudaHostAllocWriteCombined destinations; keep ordinary CPU table, GPU buffers, capacities, gather/transfer/event order and precision. Bulk and smaller pipeline calls retain torch pinned allocation.",
+      "tradeoffs": [
+        "CPU reads from WC memory may be slow; this path only writes gathered outputs and DMA reads them.",
+        "External allocation lifetime must outlive all tensor views and in-flight DMA. Synchronize device before cudaFreeHost, with allocation owner tied to buffer storage.",
+        "No extra table pinning or cross-call lookup cache; unchanged retained byte counts still require audited host/GPU capacities."
+      ],
+      "arithmetic_contract": "Placement-only, zero absolute/relative tolerance against folded resident reference.",
+      "primary_target": "b8 prefill; unchanged b1 and decode cannot nominate gain",
+      "protocol_version": "offload_gap_v1",
+      "original_protocol_version": "offload_gap_v1",
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "screen": {
+        "batches": [
+          1,
+          8,
+          16
+        ],
+        "length": 2048,
+        "modes": [
+          "prefill",
+          "decode"
+        ],
+        "variants": [
+          "ma_offload",
+          "ma_gpu"
+        ],
+        "jobs": 12,
+        "reason_batch16": "Pinned transport change"
+      },
+      "not_run": {
+        "frozen_baseline_confirmation": "Not run: fixed parent gap gate failed; conditional controller stopped.",
+        "full_validation": "Not run: not nominated for retention.",
+        "generation_validation": "Not run: not nominated for retention.",
+        "full_model_correctness": "Not run: small-model exactness passed, but candidate not nominated for retention."
+      },
+      "draft_root": "/tmp/offload-gap-A0017-draft-bvzdv8sk",
+      "draft_condition": "Activated after A0016 accepted verdict; conditional merge preserves its small-prefill policy and all tests.",
+      "draft_patch": "isolated-draft.patch",
+      "draft_validation": "Syntax compile only. GPU tests pending A0016 verdict and parent reconciliation.",
+      "eligible_gain_workloads": [
+        {
+          "mode": "prefill",
+          "batch": 8
+        }
+      ],
+      "eligible_gain_note": "Structured representation of the primary target already declared at registration; unchanged scope.",
+      "activation_patch": "conditional-A0016-parent.patch",
+      "candidate_sha": "7eb99060e4ac0125bb93487abc85f139f1e73c8f",
+      "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0017",
+      "correctness": {
+        "pytest": "37 passed in 13.24s",
+        "standalone": "PASS; worst max error 0",
+        "logs": [
+          "correctness-tests.txt",
+          "standalone-correctness.txt"
+        ]
+      },
+      "screen_manifest": "R01/manifest.json",
+      "screen_summary": "R01-summary.json",
+      "performance": "screen-comparison.json",
+      "screen_decision": "Target b8 prefill offload/gap reductions2.020062/1.692548 ms versus A0016; b1/b16 decode slower0.370803/0.431870 ms preserved. Predeclare fixed48 parent confirmation; only b8 prefill may qualify.",
+      "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json",
+      "conditional_validation_plan": "conditional-validation-plan.json",
+      "conditional_controller": "conditional-controller.json",
+      "secondary_regression_policy": "secondary-regression-policy.json",
+      "status": "within_noise",
+      "parent_confirmation_analysis": "parent-confirmation-analysis.json",
+      "decision": "Within noise: changed b8 prefill offload reduction1.765735 ms CI[0.688570,2.842900] passes latency alone, but absolute-gap reduction1.567970 ms CI[-0.678259,3.814199] fails the required positive lower bound. Preserve all three positive gap observations without claiming a repeatable gap gain. No plan extension; restore verified A0016.",
+      "limitations": [
+        "b1 decode slower in all3 blocks: offload reduction-0.393447 ms CI[-1.099139,0.312246], gap-0.430818 CI[-1.174233,0.312597]. Unresolved adverse direction retained.",
+        "WC component and model-latency improvements do not establish the required independently resolved absolute-gap reduction."
+      ]
+    },
+    {
+      "campaign_id": "offload-gap-001",
+      "continuation_id": "continuation-02",
+      "attempt_id": "A0018",
+      "parent_attempt_id": "A0016",
+      "parent_source_sha": "0ce6645eb4c4bc3992258ad0878c72ea3c37a64e",
+      "parent_sha": "91eb8ad887cae83734c16b0978801e2da24965fc",
+      "accepted_step": null,
+      "label": "submit embedding before waiting for pipeline input IDs",
+      "workflow_stage": "final_verdict",
+      "hypothesis": "For pipeline inputs, enqueue nonblocking D2H into reusable pinned ID storage, record completion, submit embedding, then wait for host IDs before CPU gather. Overlap host embedding dispatch with ID transfer/completion instead of blocking before dispatch.",
+      "expected_bottleneck": "Frozen A0001 instrumented b1/b8 ID staging CPU spans0.033814/0.047770 ms precede embedding dispatch0.034976/0.046488 ms. These instrumented spans are not guaranteed removable latency. A0011 reusable blocking IDs failed independent confirmation; this attempt specifically changes the wait position.",
+      "profile_evidence": [
+        "../continuation-02/input-startup-b1.json",
+        "../continuation-02/input-startup-b8.json",
+        "../A0011/parent-confirmation-analysis.json"
+      ],
+      "change": "Pipeline owns pinned int64 IDs and reusable completion event; model serializes staging through layer completion. Same compute-stream D2H order; embedding submission precedes CPU synchronization. Bulk, CPU IDs and foreign-device IDs retain blocking fallback.",
+      "tradeoffs": [
+        "Additional retained pinned ID bytes and model-call lock must be measured. Event/lock overhead may erase overlap.",
+        "Embedding-error cleanup must wait for pending DMA before releasing staging ownership.",
+        "No CPU gather before ID completion, no cross-call value caching, no change to resident arithmetic."
+      ],
+      "arithmetic_contract": "Scheduling-only, zero absolute/relative error against folded resident reference.",
+      "primary_target": "b1/b8 prefill; unchanged bulk data path cannot nominate gain",
+      "ablation": {
+        "blocking_reuse_attempt": "A0011",
+        "scope": "Stored blocking-reuse confirmation is descriptive context; no confirmed async-only gain claim without fresh appropriate comparison."
+      },
+      "protocol_version": "offload_gap_v1",
+      "original_protocol_version": "offload_gap_v1",
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "screen": {
+        "batches": [
+          1,
+          8,
+          16
+        ],
+        "length": 2048,
+        "modes": [
+          "prefill",
+          "decode"
+        ],
+        "variants": [
+          "ma_offload",
+          "ma_gpu"
+        ],
+        "jobs": 12,
+        "reason_batch16": "Input staging and pipeline scheduling"
+      },
+      "not_run": {
+        "confirmation": "Not run: target screen unpromising.",
+        "full_validation": "Not run: screen rejected.",
+        "generation_validation": "Not run: screen rejected.",
+        "full_model_correctness": "Not run: small-model exactness passed; not nominated for retention."
+      },
+      "draft_root": "/tmp/offload-gap-A0018-draft-7htjgy3o",
+      "draft_condition": "Activated from verified A0016 after A0017 within_noise verdict and code-only reversion. Preserves selective-depth configuration and all parent tests.",
+      "draft_patch": "isolated-draft.patch",
+      "draft_validation": "Syntax compile only; GPU tests pending sequential parent reconciliation.",
+      "eligible_gain_workloads": [
+        {
+          "mode": "prefill",
+          "batch": 1
+        },
+        {
+          "mode": "prefill",
+          "batch": 8
+        }
+      ],
+      "eligible_gain_note": "Structured representation of the primary target already declared at registration; unchanged scope.",
+      "activation_patch": "conditional-A0016-parent.patch",
+      "candidate_sha": "6089489be39a59a31360b8f89add2042cc0a7c8b",
+      "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0018",
+      "correctness": {
+        "pytest": "34 passed in 13.06s",
+        "standalone": "PASS; worst max error 0",
+        "logs": [
+          "correctness-tests.txt",
+          "standalone-correctness.txt"
+        ]
+      },
+      "screen_manifest": "R01/manifest.json",
+      "status": "rejected",
+      "screen_summary": "R01-summary.json",
+      "performance": "screen-comparison.json",
+      "decision": "Rejected at screening as unpromising: b1 prefill offload/gap reductions0.007509/0.015961 ms, while b8 prefill slower0.160926 ms and gap worse0.227580 ms. Tiny b1 observation is below its descriptive sample SD0.019534 ms (parent0.010548), not a resolved gain. No independent statistical regression claim from this short screen; no formal/full/generation escalation.",
+      "limitations": [
+        "b1/b16 decode slower0.249344/0.084073 ms in the short screen; retained as observations, not resolved regressions.",
+        "Screen sample dispersion is descriptive; no confidence interval or universal acceptance threshold is inferred."
+      ]
+    },
+    {
+      "campaign_id": "offload-gap-001",
+      "continuation_id": "continuation-02",
+      "attempt_id": "A0019",
+      "parent_attempt_id": "A0016",
+      "parent_source_sha": "0ce6645eb4c4bc3992258ad0878c72ea3c37a64e",
+      "parent_sha": "42e4b904535162ccfb47957111656f4996845b53",
+      "accepted_step": null,
+      "label": "start pipeline producer before embedding dispatch",
+      "workflow_stage": "final_verdict",
+      "hypothesis": "Launch pipeline gather/prefetch before submitting the embedding kernel, so first-layer CPU lookup/H2D can overlap embedding startup instead of depending on an entry event recorded after embedding.",
+      "expected_bottleneck": "Frozen A0001 startup diagnostic records embedding CUDA intervals0.041856/0.112032 ms at b1/b8; current model enqueues embedding before pipeline forward records its entry dependency and submits producer. These intervals may include dispatch gaps and cannot be claimed as removable latency.",
+      "profile_evidence": [
+        "../continuation-02/input-startup-b1.json",
+        "../continuation-02/input-startup-b8.json",
+        "../continuation-01/coordination-b1.json"
+      ],
+      "change": "Defer only pipeline embedding to the first layer consumer, after producer submission and entry recording. Preserve bulk ordering, supplied-hidden-state semantics, embedding values and all layer arithmetic.",
+      "tradeoffs": [
+        "Earlier transfer can contend with embedding bandwidth; producer setup delays embedding submission.",
+        "All hidden-state and KV outputs must remain bit-exact; deferred initialization and exception paths need explicit tests."
+      ],
+      "arithmetic_contract": "Scheduling-only, zero absolute/relative error against folded resident reference.",
+      "primary_target": "b1/b8 prefill; bulk decode cannot nominate gain",
+      "protocol_version": "offload_gap_v1",
+      "original_protocol_version": "offload_gap_v1",
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "screen": {
+        "batches": [
+          1,
+          8,
+          16
+        ],
+        "length": 2048,
+        "modes": [
+          "prefill",
+          "decode"
+        ],
+        "variants": [
+          "ma_offload",
+          "ma_gpu"
+        ],
+        "jobs": 12,
+        "reason_batch16": "Producer startup scheduling"
+      },
+      "not_run": {
+        "confirmation": "Not run: changed primary screens unpromising.",
+        "full_validation": "Not run: screen rejected.",
+        "generation_validation": "Not run: screen rejected.",
+        "full_model_correctness": "Not run: small-model exactness passed; candidate not nominated."
+      },
+      "draft_root": "/tmp/offload-gap-A0019-draft-luibc_pp",
+      "draft_condition": "Activated from A0016 after A0018 screening rejection and code-only reversion. Original model delta applied; new tests appended without removing A0016 tests. A0018 was not retained.",
+      "draft_patch": "isolated-draft.patch",
+      "draft_validation": "Syntax compile only; runtime exactness and producer cancellation not yet tested.",
+      "eligible_gain_workloads": [
+        {
+          "mode": "prefill",
+          "batch": 1
+        },
+        {
+          "mode": "prefill",
+          "batch": 8
+        }
+      ],
+      "eligible_gain_note": "Structured representation of the primary target already declared at registration; unchanged scope.",
+      "candidate_sha": "f59cdf0c8d7fa32f98b6947c0ba784210f0e7437",
+      "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0019",
+      "correctness": {
+        "pytest": "34 passed in 13.05s",
+        "standalone": "PASS; worst max error 0",
+        "logs": [
+          "correctness-tests.txt",
+          "standalone-correctness.txt"
+        ]
+      },
+      "screen_manifest": "R01/manifest.json",
+      "status": "rejected",
+      "screen_summary": "R01-summary.json",
+      "performance": "screen-comparison.json",
+      "decision": "Rejected at screening: both changed prefill primary paths have higher offload latency versus A0016 (b1+0.042619 ms, b8+0.366468 ms). b8 gap worsens0.106847 ms; b1 apparent gap reduction0.024187 ms is explained by a slower resident reference and cannot qualify. Unchanged b1 bulk decode reduction0.377981 ms cannot nominate this pipeline-only change.",
+      "limitations": [
+        "Short screen only; adverse observations are not independent resolved regression estimates.",
+        "Earlier producer submission may contend with embedding; this screen does not establish a mechanism."
+      ]
+    },
+    {
+      "campaign_id": "offload-gap-001",
+      "continuation_id": "continuation-02",
+      "attempt_id": "A0020",
+      "parent_attempt_id": "A0016",
+      "parent_source_sha": "0ce6645eb4c4bc3992258ad0878c72ea3c37a64e",
+      "parent_sha": "3ea6e6d5fe4ad2525f1635e0c4e1a91c8a8a5064",
+      "accepted_step": null,
+      "label": "reuse per-layer pipeline coordination tickets",
+      "workflow_stage": "final_verdict",
+      "hypothesis": "Reuse pipeline GroupTicket objects and their threading events per shape instead of allocating24 tickets and48 Python events for each call; reset state under the existing serialized forward lock.",
+      "expected_bottleneck": "Frozen A0001 coordination profiles attribute0.029966/0.032549 ms CPU to24 ticket constructions at b1/b8. Small potential gain; resetting events may cost as much. A0007 tensor-view caching was rejected and is not included.",
+      "profile_evidence": [
+        "../continuation-01/coordination-b1.json",
+        "../continuation-01/coordination-b8.json",
+        "../A0007/record.json"
+      ],
+      "change": "Preallocate ticket pool, reset only completed CPU-generation state, tag slot previous references with forward generation. Across calls all previous CPU releases are already submitted, but copied/consumed CUDA dependencies remain mandatory. No tensor view/value cache or buffer-capacity change.",
+      "tradeoffs": [
+        "Persistent Python synchronization objects increase retained host metadata.",
+        "Incorrect epoch handling can deadlock on a cleared old release event or reuse a GPU slot too early; test cross-call/cross-stream generations and failed-forward poisoning.",
+        "Potential saving is only tens of microseconds and may remain below independent model noise."
+      ],
+      "arithmetic_contract": "Control-metadata reuse only; bit-exact folded-reference output and fresh lookup every call.",
+      "primary_target": "b1/b8 prefill; unchanged bulk decode cannot nominate gain",
+      "protocol_version": "offload_gap_v1",
+      "original_protocol_version": "offload_gap_v1",
+      "measurement_plan_id": "screen_v1_w3_n5_r1",
+      "screen": {
+        "batches": [
+          1,
+          8,
+          16
+        ],
+        "length": 2048,
+        "modes": [
+          "prefill",
+          "decode"
+        ],
+        "variants": [
+          "ma_offload",
+          "ma_gpu"
+        ],
+        "jobs": 12,
+        "reason_batch16": "Pipeline coordination and slot-lifetime change"
+      },
+      "not_run": {
+        "frozen_baseline_confirmation": "Not run: parent dual latency/gap gate failed; conditional controller stopped.",
+        "full_validation": "Not run: not nominated.",
+        "generation_validation": "Not run: not nominated.",
+        "full_model_correctness": "Not run: small-model exactness passed; not nominated."
+      },
+      "draft_root": "/tmp/offload-gap-A0020-draft-a1crcszz",
+      "draft_condition": "Activated from verified A0016 after A0019 screen rejection and code-only reversion. New ticket tests appended, preserving all A0016 tests. No A0017/A0018/A0019 changes retained.",
+      "draft_patch": "isolated-draft.patch",
+      "draft_validation": "Syntax compile only; generation/stream safety and cancellation need GPU runtime gates before timing.",
+      "eligible_gain_workloads": [
+        {
+          "mode": "prefill",
+          "batch": 1
+        },
+        {
+          "mode": "prefill",
+          "batch": 8
+        }
+      ],
+      "eligible_gain_note": "Structured representation of the primary target already declared at registration; unchanged scope.",
+      "candidate_sha": "41869553c1df91e5c8ae4cda16cd4c6b1c0ab44b",
+      "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0020",
+      "correctness": {
+        "pytest": "36 passed in 12.96s",
+        "standalone": "PASS; worst max error 0",
+        "logs": [
+          "correctness-tests.txt",
+          "standalone-correctness.txt"
+        ]
+      },
+      "screen_manifest": "R01/manifest.json",
+      "screen_summary": "R01-summary.json",
+      "performance": "screen-comparison.json",
+      "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json",
+      "screen_decision": "Small eligible b1/b8 prefill offload reductions0.030696/0.048966 ms and gap reductions0.073350/0.276661 ms. Both near sample dispersion; not gains yet. b1/b8 decode slower0.271334/0.035761 ms preserved. Fixed48-process parent confirmation tests repeatability and all primary regressions without extending until favorable.",
+      "conditional_validation_plan": "conditional-validation-plan.json",
+      "conditional_controller": "conditional-controller.json",
+      "secondary_regression_policy": "secondary-regression-policy.json",
+      "status": "within_noise",
+      "parent_confirmation_analysis": "parent-confirmation-analysis.json",
+      "decision": "Within noise: no eligible primary passes dual latency/gap criterion. b1 prefill offload reduction0.030322 ms CI[-0.111244,0.171888], gap0.037519 CI[-0.153134,0.228172]; b8 prefill offload0.000883 CI[-0.402357,0.404122], gap-0.272545 CI[-1.340937,0.795846]. Close fixed48-process plan without extension and restore A0016.",
+      "limitations": [
+        "All primary comparisons unresolved; no resolved offload/resident regression. Screen coordination-sized gains do not repeat with sufficient precision.",
+        "b1 decode mean reduction-0.082997 ms CI[-0.704352,0.538358] retained as unresolved adverse observation."
+      ]
+    }
+  ]
+}

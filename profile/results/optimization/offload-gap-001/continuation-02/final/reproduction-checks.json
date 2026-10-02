@@ -1,0 +1,34 @@
+{
+  "status": "passed",
+  "bash_syntax": "all fenced Bash blocks",
+  "local_links": "all except pending publication seal resolved",
+  "execution_source_equal": "0ce6645eb4c4bc3992258ad0878c72ea3c37a64e",
+  "historical_artifacts_unchanged": true,
+  "fresh_plan_directory": "/tmp/cont02-review-bv1qgcph",
+  "screen_plan": {
+    "jobs": 12,
+    "samples": 60,
+    "model_calls_including_warmup": 96,
+    "note": "Excludes model loading and decode prefix setup; confirmation here is one side of one run, not independent paired evidence.",
+    "estimated_seconds": 263.04,
+    "estimate_inputs": {
+      "output": "/tmp/cont02-review-bv1qgcph/screen",
+      "plan_only": true,
+      "stage": "screening",
+      "variants": null,
+      "initial_baseline": false,
+      "include_batch16": true,
+      "estimate_setup_seconds": 21.0,
+      "estimate_prefill_ms": 218.0,
+      "estimate_decode_ms": 12.0
+    }
+  },
+  "parent_plan": {
+    "jobs": 48,
+    "new_process_jobs": 48,
+    "reused_points": 0,
+    "estimated_seconds": 899.3512165546417,
+    "cost_source": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R01/manifest.json",
+    "note": "Setup and call costs measured in screen; other lengths/unfolded/generation extrapolated for planning only. Full validation and generation are separate invocations. Deliberately paused setup durations replaced with median unpaused setup for the placement. Reused confirmation keeps original files/stage and all three process blocks."
+  }
+}
