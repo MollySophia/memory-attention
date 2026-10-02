@@ -1,0 +1,30 @@
+{
+  "campaign_id": "offload-gap-001",
+  "status": "feasibility_only_not_registered",
+  "source_attempt": "A0009",
+  "source_sha": "0ac06a0f7ce6c3ce77fd5a878c4a34c991527ec2",
+  "evidence": [
+    "dedup-expansion-b8-events.json",
+    "../../A0009/record.json"
+  ],
+  "observation": "24 inverse-index materializations on frozen A0009 b8 prefill occupy 1.50928 ms summed CUDA stream intervals and 1.55864 ms CPU invocation spans. A0009 screen was 2.01742 ms slower than A0001; materialization is only one possible contributor.",
+  "hypothesis": "Fuse within-call inverse row lookup with the required k+m operation, avoiding a full expanded M tensor and a separate GPU expansion kernel per layer while retaining reduced H2D volume.",
+  "scope": [
+    "Offload-specific consumption of compressed rows only; no generic attention/MLP or resident optimization.",
+    "Start from the best verified parent after A0014 verdict; bring in A0009 within-call dedup plus fused consumption as one compressed-transport design.",
+    "Retain A0009 as the unfused ablation; do not infer causal fusion speedup from isolated intervals or unmatched screens.",
+    "Keep >=8192-token threshold and primary b8 prefill target predeclared if registered; bulk decode and b1 pipeline keep their original algorithms.",
+    "Exact arithmetic order: load K and selected BF16 M, add in FP32, cast to original K dtype; demand zero-error folded-reference tests before timing, including two seeds, gating/QK norm, GQA, padding and 128 steps.",
+    "If fold_norm=False, retain original expansion/norm/add path; do not silently skip normalization.",
+    "Direct offloader acquire semantics must still return fresh full rows; fused model handle should preserve acquire/release and slot-lifetime contracts.",
+    "Count retained inverse GPU storage, compressed buffer capacity and all real temporaries."
+  ],
+  "implementation_notes": [
+    "MemoryAttention computes k+m before QK normalization; K is a reshaped projection, M rows may have group stride.",
+    "Refactor a ticket raw-row acquisition path with the same readiness dependency; use a PendingM subclass or explicit method only when inverse exists.",
+    "A fused handle must mark acquired before release and preserve cancellation/error behavior.",
+    "Reconcile any new accepted A0014 depth limit instead of overwriting its config/model changes with old A0009 files."
+  ],
+  "failed_profiler": "dedup-expansion-b8.txt and dedup-expansion-profiler-first.py preserve the first attempt: 24 CPU ranges but no valid GPU duration. The successful CUDA-event measurement is separate.",
+  "limitations": "Event intervals can include dispatch gaps/resource contention. CPU/GPU spans overlap; neither is guaranteed removable end-to-end latency."
+}

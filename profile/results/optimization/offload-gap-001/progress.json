@@ -1,11 +1,11 @@
 {
   "campaign_id": "offload-gap-001",
-  "goal_progress": "Three of ten additional verdicts complete: A0011/A0012 within_noise, A0013 rejected. A0014 one-slot automatic pipeline passes 48 tests and standalone zero error; twelve-job screen starting.",
-  "workflow_stage": "screening",
+  "goal_progress": "Three of ten additional final verdicts complete. A0014 one-slot screen improves both prefill latency/gap and reduces buffers; fixed 48-process independent parent confirmation is live. No new candidate retained yet.",
+  "workflow_stage": "parent_confirmation",
   "completed_optimization_verdicts": 13,
   "accepted_steps": 1,
   "active_attempt": "A0014",
-  "controller_pid": 2200820,
+  "controller_pid": 2206123,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
   "final_report": "continuation-01/final/REPORT.md",
@@ -14,13 +14,14 @@
   "publication": "continuation-01/final/publication.json",
   "continuation": "continuation-02/manifest.json",
   "source_candidate": "b9938ebc46d7a92fc07898a09c72edc547f5f8f3",
-  "live_manifest": "profile/results/optimization/offload-gap-001/A0014/R01/manifest.json",
-  "exec_session_id": 29843,
+  "live_manifest": "profile/results/optimization/offload-gap-001/A0014/R02-parent-confirmation/manifest.json",
+  "exec_session_id": 95613,
   "next_actions": [
-    "Poll A0014 fixed 12-job screen, compare A0000 and A0001; only changed prefill paths may nominate gain.",
-    "If promising, fixed 48-process independent parent confirmation and all retention gates; otherwise commit evidence before reverting.",
-    "Continue A0015-A0020 with concrete offload hypotheses. Potential next diagnostic: profile GPU inverse-index materialization in frozen A0009 before considering fused within-call expansion plus k+m. Prior dedup screen loses 2.017 ms at b8; do not assume this cost is removable.",
-    "Other component directions with negative evidence (CPU layout/rank/chunk/native pools and chunked H2D) remain diagnostics, not counted attempts."
+    "Poll session 95613/controller 2206123 and the A0014 confirmation manifest; never restart while live.",
+    "Analyze completed 48 jobs with analyze_paired.py. If parent confirmation qualifies a changed prefill point without regression, A0000 independent confirmation plus full correctness/matrix/generation gates are still required before acceptance.",
+    "If inconclusive/rejected, commit evidence then restore A0001. If accepted only after every gate, subsequent attempts must start from A0014.",
+    "A0015 is not registered yet. Review continuation-02/fused-dedup-feasibility.json and frozen A0009 source for potential fusion of inverse expansion with required k+m; preserve A0009 ablation and declare exactness before edits.",
+    "Continue through A0020, final report/figures/audits/publication; keep original tranche reports unchanged."
   ],
   "additional_completed_verdicts": 3,
   "additional_attempt_target": [
