@@ -1,0 +1,28 @@
+{
+  "campaign_id": "offload-gap-001",
+  "purpose": "Read-only feasibility review while A0006 confirmation runs; not an attempt, benchmark or supported speedup.",
+  "sources": [
+    {
+      "url": "https://docs.nvidia.com/cuda/archive/13.0.1/cuda-c-best-practices-guide/index.html",
+      "claim": "Mapped pinned host memory can be accessed by kernels. Discrete-GPU usefulness depends on access pattern; coalesced one-time reads are the intended case."
+    },
+    {
+      "url": "https://docs.nvidia.com/cuda/cuda-programming-guide/02-basics/understanding-memory.html",
+      "claim": "Host memory must be mapped/page-locked and GPU access must use its device pointer where required."
+    }
+  ],
+  "local_launcher": {
+    "path": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/backends/nvidia/driver.py",
+    "sha256": "83ef58f2371da7ad8e01822c2afc82f9a2d6516c2249ee0bbd8873bb20616be0",
+    "review": "getPointer queries CU_POINTER_ATTRIBUTE_DEVICE_POINTER for objects with data_ptr(). A pinned-host tensor may be accepted if driver maps it; must test capability, not assume ordinary CPU tensor is accessible."
+  },
+  "hypothesis": "One GPU gather from mapped pinned CPU table could replace CPU lookup plus explicit H2D and potentially GPU-ID D2H staging. Table remains host-resident; reads must be fresh on every forward.",
+  "risks": [
+    "PCIe read latency/bandwidth and SM occupancy can be worse than DMA-engine copies.",
+    "Entire3000MiB table becomes page-locked; host memory accounting must explicitly include it.",
+    "Keep host allocation alive until every kernel completes; close/error cleanup must synchronize before freeing.",
+    "GPU-ID and CPU-ID paths, cross-stream callers, repeated weights/IDs, exactness and bounds handling require tests.",
+    "No GPU/CPU prototype measurements were run concurrently with A0006 formal timing."
+  ],
+  "next_action": "After timing is idle, separately profile small/full-row direct mapped reads against existing gather+H2D before deciding whether to register a model candidate."
+}
