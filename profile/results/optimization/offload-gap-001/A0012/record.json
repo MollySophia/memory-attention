@@ -7,7 +7,7 @@
   "parent_sha": "1b64fe9c7e140c5c66af45df41abd9c044d792d8",
   "accepted_step": null,
   "label": "blocking producer DMA completion events",
-  "workflow_stage": "parent_confirmation",
+  "workflow_stage": "final_verdict",
   "hypothesis": "Use blocking CUDA completion events for producer host-buffer reuse, reducing CPU consumption during DMA waits and potential competition with lookup/model submission.",
   "expected_bottleneck": "Instrumented frozen A0001 producer event waits consume 13.1856/59.5677 ms thread CPU time within 13.2182/59.8416 ms wall wait at b1/b8. Overlapping wait spans are not additive removable model latency.",
   "profile_evidence": [
@@ -41,9 +41,9 @@
     "reason_batch16": "Producer pipeline wait scheduling change"
   },
   "not_run": {
-    "confirmation": "Not yet nominated; staged gates required.",
-    "full_validation": "Not yet nominated; staged gates required.",
-    "generation_validation": "Not yet nominated; staged gates required."
+    "frozen_baseline_confirmation": "Parent confirmation inconclusive; no nominated candidate, intentionally not run.",
+    "full_validation": "Parent confirmation inconclusive; no nominated candidate, intentionally not run.",
+    "generation_validation": "Parent confirmation inconclusive; no nominated candidate, intentionally not run."
   },
   "candidate_sha": "817cc6b5081acdcc7d50935f98e0a4b8c0b71b3a",
   "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0012",
@@ -61,5 +61,9 @@
   "mechanism_observation": "At b8, instrumented producer waits still span 60.2107 ms wall but consume 0.2281 ms thread CPU, versus A0001 59.8416 wall / 59.5677 CPU. This validates reduced CPU consumption, not model latency benefit.",
   "performance": "screen-comparison.json",
   "screen_decision": "b1 prefill offload and gap reductions 0.140985/0.148229 ms vs A0001; b8 prefill slower 0.356781 ms with gap worse 0.174065 ms. Requires fixed independent confirmation across all four primary workloads. Decode algorithm unchanged; decode fluctuations cannot nominate this optimization.",
-  "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json"
+  "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json",
+  "status": "within_noise",
+  "decision": "All 48 parent-confirmation jobs complete. b1 prefill offload reduction 0.044804 ms CI[-0.353767,0.443376], gap reduction 0.079503 CI[-0.366290,0.525296]; b8 prefill offload 0.132066 CI[-0.836286,1.100418], gap -0.066083 CI[-1.142762,1.010595]. No primary meets both positive lower-bound criteria; decode comparisons unresolved. Lower producer CPU time alone does not meet the campaign latency/gap objective. Close fixed plan without extension and restore A0001.",
+  "parent_confirmation_analysis": "parent-confirmation-analysis.json",
+  "next_insight": "CUDA blocking waits free CPU cycles but yield no confirmed model gain here. Keep original wait behavior; proceed to separately registered tiny mapped-bulk transport."
 }

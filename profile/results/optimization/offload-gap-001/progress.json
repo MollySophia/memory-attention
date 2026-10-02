@@ -1,11 +1,11 @@
 {
   "campaign_id": "offload-gap-001",
-  "goal_progress": "Exactly ten additional verdicts required. A0011 completed within_noise and reverted. A0012 passed correctness, reduced diagnostic wait CPU time, and has a mixed 12-job screen; fixed 48-process parent confirmation is live. One of ten final verdicts complete.",
-  "workflow_stage": "parent_confirmation",
-  "completed_optimization_verdicts": 11,
+  "goal_progress": "A0011 and A0012 within_noise after independent confirmation. Two of ten additional verdicts complete; A0013 draft ready for activation after A0012 revert.",
+  "workflow_stage": "candidate_activation",
+  "completed_optimization_verdicts": 12,
   "accepted_steps": 1,
-  "active_attempt": "A0012",
-  "controller_pid": 2178553,
+  "active_attempt": null,
+  "controller_pid": null,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
   "final_report": "continuation-01/final/REPORT.md",
@@ -14,20 +14,23 @@
   "publication": "continuation-01/final/publication.json",
   "continuation": "continuation-02/manifest.json",
   "source_candidate": "817cc6b5081acdcc7d50935f98e0a4b8c0b71b3a",
-  "live_manifest": "profile/results/optimization/offload-gap-001/A0012/R02-parent-confirmation/manifest.json",
-  "exec_session_id": 57644,
+  "live_manifest": null,
+  "exec_session_id": null,
   "next_actions": [
     "Poll session 57644 / controller 2178553 and A0012/R02-parent-confirmation; never restart while live.",
     "After all 48 jobs terminate, analyze with analyze_paired.py. Only changed prefill workloads can qualify; original dual latency/gap, no resolved primary regression and memory gates apply.",
     "Commit final evidence before reverting if inconclusive/rejected; if nominated, frozen-A0000 confirmation and full validation/correctness/generation remain mandatory.",
-    "Then register A0013 using continuation-02/mapped-bulk-design.json and mapped-bulk.json if still supported; no new GPU timing during A0012 confirmation.",
+    "A0013 is already registered; its isolated implementation-draft.patch and tests are prepared against A0001. After A0012 final verdict, reconcile with best verified parent, activate patch, commit actual implementation, freeze a worktree, then run correctness and screen. No GPU tests/timing while A0012 confirmation is live.",
     "Continue through A0020 and final cumulative report/audits/publication; do not stop after five or count diagnostics."
   ],
-  "additional_completed_verdicts": 1,
+  "additional_completed_verdicts": 2,
   "additional_attempt_target": [
     10,
     10
   ],
   "previous_final_report": "final/REPORT.md",
-  "previous_publication": "final/publication.json"
+  "previous_publication": "final/publication.json",
+  "prepared_attempts": [
+    "A0013"
+  ]
 }
