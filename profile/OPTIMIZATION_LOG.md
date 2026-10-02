@@ -346,3 +346,5 @@ Separate b1 diagnostic finds 12 gathers total10.240 ms (first0.545), versus A000
 ### A0004 registration (offload-gap-001)
 
 Start from verified A0001 after A0003 code-only revert. Test caller-thread per-group production instead of a background producer. Keep one-layer gathers, same copy stream, slots, events, transfer bytes and arithmetic. Existing A0001 b1 ticket-acquire CPU sum10.55 ms and baseline b8 sum92.8 ms motivate removing worker/main coordination; do not interpret these overlapping spans as removable wall time. A0003 shows why group enlargement is not included. Cost risk: CPU gather may delay compute submission and each group switches stream context. Predeclare 12-job primary+batch16 screen after exactness tests.
+
+A0004 implementation29a0d4ff761e862423e5cd22a8d2a475d9a99a78 frozen at /home/molly/workspace-memory-attn/offload-gap-001-A0004. All45 tests pass, including cross-stream partial-group/single-slot reuse and error cleanup, plus standalone exact-zero comparison. Twelve-job screening estimate261 seconds, same counts/representative measured costs as A0003.

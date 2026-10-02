@@ -6,7 +6,7 @@
   "parent_sha": "a6da6e541fb4fb3f53191c63f745b9be9ed9c6b2",
   "accepted_step": null,
   "label": "caller-thread pipeline producer",
-  "workflow_stage": "registered",
+  "workflow_stage": "screening",
   "hypothesis": "Prepare each one-layer group on the calling CPU thread before its consumer, retaining copy-stream overlap with previously queued GPU work. Avoid worker dispatch, separate thread CUDA context and main/producer handshakes. A0001 b1 profile spends 10.55 ms summed CPU ticket acquisition; b8 baseline 92.8 ms. These overlaps are not additive, so measure end-to-end.",
   "expected_bottleneck": "producer/main-thread coordination and CPU scheduling",
   "change": "Replace background producer submission with per-group inline production, keeping identical gather, copy stream, buffer slots, events, group size and arithmetic. No A0002 byte-copy or A0003 grouping changes.",
@@ -44,5 +44,17 @@
   "tradeoffs": [
     "CPU gather can now delay compute submission; per-group stream context switching may cost more than worker coordination.",
     "Host/GPU slot capacities and all lookup/transfer bytes remain unchanged."
-  ]
+  ],
+  "candidate_sha": "29a0d4ff761e862423e5cd22a8d2a475d9a99a78",
+  "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0004",
+  "correctness": {
+    "pytest": "45 passed in 9.54s",
+    "standalone": "PASS; worst max diff 0",
+    "logs": [
+      "correctness-tests.txt",
+      "standalone-correctness.txt"
+    ]
+  },
+  "screen_manifest": "R01/manifest.json",
+  "screen_summary": "R01-summary.json"
 }
