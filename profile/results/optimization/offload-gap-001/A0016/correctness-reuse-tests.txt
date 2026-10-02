@@ -1,0 +1,12 @@
+
+profile/results/optimization/offload-gap-001/test_correctness_reuse.py::test_all_four_frozen_reference_fingerprints_validate PASSED [ 11%]
+profile/results/optimization/offload-gap-001/test_correctness_reuse.py::test_reference_mismatch_is_rejected[seed] PASSED [ 22%]
+profile/results/optimization/offload-gap-001/test_correctness_reuse.py::test_reference_mismatch_is_rejected[source] PASSED [ 33%]
+profile/results/optimization/offload-gap-001/test_correctness_reuse.py::test_reference_mismatch_is_rejected[threads] PASSED [ 44%]
+profile/results/optimization/offload-gap-001/test_correctness_reuse.py::test_reference_mismatch_is_rejected[config] PASSED [ 55%]
+profile/results/optimization/offload-gap-001/test_correctness_reuse.py::test_reference_mismatch_is_rejected[missing_step] PASSED [ 66%]
+profile/results/optimization/offload-gap-001/test_correctness_reuse.py::test_reference_mismatch_is_rejected[missing_hidden] PASSED [ 77%]
+profile/results/optimization/offload-gap-001/test_correctness_reuse.py::test_reference_mismatch_is_rejected[nonfinite] PASSED [ 88%]
+profile/results/optimization/offload-gap-001/test_correctness_reuse.py::test_reference_mismatch_is_rejected[shape] PASSED [100%]
+
+============================== 9 passed in 0.11s ===============================

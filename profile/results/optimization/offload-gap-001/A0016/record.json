@@ -70,5 +70,7 @@
   "parent_confirmation_analysis": "parent-confirmation-analysis.json",
   "parent_confirmation_decision": "Passes prespecified primary gates: b1 prefill offload reduction0.430878 ms CI[0.153321,0.708434], gap0.451613 CI[0.304395,0.598832]. No resolved primary offload/resident regression and memory savings preserved. b8 decode slower in all three blocks, mean reduction-0.038070 CI[-0.100821,0.024682], unresolved and retained as a limitation. Not accepted; independent frozen-baseline confirmation and all full gates remain.",
   "confirmation_manifest": "R03-baseline-confirmation/manifest.json",
-  "confirmation_plan_id": "formal_v1_w10_n10_r3__balanced_order_v2"
+  "confirmation_plan_id": "formal_v1_w10_n10_r3__balanced_order_v2",
+  "conditional_validation_plan": "conditional-validation-plan.json",
+  "validation_controller": "validation-v3.json"
 }

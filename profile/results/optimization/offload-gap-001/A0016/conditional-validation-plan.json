@@ -1,0 +1,55 @@
+{
+  "campaign_id": "offload-gap-001",
+  "attempt_id": "A0016",
+  "status": "conditional_plan",
+  "condition": "Run only if fixed R03 frozen-baseline confirmation passes, after the live controller terminates. No acceptance issued automatically.",
+  "order": [
+    "Validate and reuse four frozen A0000 resident correctness fingerprints",
+    "Run four new A0016 full-model offload correctness trajectories and exact comparisons",
+    "Plan and run full paired validation with all current R03 primary processes reused",
+    "Plan and run growing generation validation",
+    "Manual source, memory, regression and artifact audit; investigate any full-matrix adverse points with predeclared bounded paired follow-up"
+  ],
+  "correctness": {
+    "new_processes": 4,
+    "reused_resident_references": 4,
+    "batches": [
+      1,
+      8
+    ],
+    "seeds": [
+      1234,
+      4321
+    ],
+    "logit_checkpoints_per_run": 129,
+    "detailed_hidden_kv_steps": [
+      0,
+      1,
+      2,
+      128
+    ],
+    "estimated_new_seconds": 85.366519,
+    "cost_source": "../A0001/validation-v2.json",
+    "reference_directory": "../A0001/R06-full-correctness",
+    "validation": "reuse_correctness.py plus12 source/scope/controller tests passed; candidate outputs not yet tested"
+  },
+  "full_matrix": {
+    "points": 84,
+    "new_processes": 68,
+    "reused_primary_points": 16,
+    "reused_primary_raw_processes": 48,
+    "estimate": "Exact measured-cost plan generated before launch after R03 passes.",
+    "pairing_reason": "Fresh matched baseline/candidate nonprimary processes preserve the current balanced regression-pair design; all matching current primary evidence is reused. Historical matrices remain untouched."
+  },
+  "generation": {
+    "points": 12,
+    "new_processes": 12,
+    "prefix": 2048,
+    "decode_steps": 128,
+    "warmup_trajectories": 2,
+    "samples_per_round": 5,
+    "rounds": 3,
+    "estimate": "Exact measured-cost plan generated before launch."
+  },
+  "accepted": false
+}

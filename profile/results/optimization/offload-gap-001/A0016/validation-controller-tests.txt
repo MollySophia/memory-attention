@@ -1,0 +1,15 @@
+
+profile/results/optimization/offload-gap-001/test_correctness_reuse.py::test_all_four_frozen_reference_fingerprints_validate PASSED [  8%]
+profile/results/optimization/offload-gap-001/test_correctness_reuse.py::test_reference_mismatch_is_rejected[seed] PASSED [ 16%]
+profile/results/optimization/offload-gap-001/test_correctness_reuse.py::test_reference_mismatch_is_rejected[source] PASSED [ 25%]
+profile/results/optimization/offload-gap-001/test_correctness_reuse.py::test_reference_mismatch_is_rejected[threads] PASSED [ 33%]
+profile/results/optimization/offload-gap-001/test_correctness_reuse.py::test_reference_mismatch_is_rejected[config] PASSED [ 41%]
+profile/results/optimization/offload-gap-001/test_correctness_reuse.py::test_reference_mismatch_is_rejected[missing_step] PASSED [ 50%]
+profile/results/optimization/offload-gap-001/test_correctness_reuse.py::test_reference_mismatch_is_rejected[missing_hidden] PASSED [ 58%]
+profile/results/optimization/offload-gap-001/test_correctness_reuse.py::test_reference_mismatch_is_rejected[nonfinite] PASSED [ 66%]
+profile/results/optimization/offload-gap-001/test_correctness_reuse.py::test_reference_mismatch_is_rejected[shape] PASSED [ 75%]
+profile/results/optimization/offload-gap-001/test_validation_controller.py::test_reused_reference_does_not_skip_candidate_or_gate[confirmation_failed] PASSED [ 83%]
+profile/results/optimization/offload-gap-001/test_validation_controller.py::test_reused_reference_does_not_skip_candidate_or_gate[correctness_failed] PASSED [ 91%]
+profile/results/optimization/offload-gap-001/test_validation_controller.py::test_reused_reference_does_not_skip_candidate_or_gate[passed] PASSED [100%]
+
+============================== 12 passed in 0.13s ==============================
