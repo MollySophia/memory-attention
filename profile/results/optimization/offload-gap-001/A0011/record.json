@@ -7,7 +7,7 @@
   "parent_sha": "c678ecffc56d3a80da8b8506241e0d58f7059ea0",
   "accepted_step": null,
   "label": "reuse pinned input-ID staging buffers",
-  "workflow_stage": "parent_confirmation",
+  "workflow_stage": "final_verdict",
   "hypothesis": "Replace a fresh pageable CPU ID tensor on every GPU-input call with a preallocated pinned int64 staging buffer per cached offloader, preserving synchronous readiness before embedding and CPU gather.",
   "expected_bottleneck": "Fresh GPU-to-CPU ID staging allocation and pageable transfer overhead; isolated b8 prefill staging 0.0134 ms versus 0.0069 ms with reusable pinned storage.",
   "profile_evidence": [
@@ -40,9 +40,9 @@
     "reason_batch16": "ID transfer/staging change"
   },
   "not_run": {
-    "confirmation": "Not yet nominated; staged gates required.",
-    "full_validation": "Not yet nominated; staged gates required.",
-    "generation_validation": "Not yet nominated; staged gates required."
+    "frozen_baseline_confirmation": "Parent confirmation inconclusive; no nominated candidate, intentionally not run.",
+    "full_validation": "Parent confirmation inconclusive; no nominated candidate, intentionally not run.",
+    "generation_validation": "Parent confirmation inconclusive; no nominated candidate, intentionally not run."
   },
   "candidate_sha": "812ac2decafaf2d9919028a7bbd0c740db07ba1a",
   "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0011",
@@ -58,5 +58,10 @@
   "screen_summary": "R01-summary.json",
   "performance": "screen-comparison.json",
   "screen_decision": "Weak positive b8 prefill latency/gap reductions 0.387758/0.044000 ms; b1 decode slower 0.360538 ms. Fixed independent confirmation required; no gain claim.",
-  "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json"
+  "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json",
+  "status": "within_noise",
+  "decision": "All 48 predeclared independent parent-confirmation jobs completed. None of the four primary workloads resolves both positive offload latency and absolute-gap reduction. Prefill b1 reductions 0.179730/0.186672 ms, intervals cross zero; b8 0.319383/0.269243 ms, intervals cross zero. Both decode comparisons unresolved. No resolved primary offload regression or loss of measured GPU savings. Close without extension and restore A0001.",
+  "parent_confirmation_analysis": "parent-confirmation-analysis.json",
+  "next_insight": "Microsecond ID staging improvement is insufficient for a confirmed model-level gain. Retain A0001; investigate remaining wait policy and tiny-transfer paths.",
+  "memory_observation": "Extra pinned IDs across prefill/decode cached shapes: 16392/131136/262272 bytes for b1/b8/b16; GPU buffers unchanged. Verified in screen-memory-audit.json."
 }

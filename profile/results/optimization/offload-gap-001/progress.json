@@ -1,11 +1,11 @@
 {
   "campaign_id": "offload-gap-001",
-  "goal_progress": "Continuation-02 requires exactly ten additional verdicts A0011-A0020. A0011 passed correctness and screen, now running fixed 48-process independent parent confirmation. Zero new final verdicts.",
-  "workflow_stage": "parent_confirmation",
-  "completed_optimization_verdicts": 10,
+  "goal_progress": "A0011 within_noise after fixed 48-process confirmation. One of ten additional attempts complete; A0012-A0020 remain. Post-confirmation diagnostics now run sequentially.",
+  "workflow_stage": "profiling",
+  "completed_optimization_verdicts": 11,
   "accepted_steps": 1,
-  "active_attempt": "A0011",
-  "controller_pid": 2155455,
+  "active_attempt": null,
+  "controller_pid": null,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
   "final_report": "continuation-01/final/REPORT.md",
@@ -14,14 +14,13 @@
   "publication": "continuation-01/final/publication.json",
   "continuation": "continuation-02/manifest.json",
   "source_candidate": "812ac2decafaf2d9919028a7bbd0c740db07ba1a",
-  "live_manifest": "profile/results/optimization/offload-gap-001/A0011/R02-parent-confirmation/manifest.json",
-  "exec_session_id": 97859,
+  "live_manifest": null,
+  "exec_session_id": 18968,
   "next_actions": [
-    "Poll live session 97859 and A0011/R02-parent-confirmation; do not restart on an observation timeout.",
-    "Analyze all 48 jobs when terminal; apply unchanged dual latency/gap and regression gates; commit evidence before accept/revert.",
-    "Continue A0012-A0020 with new profiling-supported offload hypotheses; no further GPU diagnostics while confirmation runs."
+    "Commit A0011 verdict and raw evidence, then code-only restore A0001.",
+    "Poll diagnostic session 18968; inspect wait CPU, mapped bulk and persistent gather results before A0012 registration."
   ],
-  "additional_completed_verdicts": 0,
+  "additional_completed_verdicts": 1,
   "additional_attempt_target": [
     10,
     10
