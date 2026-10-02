@@ -1,0 +1,9 @@
+{
+  "campaign_id": "offload-gap-001",
+  "remote": "origin",
+  "branch": "exp-0/attempts/offload-gap-001",
+  "verified_report_commit": "b687044b4179e09ead630d0cc132f787b100772b",
+  "remote_head_at_verification": "b687044b4179e09ead630d0cc132f787b100772b",
+  "status": "report_and_all_attempt_evidence_published",
+  "upstream_published": false
+}
