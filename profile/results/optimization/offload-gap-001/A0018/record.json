@@ -7,7 +7,7 @@
   "parent_sha": "91eb8ad887cae83734c16b0978801e2da24965fc",
   "accepted_step": null,
   "label": "submit embedding before waiting for pipeline input IDs",
-  "workflow_stage": "screening",
+  "workflow_stage": "final_verdict",
   "hypothesis": "For pipeline inputs, enqueue nonblocking D2H into reusable pinned ID storage, record completion, submit embedding, then wait for host IDs before CPU gather. Overlap host embedding dispatch with ID transfer/completion instead of blocking before dispatch.",
   "expected_bottleneck": "Frozen A0001 instrumented b1/b8 ID staging CPU spans0.033814/0.047770 ms precede embedding dispatch0.034976/0.046488 ms. These instrumented spans are not guaranteed removable latency. A0011 reusable blocking IDs failed independent confirmation; this attempt specifically changes the wait position.",
   "profile_evidence": [
@@ -49,9 +49,10 @@
     "reason_batch16": "Input staging and pipeline scheduling"
   },
   "not_run": {
-    "confirmation": "Draft only; staged gates required.",
-    "full_validation": "Draft only; staged gates required.",
-    "generation_validation": "Draft only; staged gates required."
+    "confirmation": "Not run: target screen unpromising.",
+    "full_validation": "Not run: screen rejected.",
+    "generation_validation": "Not run: screen rejected.",
+    "full_model_correctness": "Not run: small-model exactness passed; not nominated for retention."
   },
   "draft_root": "/tmp/offload-gap-A0018-draft-7htjgy3o",
   "draft_condition": "Activated from verified A0016 after A0017 within_noise verdict and code-only reversion. Preserves selective-depth configuration and all parent tests.",
@@ -79,5 +80,13 @@
       "standalone-correctness.txt"
     ]
   },
-  "screen_manifest": "R01/manifest.json"
+  "screen_manifest": "R01/manifest.json",
+  "status": "rejected",
+  "screen_summary": "R01-summary.json",
+  "performance": "screen-comparison.json",
+  "decision": "Rejected at screening as unpromising: b1 prefill offload/gap reductions0.007509/0.015961 ms, while b8 prefill slower0.160926 ms and gap worse0.227580 ms. Tiny b1 observation is below its descriptive sample SD0.019534 ms (parent0.010548), not a resolved gain. No independent statistical regression claim from this short screen; no formal/full/generation escalation.",
+  "limitations": [
+    "b1/b16 decode slower0.249344/0.084073 ms in the short screen; retained as observations, not resolved regressions.",
+    "Screen sample dispersion is descriptive; no confidence interval or universal acceptance threshold is inferred."
+  ]
 }
