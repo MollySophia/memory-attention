@@ -47,15 +47,6 @@ class GroupTicket:
         self.waited = False
         self.release_count = 0
 
-    def reset(self) -> None:
-        # Called only after the previous serialized forward has joined its
-        # producer and submitted every consumer release. CUDA work may remain.
-        self.ready.clear()
-        self.released.clear()
-        self.error = None
-        self.waited = False
-        self.release_count = 0
-
     def acquire(self, offset: int) -> torch.Tensor:
         # CPU must have submitted the copy, then we wait for the GPU side of it.
         self.ready.wait()
@@ -154,11 +145,6 @@ class MemoryTableOffloader:
             )
             for _ in range(min(prefetch_depth, len(self.groups)))
         ]
-        self.generation = 0
-        self.tickets = [
-            GroupTicket(self, self.slots[i % len(self.slots)], start)
-            for i, start in enumerate(self.groups)
-        ]
 
     @property
     def policy(self) -> str:
@@ -182,14 +168,9 @@ class MemoryTableOffloader:
                     slot = ticket.slot
                     previous = slot["previous"]
                     if previous is not None:
-                        previous_ticket, previous_generation = previous
-                        if previous_generation == self.generation:
-                            while not previous_ticket.released.wait(timeout=0.05):
-                                if cancel.is_set():
-                                    return
-                        # Earlier generations have already submitted all CPU
-                        # releases before forward returned. Their CUDA reads
-                        # still require the original copied/consumed ordering.
+                        while not previous.released.wait(timeout=0.05):
+                            if cancel.is_set():
+                                return
                         if cancel.is_set():
                             return
                         # The pinned host buffer is still being read by DMA.
@@ -205,7 +186,7 @@ class MemoryTableOffloader:
                         self._view(slot["host"], ticket.start), non_blocking=True
                     )
                     slot["copied"].record(self.copy_stream)
-                    slot["previous"] = (ticket, self.generation)
+                    slot["previous"] = ticket
                     # "Ready" means submitted, not completed.
                     ticket.ready.set()
         except BaseException as exc:
@@ -232,10 +213,10 @@ class MemoryTableOffloader:
             ids = ids_cpu.reshape(-1).contiguous()
             entry = torch.cuda.Event()
             entry.record(torch.cuda.current_stream(self.device))
-            self.generation += 1
-            tickets = self.tickets
-            for ticket in tickets:
-                ticket.reset()
+            tickets = [
+                GroupTicket(self, self.slots[i % len(self.slots)], start)
+                for i, start in enumerate(self.groups)
+            ]
             future = self.worker.submit(self._produce, ids, tickets, entry, cancel)
             for ticket in tickets:
                 for offset in range(ticket.count):
