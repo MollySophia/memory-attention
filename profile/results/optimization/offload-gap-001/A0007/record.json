@@ -7,7 +7,7 @@
   "parent_sha": "44ea50bc6ca484379b37db22961682b2cb1baf36",
   "accepted_step": null,
   "label": "precompute immutable pipeline tensor views",
-  "workflow_stage": "screening",
+  "workflow_stage": "final_verdict",
   "hypothesis": "Repeated slicing/view creation on producer and consumer threads adds Python/ATen overhead. Precompute zero-copy source, host and GPU views during offloader construction, while performing fresh gathers every call.",
   "expected_bottleneck": "96 instrumented buffer-view operations perprefill total0.316ms atb1 and1.089ms atb8, plus uninstrumented source/layer slices.",
   "profile_evidence": [
@@ -41,12 +41,12 @@
     "reason_batch16": "Pipeline execution integration; retain batch16 scheduling control"
   },
   "not_run": {
-    "confirmation": "Only if screen promises incremental gain",
-    "full_validation": "Only if nominated",
-    "generation_validation": "Only if nominated"
+    "confirmation": "Not nominated: no target prefill offload speedup at screen; intentionally notrun.",
+    "full_validation": "Not nominated: no target prefill offload speedup at screen; intentionally notrun.",
+    "generation_validation": "Not nominated: no target prefill offload speedup at screen; intentionally notrun."
   },
   "candidate_sha": "2bcbe8d197ef3244af1f51beb1214e4f3ecf6ffc",
-  "decision": "Exactness and fresh-data alias tests pass. Proceed to fixed12-job screen.",
+  "decision": "Twelve-job screen unpromising: b1/b8 prefill offload slower0.0331/0.5340ms versusA0001. b1 gap worsens0.0336ms; b8 gap improves0.1394 only with slower offload, failing objective. b16 slower1.3155ms. Stop atscreen; no confirmation/full/generation. b1 decode mean5.536ms fluctuates despite unchanged bulkpath and is not attributed causally to thischange.",
   "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0007",
   "correctness": {
     "pytest": "47 passed in9.55s",
@@ -57,5 +57,8 @@
     ]
   },
   "screen_manifest": "R01/manifest.json",
-  "screen_summary": "R01-summary.json"
+  "screen_summary": "R01-summary.json",
+  "status": "rejected",
+  "performance": "screen-comparison.json",
+  "next_insight": "Reducing tensor metadata alone does not show model-level benefit; focus on CPU gather/transfer execution alternatives."
 }
