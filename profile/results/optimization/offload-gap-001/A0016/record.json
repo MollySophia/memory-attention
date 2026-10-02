@@ -1,0 +1,54 @@
+{
+  "campaign_id": "offload-gap-001",
+  "continuation_id": "continuation-02",
+  "attempt_id": "A0016",
+  "parent_attempt_id": "A0001",
+  "parent_source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
+  "parent_sha": "91d03aff8cb15b72fef197b6a7a44d2d80b666a0",
+  "accepted_step": null,
+  "label": "single-slot automatic pipeline for small prefill only",
+  "workflow_stage": "implementation_draft",
+  "hypothesis": "Restrict one-slot automatic pipeline to <=2048-token calls. Preserve the evidenced b1 prefill overlap/working-set improvement from A0014 while leaving the high-volume b8 pipeline capacity and complete b8 primary execution path unchanged.",
+  "expected_bottleneck": "A0014 independently confirms b1 prefill latency/gap reductions but fails on b8 decode after its changed prefix allocation. Applying the small working set only in the measured small-prefill regime tests a shape-specific scheduling policy.",
+  "profile_evidence": [
+    "../continuation-02/selective-depth-feasibility.json",
+    "../A0014/parent-confirmation-analysis.json",
+    "../A0014/confirmation-memory-audit.json"
+  ],
+  "change": "Automatic pipeline uses min(configured depth,1) only at total input tokens <=2048. Preserve bulk cutoff1024, manual pipeline depth, group size, transfers/events and arithmetic. Larger calls retain original depth.",
+  "tradeoffs": [
+    "A0014 does not establish why b8 decode regressed. All four primary workloads still require independent confirmation.",
+    "The fixed2048-token boundary must be tested; no post-result threshold tuning within this attempt."
+  ],
+  "primary_target": "b1 prefill only; other unchanged primary paths cannot nominate gain",
+  "protocol_version": "offload_gap_v1",
+  "original_protocol_version": "offload_gap_v1",
+  "measurement_plan_id": "screen_v1_w3_n5_r1",
+  "screen": {
+    "batches": [
+      1,
+      8,
+      16
+    ],
+    "length": 2048,
+    "modes": [
+      "prefill",
+      "decode"
+    ],
+    "variants": [
+      "ma_offload",
+      "ma_gpu"
+    ],
+    "jobs": 12,
+    "reason_batch16": "Shape-specific pipeline policy"
+  },
+  "not_run": {
+    "confirmation": "Draft only; staged nomination gates required.",
+    "full_validation": "Draft only; staged nomination gates required.",
+    "generation_validation": "Draft only; staged nomination gates required."
+  },
+  "draft_root": "/tmp/offload-gap-A0016-draft-81086aqd",
+  "draft_condition": "Prepare isolated draft only during A0015 confirmation. Activate after its final verdict from best verified parent, reconciling any accepted A0015 fusion. No GPU tests or timings until then.",
+  "draft_patch": "isolated-draft.patch",
+  "draft_validation": "Syntax compile only; GPU tests pending A0015 final verdict and parent reconciliation."
+}
