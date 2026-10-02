@@ -1,31 +1,30 @@
 {
   "campaign_id": "offload-gap-001",
-  "goal_progress": "Fiveadditionalverdicts complete: A0006within_noise,A0007\u2013A0010rejected. A0001 remainsretained. Continuationfinalreport/figures/audit/publication pending.",
-  "workflow_stage": "final_reporting",
+  "goal_progress": "Five additional attempts completed and audited: A0006 within_noise; A0007-A0010 rejected. A0001 retained. Final publication verification pending.",
+  "workflow_stage": "publishing",
   "completed_optimization_verdicts": 10,
   "accepted_steps": 1,
   "active_attempt": null,
   "controller_pid": null,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
-  "final_report": "final/REPORT.md",
-  "final_audit": "final/core-audit.json",
+  "final_report": "continuation-01/final/REPORT.md",
+  "final_audit": "continuation-01/final/core-audit.json",
   "status": "active",
-  "publication": "final/publication.json",
+  "publication": "continuation-01/final/publication.json",
   "continuation": "continuation-01/manifest.json",
-  "source_candidate": "b22f8f616ee933ddc4ad2dd09c3eb91e60ef477b",
-  "live_manifest": "profile/results/optimization/offload-gap-001/A0010/R01/manifest.json",
+  "source_candidate": null,
+  "live_manifest": null,
   "exec_session_id": null,
   "next_actions": [
-    "Poll existingA0010screen;12jobs. Summarize/compareA0000/A0001 oncecomplete.",
-    "If targetprefill showslatency+gapbenefit, fixed48-process parentconfirmation allprimary; freshA0000/full/generation/fullcorrectness requiredbeforeanyacceptance. Noacceptancefromscreen.",
-    "Ifrejected/withinnoise: commitallresultsevidence thenrestore fla/layers/memory_offload.py, profile/benchmark_telemetry.py, tests/test_memory_offload_regressions.py fromA0001.",
-    "AfterA0010finalverdict fiveadditionalattemptscomplete. Exportcontinuation-01/final withcumulative10attempt history and retainedformalstepfigures. ReuseA0001validfull/gen/exactevidence ifstillincumbent.",
-    "Auditadditionalrawrecords/sources/plans/correctness and5\u201310additionalcount; audit_final.py --continuation continuation-01. Preserveoriginalfinalreport. Commit/pushfinalartifacts,verifyremoteandcleansource beforegoalcomplete."
+    "Commit and push continuation artifacts; verify origin branch.",
+    "Record publication, push seal, verify clean source and remote before completing goal."
   ],
   "additional_completed_verdicts": 5,
   "additional_attempt_target": [
     5,
     10
-  ]
+  ],
+  "previous_final_report": "final/REPORT.md",
+  "previous_publication": "final/publication.json"
 }

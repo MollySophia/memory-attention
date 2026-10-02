@@ -11,7 +11,7 @@
   "campaign_head_at_start": "9661acda594b2b9a1fc0d13e94cab2922f68f989",
   "protocol": "offload_gap_v1",
   "scope": "Continue same campaign with monotonic IDs and unchanged acceptance/correctness/memory criteria. Preserve prior final report as the completed first tranche; later report separately covers continuation and cumulative results.",
-  "status": "A0006_screening",
+  "status": "experiments_and_audit_complete_publication_pending",
   "candidate_directions": [
     "A0006 registered: decouple host refill from prior GPU consumer release.",
     "Investigate precomputing per-group pinned/device views;96 operations cost0.316/1.089ms instrumented atb1/b8.",
@@ -19,5 +19,17 @@
     "Investigate avoiding tiny GPU-ID staging allocation with bounded pinned storage, preserving CPU readiness and concurrent-forward rejection.",
     "Investigate overlapping input staging/embedding with producer startup, if diagnostics support a remaining critical-path dependency."
   ],
-  "note": "Directions are hypotheses to investigate, not registered attempts or promised changes. Register each before edits; do not count pure diagnostics or repetitions."
+  "note": "Directions are hypotheses to investigate, not registered attempts or promised changes. Register each before edits; do not count pure diagnostics or repetitions.",
+  "completed_additional_attempts": 5,
+  "final_outcomes": {
+    "A0006": "within_noise",
+    "A0007": "rejected",
+    "A0008": "rejected",
+    "A0009": "rejected",
+    "A0010": "rejected"
+  },
+  "final_incumbent": "A0001",
+  "final_report": "final/REPORT.md",
+  "publication": "final/publication.json",
+  "audit_completed_at_utc": "2026-10-02T05:42:26.028489+00:00"
 }

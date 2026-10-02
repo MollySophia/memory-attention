@@ -1,0 +1,45 @@
+attempt,label,status,mode,batch,length,measurement_plan_id,measured_ms,sample_sd_ms,incumbent_attempt,incumbent_ms
+A0000,restored model with verified measurement harness,baseline,prefill,1,2048,screen_v1_w3_n5_r1,43.60288484022021,0.1335433115404926,A0000,43.60288484022021
+A0001,pipeline above 1024 tokens,accepted,prefill,1,2048,screen_v1_w3_n5_r1,29.37809396535158,0.43202527240237043,A0001,29.37809396535158
+A0002,serial byte copies for tiny CPU lookups,within_noise,prefill,1,2048,screen_v1_w3_n5_r1,29.43675108253956,0.055349668595151905,A0001,29.37809396535158
+A0003,two-layer groups in automatic pipeline,rejected,prefill,1,2048,screen_v1_w3_n5_r1,31.843384448438883,1.276848331012971,A0001,29.37809396535158
+A0004,caller-thread pipeline producer,within_noise,prefill,1,2048,screen_v1_w3_n5_r1,29.026863165199757,0.06267518938346243,A0001,29.37809396535158
+A0005,compute-stream copies for tiny bulk transfers,within_noise,prefill,1,2048,screen_v1_w3_n5_r1,29.242638871073723,0.07830530887238196,A0001,29.37809396535158
+A0006,refill host slot before consumer release,within_noise,prefill,1,2048,screen_v1_w3_n5_r1,29.144953936338425,0.05450353804917386,A0001,29.37809396535158
+A0007,precompute immutable pipeline tensor views,rejected,prefill,1,2048,screen_v1_w3_n5_r1,29.411230608820915,0.14169696053871902,A0001,29.37809396535158
+A0008,mapped-host GPU gather for pipeline,rejected,prefill,1,2048,screen_v1_w3_n5_r1,29.42277453839779,0.0506216965367489,A0001,29.37809396535158
+A0009,within-call token dedup for large pipeline inputs,rejected,prefill,1,2048,screen_v1_w3_n5_r1,29.681336414068937,0.7403451742581575,A0001,29.37809396535158
+A0010,alternate pinned host buffers per GPU slot,rejected,prefill,1,2048,screen_v1_w3_n5_r1,31.109227053821087,0.18266807797334106,A0001,29.37809396535158
+A0000,restored model with verified measurement harness,baseline,decode,1,2048,screen_v1_w3_n5_r1,4.680408537387848,0.03625942888342132,A0000,4.680408537387848
+A0001,pipeline above 1024 tokens,accepted,decode,1,2048,screen_v1_w3_n5_r1,4.620579164475203,0.06799069901388392,A0001,4.620579164475203
+A0002,serial byte copies for tiny CPU lookups,within_noise,decode,1,2048,screen_v1_w3_n5_r1,4.609972238540649,0.06474760885699228,A0001,4.620579164475203
+A0003,two-layer groups in automatic pipeline,rejected,decode,1,2048,screen_v1_w3_n5_r1,4.780148807913065,0.41265621580905504,A0001,4.620579164475203
+A0004,caller-thread pipeline producer,within_noise,decode,1,2048,screen_v1_w3_n5_r1,4.614540189504623,0.07508650686919925,A0001,4.620579164475203
+A0005,compute-stream copies for tiny bulk transfers,within_noise,decode,1,2048,screen_v1_w3_n5_r1,4.586316272616386,0.08242891479504098,A0001,4.620579164475203
+A0006,refill host slot before consumer release,within_noise,decode,1,2048,screen_v1_w3_n5_r1,4.658252373337746,0.05620729435456619,A0001,4.620579164475203
+A0007,precompute immutable pipeline tensor views,rejected,decode,1,2048,screen_v1_w3_n5_r1,5.536122154444456,0.3548524925981378,A0001,4.620579164475203
+A0008,mapped-host GPU gather for pipeline,rejected,decode,1,2048,screen_v1_w3_n5_r1,5.354337953031063,0.033009301947367335,A0001,4.620579164475203
+A0009,within-call token dedup for large pipeline inputs,rejected,decode,1,2048,screen_v1_w3_n5_r1,4.716119170188904,0.20085764811107726,A0001,4.620579164475203
+A0010,alternate pinned host buffers per GPU slot,rejected,decode,1,2048,screen_v1_w3_n5_r1,4.694057442247868,0.0760907527394704,A0001,4.620579164475203
+A0000,restored model with verified measurement harness,baseline,prefill,8,2048,screen_v1_w3_n5_r1,209.1618636623025,0.45023637244545023,A0000,209.1618636623025
+A0001,pipeline above 1024 tokens,accepted,prefill,8,2048,screen_v1_w3_n5_r1,209.46270804852247,0.7164509828592313,A0001,209.46270804852247
+A0002,serial byte copies for tiny CPU lookups,within_noise,prefill,8,2048,screen_v1_w3_n5_r1,209.8816559650004,0.1931345149351365,A0001,209.46270804852247
+A0003,two-layer groups in automatic pipeline,rejected,prefill,8,2048,screen_v1_w3_n5_r1,213.51997638121247,0.12858964132972123,A0001,209.46270804852247
+A0004,caller-thread pipeline producer,within_noise,prefill,8,2048,screen_v1_w3_n5_r1,209.16501358151436,0.17931906377304757,A0001,209.46270804852247
+A0005,compute-stream copies for tiny bulk transfers,within_noise,prefill,8,2048,screen_v1_w3_n5_r1,210.35980824381113,0.3400889437135752,A0001,209.46270804852247
+A0006,refill host slot before consumer release,within_noise,prefill,8,2048,screen_v1_w3_n5_r1,209.7764796577394,0.16292688927115284,A0001,209.46270804852247
+A0007,precompute immutable pipeline tensor views,rejected,prefill,8,2048,screen_v1_w3_n5_r1,209.99673306941986,0.2679079163717672,A0001,209.46270804852247
+A0008,mapped-host GPU gather for pipeline,rejected,prefill,8,2048,screen_v1_w3_n5_r1,213.10078306123614,0.22900154961800612,A0001,209.46270804852247
+A0009,within-call token dedup for large pipeline inputs,rejected,prefill,8,2048,screen_v1_w3_n5_r1,211.4801300689578,0.16612503940625323,A0001,209.46270804852247
+A0010,alternate pinned host buffers per GPU slot,rejected,prefill,8,2048,screen_v1_w3_n5_r1,210.2196790277958,0.27966041604938274,A0001,209.46270804852247
+A0000,restored model with verified measurement harness,baseline,decode,8,2048,screen_v1_w3_n5_r1,11.02176634594798,0.0211247494037617,A0000,11.02176634594798
+A0001,pipeline above 1024 tokens,accepted,decode,8,2048,screen_v1_w3_n5_r1,11.029212363064289,0.026242426020020155,A0001,11.029212363064289
+A0002,serial byte copies for tiny CPU lookups,within_noise,decode,8,2048,screen_v1_w3_n5_r1,10.99107600748539,0.010654180077795148,A0001,11.029212363064289
+A0003,two-layer groups in automatic pipeline,rejected,decode,8,2048,screen_v1_w3_n5_r1,11.008177977055311,0.02910316640014343,A0001,11.029212363064289
+A0004,caller-thread pipeline producer,within_noise,decode,8,2048,screen_v1_w3_n5_r1,11.041998583823442,0.024107978915256307,A0001,11.029212363064289
+A0005,compute-stream copies for tiny bulk transfers,within_noise,decode,8,2048,screen_v1_w3_n5_r1,11.001310404390097,0.01303693545033228,A0001,11.029212363064289
+A0006,refill host slot before consumer release,within_noise,decode,8,2048,screen_v1_w3_n5_r1,11.004539579153061,0.024696122846473257,A0001,11.029212363064289
+A0007,precompute immutable pipeline tensor views,rejected,decode,8,2048,screen_v1_w3_n5_r1,11.050802748650312,0.021249816343031337,A0001,11.029212363064289
+A0008,mapped-host GPU gather for pipeline,rejected,decode,8,2048,screen_v1_w3_n5_r1,11.010202765464783,0.026229479068843042,A0001,11.029212363064289
+A0009,within-call token dedup for large pipeline inputs,rejected,decode,8,2048,screen_v1_w3_n5_r1,11.011401750147343,0.01596768740001814,A0001,11.029212363064289
+A0010,alternate pinned host buffers per GPU slot,rejected,decode,8,2048,screen_v1_w3_n5_r1,11.010199412703514,0.017325197367697397,A0001,11.029212363064289

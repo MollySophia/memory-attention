@@ -1,0 +1,69 @@
+{
+  "campaign_id": "offload-gap-001",
+  "continuation_id": "continuation-01",
+  "reviewed_at_utc": "2026-10-02T05:42:26.028489+00:00",
+  "status": "manual_review_passed",
+  "reviewer": "Codex",
+  "additional_verdicts": {
+    "A0006": "within_noise",
+    "A0007": "rejected",
+    "A0008": "rejected",
+    "A0009": "rejected",
+    "A0010": "rejected"
+  },
+  "retained_source": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
+  "source_equivalence": "git diff retained source -- fla profile/*.py tests is empty",
+  "historical_artifacts": "Original final directory unchanged from first-tranche seal 9661acda594b2b9a1fc0d13e94cab2922f68f989. Report commit b687044 precedes its publication record; comparison uses seal.",
+  "visual_review": {
+    "format": "All 12 PNG figure families inspected; PDF/SVG counterparts and CSV/JSON checked by core audit.",
+    "files": [
+      "history/accepted-steps-absolute-gap.png",
+      "history/accepted-steps-latency.png",
+      "history/accepted-steps-relative-overhead.png",
+      "history/accepted-steps-speedup.png",
+      "history/attempt-history-screen_v1_w3_n5_r1.png",
+      "validation/absolute-gap.png",
+      "validation/generation.png",
+      "validation/memory-batch.png",
+      "validation/memory-length.png",
+      "validation/relative-overhead.png",
+      "validation/scaling-batch.png",
+      "validation/scaling-length.png"
+    ],
+    "checks": [
+      "Labels and captions readable and inside canvas.",
+      "A0000-A0010 all present; verdict markers match ledger.",
+      "Single whole-model incumbent remains A0001; no per-metric minima.",
+      "Screen sample SD distinguished from formal confidence intervals.",
+      "Validation explicitly labels reused A0001 and frozen A0000.",
+      "Negative gaps, unfavorable secondary points and uncertainty remain visible."
+    ]
+  },
+  "reproduction_review": {
+    "bash_syntax": "All fenced bash blocks pass bash -n.",
+    "cli_options": "Reviewed against helper parsers.",
+    "fresh_screen_plan": {
+      "jobs": 12,
+      "samples": 60,
+      "calls_including_warmup": 96,
+      "output": "/tmp/offload-gap-continuation-final-plan-20261002"
+    },
+    "fresh_parent_plan": {
+      "jobs": 48,
+      "reused_points": 0,
+      "output": "/tmp/offload-gap-continuation-final-parent-plan-20261002"
+    },
+    "links": "All existing local Markdown targets resolved; publication record created at publication seal.",
+    "gpu_reruns": "None during final artifact review."
+  },
+  "evidence_review": [
+    "additional-raw-audit.json passes 108 new model process references with frozen source, sampling, configuration, environment, correctness and memory counters.",
+    "core-audit.json passes 10 actual attempts / 5 additional verdicts, one accepted step and 160 retained validation raw references.",
+    "Candidate implementation commits precede timing; outcome commits precede code-only reverts.",
+    "A0006 fixed confirmation closed without extra favorable sampling; A0007-A0010 stopped at screen.",
+    "No rejected candidate is represented as full-size validated; no new retained gain claimed.",
+    "A0008 whole-table pinned memory, A0009 inverse storage and A0010 doubled host capacity disclosed.",
+    "Prior A0001 full-size correctness/full matrix/generation reused only for unchanged verified source.",
+    "Random weights, three-pair precision, nonuniform secondary results and generation limitations disclosed."
+  ]
+}
