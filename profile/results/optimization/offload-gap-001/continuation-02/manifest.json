@@ -10,7 +10,7 @@
   "starting_source": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
   "campaign_head_at_start": "4088de5adf8e473ec6137c1b32f99dcaca40efb1",
   "protocol": "offload_gap_v1",
-  "status": "A0020_parent_confirmation",
+  "status": "ten_verdicts_complete_final_artifacts_pending",
   "scope": "Exactly ten additional focused attempts A0011-A0020. Preserve both earlier tranches, frozen A0000, unchanged acceptance and staged measurement gates.",
   "candidate_directions": [
     "CPU table physical layout and per-layer gather locality.",
@@ -20,7 +20,7 @@
     "Tiny bulk transfer lookup/layout and submission costs."
   ],
   "note": "Directions require evidence and individual registration before code changes; diagnostics/repeats are not attempts.",
-  "completed_additional_attempts": 9,
+  "completed_additional_attempts": 10,
   "final_outcomes": {
     "A0011": "within_noise",
     "A0012": "within_noise",
@@ -30,7 +30,8 @@
     "A0016": "accepted",
     "A0017": "within_noise",
     "A0018": "rejected",
-    "A0019": "rejected"
+    "A0019": "rejected",
+    "A0020": "within_noise"
   },
   "current_incumbent": "A0016",
   "current_source": "0ce6645eb4c4bc3992258ad0878c72ea3c37a64e"

@@ -7,7 +7,7 @@
   "parent_sha": "3ea6e6d5fe4ad2525f1635e0c4e1a91c8a8a5064",
   "accepted_step": null,
   "label": "reuse per-layer pipeline coordination tickets",
-  "workflow_stage": "confirmation",
+  "workflow_stage": "final_verdict",
   "hypothesis": "Reuse pipeline GroupTicket objects and their threading events per shape instead of allocating24 tickets and48 Python events for each call; reset state under the existing serialized forward lock.",
   "expected_bottleneck": "Frozen A0001 coordination profiles attribute0.029966/0.032549 ms CPU to24 ticket constructions at b1/b8. Small potential gain; resetting events may cost as much. A0007 tensor-view caching was rejected and is not included.",
   "profile_evidence": [
@@ -45,9 +45,10 @@
     "reason_batch16": "Pipeline coordination and slot-lifetime change"
   },
   "not_run": {
-    "confirmation": "Fixed48-process parent confirmation now running; no verdict yet.",
-    "full_validation": "Draft only; staged gates required.",
-    "generation_validation": "Draft only; staged gates required."
+    "frozen_baseline_confirmation": "Not run: parent dual latency/gap gate failed; conditional controller stopped.",
+    "full_validation": "Not run: not nominated.",
+    "generation_validation": "Not run: not nominated.",
+    "full_model_correctness": "Not run: small-model exactness passed; not nominated."
   },
   "draft_root": "/tmp/offload-gap-A0020-draft-a1crcszz",
   "draft_condition": "Activated from verified A0016 after A0019 screen rejection and code-only reversion. New ticket tests appended, preserving all A0016 tests. No A0017/A0018/A0019 changes retained.",
@@ -81,5 +82,12 @@
   "screen_decision": "Small eligible b1/b8 prefill offload reductions0.030696/0.048966 ms and gap reductions0.073350/0.276661 ms. Both near sample dispersion; not gains yet. b1/b8 decode slower0.271334/0.035761 ms preserved. Fixed48-process parent confirmation tests repeatability and all primary regressions without extending until favorable.",
   "conditional_validation_plan": "conditional-validation-plan.json",
   "conditional_controller": "conditional-controller.json",
-  "secondary_regression_policy": "secondary-regression-policy.json"
+  "secondary_regression_policy": "secondary-regression-policy.json",
+  "status": "within_noise",
+  "parent_confirmation_analysis": "parent-confirmation-analysis.json",
+  "decision": "Within noise: no eligible primary passes dual latency/gap criterion. b1 prefill offload reduction0.030322 ms CI[-0.111244,0.171888], gap0.037519 CI[-0.153134,0.228172]; b8 prefill offload0.000883 CI[-0.402357,0.404122], gap-0.272545 CI[-1.340937,0.795846]. Close fixed48-process plan without extension and restore A0016.",
+  "limitations": [
+    "All primary comparisons unresolved; no resolved offload/resident regression. Screen coordination-sized gains do not repeat with sufficient precision.",
+    "b1 decode mean reduction-0.082997 ms CI[-0.704352,0.538358] retained as unresolved adverse observation."
+  ]
 }
