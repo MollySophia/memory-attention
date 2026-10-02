@@ -1,0 +1,19 @@
+{
+  "parent_id": "A0016",
+  "parent_sha": "0ce6645eb4c4bc3992258ad0878c72ea3c37a64e",
+  "original_parent_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
+  "files": [
+    "fla/layers/memory_offload.py",
+    "fla/models/memory/modeling_memory.py",
+    "profile/benchmark_telemetry.py",
+    "tests/test_memory_offload_regressions.py"
+  ],
+  "conflicts": [],
+  "draft_root": "/tmp/offload-gap-A0018-if-A0016-8aj_2xxu",
+  "campaign_id": "offload-gap-001",
+  "attempt_id": "A0018",
+  "patch": "conditional-A0016-parent.patch",
+  "active": false,
+  "condition": "Activate only after A0017 final verdict, choosing the best verified parent; not a tested implementation.",
+  "validation": "All changed files AST parse; all parent test functions preserved; no GPU tests yet."
+}
