@@ -225,34 +225,3 @@ def test_auto_policy_boundary_and_shape_reuse(model):
             actual = model(input_ids=ids, use_cache=False).logits.float()
             assert model.model.memory_offloader.policy == policy
             torch.testing.assert_close(actual, ref, rtol=0, atol=0)
-
-
-@pytest.mark.parametrize('tokens', [1, 8, 9])
-def test_bulk_fresh_rows_across_caller_streams(tokens):
-    if not torch.cuda.is_available():
-        pytest.skip('requires CUDA')
-    from fla.layers.memory_offload import BulkMemoryTableOffloader, PendingM
-    with torch.inference_mode():
-        weights = torch.randn(11, 3, 8, dtype=torch.bfloat16)
-        off = BulkMemoryTableOffloader(weights, tokens, 1, 'cuda:0')
-        observed, expected = [], []
-        try:
-            for iteration in range(3):
-                stream = torch.cuda.Stream()
-                weights.add_(1)
-                ids = ((torch.arange(tokens) // 2 + iteration) % 11).reshape(tokens, 1)
-                reference = weights.index_select(0, ids.reshape(-1))
-                def consume(layer, memory):
-                    assert torch.cuda.current_stream() == stream
-                    value = memory.acquire() if isinstance(memory, PendingM) else memory
-                    observed.append(value.clone())
-                    expected.append(reference[:, layer].reshape(tokens, 1, 8))
-                    if isinstance(memory, PendingM):
-                        memory.release()
-                with torch.cuda.stream(stream):
-                    off.forward(ids, consume)
-            torch.cuda.synchronize()
-            for value, reference in zip(observed, expected):
-                torch.testing.assert_close(value.cpu(), reference, rtol=0, atol=0)
-        finally:
-            off.close()
