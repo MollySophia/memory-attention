@@ -1,0 +1,223 @@
+diff --git a/fla/layers/memory_host_buffer.py b/fla/layers/memory_host_buffer.py
+new file mode 100644
+--- /dev/null
++++ b/fla/layers/memory_host_buffer.py
+@@ -0,0 +1,57 @@
++"""Storage-owned write-combined CUDA host buffers for streaming CPU writes."""
++from __future__ import annotations
++
++import ctypes
++from functools import lru_cache
++from pathlib import Path
++import weakref
++
++import torch
++
++
++@lru_cache(maxsize=1)
++def _runtime():
++    major = torch.version.cuda.split('.')[0]
++    packages = Path(torch.__file__).resolve().parents[1]
++    candidates = [packages / f'nvidia/cu{major}/lib/libcudart.so.{major}',
++                  packages / f'nvidia/cuda_runtime/lib/libcudart.so.{major}']
++    library = next((str(path) for path in candidates if path.exists()), f'libcudart.so.{major}')
++    runtime = ctypes.CDLL(library)
++    runtime.cudaHostAlloc.argtypes = [ctypes.POINTER(ctypes.c_void_p), ctypes.c_size_t, ctypes.c_uint]
++    runtime.cudaHostAlloc.restype = ctypes.c_int
++    runtime.cudaFreeHost.argtypes = [ctypes.c_void_p]
++    runtime.cudaFreeHost.restype = ctypes.c_int
++    return runtime
++
++
++def _release(runtime, pointer, device):
++    # This storage is external to PyTorch's pinned caching allocator. Its event
++    # tracking cannot protect us when the last tensor view is dropped mid-copy.
++    with torch.cuda.device(device):
++        torch.cuda.synchronize(device)
++        status = runtime.cudaFreeHost(pointer)
++    if status:
++        raise RuntimeError(f'cudaFreeHost failed with CUDA status {status}')
++
++
++def write_combined_empty(numel: int, dtype: torch.dtype, device) -> torch.Tensor:
++    """Allocate a 1-D CPU tensor; storage retains the CUDA allocation owner."""
++    if numel <= 0:
++        raise ValueError('write-combined allocation size must be positive')
++    device = torch.device(device)
++    runtime = _runtime()
++    size = numel * torch.empty((), dtype=dtype).element_size()
++    pointer = ctypes.c_void_p()
++    with torch.cuda.device(device):
++        status = runtime.cudaHostAlloc(ctypes.byref(pointer), size, 0x04)
++    if status:
++        raise RuntimeError(f'cudaHostAllocWriteCombined failed with CUDA status {status}')
++    buffer = (ctypes.c_ubyte * size).from_address(pointer.value)
++    # torch.frombuffer holds a reference to its Python buffer owner for the
++    # entire storage lifetime, including aliases after the original tensor dies.
++    cleanup = weakref.finalize(buffer, _release, runtime, pointer, device)
++    cleanup.atexit = False  # Process teardown releases CUDA resources itself.
++    tensor = torch.frombuffer(buffer, dtype=dtype)
++    if not tensor.is_pinned():
++        raise RuntimeError('CUDA write-combined allocation was not recognized as pinned')
++    return tensor
+diff --git a/fla/layers/memory_offload.py b/fla/layers/memory_offload.py
+--- a/fla/layers/memory_offload.py
++++ b/fla/layers/memory_offload.py
+@@ -116,6 +116,7 @@
+         group_size: int = 1,
+         device: torch.device | str = "cuda:0",
+         prefetch_depth: int = 4,
++        write_combined_min_tokens: int = 8192,
+     ) -> None:
+         if weights.device.type != "cpu" or weights.ndim != 3:
+             raise ValueError("weights must be a CPU tensor of shape [vocab, layers, dim]")
+@@ -135,9 +136,14 @@
+         self.closed = False
+         self.broken = False
+         capacity = self.tokens * self.group * self.dim
++        if self.tokens >= write_combined_min_tokens:
++            from fla.layers.memory_host_buffer import write_combined_empty
++            allocate_host = lambda: write_combined_empty(capacity, weights.dtype, self.device)
++        else:
++            allocate_host = lambda: torch.empty(capacity, dtype=weights.dtype, pin_memory=True)
+         self.slots = [
+             dict(
+-                host=torch.empty(capacity, dtype=weights.dtype, pin_memory=True),
++                host=allocate_host(),
+                 gpu=torch.empty(capacity, dtype=weights.dtype, device=self.device),
+                 copied=torch.cuda.Event(),
+                 consumed=torch.cuda.Event(),
+diff --git a/fla/models/memory/configuration_memory.py b/fla/models/memory/configuration_memory.py
+--- a/fla/models/memory/configuration_memory.py
++++ b/fla/models/memory/configuration_memory.py
+@@ -45,6 +45,7 @@
+         memory_offload_prefetch_depth: int = 4,
+         memory_offload_bulk_max_tokens: int = 1024,
+         memory_offload_single_slot_max_tokens: int = 2048,
++        memory_offload_write_combined_min_tokens: int = 8192,
+         memory_offload_chunk_size: int = 1024,
+         **kwargs,
+     ):
+@@ -61,6 +62,7 @@
+         if memory_offload_single_slot_max_tokens < 0:
+             raise ValueError("single-slot token limit must be nonnegative")
+         self.memory_offload_single_slot_max_tokens = memory_offload_single_slot_max_tokens
++        self.memory_offload_write_combined_min_tokens = memory_offload_write_combined_min_tokens
+         self.memory_offload_chunk_size = memory_offload_chunk_size
+         self.hidden_size = hidden_size
+         self.num_hidden_layers = num_hidden_layers
+diff --git a/fla/models/memory/modeling_memory.py b/fla/models/memory/modeling_memory.py
+--- a/fla/models/memory/modeling_memory.py
++++ b/fla/models/memory/modeling_memory.py
+@@ -336,6 +336,7 @@
+             prefetch_depth=(min(config.memory_offload_prefetch_depth, 1)
+                             if automatic and batch * seq_len <= config.memory_offload_single_slot_max_tokens
+                             else config.memory_offload_prefetch_depth),
++            write_combined_min_tokens=config.memory_offload_write_combined_min_tokens,
+         )
+ 
+     def _offloader_for(self, batch: int, seq_len: int):
+diff --git a/tests/test_memory_offload_regressions.py b/tests/test_memory_offload_regressions.py
+--- a/tests/test_memory_offload_regressions.py
++++ b/tests/test_memory_offload_regressions.py
+@@ -172,7 +172,8 @@
+                           memory_offload_policy=policy,
+                           memory_offload_group_size=2,
+                           memory_offload_bulk_max_tokens=1,
+-                          memory_offload_prefetch_depth=4 if policy == 'auto' else 1)
++                          memory_offload_prefetch_depth=4 if policy == 'auto' else 1,
++                          memory_offload_write_combined_min_tokens=1)
+     with torch.inference_mode():
+         model = MemoryForCausalLM(config).to('cuda', dtype=torch.bfloat16).eval()
+         for layer in model.model.layers:
+@@ -263,3 +264,90 @@
+     model.enable_memory_offload()
+     model.set_offload_offloader(1,1025)
+     assert len(model.model.memory_offloader.slots) == min(4,len(model.model.layers))
++
++
++
++def test_write_combined_storage_owner_survives_views_and_dma(monkeypatch):
++    import gc
++    import fla.layers.memory_host_buffer as buffers
++    calls = []
++    original = buffers._release
++    def tracked(*args):
++        original(*args)
++        calls.append(1)
++    monkeypatch.setattr(buffers, '_release', tracked)
++    host = buffers.write_combined_empty(8192, torch.bfloat16, 'cuda:0')
++    assert host.is_pinned()
++    host.fill_(1.5)
++    view = host.view(128,64)
++    del host
++    gc.collect()
++    assert calls == []
++    stream = torch.cuda.Stream()
++    with torch.cuda.stream(stream):
++        torch.cuda._sleep(100000)
++        output = view.to('cuda', non_blocking=True)
++    del view
++    gc.collect()
++    assert calls == [1]
++    torch.testing.assert_close(output.cpu(),torch.full((128,64),1.5,dtype=torch.bfloat16),rtol=0,atol=0)
++
++
++@pytest.mark.parametrize('group,depth', [(1,1),(2,1),(2,3)])
++def test_write_combined_pipeline_slot_reuse_and_fresh_rows(group, depth):
++    from fla.layers.memory_offload import MemoryTableOffloader
++    with torch.inference_mode():
++        weights = torch.randn(32,5,64,dtype=torch.bfloat16)
++        off = MemoryTableOffloader(weights,2,4,group_size=group,prefetch_depth=depth,
++                                   write_combined_min_tokens=1)
++        assert all(slot['host'].is_pinned() for slot in off.slots)
++        streams = [torch.cuda.Stream(),torch.cuda.Stream()]
++        retained = []
++        try:
++            for iteration in range(8):
++                weights.add_(0.25)
++                ids = torch.randint(0,32,(2,4))
++                expected = [weights[ids,layer].clone() for layer in range(5)]
++                with torch.cuda.stream(streams[iteration%2]):
++                    output = []
++                    def consume(layer,handle):
++                        torch.cuda._sleep(10000)
++                        output.append(handle.acquire().clone())
++                        handle.release()
++                    off.forward(ids,consume)
++                retained.append((output,expected))
++            torch.cuda.synchronize()
++            for output, expected in retained:
++                for actual, reference in zip(output,expected):
++                    torch.testing.assert_close(actual.cpu(),reference,rtol=0,atol=0)
++        finally:
++            off.close()
++
++
++
++@pytest.mark.parametrize('tokens', [8191,8192])
++def test_write_combined_default_threshold(tokens, monkeypatch):
++    import fla.layers.memory_host_buffer as buffers
++    from fla.layers.memory_offload import MemoryTableOffloader
++    allocations = []
++    original = buffers.write_combined_empty
++    def tracked(*args,**kwargs):
++        allocations.append(args[0])
++        return original(*args,**kwargs)
++    monkeypatch.setattr(buffers,'write_combined_empty',tracked)
++    weights = torch.randn(32,3,64,dtype=torch.bfloat16)
++    with torch.inference_mode():
++        off = MemoryTableOffloader(weights,1,tokens,group_size=2,prefetch_depth=4)
++        try:
++            assert len(allocations) == (2 if tokens>=8192 else 0)
++            ids = torch.randint(0,32,(1,tokens))
++            outputs = []
++            def consume(layer,handle):
++                outputs.append(handle.acquire().clone())
++                handle.release()
++            off.forward(ids,consume)
++            torch.cuda.synchronize()
++            for layer,actual in enumerate(outputs):
++                torch.testing.assert_close(actual.cpu(),weights[ids,layer],rtol=0,atol=0)
++        finally:
++            off.close()

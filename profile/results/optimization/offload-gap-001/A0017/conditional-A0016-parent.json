@@ -1,0 +1,10 @@
+{
+  "campaign_id": "offload-gap-001",
+  "attempt_id": "A0017",
+  "condition": "Use only if A0016 earns a final accepted verdict; otherwise retain original A0001 draft.",
+  "parent_sha": "0ce6645eb4c4bc3992258ad0878c72ea3c37a64e",
+  "draft_root": "/tmp/offload-gap-A0017-if-A0016-_3x_1gi8",
+  "patch": "conditional-A0016-parent.patch",
+  "validation": "AST parse and git apply --check only; GPU tests not run. Preserves A0016 depth config/model policy/boundary tests and forced-auto trajectories alongside WC tests.",
+  "active": false
+}
