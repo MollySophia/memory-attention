@@ -504,3 +504,7 @@ A0015 twelve-point screen complete. Target b8 prefill offload/gap reduction 0.27
 ### A0016 registration and isolated draft (offload-gap-001; continuation-02)
 
 Restrict automatic one-slot pipeline to <=2048-token calls, preserving configured depth above that boundary and manual pipeline behavior. A0014 independently improved b1 prefill latency/gap but failed on b8 decode after prefix; this separately registered policy keeps the entire b8 primary path unchanged and tests the supported small-prefill regime. Fixed cutoff declared before results, not to be tuned after timing. All four primaries and b16 screen, zero-error placement/scheduling gates, independent confirmation and full regression requirements remain. Draft only while A0015 confirmation runs; reconcile with best verified parent after its final verdict.
+
+### A0015 final verdict: within_noise (offload-gap-001; continuation-02)
+
+All 48 parent-confirmation jobs completed. Target b8 prefill offload reduction 0.366669 ms CI[-0.645449,1.378787], gap reduction 0.158634 CI[-0.449015,0.766283]. Neither positive lower-bound criterion passes. All other primary comparisons remain unresolved, including unfavorable b1 decode; no claim from unchanged paths or old unfused screen. All 48 source hashes and offload memory counters verified. Close fixed plan without extension; frozen-baseline/full/generation intentionally not run. Commit evidence then restore A0001 implementation. Five of ten additional verdicts complete.

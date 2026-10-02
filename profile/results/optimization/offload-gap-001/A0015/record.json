@@ -7,7 +7,7 @@
   "parent_sha": "52aa4f283a4f7f8ab5b3e8ae49ac6c5eaf51b3ff",
   "accepted_step": null,
   "label": "fuse compressed-row expansion with memory addition",
-  "workflow_stage": "parent_confirmation",
+  "workflow_stage": "final_verdict",
   "hypothesis": "Preserve within-call deduplicated CPU lookup/H2D but fuse GPU inverse-index expansion into required k+m, avoiding a full temporary and separate expansion kernel on each layer.",
   "expected_bottleneck": "Frozen A0009 b8 profile: 24 expansions, 1.50928 ms summed CUDA stream intervals and 1.55864 ms CPU spans, overlapping. A0009 unfused screen was 2.01742 ms slower than A0001; no claim that all expansion time is removable.",
   "profile_evidence": [
@@ -48,9 +48,9 @@
     "reason_batch16": "Compressed transfer and fused consumption change"
   },
   "not_run": {
-    "confirmation": "Not yet nominated; staged gates required.",
-    "full_validation": "Not yet nominated; staged gates required.",
-    "generation_validation": "Not yet nominated; staged gates required."
+    "frozen_baseline_confirmation": "Parent confirmation inconclusive; candidate not nominated, intentionally not run.",
+    "full_validation": "Parent confirmation inconclusive; candidate not nominated, intentionally not run.",
+    "generation_validation": "Parent confirmation inconclusive; candidate not nominated, intentionally not run."
   },
   "draft_root": "/tmp/offload-gap-A0015-draft-pewlt22s",
   "draft_condition": "Activated after A0014 rejected and code-only restored to A0001.",
@@ -71,5 +71,9 @@
   "performance": "screen-comparison.json",
   "screen_decision": "Target b8 prefill offload/gap reductions 0.273381/0.382040 ms versus verified A0001. Requires fixed independent 48-process parent confirmation. Unchanged b1 and decode paths cannot nominate a gain; unfavorable b1 decode preserved. Old A0009 unfused b8 screen is 2.290803 ms slower, descriptive only.",
   "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json",
-  "memory_observation": "All 12 source/capacity checks pass. Full four-slot buffers retained; additional inverse bytes 0/131072/262144 at b1/b8/b16 counted. No cross-call lookup caching."
+  "memory_observation": "All 12 source/capacity checks pass. Full four-slot buffers retained; additional inverse bytes 0/131072/262144 at b1/b8/b16 counted. No cross-call lookup caching.",
+  "status": "within_noise",
+  "parent_confirmation_analysis": "parent-confirmation-analysis.json",
+  "decision": "All 48 fixed parent-confirmation jobs complete. Target b8 prefill offload reduction 0.366669 ms CI[-0.645449,1.378787], gap reduction 0.158634 CI[-0.449015,0.766283]. Neither lower bound is positive. Other primary workloads unresolved; no resolved primary regression. Close the fixed plan without extension and restore A0001. Unfused A0009 screen comparison does not establish an accepted parent-relative gain.",
+  "next_insight": "Fused expansion avoids the explicit index_select intermediate but CPU deduplication, indirect GPU reads and dispatch remain. Model-level latency and gap improvement are unresolved. Continue from A0001 with separately registered small-prefill depth policy."
 }
