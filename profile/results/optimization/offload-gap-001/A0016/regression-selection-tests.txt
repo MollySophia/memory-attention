@@ -1,0 +1,7 @@
+
+profile/results/optimization/offload-gap-001/test_regression_selection.py::test_any_adverse_secondary_is_selected_but_primary_is_not_extended PASSED [ 25%]
+profile/results/optimization/offload-gap-001/test_regression_selection.py::test_already_repeated_or_failed_points_cannot_be_reselected[repeated] PASSED [ 50%]
+profile/results/optimization/offload-gap-001/test_regression_selection.py::test_already_repeated_or_failed_points_cannot_be_reselected[failed] PASSED [ 75%]
+profile/results/optimization/offload-gap-001/test_regression_selection.py::test_both_generation_shapes_reviewed_without_invented_improvement PASSED [100%]
+
+============================== 4 passed in 0.01s ===============================
