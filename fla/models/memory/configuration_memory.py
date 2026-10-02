@@ -45,7 +45,6 @@ class MemoryConfig(PretrainedConfig):
         memory_offload_prefetch_depth: int = 4,
         memory_offload_bulk_max_tokens: int = 1024,
         memory_offload_chunk_size: int = 1024,
-        memory_offload_mapped_prefill: bool = True,
         **kwargs,
     ):
 
@@ -59,7 +58,6 @@ class MemoryConfig(PretrainedConfig):
         self.memory_offload_prefetch_depth = memory_offload_prefetch_depth
         self.memory_offload_bulk_max_tokens = memory_offload_bulk_max_tokens
         self.memory_offload_chunk_size = memory_offload_chunk_size
-        self.memory_offload_mapped_prefill = memory_offload_mapped_prefill
         self.hidden_size = hidden_size
         self.num_hidden_layers = num_hidden_layers
         self.num_heads = num_heads
