@@ -168,21 +168,19 @@ class MemoryTableOffloader:
                     slot = ticket.slot
                     previous = slot["previous"]
                     if previous is not None:
-                        # Host reuse depends only on the old H2D, not on the
-                        # later GPU consumer. Refill while that consumer runs.
+                        while not previous.released.wait(timeout=0.05):
+                            if cancel.is_set():
+                                return
+                        if cancel.is_set():
+                            return
+                        # The pinned host buffer is still being read by DMA.
                         slot["copied"].synchronize()
                     if cancel.is_set():
                         return
                     source = self.weights[:, ticket.start: ticket.start + ticket.count]
                     torch.index_select(source, 0, ids, out=self._view(slot["host"], ticket.start))
                     if previous is not None:
-                        while not previous.released.wait(timeout=0.05):
-                            if cancel.is_set():
-                                return
-                        if cancel.is_set():
-                            return
-                        # GPU storage still belongs to the old consumer until
-                        # this event; snapshot before it can be re-recorded.
+                        # Snapshot before the event can be re-recorded.
                         self.copy_stream.wait_event(slot["consumed"])
                     self._view(slot["gpu"], ticket.start).copy_(
                         self._view(slot["host"], ticket.start), non_blocking=True
