@@ -5,7 +5,7 @@
   "source_sha": "0ac06a0f7ce6c3ce77fd5a878c4a34c991527ec2",
   "evidence": [
     "dedup-expansion-b8-events.json",
-    "../../A0009/record.json"
+    "../A0009/record.json"
   ],
   "observation": "24 inverse-index materializations on frozen A0009 b8 prefill occupy 1.50928 ms summed CUDA stream intervals and 1.55864 ms CPU invocation spans. A0009 screen was 2.01742 ms slower than A0001; materialization is only one possible contributor.",
   "hypothesis": "Fuse within-call inverse row lookup with the required k+m operation, avoiding a full expanded M tensor and a separate GPU expansion kernel per layer while retaining reduced H2D volume.",
