@@ -4,10 +4,10 @@
   "attempt_id": "A0013",
   "parent_attempt_id": "A0001",
   "parent_source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
-  "parent_sha": "74e5d88d09fe0c7995cc24580c9500aba1536307",
+  "parent_sha": "4fa6b2fc7b0220d89dae754a3a602860e6382899",
   "accepted_step": null,
   "label": "mapped-host all-layer gather for small bulk inputs",
-  "workflow_stage": "implementation_draft",
+  "workflow_stage": "correctness",
   "hypothesis": "For 8..16-token bulk inputs, gather all layers directly from the pinned CPU table using GPU IDs in one kernel, avoiding CPU ID staging, gather and separate H2D.",
   "expected_bottleneck": "Mapped-bulk diagnostic b8 0.061450 to 0.033291 ms; b16 0.105814 to 0.048239 ms. b1 is slightly slower, so exclude it before model timing.",
   "profile_evidence": [
@@ -49,5 +49,7 @@
   "draft_root": "/tmp/offload-gap-A0013-draft-1e5za0xw",
   "draft_condition": "Do not activate or run GPU tests while A0012 confirmation is live. Reconcile against best verified parent after A0012 verdict; record actual implementation commit before any timing.",
   "draft_patch": "implementation-draft.patch",
-  "draft_static_check": "All six draft Python files compile; GPU tests and timing intentionally pending A0012 verdict."
+  "draft_static_check": "All six draft Python files compile; GPU tests and timing intentionally pending A0012 verdict.",
+  "draft_registration_parent_sha": "74e5d88d09fe0c7995cc24580c9500aba1536307",
+  "draft_activation": "A0012 finalized within_noise and reverted to A0001 before activation; patch applied cleanly to the verified parent."
 }
