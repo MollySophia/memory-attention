@@ -225,3 +225,33 @@ def test_auto_policy_boundary_and_shape_reuse(model):
             actual = model(input_ids=ids, use_cache=False).logits.float()
             assert model.model.memory_offloader.policy == policy
             torch.testing.assert_close(actual, ref, rtol=0, atol=0)
+
+
+@pytest.mark.parametrize('group,depth', [(1,1),(2,1),(2,2),(3,2)])
+def test_cached_pipeline_views_observe_fresh_ids_and_weights(group, depth):
+    from fla.layers.memory_offload import MemoryTableOffloader
+    if not torch.cuda.is_available():
+        pytest.skip('requires CUDA')
+    with torch.inference_mode():
+        weights = torch.randn(32, 5, 64, dtype=torch.bfloat16)
+        offloader = MemoryTableOffloader(weights, 2, 3, group_size=group, prefetch_depth=depth)
+        try:
+            for iteration in range(4):
+                # Change the original storage in place. Cached source views
+                # must observe it, and returned rows must follow the new IDs.
+                weights.add_(0.25)
+                ids = torch.tensor([[iteration,7,iteration],[9,2,7]])
+                outputs = []
+                def consume(layer, handle):
+                    outputs.append(handle.acquire().clone())
+                    handle.release()
+                offloader.forward(ids, consume)
+                torch.cuda.synchronize()
+                for layer, value in enumerate(outputs):
+                    torch.testing.assert_close(value.cpu(), weights[ids,layer], rtol=0, atol=0)
+            for slot in offloader.slots:
+                for values in slot['values'].values():
+                    for view in values:
+                        assert view.untyped_storage().data_ptr() == slot['gpu'].untyped_storage().data_ptr()
+        finally:
+            offloader.close()

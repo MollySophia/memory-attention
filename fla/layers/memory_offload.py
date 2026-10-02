@@ -55,8 +55,7 @@ class GroupTicket:
         if not self.waited:
             torch.cuda.current_stream(self.owner.device).wait_event(self.slot["copied"])
             self.waited = True
-        values = self.owner._view(self.slot["gpu"], self.start)
-        return values[:, offset].view(self.owner.batch, self.owner.seq_len, self.owner.dim)
+        return self.slot["values"][self.count][offset]
 
     def release(self, offset: int) -> None:
         if offset != self.release_count:
@@ -145,6 +144,28 @@ class MemoryTableOffloader:
             )
             for _ in range(min(prefetch_depth, len(self.groups)))
         ]
+        # Only tensor metadata is retained: every forward still gathers fresh
+        # table rows into these same buffers. Partial final groups need their
+        # own shape, while views with equal counts can share metadata.
+        counts = {min(self.group, self.layers - start) for start in self.groups}
+        self._buffer_views = {}
+        for slot in self.slots:
+            for flat in (slot["host"], slot["gpu"]):
+                for count in counts:
+                    self._buffer_views[id(flat), count] = flat[: self.tokens * count * self.dim].view(
+                        self.tokens, count, self.dim
+                    )
+            slot["values"] = {
+                count: tuple(
+                    self._buffer_views[id(slot["gpu"]), count][:, offset].view(batch, seq_len, self.dim)
+                    for offset in range(count)
+                )
+                for count in counts
+            }
+        self._source_views = {
+            start: self.weights[:, start: start + min(self.group, self.layers - start)]
+            for start in self.groups
+        }
 
     @property
     def policy(self) -> str:
@@ -156,7 +177,7 @@ class MemoryTableOffloader:
 
     def _view(self, flat: torch.Tensor, start: int) -> torch.Tensor:
         count = min(self.group, self.layers - start)
-        return flat[: self.tokens * count * self.dim].view(self.tokens, count, self.dim)
+        return self._buffer_views[id(flat), count]
 
     @torch.inference_mode()
     def _produce(self, ids: torch.Tensor, tickets: list[GroupTicket], entry, cancel) -> None:
@@ -177,7 +198,7 @@ class MemoryTableOffloader:
                         slot["copied"].synchronize()
                     if cancel.is_set():
                         return
-                    source = self.weights[:, ticket.start: ticket.start + ticket.count]
+                    source = self._source_views[ticket.start]
                     torch.index_select(source, 0, ids, out=self._view(slot["host"], ticket.start))
                     if previous is not None:
                         # Snapshot before the event can be re-recorded.
