@@ -1,0 +1,47 @@
+{
+  "campaign_id": "offload-gap-001",
+  "continuation_id": "continuation-02",
+  "status": "prepared_not_run",
+  "condition": "Run sequentially only after the current A0011 confirmation controller is terminal, with no model timing active.",
+  "source_root": "/home/molly/workspace-memory-attn/offload-gap-001-A0001",
+  "diagnostics": [
+    {
+      "script": "diagnose_wait_cpu.py",
+      "batches": [
+        1,
+        8
+      ],
+      "warmup": 10,
+      "purpose": "Separate producer CUDA wait wall and thread CPU time before choosing event wait policy."
+    },
+    {
+      "script": "diagnose_mapped_bulk.py",
+      "batches": [
+        1,
+        8,
+        16
+      ],
+      "warmup": 10,
+      "trials": 20,
+      "purpose": "Test one GPU mapped-host read of all layers for tiny bulk inputs, including baseline ID staging."
+    },
+    {
+      "script": "diagnose_persistent_gather.py",
+      "tokens": [
+        2048,
+        16384,
+        32768
+      ],
+      "warmup": 10,
+      "trials": 10,
+      "purpose": "Determine whether retaining native worker threads fixes the measured cost of creating threads per gather."
+    }
+  ],
+  "not_attempts": true,
+  "prior_negative_results": [
+    "CPU layer-major layout did not improve the selected microcases.",
+    "Flattened gather rank showed no compelling benefit.",
+    "CPU chunked gathers lost to whole-group gather.",
+    "Serial native memcpy and temporary four-thread copies lost to Torch gather."
+  ]
+}

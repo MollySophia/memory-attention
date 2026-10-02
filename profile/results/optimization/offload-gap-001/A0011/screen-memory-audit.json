@@ -1,0 +1,46 @@
+{
+  "campaign_id": "offload-gap-001",
+  "attempt_id": "A0011",
+  "status": "screen_source_and_pinned_id_capacity_verified",
+  "screen_jobs": 12,
+  "candidate_sha": "812ac2decafaf2d9919028a7bbd0c740db07ba1a",
+  "observations": [
+    {
+      "job": "J01-prefill-ma_offload-b1-l2048",
+      "extra_pinned_id_bytes": 16392,
+      "host_pinned_bytes": 33669128,
+      "gpu_buffer_bytes": 33652736
+    },
+    {
+      "job": "J03-decode-ma_offload-b1-l2048",
+      "extra_pinned_id_bytes": 16392,
+      "host_pinned_bytes": 33669128,
+      "gpu_buffer_bytes": 33652736
+    },
+    {
+      "job": "J05-prefill-ma_offload-b8-l2048",
+      "extra_pinned_id_bytes": 131136,
+      "host_pinned_bytes": 269353024,
+      "gpu_buffer_bytes": 269221888
+    },
+    {
+      "job": "J07-decode-ma_offload-b8-l2048",
+      "extra_pinned_id_bytes": 131136,
+      "host_pinned_bytes": 269353024,
+      "gpu_buffer_bytes": 269221888
+    },
+    {
+      "job": "J09-prefill-ma_offload-b16-l2048",
+      "extra_pinned_id_bytes": 262272,
+      "host_pinned_bytes": 538706048,
+      "gpu_buffer_bytes": 538443776
+    },
+    {
+      "job": "J11-decode-ma_offload-b16-l2048",
+      "extra_pinned_id_bytes": 262272,
+      "host_pinned_bytes": 538706048,
+      "gpu_buffer_bytes": 538443776
+    }
+  ],
+  "limitation": "Focused completed-screen check only; no independent performance verdict or full-retention claim."
+}
