@@ -7,7 +7,7 @@
   "parent_sha": "42e4b904535162ccfb47957111656f4996845b53",
   "accepted_step": null,
   "label": "start pipeline producer before embedding dispatch",
-  "workflow_stage": "correctness",
+  "workflow_stage": "screening",
   "hypothesis": "Launch pipeline gather/prefetch before submitting the embedding kernel, so first-layer CPU lookup/H2D can overlap embedding startup instead of depending on an entry event recorded after embedding.",
   "expected_bottleneck": "Frozen A0001 startup diagnostic records embedding CUDA intervals0.041856/0.112032 ms at b1/b8; current model enqueues embedding before pipeline forward records its entry dependency and submits producer. These intervals may include dispatch gaps and cannot be claimed as removable latency.",
   "profile_evidence": [
@@ -62,5 +62,16 @@
       "batch": 8
     }
   ],
-  "eligible_gain_note": "Structured representation of the primary target already declared at registration; unchanged scope."
+  "eligible_gain_note": "Structured representation of the primary target already declared at registration; unchanged scope.",
+  "candidate_sha": "f59cdf0c8d7fa32f98b6947c0ba784210f0e7437",
+  "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0019",
+  "correctness": {
+    "pytest": "34 passed in 13.05s",
+    "standalone": "PASS; worst max error 0",
+    "logs": [
+      "correctness-tests.txt",
+      "standalone-correctness.txt"
+    ]
+  },
+  "screen_manifest": "R01/manifest.json"
 }
