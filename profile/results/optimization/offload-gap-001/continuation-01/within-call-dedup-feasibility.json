@@ -1,0 +1,33 @@
+{
+  "campaign_id": "offload-gap-001",
+  "purpose": "Analytic direction selection only, not observed token counts or performance.",
+  "profile_basis": "../A0000/diagnostics-summary.json: b8 prefill streams1536MiB, instrumented H2D spans41.84ms, CPU gather75.16ms; spans overlap compute and are not additive.",
+  "hypothesis": "Deduplicate token IDs within each model call, transfer one row per distinct ID, reconstruct original order on GPU. No lookup or output survives between calls.",
+  "analytic_rows": [
+    {
+      "batch": 1,
+      "tokens": 2048,
+      "expected_distinct_uniform_ids": 1983.8700317869839,
+      "expected_fraction_avoidable_rows": 0.03131346104151178
+    },
+    {
+      "batch": 8,
+      "tokens": 16384,
+      "expected_distinct_uniform_ids": 12822.688211247076,
+      "expected_fraction_avoidable_rows": 0.21736522148150172
+    },
+    {
+      "batch": 16,
+      "tokens": 32768,
+      "expected_distinct_uniform_ids": 20507.20976740494,
+      "expected_fraction_avoidable_rows": 0.37416962379745666
+    }
+  ],
+  "risks": [
+    "Unique/inverse construction and GPU expansion add latency.",
+    "Intermediate expanded rows increaseGPUtemporarycapacity and must be included in peaks.",
+    "Benefit depends on ID distribution; unchanged random-seed workload must decide campaign verdict, not chosen duplicate-heavy input.",
+    "All-unique, all-identical, unsorted/repeated IDs, fresh weights/IDs and changing unique counts require exactness tests."
+  ],
+  "next_action": "When GPU timing is idle, profile actual fixed-seed ID distinctness and per-call compress/expand costs before registering a candidate."
+}
