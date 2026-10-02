@@ -10,7 +10,7 @@ import torch.nn as nn
 from einops import rearrange
 from transformers.utils import logging
 
-from fla.layers.memory_offload import PendingM
+from fla.layers.memory_offload import FusedPendingM, PendingM
 from fla.layers.utils import pad_input, unpad_input
 from fla.modules import RMSNorm, RotaryEmbedding
 from fla.ops.utils.index import prepare_lens_from_mask
@@ -128,22 +128,25 @@ class MemoryAttention(nn.Module):
         # that resolves to one. It lets the CPU->GPU transfer overlap the Q/K
         # kernels instead of serializing before them.
         pending_m = memory_table if isinstance(memory_table, PendingM) else None
-        if pending_m is not None:
-            m = pending_m.acquire()
-        elif memory_table is not None:
-            m = memory_table
+        if self.memory_table_folded and isinstance(pending_m, FusedPendingM):
+            v = pending_m.add_to(k)
         else:
-            if input_ids is None:
-                raise ValueError("MemoryAttention requires either input_ids or memory_table")
-            m = self.m_proj(input_ids)
-
-        m = rearrange(m, '... (h d) -> ... h d', d=self.head_dim)
-
-        if self.memory_table_folded:
-            # Table already carries m_norm, so skip the per-token norm.
-            v = k + m
-        else:
-            v = k + self.m_norm(m)
+            if pending_m is not None:
+                m = pending_m.acquire()
+            elif memory_table is not None:
+                m = memory_table
+            else:
+                if input_ids is None:
+                    raise ValueError("MemoryAttention requires either input_ids or memory_table")
+                m = self.m_proj(input_ids)
+    
+            m = rearrange(m, '... (h d) -> ... h d', d=self.head_dim)
+    
+            if self.memory_table_folded:
+                # Table already carries m_norm, so skip the per-token norm.
+                v = k + m
+            else:
+                v = k + self.m_norm(m)
 
         if pending_m is not None:
             # Safe to hand the buffer back: the copy already happened before

@@ -4,10 +4,10 @@
   "attempt_id": "A0015",
   "parent_attempt_id": "A0001",
   "parent_source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
-  "parent_sha": "4150bc2e184290c1f4db5b55fc12b10398efcabb",
+  "parent_sha": "52aa4f283a4f7f8ab5b3e8ae49ac6c5eaf51b3ff",
   "accepted_step": null,
   "label": "fuse compressed-row expansion with memory addition",
-  "workflow_stage": "implementation_draft",
+  "workflow_stage": "correctness",
   "hypothesis": "Preserve within-call deduplicated CPU lookup/H2D but fuse GPU inverse-index expansion into required k+m, avoiding a full temporary and separate expansion kernel on each layer.",
   "expected_bottleneck": "Frozen A0009 b8 profile: 24 expansions, 1.50928 ms summed CUDA stream intervals and 1.55864 ms CPU spans, overlapping. A0009 unfused screen was 2.01742 ms slower than A0001; no claim that all expansion time is removable.",
   "profile_evidence": [
@@ -53,7 +53,7 @@
     "generation_validation": "Not yet nominated; staged gates required."
   },
   "draft_root": "/tmp/offload-gap-A0015-draft-pewlt22s",
-  "draft_condition": "Do not activate or run GPU tests while A0014 timing/retention gates are live. Reconcile with best verified parent after its final verdict, preserving any accepted depth limit. Candidate implementation must be committed before timing.",
+  "draft_condition": "Activated after A0014 rejected and code-only restored to A0001.",
   "draft_patch": "isolated-draft.patch",
   "draft_validation": "Syntax compilation only; GPU tests pending completion of A0014 timing and reconciliation with best verified parent."
 }
