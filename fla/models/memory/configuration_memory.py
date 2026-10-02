@@ -42,7 +42,6 @@ class MemoryConfig(PretrainedConfig):
         memory_offload: bool = False,
         memory_offload_policy: str = "auto",
         memory_offload_group_size: int = 1,
-        memory_offload_auto_min_group_size: int = 2,
         memory_offload_prefetch_depth: int = 4,
         memory_offload_bulk_max_tokens: int = 1024,
         memory_offload_chunk_size: int = 1024,
@@ -56,9 +55,6 @@ class MemoryConfig(PretrainedConfig):
             raise ValueError("`memory_offload_policy` must be one of 'auto', 'pipeline', 'bulk'")
         self.memory_offload_policy = memory_offload_policy
         self.memory_offload_group_size = memory_offload_group_size
-        if memory_offload_auto_min_group_size < 1:
-            raise ValueError("`memory_offload_auto_min_group_size` must be positive")
-        self.memory_offload_auto_min_group_size = memory_offload_auto_min_group_size
         self.memory_offload_prefetch_depth = memory_offload_prefetch_depth
         self.memory_offload_bulk_max_tokens = memory_offload_bulk_max_tokens
         self.memory_offload_chunk_size = memory_offload_chunk_size

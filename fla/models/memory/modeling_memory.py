@@ -324,15 +324,13 @@ class MemoryModel(MemoryPreTrainedModel):
         config = self.config
         device = self._offload_device
         policy = config.memory_offload_policy
-        group_size = config.memory_offload_group_size
         if policy == "auto":
             policy = "bulk" if batch * seq_len <= config.memory_offload_bulk_max_tokens else "pipeline"
-            group_size = max(group_size, config.memory_offload_auto_min_group_size)
         if policy == "bulk":
             return BulkMemoryTableOffloader(self.memory_table, batch, seq_len, device)
         return MemoryTableOffloader(
             self.memory_table, batch, seq_len,
-            group_size=group_size,
+            group_size=config.memory_offload_group_size,
             device=device,
             prefetch_depth=config.memory_offload_prefetch_depth,
         )
