@@ -1,0 +1,52 @@
+{
+  "campaign_id": "offload-gap-001",
+  "continuation_id": "continuation-01",
+  "attempt_id": "A0008",
+  "parent_attempt_id": "A0001",
+  "parent_source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
+  "parent_sha": "853a10499662e673052f800f3bbe25f2b2bdb638",
+  "accepted_step": null,
+  "label": "mapped-host GPU gather for pipeline",
+  "workflow_stage": "implementation",
+  "hypothesis": "GPU gathers directly from mapped pinned CPU table into bounded device slots, avoiding CPU gather/intermediate H2D and GPU-ID D2H. A bounded64-CTA kernel should leave resources for concurrent model computation.",
+  "expected_bottleneck": "CPU gather and explicit H2D in prefill pipeline; b8 diagnostic75ms CPUgather and42ms transfer spans overlap compute but leave residualcriticalpath.",
+  "profile_evidence": [
+    "../continuation-01/transfer-alternatives.json",
+    "../continuation-01/transfer-alternatives-bounded.json",
+    "../A0000/diagnostics-summary.json"
+  ],
+  "change": "Replace pipeline backend with direct mapped-host gather on separate CUDAstream,64persistentCTAs, existinggroup/depth/capacity. Keep tinybulk algorithm and resident paths. Pin foldedCPUtable once; no GPUtablecache or approximate arithmetic.",
+  "tradeoffs": [
+    "Entire3000MiB table page-locked, replacing smallstagingpinning; account totalpinnedtable andallCPUcopies.",
+    "Mapped kernels consumeSMresources and may contendwithmodelcompute; microbenchbenefit notsufficient.",
+    "Synchronize finaltable-read stream beforeforwardreturns to preserve subsequentCPUtablemutation/lifetime safety."
+  ],
+  "protocol_version": "offload_gap_v1",
+  "original_protocol_version": "offload_gap_v1",
+  "measurement_plan_id": "screen_v1_w3_n5_r1",
+  "screen": {
+    "batches": [
+      1,
+      8,
+      16
+    ],
+    "length": 2048,
+    "modes": [
+      "prefill",
+      "decode"
+    ],
+    "variants": [
+      "ma_offload",
+      "ma_gpu"
+    ],
+    "jobs": 12,
+    "reason_batch16": "Transfermechanism andpipeline scheduling change"
+  },
+  "not_run": {
+    "confirmation": "Only if screenpromising",
+    "full_validation": "Only ifnominated",
+    "generation_validation": "Only ifnominated"
+  },
+  "candidate_sha": null,
+  "decision": "Registered beforeimplementation. Bounded64-CTA diagnostic b1/b8/b16 .233/1.711/3.374ms vsCPUgatherH2D .339/4.096/7.936ms;64chosenbeforemodeltiming for smallerSMfootprint, not maximum isolatedthroughput."
+}

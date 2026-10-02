@@ -410,3 +410,7 @@ Separate transfer-alternative microdiagnostics (after A0006 timing exited) pass 
 ### A0007 final verdict: rejected (offload-gap-001; continuation-01)
 
 Twelve screenjobs complete. Offload/resident ms: b1prefill29.411/28.671,decode5.536/4.583; b8prefill209.997/206.480,decode11.051/10.919; b16prefill418.870/415.174,decode20.331/20.269. Parent-relative prefill offload reductions -0.0331/-0.5340/-1.3155ms atb1/b8/b16. b1gap worsens0.0336ms; b8gap improves0.1394ms onlywithslower offload, so no targetqualifies evenasapromisingscreen. Reject withoutformal/full/generation escalation. Unchangedbulk b1decode fluctuation retained withoutcausalclaim. Preserve2bcbe8d source andallresults, thenrestoreonlyoffloader/tests toA0001. Twoadditional verdicts complete.
+
+### A0008 registration (offload-gap-001; continuation-01)
+
+ParentA0001 afterA0007revert. DirectGPUgather frommappedpinnedCPUtable intoexistingboundedGPUslots, using64persistentCTAs onaseparatestream. Independentdiagnostic64-CTA meansb1/b8/b16 .233/1.711/3.374ms vsCPUgather+H2D .339/4.096/7.936; exactallmethods.64chosenbeforemodeltiming tolimitSMfootprint; no fullmodeloverlapclaim. Entire3000MiBfoldedtable pinned, freshreads everyforward, allCPUcopies andpinnedstorage accounted. Keepbulkdecodealgorithm andresidentpath unchanged. Finalreadstream syncbefore return preservesCPUtablemutation safety; cancellation/close/crossstream/partialgroups/CPUandGPU IDs requiregates. Twelve-jobscreen, standarddualprimaryconfirmation andfullretentiongates.

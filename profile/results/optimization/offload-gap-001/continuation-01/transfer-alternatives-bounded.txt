@@ -1,0 +1,3 @@
+{"batch": 1, "mean_ms": {"gather_h2d": 0.3391143, "mapped_host": 0.221905, "dedup_h2d_expand": 0.4718664, "mapped_64_ctas": 0.2327574, "mapped_128_ctas": 0.2267671}, "errors": {}}
+{"batch": 8, "mean_ms": {"gather_h2d": 4.0958541, "mapped_host": 1.6655963, "dedup_h2d_expand": 3.9382134, "mapped_64_ctas": 1.7110568, "mapped_128_ctas": 1.6874082}, "errors": {}}
+{"batch": 16, "mean_ms": {"gather_h2d": 7.9359643, "mapped_host": 3.3074233, "dedup_h2d_expand": 5.7152268, "mapped_64_ctas": 3.3740361, "mapped_128_ctas": 3.3448439}, "errors": {}}
