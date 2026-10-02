@@ -1,0 +1,22 @@
+{
+  "campaign_id": "offload-gap-001",
+  "status": "design only, not registered or implemented",
+  "basis": "transfer-alternatives.json passes exact direct mapped-host reads; b8 one-layer1.669ms vs3.941ms CPU gather+H2D.",
+  "proposed_scope": "Pipeline/prefill only, leave tiny bulk decode algorithm unchanged. GPU-gather mapped pinned CPU table into bounded GPU slots on separate stream; no persistent GPU table.",
+  "scheduling": [
+    "A persistent Triton grid with boundedCTAcount may leaveSMresources for simultaneousmodelcompute; compare it in isolateddiagnostics beforefreezing an implementation.",
+    "Prefetch firstdepth groups, consumeone, thenrefillreleasedGPUslot; preserve consumed-event wait and copied-event dependency. No CPU producer/gather needed for mappedreads.",
+    "Keep allCPUtable storage alive until kernels complete. To preserve CPUtable mutation semantics betweenforwards, synchronize last table-read event beforeforward returns; this may be hidden beneath latercompute but must be measured.",
+    "GPU IDs canfeedgather directly; CPU IDs stillsupported. Selectbackend forshape beforeembedding withoutchangingresidentpath. AllIDstaging remainsinside timedmodelcall."
+  ],
+  "memory": [
+    "Page-lock whole3000MiB foldedtable; noGPUtablecopy. Record CPUtablepinning separately and addit to totalpinnedcapacity.",
+    "Keep rawsnapshot/restorecopiesaccounted. Existing benchmark slot-host counter alone would miss a pinnedtable and must be extended ifcandidateimplemented.",
+    "GPUslotcapacityandalltemporary outputs count toward peakssavings."
+  ],
+  "correctness": [
+    "Multiple seeds, partialgroups/slots, freshIDs andCPUweightupdates afterforward, crossstreamcallers, CPU/GPU inputIDs, exceptionalcleanup andexisting128stepgates.",
+    "Kernel masks out-of-range reads to avoidunsafehostaccess; retain invalid-ID modelbehavior and never changevalid results.",
+    "Mappedreads contendforSMs andPCIe; microgains do not implyfullmodelgains."
+  ]
+}

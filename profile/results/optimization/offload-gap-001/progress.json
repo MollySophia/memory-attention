@@ -5,7 +5,7 @@
   "completed_optimization_verdicts": 6,
   "accepted_steps": 1,
   "active_attempt": "A0007",
-  "controller_pid": null,
+  "controller_pid": 2107640,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
   "final_report": "final/REPORT.md",
@@ -15,7 +15,7 @@
   "continuation": "continuation-01/manifest.json",
   "source_candidate": "2bcbe8d197ef3244af1f51beb1214e4f3ecf6ffc",
   "live_manifest": "profile/results/optimization/offload-gap-001/A0007/R01/manifest.json",
-  "exec_session_id": null,
+  "exec_session_id": 41194,
   "next_actions": [
     "Poll A0007 screen; summarize and compare matchingA0000/A0001 screens when12jobsdone.",
     "If promising, fixed48-process parent confirmation; otherwise preserve finalverdict then code-only revert before nextattempt.",

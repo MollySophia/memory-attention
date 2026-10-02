@@ -17,10 +17,22 @@ def mapped_rows(table, ids, output, N:tl.constexpr, D:tl.constexpr, L:tl.constex
     value=tl.load(table+token*(L*D)+col,mask=(col<D)&(token>=0)&(token<V),other=0)
     tl.store(output+row*D+col,value,mask=col<D)
 
+
+@triton.jit
+def mapped_rows_limited(table, ids, output, N:tl.constexpr, D:tl.constexpr, L:tl.constexpr, V:tl.constexpr, BLOCK:tl.constexpr):
+    for tile in range(tl.program_id(0), N*tl.cdiv(D,BLOCK), tl.num_programs(0)):
+        row=tile//tl.cdiv(D,BLOCK)
+        col=(tile%tl.cdiv(D,BLOCK))*BLOCK+tl.arange(0,BLOCK)
+        token=tl.load(ids+row)
+        value=tl.load(table+token*(L*D)+col,mask=(col<D)&(token>=0)&(token<V),other=0)
+        tl.store(output+row*D+col,value,mask=col<D)
+
+
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--source-root',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
-    p.add_argument('--batches',type=int,nargs='+',default=[1,8,16]);a=p.parse_args()
+    p.add_argument('--batches',type=int,nargs='+',default=[1,8,16]);p.add_argument('--mapped-ctas',type=int,nargs='*',default=[]);a=p.parse_args()
+    assert all(n>0 for n in a.mapped_ctas)
     sys.path.insert(0,str(a.source_root/'profile'))
     from benchmark_telemetry import environment_details,source_state
     from bench_fla import env_fingerprint
@@ -35,7 +47,7 @@ def main():
             host=torch.empty((n,2048),dtype=table.dtype,pin_memory=True)
             gpu=torch.empty((n,2048),dtype=table.dtype,device='cuda')
             expanded=torch.empty_like(gpu)
-            samples={k:[] for k in ('gather_h2d','mapped_host','dedup_h2d_expand')};errors={};distinct=[]
+            samples={k:[] for k in ['gather_h2d','mapped_host','dedup_h2d_expand']+[f'mapped_{ctas}_ctas' for ctas in a.mapped_ctas]};errors={};distinct=[]
             for trial in range(20):
                 ids=torch.randint(0,32000,(n,),device='cpu');ids_gpu=ids.to('cuda')
                 expected=table[:,0].index_select(0,ids)
@@ -54,7 +66,12 @@ def main():
                     torch.index_select(gpu[:count],0,inverse.to('cuda'),out=expanded)
                     return expanded
                 methods=[('gather_h2d',baseline),('mapped_host',mapped),('dedup_h2d_expand',dedup)]
-                shift=trial%3;methods=methods[shift:]+methods[:shift]
+                for ctas in a.mapped_ctas:
+                    def limited(ctas=ctas):
+                        mapped_rows_limited[(min(ctas,n*4),)](table,ids_gpu,gpu,n,2048,24,32000,512,num_warps=4)
+                        return gpu
+                    methods.append((f'mapped_{ctas}_ctas',limited))
+                shift=trial%len(methods);methods=methods[shift:]+methods[:shift]
                 for name,fn in methods:
                     if name in errors:continue
                     try:
@@ -64,7 +81,7 @@ def main():
                         if trial>=10:samples[name].append(elapsed)
                     except Exception as exc:
                         errors[name]=repr(exc)
-                        if name!='mapped_host':raise
+                        if not name.startswith('mapped'):raise
                 if trial>=10:distinct.append(ids.unique().numel())
             row=dict(batch=batch,tokens=n,samples_ms=samples,errors=errors,mean_ms={k:statistics.mean(v) if v else None for k,v in samples.items()},distinct_counts=distinct,bit_exact_for_successful_methods=True)
             payload['records'].append(row);save();print(json.dumps({k:row[k] for k in ('batch','mean_ms','errors')}),flush=True)
