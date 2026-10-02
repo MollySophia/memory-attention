@@ -12,7 +12,6 @@ from transformers.utils import logging
 from transformers.utils.deprecation import deprecate_kwarg
 
 from fla.layers.memory_attn import MemoryAttention
-from fla.layers.memory_mapped_bulk import MappedBulkMemoryTableOffloader
 from fla.layers.memory_offload import (
     BulkMemoryTableOffloader,
     MemoryTableOffloader,
@@ -249,7 +248,7 @@ class MemoryModel(MemoryPreTrainedModel):
         for layer in self.layers:
             layer.attn.m_proj = None
 
-        self.memory_table = table.pin_memory() if config.memory_offload_mapped_bulk else table
+        self.memory_table = table
         self._offload_device = device
         self._offload_dtype = dtype
         self._offload_fold_norm = fold_norm
@@ -328,9 +327,6 @@ class MemoryModel(MemoryPreTrainedModel):
         if policy == "auto":
             policy = "bulk" if batch * seq_len <= config.memory_offload_bulk_max_tokens else "pipeline"
         if policy == "bulk":
-            if (config.memory_offload_mapped_bulk and
-                    config.memory_offload_mapped_bulk_min_tokens <= batch * seq_len <= config.memory_offload_mapped_bulk_max_tokens):
-                return MappedBulkMemoryTableOffloader(self.memory_table, batch, seq_len, device)
             return BulkMemoryTableOffloader(self.memory_table, batch, seq_len, device)
         return MemoryTableOffloader(
             self.memory_table, batch, seq_len,
@@ -441,11 +437,7 @@ class MemoryModel(MemoryPreTrainedModel):
             # IDs on CPU. Accept them on either device and stage the embedding
             # lookup on the compute device.
             device = next(self.parameters()).device
-            offloader = self._offloader_for(*input_ids.shape) if input_ids is not None else None
-            if getattr(offloader, "accepts_gpu_ids", False):
-                ids_cpu = input_ids  # This bulk path consumes fresh GPU IDs directly.
-            else:
-                ids_cpu = input_ids.to("cpu") if input_ids is not None else None
+            ids_cpu = input_ids.to("cpu") if input_ids is not None else None
             if inputs_embeds is None:
                 if input_ids is None:
                     raise ValueError("offloaded forward requires input_ids or inputs_embeds")
@@ -542,7 +534,7 @@ class MemoryModel(MemoryPreTrainedModel):
             if use_cache:
                 state["past"] = outputs[1]
 
-        # Ordinary producers use CPU IDs; mapped bulk accepts CPU or GPU IDs.
+        # input_ids must stay on CPU: the producer gathers from host memory.
         if input_states_ids is None:
             raise ValueError("offloaded forward requires input_ids")
         offloader.forward(input_states_ids, consume)
