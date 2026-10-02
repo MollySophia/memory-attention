@@ -7,7 +7,7 @@
   "parent_sha": "3ea6e6d5fe4ad2525f1635e0c4e1a91c8a8a5064",
   "accepted_step": null,
   "label": "reuse per-layer pipeline coordination tickets",
-  "workflow_stage": "correctness",
+  "workflow_stage": "screening",
   "hypothesis": "Reuse pipeline GroupTicket objects and their threading events per shape instead of allocating24 tickets and48 Python events for each call; reset state under the existing serialized forward lock.",
   "expected_bottleneck": "Frozen A0001 coordination profiles attribute0.029966/0.032549 ms CPU to24 ticket constructions at b1/b8. Small potential gain; resetting events may cost as much. A0007 tensor-view caching was rejected and is not included.",
   "profile_evidence": [
@@ -63,5 +63,16 @@
       "batch": 8
     }
   ],
-  "eligible_gain_note": "Structured representation of the primary target already declared at registration; unchanged scope."
+  "eligible_gain_note": "Structured representation of the primary target already declared at registration; unchanged scope.",
+  "candidate_sha": "41869553c1df91e5c8ae4cda16cd4c6b1c0ab44b",
+  "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0020",
+  "correctness": {
+    "pytest": "36 passed in 12.96s",
+    "standalone": "PASS; worst max error 0",
+    "logs": [
+      "correctness-tests.txt",
+      "standalone-correctness.txt"
+    ]
+  },
+  "screen_manifest": "R01/manifest.json"
 }
