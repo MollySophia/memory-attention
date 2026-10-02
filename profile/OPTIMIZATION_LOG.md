@@ -386,3 +386,7 @@ Five focused attempts complete: A0001 accepted; A0003 rejected; A0002/A0004/A000
 ### Continuation 01 (offload-gap-001)
 
 User requests another5–10 optimization attempts. Preserve A0000–A0005 and the first final report. Start A0006 from verified A0001, keep frozen A0000 and unchanged protocols/gates. Current GPU/driver and idle654MiB TRM process match previous environment. New coordination diagnostics instrument worker release waits, DMA synchronization, tensor view creation and ticket setup, separately from model timing. Register new hypotheses only after evidence review.
+
+### A0006 registration (offload-gap-001; continuation-01)
+
+Parent verified A0001. Instrumented b1 pipeline release waits total1.176ms (overlapping, not removable wall time). Test refilling pinned host slot after DMA completion but before waiting for prior GPU consumer release. GPU overwrite still waits for consumed event; no extra buffers or cached lookups. Focused schedule change, twelve-job b1/b8/b16 screen, exactness and cancellation/slot-reuse gates first.

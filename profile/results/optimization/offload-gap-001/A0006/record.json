@@ -1,0 +1,50 @@
+{
+  "campaign_id": "offload-gap-001",
+  "attempt_id": "A0006",
+  "continuation_id": "continuation-01",
+  "parent_attempt_id": "A0001",
+  "parent_source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
+  "parent_sha": "0cc9066fc7fefb3d5f5a728de2474d2896d0a043",
+  "accepted_step": null,
+  "label": "refill host slot before consumer release",
+  "workflow_stage": "implementation",
+  "hypothesis": "Producer waits for previous GPU consumer release before refilling host storage, although host storage is safe as soon as previous DMA completes. Move release wait after fresh CPU gather to overlap it with ongoing consumption.",
+  "expected_bottleneck": "CPU producer release waits serialize next gather unnecessarily",
+  "profile_evidence": [
+    "../continuation-01/coordination-b1.json",
+    "../A0000/diagnostics-summary.json"
+  ],
+  "change": "Reorder only pipeline pinned-host refill and consumer-release wait. Preserve copied.synchronize before host overwrite and consumed-event wait before device overwrite; no added buffers, table layout change or lookup cache.",
+  "protocol_version": "offload_gap_v1",
+  "original_protocol_version": "offload_gap_v1",
+  "measurement_plan_id": "screen_v1_w3_n5_r1",
+  "screen": {
+    "batches": [
+      1,
+      8,
+      16
+    ],
+    "length": 2048,
+    "modes": [
+      "prefill",
+      "decode"
+    ],
+    "variants": [
+      "ma_offload",
+      "ma_gpu"
+    ],
+    "jobs": 12,
+    "reason_batch16": "Pipeline scheduling change"
+  },
+  "tradeoffs": [
+    "More CPU work may occur before cancellation is observed; retain cancellation checks and exact exception cleanup.",
+    "Overlap opportunity may be hidden by DMA/compute; require paired wall-time and gap confirmation."
+  ],
+  "not_run": {
+    "confirmation": "Only if screen is promising",
+    "full_validation": "Only if independently nominated",
+    "generation_validation": "Only if independently nominated"
+  },
+  "candidate_sha": null,
+  "decision": "Registered before implementation; tests and screen pending."
+}

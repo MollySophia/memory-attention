@@ -1,0 +1,1081 @@
+{
+  "campaign_id": "offload-gap-001",
+  "purpose": "diagnostic only; instrumented overlapping CPU spans, not latency acceptance",
+  "source": {
+    "source_sha256": "a21cfb59e20667368dbbf7e116cc23b723c27d7a8df69c27d387cc61365652b7",
+    "git_commit": {
+      "returncode": 0,
+      "stdout": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb\n",
+      "stderr": ""
+    },
+    "git_status": {
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "source_patch": {
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  "environment": {
+    "cpu": {
+      "returncode": 0,
+      "stdout": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           48 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  32\nOn-line CPU(s) list:                     0-31\nVendor ID:                               AuthenticAMD\nModel name:                              AMD Ryzen 9 9950X 16-Core Processor\nCPU family:                              26\nModel:                                   68\nThread(s) per core:                      2\nCore(s) per socket:                      16\nSocket(s):                               1\nStepping:                                0\nMicrocode version:                       0xb404035\nFrequency boost:                         enabled\nCPU(s) scaling MHz:                      55%\nCPU max MHz:                             5756.4521\nCPU min MHz:                             624.1940\nBogoMIPS:                                8584.34\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good amd_lbr_v2 nopl xtopology nonstop_tsc cpuid extd_apicid aperfmperf rapl pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpuid_fault cpb cat_l3 cdp_l3 hw_pstate ssbd mba perfmon_v2 ibrs ibpb stibp ibrs_enhanced vmmcall fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid cqm rdt_a avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local user_shstk avx_vnni avx512_bf16 clzero irperf xsaveerptr rdpru wbnoinvd cppc arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif x2avic v_spec_ctrl vnmi avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid bus_lock_detect movdiri movdir64b overflow_recov succor smca fsrm avx512_vp2intersect flush_l1d amd_lbr_pmc_freeze\nVirtualization:                          AMD-V\nL1d cache:                               768 KiB (16 instances)\nL1i cache:                               512 KiB (16 instances)\nL2 cache:                                16 MiB (16 instances)\nL3 cache:                                64 MiB (2 instances)\nNUMA node(s):                            1\nNUMA node0 CPU(s):                       0-31\nVulnerability Gather data sampling:      Not affected\nVulnerability Ghostwrite:                Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Not affected\nVulnerability Mds:                       Not affected\nVulnerability Meltdown:                  Not affected\nVulnerability Mmio stale data:           Not affected\nVulnerability Old microcode:             Not affected\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Not affected\nVulnerability Spec rstack overflow:      Mitigation; IBPB on VMEXIT only\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Enhanced / Automatic IBRS; IBPB conditional; STIBP always-on; PBRSB-eIBRS Not affected; BHI Not affected\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Not affected\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Mitigation; IBPB on VMEXIT\n",
+      "stderr": ""
+    },
+    "cpu_affinity": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31
+    ],
+    "platform": "Linux-6.18.9-arch1-2-molly-x86_64-with-glibc2.44",
+    "torch_threads": 16,
+    "torch_interop_threads": 32,
+    "thread_environment": {
+      "OMP_NUM_THREADS": null,
+      "MKL_NUM_THREADS": null,
+      "OPENBLAS_NUM_THREADS": null
+    },
+    "nvidia_smi": {
+      "returncode": 0,
+      "stdout": "Fri Oct  2 12:34:01 2026       \n+-----------------------------------------------------------------------------------------+\n| NVIDIA-SMI 610.57.04              KMD Version: 610.57.04     CUDA UMD Version: 13.3     |\n+-----------------------------------------+------------------------+----------------------+\n| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |\n| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |\n|                                         |                        |               MIG M. |\n|=========================================+========================+======================|\n|   0  NVIDIA GeForce RTX 5090        Off |   00000000:01:00.0 Off |                  N/A |\n|  0%   43C    P1             71W /  575W |    7105MiB /  32607MiB |     33%      Default |\n|                                         |                        |                  N/A |\n+-----------------------------------------+------------------------+----------------------+\n\n+-----------------------------------------------------------------------------------------+\n| Processes:                                                                              |\n|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |\n|        ID   ID                                                               Usage      |\n|=========================================================================================|\n|    0   N/A  N/A         2083395      C   ...da3/envs/fla-bench/bin/python       6402MiB |\n|    0   N/A  N/A         3625831      C   ...ngtz/trm-mcp/.venv/bin/python        654MiB |\n+-----------------------------------------------------------------------------------------+\n",
+      "stderr": ""
+    },
+    "gpu_telemetry": {
+      "returncode": 0,
+      "stdout": "name, driver_version, temperature.gpu, clocks.current.sm [MHz], clocks.current.memory [MHz], power.draw [W], utilization.gpu [%], memory.used [MiB]\nNVIDIA GeForce RTX 5090, 610.57.04, 43, 2460 MHz, 13801 MHz, 71.99 W, 33 %, 7105 MiB\n",
+      "stderr": ""
+    }
+  },
+  "env": {
+    "git_commit": "0cc9066",
+    "model_module": "/home/molly/workspace-memory-attn/offload-gap-001-A0001/fla/models/memory/modeling_memory.py",
+    "torch": "2.9.0+cu130",
+    "torch_cuda": "13.0",
+    "flash_attn": "2.8.3",
+    "fla": "0.4.2",
+    "python": "3.12.2",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "gpu_capability": "sm_120",
+    "cuda_visible_devices": ""
+  },
+  "batch": 1,
+  "length": 2048,
+  "warmup": 10,
+  "wall_ms": 29.53048190101981,
+  "records": [
+    {
+      "label": "ticket_setup",
+      "thread": "MainThread",
+      "cpu_ms": 0.004208
+    },
+    {
+      "label": "ticket_setup",
+      "thread": "MainThread",
+      "cpu_ms": 0.001814
+    },
+    {
+      "label": "ticket_setup",
+      "thread": "MainThread",
+      "cpu_ms": 0.001382
+    },
+    {
+      "label": "ticket_setup",
+      "thread": "MainThread",
+      "cpu_ms": 0.000962
+    },
+    {
+      "label": "ticket_setup",
+      "thread": "MainThread",
+      "cpu_ms": 0.001112
+    },
+    {
+      "label": "ticket_setup",
+      "thread": "MainThread",
+      "cpu_ms": 0.001062
+    },
+    {
+      "label": "ticket_setup",
+      "thread": "MainThread",
+      "cpu_ms": 0.001012
+    },
+    {
+      "label": "ticket_setup",
+      "thread": "MainThread",
+      "cpu_ms": 0.001182
+    },
+    {
+      "label": "ticket_setup",
+      "thread": "MainThread",
+      "cpu_ms": 0.001032
+    },
+    {
+      "label": "ticket_setup",
+      "thread": "MainThread",
+      "cpu_ms": 0.001082
+    },
+    {
+      "label": "ticket_setup",
+      "thread": "MainThread",
+      "cpu_ms": 0.001042
+    },
+    {
+      "label": "ticket_setup",
+      "thread": "MainThread",
+      "cpu_ms": 0.001352
+    },
+    {
+      "label": "ticket_setup",
+      "thread": "MainThread",
+      "cpu_ms": 0.000992
+    },
+    {
+      "label": "ticket_setup",
+      "thread": "MainThread",
+      "cpu_ms": 0.000942
+    },
+    {
+      "label": "ticket_setup",
+      "thread": "MainThread",
+      "cpu_ms": 0.001142
+    },
+    {
+      "label": "ticket_setup",
+      "thread": "MainThread",
+      "cpu_ms": 0.001082
+    },
+    {
+      "label": "ticket_setup",
+      "thread": "MainThread",
+      "cpu_ms": 0.000981
+    },
+    {
+      "label": "ticket_setup",
+      "thread": "MainThread",
+      "cpu_ms": 0.001323
+    },
+    {
+      "label": "ticket_setup",
+      "thread": "MainThread",
+      "cpu_ms": 0.001072
+    },
+    {
+      "label": "ticket_setup",
+      "thread": "MainThread",
+      "cpu_ms": 0.001072
+    },
+    {
+      "label": "ticket_setup",
+      "thread": "MainThread",
+      "cpu_ms": 0.000902
+    },
+    {
+      "label": "ticket_setup",
+      "thread": "MainThread",
+      "cpu_ms": 0.001102
+    },
+    {
+      "label": "ticket_setup",
+      "thread": "MainThread",
+      "cpu_ms": 0.001102
+    },
+    {
+      "label": "ticket_setup",
+      "thread": "MainThread",
+      "cpu_ms": 0.001012
+    },
+    {
+      "label": "producer_release_wait",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.002395
+    },
+    {
+      "label": "producer_dma_sync",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.002846
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.004268
+    },
+    {
+      "label": "gather",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.151236
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.005501
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.003106
+    },
+    {
+      "label": "producer_release_wait",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001663
+    },
+    {
+      "label": "producer_dma_sync",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.002846
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.003797
+    },
+    {
+      "label": "buffer_view",
+      "thread": "MainThread",
+      "cpu_ms": 0.046879
+    },
+    {
+      "label": "gather",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.259019
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.005891
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.003597
+    },
+    {
+      "label": "producer_release_wait",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001323
+    },
+    {
+      "label": "producer_dma_sync",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.013866
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.003837
+    },
+    {
+      "label": "gather",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.234493
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.005149
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.003186
+    },
+    {
+      "label": "producer_release_wait",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.000912
+    },
+    {
+      "label": "producer_dma_sync",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001253
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.002204
+    },
+    {
+      "label": "gather",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.247708
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.003616
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001844
+    },
+    {
+      "label": "producer_release_wait",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.000661
+    },
+    {
+      "label": "producer_dma_sync",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001012
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001764
+    },
+    {
+      "label": "gather",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.235435
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.004067
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001824
+    },
+    {
+      "label": "buffer_view",
+      "thread": "MainThread",
+      "cpu_ms": 0.004759
+    },
+    {
+      "label": "producer_release_wait",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.074311
+    },
+    {
+      "label": "producer_dma_sync",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.043542
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.005651
+    },
+    {
+      "label": "gather",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.209165
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.003987
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.002265
+    },
+    {
+      "label": "buffer_view",
+      "thread": "MainThread",
+      "cpu_ms": 0.003827
+    },
+    {
+      "label": "producer_release_wait",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.196301
+    },
+    {
+      "label": "producer_dma_sync",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.002225
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001993
+    },
+    {
+      "label": "gather",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.261394
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.003286
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001493
+    },
+    {
+      "label": "buffer_view",
+      "thread": "MainThread",
+      "cpu_ms": 0.003386
+    },
+    {
+      "label": "producer_release_wait",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.162647
+    },
+    {
+      "label": "producer_dma_sync",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001583
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001883
+    },
+    {
+      "label": "gather",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.165663
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.003367
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001833
+    },
+    {
+      "label": "buffer_view",
+      "thread": "MainThread",
+      "cpu_ms": 0.003346
+    },
+    {
+      "label": "producer_release_wait",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.192503
+    },
+    {
+      "label": "producer_dma_sync",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001462
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.002265
+    },
+    {
+      "label": "gather",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.188907
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.004538
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001613
+    },
+    {
+      "label": "buffer_view",
+      "thread": "MainThread",
+      "cpu_ms": 0.004278
+    },
+    {
+      "label": "producer_release_wait",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.183787
+    },
+    {
+      "label": "producer_dma_sync",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001513
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001853
+    },
+    {
+      "label": "gather",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.167006
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.003236
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001753
+    },
+    {
+      "label": "buffer_view",
+      "thread": "MainThread",
+      "cpu_ms": 0.003436
+    },
+    {
+      "label": "producer_release_wait",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.17995
+    },
+    {
+      "label": "producer_dma_sync",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001323
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001943
+    },
+    {
+      "label": "gather",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.145064
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.003296
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001733
+    },
+    {
+      "label": "buffer_view",
+      "thread": "MainThread",
+      "cpu_ms": 0.003276
+    },
+    {
+      "label": "producer_release_wait",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.170723
+    },
+    {
+      "label": "buffer_view",
+      "thread": "MainThread",
+      "cpu_ms": 0.003186
+    },
+    {
+      "label": "producer_dma_sync",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.380459
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001553
+    },
+    {
+      "label": "gather",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.158079
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.003346
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001743
+    },
+    {
+      "label": "producer_release_wait",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.000621
+    },
+    {
+      "label": "buffer_view",
+      "thread": "MainThread",
+      "cpu_ms": 0.003427
+    },
+    {
+      "label": "buffer_view",
+      "thread": "MainThread",
+      "cpu_ms": 0.003046
+    },
+    {
+      "label": "buffer_view",
+      "thread": "MainThread",
+      "cpu_ms": 0.002966
+    },
+    {
+      "label": "producer_dma_sync",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.991022
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001503
+    },
+    {
+      "label": "gather",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.138522
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.002876
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001483
+    },
+    {
+      "label": "producer_release_wait",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.000611
+    },
+    {
+      "label": "buffer_view",
+      "thread": "MainThread",
+      "cpu_ms": 0.005069
+    },
+    {
+      "label": "producer_dma_sync",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 1.028102
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001884
+    },
+    {
+      "label": "gather",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.138902
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.003106
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001553
+    },
+    {
+      "label": "producer_release_wait",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.000621
+    },
+    {
+      "label": "buffer_view",
+      "thread": "MainThread",
+      "cpu_ms": 0.004508
+    },
+    {
+      "label": "producer_dma_sync",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 1.027881
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001423
+    },
+    {
+      "label": "gather",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.139845
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.002895
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001383
+    },
+    {
+      "label": "producer_release_wait",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.000812
+    },
+    {
+      "label": "buffer_view",
+      "thread": "MainThread",
+      "cpu_ms": 0.004598
+    },
+    {
+      "label": "producer_dma_sync",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 1.036348
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001432
+    },
+    {
+      "label": "gather",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.138923
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.002735
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001363
+    },
+    {
+      "label": "producer_release_wait",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.000611
+    },
+    {
+      "label": "buffer_view",
+      "thread": "MainThread",
+      "cpu_ms": 0.004258
+    },
+    {
+      "label": "producer_dma_sync",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 1.031889
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001433
+    },
+    {
+      "label": "gather",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.138481
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.002875
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001392
+    },
+    {
+      "label": "producer_release_wait",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.000671
+    },
+    {
+      "label": "buffer_view",
+      "thread": "MainThread",
+      "cpu_ms": 0.004268
+    },
+    {
+      "label": "producer_dma_sync",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 1.024966
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001443
+    },
+    {
+      "label": "gather",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.140866
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.002946
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001392
+    },
+    {
+      "label": "producer_release_wait",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.000752
+    },
+    {
+      "label": "buffer_view",
+      "thread": "MainThread",
+      "cpu_ms": 0.004519
+    },
+    {
+      "label": "producer_dma_sync",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 1.02715
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001413
+    },
+    {
+      "label": "gather",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.139163
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.002895
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001413
+    },
+    {
+      "label": "producer_release_wait",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.000661
+    },
+    {
+      "label": "buffer_view",
+      "thread": "MainThread",
+      "cpu_ms": 0.004378
+    },
+    {
+      "label": "producer_dma_sync",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 1.0272
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001422
+    },
+    {
+      "label": "gather",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.138061
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.002865
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001402
+    },
+    {
+      "label": "producer_release_wait",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.000812
+    },
+    {
+      "label": "buffer_view",
+      "thread": "MainThread",
+      "cpu_ms": 0.003988
+    },
+    {
+      "label": "producer_dma_sync",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 1.038331
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001442
+    },
+    {
+      "label": "gather",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.138282
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.002865
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001413
+    },
+    {
+      "label": "producer_release_wait",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.000712
+    },
+    {
+      "label": "buffer_view",
+      "thread": "MainThread",
+      "cpu_ms": 0.003817
+    },
+    {
+      "label": "producer_dma_sync",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 1.028863
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001453
+    },
+    {
+      "label": "gather",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.138712
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.002866
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001393
+    },
+    {
+      "label": "producer_release_wait",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.000702
+    },
+    {
+      "label": "buffer_view",
+      "thread": "MainThread",
+      "cpu_ms": 0.004358
+    },
+    {
+      "label": "producer_dma_sync",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 1.01639
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001463
+    },
+    {
+      "label": "gather",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.139885
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.002865
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001413
+    },
+    {
+      "label": "producer_release_wait",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.000782
+    },
+    {
+      "label": "buffer_view",
+      "thread": "MainThread",
+      "cpu_ms": 0.004498
+    },
+    {
+      "label": "producer_dma_sync",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 1.031218
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001492
+    },
+    {
+      "label": "gather",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.139624
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.002895
+    },
+    {
+      "label": "buffer_view",
+      "thread": "ma-prefetch_0",
+      "cpu_ms": 0.001383
+    },
+    {
+      "label": "buffer_view",
+      "thread": "MainThread",
+      "cpu_ms": 0.004489
+    }
+  ],
+  "summary": {
+    "buffer_view": {
+      "count": 96,
+      "sum_ms": 0.316311
+    },
+    "gather": {
+      "count": 24,
+      "sum_ms": 4.092435
+    },
+    "producer_dma_sync": {
+      "count": 24,
+      "sum_ms": 12.76329
+    },
+    "producer_release_wait": {
+      "count": 24,
+      "sum_ms": 1.1755440000000001
+    },
+    "ticket_setup": {
+      "count": 24,
+      "sum_ms": 0.029966
+    }
+  }
+}
