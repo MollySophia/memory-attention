@@ -300,3 +300,7 @@ Per the previously declared conditional plan, R08 audits prefill b4/L2048, b16/L
 ### A0001 R08 continuation environment unavailable (offload-gap-001)
 
 The continuation entered a restricted execution environment without /dev/nvidia devices; nvidia-smi cannot contact the driver. The previous exec session 54235 is unknown. The current PID namespace cannot establish whether the old host controller still runs, so no duplicate was launched and its manifest is unchanged. Seven of 24 new jobs have completed payloads (J013–J019), including J019 whose manifest still says running. Seventeen new jobs have no payload yet. R08-observation-unavailable.json records the exact observation. Do not treat this partial audit as passing, failing, or an independent three-block comparison. Reestablish GPU access and inspect the original controller before resuming only unfinished jobs under the unchanged plan. A0001 is still pending; the 5–10-attempt objective is unmet.
+
+### A0001 R08 recovery (offload-gap-001)
+
+Unrestricted environment restored. RTX 5090 is visible and idle; original controller PID 1990141 and all prior child PIDs are absent in host /proc. Source SHA/hash, GPU driver, torch/FlashAttention/Python, CPU affinity and thread environment match original data. Resume only 17 pending jobs under their unchanged commands/order, estimated 555.14 seconds. J019 already has a completed payload and is recovered without resampling. Original manifest is preserved as manifest-before-resume.json. No attempt ID, sampling effort, or acceptance gate changes.
