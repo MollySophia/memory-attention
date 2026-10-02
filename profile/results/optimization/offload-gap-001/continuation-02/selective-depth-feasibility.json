@@ -1,0 +1,22 @@
+{
+  "campaign_id": "offload-gap-001",
+  "purpose": "Future candidate design evidence; no implementation or attempt counted",
+  "evidence": [
+    "../A0014/parent-confirmation-analysis.json",
+    "../A0014/confirmation-memory-audit.json"
+  ],
+  "finding": "Single-slot auto pipeline improves b1 prefill offload latency by 0.349586 ms (95% CI 0.269728..0.429443) and gap by 0.373642 ms (0.274240..0.473045). Applying it to b8 also improves prefill but has a resolved b8 decode regression after prefix setup.",
+  "hypothesis": "Bound automatic one-slot eligibility to pipeline calls with <=2048 input tokens. Keep the four-slot policy above that threshold, including the entire b8 primary workload. This removes the changed high-volume capacity regime while preserving the evidenced small-prefill schedule.",
+  "limits": [
+    "The b8 decode mechanism is unproven. Do not infer causation from unchanged bulk code or assume unchanged primary workload measurements will pass.",
+    "Requires all four independent primary confirmations, both placements and regression gates. b1 decode uncertainty remains unresolved.",
+    "If A0015 is accepted, reconcile with that best verified parent; do not overwrite its fused behavior.",
+    "The 2048-token upper bound is declared from the profiled primary small workload before any selective-depth timing. Full validation must check other shapes and boundaries."
+  ],
+  "expected_buffer_bytes": {
+    "b1_prefill_each": 8388608,
+    "b8_prefill_each": 268435456
+  },
+  "primary_target": "b1 prefill",
+  "not_claimed": "No selective-depth source, correctness or performance results exist yet."
+}
