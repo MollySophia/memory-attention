@@ -5,7 +5,7 @@
   "completed_optimization_verdicts": 7,
   "accepted_steps": 1,
   "active_attempt": "A0008",
-  "controller_pid": null,
+  "controller_pid": 2116391,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
   "final_report": "final/REPORT.md",
@@ -15,7 +15,7 @@
   "continuation": "continuation-01/manifest.json",
   "source_candidate": "fb17afb2a97b68ec61ef517622707f68ce33e051",
   "live_manifest": "profile/results/optimization/offload-gap-001/A0008/R01/manifest.json",
-  "exec_session_id": null,
+  "exec_session_id": 4813,
   "next_actions": [
     "Poll existingA0008screen; no duplicateGPUwork.",
     "After12jobs summarize/compare toA0000/A0001. Any proposedgain needsparentconfirmation andfreshA0000confirmation/fullgates.",
