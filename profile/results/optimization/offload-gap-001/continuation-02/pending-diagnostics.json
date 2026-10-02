@@ -1,0 +1,47 @@
+{
+  "campaign_id": "offload-gap-001",
+  "status": "planned_not_started",
+  "constraint": "Run only after A0015 parent-confirmation controller terminates; sequential GPU use; finish before any next candidate timing.",
+  "jobs": [
+    {
+      "name": "input-startup-b1",
+      "command": [
+        "/home/molly/miniconda3/envs/fla-bench/bin/python",
+        "profile/results/optimization/offload-gap-001/diagnose_input_startup.py",
+        "--source-root",
+        "/home/molly/workspace-memory-attn/offload-gap-001-A0001",
+        "--batch",
+        "1",
+        "--output",
+        "profile/results/optimization/offload-gap-001/continuation-02/input-startup-b1.json"
+      ]
+    },
+    {
+      "name": "input-startup-b8",
+      "command": [
+        "/home/molly/miniconda3/envs/fla-bench/bin/python",
+        "profile/results/optimization/offload-gap-001/diagnose_input_startup.py",
+        "--source-root",
+        "/home/molly/workspace-memory-attn/offload-gap-001-A0001",
+        "--batch",
+        "8",
+        "--output",
+        "profile/results/optimization/offload-gap-001/continuation-02/input-startup-b8.json"
+      ]
+    },
+    {
+      "name": "write-combined",
+      "command": [
+        "/home/molly/miniconda3/envs/fla-bench/bin/python",
+        "profile/results/optimization/offload-gap-001/diagnose_write_combined.py",
+        "--source-root",
+        "/home/molly/workspace-memory-attn/offload-gap-001-A0001",
+        "--output",
+        "profile/results/optimization/offload-gap-001/continuation-02/write-combined.json"
+      ]
+    }
+  ],
+  "estimated_seconds": 65,
+  "estimate_note": "Rough setup plus warmup estimate; not timeout or permission gate.",
+  "purpose": "Collect mechanism evidence before selecting additional offload-specific candidates. Diagnostics do not count toward ten attempts."
+}
