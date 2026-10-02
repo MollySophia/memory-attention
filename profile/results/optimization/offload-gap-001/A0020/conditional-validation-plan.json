@@ -1,0 +1,12 @@
+{
+  "campaign_id": "offload-gap-001",
+  "attempt_id": "A0020",
+  "status": "conditional_only",
+  "parent_gate": "Fixed48-process A0016 comparison and eligible b1 or b8 prefill dual latency/gap improvement required.",
+  "baseline_gate": "Fresh fixed48-process A0000/candidate confirmation; emit measured cost plan before launch.",
+  "correctness": "Four new candidate full-model trajectories; reuse only independently validated A0000 resident fingerprints.",
+  "full_matrix": "84 points with16 valid reused primary points backed by48 current R03 processes;68 new processes, exact cost plan before launch.",
+  "generation": "12 new matched points, exact cost plan before launch.",
+  "regression": "Apply secondary-regression-policy.json after original summaries; all original observations retained.",
+  "acceptance": "Never automatic; final source/environment/memory/correctness and regression audit required."
+}

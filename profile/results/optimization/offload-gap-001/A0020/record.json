@@ -78,5 +78,8 @@
   "screen_summary": "R01-summary.json",
   "performance": "screen-comparison.json",
   "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json",
-  "screen_decision": "Small eligible b1/b8 prefill offload reductions0.030696/0.048966 ms and gap reductions0.073350/0.276661 ms. Both near sample dispersion; not gains yet. b1/b8 decode slower0.271334/0.035761 ms preserved. Fixed48-process parent confirmation tests repeatability and all primary regressions without extending until favorable."
+  "screen_decision": "Small eligible b1/b8 prefill offload reductions0.030696/0.048966 ms and gap reductions0.073350/0.276661 ms. Both near sample dispersion; not gains yet. b1/b8 decode slower0.271334/0.035761 ms preserved. Fixed48-process parent confirmation tests repeatability and all primary regressions without extending until favorable.",
+  "conditional_validation_plan": "conditional-validation-plan.json",
+  "conditional_controller": "conditional-controller.json",
+  "secondary_regression_policy": "secondary-regression-policy.json"
 }

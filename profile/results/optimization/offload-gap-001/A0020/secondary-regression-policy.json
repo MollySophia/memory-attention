@@ -1,0 +1,13 @@
+{
+  "campaign_id": "offload-gap-001",
+  "attempt_id": "A0020",
+  "policy": "nonprimary_single_pair_any_offload_or_resident_slowdown_v1",
+  "declared_before": "Parent confirmation complete; conditional full/generation stages have not run.",
+  "full_scope": "All ten nonprimary prefill/decode workloads in the frozen matrix; four primary workloads retain completed fixed confirmations.",
+  "generation_scope": "Both prefix2048+128-step workloads, batches1/8.",
+  "trigger": "Any negative baseline-minus-candidate offload or folded resident mean in the original single paired block. Zero differences do not trigger.",
+  "followup": "Keep original pair and add exactly two independent balanced pairs for both placements using extend_pairs.py. Estimate and persist exact work before launch.",
+  "verdict": "Use original95% Student-t rule over three independent blocks; any resolved offload regression/resident slowdown or memory loss fails. If uncertainty remains, report it; do not extend until favorable.",
+  "failure_handling": "OOM/unsupported/missing original rows require review, never substitute zeros.",
+  "source_scope": "Frozen A0000 versus candidate for full/generation; separate incremental A0016 primary confirmation required."
+}
