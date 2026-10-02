@@ -7,7 +7,7 @@
   "parent_sha": "0cc9066fc7fefb3d5f5a728de2474d2896d0a043",
   "accepted_step": null,
   "label": "refill host slot before consumer release",
-  "workflow_stage": "screening",
+  "workflow_stage": "parent_confirmation",
   "hypothesis": "Producer waits for previous GPU consumer release before refilling host storage, although host storage is safe as soon as previous DMA completes. Move release wait after fresh CPU gather to overlap it with ongoing consumption.",
   "expected_bottleneck": "CPU producer release waits serialize next gather unnecessarily",
   "profile_evidence": [
@@ -42,12 +42,12 @@
     "Overlap opportunity may be hidden by DMA/compute; require paired wall-time and gap confirmation."
   ],
   "not_run": {
-    "confirmation": "Only if screen is promising",
+    "confirmation": "Predeclared parent confirmation next; fresh frozen-A0000 confirmation only if incremental gain passes.",
     "full_validation": "Only if independently nominated",
     "generation_validation": "Only if independently nominated"
   },
   "candidate_sha": "b58cdb8640fb2d6a57631e0c26fc6f9a72761f74",
-  "decision": "Exactness gates passed. Run predeclared twelve-job screen; no gain claim yet.",
+  "decision": "b1 prefill screen suggests0.233ms latency and0.186ms gap reduction vsA0001. b8/b16 estimates slower. Require fixed48-process independent parent confirmation on allfour primary workloads; no extension until favorable.",
   "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0006",
   "correctness": {
     "pytest": "46 passed in9.49s",
@@ -58,5 +58,8 @@
     ]
   },
   "screen_manifest": "R01/manifest.json",
-  "screen_summary": "R01-summary.json"
+  "screen_summary": "R01-summary.json",
+  "performance": "screen-comparison.json",
+  "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json",
+  "parent_confirmation_analysis": "parent-confirmation-analysis.json"
 }
