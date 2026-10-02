@@ -7,7 +7,7 @@
   "parent_sha": "91eb8ad887cae83734c16b0978801e2da24965fc",
   "accepted_step": null,
   "label": "submit embedding before waiting for pipeline input IDs",
-  "workflow_stage": "correctness",
+  "workflow_stage": "screening",
   "hypothesis": "For pipeline inputs, enqueue nonblocking D2H into reusable pinned ID storage, record completion, submit embedding, then wait for host IDs before CPU gather. Overlap host embedding dispatch with ID transfer/completion instead of blocking before dispatch.",
   "expected_bottleneck": "Frozen A0001 instrumented b1/b8 ID staging CPU spans0.033814/0.047770 ms precede embedding dispatch0.034976/0.046488 ms. These instrumented spans are not guaranteed removable latency. A0011 reusable blocking IDs failed independent confirmation; this attempt specifically changes the wait position.",
   "profile_evidence": [
@@ -68,5 +68,16 @@
     }
   ],
   "eligible_gain_note": "Structured representation of the primary target already declared at registration; unchanged scope.",
-  "activation_patch": "conditional-A0016-parent.patch"
+  "activation_patch": "conditional-A0016-parent.patch",
+  "candidate_sha": "6089489be39a59a31360b8f89add2042cc0a7c8b",
+  "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0018",
+  "correctness": {
+    "pytest": "34 passed in 13.06s",
+    "standalone": "PASS; worst max error 0",
+    "logs": [
+      "correctness-tests.txt",
+      "standalone-correctness.txt"
+    ]
+  },
+  "screen_manifest": "R01/manifest.json"
 }
