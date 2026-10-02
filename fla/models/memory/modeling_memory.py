@@ -333,7 +333,6 @@ class MemoryModel(MemoryPreTrainedModel):
             group_size=config.memory_offload_group_size,
             device=device,
             prefetch_depth=config.memory_offload_prefetch_depth,
-            dedup_min_tokens=config.memory_offload_dedup_min_tokens,
         )
 
     def _offloader_for(self, batch: int, seq_len: int):
