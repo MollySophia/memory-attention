@@ -1,10 +1,10 @@
 {
   "campaign_id": "offload-gap-001",
-  "goal_progress": "Additional4/5minimum verdicts complete;A0010alternatehostbuffer candidate passes47tests/standalone,screen next.",
-  "workflow_stage": "screening",
-  "completed_optimization_verdicts": 9,
+  "goal_progress": "Fiveadditionalverdicts complete: A0006within_noise,A0007\u2013A0010rejected. A0001 remainsretained. Continuationfinalreport/figures/audit/publication pending.",
+  "workflow_stage": "final_reporting",
+  "completed_optimization_verdicts": 10,
   "accepted_steps": 1,
-  "active_attempt": "A0010",
+  "active_attempt": null,
   "controller_pid": null,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
@@ -23,7 +23,7 @@
     "AfterA0010finalverdict fiveadditionalattemptscomplete. Exportcontinuation-01/final withcumulative10attempt history and retainedformalstepfigures. ReuseA0001validfull/gen/exactevidence ifstillincumbent.",
     "Auditadditionalrawrecords/sources/plans/correctness and5\u201310additionalcount; audit_final.py --continuation continuation-01. Preserveoriginalfinalreport. Commit/pushfinalartifacts,verifyremoteandcleansource beforegoalcomplete."
   ],
-  "additional_completed_verdicts": 4,
+  "additional_completed_verdicts": 5,
   "additional_attempt_target": [
     5,
     10

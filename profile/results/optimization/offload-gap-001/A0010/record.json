@@ -7,7 +7,7 @@
   "parent_sha": "1835ebe802504955a6146141a1aa7ebe5f3fcc16",
   "accepted_step": null,
   "label": "alternate pinned host buffers per GPU slot",
-  "workflow_stage": "screening",
+  "workflow_stage": "final_verdict",
   "hypothesis": "Decouple pinnedhost reuse fromGPUslot reuse by retainingtwohostbuffers perGPUslot. CPUgather canusealternatehoststorage withoutwaiting forimmediatelyprecedingH2D.",
   "expected_bottleneck": "Instrumentedproducer DMAwait12.763ms atb1 and60.918ms atb8; spans overlapGPUcompute andcannotbeassumedremovablewalltime.",
   "profile_evidence": [
@@ -42,12 +42,12 @@
     "reason_batch16": "Pipelinebuffering/scheduling change"
   },
   "not_run": {
-    "confirmation": "Only ifscreenpromising",
-    "full_validation": "Only ifnominated",
-    "generation_validation": "Only ifnominated"
+    "confirmation": "Notnominated: targetprefill screenunpromising withhigherhostmemory; intentionallynotrun.",
+    "full_validation": "Notnominated: targetprefill screenunpromising withhigherhostmemory; intentionallynotrun.",
+    "generation_validation": "Notnominated: targetprefill screenunpromising withhigherhostmemory; intentionallynotrun."
   },
   "candidate_sha": "b22f8f616ee933ddc4ad2dd09c3eb91e60ef477b",
-  "decision": "In-flight hostreuse, exactgrowingdecode andmemorycounter gates pass;fixed12-job screen next.",
+  "decision": "All12screen jobs complete. Prefill offload slower1.73113/0.75697/1.30852ms atb1/b8/b16 vsA0001; gaps worsen1.68401/0.07212/1.00406ms. No targetprefill gain. Rejectatfixedscreen; noformal/full/generation. Extra pinnedhostmemory doesnotbuy amodel-level improvement.",
   "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0010",
   "correctness": {
     "pytest": "47 passed in9.62s",
@@ -58,5 +58,9 @@
     ]
   },
   "screen_manifest": "R01/manifest.json",
-  "screen_summary": "R01-summary.json"
+  "screen_summary": "R01-summary.json",
+  "status": "rejected",
+  "performance": "screen-comparison.json",
+  "next_insight": "Largerhostlookahead is notbeneficial inthismeasuredpipeline. Preserveoriginalhost/GPUbufferpairing inA0001; noacceptednewstep.",
+  "memory_observation": "Pipelinepinnedcapacity doubles whileGPUcapacityunchanged. TotalcachedoffloaderpinnedMiB b1 64.09375,b8 512.75,b16 1025.5 includingunchangedbulkdecode buffers."
 }
