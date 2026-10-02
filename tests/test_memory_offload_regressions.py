@@ -263,3 +263,60 @@ def test_single_slot_limit_can_be_disabled_and_validated(model):
     model.enable_memory_offload()
     model.set_offload_offloader(1,1025)
     assert len(model.model.memory_offloader.slots) == min(4,len(model.model.layers))
+
+
+
+@pytest.mark.parametrize('policy', ['bulk', 'pipeline'])
+def test_pipeline_producer_precedes_embedding_with_exact_hidden_states(model, monkeypatch, policy):
+    from fla.layers.memory_offload import BulkMemoryTableOffloader
+    model.config.memory_offload_policy = policy
+    ids = torch.randint(0,128,(2,17),device='cuda')
+    model.fold_memory_table_on_gpu()
+    reference = model(input_ids=ids,output_hidden_states=True,use_cache=True,logits_to_keep=1)
+    model.close_memory_offload()
+    model.enable_memory_offload()
+    model.set_offload_offloader(2,17)
+    off = model.model.memory_offloader
+    order = []
+    if policy == 'pipeline':
+        original = off.worker.submit
+        def traced_submit(*args,**kwargs):
+            result = original(*args,**kwargs)
+            order.append('producer')
+            return result
+        monkeypatch.setattr(off.worker,'submit',traced_submit)
+    else:
+        original = BulkMemoryTableOffloader.forward
+        def traced_forward(*args,**kwargs):
+            order.append('producer')
+            return original(*args,**kwargs)
+        monkeypatch.setattr(BulkMemoryTableOffloader,'forward',traced_forward)
+    hook = model.model.embeddings.register_forward_pre_hook(lambda *args: order.append('embedding'))
+    try:
+        actual = model(input_ids=ids,output_hidden_states=True,use_cache=True,logits_to_keep=1)
+        assert order == (['producer','embedding'] if policy == 'pipeline' else ['embedding','producer'])
+        torch.testing.assert_close(actual.logits,reference.logits,rtol=0,atol=0)
+        for value, expected in zip(actual.hidden_states,reference.hidden_states):
+            torch.testing.assert_close(value,expected,rtol=0,atol=0)
+        for value, expected in zip(actual.past_key_values,reference.past_key_values):
+            for actual_tensor, expected_tensor in zip(value['attn_state'],expected['attn_state']):
+                torch.testing.assert_close(actual_tensor,expected_tensor,rtol=0,atol=0)
+    finally:
+        hook.remove()
+
+
+def test_deferred_embedding_failure_cancels_pipeline(model, monkeypatch):
+    model.config.memory_offload_policy = 'pipeline'
+    model.config.memory_offload_prefetch_depth = 1
+    model.enable_memory_offload()
+    ids = torch.randint(0,128,(2,17),device='cuda')
+    with monkeypatch.context() as patch:
+        def fail(*args,**kwargs):
+            raise RuntimeError('injected deferred embedding failure')
+        patch.setattr(model.model.embeddings,'forward',fail)
+        with pytest.raises(RuntimeError,match='injected deferred embedding failure'):
+            model(input_ids=ids,use_cache=False)
+    assert model.model.memory_offloader.broken
+    model.close_memory_offload()
+    model.enable_memory_offload()
+    assert torch.isfinite(model(input_ids=ids,use_cache=False).logits).all()

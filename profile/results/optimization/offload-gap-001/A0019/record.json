@@ -2,12 +2,12 @@
   "campaign_id": "offload-gap-001",
   "continuation_id": "continuation-02",
   "attempt_id": "A0019",
-  "parent_attempt_id": "A0001",
-  "parent_source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
-  "parent_sha": "d517563c43bf86c874599a8e4783d6b789d44500",
+  "parent_attempt_id": "A0016",
+  "parent_source_sha": "0ce6645eb4c4bc3992258ad0878c72ea3c37a64e",
+  "parent_sha": "42e4b904535162ccfb47957111656f4996845b53",
   "accepted_step": null,
   "label": "start pipeline producer before embedding dispatch",
-  "workflow_stage": "implementation_draft",
+  "workflow_stage": "correctness",
   "hypothesis": "Launch pipeline gather/prefetch before submitting the embedding kernel, so first-layer CPU lookup/H2D can overlap embedding startup instead of depending on an entry event recorded after embedding.",
   "expected_bottleneck": "Frozen A0001 startup diagnostic records embedding CUDA intervals0.041856/0.112032 ms at b1/b8; current model enqueues embedding before pipeline forward records its entry dependency and submits producer. These intervals may include dispatch gaps and cannot be claimed as removable latency.",
   "profile_evidence": [
@@ -49,7 +49,7 @@
     "generation_validation": "Draft only; staged gates required."
   },
   "draft_root": "/tmp/offload-gap-A0019-draft-luibc_pp",
-  "draft_condition": "Activate sequentially after A0018 verdict from best verified parent. If A0018 retained, preserve asynchronous ID/embedding dispatch overlap by moving ID completion wait into producer before lookup; do not revert accepted staging merely to apply this draft. Preserve other retained changes. No GPU tests during A0016 confirmation.",
+  "draft_condition": "Activated from A0016 after A0018 screening rejection and code-only reversion. Original model delta applied; new tests appended without removing A0016 tests. A0018 was not retained.",
   "draft_patch": "isolated-draft.patch",
   "draft_validation": "Syntax compile only; runtime exactness and producer cancellation not yet tested.",
   "eligible_gain_workloads": [
