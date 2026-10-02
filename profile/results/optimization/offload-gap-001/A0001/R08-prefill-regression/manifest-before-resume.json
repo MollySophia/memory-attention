@@ -3,7 +3,7 @@
   "protocol_version": "offload_gap_v1",
   "measurement_plan_id": "regression_reuse1_add2_balanced_v1",
   "stage": "regression_check",
-  "controller_pid": 1999849,
+  "controller_pid": 1990141,
   "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R04-full-validation/manifest.json",
   "jobs": [
     {
@@ -586,7 +586,7 @@
       "cwd": "/home/molly/workspace-memory-attn/offload-gap-001-A0001",
       "name": "B2-J019-candidate-prefill-ma_offload-b16-l2048",
       "block": 2,
-      "status": "completed",
+      "status": "running",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/offload-gap-001-A0001/profile/bench_fla.py",
@@ -639,9 +639,7 @@
       ],
       "estimated_seconds": 33.315183877944946,
       "started_unix": 1790908310.7795486,
-      "pid": 1993828,
-      "recovery_note": "Completed raw payload recovered after controller interruption; no resampling",
-      "finished_unix": 1790908343.620701
+      "pid": 1993828
     },
     {
       "mode": "prefill",
@@ -653,7 +651,7 @@
       "cwd": "/home/molly/workspace-memory-attn/offload-gap-001-A0000",
       "name": "B2-J020-baseline-prefill-ma_offload-b16-l2048",
       "block": 2,
-      "status": "completed",
+      "status": "pending",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/offload-gap-001-A0000/profile/bench_fla.py",
@@ -704,11 +702,7 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R08-prefill-regression/B2-J020-baseline-prefill-ma_offload-b16-l2048.json"
       ],
-      "estimated_seconds": 33.29392123222351,
-      "started_unix": 1790909080.4134464,
-      "pid": 1999875,
-      "returncode": 0,
-      "finished_unix": 1790909113.674685
+      "estimated_seconds": 33.29392123222351
     },
     {
       "mode": "prefill",
@@ -720,7 +714,7 @@
       "cwd": "/home/molly/workspace-memory-attn/offload-gap-001-A0000",
       "name": "B2-J021-baseline-prefill-ma_gpu-b4-l2048",
       "block": 2,
-      "status": "completed",
+      "status": "pending",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/offload-gap-001-A0000/profile/bench_fla.py",
@@ -771,11 +765,7 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R08-prefill-regression/B2-J021-baseline-prefill-ma_gpu-b4-l2048.json"
       ],
-      "estimated_seconds": 19.983813285827637,
-      "started_unix": 1790909113.6753986,
-      "pid": 2000395,
-      "returncode": 0,
-      "finished_unix": 1790909133.5709143
+      "estimated_seconds": 19.983813285827637
     },
     {
       "mode": "prefill",
@@ -787,7 +777,7 @@
       "cwd": "/home/molly/workspace-memory-attn/offload-gap-001-A0001",
       "name": "B2-J022-candidate-prefill-ma_gpu-b4-l2048",
       "block": 2,
-      "status": "completed",
+      "status": "pending",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/offload-gap-001-A0001/profile/bench_fla.py",
@@ -838,11 +828,7 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R08-prefill-regression/B2-J022-candidate-prefill-ma_gpu-b4-l2048.json"
       ],
-      "estimated_seconds": 20.00690197944641,
-      "started_unix": 1790909133.5714111,
-      "pid": 2000692,
-      "returncode": 0,
-      "finished_unix": 1790909153.467558
+      "estimated_seconds": 20.00690197944641
     },
     {
       "mode": "prefill",
@@ -854,7 +840,7 @@
       "cwd": "/home/molly/workspace-memory-attn/offload-gap-001-A0001",
       "name": "B2-J023-candidate-prefill-ma_offload-b4-l2048",
       "block": 2,
-      "status": "completed",
+      "status": "pending",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/offload-gap-001-A0001/profile/bench_fla.py",
@@ -905,11 +891,7 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R08-prefill-regression/B2-J023-candidate-prefill-ma_offload-b4-l2048.json"
       ],
-      "estimated_seconds": 20.897279500961304,
-      "started_unix": 1790909153.4684832,
-      "pid": 2000990,
-      "returncode": 0,
-      "finished_unix": 1790909174.2594106
+      "estimated_seconds": 20.897279500961304
     },
     {
       "mode": "prefill",
@@ -921,7 +903,7 @@
       "cwd": "/home/molly/workspace-memory-attn/offload-gap-001-A0000",
       "name": "B2-J024-baseline-prefill-ma_offload-b4-l2048",
       "block": 2,
-      "status": "completed",
+      "status": "pending",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/offload-gap-001-A0000/profile/bench_fla.py",
@@ -972,11 +954,7 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R08-prefill-regression/B2-J024-baseline-prefill-ma_offload-b4-l2048.json"
       ],
-      "estimated_seconds": 20.82815146446228,
-      "started_unix": 1790909174.259983,
-      "pid": 2001304,
-      "returncode": 0,
-      "finished_unix": 1790909195.026148
+      "estimated_seconds": 20.82815146446228
     },
     {
       "mode": "prefill",
@@ -988,7 +966,7 @@
       "cwd": "/home/molly/workspace-memory-attn/offload-gap-001-A0000",
       "name": "B3-J025-baseline-prefill-ma_offload-b4-l2048",
       "block": 3,
-      "status": "completed",
+      "status": "pending",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/offload-gap-001-A0000/profile/bench_fla.py",
@@ -1039,11 +1017,7 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R08-prefill-regression/B3-J025-baseline-prefill-ma_offload-b4-l2048.json"
       ],
-      "estimated_seconds": 20.82815146446228,
-      "started_unix": 1790909195.0266507,
-      "pid": 2001616,
-      "returncode": 0,
-      "finished_unix": 1790909215.8464713
+      "estimated_seconds": 20.82815146446228
     },
     {
       "mode": "prefill",
@@ -1055,7 +1029,7 @@
       "cwd": "/home/molly/workspace-memory-attn/offload-gap-001-A0001",
       "name": "B3-J026-candidate-prefill-ma_offload-b4-l2048",
       "block": 3,
-      "status": "completed",
+      "status": "pending",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/offload-gap-001-A0001/profile/bench_fla.py",
@@ -1106,11 +1080,7 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R08-prefill-regression/B3-J026-candidate-prefill-ma_offload-b4-l2048.json"
       ],
-      "estimated_seconds": 20.897279500961304,
-      "started_unix": 1790909215.8472915,
-      "pid": 2001941,
-      "returncode": 0,
-      "finished_unix": 1790909236.5800216
+      "estimated_seconds": 20.897279500961304
     },
     {
       "mode": "prefill",
@@ -1122,7 +1092,7 @@
       "cwd": "/home/molly/workspace-memory-attn/offload-gap-001-A0001",
       "name": "B3-J027-candidate-prefill-ma_gpu-b4-l2048",
       "block": 3,
-      "status": "completed",
+      "status": "pending",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/offload-gap-001-A0001/profile/bench_fla.py",
@@ -1173,11 +1143,7 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R08-prefill-regression/B3-J027-candidate-prefill-ma_gpu-b4-l2048.json"
       ],
-      "estimated_seconds": 20.00690197944641,
-      "started_unix": 1790909236.5805573,
-      "pid": 2002268,
-      "returncode": 0,
-      "finished_unix": 1790909256.555025
+      "estimated_seconds": 20.00690197944641
     },
     {
       "mode": "prefill",
@@ -1189,7 +1155,7 @@
       "cwd": "/home/molly/workspace-memory-attn/offload-gap-001-A0000",
       "name": "B3-J028-baseline-prefill-ma_gpu-b4-l2048",
       "block": 3,
-      "status": "completed",
+      "status": "pending",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/offload-gap-001-A0000/profile/bench_fla.py",
@@ -1240,11 +1206,7 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R08-prefill-regression/B3-J028-baseline-prefill-ma_gpu-b4-l2048.json"
       ],
-      "estimated_seconds": 19.983813285827637,
-      "started_unix": 1790909256.5556989,
-      "pid": 2002557,
-      "returncode": 0,
-      "finished_unix": 1790909276.4931717
+      "estimated_seconds": 19.983813285827637
     },
     {
       "mode": "prefill",
@@ -1256,7 +1218,7 @@
       "cwd": "/home/molly/workspace-memory-attn/offload-gap-001-A0000",
       "name": "B3-J029-baseline-prefill-ma_offload-b16-l2048",
       "block": 3,
-      "status": "completed",
+      "status": "pending",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/offload-gap-001-A0000/profile/bench_fla.py",
@@ -1307,11 +1269,7 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R08-prefill-regression/B3-J029-baseline-prefill-ma_offload-b16-l2048.json"
       ],
-      "estimated_seconds": 33.29392123222351,
-      "started_unix": 1790909276.4940243,
-      "pid": 2002835,
-      "returncode": 0,
-      "finished_unix": 1790909309.7654188
+      "estimated_seconds": 33.29392123222351
     },
     {
       "mode": "prefill",
@@ -1323,7 +1281,7 @@
       "cwd": "/home/molly/workspace-memory-attn/offload-gap-001-A0001",
       "name": "B3-J030-candidate-prefill-ma_offload-b16-l2048",
       "block": 3,
-      "status": "completed",
+      "status": "pending",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/offload-gap-001-A0001/profile/bench_fla.py",
@@ -1374,11 +1332,7 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R08-prefill-regression/B3-J030-candidate-prefill-ma_offload-b16-l2048.json"
       ],
-      "estimated_seconds": 33.315183877944946,
-      "started_unix": 1790909309.766296,
-      "pid": 2003256,
-      "returncode": 0,
-      "finished_unix": 1790909343.101022
+      "estimated_seconds": 33.315183877944946
     },
     {
       "mode": "prefill",
@@ -1390,7 +1344,7 @@
       "cwd": "/home/molly/workspace-memory-attn/offload-gap-001-A0001",
       "name": "B3-J031-candidate-prefill-ma_gpu-b16-l2048",
       "block": 3,
-      "status": "completed",
+      "status": "pending",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/offload-gap-001-A0001/profile/bench_fla.py",
@@ -1441,11 +1395,7 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R08-prefill-regression/B3-J031-candidate-prefill-ma_gpu-b16-l2048.json"
       ],
-      "estimated_seconds": 32.46746802330017,
-      "started_unix": 1790909343.1017408,
-      "pid": 2003658,
-      "returncode": 0,
-      "finished_unix": 1790909375.6618938
+      "estimated_seconds": 32.46746802330017
     },
     {
       "mode": "prefill",
@@ -1457,7 +1407,7 @@
       "cwd": "/home/molly/workspace-memory-attn/offload-gap-001-A0000",
       "name": "B3-J032-baseline-prefill-ma_gpu-b16-l2048",
       "block": 3,
-      "status": "completed",
+      "status": "pending",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/offload-gap-001-A0000/profile/bench_fla.py",
@@ -1508,11 +1458,7 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R08-prefill-regression/B3-J032-baseline-prefill-ma_gpu-b16-l2048.json"
       ],
-      "estimated_seconds": 32.51201105117798,
-      "started_unix": 1790909375.6625483,
-      "pid": 2004083,
-      "returncode": 0,
-      "finished_unix": 1790909408.1800501
+      "estimated_seconds": 32.51201105117798
     },
     {
       "mode": "prefill",
@@ -1524,7 +1470,7 @@
       "cwd": "/home/molly/workspace-memory-attn/offload-gap-001-A0000",
       "name": "B3-J033-baseline-prefill-ma_offload-b8-l8192",
       "block": 3,
-      "status": "completed",
+      "status": "pending",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/offload-gap-001-A0000/profile/bench_fla.py",
@@ -1575,11 +1521,7 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R08-prefill-regression/B3-J033-baseline-prefill-ma_offload-b8-l8192.json"
       ],
-      "estimated_seconds": 56.86477041244507,
-      "started_unix": 1790909408.180563,
-      "pid": 2004467,
-      "returncode": 0,
-      "finished_unix": 1790909465.3230822
+      "estimated_seconds": 56.86477041244507
     },
     {
       "mode": "prefill",
@@ -1591,7 +1533,7 @@
       "cwd": "/home/molly/workspace-memory-attn/offload-gap-001-A0001",
       "name": "B3-J034-candidate-prefill-ma_offload-b8-l8192",
       "block": 3,
-      "status": "completed",
+      "status": "pending",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/offload-gap-001-A0001/profile/bench_fla.py",
@@ -1642,11 +1584,7 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R08-prefill-regression/B3-J034-candidate-prefill-ma_offload-b8-l8192.json"
       ],
-      "estimated_seconds": 57.23019075393677,
-      "started_unix": 1790909465.3236477,
-      "pid": 2005050,
-      "returncode": 0,
-      "finished_unix": 1790909522.6848528
+      "estimated_seconds": 57.23019075393677
     },
     {
       "mode": "prefill",
@@ -1658,7 +1596,7 @@
       "cwd": "/home/molly/workspace-memory-attn/offload-gap-001-A0001",
       "name": "B3-J035-candidate-prefill-ma_gpu-b8-l8192",
       "block": 3,
-      "status": "completed",
+      "status": "pending",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/offload-gap-001-A0001/profile/bench_fla.py",
@@ -1709,11 +1647,7 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R08-prefill-regression/B3-J035-candidate-prefill-ma_gpu-b8-l8192.json"
       ],
-      "estimated_seconds": 56.31967568397522,
-      "started_unix": 1790909522.6853642,
-      "pid": 2005638,
-      "returncode": 0,
-      "finished_unix": 1790909579.0315473
+      "estimated_seconds": 56.31967568397522
     },
     {
       "mode": "prefill",
@@ -1725,7 +1659,7 @@
       "cwd": "/home/molly/workspace-memory-attn/offload-gap-001-A0000",
       "name": "B3-J036-baseline-prefill-ma_gpu-b8-l8192",
       "block": 3,
-      "status": "completed",
+      "status": "pending",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/offload-gap-001-A0000/profile/bench_fla.py",
@@ -1776,28 +1710,14 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R08-prefill-regression/B3-J036-baseline-prefill-ma_gpu-b8-l8192.json"
       ],
-      "estimated_seconds": 56.40626811981201,
-      "started_unix": 1790909579.0320625,
-      "pid": 2006258,
-      "returncode": 0,
-      "finished_unix": 1790909635.3878524
+      "estimated_seconds": 56.40626811981201
     }
   ],
-  "status": "completed",
+  "status": "running",
   "planned_work": {
     "new_processes": 24,
     "reused_processes": 12,
     "estimated_seconds": 880.2512707710266
   },
-  "rule": "Exactly two additional independent pairs per placement; original pair retained. No automatic acceptance. No extension until favorable.",
-  "recovery": {
-    "remaining_processes": 17,
-    "recovered_completed_jobs": [
-      "B2-J019-candidate-prefill-ma_offload-b16-l2048"
-    ],
-    "estimated_seconds": 555.1357028484344,
-    "original_controller_pid": 1990141,
-    "environment_matches": true
-  },
-  "resumed_unix": 1790909080.413064
+  "rule": "Exactly two additional independent pairs per placement; original pair retained. No automatic acceptance. No extension until favorable."
 }

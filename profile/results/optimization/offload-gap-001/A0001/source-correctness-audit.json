@@ -1,0 +1,47 @@
+{
+  "campaign_id": "offload-gap-001",
+  "attempt_id": "A0001",
+  "baseline_sha": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
+  "candidate_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
+  "changed_execution_files": [
+    "fla/models/memory/configuration_memory.py"
+  ],
+  "source_patch": "diff --git a/fla/models/memory/configuration_memory.py b/fla/models/memory/configuration_memory.py\nindex 8b7139d..b76a7dc 100644\n--- a/fla/models/memory/configuration_memory.py\n+++ b/fla/models/memory/configuration_memory.py\n@@ -43,7 +43,7 @@ class MemoryConfig(PretrainedConfig):\n         memory_offload_policy: str = \"auto\",\n         memory_offload_group_size: int = 1,\n         memory_offload_prefetch_depth: int = 4,\n-        memory_offload_bulk_max_tokens: int = 4096,\n+        memory_offload_bulk_max_tokens: int = 1024,\n         memory_offload_chunk_size: int = 1024,\n         **kwargs,\n     ):\n",
+  "resident_behavior_audit": "Only auto offload policy cutoff changes. Folded/unfolded resident kernels, weights, output scope and arithmetic are identical in source. Resident timing variation is preserved, not attributed to model changes.",
+  "full_correctness": [
+    {
+      "path": "profile/results/optimization/offload-gap-001/A0001/R06-full-correctness/comparison-b1-s1234.json",
+      "batch": 1,
+      "seed": 1234,
+      "bit_exact": true,
+      "scope": "logits every step; all hidden and KV states at prefix and decode steps 1,2,128; unpadded full model"
+    },
+    {
+      "path": "profile/results/optimization/offload-gap-001/A0001/R06-full-correctness/comparison-b1-s4321.json",
+      "batch": 1,
+      "seed": 4321,
+      "bit_exact": true,
+      "scope": "logits every step; all hidden and KV states at prefix and decode steps 1,2,128; unpadded full model"
+    },
+    {
+      "path": "profile/results/optimization/offload-gap-001/A0001/R06-full-correctness/comparison-b8-s1234.json",
+      "batch": 8,
+      "seed": 1234,
+      "bit_exact": true,
+      "scope": "logits every step; all hidden and KV states at prefix and decode steps 1,2,128; unpadded full model"
+    },
+    {
+      "path": "profile/results/optimization/offload-gap-001/A0001/R06-full-correctness/comparison-b8-s4321.json",
+      "batch": 8,
+      "seed": 4321,
+      "bit_exact": true,
+      "scope": "logits every step; all hidden and KV states at prefix and decode steps 1,2,128; unpadded full model"
+    }
+  ],
+  "acceptance": true,
+  "remaining_gate": null,
+  "regression_evidence": [
+    "R07-analysis.json",
+    "R08-analysis.json"
+  ]
+}

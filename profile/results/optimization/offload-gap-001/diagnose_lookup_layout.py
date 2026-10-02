@@ -1,7 +1,7 @@
 """CPU lookup diagnostic at the actual table dimensions; never headline timing.
 
-Measures identical index_select operations with strided versus contiguous rows.
-Packing is setup work; both variants copy fresh token rows on every invocation.
+Measures identical index_select operations with vocabulary-major versus layer-major storage.
+Layout conversion is setup work; both variants copy fresh token rows on every invocation.
 Run only when model performance measurements have stopped.
 """
 import argparse
@@ -24,19 +24,21 @@ torch.manual_seed(1234)
 records = []
 with torch.inference_mode():
     weights = torch.randn(32000, 24, 2048, dtype=torch.bfloat16)
-    for tokens in (2048, 16384):
+    layered = weights.permute(1, 0, 2).contiguous().permute(1, 0, 2)
+    for tokens in (1, 8, 2048, 16384):
         ids = torch.randint(0, 32000, (tokens,))
-        for group in (1, 2):
+        for group in ((24,) if tokens <= 8 else (1, 2)):
             # Representative layer group; source rows retain full-table stride.
-            source = weights[:, 12:12 + group]
-            packed = source.contiguous()
+            start_layer = 0 if group == 24 else 12
+            source = weights[:, start_layer:start_layer + group]
+            packed = layered[:, start_layer:start_layer + group]
             output = torch.empty((tokens, group, 2048), dtype=weights.dtype, pin_memory=True)
             original = torch.index_select(source, 0, ids)
             torch.index_select(packed, 0, ids, out=output)
             assert torch.equal(original, output)
-            samples = {'strided': [], 'contiguous': []}
+            samples = {'vocab_major': [], 'layer_major': []}
             for iteration in range(40):
-                order = [('strided', source), ('contiguous', packed)]
+                order = [('vocab_major', source), ('layer_major', packed)]
                 if iteration % 2:
                     order.reverse()
                 for label, table in order:
@@ -54,7 +56,7 @@ with torch.inference_mode():
 result = dict(campaign_id='offload-gap-001', diagnostic='CPU-only lookup layout microbenchmark',
               command=sys.argv, source=source_state(), environment=environment_details(),
               weights_shape=[32000, 24, 2048], dtype='bfloat16', records=records,
-              limitations='Same-process diagnostic; synthetic random table, 10 warmups and 30 alternating samples per layout. Does not measure overlap or end-to-end gains. Packing time excluded, extra host storage required. No model optimization verdict.')
+              limitations='Same-process diagnostic; synthetic random table, 10 warmups and 30 alternating samples per layout. Does not measure overlap or end-to-end gains. Packing time excluded, diagnostic holds both full layouts simultaneously; production could use one layout without extra table storage. No model optimization verdict.')
 args.output.parent.mkdir(parents=True, exist_ok=True)
 args.output.write_text(json.dumps(result, indent=2) + '\n')
 for record in records:

@@ -1,0 +1,161 @@
+{
+  "campaign_id": "offload-gap-001",
+  "source_manifest": "profile/results/optimization/offload-gap-001/A0001/R08-prefill-regression/manifest.json",
+  "rows": [
+    {
+      "mode": "prefill",
+      "batch": 4,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "values": [
+            -1.2974706633637396,
+            -0.4709390302499088,
+            0.9022301373382362
+          ],
+          "mean": -0.2887265187584707,
+          "lower_95": -3.048884060849167,
+          "upper_95": 2.4714310233322254,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "gpu_reduction_ms": {
+          "values": [
+            0.08043545919160522,
+            -0.005087753136962192,
+            -0.4073134933908733
+          ],
+          "mean": -0.11065526244541009,
+          "lower_95": -0.7576438360271345,
+          "upper_95": 0.5363333111363142,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "gap_reduction_ms": {
+          "values": [
+            -1.3779061225553448,
+            -0.4658512771129466,
+            1.3095436307291095
+          ],
+          "mean": -0.17807125631306064,
+          "lower_95": -3.572997453864435,
+          "upper_95": 3.2168549412383136,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        }
+      },
+      "resolved_offload_regression": false,
+      "resolved_resident_slowdown": false,
+      "memory_savings_preserved": true,
+      "gpu_savings_bytes": [
+        3036282880,
+        3036282880,
+        3036282880
+      ]
+    },
+    {
+      "mode": "prefill",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "values": [
+            -8.884235238656402,
+            2.5014614996811133,
+            -5.32263525140786
+          ],
+          "mean": -3.9018029967943826,
+          "lower_95": -18.370192989928224,
+          "upper_95": 10.566586996339458,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "gpu_reduction_ms": {
+          "values": [
+            1.4643074478954077,
+            -8.38016013925278,
+            0.8423696427296363
+          ],
+          "mean": -2.0244943495425787,
+          "lower_95": -15.719410010656567,
+          "upper_95": 11.67042131157141,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "gap_reduction_ms": {
+          "values": [
+            -10.34854268655181,
+            10.881621638933893,
+            -6.165004894137496
+          ],
+          "mean": -1.8773086472518041,
+          "lower_95": -29.813447280459343,
+          "upper_95": 26.058829985955732,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        }
+      },
+      "resolved_offload_regression": false,
+      "resolved_resident_slowdown": false,
+      "memory_savings_preserved": true,
+      "gpu_savings_bytes": [
+        2096365568,
+        2096365568,
+        2096365568
+      ]
+    },
+    {
+      "mode": "prefill",
+      "batch": 16,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "values": [
+            -2.1206147503107786,
+            -6.184444219494878,
+            -1.8745962840815196
+          ],
+          "mean": -3.3932184179623923,
+          "lower_95": -9.40582596063678,
+          "upper_95": 2.619389124711994,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "gpu_reduction_ms": {
+          "values": [
+            0.9334492031484842,
+            1.0331598731378904,
+            0.5098147007326475
+          ],
+          "mean": 0.825474592339674,
+          "lower_95": 0.13518626955511037,
+          "upper_95": 1.5157629151242378,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "gap_reduction_ms": {
+          "values": [
+            -3.054063953459263,
+            -7.217604092632769,
+            -2.384410984814167
+          ],
+          "mean": -4.218693010302066,
+          "lower_95": -10.723724123183441,
+          "upper_95": 2.2863381025793093,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        }
+      },
+      "resolved_offload_regression": false,
+      "resolved_resident_slowdown": false,
+      "memory_savings_preserved": true,
+      "gpu_savings_bytes": [
+        2632450048,
+        2632450048,
+        2632450048
+      ]
+    }
+  ],
+  "regression_gate_passed": true,
+  "uncertainty_note": "95% Student-t intervals over exactly three independent paired blocks, including original pair. n=3; symmetry assumption unverified. No samples discarded; not a new improvement claim."
+}

@@ -1,0 +1,35 @@
+{"remaining_processes": 17, "recovered_completed_jobs": ["B2-J019-candidate-prefill-ma_offload-b16-l2048"], "estimated_seconds": 555.1357028484344, "original_controller_pid": 1990141, "environment_matches": true}
+START B2-J020-baseline-prefill-ma_offload-b16-l2048
+END B2-J020-baseline-prefill-ma_offload-b16-l2048 completed
+START B2-J021-baseline-prefill-ma_gpu-b4-l2048
+END B2-J021-baseline-prefill-ma_gpu-b4-l2048 completed
+START B2-J022-candidate-prefill-ma_gpu-b4-l2048
+END B2-J022-candidate-prefill-ma_gpu-b4-l2048 completed
+START B2-J023-candidate-prefill-ma_offload-b4-l2048
+END B2-J023-candidate-prefill-ma_offload-b4-l2048 completed
+START B2-J024-baseline-prefill-ma_offload-b4-l2048
+END B2-J024-baseline-prefill-ma_offload-b4-l2048 completed
+START B3-J025-baseline-prefill-ma_offload-b4-l2048
+END B3-J025-baseline-prefill-ma_offload-b4-l2048 completed
+START B3-J026-candidate-prefill-ma_offload-b4-l2048
+END B3-J026-candidate-prefill-ma_offload-b4-l2048 completed
+START B3-J027-candidate-prefill-ma_gpu-b4-l2048
+END B3-J027-candidate-prefill-ma_gpu-b4-l2048 completed
+START B3-J028-baseline-prefill-ma_gpu-b4-l2048
+END B3-J028-baseline-prefill-ma_gpu-b4-l2048 completed
+START B3-J029-baseline-prefill-ma_offload-b16-l2048
+END B3-J029-baseline-prefill-ma_offload-b16-l2048 completed
+START B3-J030-candidate-prefill-ma_offload-b16-l2048
+END B3-J030-candidate-prefill-ma_offload-b16-l2048 completed
+START B3-J031-candidate-prefill-ma_gpu-b16-l2048
+END B3-J031-candidate-prefill-ma_gpu-b16-l2048 completed
+START B3-J032-baseline-prefill-ma_gpu-b16-l2048
+END B3-J032-baseline-prefill-ma_gpu-b16-l2048 completed
+START B3-J033-baseline-prefill-ma_offload-b8-l8192
+END B3-J033-baseline-prefill-ma_offload-b8-l8192 completed
+START B3-J034-candidate-prefill-ma_offload-b8-l8192
+END B3-J034-candidate-prefill-ma_offload-b8-l8192 completed
+START B3-J035-candidate-prefill-ma_gpu-b8-l8192
+END B3-J035-candidate-prefill-ma_gpu-b8-l8192 completed
+START B3-J036-baseline-prefill-ma_gpu-b8-l8192
+END B3-J036-baseline-prefill-ma_gpu-b8-l8192 completed

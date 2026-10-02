@@ -1,22 +1,20 @@
 {
   "campaign_id": "offload-gap-001",
-  "goal_progress": "R07 complete; 7 of 24 new R08 payloads complete; restricted continuation cannot access GPU or prior process session. Preserving evidence and rendering provisional reports.",
+  "goal_progress": "A0001 accepted after all predeclared gates. Next CPU layout diagnostic running; continue toward 5\u201310 attempts.",
   "active_attempt": "A0001",
-  "workflow_stage": "regression_investigation_environment_unavailable",
-  "completed_optimization_verdicts": 0,
-  "accepted_steps": 0,
-  "live_manifest": "profile/results/optimization/offload-gap-001/A0001/R08-prefill-regression/manifest.json",
+  "workflow_stage": "A0001_accepted_next_profile",
+  "completed_optimization_verdicts": 1,
+  "accepted_steps": 1,
+  "live_manifest": null,
   "controller_pid": 1990141,
   "exec_session_id": 54235,
   "validation_controller": "profile/results/optimization/offload-gap-001/A0001/validation-v2.json",
   "source_baseline": "62942a0",
   "source_candidate": "942a2a5",
   "next_actions": [
-    "Reestablish device access and verify old controller/child stopped or completed before resuming only unfinished jobs; validate environment against original plan. No restart or new attempt in this environment.",
-    "Run CPU lookup layout diagnostic sequentially after timing, using frozen baseline source. No model change yet.",
-    "Audit R08 plus full matrix, memory, exactness and source; accept or reject A0001, commit evidence then code-only revert if rejected.",
-    "Continue 5\u201310 focused optimization attempts from best verified implementation; only A0001 exists so far.",
-    "Export final validation/history figures and reproducible commands, push campaign branch; goal remains active."
+    "Read CPU lookup layout diagnostic, register A0002 from accepted A0001 before editing model.",
+    "Run required correctness and candidate screen; keep frozen A0000 for final comparison and A0001 for incremental attribution.",
+    "Complete remaining focused attempts, final plots and reproducible commands."
   ],
   "notes": [
     "GOAL.md remains the full scope. No optimization accepted yet.",
