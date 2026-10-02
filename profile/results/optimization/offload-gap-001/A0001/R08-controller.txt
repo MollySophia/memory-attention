@@ -1,0 +1,14 @@
+{"new_processes": 24, "reused_processes": 12, "estimated_seconds": 880.2512707710266}
+START B2-J013-baseline-prefill-ma_gpu-b8-l8192
+END B2-J013-baseline-prefill-ma_gpu-b8-l8192 completed
+START B2-J014-candidate-prefill-ma_gpu-b8-l8192
+END B2-J014-candidate-prefill-ma_gpu-b8-l8192 completed
+START B2-J015-candidate-prefill-ma_offload-b8-l8192
+END B2-J015-candidate-prefill-ma_offload-b8-l8192 completed
+START B2-J016-baseline-prefill-ma_offload-b8-l8192
+END B2-J016-baseline-prefill-ma_offload-b8-l8192 completed
+START B2-J017-baseline-prefill-ma_gpu-b16-l2048
+END B2-J017-baseline-prefill-ma_gpu-b16-l2048 completed
+START B2-J018-candidate-prefill-ma_gpu-b16-l2048
+END B2-J018-candidate-prefill-ma_gpu-b16-l2048 completed
+START B2-J019-candidate-prefill-ma_offload-b16-l2048

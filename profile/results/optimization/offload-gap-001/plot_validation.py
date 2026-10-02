@@ -16,11 +16,12 @@ import matplotlib.pyplot as plt
 
 COLORS={'ma_offload':'#cc5533','ma_gpu':'#28689b','ma_gpu_unfolded':'#7a6396'}
 VARIANTS=('ma_offload','ma_gpu','ma_gpu_unfolded')
+STATUS_LABEL = ''
 CAPTION='2.836B parameters · BF16 · RTX 5090 · seeded random weights (no quality claim)\nCached last-token logits. Bars: process 95% CI where n=3; otherwise descriptive round range, not CI.'
 
 
 def save(fig,output,name,caption=CAPTION,top=.96):
-    fig.text(.01,.015,caption,fontsize=8,va='bottom')
+    fig.text(.01,.015,caption + ('\n' + STATUS_LABEL if STATUS_LABEL else ''),fontsize=8,va='bottom')
     fig.tight_layout(rect=(0,.095,1,top))
     for extension in ('pdf','svg','png'):
         fig.savefig(output/(name+'.'+extension),dpi=180)
@@ -141,15 +142,17 @@ def generation(points,output):
 
 
 def main():
+    global STATUS_LABEL
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--matrix',type=Path,required=True)
     p.add_argument('--generation',type=Path,required=True)
     p.add_argument('--output',type=Path,required=True)
-    args=p.parse_args();args.output.mkdir(parents=True,exist_ok=True)
+    p.add_argument('--status-label', default='', help='Explicit candidate verdict or pending status printed on every figure')
+    args=p.parse_args();STATUS_LABEL=args.status_label;args.output.mkdir(parents=True,exist_ok=True)
     matrix=json.loads(args.matrix.read_text());gen=json.loads(args.generation.read_text())
     assert matrix['stage']=='full_validation' and gen['stage']=='generation_validation'
     all_points=matrix['points']+gen['points']
-    (args.output/'source.json').write_text(json.dumps(dict(matrix=matrix,generation=gen),indent=2)+'\n')
+    (args.output/'source.json').write_text(json.dumps(dict(matrix=matrix,generation=gen,status_label=STATUS_LABEL),indent=2)+'\n')
     fields=sorted({k for r in all_points for k in r})
     with (args.output/'source.csv').open('w') as f:
         writer=csv.DictWriter(f,fieldnames=fields);writer.writeheader()

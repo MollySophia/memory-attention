@@ -1,0 +1,182 @@
+{
+  "campaign_id": "offload-gap-001",
+  "observed_unix": 1790908423.169813,
+  "session_handle": 54235,
+  "session_observation": "write_stdin: Unknown process id 54235",
+  "gpu_observation": "nvidia-smi cannot communicate with driver; /dev/nvidia* absent in current restricted environment",
+  "process_observation": "Current sandbox PID namespace does not expose former controller. Do not infer host-process death from this namespace.",
+  "controller_manifest_unchanged": true,
+  "rows": [
+    {
+      "name": "B2-J013-baseline-prefill-ma_gpu-b8-l8192",
+      "manifest_status": "completed",
+      "payload_status": "completed",
+      "source_result": "profile/results/optimization/offload-gap-001/A0001/R08-prefill-regression/B2-J013-baseline-prefill-ma_gpu-b8-l8192.json",
+      "mtime_ns": 1790908073823810228
+    },
+    {
+      "name": "B2-J014-candidate-prefill-ma_gpu-b8-l8192",
+      "manifest_status": "completed",
+      "payload_status": "completed",
+      "source_result": "profile/results/optimization/offload-gap-001/A0001/R08-prefill-regression/B2-J014-candidate-prefill-ma_gpu-b8-l8192.json",
+      "mtime_ns": 1790908129906158918
+    },
+    {
+      "name": "B2-J015-candidate-prefill-ma_offload-b8-l8192",
+      "manifest_status": "completed",
+      "payload_status": "completed",
+      "source_result": "profile/results/optimization/offload-gap-001/A0001/R08-prefill-regression/B2-J015-candidate-prefill-ma_offload-b8-l8192.json",
+      "mtime_ns": 1790908187111720509
+    },
+    {
+      "name": "B2-J016-baseline-prefill-ma_offload-b8-l8192",
+      "manifest_status": "completed",
+      "payload_status": "completed",
+      "source_result": "profile/results/optimization/offload-gap-001/A0001/R08-prefill-regression/B2-J016-baseline-prefill-ma_offload-b8-l8192.json",
+      "mtime_ns": 1790908244508067362
+    },
+    {
+      "name": "B2-J017-baseline-prefill-ma_gpu-b16-l2048",
+      "manifest_status": "completed",
+      "payload_status": "completed",
+      "source_result": "profile/results/optimization/offload-gap-001/A0001/R08-prefill-regression/B2-J017-baseline-prefill-ma_gpu-b16-l2048.json",
+      "mtime_ns": 1790908277365019544
+    },
+    {
+      "name": "B2-J018-candidate-prefill-ma_gpu-b16-l2048",
+      "manifest_status": "completed",
+      "payload_status": "completed",
+      "source_result": "profile/results/optimization/offload-gap-001/A0001/R08-prefill-regression/B2-J018-candidate-prefill-ma_gpu-b16-l2048.json",
+      "mtime_ns": 1790908310035875438
+    },
+    {
+      "name": "B2-J019-candidate-prefill-ma_offload-b16-l2048",
+      "manifest_status": "running",
+      "payload_status": "completed",
+      "source_result": "profile/results/optimization/offload-gap-001/A0001/R08-prefill-regression/B2-J019-candidate-prefill-ma_offload-b16-l2048.json",
+      "mtime_ns": 1790908343620701140
+    },
+    {
+      "name": "B2-J020-baseline-prefill-ma_offload-b16-l2048",
+      "manifest_status": "pending",
+      "payload_status": null,
+      "source_result": null,
+      "mtime_ns": null
+    },
+    {
+      "name": "B2-J021-baseline-prefill-ma_gpu-b4-l2048",
+      "manifest_status": "pending",
+      "payload_status": null,
+      "source_result": null,
+      "mtime_ns": null
+    },
+    {
+      "name": "B2-J022-candidate-prefill-ma_gpu-b4-l2048",
+      "manifest_status": "pending",
+      "payload_status": null,
+      "source_result": null,
+      "mtime_ns": null
+    },
+    {
+      "name": "B2-J023-candidate-prefill-ma_offload-b4-l2048",
+      "manifest_status": "pending",
+      "payload_status": null,
+      "source_result": null,
+      "mtime_ns": null
+    },
+    {
+      "name": "B2-J024-baseline-prefill-ma_offload-b4-l2048",
+      "manifest_status": "pending",
+      "payload_status": null,
+      "source_result": null,
+      "mtime_ns": null
+    },
+    {
+      "name": "B3-J025-baseline-prefill-ma_offload-b4-l2048",
+      "manifest_status": "pending",
+      "payload_status": null,
+      "source_result": null,
+      "mtime_ns": null
+    },
+    {
+      "name": "B3-J026-candidate-prefill-ma_offload-b4-l2048",
+      "manifest_status": "pending",
+      "payload_status": null,
+      "source_result": null,
+      "mtime_ns": null
+    },
+    {
+      "name": "B3-J027-candidate-prefill-ma_gpu-b4-l2048",
+      "manifest_status": "pending",
+      "payload_status": null,
+      "source_result": null,
+      "mtime_ns": null
+    },
+    {
+      "name": "B3-J028-baseline-prefill-ma_gpu-b4-l2048",
+      "manifest_status": "pending",
+      "payload_status": null,
+      "source_result": null,
+      "mtime_ns": null
+    },
+    {
+      "name": "B3-J029-baseline-prefill-ma_offload-b16-l2048",
+      "manifest_status": "pending",
+      "payload_status": null,
+      "source_result": null,
+      "mtime_ns": null
+    },
+    {
+      "name": "B3-J030-candidate-prefill-ma_offload-b16-l2048",
+      "manifest_status": "pending",
+      "payload_status": null,
+      "source_result": null,
+      "mtime_ns": null
+    },
+    {
+      "name": "B3-J031-candidate-prefill-ma_gpu-b16-l2048",
+      "manifest_status": "pending",
+      "payload_status": null,
+      "source_result": null,
+      "mtime_ns": null
+    },
+    {
+      "name": "B3-J032-baseline-prefill-ma_gpu-b16-l2048",
+      "manifest_status": "pending",
+      "payload_status": null,
+      "source_result": null,
+      "mtime_ns": null
+    },
+    {
+      "name": "B3-J033-baseline-prefill-ma_offload-b8-l8192",
+      "manifest_status": "pending",
+      "payload_status": null,
+      "source_result": null,
+      "mtime_ns": null
+    },
+    {
+      "name": "B3-J034-candidate-prefill-ma_offload-b8-l8192",
+      "manifest_status": "pending",
+      "payload_status": null,
+      "source_result": null,
+      "mtime_ns": null
+    },
+    {
+      "name": "B3-J035-candidate-prefill-ma_gpu-b8-l8192",
+      "manifest_status": "pending",
+      "payload_status": null,
+      "source_result": null,
+      "mtime_ns": null
+    },
+    {
+      "name": "B3-J036-baseline-prefill-ma_gpu-b8-l8192",
+      "manifest_status": "pending",
+      "payload_status": null,
+      "source_result": null,
+      "mtime_ns": null
+    }
+  ],
+  "completed_new_payloads": 7,
+  "remaining_new_payloads": 17,
+  "next_action": "Reestablish device access and verify old controller/child stopped or completed before resuming only unfinished jobs; validate environment against original plan. No restart or new attempt in this environment."
+}

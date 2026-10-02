@@ -1,0 +1,23 @@
+{
+  "campaign_id": "offload-gap-001",
+  "attempt_id": "A0001",
+  "status": "provisional_pending_regression_audit",
+  "figure_sets": 7,
+  "formats": [
+    "pdf",
+    "svg",
+    "png"
+  ],
+  "source_files": [
+    "source.json",
+    "source.csv"
+  ],
+  "matrix_points": 84,
+  "generation_points": 12,
+  "visual_checks": [
+    "generation.png: labels, process uncertainty and pending footer readable",
+    "absolute-gap.png: signed gaps retained, axes and pending footer readable"
+  ],
+  "tests": "9 report/export/history tests passed",
+  "command": "MPLCONFIGDIR=/tmp/offload-gap-mpl /home/molly/miniconda3/envs/fla-bench/bin/python profile/results/optimization/offload-gap-001/plot_validation.py --matrix profile/results/optimization/offload-gap-001/A0001/full-summary.json --generation profile/results/optimization/offload-gap-001/A0001/generation-audited-summary.json --output profile/results/optimization/offload-gap-001/A0001/figures-pending-review --status-label \"A0001 provisional: acceptance pending prefill regression audit; not the final campaign result.\""
+}
