@@ -290,9 +290,13 @@ class BulkMemoryTableOffloader:
         self.inline_copy = batch * seq_len <= 8
         self.copy_stream = None if self.inline_copy else torch.cuda.Stream(device=self.device)
         self.transfer_stream = None
+        self.allocation_ready = None
         # Establish allocation-stream ordering once, before async use.
         if self.copy_stream is not None:
             self.copy_stream.wait_stream(torch.cuda.current_stream(self.device))
+        else:
+            self.allocation_ready = torch.cuda.Event()
+            self.allocation_ready.record(torch.cuda.current_stream(self.device))
         self.copied = torch.cuda.Event()
         self.consumed = torch.cuda.Event()
         self.slots = [{"host": self.host, "gpu": self.gpu}]
@@ -327,6 +331,8 @@ class BulkMemoryTableOffloader:
                     current = torch.cuda.current_stream(self.device)
                     if self.started:
                         current.wait_event(self.consumed)
+                    else:
+                        current.wait_event(self.allocation_ready)
                     self.gpu.copy_(self.host, non_blocking=True)
                     self.copied.record(current)
                     self.transfer_stream = current
