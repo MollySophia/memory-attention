@@ -7,7 +7,7 @@
   "parent_sha": "52aa4f283a4f7f8ab5b3e8ae49ac6c5eaf51b3ff",
   "accepted_step": null,
   "label": "fuse compressed-row expansion with memory addition",
-  "workflow_stage": "correctness",
+  "workflow_stage": "screening",
   "hypothesis": "Preserve within-call deduplicated CPU lookup/H2D but fuse GPU inverse-index expansion into required k+m, avoiding a full temporary and separate expansion kernel on each layer.",
   "expected_bottleneck": "Frozen A0009 b8 profile: 24 expansions, 1.50928 ms summed CUDA stream intervals and 1.55864 ms CPU spans, overlapping. A0009 unfused screen was 2.01742 ms slower than A0001; no claim that all expansion time is removable.",
   "profile_evidence": [
@@ -55,5 +55,15 @@
   "draft_root": "/tmp/offload-gap-A0015-draft-pewlt22s",
   "draft_condition": "Activated after A0014 rejected and code-only restored to A0001.",
   "draft_patch": "isolated-draft.patch",
-  "draft_validation": "Syntax compilation only; GPU tests pending completion of A0014 timing and reconciliation with best verified parent."
+  "draft_validation": "Syntax compilation only; GPU tests pending completion of A0014 timing and reconciliation with best verified parent.",
+  "candidate_sha": "0436370506e82e3a32d6ccbc6bb5217bc0e84637",
+  "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0015",
+  "correctness": {
+    "pytest": "42 passed in 10.07s",
+    "standalone": "PASS; worst max error 0",
+    "logs": [
+      "correctness-tests.txt",
+      "standalone-correctness.txt"
+    ]
+  }
 }
