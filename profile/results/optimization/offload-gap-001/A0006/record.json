@@ -7,12 +7,13 @@
   "parent_sha": "0cc9066fc7fefb3d5f5a728de2474d2896d0a043",
   "accepted_step": null,
   "label": "refill host slot before consumer release",
-  "workflow_stage": "implementation",
+  "workflow_stage": "screening",
   "hypothesis": "Producer waits for previous GPU consumer release before refilling host storage, although host storage is safe as soon as previous DMA completes. Move release wait after fresh CPU gather to overlap it with ongoing consumption.",
   "expected_bottleneck": "CPU producer release waits serialize next gather unnecessarily",
   "profile_evidence": [
     "../continuation-01/coordination-b1.json",
-    "../A0000/diagnostics-summary.json"
+    "../A0000/diagnostics-summary.json",
+    "../continuation-01/coordination-b8.json"
   ],
   "change": "Reorder only pipeline pinned-host refill and consumer-release wait. Preserve copied.synchronize before host overwrite and consumed-event wait before device overwrite; no added buffers, table layout change or lookup cache.",
   "protocol_version": "offload_gap_v1",
@@ -45,6 +46,17 @@
     "full_validation": "Only if independently nominated",
     "generation_validation": "Only if independently nominated"
   },
-  "candidate_sha": null,
-  "decision": "Registered before implementation; tests and screen pending."
+  "candidate_sha": "b58cdb8640fb2d6a57631e0c26fc6f9a72761f74",
+  "decision": "Exactness gates passed. Run predeclared twelve-job screen; no gain claim yet.",
+  "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0006",
+  "correctness": {
+    "pytest": "46 passed in9.49s",
+    "standalone": "PASS; worst max error0",
+    "logs": [
+      "correctness-tests.txt",
+      "standalone-correctness.txt"
+    ]
+  },
+  "screen_manifest": "R01/manifest.json",
+  "screen_summary": "R01-summary.json"
 }

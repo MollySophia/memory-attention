@@ -390,3 +390,5 @@ User requests another5–10 optimization attempts. Preserve A0000–A0005 and th
 ### A0006 registration (offload-gap-001; continuation-01)
 
 Parent verified A0001. Instrumented b1 pipeline release waits total1.176ms (overlapping, not removable wall time). Test refilling pinned host slot after DMA completion but before waiting for prior GPU consumer release. GPU overwrite still waits for consumed event; no extra buffers or cached lookups. Focused schedule change, twelve-job b1/b8/b16 screen, exactness and cancellation/slot-reuse gates first.
+
+A0006 frozen source b58cdb8640fb2d6a57631e0c26fc6f9a72761f74;46 tests and standalone maxerror0 pass. New tests enforce early host refill with one slot and partial groups while retaining live GPU values, plus consumer-error cancellation. b8 diagnostic release waits total0.041ms, DMA waits60.918ms, view calls1.089ms; expectation is mostly b1, not blanket acceleration. Twelve-job screen estimate261sec from prior matching12-job costs (~20sec setup,420ms prefill,21ms decode).

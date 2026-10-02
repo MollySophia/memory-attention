@@ -1,10 +1,10 @@
 {
   "campaign_id": "offload-gap-001",
-  "goal_progress": "User requested5\u201310 additional attempts startingA0006. Original five verdicts and final report preserved.",
-  "workflow_stage": "profiling",
+  "goal_progress": "A0006 early host refill passes46 tests and standalone exactness. Twelve-job screen next; additional completed verdicts0/5 minimum.",
+  "workflow_stage": "screening",
   "completed_optimization_verdicts": 5,
   "accepted_steps": 1,
-  "active_attempt": null,
+  "active_attempt": "A0006",
   "controller_pid": null,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
@@ -12,5 +12,7 @@
   "final_audit": "final/core-audit.json",
   "status": "active",
   "publication": "final/publication.json",
-  "continuation": "continuation-01/manifest.json"
+  "continuation": "continuation-01/manifest.json",
+  "source_candidate": "b58cdb8640fb2d6a57631e0c26fc6f9a72761f74",
+  "live_manifest": "profile/results/optimization/offload-gap-001/A0006/R01/manifest.json"
 }
