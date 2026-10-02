@@ -1,0 +1,111 @@
+{
+  "campaign_id": "offload-gap-001",
+  "stage": "full_validation",
+  "policy": "nonprimary_single_pair_any_offload_or_resident_slowdown_v1",
+  "reviewed": [
+    {
+      "mode": "decode",
+      "batch": 4,
+      "length": 2048,
+      "offload_reduction_ms": 0.015632125238576933,
+      "gpu_reduction_ms": 0.004027675216397242,
+      "gap_reduction_ms": 0.011604450022179691,
+      "requires_bounded_check": false
+    },
+    {
+      "mode": "decode",
+      "batch": 8,
+      "length": 512,
+      "offload_reduction_ms": -0.21466997762521078,
+      "gpu_reduction_ms": 0.003583822399377823,
+      "gap_reduction_ms": -0.2182538000245886,
+      "requires_bounded_check": true
+    },
+    {
+      "mode": "decode",
+      "batch": 8,
+      "length": 4096,
+      "offload_reduction_ms": 0.019976558784644993,
+      "gpu_reduction_ms": 0.02016308717429638,
+      "gap_reduction_ms": -0.00018652838965138585,
+      "requires_bounded_check": false
+    },
+    {
+      "mode": "decode",
+      "batch": 8,
+      "length": 8192,
+      "offload_reduction_ms": -0.030864309519529343,
+      "gpu_reduction_ms": 0.008930002028741058,
+      "gap_reduction_ms": -0.0397943115482704,
+      "requires_bounded_check": true
+    },
+    {
+      "mode": "decode",
+      "batch": 16,
+      "length": 2048,
+      "offload_reduction_ms": -0.05191921566923341,
+      "gpu_reduction_ms": -0.0041771214455366135,
+      "gap_reduction_ms": -0.047742094223696796,
+      "requires_bounded_check": true
+    },
+    {
+      "mode": "prefill",
+      "batch": 4,
+      "length": 2048,
+      "offload_reduction_ms": 0.11930232867598534,
+      "gpu_reduction_ms": -0.723626154164478,
+      "gap_reduction_ms": 0.8429284828404633,
+      "requires_bounded_check": true
+    },
+    {
+      "mode": "prefill",
+      "batch": 8,
+      "length": 512,
+      "offload_reduction_ms": 26.863617698351547,
+      "gpu_reduction_ms": -0.19769299154480535,
+      "gap_reduction_ms": 27.061310689896352,
+      "requires_bounded_check": true
+    },
+    {
+      "mode": "prefill",
+      "batch": 8,
+      "length": 4096,
+      "offload_reduction_ms": -0.6663321517407894,
+      "gpu_reduction_ms": 1.0280492870758167,
+      "gap_reduction_ms": -1.694381438816606,
+      "requires_bounded_check": true
+    },
+    {
+      "mode": "prefill",
+      "batch": 8,
+      "length": 8192,
+      "offload_reduction_ms": -8.592136142154573,
+      "gpu_reduction_ms": 1.3629948099453486,
+      "gap_reduction_ms": -9.955130952099921,
+      "requires_bounded_check": true
+    },
+    {
+      "mode": "prefill",
+      "batch": 16,
+      "length": 2048,
+      "offload_reduction_ms": -1.4599844658126244,
+      "gpu_reduction_ms": 0.7251278031617403,
+      "gap_reduction_ms": -2.1851122689743647,
+      "requires_bounded_check": true
+    }
+  ],
+  "selected": [
+    "decode:8:512",
+    "decode:8:8192",
+    "decode:16:2048",
+    "prefill:4:2048",
+    "prefill:8:512",
+    "prefill:8:4096",
+    "prefill:8:8192",
+    "prefill:16:2048"
+  ],
+  "extra_pairs_per_placement": 2,
+  "original_pair_retained": true,
+  "note": "Conservative follow-up trigger, not proof of regression. Exactly three total independent paired blocks; no further extension until favorable. Primary confirmation is not extended.",
+  "source_summary": "profile/results/optimization/offload-gap-001/A0016/full-summary.json"
+}

@@ -1,7 +1,7 @@
 {
   "campaign_id": "offload-gap-001",
   "attempt_id": "A0016",
-  "status": "R04-full-validation",
+  "status": "validation_complete_needs_audit",
   "driver_command": [
     "profile/results/optimization/offload-gap-001/continue_validation.py",
     "--attempt",
@@ -264,9 +264,56 @@
         "--output",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R04-full-validation"
       ],
-      "status": "running",
+      "status": "completed",
       "started_unix": 1790930770.9440842,
-      "pid": 2275087
+      "pid": 2275087,
+      "returncode": 0,
+      "finished_unix": 1790932406.395842
+    },
+    {
+      "name": "R05-generation-validation-plan",
+      "command": [
+        "/home/molly/miniconda3/envs/fla-bench/bin/python",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/run_paired.py",
+        "--baseline-root",
+        "/home/molly/workspace-memory-attn/offload-gap-001-A0000",
+        "--candidate-root",
+        "/home/molly/workspace-memory-attn/offload-gap-001-A0016",
+        "--screen-manifest",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R01/manifest.json",
+        "--stage",
+        "generation_validation",
+        "--plan-only",
+        "--output",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R05-generation-validation-plan"
+      ],
+      "status": "completed",
+      "started_unix": 1790932406.3965435,
+      "pid": 2301185,
+      "returncode": 0,
+      "finished_unix": 1790932406.4404736
+    },
+    {
+      "name": "R05-generation-validation",
+      "command": [
+        "/home/molly/miniconda3/envs/fla-bench/bin/python",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/run_paired.py",
+        "--baseline-root",
+        "/home/molly/workspace-memory-attn/offload-gap-001-A0000",
+        "--candidate-root",
+        "/home/molly/workspace-memory-attn/offload-gap-001-A0016",
+        "--screen-manifest",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R01/manifest.json",
+        "--stage",
+        "generation_validation",
+        "--output",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R05-generation-validation"
+      ],
+      "status": "completed",
+      "started_unix": 1790932406.4406497,
+      "pid": 2301195,
+      "returncode": 0,
+      "finished_unix": 1790932807.010232
     }
   ],
   "accepted": false,

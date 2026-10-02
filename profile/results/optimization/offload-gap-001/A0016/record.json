@@ -42,9 +42,7 @@
     "jobs": 12,
     "reason_batch16": "Shape-specific pipeline policy"
   },
-  "not_run": {
-    "generation_validation": "Queued after complete full matrix; not yet run."
-  },
+  "not_run": {},
   "draft_root": "/tmp/offload-gap-A0016-draft-81086aqd",
   "draft_condition": "Activated from verified A0001 after A0015 within_noise verdict and code-only reversion. GPU tests wait for the sequential diagnostic batch.",
   "draft_patch": "isolated-draft.patch",
@@ -82,5 +80,12 @@
       "batch": 1
     }
   ],
-  "eligible_gain_note": "Structured representation of the primary target already declared at registration; unchanged scope."
+  "eligible_gain_note": "Structured representation of the primary target already declared at registration; unchanged scope.",
+  "generation_manifest": "R05-generation-validation/manifest.json",
+  "secondary_regression_policy": "secondary-regression-policy.json",
+  "secondary_regression_selection": [
+    "full-regression-selection.json",
+    "generation-regression-selection.json"
+  ],
+  "validation_progress": "All84 full-matrix points and12 generation points completed. Exactly64 full-matrix and8 generation extra processes predeclared by the prior any-negative secondary trigger; original pairs retained. Final acceptance awaits bounded regression results and source/memory audit."
 }
