@@ -74,5 +74,8 @@
   "screen_summary": "R01-summary.json",
   "performance": "screen-comparison.json",
   "screen_decision": "Target b8 prefill offload/gap reductions2.020062/1.692548 ms versus A0016; b1/b16 decode slower0.370803/0.431870 ms preserved. Predeclare fixed48 parent confirmation; only b8 prefill may qualify.",
-  "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json"
+  "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json",
+  "conditional_validation_plan": "conditional-validation-plan.json",
+  "conditional_controller": "conditional-controller.json",
+  "secondary_regression_policy": "secondary-regression-policy.json"
 }
