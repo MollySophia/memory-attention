@@ -444,14 +444,7 @@ class MemoryModel(MemoryPreTrainedModel):
             if inputs_embeds is None:
                 if input_ids is None:
                     raise ValueError("offloaded forward requires input_ids or inputs_embeds")
-                embedding_ids = input_ids.to(device, non_blocking=True)
-                if self._offloader_for(*input_ids.shape).policy == "pipeline":
-                    return self._forward_offloaded(
-                        None, ids_cpu, attention_mask, past_key_values,
-                        use_cache, output_hidden_states, return_dict,
-                        deferred_embedding_ids=embedding_ids,
-                    )
-                inputs_embeds = self.embeddings(embedding_ids)
+                inputs_embeds = self.embeddings(input_ids.to(device, non_blocking=True))
             return self._forward_offloaded(
                 inputs_embeds, ids_cpu, attention_mask, past_key_values,
                 use_cache, output_hidden_states, return_dict,
@@ -507,14 +500,13 @@ class MemoryModel(MemoryPreTrainedModel):
 
     def _forward_offloaded(
         self,
-        hidden_states: torch.Tensor | None,
+        hidden_states: torch.Tensor,
         input_states_ids: torch.LongTensor,
         attention_mask: torch.Tensor | None,
         past_key_values: Cache | None,
         use_cache: bool,
         output_hidden_states: bool,
         return_dict: bool,
-        deferred_embedding_ids: torch.LongTensor | None = None,
     ):
         """Run the layer stack while the memory table streams from CPU.
 
@@ -522,12 +514,7 @@ class MemoryModel(MemoryPreTrainedModel):
         point of use, so the H2D for a group overlaps the Q/K kernels of the
         layers already running.
         """
-        if hidden_states is None:
-            if deferred_embedding_ids is None:
-                raise ValueError("deferred embedding requires input IDs")
-            batch, seq_len = deferred_embedding_ids.shape
-        else:
-            batch, seq_len = hidden_states.shape[0], hidden_states.shape[1]
+        batch, seq_len = hidden_states.shape[0], hidden_states.shape[1]
         offloader = self._offloader_for(batch, seq_len)
 
         state = dict(hidden=hidden_states, past=past_key_values)
@@ -535,10 +522,6 @@ class MemoryModel(MemoryPreTrainedModel):
 
         def consume(index: int, memory_table) -> None:
             nonlocal all_hidden_states
-            if state["hidden"] is None:
-                # Pipeline has submitted its producer and entry dependency;
-                # initial lookup/H2D can now overlap embedding startup.
-                state["hidden"] = self.embeddings(deferred_embedding_ids)
             layer = self.layers[index]
             if output_hidden_states:
                 all_hidden_states += (state["hidden"],)
