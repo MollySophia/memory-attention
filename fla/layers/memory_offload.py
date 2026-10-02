@@ -116,6 +116,7 @@ class MemoryTableOffloader:
         group_size: int = 1,
         device: torch.device | str = "cuda:0",
         prefetch_depth: int = 4,
+        write_combined_min_tokens: int = 8192,
     ) -> None:
         if weights.device.type != "cpu" or weights.ndim != 3:
             raise ValueError("weights must be a CPU tensor of shape [vocab, layers, dim]")
@@ -135,9 +136,14 @@ class MemoryTableOffloader:
         self.closed = False
         self.broken = False
         capacity = self.tokens * self.group * self.dim
+        if self.tokens >= write_combined_min_tokens:
+            from fla.layers.memory_host_buffer import write_combined_empty
+            allocate_host = lambda: write_combined_empty(capacity, weights.dtype, self.device)
+        else:
+            allocate_host = lambda: torch.empty(capacity, dtype=weights.dtype, pin_memory=True)
         self.slots = [
             dict(
-                host=torch.empty(capacity, dtype=weights.dtype, pin_memory=True),
+                host=allocate_host(),
                 gpu=torch.empty(capacity, dtype=weights.dtype, device=self.device),
                 copied=torch.cuda.Event(),
                 consumed=torch.cuda.Event(),

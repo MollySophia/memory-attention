@@ -172,7 +172,8 @@ def test_growing_cache_exact_with_slot_reuse(seed, policy, padded):
                           memory_offload_policy=policy,
                           memory_offload_group_size=2,
                           memory_offload_bulk_max_tokens=1,
-                          memory_offload_prefetch_depth=4 if policy == 'auto' else 1)
+                          memory_offload_prefetch_depth=4 if policy == 'auto' else 1,
+                          memory_offload_write_combined_min_tokens=1)
     with torch.inference_mode():
         model = MemoryForCausalLM(config).to('cuda', dtype=torch.bfloat16).eval()
         for layer in model.model.layers:
@@ -263,3 +264,90 @@ def test_single_slot_limit_can_be_disabled_and_validated(model):
     model.enable_memory_offload()
     model.set_offload_offloader(1,1025)
     assert len(model.model.memory_offloader.slots) == min(4,len(model.model.layers))
+
+
+
+def test_write_combined_storage_owner_survives_views_and_dma(monkeypatch):
+    import gc
+    import fla.layers.memory_host_buffer as buffers
+    calls = []
+    original = buffers._release
+    def tracked(*args):
+        original(*args)
+        calls.append(1)
+    monkeypatch.setattr(buffers, '_release', tracked)
+    host = buffers.write_combined_empty(8192, torch.bfloat16, 'cuda:0')
+    assert host.is_pinned()
+    host.fill_(1.5)
+    view = host.view(128,64)
+    del host
+    gc.collect()
+    assert calls == []
+    stream = torch.cuda.Stream()
+    with torch.cuda.stream(stream):
+        torch.cuda._sleep(100000)
+        output = view.to('cuda', non_blocking=True)
+    del view
+    gc.collect()
+    assert calls == [1]
+    torch.testing.assert_close(output.cpu(),torch.full((128,64),1.5,dtype=torch.bfloat16),rtol=0,atol=0)
+
+
+@pytest.mark.parametrize('group,depth', [(1,1),(2,1),(2,3)])
+def test_write_combined_pipeline_slot_reuse_and_fresh_rows(group, depth):
+    from fla.layers.memory_offload import MemoryTableOffloader
+    with torch.inference_mode():
+        weights = torch.randn(32,5,64,dtype=torch.bfloat16)
+        off = MemoryTableOffloader(weights,2,4,group_size=group,prefetch_depth=depth,
+                                   write_combined_min_tokens=1)
+        assert all(slot['host'].is_pinned() for slot in off.slots)
+        streams = [torch.cuda.Stream(),torch.cuda.Stream()]
+        retained = []
+        try:
+            for iteration in range(8):
+                weights.add_(0.25)
+                ids = torch.randint(0,32,(2,4))
+                expected = [weights[ids,layer].clone() for layer in range(5)]
+                with torch.cuda.stream(streams[iteration%2]):
+                    output = []
+                    def consume(layer,handle):
+                        torch.cuda._sleep(10000)
+                        output.append(handle.acquire().clone())
+                        handle.release()
+                    off.forward(ids,consume)
+                retained.append((output,expected))
+            torch.cuda.synchronize()
+            for output, expected in retained:
+                for actual, reference in zip(output,expected):
+                    torch.testing.assert_close(actual.cpu(),reference,rtol=0,atol=0)
+        finally:
+            off.close()
+
+
+
+@pytest.mark.parametrize('tokens', [8191,8192])
+def test_write_combined_default_threshold(tokens, monkeypatch):
+    import fla.layers.memory_host_buffer as buffers
+    from fla.layers.memory_offload import MemoryTableOffloader
+    allocations = []
+    original = buffers.write_combined_empty
+    def tracked(*args,**kwargs):
+        allocations.append(args[0])
+        return original(*args,**kwargs)
+    monkeypatch.setattr(buffers,'write_combined_empty',tracked)
+    weights = torch.randn(32,3,64,dtype=torch.bfloat16)
+    with torch.inference_mode():
+        off = MemoryTableOffloader(weights,1,tokens,group_size=2,prefetch_depth=4)
+        try:
+            assert len(allocations) == (2 if tokens>=8192 else 0)
+            ids = torch.randint(0,32,(1,tokens))
+            outputs = []
+            def consume(layer,handle):
+                outputs.append(handle.acquire().clone())
+                handle.release()
+            off.forward(ids,consume)
+            torch.cuda.synchronize()
+            for layer,actual in enumerate(outputs):
+                torch.testing.assert_close(actual.cpu(),weights[ids,layer],rtol=0,atol=0)
+        finally:
+            off.close()

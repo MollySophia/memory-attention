@@ -2,12 +2,12 @@
   "campaign_id": "offload-gap-001",
   "continuation_id": "continuation-02",
   "attempt_id": "A0017",
-  "parent_attempt_id": "A0001",
-  "parent_source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
-  "parent_sha": "9d6f3af1069919be7bdba8dc3fc74845d984d3ab",
+  "parent_attempt_id": "A0016",
+  "parent_source_sha": "0ce6645eb4c4bc3992258ad0878c72ea3c37a64e",
+  "parent_sha": "eedd189a84b5b1c20144bb1c90367014c42ae7ae",
   "accepted_step": null,
   "label": "write-combined pinned pipeline buffers for large inputs",
-  "workflow_stage": "implementation_draft",
+  "workflow_stage": "correctness",
   "hypothesis": "Use write-combined CUDA host allocation for large pipeline gather destinations, preserving fresh CPU gather and H2D while reducing the combined transport cost.",
   "expected_bottleneck": "Frozen A0001 component diagnostic:16384/32768-token gather+H2D means3.869776/7.856003 ms torch pinned versus2.983973/5.945323 write-combined; native default allocation3.892142/7.923771 controls allocation API.2048 tokens slightly worse with WC, so exclude small inputs.",
   "profile_evidence": [
@@ -49,7 +49,7 @@
     "generation_validation": "Draft only; staged gates required."
   },
   "draft_root": "/tmp/offload-gap-A0017-draft-bvzdv8sk",
-  "draft_condition": "Only isolated draft while A0016 screening/retention gates run. Activate from best verified parent after A0016 verdict; preserve its small-prefill depth policy if retained. GPU correctness and model timing are not yet run.",
+  "draft_condition": "Activated after A0016 accepted verdict; conditional merge preserves its small-prefill policy and all tests.",
   "draft_patch": "isolated-draft.patch",
   "draft_validation": "Syntax compile only. GPU tests pending A0016 verdict and parent reconciliation.",
   "eligible_gain_workloads": [
@@ -58,5 +58,6 @@
       "batch": 8
     }
   ],
-  "eligible_gain_note": "Structured representation of the primary target already declared at registration; unchanged scope."
+  "eligible_gain_note": "Structured representation of the primary target already declared at registration; unchanged scope.",
+  "activation_patch": "conditional-A0016-parent.patch"
 }
