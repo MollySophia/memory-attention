@@ -1,0 +1,47 @@
+{
+  "campaign_id": "offload-gap-001",
+  "attempt_id": "A0005",
+  "parent_attempt_id": "A0001",
+  "parent_source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
+  "parent_sha": "5c73b2851c575ebacbf8d9f64e9f777e59b89bfc",
+  "accepted_step": null,
+  "label": "compute-stream copies for tiny bulk transfers",
+  "workflow_stage": "registered",
+  "hypothesis": "For <=8 tokens, place the tiny H2D directly on the consuming compute stream and skip the redundant first-layer cross-stream wait. Baseline decode profiles show ~5.5/5.8 us CPU H2D submission and ~11/22 us transfer spans at b1/b8. Reduced stream coordination may exceed the lost Q/K overlap for such small transfers.",
+  "expected_bottleneck": "tiny bulk H2D stream switching and dependency coordination",
+  "change": "Use compute-stream H2D only for <=8 token bulk calls, preserving copied/consumed events for pinned-host and cross-call buffer safety. Keep separate-copy-stream path for larger bulk calls and pipeline unchanged. Fresh torch gather every call; no A0002/A0003/A0004 changes.",
+  "profile_evidence": [
+    "../A0000/diagnostics-summary.json",
+    "../A0002/parent-confirmation-analysis.json"
+  ],
+  "protocol_version": "offload_gap_v1",
+  "original_protocol_version": "offload_gap_v1",
+  "measurement_plan_id": "screen_v1_w3_n5_r1",
+  "screen": {
+    "batches": [
+      1,
+      8,
+      16
+    ],
+    "length": 2048,
+    "modes": [
+      "prefill",
+      "decode"
+    ],
+    "variants": [
+      "ma_offload",
+      "ma_gpu"
+    ],
+    "jobs": 12,
+    "reason_batch16": "H2D scheduling change, including unchanged larger-batch control"
+  },
+  "not_run": {
+    "confirmation": "screen first",
+    "full_validation": "only after confirmation",
+    "generation_validation": "only if nominated"
+  },
+  "tradeoffs": [
+    "Serializes tiny transfer before Q/K kernels, potentially losing more overlap than saved CPU submission time.",
+    "Transfer byte count, table precision and buffer capacities unchanged."
+  ]
+}
