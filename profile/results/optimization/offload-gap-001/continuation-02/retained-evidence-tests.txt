@@ -1,0 +1,21 @@
+
+profile/results/optimization/offload-gap-001/test_retained_evidence.py::test_existing_accepted_source_all_raw_stages_validate PASSED [  5%]
+profile/results/optimization/offload-gap-001/test_retained_evidence.py::test_missing_intermediate_stage_fails[full_summary] PASSED [ 11%]
+profile/results/optimization/offload-gap-001/test_retained_evidence.py::test_missing_intermediate_stage_fails[generation_summary] PASSED [ 16%]
+profile/results/optimization/offload-gap-001/test_retained_evidence.py::test_missing_intermediate_stage_fails[correctness_directory] PASSED [ 22%]
+profile/results/optimization/offload-gap-001/test_retained_evidence.py::test_incremental_gain_must_be_in_declared_target PASSED [ 27%]
+profile/results/optimization/offload-gap-001/test_continuation_scope.py::test_old_tranche_cannot_satisfy_additional_count PASSED [ 33%]
+profile/results/optimization/offload-gap-001/test_continuation_scope.py::test_registration_count_does_not_replace_final_verdicts PASSED [ 38%]
+profile/results/optimization/offload-gap-001/test_continuation_scope.py::test_ten_additional_request_requires_all_ten PASSED [ 44%]
+profile/results/optimization/offload-gap-001/test_continuation_scope.py::test_twentieth_registration_must_have_a_final_verdict PASSED [ 50%]
+profile/results/optimization/offload-gap-001/test_correctness_reuse.py::test_all_four_frozen_reference_fingerprints_validate PASSED [ 55%]
+profile/results/optimization/offload-gap-001/test_correctness_reuse.py::test_reference_mismatch_is_rejected[seed] PASSED [ 61%]
+profile/results/optimization/offload-gap-001/test_correctness_reuse.py::test_reference_mismatch_is_rejected[source] PASSED [ 66%]
+profile/results/optimization/offload-gap-001/test_correctness_reuse.py::test_reference_mismatch_is_rejected[threads] PASSED [ 72%]
+profile/results/optimization/offload-gap-001/test_correctness_reuse.py::test_reference_mismatch_is_rejected[config] PASSED [ 77%]
+profile/results/optimization/offload-gap-001/test_correctness_reuse.py::test_reference_mismatch_is_rejected[missing_step] PASSED [ 83%]
+profile/results/optimization/offload-gap-001/test_correctness_reuse.py::test_reference_mismatch_is_rejected[missing_hidden] PASSED [ 88%]
+profile/results/optimization/offload-gap-001/test_correctness_reuse.py::test_reference_mismatch_is_rejected[nonfinite] PASSED [ 94%]
+profile/results/optimization/offload-gap-001/test_correctness_reuse.py::test_reference_mismatch_is_rejected[shape] PASSED [100%]
+
+============================== 18 passed in 0.20s ==============================

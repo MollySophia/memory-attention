@@ -75,5 +75,12 @@
   "confirmation_analysis": "validation-v3-confirmation-analysis.json",
   "frozen_baseline_confirmation_decision": "Passes fixed primary gates against A0000. b1 prefill cumulative offload reduction14.021136 ms CI[13.510024,14.532248], gap14.015407 CI[13.549947,14.480867]. Other primary comparisons unresolved without resolved regression; memory preserved. Incremental gain remains parent-relative0.430878 ms, not14.02 ms. Full validation/correctness/generation and regression audit remain before acceptance.",
   "correctness_directory": "R06-full-correctness",
-  "validation_matrix_manifest": "R04-full-validation/manifest.json"
+  "validation_matrix_manifest": "R04-full-validation/manifest.json",
+  "eligible_gain_workloads": [
+    {
+      "mode": "prefill",
+      "batch": 1
+    }
+  ],
+  "eligible_gain_note": "Structured representation of the primary target already declared at registration; unchanged scope."
 }

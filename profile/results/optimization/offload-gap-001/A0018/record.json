@@ -56,5 +56,16 @@
   "draft_root": "/tmp/offload-gap-A0018-draft-7htjgy3o",
   "draft_condition": "Isolated draft only. Activate sequentially after A0017 final verdict from best verified parent; preserve any accepted depth/WC changes. No GPU tests/timing during A0016 confirmation.",
   "draft_patch": "isolated-draft.patch",
-  "draft_validation": "Syntax compile only; GPU tests pending sequential parent reconciliation."
+  "draft_validation": "Syntax compile only; GPU tests pending sequential parent reconciliation.",
+  "eligible_gain_workloads": [
+    {
+      "mode": "prefill",
+      "batch": 1
+    },
+    {
+      "mode": "prefill",
+      "batch": 8
+    }
+  ],
+  "eligible_gain_note": "Structured representation of the primary target already declared at registration; unchanged scope."
 }
