@@ -1,20 +1,22 @@
 {
   "campaign_id": "offload-gap-001",
-  "goal_progress": "A0001 accepted after all predeclared gates. Next CPU layout diagnostic running; continue toward 5\u201310 attempts.",
-  "active_attempt": "A0001",
-  "workflow_stage": "A0001_accepted_next_profile",
+  "goal_progress": "A0001 accepted; A0002 exactness and eight-job screening complete, modest b8 decode improvement awaiting independent parent-relative confirmation.",
+  "active_attempt": "A0002",
+  "workflow_stage": "parent_confirmation",
   "completed_optimization_verdicts": 1,
   "accepted_steps": 1,
-  "live_manifest": null,
+  "live_manifest": "profile/results/optimization/offload-gap-001/A0002/R02-parent-confirmation/manifest.json",
   "controller_pid": 1990141,
-  "exec_session_id": 54235,
+  "exec_session_id": null,
   "validation_controller": "profile/results/optimization/offload-gap-001/A0001/validation-v2.json",
   "source_baseline": "62942a0",
   "source_candidate": "942a2a5",
   "next_actions": [
-    "Read CPU lookup layout diagnostic, register A0002 from accepted A0001 before editing model.",
-    "Run required correctness and candidate screen; keep frozen A0000 for final comparison and A0001 for incremental attribution.",
-    "Complete remaining focused attempts, final plots and reproducible commands."
+    "Inspect existing A0002/R02-parent-confirmation controller; do not duplicate live jobs.",
+    "Analyze completed 48-process comparison with analyze_paired.py. Here baseline=A0001, candidate=A0002; no frozen-A0000 cumulative claim from this run.",
+    "If unresolved, commit within_noise evidence then code-only revert A0002 model/test changes to A0001. If repeatable, run frozen-A0000 confirmation and all retention gates.",
+    "Continue focused A0003\u2013A0005 (or more) from best verified source; current completed verdict count 1, accepted step count 1.",
+    "Generate final history/accepted-step charts and reproducible commands; full scope remains unfinished."
   ],
   "notes": [
     "GOAL.md remains the full scope. No optimization accepted yet.",

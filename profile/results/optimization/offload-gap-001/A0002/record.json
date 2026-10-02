@@ -6,7 +6,7 @@
   "parent_sha": "0936d6de82ba57a7c7c8b94a6fcaad9747cc8cf1",
   "accepted_step": null,
   "label": "serial byte copies for tiny CPU lookups",
-  "workflow_stage": "screening",
+  "workflow_stage": "parent_confirmation",
   "hypothesis": "Avoid torch CPU dispatch/thread-pool overhead for bulk gathers of <=8 tokens using serial byte copies into the existing pinned buffer. Baseline model profiles show 24/44 us CPU gather at b1/b8 decode; CPU microdiagnostic shows 4.68->2.70 us and 24.56->17.21 us for hot lookups. Confirm end-to-end effects independently.",
   "expected_bottleneck": "tiny bulk CPU table gather and associated CPU scheduling overhead",
   "change": "Precreate zero-copy uint8 NumPy views; copy each requested row for <=8 tokens when CPU table is contiguous. Fall back to torch index_select for other inputs. No value/lookup caching, dtype conversion, global thread changes or extra table storage.",
@@ -36,9 +36,9 @@
     "reason_no_batch16": "Only CPU lookup implementation for <=8 tokens changes; transfer volume and pipeline scheduling remain fixed."
   },
   "not_run": {
-    "confirmation": "screening gate first",
-    "full_validation": "only after primary confirmation",
-    "generation_validation": "only after nomination"
+    "frozen_baseline_confirmation": "Only if parent-relative gain is repeatable; prior A0001 gain cannot justify accepting A0002",
+    "full_validation": "Only after both incremental and frozen-baseline confirmation",
+    "generation_validation": "Only after nomination"
   },
   "limitations": [
     "Microdiagnostic uses hot rows and does not establish model gain; generation CPU scheduling causality remains unproven."
@@ -54,5 +54,8 @@
     ]
   },
   "screen_manifest": "R01/manifest.json",
-  "screen_summary": "R01-summary.json"
+  "screen_summary": "R01-summary.json",
+  "performance": "screen-comparison.json",
+  "decision": "Screen suggests modest b8 decode gap reduction; require independent comparison against accepted parent A0001 before any incremental gain claim.",
+  "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json"
 }

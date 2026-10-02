@@ -1,0 +1,17 @@
+{"jobs": 8, "samples": 40, "model_calls_including_warmup": 64, "note": "Excludes model loading and decode prefix setup; confirmation here is one side of one run, not independent paired evidence.", "estimated_seconds": 207.072, "estimate_inputs": {"output": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0002/R01", "plan_only": false, "stage": "screening", "variants": null, "initial_baseline": false, "include_batch16": false, "estimate_setup_seconds": 25.0, "estimate_prefill_ms": 210.0, "estimate_decode_ms": 11.0}}
+START J01-prefill-ma_offload-b1-l2048
+END J01-prefill-ma_offload-b1-l2048 completed
+START J02-prefill-ma_gpu-b1-l2048
+END J02-prefill-ma_gpu-b1-l2048 completed
+START J03-decode-ma_offload-b1-l2048
+END J03-decode-ma_offload-b1-l2048 completed
+START J04-decode-ma_gpu-b1-l2048
+END J04-decode-ma_gpu-b1-l2048 completed
+START J05-prefill-ma_offload-b8-l2048
+END J05-prefill-ma_offload-b8-l2048 completed
+START J06-prefill-ma_gpu-b8-l2048
+END J06-prefill-ma_gpu-b8-l2048 completed
+START J07-decode-ma_offload-b8-l2048
+END J07-decode-ma_offload-b8-l2048 completed
+START J08-decode-ma_gpu-b8-l2048
+END J08-decode-ma_gpu-b8-l2048 completed
