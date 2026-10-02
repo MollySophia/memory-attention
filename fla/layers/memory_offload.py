@@ -25,6 +25,7 @@ from __future__ import annotations
 import threading
 from concurrent.futures import ThreadPoolExecutor
 
+import numpy as np
 import torch
 
 
@@ -284,6 +285,15 @@ class BulkMemoryTableOffloader:
         shape = (batch * seq_len, self.layers, self.dim)
         self.host = torch.empty(shape, dtype=weights.dtype, pin_memory=True)
         self.gpu = torch.empty(shape, dtype=weights.dtype, device=self.device)
+        # Byte views preserve BF16 bits and share the table/buffer storage.
+        # Tiny gathers avoid dispatching a CPU parallel operation; every call
+        # still copies its requested rows afresh. Other layouts use PyTorch.
+        self._byte_rows = None
+        if batch * seq_len <= 8 and weights.is_contiguous():
+            self._byte_rows = (
+                weights.view(torch.uint8).numpy().reshape(weights.shape[0], -1),
+                self.host.view(torch.uint8).numpy().reshape(batch * seq_len, -1),
+            )
         self.values = [self.gpu[:, i].view(batch, seq_len, self.dim) for i in range(self.layers)]
         self.copy_stream = torch.cuda.Stream(device=self.device)
         # Establish allocation-stream ordering once, before async use.
@@ -300,6 +310,17 @@ class BulkMemoryTableOffloader:
     def group_size(self) -> int:
         return self.group
 
+    def _gather(self, ids: torch.Tensor) -> None:
+        if self._byte_rows is not None:
+            source, destination = self._byte_rows
+            indices = ids.tolist()
+            # Preserve index_select's bounds behavior, including negative IDs.
+            if all(0 <= index < len(source) for index in indices):
+                for row, index in enumerate(indices):
+                    np.copyto(destination[row], source[index])
+                return
+        torch.index_select(self.weights, 0, ids, out=self.host)
+
     @torch.inference_mode()
     def forward(self, ids_cpu: torch.Tensor, consume) -> None:
         if self.closed or self.broken:
@@ -314,7 +335,7 @@ class BulkMemoryTableOffloader:
             if self.started and not self.copied.query():
                 self.copied.synchronize()
             # No caching: every call performs a real lookup.
-            torch.index_select(self.weights, 0, ids_cpu.reshape(-1), out=self.host)
+            self._gather(ids_cpu.reshape(-1))
             with torch.cuda.device(self.device), torch.cuda.stream(self.copy_stream):
                 if self.started:
                     self.copy_stream.wait_event(self.consumed)
