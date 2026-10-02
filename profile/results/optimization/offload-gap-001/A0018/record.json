@@ -2,12 +2,12 @@
   "campaign_id": "offload-gap-001",
   "continuation_id": "continuation-02",
   "attempt_id": "A0018",
-  "parent_attempt_id": "A0001",
-  "parent_source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
-  "parent_sha": "58d74ed73643b931c2d5a0eda22c9c2c9902b276",
+  "parent_attempt_id": "A0016",
+  "parent_source_sha": "0ce6645eb4c4bc3992258ad0878c72ea3c37a64e",
+  "parent_sha": "91eb8ad887cae83734c16b0978801e2da24965fc",
   "accepted_step": null,
   "label": "submit embedding before waiting for pipeline input IDs",
-  "workflow_stage": "implementation_draft",
+  "workflow_stage": "correctness",
   "hypothesis": "For pipeline inputs, enqueue nonblocking D2H into reusable pinned ID storage, record completion, submit embedding, then wait for host IDs before CPU gather. Overlap host embedding dispatch with ID transfer/completion instead of blocking before dispatch.",
   "expected_bottleneck": "Frozen A0001 instrumented b1/b8 ID staging CPU spans0.033814/0.047770 ms precede embedding dispatch0.034976/0.046488 ms. These instrumented spans are not guaranteed removable latency. A0011 reusable blocking IDs failed independent confirmation; this attempt specifically changes the wait position.",
   "profile_evidence": [
@@ -54,7 +54,7 @@
     "generation_validation": "Draft only; staged gates required."
   },
   "draft_root": "/tmp/offload-gap-A0018-draft-7htjgy3o",
-  "draft_condition": "Isolated draft only. Activate sequentially after A0017 final verdict from best verified parent; preserve any accepted depth/WC changes. No GPU tests/timing during A0016 confirmation.",
+  "draft_condition": "Activated from verified A0016 after A0017 within_noise verdict and code-only reversion. Preserves selective-depth configuration and all parent tests.",
   "draft_patch": "isolated-draft.patch",
   "draft_validation": "Syntax compile only; GPU tests pending sequential parent reconciliation.",
   "eligible_gain_workloads": [
@@ -67,5 +67,6 @@
       "batch": 8
     }
   ],
-  "eligible_gain_note": "Structured representation of the primary target already declared at registration; unchanged scope."
+  "eligible_gain_note": "Structured representation of the primary target already declared at registration; unchanged scope.",
+  "activation_patch": "conditional-A0016-parent.patch"
 }

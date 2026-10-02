@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import math
+import threading
 import warnings
 from typing import TYPE_CHECKING, Any
 
@@ -181,6 +182,7 @@ class MemoryModel(MemoryPreTrainedModel):
         # nn.Embedding weights are dropped to free their device copy.
         self.memory_offloader = None
         self.memory_table = None
+        self._offload_input_lock = None
 
         self.post_init()
 
@@ -248,6 +250,7 @@ class MemoryModel(MemoryPreTrainedModel):
         for layer in self.layers:
             layer.attn.m_proj = None
 
+        self._offload_input_lock = threading.Lock()
         self.memory_table = table
         self._offload_device = device
         self._offload_dtype = dtype
@@ -376,6 +379,7 @@ class MemoryModel(MemoryPreTrainedModel):
             self.memory_offloader.close()
             self.memory_offloader = None
         self.memory_table = None
+        self._offload_input_lock = None
         if getattr(self, "_resident_m_projs", None) is not None:
             device = getattr(self, "_offload_device", torch.device("cpu"))
             for layer, m in zip(self.layers, self._resident_m_projs):
@@ -436,19 +440,41 @@ class MemoryModel(MemoryPreTrainedModel):
         # yet but must still take the streaming path. _offloader_for() builds
         # one on demand for whatever shape this call uses.
         if self.memory_table is not None:
-            # The offload producer gathers from host memory, so it needs the
-            # IDs on CPU. Accept them on either device and stage the embedding
-            # lookup on the compute device.
-            device = next(self.parameters()).device
-            ids_cpu = input_ids.to("cpu") if input_ids is not None else None
-            if inputs_embeds is None:
+            input_lock = self._offload_input_lock
+            if not input_lock.acquire(blocking=False):
+                raise RuntimeError("concurrent offloaded model forwards are unsupported")
+            pending_ids = None
+            try:
+                device = next(self.parameters()).device
                 if input_ids is None:
-                    raise ValueError("offloaded forward requires input_ids or inputs_embeds")
-                inputs_embeds = self.embeddings(input_ids.to(device, non_blocking=True))
-            return self._forward_offloaded(
-                inputs_embeds, ids_cpu, attention_mask, past_key_values,
-                use_cache, output_hidden_states, return_dict,
-            )
+                    raise ValueError("offloaded forward requires input_ids")
+                offloader = self._offloader_for(*input_ids.shape)
+                if offloader.policy == "pipeline" and input_ids.device == device:
+                    offloader.ids_host.copy_(input_ids, non_blocking=True)
+                    offloader.ids_ready.record(torch.cuda.current_stream(device))
+                    pending_ids = offloader.ids_ready
+                    ids_cpu = offloader.ids_host
+                else:
+                    ids_cpu = input_ids.to("cpu")
+                if inputs_embeds is None:
+                    inputs_embeds = self.embeddings(input_ids.to(device, non_blocking=True))
+                if pending_ids is not None:
+                    # CPU lookup starts only after ID DMA; embedding dispatch
+                    # has already been submitted while the transfer progresses.
+                    pending_ids.synchronize()
+                    pending_ids = None
+                return self._forward_offloaded(
+                    inputs_embeds, ids_cpu, attention_mask, past_key_values,
+                    use_cache, output_hidden_states, return_dict,
+                )
+            finally:
+                try:
+                    # An embedding failure must not release ownership while a
+                    # previous D2H can still overwrite the next call's IDs.
+                    if pending_ids is not None:
+                        pending_ids.synchronize()
+                finally:
+                    input_lock.release()
 
         if inputs_embeds is None:
             inputs_embeds = self.embeddings(input_ids)
