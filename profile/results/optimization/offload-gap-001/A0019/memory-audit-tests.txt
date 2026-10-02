@@ -1,0 +1,23 @@
+
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_completed_screen_memory[A0008] PASSED [  5%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_completed_screen_memory[A0009] PASSED [ 10%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_completed_screen_memory[A0010] PASSED [ 15%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_completed_screen_memory[A0011] PASSED [ 20%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_completed_screen_memory[A0012] PASSED [ 25%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_completed_screen_memory[A0013] PASSED [ 30%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_completed_screen_memory[A0014] PASSED [ 35%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_completed_screen_memory[A0015] PASSED [ 40%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_completed_screen_memory[A0016] PASSED [ 45%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_completed_screen_memory[A0017] PASSED [ 50%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_completed_screen_memory[A0018] PASSED [ 55%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_completed_screen_memory[A0019] PASSED [ 60%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_omitted_or_wrong_capacity_rejected[A0011-ids] PASSED [ 65%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_omitted_or_wrong_capacity_rejected[A0013-table] PASSED [ 70%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_omitted_or_wrong_capacity_rejected[A0014-depth] PASSED [ 75%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_omitted_or_wrong_capacity_rejected[A0015-inverse] PASSED [ 80%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_omitted_or_wrong_capacity_rejected[A0016-depth] PASSED [ 85%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_omitted_or_wrong_capacity_rejected[A0017-depth] PASSED [ 90%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_omitted_or_wrong_capacity_rejected[A0018-ids] PASSED [ 95%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_omitted_or_wrong_capacity_rejected[A0019-depth] PASSED [100%]
+
+============================== 20 passed in 0.02s ==============================

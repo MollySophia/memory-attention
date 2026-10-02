@@ -33,7 +33,7 @@ def validate_offload_memory(attempt, memory):
                 assert host == 0 and gpu == tokens * 24 * 2048 * 2
             else:
                 assert host == gpu
-        if attempt in ('A0014', 'A0016', 'A0017', 'A0018'):
+        if attempt in ('A0014', 'A0016', 'A0017', 'A0018', 'A0019'):
             depth = 1 if attempt == 'A0014' or tokens <= 2048 else 4
             expected = tokens * 2048 * 2 * (depth if cap['policy'] == 'pipeline' else 24)
             ids = tokens * 8 if attempt == 'A0018' and cap['policy'] == 'pipeline' else 0
