@@ -43,6 +43,7 @@ class MemoryConfig(PretrainedConfig):
         memory_offload_policy: str = "auto",
         memory_offload_group_size: int = 1,
         memory_offload_prefetch_depth: int = 4,
+        memory_offload_auto_depth_limit: int = 1,
         memory_offload_bulk_max_tokens: int = 1024,
         memory_offload_chunk_size: int = 1024,
         **kwargs,
@@ -56,6 +57,9 @@ class MemoryConfig(PretrainedConfig):
         self.memory_offload_policy = memory_offload_policy
         self.memory_offload_group_size = memory_offload_group_size
         self.memory_offload_prefetch_depth = memory_offload_prefetch_depth
+        if memory_offload_auto_depth_limit < 1:
+            raise ValueError("automatic pipeline depth limit must be positive")
+        self.memory_offload_auto_depth_limit = memory_offload_auto_depth_limit
         self.memory_offload_bulk_max_tokens = memory_offload_bulk_max_tokens
         self.memory_offload_chunk_size = memory_offload_chunk_size
         self.hidden_size = hidden_size

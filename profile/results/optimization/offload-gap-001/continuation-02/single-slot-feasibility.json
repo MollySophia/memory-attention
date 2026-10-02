@@ -1,0 +1,29 @@
+{
+  "campaign_id": "offload-gap-001",
+  "purpose": "Choose a bounded-lookahead tradeoff from existing offload profiles, not a speedup claim.",
+  "sources": [
+    "A0001/R01-summary.json",
+    "continuation-01/coordination-b1.json",
+    "continuation-01/coordination-b8.json",
+    "continuation-01/transfer-alternatives.json",
+    "A0010/record.json"
+  ],
+  "observations": [
+    "A0001 keeps four one-layer pinned/GPU slots: pipeline capacity 32/256/512 MiB per placement at b1/b8/b16 prefill.",
+    "Slot release occurs after k+m is enqueued, before later attention/MLP work, leaving a possible overlap window for the following group.",
+    "One-layer gather/H2D diagnostics are about 0.339 ms at b1 and 3.941 ms at b8; whole-model prefill is about 29.4/209.5 ms over 24 layers. Component and average-layer times are not independent stage bounds.",
+    "Doubling host buffering in A0010 did not improve model latency; its mechanism was not isolated."
+  ],
+  "hypothesis": "One slot may retain enough inter-layer overlap while reducing pinned/device working set and cache pressure. Loss of lookahead may instead starve compute.",
+  "declared_change": "Limit automatic pipeline to one slot, preserving explicit manual pipeline depths, group size, gather/copy/event ordering and all fresh lookups.",
+  "primary_targets": [
+    "b1 prefill",
+    "b8 prefill"
+  ],
+  "predicted_capacity_only_mib": {
+    "b1": 8,
+    "b8": 64,
+    "b16": 128
+  },
+  "not_claimed": "No latency prediction or attribution of earlier slowdowns solely to cache pressure."
+}
