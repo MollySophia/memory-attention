@@ -224,4 +224,22 @@ def test_auto_policy_boundary_and_shape_reuse(model):
         for _ in range(2):
             actual = model(input_ids=ids, use_cache=False).logits.float()
             assert model.model.memory_offloader.policy == policy
+            if policy == 'pipeline':
+                assert model.model.memory_offloader.group_size == 2
             torch.testing.assert_close(actual, ref, rtol=0, atol=0)
+
+
+def test_automatic_grouping_preserves_explicit_pipeline_setting(model):
+    for policy, expected in [('auto', 2), ('pipeline', 1)]:
+        model.close_memory_offload()
+        model.config.memory_offload_policy = policy
+        model.config.memory_offload_group_size = 1
+        model.enable_memory_offload()
+        off = model.model._offloader_for(1, 1025)
+        assert off.group_size == expected
+
+
+def test_automatic_group_minimum_requires_positive_value():
+    from fla.models.memory.configuration_memory import MemoryConfig
+    with pytest.raises(ValueError, match='must be positive'):
+        MemoryConfig(memory_offload_auto_min_group_size=0)
