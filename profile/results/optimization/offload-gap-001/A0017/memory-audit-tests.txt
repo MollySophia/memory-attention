@@ -1,0 +1,19 @@
+
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_completed_screen_memory[A0008] PASSED [  6%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_completed_screen_memory[A0009] PASSED [ 12%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_completed_screen_memory[A0010] PASSED [ 18%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_completed_screen_memory[A0011] PASSED [ 25%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_completed_screen_memory[A0012] PASSED [ 31%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_completed_screen_memory[A0013] PASSED [ 37%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_completed_screen_memory[A0014] PASSED [ 43%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_completed_screen_memory[A0015] PASSED [ 50%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_completed_screen_memory[A0016] PASSED [ 56%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_completed_screen_memory[A0017] PASSED [ 62%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_omitted_or_wrong_capacity_rejected[A0011-ids] PASSED [ 68%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_omitted_or_wrong_capacity_rejected[A0013-table] PASSED [ 75%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_omitted_or_wrong_capacity_rejected[A0014-depth] PASSED [ 81%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_omitted_or_wrong_capacity_rejected[A0015-inverse] PASSED [ 87%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_omitted_or_wrong_capacity_rejected[A0016-depth] PASSED [ 93%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_omitted_or_wrong_capacity_rejected[A0017-depth] PASSED [100%]
+
+============================== 16 passed in 0.02s ==============================
