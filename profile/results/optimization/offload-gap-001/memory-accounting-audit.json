@@ -28,5 +28,10 @@
     "active_cpu_table_bytes": 0
   },
   "method": "Raw payloads measure cpu_table_bytes and raw_table_snapshot_bytes. The additional restore embedding copy is derived from source: GPU weights are independently copied to CPU after the raw snapshot; 32000*24*2048 BF16 entries. The measured process RSS includes all three copies, pinned buffers, runtime and allocator overhead. Do not add these capacity counts to RSS, which would double-count them.",
-  "caveat": "Inferred capacities are explicitly distinguished from raw measured counters. Reaudit if a later candidate changes table/snapshot/restore ownership."
+  "caveat": "Inferred capacities are explicitly distinguished from raw measured counters. Reaudit if a later candidate changes table/snapshot/restore ownership.",
+  "kv_rollback": {
+    "source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
+    "source_excerpt": "def rollback(cache, length):\n    \"\"\"Trim the KV cache back to `length` tokens.\n\n    fla/models/utils.py:241 concatenates instead of overwriting when no sliding\n    window is set, so an un-trimmed decode loop would grow the context every\n    step and measure something different each repetition.\n    \"\"\"\n    holders = cache.states if hasattr(cache, \"states\") else [layer.state for layer in cache.layers]\n    for state in holders:\n        if isinstance(state, dict) and state.get(\"attn_state\") is not None:\n            state[\"attn_state\"] = [t[:, :length] for t in state[\"attn_state\"]]\n    cache._seen_tokens = length\n\n\n",
+    "description": "Fixed-context rollback slices views; no independent full KV snapshot is retained. KV update torch.cat inside the model creates temporary old/new storage reflected in GPU peaks. Offload prefill/decode buffers are cached and included."
+  }
 }

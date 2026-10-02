@@ -6,7 +6,7 @@
   "parent_sha": "5c73b2851c575ebacbf8d9f64e9f777e59b89bfc",
   "accepted_step": null,
   "label": "compute-stream copies for tiny bulk transfers",
-  "workflow_stage": "parent_confirmation",
+  "workflow_stage": "final_verdict",
   "hypothesis": "For <=8 tokens, place the tiny H2D directly on the consuming compute stream and skip the redundant first-layer cross-stream wait. Baseline decode profiles show ~5.5/5.8 us CPU H2D submission and ~11/22 us transfer spans at b1/b8. Reduced stream coordination may exceed the lost Q/K overlap for such small transfers.",
   "expected_bottleneck": "tiny bulk H2D stream switching and dependency coordination",
   "change": "Use compute-stream H2D only for <=8 token bulk calls, preserving copied/consumed events for pinned-host and cross-call buffer safety. Keep separate-copy-stream path for larger bulk calls and pipeline unchanged. Fresh torch gather every call; no A0002/A0003/A0004 changes.",
@@ -36,9 +36,9 @@
     "reason_batch16": "H2D scheduling change, including unchanged larger-batch control"
   },
   "not_run": {
-    "frozen_baseline_confirmation": "Only if parent-relative target decode improvement passes",
-    "full_validation": "Only after parent and frozen-baseline confirmation",
-    "generation_validation": "Only if nominated"
+    "frozen_baseline_confirmation": "Not nominated: parent-relative latency and gap criterion unresolved; intentionally not run.",
+    "full_validation": "Not nominated: parent-relative latency and gap criterion unresolved; intentionally not run.",
+    "generation_validation": "Not nominated: parent-relative latency and gap criterion unresolved; intentionally not run."
   },
   "tradeoffs": [
     "Serializes tiny transfer before Q/K kernels, potentially losing more overlap than saved CPU submission time.",
@@ -71,7 +71,9 @@
   ],
   "performance": "screen-comparison.json",
   "diagnostic": "diagnostic-b1-decode/offload.json",
-  "decision": "Small positive b1/b8 decode screen estimates need independent parent-relative confirmation; b1 resident reference also moved, so gap alone is insufficient.",
+  "decision": "No target decode workload passes both paired latency and absolute-gap reduction. b1 decode reduction 0.372980 ms CI [-0.275798,1.021758], gap 0.436864 [-0.218786,1.092514]; b8 decode reduction 0.021608 [-0.168654,0.211869], gap 0.003542 [-0.183501,0.190584]. Preserve all 48 processes; no extension. Restore A0001 after committing evidence.",
   "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json",
-  "parent_confirmation_analysis": "parent-confirmation-analysis.json"
+  "parent_confirmation_analysis": "parent-confirmation-analysis.json",
+  "status": "within_noise",
+  "next_insight": "Tiny-copy coordination savings remain unresolved at model scale; b1 process variability dominates. No additional step retained."
 }

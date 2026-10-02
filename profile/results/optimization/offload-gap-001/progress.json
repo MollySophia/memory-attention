@@ -1,31 +1,11 @@
 {
   "campaign_id": "offload-gap-001",
-  "goal_progress": "A0002 within_noise and A0003 rejected/reverted; A0004 correct and promising screen, parent confirmation running with analysis queued after completion.",
-  "active_attempt": "A0004",
-  "workflow_stage": "parent_confirmation",
-  "completed_optimization_verdicts": 3,
+  "goal_progress": "Five verdicts complete; preparing final artifacts and audit.",
+  "workflow_stage": "final_reporting",
+  "completed_optimization_verdicts": 5,
   "accepted_steps": 1,
-  "live_manifest": "profile/results/optimization/offload-gap-001/A0004/R02-parent-confirmation/manifest.json",
-  "controller_pid": 2042987,
-  "exec_session_id": 88509,
-  "validation_controller": "profile/results/optimization/offload-gap-001/A0001/validation-v2.json",
-  "source_baseline": "62942a0",
-  "source_candidate": "29a0d4ff761e862423e5cd22a8d2a475d9a99a78",
-  "next_actions": [
-    "Poll existing A0004/R02-parent-confirmation controller/session88509 and child; never restart on observation timeout.",
-    "After completion read parent-confirmation-analysis.json and R02-analysis.txt. Baseline label is A0001, not frozen A0000. No acceptance from this run alone.",
-    "If within_noise/regressed, commit verdict/raw evidence before restoring only fla/layers/memory_offload.py and tests/test_memory_offload_regressions.py from A0001.",
-    "If incremental confirmation passes, compare frozen A0000 against A0004 independently (48 jobs), then full matrix/generation/full-model correctness before acceptance; valid A0000/A0004 confirmation can be reused for primary full matrix points.",
-    "Complete at least A0005 from best verified implementation, currently A0001. Possible hypothesis: simplify tiny bulk H2D stream coordination, supported by original decode profile; register before editing and screen primary plus batch16 if scheduling changes.",
-    "Generate final history/accepted-step charts, reproducible baseline/final commands, verify all requirements and push final evidence. 5\u201310-attempt target and final audit remain unmet."
-  ],
-  "notes": [
-    "GOAL.md remains the full scope. No optimization accepted yet.",
-    "R02 is a preserved benchmark design failure: reversing workload traversal canceled source/placement alternation. R02 must not supply formal acceptance or reused validation; balanced_order_v2 is enforced.",
-    "R02 showed ~13.56 ms b1 prefill reduction, but b1 decode reference slowdown and noisy offload decode. Subsequent CPU gather diagnostics did not reproduce spikes; gather ~0.022 ms both sources. No outliers discarded.",
-    "Frozen worktrees: /home/molly/workspace-memory-attn/offload-gap-001-A0000 and -A0001. Model source unchanged since 942a2a5.",
-    "Latest pushed campaign commit 6e2f1a0; current controllers preserve all new raw outputs automatically."
-  ],
-  "execution_observation": "A0001/R08-observation-unavailable.json",
-  "source_comparison_parent": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb"
+  "active_attempt": null,
+  "controller_pid": null,
+  "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
+  "source_final": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb"
 }

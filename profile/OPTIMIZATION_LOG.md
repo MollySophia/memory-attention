@@ -372,3 +372,9 @@ A0005 screen complete: offload/resident b1 prefill29.243/28.745 ms, decode4.586/
 Separate instrumented b1 decode wall4.982 ms, ID staging0.0201, CPU gather0.0234 and H2D submission0.0058 ms; instrumentation does not establish a speedup and does not isolate all context-switch overhead. Preserve this unfavorable diagnostic as well.
 
 R02 parent confirmation plan: A0001 vs A0005, all four primary workloads, both placements, three balanced independent process blocks, formal10/10/3, 48 jobs, estimated894.14 seconds from measured screen process costs. Apply the same dual latency/gap criterion; no extension until favorable. If no target decode workload qualifies, classify within_noise and revert.
+
+### A0005 final verdict: within_noise, accepted_step null (offload-gap-001)
+
+All 48 independent parent-confirmation processes completed. b1 decode offload reduction0.372980 ms, 95% CI[-0.275798,1.021758]; gap reduction0.436864 [-0.218786,1.092514]. b8 decode reduction0.021608 [-0.168654,0.211869]; gap reduction0.003542 [-0.183501,0.190584]. No targeted decode point meets both criteria. Unchanged b1 prefill shows latency reduction0.084529 [0.036308,0.132750], but gap remains unresolved and this unchanged path does not establish the proposed decode mechanism. No resolved primary regression or loss of measured GPU savings.
+
+Close the predeclared plan without extension; no A0000 confirmation/full/generation escalation. Commit all source/evidence before restoring only offloader and regression-test files to accepted A0001. Five focused optimization attempts now have final verdicts, with one accepted cumulative step.
