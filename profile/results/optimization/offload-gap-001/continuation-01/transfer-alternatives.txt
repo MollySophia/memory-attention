@@ -1,0 +1,15 @@
+In file included from /home/molly/miniconda3/envs/fla-bench/include/python3.12/Python.h:12,
+                 from /tmp/tmpzxilf020/__triton_launcher.c:7:
+/home/molly/miniconda3/envs/fla-bench/include/python3.12/pyconfig.h:1875:9: warning: ‘_POSIX_C_SOURCE’ redefined
+ 1875 | #define _POSIX_C_SOURCE 200809L
+      |         ^~~~~~~~~~~~~~~
+In file included from /usr/include/bits/libc-header-start.h:33,
+                 from /usr/include/stdlib.h:26,
+                 from /home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/backends/nvidia/include/cuda.h:56,
+                 from /tmp/tmpzxilf020/__triton_launcher.c:2:
+/usr/include/features.h:319:10: note: this is the location of the previous definition
+  319 | # define _POSIX_C_SOURCE        202405L
+      |          ^~~~~~~~~~~~~~~
+{"batch": 1, "mean_ms": {"gather_h2d": 0.3385784, "mapped_host": 0.2355731, "dedup_h2d_expand": 0.5026541}, "errors": {}}
+{"batch": 8, "mean_ms": {"gather_h2d": 3.9410339, "mapped_host": 1.6689402, "dedup_h2d_expand": 3.9105331}, "errors": {}}
+{"batch": 16, "mean_ms": {"gather_h2d": 7.9514086, "mapped_host": 3.3818739, "dedup_h2d_expand": 5.7615706}, "errors": {}}

@@ -402,3 +402,7 @@ A0006 twelve-job screen complete. b1 prefill offload29.145/resident28.624ms, red
 ### A0007 registration (offload-gap-001; continuation-01)
 
 Parent A0001 after A0006 evidence/revert. Cache immutable zero-copy tensor view metadata, not token values. Instrumented96 buffer-view calls total0.316/1.089ms atb1/b8; source and layer slices add operations. Precompute source-group aliases, host/GPU transfer views and per-layer GPU aliases in setup. Keep worker, slot count, DMA/release order and allfreshlookups unchanged. Test alias visibility after weight andID changes, partialgroups and slots, plus existing128-step gates. Twelve-job screen predeclared, formaldualcriterion unchanged.
+
+A0007 source2bcbe8d197ef3244af1f51beb1214e4f3ecf6ffc frozen.47 tests plusstandalone exactzero pass, including fourgroup/depth combinations observingfreshweightsandIDs throughmetadataaliases. Planned12-job screen~261sec.
+
+Separate transfer-alternative microdiagnostics (after A0006 timing exited) pass exact output checks for every method. Single-layer gather/H2D vs mapped-host vsdedup/H2D/expand means ms: b1 .3386/.2356/.5027; b8 3.9410/1.6689/3.9105; b16 7.9514/3.3819/5.7616. FreshsameIDs pertrial,10warmups/10trials, rotatingmethodorder; no modelcomputeoverlap. Entire3000MiB sourcetable pinned for this diagnostic. Per-call dedup cost is included for this singlelayer (a fullmodel would amortize it acrosslayers). These are direction-selection diagnostics, not optimizationattempts or accepted gains. Rawdata andcompilerlogs retained.

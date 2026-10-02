@@ -1,10 +1,10 @@
 {
   "campaign_id": "offload-gap-001",
-  "goal_progress": "A0006 within_noise after48 paired processes. Additional1/5 minimum final verdicts complete; A0001 incumbent.",
-  "workflow_stage": "profiling",
+  "goal_progress": "A0006 within_noise; A0007 cached-view source passes47 tests and standaloneexactness, screening next.",
+  "workflow_stage": "screening",
   "completed_optimization_verdicts": 6,
   "accepted_steps": 1,
-  "active_attempt": null,
+  "active_attempt": "A0007",
   "controller_pid": null,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
@@ -13,15 +13,14 @@
   "status": "active",
   "publication": "final/publication.json",
   "continuation": "continuation-01/manifest.json",
-  "source_candidate": "b58cdb8640fb2d6a57631e0c26fc6f9a72761f74",
-  "live_manifest": "profile/results/optimization/offload-gap-001/A0006/R02-parent-confirmation/manifest.json",
+  "source_candidate": "2bcbe8d197ef3244af1f51beb1214e4f3ecf6ffc",
+  "live_manifest": "profile/results/optimization/offload-gap-001/A0007/R01/manifest.json",
   "exec_session_id": null,
   "next_actions": [
-    "Poll same A0006 R02 controller/session1817; analyze_paired.py automatically queued after48jobs. Do not duplicate.",
-    "If no targetedprefill meets both latency/gap lower95>0, finalwithin_noise/rejected; commit evidence then restore fla/layers/memory_offload.py and tests/test_memory_offload_regressions.py from942a2a5. If promising, freshA0000 confirmation thenfull/generation/fullcorrectness gates beforeaccept.",
-    "Need5\u201310 additional verdicts A0006 onward. Continue from latestverifiedincumbent, currentlyA0001. Next profile-supported direction is caching immutable buffer views (96calls,0.316/1.089ms instrumented CPUspan); independenthostbuffer ring is anotherdistincthypothesis.",
-    "Register each nextattempt beforecode; sourcecommitbeforetiming;12jobsforpipeline/transferchanges; preserve failed/noisyevidence beforecodeonlyreverts.",
-    "Finalcontinuation artifacts go continuation-01/final; preserve originalfinalreport. Finalaudit must pass --continuation continuation-01 to enforceadditional5\u201310 count. Alloriginalacceptancegates unchanged."
+    "Poll A0007 screen; summarize and compare matchingA0000/A0001 screens when12jobsdone.",
+    "If promising, fixed48-process parent confirmation; otherwise preserve finalverdict then code-only revert before nextattempt.",
+    "Next candidates: mapped-host direct gather (one-layer microdiagnostic promising) and within-call ID dedup (b16 microdiagnostic promising), with proper memory/correctness/full-model checks. Independenthostring remains a separate CPU-pipeline option.",
+    "Additional completedverdicts1/5minimum. Preserve originalfinalreport; use continuation-01/final and --continuation continuation-01 for finalaudit."
   ],
   "additional_completed_verdicts": 1,
   "additional_attempt_target": [
