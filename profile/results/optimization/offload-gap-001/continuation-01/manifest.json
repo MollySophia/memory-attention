@@ -11,13 +11,13 @@
   "campaign_head_at_start": "9661acda594b2b9a1fc0d13e94cab2922f68f989",
   "protocol": "offload_gap_v1",
   "scope": "Continue same campaign with monotonic IDs and unchanged acceptance/correctness/memory criteria. Preserve prior final report as the completed first tranche; later report separately covers continuation and cumulative results.",
-  "status": "profiling",
+  "status": "A0006_screening",
   "candidate_directions": [
-    "Decouple CPU pinned-slot refill from GPU-consumer release while preserving DMA safety.",
-    "Precompute buffer tensor views to reduce producer/consumer metadata work without caching token outputs.",
-    "Reduce per-call ticket/event bookkeeping if measured setup is material.",
-    "Reuse pinned token-ID staging storage with correct D2H completion.",
-    "Overlap D2H readiness and CPU producer start with embedding submission."
+    "A0006 registered: decouple host refill from prior GPU consumer release.",
+    "Investigate precomputing per-group pinned/device views;96 operations cost0.316/1.089ms instrumented atb1/b8.",
+    "Investigate independent host-buffer ring to permit CPU gather while prior DMA reads another host slot; observed12.763/60.918ms producer DMA waits, not isolated transfer time.",
+    "Investigate avoiding tiny GPU-ID staging allocation with bounded pinned storage, preserving CPU readiness and concurrent-forward rejection.",
+    "Investigate overlapping input staging/embedding with producer startup, if diagnostics support a remaining critical-path dependency."
   ],
   "note": "Directions are hypotheses to investigate, not registered attempts or promised changes. Register each before edits; do not count pure diagnostics or repetitions."
 }

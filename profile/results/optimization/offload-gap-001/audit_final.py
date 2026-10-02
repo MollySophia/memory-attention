@@ -18,10 +18,18 @@ def read(path):
     return json.loads(path.read_text())
 
 
-def audit(root, repository, artifacts):
+def audit(root, repository, artifacts, continuation=None):
     records = {p.parent.name: read(p) for p in sorted(root.glob('A[0-9][0-9][0-9][0-9]/record.json'))}
     attempts = {k: v for k, v in records.items() if k != 'A0000'}
-    assert 5 <= len(attempts) <= 10, 'Five to ten actual attempts required'
+    if continuation is None:
+        assert 5 <= len(attempts) <= 10, 'Five to ten actual attempts required'
+    else:
+        tranche = read(root / continuation / 'manifest.json')
+        assert tranche['campaign_id'] == 'offload-gap-001'
+        previous_count = int(tranche['start_after_attempt'][1:])
+        additional = len(attempts) - previous_count
+        assert tranche['minimum_additional_attempts'] <= additional <= tranche['maximum_additional_attempts'], 'Additional attempt count does not satisfy user request'
+        assert tranche['first_new_attempt'] == f'A{previous_count+1:04d}'
     assert list(attempts) == [f'A{i:04d}' for i in range(1, len(attempts)+1)]
     for name, record in attempts.items():
         assert record['campaign_id'] == 'offload-gap-001'
@@ -129,7 +137,7 @@ def audit(root, repository, artifacts):
                  'history/history-source.csv', 'history/accepted_steps-source.csv', 'REPRODUCE.md', 'REPORT.md'):
         assert (artifacts / name).stat().st_size > 0
     return dict(campaign_id='offload-gap-001', status='core_evidence_checks_passed', attempts=len(attempts),
-                accepted_steps=len(retained), final_attempt=final['attempt_id'], final_source_sha=final['candidate_sha'],
+                accepted_steps=len(retained), continuation=continuation, final_attempt=final['attempt_id'], final_source_sha=final['candidate_sha'],
                 source_hash=source_hash(repository), checked_raw_sources=len(checked_sources),
                 confirmations=confirmations, full_correctness_reports=correctness,
                 remaining_manual_audit=['Inspect final rendered figures and report/commands',
@@ -143,7 +151,8 @@ if __name__ == '__main__':
     parser.add_argument('--repository', type=Path, required=True)
     parser.add_argument('--artifacts', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--continuation', help='Audit an explicitly requested additional-attempt tranche')
     args = parser.parse_args()
-    result = audit(args.campaign, args.repository, args.artifacts)
+    result = audit(args.campaign, args.repository, args.artifacts, args.continuation)
     args.output.write_text(json.dumps(result, indent=2)+'\n')
     print(result['status'], result['attempts'], 'attempts;', result['accepted_steps'], 'accepted steps')

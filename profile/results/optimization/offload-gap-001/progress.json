@@ -5,7 +5,7 @@
   "completed_optimization_verdicts": 5,
   "accepted_steps": 1,
   "active_attempt": "A0006",
-  "controller_pid": null,
+  "controller_pid": 2085496,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
   "final_report": "final/REPORT.md",
@@ -14,5 +14,13 @@
   "publication": "final/publication.json",
   "continuation": "continuation-01/manifest.json",
   "source_candidate": "b58cdb8640fb2d6a57631e0c26fc6f9a72761f74",
-  "live_manifest": "profile/results/optimization/offload-gap-001/A0006/R01/manifest.json"
+  "live_manifest": "profile/results/optimization/offload-gap-001/A0006/R01/manifest.json",
+  "exec_session_id": 26766,
+  "next_actions": [
+    "Poll same A0006/R01 controller; do not duplicate.",
+    "After12 jobs summarize_screen.py and compare_screens.py vsA0000/A0001. If pipeline targetprefill estimates promising, independent48-process parent confirmation. Otherwise preserve verdict then code-only revert.",
+    "Need5\u201310 ADDITIONAL final verdicts startingA0006; prior A0001\u2013A0005 do not count toward new request.",
+    "Before any subsequent model edits register new attempt from incumbent; investigate precomputed views (~0.32/1.09ms spans) and independent host/GPU slot reuse (~12.8/60.9ms instrumented DMA waits).",
+    "Preserve first-tranche final report; later artifacts in continuation-01/final with cumulative history. New accepted candidate requires alloriginalgates."
+  ]
 }
