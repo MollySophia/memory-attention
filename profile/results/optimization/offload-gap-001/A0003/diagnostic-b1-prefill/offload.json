@@ -1,0 +1,305 @@
+{
+  "campaign_id": "offload-gap-001",
+  "batch_size": 1,
+  "mode": "prefill",
+  "variant": "ma_offload",
+  "diagnostic_wall_ms": 32.71053871139884,
+  "cpu_spans": [
+    {
+      "label": "id_d2h_staging",
+      "cpu_ms": 0.03486545756459236,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 0.545211136341095,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.007844995707273483,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.6693946197628975,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 1.1910921894013882,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.010409858077764511,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 1.2196549214422703,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.009437091648578644,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.21647987887263298,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 1.217070035636425,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.049493275582790375,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 1.136539038270712,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.009537674486637115,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.01585017889738083,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.006352085620164871,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 0.6714691407978535,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.013886019587516785,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.013164244592189789,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.006202142685651779,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 1.2639393098652363,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.011702068150043488,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.012814067304134369,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.006001908332109451,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 0.6027603521943092,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.01138215884566307,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.012823846191167831,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.00799586996436119,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 0.6055152043700218,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.009858980774879456,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.013014301657676697,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.006171874701976776,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 0.5949651822447777,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.010770279914140701,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.012683682143688202,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.005410052835941315,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 0.6056549027562141,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.01938687637448311,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.013034790754318237,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.00555114820599556,
+      "thread": "MainThread"
+    },
+    {
+      "label": "cpu_table_gather",
+      "cpu_ms": 0.5860370583832264,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "label": "h2d_submit",
+      "cpu_ms": 0.02577807754278183,
+      "thread": "ma-prefetch_0"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.012943986803293228,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.0054603442549705505,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.00964803621172905,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.004848930984735489,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.010420102626085281,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.004938803613185883,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.009268056601285934,
+      "thread": "MainThread"
+    },
+    {
+      "label": "ticket_acquire",
+      "cpu_ms": 0.004649162292480469,
+      "thread": "MainThread"
+    }
+  ],
+  "transfers": [
+    {
+      "stream_ms": 1.099552035331726,
+      "bytes": 16777216
+    },
+    {
+      "stream_ms": 1.1143039464950562,
+      "bytes": 16777216
+    },
+    {
+      "stream_ms": 1.1296639442443848,
+      "bytes": 16777216
+    },
+    {
+      "stream_ms": 1.051967978477478,
+      "bytes": 16777216
+    },
+    {
+      "stream_ms": 0.5886719822883606,
+      "bytes": 16777216
+    },
+    {
+      "stream_ms": 1.1835520267486572,
+      "bytes": 16777216
+    },
+    {
+      "stream_ms": 0.4514240026473999,
+      "bytes": 16777216
+    },
+    {
+      "stream_ms": 0.3118079900741577,
+      "bytes": 16777216
+    },
+    {
+      "stream_ms": 0.2945599853992462,
+      "bytes": 16777216
+    },
+    {
+      "stream_ms": 0.2956480085849762,
+      "bytes": 16777216
+    },
+    {
+      "stream_ms": 0.3587839901447296,
+      "bytes": 16777216
+    },
+    {
+      "stream_ms": 0.4928640127182007,
+      "bytes": 16777216
+    }
+  ],
+  "caveat": "Instrumented single call. CPU spans overlap; stream spans include submission gaps; not headline timings."
+}

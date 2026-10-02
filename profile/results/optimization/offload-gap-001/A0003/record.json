@@ -6,7 +6,7 @@
   "parent_sha": "f30a155a2a649a9a9f0056ab8491bc32ba65541d",
   "accepted_step": null,
   "label": "two-layer groups in automatic pipeline",
-  "workflow_stage": "screening",
+  "workflow_stage": "final_verdict",
   "hypothesis": "Amortize pipeline producer/event/copy coordination across two adjacent layers. A0001 b1 prefill uses 24 group submissions; baseline b8 profile records 24 acquisitions with 92.8 ms summed CPU wait and 24 copy submissions. Halving group count may reduce scheduling overhead, at the cost of larger first transfer and doubled slot capacity.",
   "expected_bottleneck": "per-group CPU producer and H2D coordination",
   "change": "Automatic pipeline uses minimum group size 2; explicit pipeline policy preserves requested group size. Bulk decode unchanged. Add configurable automatic minimum, default 2. No arithmetic change.",
@@ -37,9 +37,10 @@
     "reason_batch16": "Pipeline grouping/scheduling and cached buffer capacity change"
   },
   "not_run": {
-    "confirmation": "screen first",
-    "full_validation": "only after independent parent/frozen-baseline confirmation",
-    "generation_validation": "only if nominated"
+    "confirmation": "Rejected screen: prefill +2.465/+4.057/+9.968 ms at b1/b8/b16",
+    "full_validation": "Rejected screen",
+    "generation_validation": "Rejected screen",
+    "full_model_correctness": "Not nominated; existing correctness tests exact"
   },
   "tradeoffs": [
     "Doubles per-slot host/GPU capacity with default prefetch depth, reduces memory saving while preserving offload placement.",
@@ -62,5 +63,9 @@
     "automatic_pipeline_group_size": 2,
     "bulk_group_size": 24,
     "note": "Raw benchmark group_size is the requested setting; model_config records new automatic minimum and actual policy determines effective group count."
-  }
+  },
+  "status": "rejected",
+  "decision": "Clear prefill screen regressions against accepted A0001 at all three batches, larger cached buffers, and no compensating supported offload gain. Do not escalate.",
+  "performance": "screen-comparison.json",
+  "diagnostic": "diagnostic-comparison.json"
 }

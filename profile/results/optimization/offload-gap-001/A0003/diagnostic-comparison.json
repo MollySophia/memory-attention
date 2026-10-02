@@ -1,0 +1,57 @@
+{
+  "rows": [
+    {
+      "attempt": "A0001",
+      "diagnostic_wall_ms": 30.237858649343252,
+      "cpu_spans": {
+        "id_d2h_staging": {
+          "count": 1,
+          "sum_ms": 0.08077314123511314,
+          "first_ms": 0.08077314123511314
+        },
+        "cpu_table_gather": {
+          "count": 24,
+          "sum_ms": 3.480557817965746,
+          "first_ms": 0.14590471982955933
+        },
+        "h2d_submit": {
+          "count": 24,
+          "sum_ms": 0.37882570177316666,
+          "first_ms": 0.003977678716182709
+        },
+        "ticket_acquire": {
+          "count": 24,
+          "sum_ms": 10.554858949035406,
+          "first_ms": 0.19369600340723991
+        }
+      }
+    },
+    {
+      "attempt": "A0003",
+      "diagnostic_wall_ms": 32.71053871139884,
+      "cpu_spans": {
+        "id_d2h_staging": {
+          "count": 1,
+          "sum_ms": 0.03486545756459236,
+          "first_ms": 0.03486545756459236
+        },
+        "cpu_table_gather": {
+          "count": 12,
+          "sum_ms": 10.23990847170353,
+          "first_ms": 0.545211136341095
+        },
+        "h2d_submit": {
+          "count": 12,
+          "sum_ms": 0.18948735669255257,
+          "first_ms": 0.007844995707273483
+        },
+        "ticket_acquire": {
+          "count": 24,
+          "sum_ms": 1.0851221159100533,
+          "first_ms": 0.6693946197628975
+        }
+      }
+    }
+  ],
+  "note": "Single-call instrumented diagnostics; overlapping spans not additive; no confidence or causal exclusivity claim."
+}
