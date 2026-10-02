@@ -7,7 +7,7 @@
   "parent_sha": "ce765f0cdfdf0368ad720fd93e891d6accbd3145",
   "accepted_step": null,
   "label": "single-slot automatic pipeline for small prefill only",
-  "workflow_stage": "screening",
+  "workflow_stage": "parent_confirmation",
   "hypothesis": "Restrict one-slot automatic pipeline to <=2048-token calls. Preserve the evidenced b1 prefill overlap/working-set improvement from A0014 while leaving the high-volume b8 pipeline capacity and complete b8 primary execution path unchanged.",
   "expected_bottleneck": "A0014 independently confirms b1 prefill latency/gap reductions but fails on b8 decode after its changed prefix allocation. Applying the small working set only in the measured small-prefill regime tests a shape-specific scheduling policy.",
   "profile_evidence": [
@@ -60,5 +60,11 @@
       "correctness-tests.txt",
       "standalone-correctness.txt"
     ]
-  }
+  },
+  "screen_manifest": "R01/manifest.json",
+  "screen_summary": "R01-summary.json",
+  "performance": "screen-comparison.json",
+  "screen_decision": "Target b1 prefill offload/gap reductions0.436107/0.411638 ms versus A0001. b1 decode slower0.451537 ms; preserve and test under fixed independent confirmation across all primary workloads. Other unchanged paths cannot nominate gains.",
+  "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json",
+  "memory_observation": "Verified one-slot b1 prefill and original four-slot b8/b16 capacities. All12 sources and buffer totals audited."
 }
