@@ -524,3 +524,7 @@ Test pipeline nonblocking ID D2H followed by embedding submission before waiting
 ### A0019 registration and isolated draft (offload-gap-001; continuation-02)
 
 Test producer submission before pipeline embedding dispatch: current pipeline entry event follows embedding, while startup diagnostics show instrumented embedding CUDA intervals0.041856/0.112032 ms at b1/b8. Defer embedding to first pipeline consumer to overlap initial CPU lookup/H2D, keeping bulk ordering and arithmetic. Earlier transfer may contend with embedding; no additive latency claim. Draft against A0001 only until preceding attempts finish; if A0018 is retained, preserve its asynchronous dispatch overlap with producer-side ID completion rather than reverting it. Fixed12-point screen and original independent/full gates apply.
+
+### A0020 registration and isolated draft (offload-gap-001; continuation-02)
+
+Test reusable GroupTicket/threading-event pool, motivated by frozen A0001 ticket setup CPU sums0.029966/0.032549 ms at b1/b8. Keep fresh CPU lookup and all CUDA copied/consumed dependencies; generation tags distinguish already-submitted prior-call CPU releases from current-generation waits after ticket reset. No A0007 tensor-view caching. Potential savings are small and may be erased by reset overhead; all independent gates remain. Test cross-stream repeated forwards, partial groups and failure poisoning. Draft only until A0019 verdict and best-parent merge. A0020 registration does not imply completion: only five of ten additional attempts currently have verdicts.

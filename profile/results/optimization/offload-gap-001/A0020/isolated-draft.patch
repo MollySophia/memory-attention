@@ -1,0 +1,141 @@
+--- a/fla/layers/memory_offload.py
++++ b/fla/layers/memory_offload.py
+@@ -44,6 +44,15 @@
+         self.ready = threading.Event()
+         self.released = threading.Event()
+         self.error: BaseException | None = None
++        self.waited = False
++        self.release_count = 0
++
++    def reset(self) -> None:
++        # Called only after the previous serialized forward has joined its
++        # producer and submitted every consumer release. CUDA work may remain.
++        self.ready.clear()
++        self.released.clear()
++        self.error = None
+         self.waited = False
+         self.release_count = 0
+ 
+@@ -145,6 +154,11 @@
+             )
+             for _ in range(min(prefetch_depth, len(self.groups)))
+         ]
++        self.generation = 0
++        self.tickets = [
++            GroupTicket(self, self.slots[i % len(self.slots)], start)
++            for i, start in enumerate(self.groups)
++        ]
+ 
+     @property
+     def policy(self) -> str:
+@@ -168,9 +182,14 @@
+                     slot = ticket.slot
+                     previous = slot["previous"]
+                     if previous is not None:
+-                        while not previous.released.wait(timeout=0.05):
+-                            if cancel.is_set():
+-                                return
++                        previous_ticket, previous_generation = previous
++                        if previous_generation == self.generation:
++                            while not previous_ticket.released.wait(timeout=0.05):
++                                if cancel.is_set():
++                                    return
++                        # Earlier generations have already submitted all CPU
++                        # releases before forward returned. Their CUDA reads
++                        # still require the original copied/consumed ordering.
+                         if cancel.is_set():
+                             return
+                         # The pinned host buffer is still being read by DMA.
+@@ -186,7 +205,7 @@
+                         self._view(slot["host"], ticket.start), non_blocking=True
+                     )
+                     slot["copied"].record(self.copy_stream)
+-                    slot["previous"] = ticket
++                    slot["previous"] = (ticket, self.generation)
+                     # "Ready" means submitted, not completed.
+                     ticket.ready.set()
+         except BaseException as exc:
+@@ -213,10 +232,10 @@
+             ids = ids_cpu.reshape(-1).contiguous()
+             entry = torch.cuda.Event()
+             entry.record(torch.cuda.current_stream(self.device))
+-            tickets = [
+-                GroupTicket(self, self.slots[i % len(self.slots)], start)
+-                for i, start in enumerate(self.groups)
+-            ]
++            self.generation += 1
++            tickets = self.tickets
++            for ticket in tickets:
++                ticket.reset()
+             future = self.worker.submit(self._produce, ids, tickets, entry, cancel)
+             for ticket in tickets:
+                 for offset in range(ticket.count):
+--- a/tests/test_memory_offload_regressions.py
++++ b/tests/test_memory_offload_regressions.py
+@@ -225,3 +225,66 @@
+             actual = model(input_ids=ids, use_cache=False).logits.float()
+             assert model.model.memory_offloader.policy == policy
+             torch.testing.assert_close(actual, ref, rtol=0, atol=0)
++
++
++
++@pytest.mark.parametrize('group,depth', [(1,1),(2,1),(2,3)])
++def test_ticket_pool_cross_generation_streams_and_fresh_rows(group, depth):
++    from fla.layers.memory_offload import MemoryTableOffloader
++    with torch.inference_mode():
++        weights = torch.randn(32,5,64,dtype=torch.bfloat16)
++        off = MemoryTableOffloader(weights,2,4,group_size=group,prefetch_depth=depth)
++        identities = [id(ticket) for ticket in off.tickets]
++        streams = [torch.cuda.Stream(),torch.cuda.Stream()]
++        retained = []
++        try:
++            for iteration in range(8):
++                weights.add_(0.25)
++                ids = torch.randint(0,32,(2,4))
++                expected = [weights[ids,layer].clone() for layer in range(5)]
++                with torch.cuda.stream(streams[iteration%2]):
++                    outputs = []
++                    def consume(layer,handle):
++                        torch.cuda._sleep(100000)
++                        outputs.append(handle.acquire().clone())
++                        handle.release()
++                    off.forward(ids,consume)
++                assert off.generation == iteration + 1
++                assert [id(ticket) for ticket in off.tickets] == identities
++                assert all(slot['previous'][1] == off.generation for slot in off.slots)
++                retained.append((outputs,expected))
++            torch.cuda.synchronize()
++            for outputs,expected in retained:
++                for actual,reference in zip(outputs,expected):
++                    torch.testing.assert_close(actual.cpu(),reference,rtol=0,atol=0)
++        finally:
++            off.close()
++
++
++@pytest.mark.parametrize('failure', ['producer', 'consumer'])
++def test_ticket_pool_failure_poisoning_and_cleanup(failure):
++    from fla.layers.memory_offload import MemoryTableOffloader
++    with torch.inference_mode():
++        weights = torch.randn(32,5,64,dtype=torch.bfloat16)
++        off = MemoryTableOffloader(weights,2,4,group_size=2,prefetch_depth=1)
++        ids = torch.zeros((2,4),dtype=torch.long)
++        def good(layer,handle):
++            handle.acquire().clone()
++            handle.release()
++        try:
++            off.forward(ids,good)
++            if failure == 'producer':
++                ids.fill_(32)
++                consumer = good
++            else:
++                def consumer(layer,handle):
++                    if layer == 2:
++                        raise RuntimeError('injected consumer failure')
++                    good(layer,handle)
++            with pytest.raises(RuntimeError):
++                off.forward(ids,consumer)
++            assert off.broken
++            with pytest.raises(RuntimeError,match='closed or failed'):
++                off.forward(torch.zeros_like(ids),good)
++        finally:
++            off.close()
