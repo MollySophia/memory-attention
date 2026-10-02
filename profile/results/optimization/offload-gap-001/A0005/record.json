@@ -6,7 +6,7 @@
   "parent_sha": "5c73b2851c575ebacbf8d9f64e9f777e59b89bfc",
   "accepted_step": null,
   "label": "compute-stream copies for tiny bulk transfers",
-  "workflow_stage": "screening",
+  "workflow_stage": "parent_confirmation",
   "hypothesis": "For <=8 tokens, place the tiny H2D directly on the consuming compute stream and skip the redundant first-layer cross-stream wait. Baseline decode profiles show ~5.5/5.8 us CPU H2D submission and ~11/22 us transfer spans at b1/b8. Reduced stream coordination may exceed the lost Q/K overlap for such small transfers.",
   "expected_bottleneck": "tiny bulk H2D stream switching and dependency coordination",
   "change": "Use compute-stream H2D only for <=8 token bulk calls, preserving copied/consumed events for pinned-host and cross-call buffer safety. Keep separate-copy-stream path for larger bulk calls and pipeline unchanged. Fresh torch gather every call; no A0002/A0003/A0004 changes.",
@@ -36,9 +36,9 @@
     "reason_batch16": "H2D scheduling change, including unchanged larger-batch control"
   },
   "not_run": {
-    "confirmation": "screen first",
-    "full_validation": "only after confirmation",
-    "generation_validation": "only if nominated"
+    "frozen_baseline_confirmation": "Only if parent-relative target decode improvement passes",
+    "full_validation": "Only after parent and frozen-baseline confirmation",
+    "generation_validation": "Only if nominated"
   },
   "tradeoffs": [
     "Serializes tiny transfer before Q/K kernels, potentially losing more overlap than saved CPU submission time.",
@@ -68,5 +68,10 @@
       "phase": "final candidate freeze before all performance measurement",
       "change": "Preserve first-call allocation-stream dependency for cross-stream callers; same scheduling hypothesis."
     }
-  ]
+  ],
+  "performance": "screen-comparison.json",
+  "diagnostic": "diagnostic-b1-decode/offload.json",
+  "decision": "Small positive b1/b8 decode screen estimates need independent parent-relative confirmation; b1 resident reference also moved, so gap alone is insufficient.",
+  "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json",
+  "parent_confirmation_analysis": "parent-confirmation-analysis.json"
 }
