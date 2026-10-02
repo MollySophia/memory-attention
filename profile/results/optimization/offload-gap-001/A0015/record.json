@@ -1,0 +1,59 @@
+{
+  "campaign_id": "offload-gap-001",
+  "continuation_id": "continuation-02",
+  "attempt_id": "A0015",
+  "parent_attempt_id": "A0001",
+  "parent_source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
+  "parent_sha": "4150bc2e184290c1f4db5b55fc12b10398efcabb",
+  "accepted_step": null,
+  "label": "fuse compressed-row expansion with memory addition",
+  "workflow_stage": "implementation_draft",
+  "hypothesis": "Preserve within-call deduplicated CPU lookup/H2D but fuse GPU inverse-index expansion into required k+m, avoiding a full temporary and separate expansion kernel on each layer.",
+  "expected_bottleneck": "Frozen A0009 b8 profile: 24 expansions, 1.50928 ms summed CUDA stream intervals and 1.55864 ms CPU spans, overlapping. A0009 unfused screen was 2.01742 ms slower than A0001; no claim that all expansion time is removable.",
+  "profile_evidence": [
+    "../continuation-02/dedup-expansion-b8-events.json",
+    "../continuation-02/fused-dedup-feasibility.json",
+    "../A0009/record.json"
+  ],
+  "change": "Compressed offload consumption only for pipeline inputs >=8192 tokens. Use a fused gather-plus-add handle for folded tables; preserve materializing acquire API and unfolded normalization fallback. No lookup/output caching across calls.",
+  "tradeoffs": [
+    "Additional inverse-index storage remains counted; compressed buffers retain their full capacity.",
+    "Indirect GPU loads and Triton dispatch may offset saved materialization; CPU unique cost persists.",
+    "Primary target b8 prefill; unchanged b1 and decode paths cannot nominate a gain."
+  ],
+  "arithmetic_contract": "Zero absolute/relative tolerance against folded reference, declared before results. Load BF16 K and selected M, FP32 elementwise addition, cast to K dtype; no reduction/reassociation. Tests must prove exactness before timing; no tolerance relaxation.",
+  "ablation": {
+    "unfused_attempt": "A0009",
+    "scope": "Prior stored screen supplies descriptive unfused comparison on the same source/protocol/environment; do not claim a confirmed fusion-only speedup from it. Retention requires independent parent/frozen-baseline and full gates."
+  },
+  "protocol_version": "offload_gap_v1",
+  "original_protocol_version": "offload_gap_v1",
+  "measurement_plan_id": "screen_v1_w3_n5_r1",
+  "screen": {
+    "batches": [
+      1,
+      8,
+      16
+    ],
+    "length": 2048,
+    "modes": [
+      "prefill",
+      "decode"
+    ],
+    "variants": [
+      "ma_offload",
+      "ma_gpu"
+    ],
+    "jobs": 12,
+    "reason_batch16": "Compressed transfer and fused consumption change"
+  },
+  "not_run": {
+    "confirmation": "Not yet nominated; staged gates required.",
+    "full_validation": "Not yet nominated; staged gates required.",
+    "generation_validation": "Not yet nominated; staged gates required."
+  },
+  "draft_root": "/tmp/offload-gap-A0015-draft-pewlt22s",
+  "draft_condition": "Do not activate or run GPU tests while A0014 timing/retention gates are live. Reconcile with best verified parent after its final verdict, preserving any accepted depth limit. Candidate implementation must be committed before timing.",
+  "draft_patch": "isolated-draft.patch",
+  "draft_validation": "Syntax compilation only; GPU tests pending completion of A0014 timing and reconciliation with best verified parent."
+}
