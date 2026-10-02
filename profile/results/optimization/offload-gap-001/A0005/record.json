@@ -6,7 +6,7 @@
   "parent_sha": "5c73b2851c575ebacbf8d9f64e9f777e59b89bfc",
   "accepted_step": null,
   "label": "compute-stream copies for tiny bulk transfers",
-  "workflow_stage": "registered",
+  "workflow_stage": "screening",
   "hypothesis": "For <=8 tokens, place the tiny H2D directly on the consuming compute stream and skip the redundant first-layer cross-stream wait. Baseline decode profiles show ~5.5/5.8 us CPU H2D submission and ~11/22 us transfer spans at b1/b8. Reduced stream coordination may exceed the lost Q/K overlap for such small transfers.",
   "expected_bottleneck": "tiny bulk H2D stream switching and dependency coordination",
   "change": "Use compute-stream H2D only for <=8 token bulk calls, preserving copied/consumed events for pinned-host and cross-call buffer safety. Keep separate-copy-stream path for larger bulk calls and pipeline unchanged. Fresh torch gather every call; no A0002/A0003/A0004 changes.",
@@ -43,5 +43,30 @@
   "tradeoffs": [
     "Serializes tiny transfer before Q/K kernels, potentially losing more overlap than saved CPU submission time.",
     "Transfer byte count, table precision and buffer capacities unchanged."
+  ],
+  "candidate_sha": "f33b0e383f2b3d9d7121ea3b92d1e45157aad1de",
+  "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0005",
+  "correctness": {
+    "pytest": "46 passed in 9.58s",
+    "standalone": "PASS; worst max diff 0",
+    "logs": [
+      "correctness-tests.txt",
+      "standalone-correctness.txt"
+    ]
+  },
+  "screen_manifest": "R01/manifest.json",
+  "screen_summary": "R01-summary.json",
+  "implementation_revisions": [
+    {
+      "sha": "1f614dbbab4903d395dc7a284baf665f2cb502f1",
+      "phase": "implementation before timing freeze",
+      "correctness_log": "correctness-tests-before-allocation-order.txt",
+      "performance": null
+    },
+    {
+      "sha": "f33b0e383f2b3d9d7121ea3b92d1e45157aad1de",
+      "phase": "final candidate freeze before all performance measurement",
+      "change": "Preserve first-call allocation-stream dependency for cross-stream callers; same scheduling hypothesis."
+    }
   ]
 }
