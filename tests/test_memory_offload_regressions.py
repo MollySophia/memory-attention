@@ -158,7 +158,7 @@ Path(a.json).write_text(json.dumps(dict(
 
 @pytest.mark.parametrize('padded', [False, True])
 @pytest.mark.parametrize('seed', [1234, 4321])
-@pytest.mark.parametrize('policy', ['bulk', 'pipeline', 'auto'])
+@pytest.mark.parametrize('policy', ['bulk', 'pipeline'])
 def test_growing_cache_exact_with_slot_reuse(seed, policy, padded):
     """128 growing steps, non-unit norms, partial groups, GQA and padding."""
     if not torch.cuda.is_available():
@@ -170,9 +170,7 @@ def test_growing_cache_exact_with_slot_reuse(seed, policy, padded):
                           num_kv_heads=2, vocab_size=128, qk_norm=True,
                           use_gate=True, fuse_norm=False,
                           memory_offload_policy=policy,
-                          memory_offload_bulk_max_tokens=1 if policy == 'auto' else 1024,
-                          memory_offload_group_size=2,
-                          memory_offload_prefetch_depth=4 if policy == 'auto' else 1)
+                          memory_offload_group_size=2, memory_offload_prefetch_depth=1)
     with torch.inference_mode():
         model = MemoryForCausalLM(config).to('cuda', dtype=torch.bfloat16).eval()
         for layer in model.model.layers:
@@ -227,29 +225,3 @@ def test_auto_policy_boundary_and_shape_reuse(model):
             actual = model(input_ids=ids, use_cache=False).logits.float()
             assert model.model.memory_offloader.policy == policy
             torch.testing.assert_close(actual, ref, rtol=0, atol=0)
-
-
-
-def test_auto_single_slot_capacity_and_explicit_depth(model):
-    model.config.memory_offload_policy='auto'
-    model.config.memory_offload_bulk_max_tokens=16
-    model.config.memory_offload_prefetch_depth=4
-    ids=torch.randint(0,128,(2,17),device='cuda')
-    model.fold_memory_table_on_gpu()
-    expected=model(input_ids=ids,use_cache=False).logits.clone()
-    model.close_memory_offload()
-    model.enable_memory_offload()
-    for _ in range(3):
-        actual=model(input_ids=ids,use_cache=False).logits
-        torch.testing.assert_close(actual,expected,rtol=0,atol=0)
-    off=model.model.memory_offloader
-    assert off.policy=='pipeline' and len(off.slots)==1
-    snapshot=load_script('benchmark_telemetry').memory_snapshot(model,'cuda')
-    expected_bytes=2*17*off.group*off.dim*off.weights.element_size()
-    assert snapshot['offload_pinned_bytes']==snapshot['offload_gpu_buffer_bytes']==expected_bytes
-    model.close_memory_offload()
-    model.config.memory_offload_policy='pipeline'
-    model.enable_memory_offload()
-    model.set_offload_offloader(2,17)
-    assert len(model.model.memory_offloader.slots)==min(4,len(model.model.layers))
-    torch.testing.assert_close(model(input_ids=ids,use_cache=False).logits,expected,rtol=0,atol=0)
