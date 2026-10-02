@@ -1,0 +1,59 @@
+{
+  "campaign_id": "offload-gap-001",
+  "source_manifest": "profile/results/optimization/offload-gap-001/A0001/R07-generation-regression/manifest.json",
+  "rows": [
+    {
+      "mode": "generation",
+      "batch": 1,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "values": [
+            -44.08760179455078,
+            20.112932038803933,
+            3.114910361667512
+          ],
+          "mean": -6.953253131359777,
+          "lower_95": -89.58409312024065,
+          "upper_95": 75.6775868575211,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "gpu_reduction_ms": {
+          "values": [
+            -4.477320766697289,
+            1.291394078483222,
+            12.006172289451001
+          ],
+          "mean": 2.940081867078978,
+          "lower_95": -17.83851091398719,
+          "upper_95": 23.718674648145143,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "gap_reduction_ms": {
+          "values": [
+            -39.61028102785349,
+            18.82153796032071,
+            -8.89126192778349
+          ],
+          "mean": -9.893334998438755,
+          "lower_95": -82.50168791742985,
+          "upper_95": 62.715017920552334,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        }
+      },
+      "resolved_offload_regression": false,
+      "resolved_resident_slowdown": false,
+      "memory_savings_preserved": true,
+      "gpu_savings_bytes": [
+        3137241088,
+        3137241088,
+        3137241088
+      ]
+    }
+  ],
+  "regression_gate_passed": true,
+  "uncertainty_note": "95% Student-t intervals over exactly three independent paired blocks, including original pair. n=3; symmetry assumption unverified. No samples discarded; not a new improvement claim."
+}

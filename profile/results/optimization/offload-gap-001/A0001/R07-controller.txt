@@ -1,0 +1,17 @@
+{"new_processes": 8, "reused_processes": 4, "estimated_seconds": 218.34010457992554}
+START B2-J005-baseline-generation-ma_gpu-b1-l2048
+END B2-J005-baseline-generation-ma_gpu-b1-l2048 completed
+START B2-J006-candidate-generation-ma_gpu-b1-l2048
+END B2-J006-candidate-generation-ma_gpu-b1-l2048 completed
+START B2-J007-candidate-generation-ma_offload-b1-l2048
+END B2-J007-candidate-generation-ma_offload-b1-l2048 completed
+START B2-J008-baseline-generation-ma_offload-b1-l2048
+END B2-J008-baseline-generation-ma_offload-b1-l2048 completed
+START B3-J009-baseline-generation-ma_offload-b1-l2048
+END B3-J009-baseline-generation-ma_offload-b1-l2048 completed
+START B3-J010-candidate-generation-ma_offload-b1-l2048
+END B3-J010-candidate-generation-ma_offload-b1-l2048 completed
+START B3-J011-candidate-generation-ma_gpu-b1-l2048
+END B3-J011-candidate-generation-ma_gpu-b1-l2048 completed
+START B3-J012-baseline-generation-ma_gpu-b1-l2048
+END B3-J012-baseline-generation-ma_gpu-b1-l2048 completed

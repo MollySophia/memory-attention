@@ -290,3 +290,9 @@ four reused process records, estimated218 seconds. No outliers removed and no
 open-ended extension until favorable. If generation is not a resolved regression,
 follow with the same bounded audit at the three flagged prefill points before
 acceptance. This is validation of unchanged A0001, not a new optimization attempt.
+
+### A0001 R07 outcome and R08 bounded prefill audit (offload-gap-001)
+
+R07 retained the original generation pair and added exactly two alternating independent pairs per placement. Offload reduction -6.953 ms, 95% paired-block interval [-89.584, 75.678]; resident reduction 2.940 ms [-17.839, 23.719]. No resolved regression; no generation gain claim. All samples and the unfavorable original pair remain. GPU savings preserved in every block.
+
+Per the previously declared conditional plan, R08 audits prefill b4/L2048, b16/L2048, b8/L8192. Each uses the original full-matrix pair plus exactly two alternating pairs per placement. 24 new processes, 12 reused; estimated 880.25 seconds including measured setup. Same formal 10/10/3 plan, no extra extension based on outcome. Original matrices remain immutable. Plan: A0001/R08-prefill-regression-plan/manifest.json.
