@@ -420,3 +420,7 @@ A0008 finalsourcefb17afb2a97b68ec61ef517622707f68ce33e051 frozen beforetiming.50
 ### A0008 final verdict: rejected (offload-gap-001; continuation-01)
 
 All12screenjobs complete. Offload/resident ms: b1prefill29.423/28.758,decode5.354/4.629; b8prefill213.101/206.580,decode11.010/10.927; b16prefill428.715/415.070,decode20.372/20.245. RelativeA0001 prefillslower0.0447/3.6381/11.1612ms; b8/b16gapworse2.8646/11.0158ms. No targetprefill improvement; rejectwithoutformal/full/generation. Mappedread microgains do not establish end-to-end overlap; mechanismbreakdown remainsunmeasured. Whole3000MiBtable pinning plusbulk buffers correctlyrecorded; b1/b8totalpinned3000.09375/3000.75MiB. Commitallsource/evidence thenrevert sixchangedexecution/testfiles includingnewmodule. Threeadditionalverdicts complete.
+
+### A0009 registration (offload-gap-001; continuation-01)
+
+ParentA0001 afterA0008revert. Deduplicate/sortIDs oncewithineachforward, transferunique rowspergroup, reconstruct originalorderusingGPUinverseindex. Noacrosscall lookupreuse. Predeclare>=8192token threshold frommicrodiagnostics: b1perlayer compression costloses, b8nearlyneutral beforeamortizingIDwork, b16benefits. Targetprimaryb8prefill only; unchangedb1/decode cannotnominate anewstep. CountGPUinversebuffer andexpandedMtemporary. Test changingallunique/allidentical/unsortedIDs, freshweights, partialgroups, crossstreamslotreuse and128-stepfullsmallmodelgates. Twelve-jobscreen andoriginaldualcriteria.
