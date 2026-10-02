@@ -1,0 +1,7 @@
+
+profile/results/optimization/offload-gap-001/test_continuation_scope.py::test_old_tranche_cannot_satisfy_additional_count PASSED [ 25%]
+profile/results/optimization/offload-gap-001/test_continuation_scope.py::test_registration_count_does_not_replace_final_verdicts PASSED [ 50%]
+profile/results/optimization/offload-gap-001/test_continuation_scope.py::test_ten_additional_request_requires_all_ten PASSED [ 75%]
+profile/results/optimization/offload-gap-001/test_continuation_scope.py::test_twentieth_registration_must_have_a_final_verdict PASSED [100%]
+
+============================== 4 passed in 0.01s ===============================

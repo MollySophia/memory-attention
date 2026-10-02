@@ -33,3 +33,25 @@ def test_registration_count_does_not_replace_final_verdicts(tmp_path,monkeypatch
     monkeypatch.setattr(audit_final.subprocess,'check_output',lambda *a,**kw:'commit\n')
     with pytest.raises(AssertionError,match='A0010'):
         audit_final.audit(tmp_path,tmp_path,tmp_path,'continuation-01')
+
+
+def continuation_two(root,count):
+    fixture(root,count)
+    d=root/'continuation-02';d.mkdir()
+    (d/'manifest.json').write_text(json.dumps(dict(campaign_id='offload-gap-001',start_after_attempt='A0010',first_new_attempt='A0011',minimum_additional_attempts=10,maximum_additional_attempts=10)))
+    for n in range(11,count+1):
+        p=root/f'A{n:04d}'/'record.json';r=json.loads(p.read_text());r['continuation_id']='continuation-02';p.write_text(json.dumps(r))
+
+
+def test_ten_additional_request_requires_all_ten(tmp_path):
+    continuation_two(tmp_path,19)
+    with pytest.raises(AssertionError,match='Additional attempt count'):
+        audit_final.audit(tmp_path,tmp_path,tmp_path,'continuation-02')
+
+
+def test_twentieth_registration_must_have_a_final_verdict(tmp_path,monkeypatch):
+    continuation_two(tmp_path,20)
+    p=tmp_path/'A0020/record.json';r=json.loads(p.read_text());r['workflow_stage']='screening';p.write_text(json.dumps(r))
+    monkeypatch.setattr(audit_final.subprocess,'check_output',lambda *a,**kw:'commit\n')
+    with pytest.raises(AssertionError,match='A0020'):
+        audit_final.audit(tmp_path,tmp_path,tmp_path,'continuation-02')
