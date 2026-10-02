@@ -56,10 +56,7 @@ class GroupTicket:
             torch.cuda.current_stream(self.owner.device).wait_event(self.slot["copied"])
             self.waited = True
         values = self.owner._view(self.slot["gpu"], self.start)
-        rows = values[:, offset]
-        if self.owner.inverse_gpu is not None:
-            rows = torch.index_select(rows, 0, self.owner.inverse_gpu)
-        return rows.view(self.owner.batch, self.owner.seq_len, self.owner.dim)
+        return values[:, offset].view(self.owner.batch, self.owner.seq_len, self.owner.dim)
 
     def release(self, offset: int) -> None:
         if offset != self.release_count:
@@ -119,7 +116,6 @@ class MemoryTableOffloader:
         group_size: int = 1,
         device: torch.device | str = "cuda:0",
         prefetch_depth: int = 4,
-        dedup_min_tokens: int = 8192,
     ) -> None:
         if weights.device.type != "cpu" or weights.ndim != 3:
             raise ValueError("weights must be a CPU tensor of shape [vocab, layers, dim]")
@@ -129,9 +125,6 @@ class MemoryTableOffloader:
         self.batch = batch
         self.seq_len = seq_len
         self.tokens = batch * seq_len
-        self.active_tokens = self.tokens
-        self.deduplicate = self.tokens >= dedup_min_tokens
-        self.inverse_gpu = None
         self.layers, self.dim = weights.shape[1:]
         self.group = min(group_size, self.layers)
         self.groups = list(range(0, self.layers, self.group))
@@ -161,13 +154,9 @@ class MemoryTableOffloader:
     def group_size(self) -> int:
         return self.group
 
-    @property
-    def extra_gpu_buffers(self):
-        return [] if self.inverse_gpu is None else [self.inverse_gpu]
-
     def _view(self, flat: torch.Tensor, start: int) -> torch.Tensor:
         count = min(self.group, self.layers - start)
-        return flat[: self.active_tokens * count * self.dim].view(self.active_tokens, count, self.dim)
+        return flat[: self.tokens * count * self.dim].view(self.tokens, count, self.dim)
 
     @torch.inference_mode()
     def _produce(self, ids: torch.Tensor, tickets: list[GroupTicket], entry, cancel) -> None:
@@ -222,13 +211,6 @@ class MemoryTableOffloader:
         future = None
         try:
             ids = ids_cpu.reshape(-1).contiguous()
-            if self.deduplicate:
-                ids, inverse = torch.unique(ids, sorted=True, return_inverse=True)
-                self.active_tokens = ids.numel()
-                self.inverse_gpu = inverse.to(self.device, non_blocking=True)
-            else:
-                self.active_tokens = self.tokens
-                self.inverse_gpu = None
             entry = torch.cuda.Event()
             entry.record(torch.cuda.current_stream(self.device))
             tickets = [

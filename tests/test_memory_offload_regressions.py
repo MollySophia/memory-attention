@@ -170,8 +170,7 @@ def test_growing_cache_exact_with_slot_reuse(seed, policy, padded):
                           num_kv_heads=2, vocab_size=128, qk_norm=True,
                           use_gate=True, fuse_norm=False,
                           memory_offload_policy=policy,
-                          memory_offload_group_size=2, memory_offload_prefetch_depth=1,
-                          memory_offload_dedup_min_tokens=1)
+                          memory_offload_group_size=2, memory_offload_prefetch_depth=1)
     with torch.inference_mode():
         model = MemoryForCausalLM(config).to('cuda', dtype=torch.bfloat16).eval()
         for layer in model.model.layers:
@@ -226,47 +225,3 @@ def test_auto_policy_boundary_and_shape_reuse(model):
             actual = model(input_ids=ids, use_cache=False).logits.float()
             assert model.model.memory_offloader.policy == policy
             torch.testing.assert_close(actual, ref, rtol=0, atol=0)
-
-
-@pytest.mark.parametrize('group,depth', [(1,1),(2,1),(2,3)])
-def test_per_call_dedup_reconstructs_order_with_dynamic_unique_counts(group,depth):
-    from fla.layers.memory_offload import MemoryTableOffloader
-    if not torch.cuda.is_available():
-        pytest.skip('requires CUDA')
-    with torch.inference_mode():
-        weights=torch.randn(32,5,64,dtype=torch.bfloat16)
-        offloader=MemoryTableOffloader(weights,2,4,group_size=group,prefetch_depth=depth,dedup_min_tokens=1)
-        inputs=[torch.arange(8).view(2,4),torch.full((2,4),3),torch.tensor([[7,1,7,9],[1,9,2,1]]),torch.arange(8,16).view(2,4)]
-        streams=[torch.cuda.Stream(),torch.cuda.Stream()]
-        retained=[]
-        try:
-            for iteration,ids in enumerate(inputs*2):
-                weights.add_(0.25)
-                expected=[weights[ids,layer].clone() for layer in range(5)]
-                with torch.cuda.stream(streams[iteration%2]):
-                    outputs=[]
-                    def consume(layer,handle):
-                        outputs.append(handle.acquire().clone());handle.release()
-                    offloader.forward(ids,consume)
-                assert offloader.active_tokens==ids.unique().numel()
-                assert offloader.inverse_gpu.numel()==ids.numel()
-                retained.append((outputs,expected))
-            torch.cuda.synchronize()
-            for outputs,expected in retained:
-                for out,ref in zip(outputs,expected):
-                    torch.testing.assert_close(out.cpu(),ref,rtol=0,atol=0)
-        finally:
-            offloader.close()
-
-
-def test_dedup_inverse_storage_included_in_memory_snapshot(model):
-    model.config.memory_offload_policy='pipeline'
-    model.config.memory_offload_dedup_min_tokens=1
-    model.enable_memory_offload()
-    ids=torch.tensor([[1,1,7,7],[9,1,9,7]],device='cuda')
-    model(input_ids=ids,use_cache=False)
-    telemetry=load_script('benchmark_telemetry')
-    offloader=model.model.memory_offloader
-    counted=telemetry.memory_snapshot(model,'cuda')['offload_gpu_buffer_bytes']
-    buffers=telemetry.storage_bytes([s['gpu'] for s in offloader.slots])
-    assert counted==buffers+offloader.inverse_gpu.untyped_storage().nbytes()
