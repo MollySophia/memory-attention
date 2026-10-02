@@ -9,6 +9,7 @@ import csv
 import json
 from pathlib import Path
 import statistics
+import textwrap
 
 import matplotlib
 matplotlib.use('Agg')
@@ -55,7 +56,7 @@ def history(entries,output):
     plans={r['measurement_plan_id'] for entry in entries for r in entry['rows'].values()}
     exported=[]
     for plan in sorted(plans):
-        fig,axes=plt.subplots(2,2,figsize=(12,8))
+        fig,axes=plt.subplots(2,2,figsize=(max(12,.9*len(entries)),8))
         for ax,key in zip(axes.flat,WORKLOADS):
             incumbent=None;incumbent_attempt=None;step=[];x=[]
             for index,entry in enumerate(entries):
@@ -80,7 +81,7 @@ def history(entries,output):
                                      sample_sd_ms=row['offload_sample_sd_ms'] if row else None,
                                      incumbent_attempt=incumbent_attempt,incumbent_ms=incumbent))
             ax.step(x,step,where='post',color='#222222',linestyle='--',linewidth=1,label='Incumbent accepted implementation')
-            ax.set_xticks(x,[e['record']['attempt_id'] for e in entries],rotation=30)
+            ax.set_xticks(x,[e['record']['attempt_id'] for e in entries],rotation=35,ha='right',fontsize=8)
             ax.set_title(f'{key[0].title()}, batch {key[1]}, length/context 2048')
             ax.set_ylabel('Offloaded latency (ms)');ax.grid(alpha=.2)
         handles=[plt.Line2D([],[],color=c,marker=m,linestyle='none',label=s) for s,(m,c) in STYLE.items() if s in {'baseline' if e['record']['attempt_id']=='A0000' else e['record'].get('status') or 'pending' for e in entries}]
@@ -144,11 +145,11 @@ def accepted_steps(entries,output):
                 metrics[name][(mode,batch)].append((center,low,high))
                 exported.append(dict(accepted_step=step,label=labels[step],attempt='A0000' if step==0 else retained[step-1]['record']['attempt_id'],mode=mode,batch=batch,length=2048,metric=name,mean=center,lower_95=low,upper_95=high,process_values=array))
     for name,workloads in metrics.items():
-        fig,axes=plt.subplots(2,2,figsize=(12,8))
+        fig,axes=plt.subplots(2,2,figsize=(max(12,2.4*len(labels)),8))
         for ax,key in zip(axes.flat,WORKLOADS):
             center,low,high=zip(*workloads[key]);x=list(range(len(center)))
             ax.errorbar(x,center,yerr=[[max(0,c-l) for c,l in zip(center,low)],[max(0,h-c) for c,h in zip(center,high)]],marker='o',capsize=3,color='#218358')
-            ax.set_xticks(x,labels,rotation=22,ha='right',fontsize=7)
+            ax.set_xticks(x,[textwrap.fill(label,22,break_long_words=False,break_on_hyphens=False) for label in labels],fontsize=7)
             ax.set_title(f'{key[0].title()}, batch {key[1]}, length/context 2048')
             ax.set_ylabel({'latency':'Offloaded latency (ms)','speedup':'Offload speedup vs frozen A0000','absolute-gap':'Signed offload − resident gap (ms)','relative-overhead':'Signed relative overhead (%)'}[name])
             ax.grid(alpha=.2)
