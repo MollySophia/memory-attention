@@ -5,7 +5,7 @@
   "completed_optimization_verdicts": 8,
   "accepted_steps": 1,
   "active_attempt": "A0009",
-  "controller_pid": null,
+  "controller_pid": 2123124,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
   "final_report": "final/REPORT.md",
@@ -15,7 +15,7 @@
   "continuation": "continuation-01/manifest.json",
   "source_candidate": "0ac06a0f7ce6c3ce77fd5a878c4a34c991527ec2",
   "live_manifest": "profile/results/optimization/offload-gap-001/A0009/R01/manifest.json",
-  "exec_session_id": null,
+  "exec_session_id": 73132,
   "next_actions": [
     "Poll A0009screen;12jobs allprimaryplacementsplusb16. Summarize/compare A0000/A0001 whencomplete.",
     "Only targetb8prefill (>=8192tokens) cannominateincrementalstep. b1/decode unchangedalgorithm gainscannotqualify. Ifpromisingrun48-process parentconfirmation allfourprimary thenA0000/fullgates.",

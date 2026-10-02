@@ -1,0 +1,24 @@
+{
+  "campaign_id": "offload-gap-001",
+  "status": "design only; notregistered orimplemented",
+  "hypothesis": "Two pinned host buffers per GPU slot can let CPU gather ahead without waiting for the immediately precedingH2D, while GPUslotcapacity remainsfixed.",
+  "profile_evidence": [
+    "coordination-b1.json: producerDMAwait12.763ms",
+    "coordination-b8.json: producerDMAwait60.918ms"
+  ],
+  "scope": "Keep A0001 wait-for-previous-consumer-release BEFORE gather, isolatinghostbufferreuse from A0006 early-refill reordering. If parentlateracceptedA0009, preserve itsdedup behavior asparent.",
+  "design": [
+    "EachGPUslot owns originalhostbuffer plusalternatehostbuffer andtwoH2D-completionevents. PreserveGPUconsumedevent.",
+    "AfteroldGPUticketreleasewait, choose nexthostbuffer andwait onlyits ownpreviousH2D beforeCPUoverwrite. Gatherfreshrows, thenwaitGPUconsumedevent beforeH2D intoGPUslot.",
+    "Consumer copied-event canpoint to selectedhostcompletionevent; oldticket isalreadyfullyreleased before replacement. Recordoneeventpercopy, notanextraevent.",
+    "Retainhostturn/usedstates acrossforwards andpartialgroups; close/errors preserveexistingdrain behavior.",
+    "Exposealternatehosts through extra_host_buffers andextendmemorytelemetry acrossallcachedoffloaders. Pinnedhostcapacitydoubles;GPUcapacityunchanged."
+  ],
+  "tests": [
+    "RepeatedfreshIDs/weights withpartialgroups/singleandmultipleslots andcrossstreamGPUconsumers.",
+    "DelayedGPUconsumption toexerciseinflightcopies andhostreuse.",
+    "Pinnedcounter equalsunique backingstorage ofallhostbuffers; no doublecount;GPUbuffercapacityunchanged.",
+    "Existingexact128-step gates andstandalonebeforeanytiming."
+  ],
+  "not_counted_as_attempt": true
+}
