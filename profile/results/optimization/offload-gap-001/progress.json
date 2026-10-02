@@ -1,7 +1,7 @@
 {
   "campaign_id": "offload-gap-001",
-  "goal_progress": "Complete: five focused attempts, one verified retained optimization, final artifacts audited and published to origin.",
-  "workflow_stage": "complete",
+  "goal_progress": "User requested5\u201310 additional attempts startingA0006. Original five verdicts and final report preserved.",
+  "workflow_stage": "profiling",
   "completed_optimization_verdicts": 5,
   "accepted_steps": 1,
   "active_attempt": null,
@@ -10,6 +10,7 @@
   "source_final": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
   "final_report": "final/REPORT.md",
   "final_audit": "final/core-audit.json",
-  "status": "complete",
-  "publication": "final/publication.json"
+  "status": "active",
+  "publication": "final/publication.json",
+  "continuation": "continuation-01/manifest.json"
 }

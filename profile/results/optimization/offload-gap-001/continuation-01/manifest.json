@@ -1,0 +1,23 @@
+{
+  "campaign_id": "offload-gap-001",
+  "continuation_id": "continuation-01",
+  "user_request": "another 5\u201310 focused optimization attempts",
+  "start_after_attempt": "A0005",
+  "first_new_attempt": "A0006",
+  "minimum_additional_attempts": 5,
+  "maximum_additional_attempts": 10,
+  "starting_incumbent": "A0001",
+  "starting_source": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
+  "campaign_head_at_start": "9661acda594b2b9a1fc0d13e94cab2922f68f989",
+  "protocol": "offload_gap_v1",
+  "scope": "Continue same campaign with monotonic IDs and unchanged acceptance/correctness/memory criteria. Preserve prior final report as the completed first tranche; later report separately covers continuation and cumulative results.",
+  "status": "profiling",
+  "candidate_directions": [
+    "Decouple CPU pinned-slot refill from GPU-consumer release while preserving DMA safety.",
+    "Precompute buffer tensor views to reduce producer/consumer metadata work without caching token outputs.",
+    "Reduce per-call ticket/event bookkeeping if measured setup is material.",
+    "Reuse pinned token-ID staging storage with correct D2H completion.",
+    "Overlap D2H readiness and CPU producer start with embedding submission."
+  ],
+  "note": "Directions are hypotheses to investigate, not registered attempts or promised changes. Register each before edits; do not count pure diagnostics or repetitions."
+}

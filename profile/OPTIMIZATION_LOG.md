@@ -382,3 +382,7 @@ Close the predeclared plan without extension; no A0000 confirmation/full/generat
 ### Final campaign audit (offload-gap-001)
 
 Five focused attempts complete: A0001 accepted; A0003 rejected; A0002/A0004/A0005 within_noise. Current model and tests match verified A0001. Final report and reproducibility commands are under results/optimization/offload-gap-001/final. Twelve figure families export PDF/SVG/PNG and CSV/JSON; accepted-step figures use eligible formal evidence, attempt history uses explicitly provisional screens. Core audit checks160 raw process references for84 full-matrix and12 generation points, exact source/environment/configuration, memory and four full-size exactness comparisons. All rendered figure families reviewed; shell syntax and48/68/12-process reproduction plans checked. No final performance rerun of unchanged source. Limitations include b16 adverse direction, noisy b4 decode, and no decode/generation gain. Final publication uses authorized origin campaign branch only.
+
+### Continuation 01 (offload-gap-001)
+
+User requests another5–10 optimization attempts. Preserve A0000–A0005 and the first final report. Start A0006 from verified A0001, keep frozen A0000 and unchanged protocols/gates. Current GPU/driver and idle654MiB TRM process match previous environment. New coordination diagnostics instrument worker release waits, DMA synchronization, tensor view creation and ticket setup, separately from model timing. Register new hypotheses only after evidence review.
