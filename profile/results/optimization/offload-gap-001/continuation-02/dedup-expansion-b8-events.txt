@@ -1,0 +1,1 @@
+{"count": 24, "cpu_total_ms": 1.558643, "cuda_stream_total_ms": 1.5092799961566925}

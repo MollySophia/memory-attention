@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/diagnose_dedup_expansion.py", line 30, in <module>
+    assert count[0]==24 and len(target)==1 and target[0]['device_total_us']>0,(count,target)
+AssertionError: ([24], [{'name': 'offload_inverse_expansion', 'count': 24, 'cpu_total_us': 2964.5770000000084, 'device_total_us': 0, 'self_device_us': 0}])

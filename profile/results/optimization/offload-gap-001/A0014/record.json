@@ -7,7 +7,7 @@
   "parent_sha": "85f530f0698617dc8885e0ccd8f0efe3c5c2b422",
   "accepted_step": null,
   "label": "one-slot automatic pipeline lookahead",
-  "workflow_stage": "screening",
+  "workflow_stage": "parent_confirmation",
   "hypothesis": "Reduce automatic pipeline host/device working set to one slot while using the interval after k+m release for the next gather/H2D; test whether four-group lookahead is unnecessary and adds memory/cache pressure.",
   "expected_bottleneck": "Four pinned and device slots retain 32/256/512 MiB each at b1/b8/b16; actual producer/consumer wait profiles and component transfer costs motivate testing a smaller bounded working set.",
   "profile_evidence": [
@@ -57,5 +57,9 @@
     ]
   },
   "screen_manifest": "R01/manifest.json",
-  "screen_summary": "R01-summary.json"
+  "screen_summary": "R01-summary.json",
+  "performance": "screen-comparison.json",
+  "screen_decision": "b1/b8 prefill offload reductions 0.372477/2.090906 ms and gap reductions 0.452067/1.876710 ms versus A0001. All primary workloads and placements require fixed independent confirmation; no acceptance from screen or lower memory alone.",
+  "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json",
+  "memory_observation": "Pipeline host and GPU capacity reduced to one layer; total cached buffers 8.09375/64.75/129.5 MiB each at b1/b8/b16, including bulk decode. Verified in screen-memory-audit.json."
 }
