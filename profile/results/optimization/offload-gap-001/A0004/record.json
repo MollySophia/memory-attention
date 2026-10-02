@@ -1,0 +1,48 @@
+{
+  "campaign_id": "offload-gap-001",
+  "attempt_id": "A0004",
+  "parent_attempt_id": "A0001",
+  "parent_source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
+  "parent_sha": "a6da6e541fb4fb3f53191c63f745b9be9ed9c6b2",
+  "accepted_step": null,
+  "label": "caller-thread pipeline producer",
+  "workflow_stage": "registered",
+  "hypothesis": "Prepare each one-layer group on the calling CPU thread before its consumer, retaining copy-stream overlap with previously queued GPU work. Avoid worker dispatch, separate thread CUDA context and main/producer handshakes. A0001 b1 profile spends 10.55 ms summed CPU ticket acquisition; b8 baseline 92.8 ms. These overlaps are not additive, so measure end-to-end.",
+  "expected_bottleneck": "producer/main-thread coordination and CPU scheduling",
+  "change": "Replace background producer submission with per-group inline production, keeping identical gather, copy stream, buffer slots, events, group size and arithmetic. No A0002 byte-copy or A0003 grouping changes.",
+  "profile_evidence": [
+    "../A0001/diagnostic-b1-prefill/offload.json",
+    "../A0000/diagnostics-summary.json",
+    "../A0003/diagnostic-comparison.json"
+  ],
+  "protocol_version": "offload_gap_v1",
+  "original_protocol_version": "offload_gap_v1",
+  "measurement_plan_id": "screen_v1_w3_n5_r1",
+  "screen": {
+    "batches": [
+      1,
+      8,
+      16
+    ],
+    "length": 2048,
+    "modes": [
+      "prefill",
+      "decode"
+    ],
+    "variants": [
+      "ma_offload",
+      "ma_gpu"
+    ],
+    "jobs": 12,
+    "reason_batch16": "Pipeline scheduling change"
+  },
+  "not_run": {
+    "confirmation": "screen first",
+    "full_validation": "only after confirmation",
+    "generation_validation": "only if nominated"
+  },
+  "tradeoffs": [
+    "CPU gather can now delay compute submission; per-group stream context switching may cost more than worker coordination.",
+    "Host/GPU slot capacities and all lookup/transfer bytes remain unchanged."
+  ]
+}
