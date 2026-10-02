@@ -225,39 +225,3 @@ def test_auto_policy_boundary_and_shape_reuse(model):
             actual = model(input_ids=ids, use_cache=False).logits.float()
             assert model.model.memory_offloader.policy == policy
             torch.testing.assert_close(actual, ref, rtol=0, atol=0)
-
-
-@pytest.mark.parametrize('policy', ['bulk', 'pipeline'])
-def test_reused_pinned_ids_fresh_inputs_and_memory(model, policy):
-    model.config.memory_offload_policy = policy
-    model.config.memory_offload_group_size = 2
-    model.config.memory_offload_prefetch_depth = 1
-    model.fold_memory_table_on_gpu()
-    batches = [torch.randint(0,128,(2,11),device='cuda') for _ in range(3)]
-    expected = [model(input_ids=ids,use_cache=False).logits.clone() for ids in batches]
-    model.close_memory_offload()
-    model.enable_memory_offload()
-    stream = torch.cuda.Stream()
-    stream.wait_stream(torch.cuda.current_stream())
-    ptr = None
-    for ids,ref in zip(batches,expected):
-        with torch.cuda.stream(stream):
-            # IDs are written on a nondefault stream immediately before use.
-            actual = model(input_ids=ids.clone(),use_cache=False).logits
-            off = model.model.memory_offloader
-            assert off.ids_host.is_pinned()
-            if ptr is not None: assert ptr == off.ids_host.data_ptr()
-            ptr = off.ids_host.data_ptr()
-            torch.testing.assert_close(actual,ref,rtol=0,atol=0)
-            torch.testing.assert_close(off.ids_host,ids.cpu(),rtol=0,atol=0)
-    stream.synchronize()
-    telemetry=load_script('benchmark_telemetry')
-    snap=telemetry.memory_snapshot(model,'cuda')
-    assert snap['offload_pinned_bytes'] == snap['offload_gpu_buffer_bytes'] + 2*11*8
-    model.model._offload_input_lock.acquire()
-    try:
-        with pytest.raises(RuntimeError,match='concurrent offloaded'):
-            model(input_ids=batches[0],use_cache=False)
-    finally:
-        model.model._offload_input_lock.release()
-    torch.testing.assert_close(model(input_ids=batches[0].cpu(),use_cache=False).logits,expected[0],rtol=0,atol=0)

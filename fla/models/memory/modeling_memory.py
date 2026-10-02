@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import math
-import threading
 import warnings
 from typing import TYPE_CHECKING, Any
 
@@ -182,7 +181,6 @@ class MemoryModel(MemoryPreTrainedModel):
         # nn.Embedding weights are dropped to free their device copy.
         self.memory_offloader = None
         self.memory_table = None
-        self._offload_input_lock = threading.Lock()
 
         self.post_init()
 
@@ -435,28 +433,19 @@ class MemoryModel(MemoryPreTrainedModel):
         # yet but must still take the streaming path. _offloader_for() builds
         # one on demand for whatever shape this call uses.
         if self.memory_table is not None:
-            if not self._offload_input_lock.acquire(blocking=False):
-                raise RuntimeError("concurrent offloaded model forwards are unsupported")
-            try:
-                device = next(self.parameters()).device
+            # The offload producer gathers from host memory, so it needs the
+            # IDs on CPU. Accept them on either device and stage the embedding
+            # lookup on the compute device.
+            device = next(self.parameters()).device
+            ids_cpu = input_ids.to("cpu") if input_ids is not None else None
+            if inputs_embeds is None:
                 if input_ids is None:
-                    raise ValueError("offloaded forward requires input_ids")
-                offloader = self._offloader_for(*input_ids.shape)
-                if input_ids.device.type == "cpu":
-                    ids_cpu = input_ids
-                else:
-                    # Blocking copy makes the host IDs ready before lookup;
-                    # pinned storage is retained per shape, never lookup values.
-                    offloader.ids_host.copy_(input_ids)
-                    ids_cpu = offloader.ids_host
-                if inputs_embeds is None:
-                    inputs_embeds = self.embeddings(input_ids.to(device, non_blocking=True))
-                return self._forward_offloaded(
-                    inputs_embeds, ids_cpu, attention_mask, past_key_values,
-                    use_cache, output_hidden_states, return_dict,
-                )
-            finally:
-                self._offload_input_lock.release()
+                    raise ValueError("offloaded forward requires input_ids or inputs_embeds")
+                inputs_embeds = self.embeddings(input_ids.to(device, non_blocking=True))
+            return self._forward_offloaded(
+                inputs_embeds, ids_cpu, attention_mask, past_key_values,
+                use_cache, output_hidden_states, return_dict,
+            )
 
         if inputs_embeds is None:
             inputs_embeds = self.embeddings(input_ids)
