@@ -87,7 +87,7 @@ def history(entries,output):
         handles.append(plt.Line2D([],[],color='#222222',linestyle='--',label='Accepted incumbent (one model, all workloads)'))
         fig.legend(handles=handles,loc='upper center',bbox_to_anchor=(.5,.955),ncol=4,fontsize=8)
         fig.suptitle('Optimization attempts — provisional screening measurements',y=.995)
-        save(fig,output,'attempt-history-'+plan,CAPTION.split('\n')[0]+'\nHistory uses matched screening only; bars are sample SD, not confidence intervals. Failures have no numerical point. Incumbent is never a per-metric minimum.',top=.88)
+        save(fig,output,'attempt-history-'+plan,CAPTION.split('\n')[0]+'\nCached last-token logits and KV; frozen baseline A0000.\nHistory uses matched screening only; bars are sample SD, not confidence intervals. Failures have no numerical point. Incumbent is never a per-metric minimum.',top=.88)
     return exported
 
 
@@ -153,7 +153,7 @@ def accepted_steps(entries,output):
             ax.set_ylabel({'latency':'Offloaded latency (ms)','speedup':'Offload speedup vs frozen A0000','absolute-gap':'Signed offload − resident gap (ms)','relative-overhead':'Signed relative overhead (%)'}[name])
             ax.grid(alpha=.2)
         fig.suptitle('Accepted cumulative implementations — '+name)
-        save(fig,output,'accepted-steps-'+name,CAPTION.split('\n')[0]+'\nThree independent balanced process blocks; 95% Student-t intervals (df=2). Baseline source is frozen A0000. Implementation history, not an additive decomposition.')
+        save(fig,output,'accepted-steps-'+name,CAPTION.split('\n')[0]+'\nCached last-token logits and KV; frozen baseline A0000.\nThree independent balanced process blocks; 95% Student-t intervals (df=2). Baseline source is frozen A0000. Implementation history, not an additive decomposition.')
     return exported
 
 

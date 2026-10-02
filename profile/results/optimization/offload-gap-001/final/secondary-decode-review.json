@@ -1,0 +1,59 @@
+{
+  "campaign_id": "offload-gap-001",
+  "workload": "b4 decode context2048",
+  "rows": [
+    {
+      "implementation": "baseline",
+      "variant": "ma_gpu",
+      "source": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R04-full-validation/B1-J021-baseline-decode-ma_gpu-b4-l2048.json",
+      "mean_ms": 7.227640117829044,
+      "round_ms": [
+        7.232031086459756,
+        7.228950085118413,
+        7.221939181908965
+      ],
+      "sample_min_ms": 7.2082108817994595,
+      "sample_max_ms": 7.263355888426304
+    },
+    {
+      "implementation": "candidate",
+      "variant": "ma_gpu",
+      "source": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R04-full-validation/B1-J022-candidate-decode-ma_gpu-b4-l2048.json",
+      "mean_ms": 7.209649138773481,
+      "round_ms": [
+        7.21086747944355,
+        7.208081055432558,
+        7.209998881444335
+      ],
+      "sample_min_ms": 7.1901981718838215,
+      "sample_max_ms": 7.249298971146345
+    },
+    {
+      "implementation": "candidate",
+      "variant": "ma_offload",
+      "source": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R04-full-validation/B1-J023-candidate-decode-ma_offload-b4-l2048.json",
+      "mean_ms": 8.27848861614863,
+      "round_ms": [
+        7.347947498783469,
+        7.343809492886066,
+        10.143708856776357
+      ],
+      "sample_min_ms": 7.321985904127359,
+      "sample_max_ms": 25.877379812300205
+    },
+    {
+      "implementation": "baseline",
+      "variant": "ma_offload",
+      "source": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R04-full-validation/B1-J024-baseline-decode-ma_offload-b4-l2048.json",
+      "mean_ms": 7.902923164268334,
+      "round_ms": [
+        7.334860833361745,
+        9.045565826818347,
+        7.328342832624912
+      ],
+      "sample_min_ms": 7.312048226594925,
+      "sample_max_ms": 24.558691773563623
+    }
+  ],
+  "interpretation": "Single-process offload means 7.903 vs 8.278 ms have isolated 24.56/25.88-ms spikes on both sources, with other rounds around7.33/7.34 ms. All spikes retained. Source audit shows identical bulk decode scheduling at both cutoffs. Cause is not established; no independent confirmation, no gain/equivalence/no-regression claim at this secondary point. Descriptive round ranges overlap and are not confidence intervals. No retrospective sample removal or plan extension."
+}

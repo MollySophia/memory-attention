@@ -1,0 +1,25 @@
+attempt,label,status,mode,batch,length,measurement_plan_id,measured_ms,sample_sd_ms,incumbent_attempt,incumbent_ms
+A0000,restored model with verified measurement harness,baseline,prefill,1,2048,screen_v1_w3_n5_r1,43.60288484022021,0.1335433115404926,A0000,43.60288484022021
+A0001,pipeline above 1024 tokens,accepted,prefill,1,2048,screen_v1_w3_n5_r1,29.37809396535158,0.43202527240237043,A0001,29.37809396535158
+A0002,serial byte copies for tiny CPU lookups,within_noise,prefill,1,2048,screen_v1_w3_n5_r1,29.43675108253956,0.055349668595151905,A0001,29.37809396535158
+A0003,two-layer groups in automatic pipeline,rejected,prefill,1,2048,screen_v1_w3_n5_r1,31.843384448438883,1.276848331012971,A0001,29.37809396535158
+A0004,caller-thread pipeline producer,within_noise,prefill,1,2048,screen_v1_w3_n5_r1,29.026863165199757,0.06267518938346243,A0001,29.37809396535158
+A0005,compute-stream copies for tiny bulk transfers,within_noise,prefill,1,2048,screen_v1_w3_n5_r1,29.242638871073723,0.07830530887238196,A0001,29.37809396535158
+A0000,restored model with verified measurement harness,baseline,decode,1,2048,screen_v1_w3_n5_r1,4.680408537387848,0.03625942888342132,A0000,4.680408537387848
+A0001,pipeline above 1024 tokens,accepted,decode,1,2048,screen_v1_w3_n5_r1,4.620579164475203,0.06799069901388392,A0001,4.620579164475203
+A0002,serial byte copies for tiny CPU lookups,within_noise,decode,1,2048,screen_v1_w3_n5_r1,4.609972238540649,0.06474760885699228,A0001,4.620579164475203
+A0003,two-layer groups in automatic pipeline,rejected,decode,1,2048,screen_v1_w3_n5_r1,4.780148807913065,0.41265621580905504,A0001,4.620579164475203
+A0004,caller-thread pipeline producer,within_noise,decode,1,2048,screen_v1_w3_n5_r1,4.614540189504623,0.07508650686919925,A0001,4.620579164475203
+A0005,compute-stream copies for tiny bulk transfers,within_noise,decode,1,2048,screen_v1_w3_n5_r1,4.586316272616386,0.08242891479504098,A0001,4.620579164475203
+A0000,restored model with verified measurement harness,baseline,prefill,8,2048,screen_v1_w3_n5_r1,209.1618636623025,0.45023637244545023,A0000,209.1618636623025
+A0001,pipeline above 1024 tokens,accepted,prefill,8,2048,screen_v1_w3_n5_r1,209.46270804852247,0.7164509828592313,A0001,209.46270804852247
+A0002,serial byte copies for tiny CPU lookups,within_noise,prefill,8,2048,screen_v1_w3_n5_r1,209.8816559650004,0.1931345149351365,A0001,209.46270804852247
+A0003,two-layer groups in automatic pipeline,rejected,prefill,8,2048,screen_v1_w3_n5_r1,213.51997638121247,0.12858964132972123,A0001,209.46270804852247
+A0004,caller-thread pipeline producer,within_noise,prefill,8,2048,screen_v1_w3_n5_r1,209.16501358151436,0.17931906377304757,A0001,209.46270804852247
+A0005,compute-stream copies for tiny bulk transfers,within_noise,prefill,8,2048,screen_v1_w3_n5_r1,210.35980824381113,0.3400889437135752,A0001,209.46270804852247
+A0000,restored model with verified measurement harness,baseline,decode,8,2048,screen_v1_w3_n5_r1,11.02176634594798,0.0211247494037617,A0000,11.02176634594798
+A0001,pipeline above 1024 tokens,accepted,decode,8,2048,screen_v1_w3_n5_r1,11.029212363064289,0.026242426020020155,A0001,11.029212363064289
+A0002,serial byte copies for tiny CPU lookups,within_noise,decode,8,2048,screen_v1_w3_n5_r1,10.99107600748539,0.010654180077795148,A0001,11.029212363064289
+A0003,two-layer groups in automatic pipeline,rejected,decode,8,2048,screen_v1_w3_n5_r1,11.008177977055311,0.02910316640014343,A0001,11.029212363064289
+A0004,caller-thread pipeline producer,within_noise,decode,8,2048,screen_v1_w3_n5_r1,11.041998583823442,0.024107978915256307,A0001,11.029212363064289
+A0005,compute-stream copies for tiny bulk transfers,within_noise,decode,8,2048,screen_v1_w3_n5_r1,11.001310404390097,0.01303693545033228,A0001,11.029212363064289

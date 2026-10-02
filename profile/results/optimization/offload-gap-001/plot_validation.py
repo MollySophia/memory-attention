@@ -81,7 +81,7 @@ def memory(points,output,sweep):
         axes[0,col].set_title(mode.title())
     axes[0,0].legend(fontsize=7,ncol=2)
     fig.suptitle('Memory vs '+('batch size' if sweep=='batch' else 'context length'))
-    save(fig,output,'memory-'+sweep,CAPTION.split('\n')[0]+'\nGPU includes KV, activations, logits and cached buffers; host includes tables/raw restore snapshots. Bars show process range. Reserved/pinned bytes are in source CSV.')
+    save(fig,output,'memory-'+sweep,CAPTION.split('\n')[0]+'\nCached last-token logits and KV.\nGPU includes KV, activations, logits and cached buffers; host includes tables/raw restore snapshots. Bars show process range. Reserved/pinned bytes are in source CSV.')
 
 
 def derived_gap(off,gpu,relative):
@@ -121,7 +121,7 @@ def gaps(points,output,relative):
             ax.set_title(mode.title());ax.set_xlabel('Batch size (context 2048)' if sweep=='batch' else 'Length/context (batch 8)')
             ax.set_ylabel('Signed relative overhead (%)' if relative else 'Signed offload − resident gap (ms)')
     axes[0,0].legend();fig.suptitle('Offload overhead against folded resident placement')
-    save(fig,output,'relative-overhead' if relative else 'absolute-gap',CAPTION.split('\n')[0]+'\nBars: paired process-block 95% CI where n=3; otherwise round-range envelope, not CI. Signed values retained.')
+    save(fig,output,'relative-overhead' if relative else 'absolute-gap',CAPTION.split('\n')[0]+'\nCached last-token logits and KV.\nBars: paired process-block 95% CI where n=3; otherwise round-range envelope, not CI. Signed values retained.')
 
 
 def generation(points,output):
@@ -138,7 +138,7 @@ def generation(points,output):
         ax.set_xticks(range(len(rows)),labels,rotation=25,fontsize=7);ax.set_title(f'Batch {batch}')
         ax.set_ylabel('Prefix + 128 decode calls (ms)');ax.grid(axis='y',alpha=.2)
     fig.suptitle('Growing-cache generation latency')
-    save(fig,output,'generation',CAPTION.split('\n')[0]+'\n2048-token prefix + 128 predetermined GPU-token decode calls. Sampling excluded; not serving latency. Bars: process 95% CI where n=3; otherwise trajectory round range, not CI.')
+    save(fig,output,'generation',CAPTION.split('\n')[0]+'\nCached last-token logits and KV.\n2048-token prefix + 128 predetermined GPU-token decode calls. Sampling excluded; not serving latency. Bars: process 95% CI where n=3; otherwise trajectory round range, not CI.')
 
 
 def main():

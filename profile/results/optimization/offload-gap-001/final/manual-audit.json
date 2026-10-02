@@ -1,0 +1,32 @@
+{
+  "campaign_id": "offload-gap-001",
+  "status": "manual_content_review_passed",
+  "goal_specification_sha256": "c94d8bf59b65fd784477214b9b17ccb7ea05eeb1c109d916a33e115bb7552bb2",
+  "checks": {
+    "attempts": "Five concrete offload hypotheses; every source committed before timing; final verdicts1 accepted/1 rejected/3 within_noise; evidence precedes code-only reverts.",
+    "retained_source": "Current fla/, tests/, benchmark match frozen A0001 exactly. Only model delta versus A0000 is cutoff4096 to1024; resident math unchanged.",
+    "acceptance": "Eligible corrected R03 confirms latency and gap for b1 prefill, no resolved other-primary regression or resident slowdown; memory gates preserved. R02 excluded.",
+    "full_scope": "84 matrix points and12 generation points complete;160 referenced raw processes checked by core audit. Valid source/plan/environment evidence reused.",
+    "secondary_regressions": "R07/R08 retained all originals and bounded repeats. b16 adverse direction and wide generation intervals explicitly reported; b4 decode single-process spike review preserved without equivalence claim.",
+    "correctness": "Small-model extended gates and four independent full-size exact fingerprint comparisons include128 growing steps; no tolerance relaxation.",
+    "memory": "GPU allocated/reserved and measured host RSS distinguished;9000MiB CPU table/snapshot/restore storage not added to RSS. KV rollback is views, not an independent snapshot.",
+    "figures": "All12 figure families visually inspected as PNG; PDF/SVG/PNG andCSV/JSON present. Signed values, uncertainty type, workload/model/cache scope and baseline labeled. History uses one accepted model; formal speedup uses independent evidence.",
+    "reproduction": "Shell blocks syntax checked; all local report links exist; confirmation/full/generation plan-only commands validate48/68/12 new processes. No expensive model timings repeated for report preparation.",
+    "limitations": "Random weights/no quality claim; missing operator GPU events, n3 normality and multiplicity limits, no decode/generation gain, secondary adverse points visible.",
+    "publication": "Authorized origin campaign branch only. Remote HEAD verification is performed after final results commit; no upstream publication."
+  },
+  "rendered_figures": [
+    "history/accepted-steps-absolute-gap.png",
+    "history/accepted-steps-latency.png",
+    "history/accepted-steps-relative-overhead.png",
+    "history/accepted-steps-speedup.png",
+    "history/attempt-history-screen_v1_w3_n5_r1.png",
+    "validation/absolute-gap.png",
+    "validation/generation.png",
+    "validation/memory-batch.png",
+    "validation/memory-length.png",
+    "validation/relative-overhead.png",
+    "validation/scaling-batch.png",
+    "validation/scaling-length.png"
+  ]
+}
