@@ -1,11 +1,11 @@
 {
   "campaign_id": "offload-gap-001",
-  "goal_progress": "A0006 screen complete; fixed48-process independent parent confirmation running. Additional final verdicts0, target5\u201310.",
-  "workflow_stage": "parent_confirmation",
-  "completed_optimization_verdicts": 5,
+  "goal_progress": "A0006 within_noise after48 paired processes. Additional1/5 minimum final verdicts complete; A0001 incumbent.",
+  "workflow_stage": "profiling",
+  "completed_optimization_verdicts": 6,
   "accepted_steps": 1,
-  "active_attempt": "A0006",
-  "controller_pid": 2090064,
+  "active_attempt": null,
+  "controller_pid": null,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
   "final_report": "final/REPORT.md",
@@ -15,7 +15,7 @@
   "continuation": "continuation-01/manifest.json",
   "source_candidate": "b58cdb8640fb2d6a57631e0c26fc6f9a72761f74",
   "live_manifest": "profile/results/optimization/offload-gap-001/A0006/R02-parent-confirmation/manifest.json",
-  "exec_session_id": 1817,
+  "exec_session_id": null,
   "next_actions": [
     "Poll same A0006 R02 controller/session1817; analyze_paired.py automatically queued after48jobs. Do not duplicate.",
     "If no targetedprefill meets both latency/gap lower95>0, finalwithin_noise/rejected; commit evidence then restore fla/layers/memory_offload.py and tests/test_memory_offload_regressions.py from942a2a5. If promising, freshA0000 confirmation thenfull/generation/fullcorrectness gates beforeaccept.",
@@ -23,7 +23,7 @@
     "Register each nextattempt beforecode; sourcecommitbeforetiming;12jobsforpipeline/transferchanges; preserve failed/noisyevidence beforecodeonlyreverts.",
     "Finalcontinuation artifacts go continuation-01/final; preserve originalfinalreport. Finalaudit must pass --continuation continuation-01 to enforceadditional5\u201310 count. Alloriginalacceptancegates unchanged."
   ],
-  "additional_completed_verdicts": 0,
+  "additional_completed_verdicts": 1,
   "additional_attempt_target": [
     5,
     10
