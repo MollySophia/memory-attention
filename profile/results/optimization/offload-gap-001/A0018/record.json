@@ -1,0 +1,60 @@
+{
+  "campaign_id": "offload-gap-001",
+  "continuation_id": "continuation-02",
+  "attempt_id": "A0018",
+  "parent_attempt_id": "A0001",
+  "parent_source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
+  "parent_sha": "58d74ed73643b931c2d5a0eda22c9c2c9902b276",
+  "accepted_step": null,
+  "label": "submit embedding before waiting for pipeline input IDs",
+  "workflow_stage": "implementation_draft",
+  "hypothesis": "For pipeline inputs, enqueue nonblocking D2H into reusable pinned ID storage, record completion, submit embedding, then wait for host IDs before CPU gather. Overlap host embedding dispatch with ID transfer/completion instead of blocking before dispatch.",
+  "expected_bottleneck": "Frozen A0001 instrumented b1/b8 ID staging CPU spans0.033814/0.047770 ms precede embedding dispatch0.034976/0.046488 ms. These instrumented spans are not guaranteed removable latency. A0011 reusable blocking IDs failed independent confirmation; this attempt specifically changes the wait position.",
+  "profile_evidence": [
+    "../continuation-02/input-startup-b1.json",
+    "../continuation-02/input-startup-b8.json",
+    "../A0011/parent-confirmation-analysis.json"
+  ],
+  "change": "Pipeline owns pinned int64 IDs and reusable completion event; model serializes staging through layer completion. Same compute-stream D2H order; embedding submission precedes CPU synchronization. Bulk, CPU IDs and foreign-device IDs retain blocking fallback.",
+  "tradeoffs": [
+    "Additional retained pinned ID bytes and model-call lock must be measured. Event/lock overhead may erase overlap.",
+    "Embedding-error cleanup must wait for pending DMA before releasing staging ownership.",
+    "No CPU gather before ID completion, no cross-call value caching, no change to resident arithmetic."
+  ],
+  "arithmetic_contract": "Scheduling-only, zero absolute/relative error against folded resident reference.",
+  "primary_target": "b1/b8 prefill; unchanged bulk data path cannot nominate gain",
+  "ablation": {
+    "blocking_reuse_attempt": "A0011",
+    "scope": "Stored blocking-reuse confirmation is descriptive context; no confirmed async-only gain claim without fresh appropriate comparison."
+  },
+  "protocol_version": "offload_gap_v1",
+  "original_protocol_version": "offload_gap_v1",
+  "measurement_plan_id": "screen_v1_w3_n5_r1",
+  "screen": {
+    "batches": [
+      1,
+      8,
+      16
+    ],
+    "length": 2048,
+    "modes": [
+      "prefill",
+      "decode"
+    ],
+    "variants": [
+      "ma_offload",
+      "ma_gpu"
+    ],
+    "jobs": 12,
+    "reason_batch16": "Input staging and pipeline scheduling"
+  },
+  "not_run": {
+    "confirmation": "Draft only; staged gates required.",
+    "full_validation": "Draft only; staged gates required.",
+    "generation_validation": "Draft only; staged gates required."
+  },
+  "draft_root": "/tmp/offload-gap-A0018-draft-7htjgy3o",
+  "draft_condition": "Isolated draft only. Activate sequentially after A0017 final verdict from best verified parent; preserve any accepted depth/WC changes. No GPU tests/timing during A0016 confirmation.",
+  "draft_patch": "isolated-draft.patch",
+  "draft_validation": "Syntax compile only; GPU tests pending sequential parent reconciliation."
+}
