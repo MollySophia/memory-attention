@@ -7,7 +7,7 @@
   "parent_sha": "ce765f0cdfdf0368ad720fd93e891d6accbd3145",
   "accepted_step": null,
   "label": "single-slot automatic pipeline for small prefill only",
-  "workflow_stage": "correctness",
+  "workflow_stage": "screening",
   "hypothesis": "Restrict one-slot automatic pipeline to <=2048-token calls. Preserve the evidenced b1 prefill overlap/working-set improvement from A0014 while leaving the high-volume b8 pipeline capacity and complete b8 primary execution path unchanged.",
   "expected_bottleneck": "A0014 independently confirms b1 prefill latency/gap reductions but fails on b8 decode after its changed prefix allocation. Applying the small working set only in the measured small-prefill regime tests a shape-specific scheduling policy.",
   "profile_evidence": [
@@ -50,5 +50,15 @@
   "draft_root": "/tmp/offload-gap-A0016-draft-81086aqd",
   "draft_condition": "Activated from verified A0001 after A0015 within_noise verdict and code-only reversion. GPU tests wait for the sequential diagnostic batch.",
   "draft_patch": "isolated-draft.patch",
-  "draft_validation": "Syntax compile only; GPU tests pending A0015 final verdict and parent reconciliation."
+  "draft_validation": "Syntax compile only; GPU tests pending A0015 final verdict and parent reconciliation.",
+  "candidate_sha": "0ce6645eb4c4bc3992258ad0878c72ea3c37a64e",
+  "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0016",
+  "correctness": {
+    "pytest": "31 passed in 14.58s",
+    "standalone": "PASS; worst max error 0",
+    "logs": [
+      "correctness-tests.txt",
+      "standalone-correctness.txt"
+    ]
+  }
 }

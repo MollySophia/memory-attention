@@ -1,0 +1,1 @@
+{"records": [{"operation": "ID_to_CPU", "cpu_ms": 0.04777}, {"operation": "embedding_dispatch", "cpu_ms": 0.046488}], "embedding_cuda_interval_ms": 0.11203200370073318}

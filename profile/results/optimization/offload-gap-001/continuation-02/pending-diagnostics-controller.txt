@@ -1,0 +1,6 @@
+START input-startup-b1
+END input-startup-b1 completed
+START input-startup-b8
+END input-startup-b8 completed
+START write-combined
+END write-combined completed

@@ -1,6 +1,6 @@
 {
   "campaign_id": "offload-gap-001",
-  "status": "planned_not_started",
+  "status": "completed",
   "constraint": "Run only after A0015 parent-confirmation controller terminates; sequential GPU use; finish before any next candidate timing.",
   "jobs": [
     {
@@ -14,7 +14,12 @@
         "1",
         "--output",
         "profile/results/optimization/offload-gap-001/continuation-02/input-startup-b1.json"
-      ]
+      ],
+      "status": "completed",
+      "started_unix": 1790928303.088429,
+      "pid": 2238985,
+      "returncode": 0,
+      "finished_unix": 1790928319.7974975
     },
     {
       "name": "input-startup-b8",
@@ -27,7 +32,12 @@
         "8",
         "--output",
         "profile/results/optimization/offload-gap-001/continuation-02/input-startup-b8.json"
-      ]
+      ],
+      "status": "completed",
+      "started_unix": 1790928319.7977474,
+      "pid": 2239246,
+      "returncode": 0,
+      "finished_unix": 1790928338.4724169
     },
     {
       "name": "write-combined",
@@ -38,10 +48,18 @@
         "/home/molly/workspace-memory-attn/offload-gap-001-A0001",
         "--output",
         "profile/results/optimization/offload-gap-001/continuation-02/write-combined.json"
-      ]
+      ],
+      "status": "completed",
+      "started_unix": 1790928338.4726593,
+      "pid": 2239573,
+      "returncode": 0,
+      "finished_unix": 1790928358.2427394
     }
   ],
   "estimated_seconds": 65,
   "estimate_note": "Rough setup plus warmup estimate; not timeout or permission gate.",
-  "purpose": "Collect mechanism evidence before selecting additional offload-specific candidates. Diagnostics do not count toward ten attempts."
+  "purpose": "Collect mechanism evidence before selecting additional offload-specific candidates. Diagnostics do not count toward ten attempts.",
+  "controller_pid": 2238955,
+  "started_unix": 1790928303.088304,
+  "finished_unix": 1790928358.2429621
 }
