@@ -1,11 +1,11 @@
 {
   "campaign_id": "offload-gap-001",
-  "goal_progress": "Additional3/5minimum verdicts complete;A0009 percall dedup passes47tests/standalone,screen next.",
-  "workflow_stage": "screening",
-  "completed_optimization_verdicts": 8,
+  "goal_progress": "Fouradditionalverdicts complete:A0006within_noise,A0007/A0008/A0009rejected. A0010independenthostbuffers next;A0001incumbent.",
+  "workflow_stage": "implementation",
+  "completed_optimization_verdicts": 9,
   "accepted_steps": 1,
-  "active_attempt": "A0009",
-  "controller_pid": 2123124,
+  "active_attempt": null,
+  "controller_pid": null,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
   "final_report": "final/REPORT.md",
@@ -15,7 +15,7 @@
   "continuation": "continuation-01/manifest.json",
   "source_candidate": "0ac06a0f7ce6c3ce77fd5a878c4a34c991527ec2",
   "live_manifest": "profile/results/optimization/offload-gap-001/A0009/R01/manifest.json",
-  "exec_session_id": 73132,
+  "exec_session_id": null,
   "next_actions": [
     "Poll A0009screen;12jobs allprimaryplacementsplusb16. Summarize/compare A0000/A0001 whencomplete.",
     "Only targetb8prefill (>=8192tokens) cannominateincrementalstep. b1/decode unchangedalgorithm gainscannotqualify. Ifpromisingrun48-process parentconfirmation allfourprimary thenA0000/fullgates.",
@@ -23,7 +23,7 @@
     "Needatleastone furtheractualattemptA0010 afterA0009verdict; independenthostring is profile-supported by12.8/60.9ms instrumentedDMAwaits, retainGPUslotcapacity andaccount extrahostmemory.",
     "Originalfinalreport immutable; continuation-01/final and --continuation continuation-01 audit. CurrentincumbentA0001; no newacceptedsteps."
   ],
-  "additional_completed_verdicts": 3,
+  "additional_completed_verdicts": 4,
   "additional_attempt_target": [
     5,
     10
