@@ -225,3 +225,49 @@ def test_auto_policy_boundary_and_shape_reuse(model):
             actual = model(input_ids=ids, use_cache=False).logits.float()
             assert model.model.memory_offloader.policy == policy
             torch.testing.assert_close(actual, ref, rtol=0, atol=0)
+
+
+def test_pipeline_slot_reuse_across_caller_streams():
+    if not torch.cuda.is_available():
+        pytest.skip('requires CUDA')
+    from fla.layers.memory_offload import MemoryTableOffloader
+    with torch.inference_mode():
+        weights = torch.randn(11, 3, 8, dtype=torch.bfloat16)
+        off = MemoryTableOffloader(weights, 2, 3, group_size=2, prefetch_depth=1)
+        observed, expected = [], []
+        try:
+            for iteration in range(2):
+                stream = torch.cuda.Stream()
+                ids = (torch.arange(6).reshape(2, 3) + iteration) % 11
+                reference = weights.index_select(0, ids.reshape(-1))
+                def consume(layer, handle):
+                    assert torch.cuda.current_stream() == stream
+                    observed.append(handle.acquire().clone())
+                    expected.append(reference[:, layer].reshape(2, 3, 8))
+                    handle.release()
+                with torch.cuda.stream(stream):
+                    off.forward(ids, consume)
+            torch.cuda.synchronize()
+            for value, reference in zip(observed, expected):
+                torch.testing.assert_close(value.cpu(), reference, rtol=0, atol=0)
+        finally:
+            off.close()
+
+
+def test_pipeline_consumer_failure_rejects_reuse():
+    if not torch.cuda.is_available():
+        pytest.skip('requires CUDA')
+    from fla.layers.memory_offload import MemoryTableOffloader
+    with torch.inference_mode():
+        off = MemoryTableOffloader(torch.ones(11, 3, 8, dtype=torch.bfloat16), 1, 2, prefetch_depth=1)
+        def fail(layer, handle):
+            handle.acquire()
+            raise RuntimeError('consumer failed')
+        try:
+            ids = torch.zeros((1, 2), dtype=torch.long)
+            with pytest.raises(RuntimeError, match='consumer failed'):
+                off.forward(ids, fail)
+            with pytest.raises(RuntimeError, match='closed or failed'):
+                off.forward(ids, fail)
+        finally:
+            off.close()

@@ -23,7 +23,6 @@ is intentionally unsupported.
 from __future__ import annotations
 
 import threading
-from concurrent.futures import ThreadPoolExecutor
 
 import torch
 
@@ -93,11 +92,11 @@ class PendingM:
 
 
 class MemoryTableOffloader:
-    """Prefetching producer: one CPU task per forward, bounded lookahead slots.
+    """Caller-thread producer with bounded transfer slots.
 
-    The producer gathers the needed rows on a worker thread and submits the
-    H2D on a dedicated copy stream, independently of block execution. Layers
-    resolve their slice through :class:`PendingM` at the point of use.
+    Each group is gathered and submitted before its layer consumers. CPU
+    lookup and the dedicated H2D stream can overlap previously queued GPU
+    compute. Layers resolve their slice through :class:`PendingM`.
 
     Args:
         weights: CPU tensor of shape ``[vocab_size, num_layers, dim]``, detached.
@@ -130,7 +129,6 @@ class MemoryTableOffloader:
         self.groups = list(range(0, self.layers, self.group))
         self.device = torch.device(device)
         self.copy_stream = torch.cuda.Stream(device=self.device)
-        self.worker = ThreadPoolExecutor(max_workers=1, thread_name_prefix="ma-prefetch")
         self.lock = threading.Lock()
         self.closed = False
         self.broken = False
@@ -208,7 +206,6 @@ class MemoryTableOffloader:
         if not self.lock.acquire(blocking=False):
             raise RuntimeError("concurrent forwards on one offloader are unsupported")
         cancel = threading.Event()
-        future = None
         try:
             ids = ids_cpu.reshape(-1).contiguous()
             entry = torch.cuda.Event()
@@ -217,29 +214,22 @@ class MemoryTableOffloader:
                 GroupTicket(self, self.slots[i % len(self.slots)], start)
                 for i, start in enumerate(self.groups)
             ]
-            future = self.worker.submit(self._produce, ids, tickets, entry, cancel)
             for ticket in tickets:
+                self._produce(ids, [ticket], entry, cancel)
                 for offset in range(ticket.count):
                     handle = PendingM(ticket, offset)
                     consume(ticket.start + offset, handle)
                     if not handle.released:
                         raise RuntimeError("consumer did not acquire/release its PendingM")
-            future.result()
         except BaseException:
             self.broken = True
             cancel.set()
-            if future is not None:
-                try:
-                    future.result()
-                except BaseException:
-                    pass
             raise
         finally:
             self.lock.release()
 
     def close(self) -> None:
         self.closed = True
-        self.worker.shutdown(wait=True)
         torch.cuda.synchronize(self.device)
 
     def __enter__(self):
