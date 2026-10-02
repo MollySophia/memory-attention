@@ -257,7 +257,9 @@ class _BulkTicket:
 
     def acquire(self, offset: int) -> torch.Tensor:
         if offset == 0:
-            torch.cuda.current_stream(self.owner.device).wait_event(self.owner.copied)
+            current = torch.cuda.current_stream(self.owner.device)
+            if current != self.owner.transfer_stream:
+                current.wait_event(self.owner.copied)
         return self.owner.values[offset]
 
     def release(self, offset: int) -> None:
@@ -285,9 +287,12 @@ class BulkMemoryTableOffloader:
         self.host = torch.empty(shape, dtype=weights.dtype, pin_memory=True)
         self.gpu = torch.empty(shape, dtype=weights.dtype, device=self.device)
         self.values = [self.gpu[:, i].view(batch, seq_len, self.dim) for i in range(self.layers)]
-        self.copy_stream = torch.cuda.Stream(device=self.device)
+        self.inline_copy = batch * seq_len <= 8
+        self.copy_stream = None if self.inline_copy else torch.cuda.Stream(device=self.device)
+        self.transfer_stream = None
         # Establish allocation-stream ordering once, before async use.
-        self.copy_stream.wait_stream(torch.cuda.current_stream(self.device))
+        if self.copy_stream is not None:
+            self.copy_stream.wait_stream(torch.cuda.current_stream(self.device))
         self.copied = torch.cuda.Event()
         self.consumed = torch.cuda.Event()
         self.slots = [{"host": self.host, "gpu": self.gpu}]
@@ -315,11 +320,23 @@ class BulkMemoryTableOffloader:
                 self.copied.synchronize()
             # No caching: every call performs a real lookup.
             torch.index_select(self.weights, 0, ids_cpu.reshape(-1), out=self.host)
-            with torch.cuda.device(self.device), torch.cuda.stream(self.copy_stream):
-                if self.started:
-                    self.copy_stream.wait_event(self.consumed)
-                self.gpu.copy_(self.host, non_blocking=True)
-                self.copied.record(self.copy_stream)
+            if self.inline_copy:
+                # Stream order supplies the dependency before layer execution.
+                # Keep the consumed wait for forwards on a different stream.
+                with torch.cuda.device(self.device):
+                    current = torch.cuda.current_stream(self.device)
+                    if self.started:
+                        current.wait_event(self.consumed)
+                    self.gpu.copy_(self.host, non_blocking=True)
+                    self.copied.record(current)
+                    self.transfer_stream = current
+            else:
+                with torch.cuda.device(self.device), torch.cuda.stream(self.copy_stream):
+                    if self.started:
+                        self.copy_stream.wait_event(self.consumed)
+                    self.gpu.copy_(self.host, non_blocking=True)
+                    self.copied.record(self.copy_stream)
+                    self.transfer_stream = self.copy_stream
             ticket = _BulkTicket(self)
             for layer in range(self.layers):
                 if layer == 0 or layer == self.layers - 1:
