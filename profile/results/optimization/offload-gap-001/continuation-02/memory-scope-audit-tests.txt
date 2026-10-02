@@ -1,0 +1,19 @@
+
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_completed_screen_memory[A0008] PASSED [  6%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_completed_screen_memory[A0009] PASSED [ 12%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_completed_screen_memory[A0010] PASSED [ 18%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_completed_screen_memory[A0011] PASSED [ 25%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_completed_screen_memory[A0012] PASSED [ 31%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_completed_screen_memory[A0013] PASSED [ 37%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_completed_screen_memory[A0014] PASSED [ 43%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_completed_screen_memory[A0015] PASSED [ 50%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_omitted_or_wrong_capacity_rejected[A0011-ids] PASSED [ 56%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_omitted_or_wrong_capacity_rejected[A0013-table] PASSED [ 62%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_omitted_or_wrong_capacity_rejected[A0014-depth] PASSED [ 68%]
+profile/results/optimization/offload-gap-001/test_continuation_memory.py::test_omitted_or_wrong_capacity_rejected[A0015-inverse] PASSED [ 75%]
+profile/results/optimization/offload-gap-001/test_continuation_scope.py::test_old_tranche_cannot_satisfy_additional_count PASSED [ 81%]
+profile/results/optimization/offload-gap-001/test_continuation_scope.py::test_registration_count_does_not_replace_final_verdicts PASSED [ 87%]
+profile/results/optimization/offload-gap-001/test_continuation_scope.py::test_ten_additional_request_requires_all_ten PASSED [ 93%]
+profile/results/optimization/offload-gap-001/test_continuation_scope.py::test_twentieth_registration_must_have_a_final_verdict PASSED [100%]
+
+============================== 16 passed in 0.02s ==============================

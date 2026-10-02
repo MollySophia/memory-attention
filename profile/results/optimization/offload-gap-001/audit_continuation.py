@@ -6,6 +6,38 @@ from run_paired import source_hash,validate_balanced_order
 
 def read(path):return json.loads(path.read_text())
 
+
+def validate_offload_memory(attempt, memory):
+    """Count every retained allocation, including transport metadata and tables."""
+    caps = memory['offloader_capacities']
+    assert memory['cpu_table_bytes'] == 3000 * 2**20
+    assert memory['offload_gpu_buffer_bytes'] == sum(c['gpu_bytes'] for c in caps)
+    table_pinned = memory.get('cpu_table_pinned_bytes', 0)
+    if attempt in ('A0008', 'A0013'):
+        assert table_pinned == 3000 * 2**20
+    else:
+        assert table_pinned == 0
+    assert memory['offload_pinned_bytes'] == table_pinned + sum(c['host_bytes'] for c in caps)
+    for cap in caps:
+        tokens = cap['batch'] * cap['length']
+        host, gpu = cap['host_bytes'], cap['gpu_bytes']
+        if attempt == 'A0010' and cap['policy'] == 'pipeline':
+            assert host == 2 * gpu
+        if attempt in ('A0009', 'A0015') and cap['policy'] == 'pipeline':
+            inverse = tokens * 8 if tokens >= 8192 else 0
+            assert gpu == host + inverse
+        if attempt == 'A0011':
+            assert host == gpu + tokens * 8
+        if attempt == 'A0013':
+            if cap['policy'] == 'bulk' and 8 <= tokens <= 16:
+                assert host == 0 and gpu == tokens * 24 * 2048 * 2
+            else:
+                assert host == gpu
+        if attempt == 'A0014':
+            expected = tokens * 2048 * 2 * (1 if cap['policy'] == 'pipeline' else 24)
+            assert host == gpu == expected
+
+
 def audit(campaign,continuation):
     tranche=read(campaign/continuation/'manifest.json')
     start=int(tranche['first_new_attempt'][1:])
@@ -50,19 +82,7 @@ def audit(campaign,continuation):
             row=raw(d/'R01'/(job['name']+'.json'),sha,root,'screening')
             memory=row['memory_after'];caps=memory['offloader_capacities']
             if job['variant']=='ma_offload':
-                assert memory['cpu_table_bytes']==3000*2**20
-                assert memory['offload_gpu_buffer_bytes']==sum(c['gpu_bytes'] for c in caps)
-                if r['attempt_id']=='A0008':
-                    assert memory['cpu_table_pinned_bytes']==3000*2**20
-                    assert memory['offload_pinned_bytes']==3000*2**20+sum(c['host_bytes'] for c in caps)
-                else:
-                    assert memory['offload_pinned_bytes']==sum(c['host_bytes'] for c in caps)
-                for cap in caps:
-                    if r['attempt_id']=='A0010' and cap['policy']=='pipeline':
-                        assert cap['host_bytes']==2*cap['gpu_bytes']
-                    if r['attempt_id']=='A0009' and cap['policy']=='pipeline':
-                        inverse=cap['batch']*cap['length']*8 if cap['batch']*cap['length']>=8192 else 0
-                        assert cap['gpu_bytes']==cap['host_bytes']+inverse
+                validate_offload_memory(r['attempt_id'], memory)
         confirmation=r.get('parent_confirmation_manifest')
         if confirmation:
             manifest=read(d/confirmation);assert manifest['status']=='completed' and len(manifest['jobs'])==48
