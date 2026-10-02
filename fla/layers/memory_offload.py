@@ -145,11 +145,6 @@ class MemoryTableOffloader:
             )
             for _ in range(min(prefetch_depth, len(self.groups)))
         ]
-        for slot in self.slots:
-            slot["host_alt"] = torch.empty(capacity, dtype=weights.dtype, pin_memory=True)
-            slot["host_events"] = (slot["copied"], torch.cuda.Event())
-            slot["host_used"] = [False, False]
-            slot["host_turn"] = 0
 
     @property
     def policy(self) -> str:
@@ -158,10 +153,6 @@ class MemoryTableOffloader:
     @property
     def group_size(self) -> int:
         return self.group
-
-    @property
-    def extra_host_buffers(self):
-        return [slot["host_alt"] for slot in self.slots]
 
     def _view(self, flat: torch.Tensor, start: int) -> torch.Tensor:
         count = min(self.group, self.layers - start)
@@ -182,29 +173,19 @@ class MemoryTableOffloader:
                                 return
                         if cancel.is_set():
                             return
+                        # The pinned host buffer is still being read by DMA.
+                        slot["copied"].synchronize()
                     if cancel.is_set():
                         return
-                    host_index = slot["host_turn"]
-                    host = slot["host"] if host_index == 0 else slot["host_alt"]
-                    host_event = slot["host_events"][host_index]
-                    if slot["host_used"][host_index]:
-                        # Only this host allocation's last DMA constrains CPU
-                        # overwrite; the other host buffer may still be read.
-                        host_event.synchronize()
                     source = self.weights[:, ticket.start: ticket.start + ticket.count]
-                    torch.index_select(source, 0, ids, out=self._view(host, ticket.start))
+                    torch.index_select(source, 0, ids, out=self._view(slot["host"], ticket.start))
                     if previous is not None:
                         # Snapshot before the event can be re-recorded.
                         self.copy_stream.wait_event(slot["consumed"])
                     self._view(slot["gpu"], ticket.start).copy_(
-                        self._view(host, ticket.start), non_blocking=True
+                        self._view(slot["host"], ticket.start), non_blocking=True
                     )
-                    host_event.record(self.copy_stream)
-                    # The previous ticket has fully released before changing
-                    # this pointer, and readiness publishes it to this ticket.
-                    slot["copied"] = host_event
-                    slot["host_used"][host_index] = True
-                    slot["host_turn"] = 1 - host_index
+                    slot["copied"].record(self.copy_stream)
                     slot["previous"] = ticket
                     # "Ready" means submitted, not completed.
                     ticket.ready.set()

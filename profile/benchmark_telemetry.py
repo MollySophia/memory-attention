@@ -31,7 +31,6 @@ def memory_snapshot(model, device, cache=None):
     if active is not None and all(active is not item for item in offloaders):
         offloaders.append(active)
     slots = [slot for off in offloaders for slot in off.slots]
-    extra_host = [buffer for off in offloaders for buffer in getattr(off, 'extra_host_buffers', [])]
     status = dict(line.split(':', 1) for line in Path('/proc/self/status').read_text().splitlines() if ':' in line)
     return dict(
         gpu_allocated_bytes=torch.cuda.memory_allocated(device),
@@ -43,10 +42,10 @@ def memory_snapshot(model, device, cache=None):
         host_high_water_scope='process lifetime, including model loading',
         raw_table_snapshot_bytes=storage_bytes(getattr(body, '_raw_m_proj_weights', None) or []),
         cpu_table_bytes=storage_bytes([getattr(body, 'memory_table', None)]),
-        offload_pinned_bytes=storage_bytes([s['host'] for s in slots] + extra_host),
+        offload_pinned_bytes=storage_bytes(s['host'] for s in slots),
         offload_gpu_buffer_bytes=storage_bytes(s['gpu'] for s in slots),
         offloader_capacities=[dict(batch=off.batch, length=off.seq_len, policy=off.policy,
-                                  host_bytes=storage_bytes([s['host'] for s in off.slots] + list(getattr(off, 'extra_host_buffers', []))),
+                                  host_bytes=storage_bytes(s['host'] for s in off.slots),
                                   gpu_bytes=storage_bytes(s['gpu'] for s in off.slots)) for off in offloaders],
         kv_cache_storage_bytes=cache_bytes(cache),
     )
