@@ -7,7 +7,7 @@
   "parent_sha": "550aa0e8b9e8de0463e74153a7a03bbeec4337f5",
   "accepted_step": null,
   "label": "within-call token dedup for large pipeline inputs",
-  "workflow_stage": "implementation",
+  "workflow_stage": "screening",
   "hypothesis": "Sort/deduplicate CPU tokenIDs onceperforward, gather/transfer unique rows perlayergroup, expand originaltokenorder onGPU. Reduce b8/b16 transfer/gather work without caching values acrosscalls.",
   "expected_bottleneck": "b8 CPUgather75ms andH2D41.8ms instrumentedspans; uniform-ID expected duplicates21.7% atb8 and37.4% atb16. Actualsinglelayerdedup diagnostic improvesb16, nearlyneutralb8, regressesb1.",
   "profile_evidence": [
@@ -55,6 +55,18 @@
     "full_validation": "Only ifnominated",
     "generation_validation": "Only ifnominated"
   },
-  "candidate_sha": null,
-  "decision": "Registered beforecode. No acrosscalllookupcache; freshIDs/weights andchangingdistinctcounts mustpass exactness."
+  "candidate_sha": "0ac06a0f7ce6c3ce77fd5a878c4a34c991527ec2",
+  "decision": "Exactness gates pass;fixed12-job screen next. Onlyb8prefill is newprimarytarget.",
+  "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0009",
+  "correctness": {
+    "pytest": "47 passed in9.57s",
+    "standalone": "PASS; worst maxerror0",
+    "logs": [
+      "correctness-tests.txt",
+      "standalone-correctness.txt"
+    ],
+    "scope": "128-step gated/QKnormalized/GQA/padded tests force dedup_min_tokens1 onsmallmodel. Additionalchangingunique-count andcrossstreamtests pass."
+  },
+  "screen_manifest": "R01/manifest.json",
+  "screen_summary": "R01-summary.json"
 }

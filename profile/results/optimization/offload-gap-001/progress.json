@@ -1,10 +1,10 @@
 {
   "campaign_id": "offload-gap-001",
-  "goal_progress": "Threeadditionalverdicts: A0006 within_noise, A0007/A0008 rejected. A0001 incumbent. Nextwithin-call dedup.",
-  "workflow_stage": "implementation",
+  "goal_progress": "Additional3/5minimum verdicts complete;A0009 percall dedup passes47tests/standalone,screen next.",
+  "workflow_stage": "screening",
   "completed_optimization_verdicts": 8,
   "accepted_steps": 1,
-  "active_attempt": null,
+  "active_attempt": "A0009",
   "controller_pid": null,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
@@ -13,16 +13,15 @@
   "status": "active",
   "publication": "final/publication.json",
   "continuation": "continuation-01/manifest.json",
-  "source_candidate": "fb17afb2a97b68ec61ef517622707f68ce33e051",
-  "live_manifest": "profile/results/optimization/offload-gap-001/A0008/R01/manifest.json",
+  "source_candidate": "0ac06a0f7ce6c3ce77fd5a878c4a34c991527ec2",
+  "live_manifest": "profile/results/optimization/offload-gap-001/A0009/R01/manifest.json",
   "exec_session_id": null,
   "next_actions": [
-    "Poll existingA0008screen; no duplicateGPUwork.",
-    "After12jobs summarize/compare toA0000/A0001. Any proposedgain needsparentconfirmation andfreshA0000confirmation/fullgates.",
-    "IfA0008fails: commitallresults first, then restore fromA0001 fla/layers/memory_mapped_offload.py (delete), fla/models/memory/configuration_memory.py, fla/models/memory/modeling_memory.py, profile/benchmark_telemetry.py, profile/test_memory_offload.py, tests/test_memory_offload_regressions.py. Verify sourcehashmatchesA1.",
-    "Remainingdirections: within-call dedup (b16componentbenefit), independenthostring if CPU pipeline remains incumbent. Need5\u201310additionalactualverdicts, notdiagnosticruns.",
-    "Mappedcandidatepins3000MiBtable; cpu_table_pinned_bytes and totaloffload_pinned_bytes includeit. FinalCPUtable-readstreamsync protectsCPUweightmutationafterreturn. Preservememorytradeoff inverdict.",
-    "Originalfinalreport remains immutable; continuationfinal artifacts andaudit --continuation continuation-01 required."
+    "Poll A0009screen;12jobs allprimaryplacementsplusb16. Summarize/compare A0000/A0001 whencomplete.",
+    "Only targetb8prefill (>=8192tokens) cannominateincrementalstep. b1/decode unchangedalgorithm gainscannotqualify. Ifpromisingrun48-process parentconfirmation allfourprimary thenA0000/fullgates.",
+    "Ifrejected/withinnoise: commitevidence first, thenrestorefivefilesfromA1: fla/layers/memory_offload.py, fla/models/memory/configuration_memory.py, fla/models/memory/modeling_memory.py, profile/benchmark_telemetry.py, tests/test_memory_offload_regressions.py.",
+    "Needatleastone furtheractualattemptA0010 afterA0009verdict; independenthostring is profile-supported by12.8/60.9ms instrumentedDMAwaits, retainGPUslotcapacity andaccount extrahostmemory.",
+    "Originalfinalreport immutable; continuation-01/final and --continuation continuation-01 audit. CurrentincumbentA0001; no newacceptedsteps."
   ],
   "additional_completed_verdicts": 3,
   "additional_attempt_target": [
