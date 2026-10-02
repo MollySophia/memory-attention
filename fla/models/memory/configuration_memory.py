@@ -44,6 +44,7 @@ class MemoryConfig(PretrainedConfig):
         memory_offload_group_size: int = 1,
         memory_offload_prefetch_depth: int = 4,
         memory_offload_bulk_max_tokens: int = 1024,
+        memory_offload_single_slot_max_tokens: int = 2048,
         memory_offload_chunk_size: int = 1024,
         **kwargs,
     ):
@@ -57,6 +58,9 @@ class MemoryConfig(PretrainedConfig):
         self.memory_offload_group_size = memory_offload_group_size
         self.memory_offload_prefetch_depth = memory_offload_prefetch_depth
         self.memory_offload_bulk_max_tokens = memory_offload_bulk_max_tokens
+        if memory_offload_single_slot_max_tokens < 0:
+            raise ValueError("single-slot token limit must be nonnegative")
+        self.memory_offload_single_slot_max_tokens = memory_offload_single_slot_max_tokens
         self.memory_offload_chunk_size = memory_offload_chunk_size
         self.hidden_size = hidden_size
         self.num_hidden_layers = num_hidden_layers
