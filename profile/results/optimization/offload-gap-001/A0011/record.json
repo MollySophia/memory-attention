@@ -7,7 +7,7 @@
   "parent_sha": "c678ecffc56d3a80da8b8506241e0d58f7059ea0",
   "accepted_step": null,
   "label": "reuse pinned input-ID staging buffers",
-  "workflow_stage": "registered",
+  "workflow_stage": "parent_confirmation",
   "hypothesis": "Replace a fresh pageable CPU ID tensor on every GPU-input call with a preallocated pinned int64 staging buffer per cached offloader, preserving synchronous readiness before embedding and CPU gather.",
   "expected_bottleneck": "Fresh GPU-to-CPU ID staging allocation and pageable transfer overhead; isolated b8 prefill staging 0.0134 ms versus 0.0069 ms with reusable pinned storage.",
   "profile_evidence": [
@@ -43,5 +43,20 @@
     "confirmation": "Not yet nominated; staged gates required.",
     "full_validation": "Not yet nominated; staged gates required.",
     "generation_validation": "Not yet nominated; staged gates required."
-  }
+  },
+  "candidate_sha": "812ac2decafaf2d9919028a7bbd0c740db07ba1a",
+  "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0011",
+  "correctness": {
+    "pytest": "45 passed in 9.95s",
+    "standalone": "PASS; worst max error 0",
+    "logs": [
+      "correctness-tests.txt",
+      "standalone-correctness.txt"
+    ]
+  },
+  "screen_manifest": "R01/manifest.json",
+  "screen_summary": "R01-summary.json",
+  "performance": "screen-comparison.json",
+  "screen_decision": "Weak positive b8 prefill latency/gap reductions 0.387758/0.044000 ms; b1 decode slower 0.360538 ms. Fixed independent confirmation required; no gain claim.",
+  "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json"
 }

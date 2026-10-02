@@ -1,10 +1,10 @@
 {
   "campaign_id": "offload-gap-001",
   "goal_progress": "New request: ten additional attempts A0011-A0020; none completed in continuation-02.",
-  "workflow_stage": "profiling",
+  "workflow_stage": "screening",
   "completed_optimization_verdicts": 10,
   "accepted_steps": 1,
-  "active_attempt": null,
+  "active_attempt": "A0011",
   "controller_pid": null,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
@@ -13,11 +13,12 @@
   "status": "active",
   "publication": "continuation-01/final/publication.json",
   "continuation": "continuation-02/manifest.json",
-  "source_candidate": null,
-  "live_manifest": null,
+  "source_candidate": "812ac2decafaf2d9919028a7bbd0c740db07ba1a",
+  "live_manifest": "profile/results/optimization/offload-gap-001/A0011/R01/manifest.json",
   "exec_session_id": null,
   "next_actions": [
-    "Profile remaining offload-specific bottlenecks, register A0011, commit implementation, run correctness and screening."
+    "Poll A0011 fixed 12-job screen; compare with A0001/A0000; formal confirmation only if targeted latency and gap improve.",
+    "Continue remaining nine attempts with profile-supported hypotheses."
   ],
   "additional_completed_verdicts": 0,
   "additional_attempt_target": [

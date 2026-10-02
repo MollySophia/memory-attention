@@ -1,0 +1,1 @@
+[{"tokens": 2048, "mean_ms": {"torch": 0.0319464, "native_serial": 0.3854381, "native_threads4": 0.31566839999999996}}, {"tokens": 16384, "mean_ms": {"torch": 2.4187691, "native_serial": 3.8126453, "native_threads4": 2.6174705}}, {"tokens": 32768, "mean_ms": {"torch": 5.2256736, "native_serial": 7.7130244, "native_threads4": 5.3985142}}]
