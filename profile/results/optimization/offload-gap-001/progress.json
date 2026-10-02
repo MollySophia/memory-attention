@@ -1,10 +1,10 @@
 {
   "campaign_id": "offload-gap-001",
-  "goal_progress": "Fouradditionalverdicts complete:A0006within_noise,A0007/A0008/A0009rejected. A0010independenthostbuffers next;A0001incumbent.",
-  "workflow_stage": "implementation",
+  "goal_progress": "Additional4/5minimum verdicts complete;A0010alternatehostbuffer candidate passes47tests/standalone,screen next.",
+  "workflow_stage": "screening",
   "completed_optimization_verdicts": 9,
   "accepted_steps": 1,
-  "active_attempt": null,
+  "active_attempt": "A0010",
   "controller_pid": null,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
@@ -13,15 +13,15 @@
   "status": "active",
   "publication": "final/publication.json",
   "continuation": "continuation-01/manifest.json",
-  "source_candidate": "0ac06a0f7ce6c3ce77fd5a878c4a34c991527ec2",
-  "live_manifest": "profile/results/optimization/offload-gap-001/A0009/R01/manifest.json",
+  "source_candidate": "b22f8f616ee933ddc4ad2dd09c3eb91e60ef477b",
+  "live_manifest": "profile/results/optimization/offload-gap-001/A0010/R01/manifest.json",
   "exec_session_id": null,
   "next_actions": [
-    "Poll A0009screen;12jobs allprimaryplacementsplusb16. Summarize/compare A0000/A0001 whencomplete.",
-    "Only targetb8prefill (>=8192tokens) cannominateincrementalstep. b1/decode unchangedalgorithm gainscannotqualify. Ifpromisingrun48-process parentconfirmation allfourprimary thenA0000/fullgates.",
-    "Ifrejected/withinnoise: commitevidence first, thenrestorefivefilesfromA1: fla/layers/memory_offload.py, fla/models/memory/configuration_memory.py, fla/models/memory/modeling_memory.py, profile/benchmark_telemetry.py, tests/test_memory_offload_regressions.py.",
-    "Needatleastone furtheractualattemptA0010 afterA0009verdict; independenthostring is profile-supported by12.8/60.9ms instrumentedDMAwaits, retainGPUslotcapacity andaccount extrahostmemory.",
-    "Originalfinalreport immutable; continuation-01/final and --continuation continuation-01 audit. CurrentincumbentA0001; no newacceptedsteps."
+    "Poll existingA0010screen;12jobs. Summarize/compareA0000/A0001 oncecomplete.",
+    "If targetprefill showslatency+gapbenefit, fixed48-process parentconfirmation allprimary; freshA0000/full/generation/fullcorrectness requiredbeforeanyacceptance. Noacceptancefromscreen.",
+    "Ifrejected/withinnoise: commitallresultsevidence thenrestore fla/layers/memory_offload.py, profile/benchmark_telemetry.py, tests/test_memory_offload_regressions.py fromA0001.",
+    "AfterA0010finalverdict fiveadditionalattemptscomplete. Exportcontinuation-01/final withcumulative10attempt history and retainedformalstepfigures. ReuseA0001validfull/gen/exactevidence ifstillincumbent.",
+    "Auditadditionalrawrecords/sources/plans/correctness and5\u201310additionalcount; audit_final.py --continuation continuation-01. Preserveoriginalfinalreport. Commit/pushfinalartifacts,verifyremoteandcleansource beforegoalcomplete."
   ],
   "additional_completed_verdicts": 4,
   "additional_attempt_target": [

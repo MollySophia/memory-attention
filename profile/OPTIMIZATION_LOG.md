@@ -434,3 +434,5 @@ All12screenjobscomplete. Offload/resident ms:b1prefill29.681/28.734,decode4.716/
 ### A0010 registration (offload-gap-001; continuation-01)
 
 ParentA0001 afterA0009revert. Alternate two pinnedhostbuffers foreachunchangedGPUslot. ProfileproducerDMAwait12.763/60.918ms b1/b8 motivatesmoreCPUlookahead. PreserveA0001 release-before-gather ordering, isolatinghostreusefromA0006earlyrefill. Separatehostcompletionevents, one eventrecordpercopy, consumerpointsselectedevent. Hostpinningdoubles;GPUcapacityandtransferbytes unchanged. No earlierrejectedoptimizations combined. Test inflightreusewithdelayedGPUconsumers,freshweights/IDs,partialgroups,crossstreams,errorcleanup andcompletehostmemoryaccounting. Twelve-jobscreen andunchangedretentiongates.
+
+A0010 sourceb22f8f616ee933ddc4ad2dd09c3eb91e60ef477b frozen.47testspass9.62sec plusstandalone maxerror0; delayedGPUconsumer/crossstream/partialgroup hostreuse andpinnedcounter/errorcleanup verified. Twelve-jobscreen estimate261sec fromprior matchingprocess costs. Additionalhostpool correctlycounted; nochangeGPUslotcapacity.

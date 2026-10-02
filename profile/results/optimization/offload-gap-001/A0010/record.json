@@ -7,7 +7,7 @@
   "parent_sha": "1835ebe802504955a6146141a1aa7ebe5f3fcc16",
   "accepted_step": null,
   "label": "alternate pinned host buffers per GPU slot",
-  "workflow_stage": "implementation",
+  "workflow_stage": "screening",
   "hypothesis": "Decouple pinnedhost reuse fromGPUslot reuse by retainingtwohostbuffers perGPUslot. CPUgather canusealternatehoststorage withoutwaiting forimmediatelyprecedingH2D.",
   "expected_bottleneck": "Instrumentedproducer DMAwait12.763ms atb1 and60.918ms atb8; spans overlapGPUcompute andcannotbeassumedremovablewalltime.",
   "profile_evidence": [
@@ -46,6 +46,17 @@
     "full_validation": "Only ifnominated",
     "generation_validation": "Only ifnominated"
   },
-  "candidate_sha": null,
-  "decision": "Registered beforecode; preserveDMAread/CPUoverwrite ordering andGPUconsumptionfences."
+  "candidate_sha": "b22f8f616ee933ddc4ad2dd09c3eb91e60ef477b",
+  "decision": "In-flight hostreuse, exactgrowingdecode andmemorycounter gates pass;fixed12-job screen next.",
+  "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0010",
+  "correctness": {
+    "pytest": "47 passed in9.62s",
+    "standalone": "PASS; worst maxerror0",
+    "logs": [
+      "correctness-tests.txt",
+      "standalone-correctness.txt"
+    ]
+  },
+  "screen_manifest": "R01/manifest.json",
+  "screen_summary": "R01-summary.json"
 }
