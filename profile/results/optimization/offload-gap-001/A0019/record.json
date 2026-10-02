@@ -1,0 +1,55 @@
+{
+  "campaign_id": "offload-gap-001",
+  "continuation_id": "continuation-02",
+  "attempt_id": "A0019",
+  "parent_attempt_id": "A0001",
+  "parent_source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
+  "parent_sha": "d517563c43bf86c874599a8e4783d6b789d44500",
+  "accepted_step": null,
+  "label": "start pipeline producer before embedding dispatch",
+  "workflow_stage": "implementation_draft",
+  "hypothesis": "Launch pipeline gather/prefetch before submitting the embedding kernel, so first-layer CPU lookup/H2D can overlap embedding startup instead of depending on an entry event recorded after embedding.",
+  "expected_bottleneck": "Frozen A0001 startup diagnostic records embedding CUDA intervals0.041856/0.112032 ms at b1/b8; current model enqueues embedding before pipeline forward records its entry dependency and submits producer. These intervals may include dispatch gaps and cannot be claimed as removable latency.",
+  "profile_evidence": [
+    "../continuation-02/input-startup-b1.json",
+    "../continuation-02/input-startup-b8.json",
+    "../continuation-01/coordination-b1.json"
+  ],
+  "change": "Defer only pipeline embedding to the first layer consumer, after producer submission and entry recording. Preserve bulk ordering, supplied-hidden-state semantics, embedding values and all layer arithmetic.",
+  "tradeoffs": [
+    "Earlier transfer can contend with embedding bandwidth; producer setup delays embedding submission.",
+    "All hidden-state and KV outputs must remain bit-exact; deferred initialization and exception paths need explicit tests."
+  ],
+  "arithmetic_contract": "Scheduling-only, zero absolute/relative error against folded resident reference.",
+  "primary_target": "b1/b8 prefill; bulk decode cannot nominate gain",
+  "protocol_version": "offload_gap_v1",
+  "original_protocol_version": "offload_gap_v1",
+  "measurement_plan_id": "screen_v1_w3_n5_r1",
+  "screen": {
+    "batches": [
+      1,
+      8,
+      16
+    ],
+    "length": 2048,
+    "modes": [
+      "prefill",
+      "decode"
+    ],
+    "variants": [
+      "ma_offload",
+      "ma_gpu"
+    ],
+    "jobs": 12,
+    "reason_batch16": "Producer startup scheduling"
+  },
+  "not_run": {
+    "confirmation": "Draft only; staged gates required.",
+    "full_validation": "Draft only; staged gates required.",
+    "generation_validation": "Draft only; staged gates required."
+  },
+  "draft_root": "/tmp/offload-gap-A0019-draft-luibc_pp",
+  "draft_condition": "Activate sequentially after A0018 verdict from best verified parent. If A0018 retained, preserve asynchronous ID/embedding dispatch overlap by moving ID completion wait into producer before lookup; do not revert accepted staging merely to apply this draft. Preserve other retained changes. No GPU tests during A0016 confirmation.",
+  "draft_patch": "isolated-draft.patch",
+  "draft_validation": "Syntax compile only; runtime exactness and producer cancellation not yet tested."
+}
