@@ -398,3 +398,7 @@ A0006 twelve-job screen complete. b1 prefill offload29.145/resident28.624ms, red
 ### A0006 final verdict: within_noise (offload-gap-001; continuation-01)
 
 48 parent-confirmation processes complete. b1 prefill offload reduction0.148526ms,95%CI[-0.160371,0.457424]; gap reduction0.159473[-0.193442,0.512389]. b8 prefill reduction-0.227075[-1.439697,0.985547], gap-0.045337[-1.801089,1.710414]. Bothdecode changes unresolved; no primary resolves a regression, and GPU savings preserved. No point meets both latency/gap requirements. Keep allsamples and frozen b58cdb8 source; no extension and nofull/generation escalation. Commit evidence then code-only restore A0001. First additional verdict complete.
+
+### A0007 registration (offload-gap-001; continuation-01)
+
+Parent A0001 after A0006 evidence/revert. Cache immutable zero-copy tensor view metadata, not token values. Instrumented96 buffer-view calls total0.316/1.089ms atb1/b8; source and layer slices add operations. Precompute source-group aliases, host/GPU transfer views and per-layer GPU aliases in setup. Keep worker, slot count, DMA/release order and allfreshlookups unchanged. Test alias visibility after weight andID changes, partialgroups and slots, plus existing128-step gates. Twelve-job screen predeclared, formaldualcriterion unchanged.

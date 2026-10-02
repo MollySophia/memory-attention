@@ -1,0 +1,50 @@
+{
+  "campaign_id": "offload-gap-001",
+  "continuation_id": "continuation-01",
+  "attempt_id": "A0007",
+  "parent_attempt_id": "A0001",
+  "parent_source_sha": "942a2a52d94cf6dbe6e753f7ac291daf8b0699fb",
+  "parent_sha": "44ea50bc6ca484379b37db22961682b2cb1baf36",
+  "accepted_step": null,
+  "label": "precompute immutable pipeline tensor views",
+  "workflow_stage": "implementation",
+  "hypothesis": "Repeated slicing/view creation on producer and consumer threads adds Python/ATen overhead. Precompute zero-copy source, host and GPU views during offloader construction, while performing fresh gathers every call.",
+  "expected_bottleneck": "96 instrumented buffer-view operations perprefill total0.316ms atb1 and1.089ms atb8, plus uninstrumented source/layer slices.",
+  "profile_evidence": [
+    "../continuation-01/coordination-b1.json",
+    "../continuation-01/coordination-b8.json"
+  ],
+  "change": "Cache tensor metadata aliases for fixed-capacity buffers/source groups; keep A0001 producer, DMA/release order, slot count and arithmetic unchanged.",
+  "tradeoffs": [
+    "Extra small Python/view metadata persists for cached offloaders; backing storage unchanged.",
+    "Measured view spans include instrumentation/GIL interactions and overlap compute; model-level gain may remain unresolved."
+  ],
+  "protocol_version": "offload_gap_v1",
+  "original_protocol_version": "offload_gap_v1",
+  "measurement_plan_id": "screen_v1_w3_n5_r1",
+  "screen": {
+    "batches": [
+      1,
+      8,
+      16
+    ],
+    "length": 2048,
+    "modes": [
+      "prefill",
+      "decode"
+    ],
+    "variants": [
+      "ma_offload",
+      "ma_gpu"
+    ],
+    "jobs": 12,
+    "reason_batch16": "Pipeline execution integration; retain batch16 scheduling control"
+  },
+  "not_run": {
+    "confirmation": "Only if screen promises incremental gain",
+    "full_validation": "Only if nominated",
+    "generation_validation": "Only if nominated"
+  },
+  "candidate_sha": null,
+  "decision": "Registered before code edits; no timing yet."
+}
