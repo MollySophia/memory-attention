@@ -7,7 +7,7 @@
   "parent_sha": "1b64fe9c7e140c5c66af45df41abd9c044d792d8",
   "accepted_step": null,
   "label": "blocking producer DMA completion events",
-  "workflow_stage": "registered",
+  "workflow_stage": "parent_confirmation",
   "hypothesis": "Use blocking CUDA completion events for producer host-buffer reuse, reducing CPU consumption during DMA waits and potential competition with lookup/model submission.",
   "expected_bottleneck": "Instrumented frozen A0001 producer event waits consume 13.1856/59.5677 ms thread CPU time within 13.2182/59.8416 ms wall wait at b1/b8. Overlapping wait spans are not additive removable model latency.",
   "profile_evidence": [
@@ -44,5 +44,22 @@
     "confirmation": "Not yet nominated; staged gates required.",
     "full_validation": "Not yet nominated; staged gates required.",
     "generation_validation": "Not yet nominated; staged gates required."
-  }
+  },
+  "candidate_sha": "817cc6b5081acdcc7d50935f98e0a4b8c0b71b3a",
+  "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0012",
+  "correctness": {
+    "pytest": "45 passed in 9.87s",
+    "standalone": "PASS; worst max error 0",
+    "logs": [
+      "correctness-tests.txt",
+      "standalone-correctness.txt"
+    ]
+  },
+  "screen_manifest": "R01/manifest.json",
+  "screen_summary": "R01-summary.json",
+  "mechanism_diagnostic": "wait-cpu-b8.json",
+  "mechanism_observation": "At b8, instrumented producer waits still span 60.2107 ms wall but consume 0.2281 ms thread CPU, versus A0001 59.8416 wall / 59.5677 CPU. This validates reduced CPU consumption, not model latency benefit.",
+  "performance": "screen-comparison.json",
+  "screen_decision": "b1 prefill offload and gap reductions 0.140985/0.148229 ms vs A0001; b8 prefill slower 0.356781 ms with gap worse 0.174065 ms. Requires fixed independent confirmation across all four primary workloads. Decode algorithm unchanged; decode fluctuations cannot nominate this optimization.",
+  "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json"
 }

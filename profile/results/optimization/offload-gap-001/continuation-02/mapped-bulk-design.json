@@ -1,0 +1,32 @@
+{
+  "campaign_id": "offload-gap-001",
+  "continuation_id": "continuation-02",
+  "status": "design_only_not_registered",
+  "hypothesis": "For small bulk inputs, read all layer rows directly on GPU from mapped pinned CPU storage, avoiding GPU-ID D2H and CPU gather/H2D submission.",
+  "evidence": "mapped-bulk.json",
+  "predeclared_scope_if_registered": {
+    "minimum_tokens": 8,
+    "maximum_tokens": 16,
+    "target_primary": "batch 8 decode",
+    "reason": "b1 mapped microcase slightly slower; b8/b16 improve, so leave b1 unchanged."
+  },
+  "expected_change": [
+    "Only use mapped bulk when existing policy selects bulk and token count is in range 8..16. Pipeline remains original.",
+    "Pin CPU folded table once during setup; keep the complete table on CPU, with only bounded gathered bulk output on GPU.",
+    "Feed fresh GPU IDs directly for mapped bulk; other offloaders retain their normal CPU-ID path.",
+    "One mapped gather across all 24 layers, then existing bulk per-layer handles. No lookup reuse across calls.",
+    "Synchronize the mapped read stream before return and on error so CPU table updates and tensor lifetimes remain safe."
+  ],
+  "memory": [
+    "Whole 3000 MiB folded table becomes page-locked; record cpu_table_pinned_bytes and include once in offload_pinned_bytes.",
+    "Mapped bulk output capacity unchanged; zero gathered host buffer for that offloader; original pipeline and other bulk host buffers remain counted.",
+    "Raw/restore CPU tables and process RSS remain reported; temporary setup pin-copy is not hidden from process high-water reporting."
+  ],
+  "correctness": [
+    "Two seeds, non-unit norms, QK normalization/gating, GQA and padding in 128-step comparisons; force mapped range in small-model bulk tests.",
+    "Direct CPU/GPU-ID tests at batch 8/16, changing IDs, host weights mutated immediately after return, cross-stream reuse and consumer-error cleanup.",
+    "No precision/arithmetic change; require exact folded-resident results."
+  ],
+  "gates": "Twelve-job screen including b16; only target b8 decode can nominate gain; fixed independent confirmation, frozen-baseline comparison and full correctness/matrix/generation required before retention.",
+  "prior_attempt_relation": "A0008 tested bounded mapped prefill groups and was rejected; this bulk-only proposal instead uses one all-layer read for tiny inputs. It does not combine the rejected prefill implementation."
+}
