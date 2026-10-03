@@ -1,0 +1,803 @@
+{
+  "status": "frozen_before_measurement",
+  "created_unix": 1790994605.2069635,
+  "attempts": [
+    {
+      "attempt": "A0002",
+      "parent": "A0001",
+      "source": "ac6fbc2cbf534c804bb34227aa3ddee3e08728d9",
+      "label": "serial byte copies for tiny CPU lookups",
+      "workloads": [
+        [
+          "decode",
+          4,
+          2048
+        ],
+        [
+          "decode",
+          8,
+          512
+        ],
+        [
+          "decode",
+          8,
+          4096
+        ],
+        [
+          "decode",
+          8,
+          8192
+        ],
+        [
+          "generation",
+          1,
+          2048
+        ],
+        [
+          "generation",
+          8,
+          2048
+        ]
+      ],
+      "planned_work": {
+        "jobs": 24,
+        "estimated_seconds": 543.7217792862095
+      }
+    },
+    {
+      "attempt": "A0003",
+      "parent": "A0001",
+      "source": "986e000b1d973a2a76155ff932aba2d367d03dc0",
+      "label": "two-layer groups in automatic pipeline",
+      "workloads": [
+        [
+          "prefill",
+          4,
+          2048
+        ],
+        [
+          "prefill",
+          8,
+          512
+        ],
+        [
+          "prefill",
+          8,
+          4096
+        ],
+        [
+          "prefill",
+          8,
+          8192
+        ],
+        [
+          "decode",
+          8,
+          8192
+        ],
+        [
+          "generation",
+          1,
+          2048
+        ],
+        [
+          "generation",
+          8,
+          2048
+        ]
+      ],
+      "planned_work": {
+        "jobs": 28,
+        "estimated_seconds": 650.8106543235481
+      }
+    },
+    {
+      "attempt": "A0004",
+      "parent": "A0001",
+      "source": "29a0d4ff761e862423e5cd22a8d2a475d9a99a78",
+      "label": "caller-thread pipeline producer",
+      "workloads": [
+        [
+          "prefill",
+          4,
+          2048
+        ],
+        [
+          "prefill",
+          8,
+          512
+        ],
+        [
+          "prefill",
+          8,
+          4096
+        ],
+        [
+          "prefill",
+          8,
+          8192
+        ],
+        [
+          "decode",
+          8,
+          8192
+        ],
+        [
+          "generation",
+          1,
+          2048
+        ],
+        [
+          "generation",
+          8,
+          2048
+        ]
+      ],
+      "planned_work": {
+        "jobs": 28,
+        "estimated_seconds": 649.5059584151953
+      }
+    },
+    {
+      "attempt": "A0005",
+      "parent": "A0001",
+      "source": "f33b0e383f2b3d9d7121ea3b92d1e45157aad1de",
+      "label": "compute-stream copies for tiny bulk transfers",
+      "workloads": [
+        [
+          "decode",
+          4,
+          2048
+        ],
+        [
+          "decode",
+          8,
+          512
+        ],
+        [
+          "decode",
+          8,
+          4096
+        ],
+        [
+          "decode",
+          8,
+          8192
+        ],
+        [
+          "generation",
+          1,
+          2048
+        ],
+        [
+          "generation",
+          8,
+          2048
+        ]
+      ],
+      "planned_work": {
+        "jobs": 24,
+        "estimated_seconds": 543.2351770192384
+      }
+    },
+    {
+      "attempt": "A0006",
+      "parent": "A0001",
+      "source": "b58cdb8640fb2d6a57631e0c26fc6f9a72761f74",
+      "label": "refill host slot before consumer release",
+      "workloads": [
+        [
+          "prefill",
+          4,
+          2048
+        ],
+        [
+          "prefill",
+          8,
+          512
+        ],
+        [
+          "prefill",
+          8,
+          4096
+        ],
+        [
+          "prefill",
+          8,
+          8192
+        ],
+        [
+          "decode",
+          8,
+          8192
+        ],
+        [
+          "generation",
+          1,
+          2048
+        ],
+        [
+          "generation",
+          8,
+          2048
+        ]
+      ],
+      "planned_work": {
+        "jobs": 28,
+        "estimated_seconds": 650.4291003879159
+      }
+    },
+    {
+      "attempt": "A0007",
+      "parent": "A0001",
+      "source": "2bcbe8d197ef3244af1f51beb1214e4f3ecf6ffc",
+      "label": "precompute immutable pipeline tensor views",
+      "workloads": [
+        [
+          "prefill",
+          4,
+          2048
+        ],
+        [
+          "prefill",
+          8,
+          512
+        ],
+        [
+          "prefill",
+          8,
+          4096
+        ],
+        [
+          "prefill",
+          8,
+          8192
+        ],
+        [
+          "decode",
+          8,
+          8192
+        ],
+        [
+          "generation",
+          1,
+          2048
+        ],
+        [
+          "generation",
+          8,
+          2048
+        ]
+      ],
+      "planned_work": {
+        "jobs": 28,
+        "estimated_seconds": 653.3465359276161
+      }
+    },
+    {
+      "attempt": "A0008",
+      "parent": "A0001",
+      "source": "fb17afb2a97b68ec61ef517622707f68ce33e051",
+      "label": "mapped-host GPU gather for pipeline",
+      "workloads": [
+        [
+          "prefill",
+          4,
+          2048
+        ],
+        [
+          "prefill",
+          8,
+          512
+        ],
+        [
+          "prefill",
+          8,
+          4096
+        ],
+        [
+          "prefill",
+          8,
+          8192
+        ],
+        [
+          "decode",
+          8,
+          8192
+        ],
+        [
+          "generation",
+          1,
+          2048
+        ],
+        [
+          "generation",
+          8,
+          2048
+        ]
+      ],
+      "planned_work": {
+        "jobs": 28,
+        "estimated_seconds": 658.0451272251084
+      }
+    },
+    {
+      "attempt": "A0009",
+      "parent": "A0001",
+      "source": "0ac06a0f7ce6c3ce77fd5a878c4a34c991527ec2",
+      "label": "within-call token dedup for large pipeline inputs",
+      "workloads": [
+        [
+          "prefill",
+          4,
+          2048
+        ],
+        [
+          "prefill",
+          8,
+          4096
+        ],
+        [
+          "prefill",
+          8,
+          8192
+        ],
+        [
+          "decode",
+          8,
+          8192
+        ],
+        [
+          "generation",
+          8,
+          2048
+        ]
+      ],
+      "planned_work": {
+        "jobs": 20,
+        "estimated_seconds": 478.0173498858698
+      }
+    },
+    {
+      "attempt": "A0010",
+      "parent": "A0001",
+      "source": "b22f8f616ee933ddc4ad2dd09c3eb91e60ef477b",
+      "label": "alternate pinned host buffers per GPU slot",
+      "workloads": [
+        [
+          "prefill",
+          4,
+          2048
+        ],
+        [
+          "prefill",
+          8,
+          512
+        ],
+        [
+          "prefill",
+          8,
+          4096
+        ],
+        [
+          "prefill",
+          8,
+          8192
+        ],
+        [
+          "decode",
+          8,
+          8192
+        ],
+        [
+          "generation",
+          1,
+          2048
+        ],
+        [
+          "generation",
+          8,
+          2048
+        ]
+      ],
+      "planned_work": {
+        "jobs": 28,
+        "estimated_seconds": 651.4116541055963
+      }
+    },
+    {
+      "attempt": "A0011",
+      "parent": "A0001",
+      "source": "812ac2decafaf2d9919028a7bbd0c740db07ba1a",
+      "label": "reuse pinned input-ID staging buffers",
+      "workloads": [
+        [
+          "prefill",
+          4,
+          2048
+        ],
+        [
+          "prefill",
+          8,
+          512
+        ],
+        [
+          "prefill",
+          8,
+          4096
+        ],
+        [
+          "prefill",
+          8,
+          8192
+        ],
+        [
+          "decode",
+          8,
+          8192
+        ],
+        [
+          "generation",
+          1,
+          2048
+        ],
+        [
+          "generation",
+          8,
+          2048
+        ]
+      ],
+      "planned_work": {
+        "jobs": 28,
+        "estimated_seconds": 651.1548475606368
+      }
+    },
+    {
+      "attempt": "A0012",
+      "parent": "A0001",
+      "source": "817cc6b5081acdcc7d50935f98e0a4b8c0b71b3a",
+      "label": "blocking producer DMA completion events",
+      "workloads": [
+        [
+          "prefill",
+          4,
+          2048
+        ],
+        [
+          "prefill",
+          8,
+          512
+        ],
+        [
+          "prefill",
+          8,
+          4096
+        ],
+        [
+          "prefill",
+          8,
+          8192
+        ],
+        [
+          "decode",
+          8,
+          8192
+        ],
+        [
+          "generation",
+          1,
+          2048
+        ],
+        [
+          "generation",
+          8,
+          2048
+        ]
+      ],
+      "planned_work": {
+        "jobs": 28,
+        "estimated_seconds": 650.9457180747762
+      }
+    },
+    {
+      "attempt": "A0013",
+      "parent": "A0001",
+      "source": "5d5eb4858f5102b5e7c0c004e359304b13ac38c8",
+      "label": "mapped-host all-layer gather for small bulk inputs",
+      "workloads": [
+        [
+          "decode",
+          8,
+          512
+        ],
+        [
+          "decode",
+          8,
+          4096
+        ],
+        [
+          "decode",
+          8,
+          8192
+        ],
+        [
+          "generation",
+          8,
+          2048
+        ]
+      ],
+      "planned_work": {
+        "jobs": 16,
+        "estimated_seconds": 375.7152584451251
+      }
+    },
+    {
+      "attempt": "A0014",
+      "parent": "A0001",
+      "source": "b9938ebc46d7a92fc07898a09c72edc547f5f8f3",
+      "label": "one-slot automatic pipeline lookahead",
+      "workloads": [
+        [
+          "prefill",
+          4,
+          2048
+        ],
+        [
+          "prefill",
+          8,
+          512
+        ],
+        [
+          "prefill",
+          8,
+          4096
+        ],
+        [
+          "prefill",
+          8,
+          8192
+        ],
+        [
+          "decode",
+          8,
+          8192
+        ],
+        [
+          "generation",
+          1,
+          2048
+        ],
+        [
+          "generation",
+          8,
+          2048
+        ]
+      ],
+      "planned_work": {
+        "jobs": 28,
+        "estimated_seconds": 649.9477607639507
+      }
+    },
+    {
+      "attempt": "A0015",
+      "parent": "A0001",
+      "source": "0436370506e82e3a32d6ccbc6bb5217bc0e84637",
+      "label": "fuse compressed-row expansion with memory addition",
+      "workloads": [
+        [
+          "prefill",
+          4,
+          2048
+        ],
+        [
+          "prefill",
+          8,
+          4096
+        ],
+        [
+          "prefill",
+          8,
+          8192
+        ],
+        [
+          "decode",
+          8,
+          8192
+        ],
+        [
+          "generation",
+          8,
+          2048
+        ]
+      ],
+      "planned_work": {
+        "jobs": 20,
+        "estimated_seconds": 477.9037239552476
+      }
+    },
+    {
+      "attempt": "A0017",
+      "parent": "A0016",
+      "source": "7eb99060e4ac0125bb93487abc85f139f1e73c8f",
+      "label": "write-combined pinned pipeline buffers for large inputs",
+      "workloads": [
+        [
+          "prefill",
+          4,
+          2048
+        ],
+        [
+          "prefill",
+          8,
+          4096
+        ],
+        [
+          "prefill",
+          8,
+          8192
+        ],
+        [
+          "decode",
+          8,
+          8192
+        ],
+        [
+          "generation",
+          8,
+          2048
+        ]
+      ],
+      "planned_work": {
+        "jobs": 20,
+        "estimated_seconds": 478.3486926487647
+      }
+    },
+    {
+      "attempt": "A0018",
+      "parent": "A0016",
+      "source": "6089489be39a59a31360b8f89add2042cc0a7c8b",
+      "label": "submit embedding before waiting for pipeline input IDs",
+      "workloads": [
+        [
+          "prefill",
+          4,
+          2048
+        ],
+        [
+          "prefill",
+          8,
+          512
+        ],
+        [
+          "prefill",
+          8,
+          4096
+        ],
+        [
+          "prefill",
+          8,
+          8192
+        ],
+        [
+          "decode",
+          8,
+          8192
+        ],
+        [
+          "generation",
+          1,
+          2048
+        ],
+        [
+          "generation",
+          8,
+          2048
+        ]
+      ],
+      "planned_work": {
+        "jobs": 28,
+        "estimated_seconds": 654.0111430660821
+      }
+    },
+    {
+      "attempt": "A0019",
+      "parent": "A0016",
+      "source": "f59cdf0c8d7fa32f98b6947c0ba784210f0e7437",
+      "label": "start pipeline producer before embedding dispatch",
+      "workloads": [
+        [
+          "prefill",
+          4,
+          2048
+        ],
+        [
+          "prefill",
+          8,
+          512
+        ],
+        [
+          "prefill",
+          8,
+          4096
+        ],
+        [
+          "prefill",
+          8,
+          8192
+        ],
+        [
+          "decode",
+          8,
+          8192
+        ],
+        [
+          "generation",
+          1,
+          2048
+        ],
+        [
+          "generation",
+          8,
+          2048
+        ]
+      ],
+      "planned_work": {
+        "jobs": 28,
+        "estimated_seconds": 652.9131474969909
+      }
+    },
+    {
+      "attempt": "A0020",
+      "parent": "A0016",
+      "source": "41869553c1df91e5c8ae4cda16cd4c6b1c0ab44b",
+      "label": "reuse per-layer pipeline coordination tickets",
+      "workloads": [
+        [
+          "prefill",
+          4,
+          2048
+        ],
+        [
+          "prefill",
+          8,
+          512
+        ],
+        [
+          "prefill",
+          8,
+          4096
+        ],
+        [
+          "prefill",
+          8,
+          8192
+        ],
+        [
+          "decode",
+          8,
+          8192
+        ],
+        [
+          "generation",
+          1,
+          2048
+        ],
+        [
+          "generation",
+          8,
+          2048
+        ]
+      ],
+      "planned_work": {
+        "jobs": 28,
+        "estimated_seconds": 654.7460604761727
+      }
+    }
+  ],
+  "jobs": 460,
+  "estimated_seconds": 10724.209689064044,
+  "selection": "All new screen points with positive mean offload and gap reductions and positive GPU savings, plus applicable historical batch16 screen points meeting the same sign rule. No effect-size cutoff, top-K selection or repeated screening.",
+  "confirmation": "Exactly three fresh balanced blocks per selected workload against historical parent; additionally against A0016 if different. Screen observations excluded from inference. No extension until favorable.",
+  "multiple_testing": "Holm family-wise correction at 0.05 across all parent and current comparisons; p=max(one-sided paired t latency p, gap p), n=3. Also require both nominal two-sided 95% lower bounds positive, no resolved resident slowdown, positive GPU savings. Only local performance evidence, never automatic acceptance.",
+  "scope": "18 nonretained frozen implementations; pipeline prefill uncovered shapes, high-context decode control, applicable generation; tiny bulk uncovered decode and generation. Historical verdicts and final implementation unchanged. Not an exhaustive search outside the campaign matrix."
+}
