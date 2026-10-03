@@ -1,0 +1,97 @@
+{
+  "status": "audited",
+  "formal": true,
+  "rows": [
+    {
+      "attempt": "A0004",
+      "baseline": "A0016",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 512,
+      "statistics": {
+        "offload_reduction_ms": {
+          "values": [
+            2.1997921013583692,
+            2.149369055405259,
+            2.624224995573357
+          ],
+          "mean": 2.3244620507789953,
+          "lower_95": 1.6765401295027647,
+          "upper_95": 2.972383972055226,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "gpu_reduction_ms": {
+          "values": [
+            0.1081200161327942,
+            -0.003758414338030036,
+            -0.2470576049139055
+          ],
+          "mean": -0.04756533437304711,
+          "lower_95": -0.4986745538335751,
+          "upper_95": 0.4035438850874809,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "gap_reduction_ms": {
+          "values": [
+            2.091672085225575,
+            2.153127469743289,
+            2.8712826004872625
+          ],
+          "mean": 2.3720273851520424,
+          "lower_95": 1.2952575026651403,
+          "upper_95": 3.4487972676389447,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "offload_speedup": {
+          "values": [
+            1.0416784504214442,
+            1.0408690167644516,
+            1.0498657138596752
+          ],
+          "mean": 1.0441377270151904,
+          "lower_95": 1.0317740134857907,
+          "upper_95": 1.05650144054459,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 54.97987579243878,
+          "baseline_gpu_ms": 52.4341421512266,
+          "candidate_offload_ms": 52.780083691080414,
+          "candidate_gpu_ms": 52.32602213509381
+        },
+        {
+          "baseline_offload_ms": 54.74101978664597,
+          "baseline_gpu_ms": 51.955161429941654,
+          "candidate_offload_ms": 52.59165073124071,
+          "candidate_gpu_ms": 51.958919844279684
+        },
+        {
+          "baseline_offload_ms": 55.25006332124273,
+          "baseline_gpu_ms": 51.9294315793862,
+          "candidate_offload_ms": 52.62583832566937,
+          "candidate_gpu_ms": 52.1764891843001
+        }
+      ],
+      "gpu_savings_bytes": [
+        3102998528,
+        3102998528,
+        3102998528
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0004/confirmation-current/manifest.json",
+      "accepted": false,
+      "screen_promising": true,
+      "joint_one_sided_p": 0.005474262007755845,
+      "nominal_dual_gain": true,
+      "resolved_resident_slowdown": false
+    }
+  ],
+  "checked_raw_results": 12,
+  "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0004/confirmation-current/manifest.json"
+}
