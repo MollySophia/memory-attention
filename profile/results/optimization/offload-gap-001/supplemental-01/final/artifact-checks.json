@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "csv_rows": {
+    "screen.csv": 135,
+    "confirmation.csv": 112,
+    "measurements.csv": 1408
+  },
+  "figure_sets": 19,
+  "formats": [
+    "png",
+    "pdf",
+    "svg"
+  ],
+  "local_links_checked": 35,
+  "bash_fences_checked": 2
+}

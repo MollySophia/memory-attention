@@ -21,9 +21,19 @@
   "next_actions": [],
   "supplemental_study": {
     "id": "supplemental-01",
-    "status": "running",
+    "status": "complete",
     "plan": "supplemental-01/PLAN.md",
     "screen_controller": "supplemental-01/screen-controller.json",
-    "note": "Separate shape survey; original 20 attempts and two retained sources remain finalized."
+    "note": "Local secondary-shape evidence found; no implementation change. Original20 attempts and2 retained sources remain finalized.",
+    "finished_unix": 1791032707.1114876,
+    "report": "supplemental-01/final/REPORT.md",
+    "audit": "supplemental-01/final/audit.json",
+    "publication": "supplemental-01/final/publication.json",
+    "fresh_screen_processes": 472,
+    "independent_confirmation_processes": 936,
+    "fixed_confirmation_family": 112,
+    "confirmed_local_comparisons": 3,
+    "workloads_passing_parent_and_current": 1,
+    "accepted_new_attempts": 0
   }
 }

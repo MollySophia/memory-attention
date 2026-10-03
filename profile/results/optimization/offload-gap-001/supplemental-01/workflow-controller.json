@@ -1,21 +1,28 @@
 {
-  "status": "stopped_confirmation_needs_review",
-  "pid": 2707597,
-  "screen_pid": 2703709,
-  "screen_starttime": "340759574",
+  "status": "measurements_complete_pending_report",
+  "pid": 2860276,
   "started_unix": 1790994918.6225526,
+  "resumed_unix": 1791005761.0306756,
+  "prior_record": "preparation-failure-01/workflow-controller.json",
+  "reason": "Historical reference was measured in original repository at correct SHA/hash. Audit now checks recorded command/cwd module path, preserving strict source identity. No GPU measurements were repeated.",
   "stages": [
     {
-      "action": "prepare",
+      "action": "run",
       "command": [
         "/home/molly/miniconda3/envs/fla-bench/bin/python",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/confirm.py",
-        "prepare"
+        "run"
       ],
-      "started_unix": 1791005298.939724,
-      "pid": 2854451,
-      "returncode": 1,
-      "finished_unix": 1791005497.1079414
+      "started_unix": 1791005761.030684,
+      "pid": 2860320,
+      "returncode": 0,
+      "finished_unix": 1791032330.1179595
     }
-  ]
+  ],
+  "finished_unix": 1791032330.1179612,
+  "report_status": "complete",
+  "report": "final/REPORT.md",
+  "audit": "final/audit.json",
+  "report_completed_unix": 1791032707.111631,
+  "status_note": "Measurement terminal status is retained for deterministic CPU-only report/audit regeneration; report_status records report completion."
 }
