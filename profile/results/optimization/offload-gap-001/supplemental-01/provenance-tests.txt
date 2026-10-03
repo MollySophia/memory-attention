@@ -1,0 +1,9 @@
+
+profile/results/optimization/offload-gap-001/supplemental-01/test_study.py::test_scope_covers_all_nonretained_sources_and_appropriate_branches PASSED [ 16%]
+profile/results/optimization/offload-gap-001/supplemental-01/test_study.py::test_formal_plan_uses_fresh_alternating_blocks_and_unchanged_generation_scope PASSED [ 33%]
+profile/results/optimization/offload-gap-001/supplemental-01/test_study.py::test_raw_audit_rejects_wrong_provenance_or_shape[candidate_sha-bad] PASSED [ 50%]
+profile/results/optimization/offload-gap-001/supplemental-01/test_study.py::test_raw_audit_rejects_wrong_provenance_or_shape[source_sha256-bad] PASSED [ 66%]
+profile/results/optimization/offload-gap-001/supplemental-01/test_study.py::test_raw_audit_rejects_wrong_provenance_or_shape[batch-16] PASSED [ 83%]
+profile/results/optimization/offload-gap-001/supplemental-01/test_study.py::test_holm_keeps_fixed_unrun_family_and_is_monotone PASSED [100%]
+
+============================== 6 passed in 0.11s ===============================
