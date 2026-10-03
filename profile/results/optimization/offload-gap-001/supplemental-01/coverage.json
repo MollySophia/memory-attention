@@ -1181,8 +1181,8 @@
       "mode": "decode",
       "batch": 4,
       "length": 2048,
-      "coverage": "not_measured",
-      "reason": "Outside this route-aware scope; not a claim of equivalence. Tiny-bulk/pipeline activation and threshold exclusions documented in PLAN.md."
+      "coverage": "fresh_supplemental_addendum",
+      "reason": "Source review identified shared bulk ID staging; three additional cells frozen before their measurement. See bulk-coverage-addendum.json."
     },
     {
       "attempt": "A0011",
@@ -1229,8 +1229,8 @@
       "mode": "decode",
       "batch": 8,
       "length": 512,
-      "coverage": "not_measured",
-      "reason": "Outside this route-aware scope; not a claim of equivalence. Tiny-bulk/pipeline activation and threshold exclusions documented in PLAN.md."
+      "coverage": "fresh_supplemental_addendum",
+      "reason": "Source review identified shared bulk ID staging; three additional cells frozen before their measurement. See bulk-coverage-addendum.json."
     },
     {
       "attempt": "A0011",
@@ -1245,8 +1245,8 @@
       "mode": "decode",
       "batch": 8,
       "length": 4096,
-      "coverage": "not_measured",
-      "reason": "Outside this route-aware scope; not a claim of equivalence. Tiny-bulk/pipeline activation and threshold exclusions documented in PLAN.md."
+      "coverage": "fresh_supplemental_addendum",
+      "reason": "Source review identified shared bulk ID staging; three additional cells frozen before their measurement. See bulk-coverage-addendum.json."
     },
     {
       "attempt": "A0011",

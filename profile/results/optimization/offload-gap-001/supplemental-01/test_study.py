@@ -35,3 +35,9 @@ def test_holm_keeps_fixed_unrun_family_and_is_monotone():
  assert holm([.04,.01,1.])==pytest.approx([.08,.03,1.])
  assert holm([.001,.001,.001])==pytest.approx([.003,.003,.003])
  assert holm([])==[]
+
+def test_bulk_addendum_is_previously_unmeasured_and_paired(tmp_path):
+ assert not set(s.ADDENDUM_SHAPES)&set(s.shapes('A0011'))
+ p=s.plan('A0011',s.ADDENDUM_SHAPES,'A0001',False,tmp_path)
+ assert len(p['jobs'])==12
+ assert {j['mode'] for j in p['jobs']}=={'decode'}

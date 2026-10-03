@@ -120,6 +120,14 @@ def summarize(directory):
  result=dict(status='audited',formal=p['formal'],rows=rows,checked_raw_results=len(p['jobs']),source_manifest=str(directory/'manifest.json'))
  save(directory/'summary.json',result);return result
 
+ADDENDUM_SHAPES=[('decode',4,2048),('decode',8,512),('decode',8,4096)]
+def prepare_addendum():
+ directory=D/'A0011/screen-bulk-addendum'
+ directory.mkdir(parents=True,exist_ok=False)
+ p=plan('A0011',ADDENDUM_SHAPES,'A0001',False,directory)
+ save(directory/'manifest.json',p)
+ save(D/'bulk-coverage-addendum.json',dict(status='frozen_before_additional_measurement',created_unix=time.time(),attempt='A0011',workloads=ADDENDUM_SHAPES,planned_work=p['planned_work'],reason='Coverage review: reusable pinned IDs affect bulk as well as pipeline calls. Add previously omitted b4/2048 and b8/512,4096 decode. No observations of these new points used to select them; original460-process plan retained. Run after original screen and before freezing independent-confirmation nominations. Selection and statistical rules unchanged.'))
+
 def prepare():
  assert not (D/'plan.json').exists()
  descriptions=[]
@@ -128,6 +136,7 @@ def prepare():
   p=plan(a,work,r['parent_attempt_id'],False,directory);save(directory/'manifest.json',p)
   descriptions.append(dict(attempt=a,parent=r['parent_attempt_id'],source=r['candidate_sha'],label=r['label'],workloads=work,planned_work=p['planned_work']))
  save(D/'plan.json',dict(status='frozen_before_measurement',created_unix=time.time(),attempts=descriptions,jobs=sum(x['planned_work']['jobs'] for x in descriptions),estimated_seconds=sum(x['planned_work']['estimated_seconds'] for x in descriptions),selection='All new screen points with positive mean offload and gap reductions and positive GPU savings, plus applicable historical batch16 screen points meeting the same sign rule. No effect-size cutoff, top-K selection or repeated screening.',confirmation='Exactly three fresh balanced blocks per selected workload against historical parent; additionally against A0016 if different. Screen observations excluded from inference. No extension until favorable.',multiple_testing='Holm family-wise correction at 0.05 across all parent and current comparisons; p=max(one-sided paired t latency p, gap p), n=3. Also require both nominal two-sided 95% lower bounds positive, no resolved resident slowdown, positive GPU savings. Only local performance evidence, never automatic acceptance.',scope='18 nonretained frozen implementations; pipeline prefill uncovered shapes, high-context decode control, applicable generation; tiny bulk uncovered decode and generation. Historical verdicts and final implementation unchanged. Not an exhaustive search outside the campaign matrix.'))
+ prepare_addendum()
  print(read(D/'plan.json')['jobs'],read(D/'plan.json')['estimated_seconds'])
 
 def screen_all():

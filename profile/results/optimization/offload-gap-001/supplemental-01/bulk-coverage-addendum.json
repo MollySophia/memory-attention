@@ -1,0 +1,27 @@
+{
+  "status": "frozen_before_additional_measurement",
+  "created_unix": 1791000498.2264671,
+  "attempt": "A0011",
+  "workloads": [
+    [
+      "decode",
+      4,
+      2048
+    ],
+    [
+      "decode",
+      8,
+      512
+    ],
+    [
+      "decode",
+      8,
+      4096
+    ]
+  ],
+  "planned_work": {
+    "jobs": 12,
+    "estimated_seconds": 197.22809349820017
+  },
+  "reason": "Coverage review: reusable pinned IDs affect bulk as well as pipeline calls. Add previously omitted b4/2048 and b8/512,4096 decode. No observations of these new points used to select them; original460-process plan retained. Run after original screen and before freezing independent-confirmation nominations. Selection and statistical rules unchanged."
+}

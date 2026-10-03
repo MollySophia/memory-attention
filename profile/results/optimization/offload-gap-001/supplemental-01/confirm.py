@@ -33,9 +33,13 @@ def historical(a):
 def prepare():
  assert not (D/'confirmation-plan.json').exists()
  assert s.read(D/'screen-controller.json')['status']=='completed'
+ addon=D/'A0011/screen-bulk-addendum'
+ assert s.read(addon/'manifest.json')['status']=='planned'
+ s.run(addon);s.summarize(addon)
  nominees=[];allpoints=[];comparisons=[]
  for a in s.ATTEMPTS:
   new=s.summarize(D/a/'screen')['rows'];old=historical(a)
+  if a=='A0011':new+=s.summarize(D/a/'screen-bulk-addendum')['rows']
   s.save(D/a/'historical-b16-review.json',dict(rows=old))
   points=new+old;allpoints+=points;selected=[r for r in points if r['screen_promising']]
   nominees+=selected
@@ -50,7 +54,7 @@ def prepare():
    for r in selected:comparisons.append(dict(attempt=a,comparator=comparator,baseline=baseline,mode=r['mode'],batch=r['batch'],length=r['length'],status='planned',p_for_multiplicity=1.0))
  plan=dict(status='frozen_before_independent_confirmation',created_unix=time.time(),nominees=nominees,family=comparisons,family_size=len(comparisons),parent_jobs=12*len(nominees),maximum_current_jobs=12*sum(r['comparator']=='current' for r in comparisons),screen_points_reviewed=len(allpoints),rule='Exactly three new independent blocks; screens excluded. Fixed potential parent/current family; unrun current slots p=1. Holm-adjusted conjunction p plus both two-sided95% lower bounds positive, memory savings and no resident slowdown. Local evidence only; not acceptance.')
  s.save(D/'confirmation-plan.json',plan)
- s.save(D/'screen-summary.json',dict(rows=allpoints,nominees=len(nominees),raw_new_results=460))
+ s.save(D/'screen-summary.json',dict(rows=allpoints,nominees=len(nominees),raw_new_results=472))
  print(json.dumps({k:v for k,v in plan.items() if k not in ('nominees','family')}),flush=True)
 
 def passes(row):return row['nominal_dual_gain'] and row['memory_savings_preserved'] and not row['resolved_resident_slowdown']

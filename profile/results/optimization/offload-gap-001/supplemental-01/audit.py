@@ -14,6 +14,10 @@ def audit():
   assert len(p['jobs'])==4*len(s.shapes(a))
   keys={(j['mode'],j['batch'],j['length']) for j in p['jobs']};assert keys==set(s.shapes(a))
   summary=s.summarize(D/a/'screen');history=confirm.historical(a)
+  if a=='A0011':
+   addon=s.read(D/a/'screen-bulk-addendum/manifest.json');assert len(addon['jobs'])==12
+   assert {(j['mode'],j['batch'],j['length']) for j in addon['jobs']}==set(s.ADDENDUM_SHAPES)
+   summary['rows']+=s.summarize(D/a/'screen-bulk-addendum')['rows']
   nominated[a]={(r['mode'],r['batch'],r['length']) for r in summary['rows']+history if r['screen_promising']}
  for path in D.glob('A*/*/manifest.json'):
   p=s.read(path)
@@ -50,6 +54,6 @@ def audit():
  assert s.source_hash(repo)==s.source_hash(s.root('A0016'))
  historical=[str(p.relative_to(repo)) for p in C.glob('A[0-9][0-9][0-9][0-9]')]+[str((C/'final').relative_to(repo)),str((C/'continuation-01/final').relative_to(repo)),str((C/'continuation-02/final').relative_to(repo))]
  assert not subprocess.check_output(['git','diff','0afe89bf6e1f69db4036f00ce8e3c9877889c2cd','--',*historical],cwd=repo)
- result=dict(status='passed',campaign_id='offload-gap-001',study='supplemental-01',screen_processes=460,checked_new_raw_results=len(checked),independent_confirmation_processes=len(checked)-460,nominees=sum(map(len,nominated.values())),fixed_confirmation_family=expected,confirmed_local_comparisons=summary['confirmed_local_comparisons'],retained_source=retained,historical_evidence_unchanged=True,execution_source_unchanged=True,environment_classes=len(environments),source_results=checked,limitations='No new attempt accepted. Local performance evidence does not replace full applicable correctness/integration/regression gates. Shape omissions and n=3 assumptions remain explicit.')
+ result=dict(status='passed',campaign_id='offload-gap-001',study='supplemental-01',screen_processes=472,checked_new_raw_results=len(checked),independent_confirmation_processes=len(checked)-472,nominees=sum(map(len,nominated.values())),fixed_confirmation_family=expected,confirmed_local_comparisons=summary['confirmed_local_comparisons'],retained_source=retained,historical_evidence_unchanged=True,execution_source_unchanged=True,environment_classes=len(environments),source_results=checked,limitations='No new attempt accepted. Local performance evidence does not replace full applicable correctness/integration/regression gates. Shape omissions and n=3 assumptions remain explicit.')
  s.save(D/'final/audit.json',result);print(json.dumps({k:v for k,v in result.items() if k!='source_results'}))
 if __name__=='__main__':audit()
