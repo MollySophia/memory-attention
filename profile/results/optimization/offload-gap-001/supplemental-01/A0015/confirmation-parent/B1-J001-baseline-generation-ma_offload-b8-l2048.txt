@@ -1,0 +1,1 @@
+ma_offload       generation median= 1371.076 ms  min= 1370.829  max= 1373.126  spread=0.17%  policy=bulk
