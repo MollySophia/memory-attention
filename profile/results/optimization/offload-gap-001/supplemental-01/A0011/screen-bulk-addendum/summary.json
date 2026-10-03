@@ -1,0 +1,152 @@
+{
+  "status": "audited",
+  "formal": false,
+  "rows": [
+    {
+      "attempt": "A0011",
+      "baseline": "A0001",
+      "mode": "decode",
+      "batch": 4,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.034360773861408234,
+          "values": [
+            0.034360773861408234
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.009698327630758286,
+          "values": [
+            -0.009698327630758286
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.04405910149216652,
+          "values": [
+            0.04405910149216652
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0046896316160685,
+          "values": [
+            1.0046896316160685
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 7.361327297985554,
+          "baseline_gpu_ms": 7.212699018418789,
+          "candidate_offload_ms": 7.3269665241241455,
+          "candidate_gpu_ms": 7.222397346049547
+        }
+      ],
+      "gpu_savings_bytes": [
+        3036299264
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0011/screen-bulk-addendum/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0011",
+      "baseline": "A0001",
+      "mode": "decode",
+      "batch": 8,
+      "length": 512,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.2711494453251362,
+          "values": [
+            -0.2711494453251362
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.0027171336114406586,
+          "values": [
+            0.0027171336114406586
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -0.27386657893657684,
+          "values": [
+            -0.27386657893657684
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9545418960667122,
+          "values": [
+            0.9545418960667122
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 5.693671386688948,
+          "baseline_gpu_ms": 5.602341052144766,
+          "candidate_offload_ms": 5.964820832014084,
+          "candidate_gpu_ms": 5.599623918533325
+        }
+      ],
+      "gpu_savings_bytes": [
+        3103031296
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0011/screen-bulk-addendum/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0011",
+      "baseline": "A0001",
+      "mode": "decode",
+      "batch": 8,
+      "length": 4096,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.032052863389253616,
+          "values": [
+            0.032052863389253616
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.0017211772501468658,
+          "values": [
+            -0.0017211772501468658
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.03377404063940048,
+          "values": [
+            0.03377404063940048
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0016769612772678,
+          "values": [
+            1.0016769612772678
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 19.145710300654173,
+          "baseline_gpu_ms": 18.933974858373404,
+          "candidate_offload_ms": 19.11365743726492,
+          "candidate_gpu_ms": 18.93569603562355
+        }
+      ],
+      "gpu_savings_bytes": [
+        2633269248
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0011/screen-bulk-addendum/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    }
+  ],
+  "checked_raw_results": 12,
+  "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0011/screen-bulk-addendum/manifest.json"
+}

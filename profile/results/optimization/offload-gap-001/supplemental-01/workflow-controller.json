@@ -1,0 +1,21 @@
+{
+  "status": "stopped_confirmation_needs_review",
+  "pid": 2707597,
+  "screen_pid": 2703709,
+  "screen_starttime": "340759574",
+  "started_unix": 1790994918.6225526,
+  "stages": [
+    {
+      "action": "prepare",
+      "command": [
+        "/home/molly/miniconda3/envs/fla-bench/bin/python",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/confirm.py",
+        "prepare"
+      ],
+      "started_unix": 1791005298.939724,
+      "pid": 2854451,
+      "returncode": 1,
+      "finished_unix": 1791005497.1079414
+    }
+  ]
+}

@@ -68,7 +68,8 @@ def audit_job(j,path):
  expected=('generation_v1_w2_n5_r3' if j['mode']=='generation' else 'screen_v1_w3_n5_r1' if cfg['warmup']==3 else 'formal_v1_w10_n10_r3')
  assert p['measurement_plan_id']==expected
  assert row['output_scope']=='cached_logits'
- assert Path(p['env']['model_module']).resolve().is_relative_to(root(j['attempt']).resolve())
+ recorded_root=Path(j['cwd']).resolve() if j.get('cwd') else Path(j['command'][1]).resolve().parents[1]
+ assert Path(p['env']['model_module']).resolve()==recorded_root/'fla/models/memory/modeling_memory.py'
  for key,value in dict(hidden_size=2048,num_hidden_layers=24,num_heads=32,num_kv_heads=32,intermediate_size=5632,vocab_size=32000,qk_norm=False,use_gate=False,fuse_norm=False,tie_word_embeddings=False).items():assert p['model_config'][key]==value
  if j['variant']=='ma_offload':validate_offload_memory(j['attempt'],row['memory_after'])
  env=p['environment_before'];e=p['env']

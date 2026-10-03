@@ -34,8 +34,10 @@ def prepare():
  assert not (D/'confirmation-plan.json').exists()
  assert s.read(D/'screen-controller.json')['status']=='completed'
  addon=D/'A0011/screen-bulk-addendum'
- assert s.read(addon/'manifest.json')['status']=='planned'
- s.run(addon);s.summarize(addon)
+ addon_status=s.read(addon/'manifest.json')['status']
+ assert addon_status in ('planned','completed'), 'Never restart an incomplete addendum implicitly'
+ if addon_status=='planned':s.run(addon)
+ s.summarize(addon)
  nominees=[];allpoints=[];comparisons=[]
  for a in s.ATTEMPTS:
   new=s.summarize(D/a/'screen')['rows'];old=historical(a)

@@ -1,0 +1,27 @@
+{
+  "rows": [
+    {
+      "attempt": "A0004",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 16,
+      "length": 2048,
+      "screen_promising": false,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.5217710509896278
+        },
+        "gap_reduction_ms": {
+          "mean": -0.00850306823849678
+        }
+      },
+      "source_results": [
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R01/J10-prefill-ma_gpu-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0004/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0004/R01/J10-prefill-ma_gpu-b16-l2048.json"
+      ],
+      "nomination_source": "historical_screen_only"
+    }
+  ]
+}

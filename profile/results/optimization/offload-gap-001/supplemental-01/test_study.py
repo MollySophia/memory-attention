@@ -41,3 +41,15 @@ def test_bulk_addendum_is_previously_unmeasured_and_paired(tmp_path):
  p=s.plan('A0011',s.ADDENDUM_SHAPES,'A0001',False,tmp_path)
  assert len(p['jobs'])==12
  assert {j['mode'] for j in p['jobs']}=={'decode'}
+
+def test_historical_loaded_path_uses_recorded_command_root(monkeypatch):
+ d=s.C/'A0001/R01';manifest=s.read(d/'manifest.json');j=next(x for x in manifest['jobs'] if x['batch']==16).copy()
+ j.update(attempt='A0001',candidate_sha=s.record('A0001')['candidate_sha'],source_sha256=s.source_hash(s.root('A0001')))
+ path=d/(j['name']+'.json');s.audit_job(j,path)
+ original=s.read
+ def tamper(p):
+  result=original(p)
+  if Path(p)==path:result['env']['model_module']='/tmp/unrelated/fla/models/memory/modeling_memory.py'
+  return result
+ monkeypatch.setattr(s,'read',tamper)
+ with pytest.raises(AssertionError):s.audit_job(j,path)

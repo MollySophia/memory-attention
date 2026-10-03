@@ -1,0 +1,50 @@
+{
+  "rows": [
+    {
+      "attempt": "A0011",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 16,
+      "length": 2048,
+      "screen_promising": false,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -1.4775272458791733
+        },
+        "gap_reduction_ms": {
+          "mean": -0.922984816133976
+        }
+      },
+      "source_results": [
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R01/J10-prefill-ma_gpu-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0011/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0011/R01/J10-prefill-ma_gpu-b16-l2048.json"
+      ],
+      "nomination_source": "historical_screen_only"
+    },
+    {
+      "attempt": "A0011",
+      "baseline": "A0001",
+      "mode": "decode",
+      "batch": 16,
+      "length": 2048,
+      "screen_promising": true,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.005781929939985275
+        },
+        "gap_reduction_ms": {
+          "mean": 0.014497898519039154
+        }
+      },
+      "source_results": [
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R01/J11-decode-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R01/J12-decode-ma_gpu-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0011/R01/J11-decode-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0011/R01/J12-decode-ma_gpu-b16-l2048.json"
+      ],
+      "nomination_source": "historical_screen_only"
+    }
+  ]
+}

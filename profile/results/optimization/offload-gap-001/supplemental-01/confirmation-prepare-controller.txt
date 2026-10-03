@@ -1,0 +1,25 @@
+START A0011 B1-J001-baseline-decode-ma_offload-b4-l2048
+START A0011 B1-J002-candidate-decode-ma_offload-b4-l2048
+START A0011 B1-J003-candidate-decode-ma_gpu-b4-l2048
+START A0011 B1-J004-baseline-decode-ma_gpu-b4-l2048
+START A0011 B1-J005-baseline-decode-ma_gpu-b8-l512
+START A0011 B1-J006-candidate-decode-ma_gpu-b8-l512
+START A0011 B1-J007-candidate-decode-ma_offload-b8-l512
+START A0011 B1-J008-baseline-decode-ma_offload-b8-l512
+START A0011 B1-J009-baseline-decode-ma_offload-b8-l4096
+START A0011 B1-J010-candidate-decode-ma_offload-b8-l4096
+START A0011 B1-J011-candidate-decode-ma_gpu-b8-l4096
+START A0011 B1-J012-baseline-decode-ma_gpu-b8-l4096
+Traceback (most recent call last):
+  File "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/confirm.py", line 107, in <module>
+    p=argparse.ArgumentParser();p.add_argument('action',choices=['prepare','run','analyze']);a=p.parse_args();globals()[a.action]()
+                                                                                                              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/confirm.py", line 41, in prepare
+    new=s.summarize(D/a/'screen')['rows'];old=historical(a)
+                                              ^^^^^^^^^^^^^
+  File "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/confirm.py", line 27, in historical
+    path=C/aid/'R01'/(j['name']+'.json');s.audit_job(j,path);rr[impl,variant]=s.read(path)['results'][0];refs.append(str(path))
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/study.py", line 71, in audit_job
+    assert Path(p['env']['model_module']).resolve().is_relative_to(root(j['attempt']).resolve())
+AssertionError

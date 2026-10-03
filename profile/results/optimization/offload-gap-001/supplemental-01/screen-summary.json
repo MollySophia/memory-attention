@@ -1,0 +1,6061 @@
+{
+  "rows": [
+    {
+      "attempt": "A0002",
+      "baseline": "A0001",
+      "mode": "decode",
+      "batch": 4,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.06972756236791611,
+          "values": [
+            0.06972756236791611
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.001767277717590332,
+          "values": [
+            -0.001767277717590332
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.07149484008550644,
+          "values": [
+            0.07149484008550644
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0095573382532,
+          "values": [
+            1.0095573382532
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 7.3654369451105595,
+          "baseline_gpu_ms": 7.216646522283554,
+          "candidate_offload_ms": 7.295709382742643,
+          "candidate_gpu_ms": 7.218413800001144
+        }
+      ],
+      "gpu_savings_bytes": [
+        3036299264
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0002/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0002",
+      "baseline": "A0001",
+      "mode": "decode",
+      "batch": 8,
+      "length": 512,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.08342145010828972,
+          "values": [
+            0.08342145010828972
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.004700943827629089,
+          "values": [
+            0.004700943827629089
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.07872050628066063,
+          "values": [
+            0.07872050628066063
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0146778475538134,
+          "values": [
+            1.0146778475538134
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 5.766914878040552,
+          "baseline_gpu_ms": 5.600863415747881,
+          "candidate_offload_ms": 5.683493427932262,
+          "candidate_gpu_ms": 5.596162471920252
+        }
+      ],
+      "gpu_savings_bytes": [
+        3103031296
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0002/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0002",
+      "baseline": "A0001",
+      "mode": "decode",
+      "batch": 8,
+      "length": 4096,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.049304962158203125,
+          "values": [
+            0.049304962158203125
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.001809094101190567,
+          "values": [
+            -0.001809094101190567
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.05111405625939369,
+          "values": [
+            0.05111405625939369
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0025970207696762,
+          "values": [
+            1.0025970207696762
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 19.034506287425756,
+          "baseline_gpu_ms": 18.93271217122674,
+          "candidate_offload_ms": 18.985201325267553,
+          "candidate_gpu_ms": 18.93452126532793
+        }
+      ],
+      "gpu_savings_bytes": [
+        2633269248
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0002/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0002",
+      "baseline": "A0001",
+      "mode": "decode",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.012798327952623367,
+          "values": [
+            0.012798327952623367
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.013465341180562973,
+          "values": [
+            0.013465341180562973
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -0.0006670132279396057,
+          "values": [
+            -0.0006670132279396057
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.000369506925072,
+          "values": [
+            1.000369506925072
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 34.649031329900026,
+          "baseline_gpu_ms": 34.613716416060925,
+          "candidate_offload_ms": 34.6362330019474,
+          "candidate_gpu_ms": 34.60025107488036
+        }
+      ],
+      "gpu_savings_bytes": [
+        2096398336
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0002/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0002",
+      "baseline": "A0001",
+      "mode": "generation",
+      "batch": 1,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 57.95607085650158,
+          "values": [
+            57.95607085650158
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 1.8143287859857082,
+          "values": [
+            1.8143287859857082
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 56.141742070515875,
+          "values": [
+            56.141742070515875
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0951442493034804,
+          "values": [
+            1.0951442493034804
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 667.0950496258835,
+          "baseline_gpu_ms": 596.9165302813053,
+          "candidate_offload_ms": 609.1389787693819,
+          "candidate_gpu_ms": 595.1022014953196
+        }
+      ],
+      "gpu_savings_bytes": [
+        3137241088
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0002/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0002",
+      "baseline": "A0001",
+      "mode": "generation",
+      "batch": 8,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 7.725703343749046,
+          "values": [
+            7.725703343749046
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.3943301737308502,
+          "values": [
+            -0.3943301737308502
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 8.120033517479897,
+          "values": [
+            8.120033517479897
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0056419859991372,
+          "values": [
+            1.0056419859991372
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 1377.0490843181808,
+          "baseline_gpu_ms": 1348.697646893561,
+          "candidate_offload_ms": 1369.3233809744318,
+          "candidate_gpu_ms": 1349.0919770672917
+        }
+      ],
+      "gpu_savings_bytes": [
+        2901671936
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0002/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0003",
+      "baseline": "A0001",
+      "mode": "decode",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.10850699618458748,
+          "values": [
+            -0.10850699618458748
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.0011378899216651917,
+          "values": [
+            -0.0011378899216651917
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -0.10736910626292229,
+          "values": [
+            -0.10736910626292229
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.996888902885876,
+          "values": [
+            0.996888902885876
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 34.76889869198203,
+          "baseline_gpu_ms": 34.626627527177334,
+          "candidate_offload_ms": 34.87740568816662,
+          "candidate_gpu_ms": 34.627765417099
+        }
+      ],
+      "gpu_savings_bytes": [
+        1022656512
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0003/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0003",
+      "baseline": "A0001",
+      "mode": "generation",
+      "batch": 1,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 32.21128492926562,
+          "values": [
+            32.21128492926562
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.471463892608881,
+          "values": [
+            -0.471463892608881
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 32.6827488218745,
+          "values": [
+            32.6827488218745
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.051678594745353,
+          "values": [
+            1.051678594745353
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 655.5116104893386,
+          "baseline_gpu_ms": 588.0124380812049,
+          "candidate_offload_ms": 623.300325560073,
+          "candidate_gpu_ms": 588.4839019738138
+        }
+      ],
+      "gpu_savings_bytes": [
+        3103686656
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0003/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0003",
+      "baseline": "A0001",
+      "mode": "generation",
+      "batch": 8,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.13686766227101543,
+          "values": [
+            0.13686766227101543
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.27801990509033203,
+          "values": [
+            0.27801990509033203
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -0.1411522428193166,
+          "values": [
+            -0.1411522428193166
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0000994522836066,
+          "values": [
+            1.0000994522836066
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 1376.3512421088915,
+          "baseline_gpu_ms": 1350.3181671723723,
+          "candidate_offload_ms": 1376.2143744466205,
+          "candidate_gpu_ms": 1350.040147267282
+        }
+      ],
+      "gpu_savings_bytes": [
+        2633236480
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0003/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0003",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 4,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -2.8663300909101963,
+          "values": [
+            -2.8663300909101963
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.21416647359728813,
+          "values": [
+            0.21416647359728813
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -3.0804965645074844,
+          "values": [
+            -3.0804965645074844
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9743215155948985,
+          "values": [
+            0.9743215155948985
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 108.75747315585613,
+          "baseline_gpu_ms": 105.95705956220627,
+          "candidate_offload_ms": 111.62380324676633,
+          "candidate_gpu_ms": 105.74289308860898
+        }
+      ],
+      "gpu_savings_bytes": [
+        2902065152
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0003/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0003",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 512,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -1.4235316775739193,
+          "values": [
+            -1.4235316775739193
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.0401756726205349,
+          "values": [
+            0.0401756726205349
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -1.4637073501944542,
+          "values": [
+            -1.4637073501944542
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9749694776927789,
+          "values": [
+            0.9749694776927789
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 55.448301043361425,
+          "baseline_gpu_ms": 52.11840560659766,
+          "candidate_offload_ms": 56.871832720935345,
+          "candidate_gpu_ms": 52.07822993397713
+        }
+      ],
+      "gpu_savings_bytes": [
+        3035889664
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0003/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0003",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 4096,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -9.41245649009943,
+          "values": [
+            -9.41245649009943
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 1.1134077794849873,
+          "values": [
+            1.1134077794849873
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -10.525864269584417,
+          "values": [
+            -10.525864269584417
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9794133840588716,
+          "values": [
+            0.9794133840588716
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 447.7999633178115,
+          "baseline_gpu_ms": 443.6387661844492,
+          "candidate_offload_ms": 457.2124198079109,
+          "candidate_gpu_ms": 442.5253584049642
+        }
+      ],
+      "gpu_savings_bytes": [
+        2096365568
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0003/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0003",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -18.828437477350235,
+          "values": [
+            -18.828437477350235
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.025888904929161072,
+          "values": [
+            -0.025888904929161072
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -18.802548572421074,
+          "values": [
+            -18.802548572421074
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9814662509789727,
+          "values": [
+            0.9814662509789727
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 997.0716621726751,
+          "baseline_gpu_ms": 990.6654122285545,
+          "candidate_offload_ms": 1015.9000996500254,
+          "candidate_gpu_ms": 990.6913011334836
+        }
+      ],
+      "gpu_savings_bytes": [
+        1022623744
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0003/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0003",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 16,
+      "length": 2048,
+      "screen_promising": false,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -9.967990405857563
+        },
+        "gap_reduction_ms": {
+          "mean": -10.314133297652006
+        }
+      },
+      "source_results": [
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R01/J10-prefill-ma_gpu-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0003/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0003/R01/J10-prefill-ma_gpu-b16-l2048.json"
+      ],
+      "nomination_source": "historical_screen_only"
+    },
+    {
+      "attempt": "A0004",
+      "baseline": "A0001",
+      "mode": "decode",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.011545326560735703,
+          "values": [
+            -0.011545326560735703
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.004740804433822632,
+          "values": [
+            -0.004740804433822632
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -0.006804522126913071,
+          "values": [
+            -0.006804522126913071
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9996675027158313,
+          "values": [
+            0.9996675027158313
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 34.711524937301874,
+          "baseline_gpu_ms": 34.61945476010442,
+          "candidate_offload_ms": 34.72307026386261,
+          "candidate_gpu_ms": 34.62419556453824
+        }
+      ],
+      "gpu_savings_bytes": [
+        2096398336
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0004/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0004",
+      "baseline": "A0001",
+      "mode": "generation",
+      "batch": 1,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -11.598926596343517,
+          "values": [
+            -11.598926596343517
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -2.4120850798984748,
+          "values": [
+            -2.4120850798984748
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -9.186841516445043,
+          "values": [
+            -9.186841516445043
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9821432094866598,
+          "values": [
+            0.9821432094866598
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 637.9537792876363,
+          "baseline_gpu_ms": 588.9452882731954,
+          "candidate_offload_ms": 649.5527058839798,
+          "candidate_gpu_ms": 591.3573733530939
+        }
+      ],
+      "gpu_savings_bytes": [
+        3137241088
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0004/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0004",
+      "baseline": "A0001",
+      "mode": "generation",
+      "batch": 8,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.15941886231303215,
+          "values": [
+            -0.15941886231303215
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.35721889386582006,
+          "values": [
+            0.35721889386582006
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -0.5166377561788522,
+          "values": [
+            -0.5166377561788522
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9998840340078594,
+          "values": [
+            0.9998840340078594
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 1374.5441418141127,
+          "baseline_gpu_ms": 1350.351121649146,
+          "candidate_offload_ms": 1374.7035606764257,
+          "candidate_gpu_ms": 1349.9939027552803
+        }
+      ],
+      "gpu_savings_bytes": [
+        2901671936
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0004/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0004",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 4,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 1.9107019528746605,
+          "values": [
+            1.9107019528746605
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.08349539712071419,
+          "values": [
+            0.08349539712071419
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 1.8272065557539463,
+          "values": [
+            1.8272065557539463
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0177974496735727,
+          "values": [
+            1.0177974496735727
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 109.26889022812247,
+          "baseline_gpu_ms": 105.90019067749381,
+          "candidate_offload_ms": 107.35818827524781,
+          "candidate_gpu_ms": 105.8166952803731
+        }
+      ],
+      "gpu_savings_bytes": [
+        3036282880
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0004/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0004",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 512,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 2.501322515308857,
+          "values": [
+            2.501322515308857
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.06535332649946213,
+          "values": [
+            0.06535332649946213
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 2.435969188809395,
+          "values": [
+            2.435969188809395
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0475528456799017,
+          "values": [
+            1.0475528456799017
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 55.10222325101495,
+          "baseline_gpu_ms": 52.101500146090984,
+          "candidate_offload_ms": 52.60090073570609,
+          "candidate_gpu_ms": 52.03614681959152
+        }
+      ],
+      "gpu_savings_bytes": [
+        3102998528
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0004/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0004",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 4096,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.7798375561833382,
+          "values": [
+            0.7798375561833382
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.12898221611976624,
+          "values": [
+            -0.12898221611976624
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.9088197723031044,
+          "values": [
+            0.9088197723031044
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.001744938153017,
+          "values": [
+            1.001744938153017
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 447.6939902640879,
+          "baseline_gpu_ms": 443.39393582195044,
+          "candidate_offload_ms": 446.9141527079046,
+          "candidate_gpu_ms": 443.5229180380702
+        }
+      ],
+      "gpu_savings_bytes": [
+        2633236480
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0004/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0004",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 1.077170018106699,
+          "values": [
+            1.077170018106699
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.7786078378558159,
+          "values": [
+            -0.7786078378558159
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 1.8557778559625149,
+          "values": [
+            1.8557778559625149
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0010814468926872,
+          "values": [
+            1.0010814468926872
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 997.1223992295563,
+          "baseline_gpu_ms": 990.9148266538978,
+          "candidate_offload_ms": 996.0452292114496,
+          "candidate_gpu_ms": 991.6934344917536
+        }
+      ],
+      "gpu_savings_bytes": [
+        2096365568
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0004/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0004",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 16,
+      "length": 2048,
+      "screen_promising": false,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.5217710509896278
+        },
+        "gap_reduction_ms": {
+          "mean": -0.00850306823849678
+        }
+      },
+      "source_results": [
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R01/J10-prefill-ma_gpu-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0004/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0004/R01/J10-prefill-ma_gpu-b16-l2048.json"
+      ],
+      "nomination_source": "historical_screen_only"
+    },
+    {
+      "attempt": "A0005",
+      "baseline": "A0001",
+      "mode": "decode",
+      "batch": 4,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.019637588411569595,
+          "values": [
+            0.019637588411569595
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.002238154411315918,
+          "values": [
+            -0.002238154411315918
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.021875742822885513,
+          "values": [
+            0.021875742822885513
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0026779586024586,
+          "values": [
+            1.0026779586024586
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 7.352681644260883,
+          "baseline_gpu_ms": 7.220499869436026,
+          "candidate_offload_ms": 7.333044055849314,
+          "candidate_gpu_ms": 7.2227380238473415
+        }
+      ],
+      "gpu_savings_bytes": [
+        3036299264
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0005/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0005",
+      "baseline": "A0001",
+      "mode": "decode",
+      "batch": 8,
+      "length": 512,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.000332854688167572,
+          "values": [
+            0.000332854688167572
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.006117485463619232,
+          "values": [
+            0.006117485463619232
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -0.00578463077545166,
+          "values": [
+            -0.00578463077545166
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0000586102884015,
+          "values": [
+            1.0000586102884015
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 5.679449904710054,
+          "baseline_gpu_ms": 5.60638178139925,
+          "candidate_offload_ms": 5.679117050021887,
+          "candidate_gpu_ms": 5.600264295935631
+        }
+      ],
+      "gpu_savings_bytes": [
+        3103031296
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0005/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0005",
+      "baseline": "A0001",
+      "mode": "decode",
+      "batch": 8,
+      "length": 4096,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.009670201689004898,
+          "values": [
+            -0.009670201689004898
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.010211393237113953,
+          "values": [
+            -0.010211393237113953
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.0005411915481090546,
+          "values": [
+            0.0005411915481090546
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9994919838189656,
+          "values": [
+            0.9994919838189656
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 19.025553576648235,
+          "baseline_gpu_ms": 18.928141612559557,
+          "candidate_offload_ms": 19.03522377833724,
+          "candidate_gpu_ms": 18.93835300579667
+        }
+      ],
+      "gpu_savings_bytes": [
+        2633269248
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0005/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0005",
+      "baseline": "A0001",
+      "mode": "decode",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.03955056890845299,
+          "values": [
+            0.03955056890845299
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.017637107521295547,
+          "values": [
+            0.017637107521295547
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.02191346138715744,
+          "values": [
+            0.02191346138715744
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0011408434567561,
+          "values": [
+            1.0011408434567561
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 34.70738222822547,
+          "baseline_gpu_ms": 34.60450544953346,
+          "candidate_offload_ms": 34.66783165931702,
+          "candidate_gpu_ms": 34.58686834201217
+        }
+      ],
+      "gpu_savings_bytes": [
+        2096398336
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0005/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0005",
+      "baseline": "A0001",
+      "mode": "generation",
+      "batch": 1,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 6.693784985691309,
+          "values": [
+            6.693784985691309
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -6.480255567779068,
+          "values": [
+            -6.480255567779068
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 13.174040553470377,
+          "values": [
+            13.174040553470377
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.010390636072353,
+          "values": [
+            1.010390636072353
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 650.9069918654859,
+          "baseline_gpu_ms": 591.7930141401788,
+          "candidate_offload_ms": 644.2132068797946,
+          "candidate_gpu_ms": 598.2732697079579
+        }
+      ],
+      "gpu_savings_bytes": [
+        3137241088
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0005/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0005",
+      "baseline": "A0001",
+      "mode": "generation",
+      "batch": 8,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 2.1074203774333,
+          "values": [
+            2.1074203774333
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.11714035645127296,
+          "values": [
+            -0.11714035645127296
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 2.224560733884573,
+          "values": [
+            2.224560733884573
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0015369263006793,
+          "values": [
+            1.0015369263006793
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 1373.2989840209484,
+          "baseline_gpu_ms": 1348.9856635220349,
+          "candidate_offload_ms": 1371.191563643515,
+          "candidate_gpu_ms": 1349.1028038784862
+        }
+      ],
+      "gpu_savings_bytes": [
+        2901671936
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0005/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0006",
+      "baseline": "A0001",
+      "mode": "decode",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.04269452765583992,
+          "values": [
+            -0.04269452765583992
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.001017749309539795,
+          "values": [
+            0.001017749309539795
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -0.043712276965379715,
+          "values": [
+            -0.043712276965379715
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9987716474531595,
+          "values": [
+            0.9987716474531595
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 34.71485758200288,
+          "baseline_gpu_ms": 34.6137085929513,
+          "candidate_offload_ms": 34.75755210965872,
+          "candidate_gpu_ms": 34.61269084364176
+        }
+      ],
+      "gpu_savings_bytes": [
+        2096398336
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0006/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0006",
+      "baseline": "A0001",
+      "mode": "generation",
+      "batch": 1,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 15.831463783979416,
+          "values": [
+            15.831463783979416
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -3.226857197781328,
+          "values": [
+            -3.226857197781328
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 19.058320981760744,
+          "values": [
+            19.058320981760744
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0247541301187177,
+          "values": [
+            1.0247541301187177
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 655.3798425011337,
+          "baseline_gpu_ms": 593.1397479337951,
+          "candidate_offload_ms": 639.5483787171543,
+          "candidate_gpu_ms": 596.3666051315764
+        }
+      ],
+      "gpu_savings_bytes": [
+        3137241088
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0006/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0006",
+      "baseline": "A0001",
+      "mode": "generation",
+      "batch": 8,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.1854551024734974,
+          "values": [
+            -0.1854551024734974
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.2881068425874673,
+          "values": [
+            0.2881068425874673
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -0.4735619450609647,
+          "values": [
+            -0.4735619450609647
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9998648902011438,
+          "values": [
+            0.9998648902011438
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 1372.4396545750399,
+          "baseline_gpu_ms": 1350.2479869872332,
+          "candidate_offload_ms": 1372.6251096775134,
+          "candidate_gpu_ms": 1349.9598801446457
+        }
+      ],
+      "gpu_savings_bytes": [
+        2901671936
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0006/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0006",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 4,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.46009281650185585,
+          "values": [
+            0.46009281650185585
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.1384388655424118,
+          "values": [
+            0.1384388655424118
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.32165395095944405,
+          "values": [
+            0.32165395095944405
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.004189591934667,
+          "values": [
+            1.004189591934667
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 110.27814280241728,
+          "baseline_gpu_ms": 105.94799015671015,
+          "candidate_offload_ms": 109.81804998591542,
+          "candidate_gpu_ms": 105.80955129116774
+        }
+      ],
+      "gpu_savings_bytes": [
+        3036282880
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0006/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0006",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 512,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.3300154581665993,
+          "values": [
+            -0.3300154581665993
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.12405412271618843,
+          "values": [
+            0.12405412271618843
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -0.4540695808827877,
+          "values": [
+            -0.4540695808827877
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9941009278758469,
+          "values": [
+            0.9941009278758469
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 55.61360605061054,
+          "baseline_gpu_ms": 52.105800714343786,
+          "candidate_offload_ms": 55.94362150877714,
+          "candidate_gpu_ms": 51.9817465916276
+        }
+      ],
+      "gpu_savings_bytes": [
+        3102998528
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0006/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0006",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 4096,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.6600243039429188,
+          "values": [
+            0.6600243039429188
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 2.0115639083087444,
+          "values": [
+            2.0115639083087444
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -1.3515396043658257,
+          "values": [
+            -1.3515396043658257
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0014770480179458,
+          "values": [
+            1.0014770480179458
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 447.5136782974005,
+          "baseline_gpu_ms": 444.6946029551327,
+          "candidate_offload_ms": 446.85365399345756,
+          "candidate_gpu_ms": 442.683039046824
+        }
+      ],
+      "gpu_savings_bytes": [
+        2633236480
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0006/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0006",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.37537897005677223,
+          "values": [
+            -0.37537897005677223
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.34240661188960075,
+          "values": [
+            0.34240661188960075
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -0.717785581946373,
+          "values": [
+            -0.717785581946373
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9996235823203476,
+          "values": [
+            0.9996235823203476
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 996.865160856396,
+          "baseline_gpu_ms": 990.5166507698596,
+          "candidate_offload_ms": 997.2405398264527,
+          "candidate_gpu_ms": 990.17424415797
+        }
+      ],
+      "gpu_savings_bytes": [
+        2096365568
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0006/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0006",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 16,
+      "length": 2048,
+      "screen_promising": false,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.6658187136054039
+        },
+        "gap_reduction_ms": {
+          "mean": -0.5611974745988846
+        }
+      },
+      "source_results": [
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R01/J10-prefill-ma_gpu-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0006/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0006/R01/J10-prefill-ma_gpu-b16-l2048.json"
+      ],
+      "nomination_source": "historical_screen_only"
+    },
+    {
+      "attempt": "A0007",
+      "baseline": "A0001",
+      "mode": "decode",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.0381038524210453,
+          "values": [
+            0.0381038524210453
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.02964036539196968,
+          "values": [
+            -0.02964036539196968
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.06774421781301498,
+          "values": [
+            0.06774421781301498
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0010982786092018,
+          "values": [
+            1.0010982786092018
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 34.73226260393858,
+          "baseline_gpu_ms": 34.6266251988709,
+          "candidate_offload_ms": 34.694158751517534,
+          "candidate_gpu_ms": 34.65626556426287
+        }
+      ],
+      "gpu_savings_bytes": [
+        2096398336
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0007/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0007",
+      "baseline": "A0001",
+      "mode": "generation",
+      "batch": 1,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -14.612481463700533,
+          "values": [
+            -14.612481463700533
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -7.096442766487598,
+          "values": [
+            -7.096442766487598
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -7.5160386972129345,
+          "values": [
+            -7.5160386972129345
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9776531168564897,
+          "values": [
+            0.9776531168564897
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 639.2810109692315,
+          "baseline_gpu_ms": 589.0615899426242,
+          "candidate_offload_ms": 653.893492432932,
+          "candidate_gpu_ms": 596.1580327091118
+        }
+      ],
+      "gpu_savings_bytes": [
+        3137241088
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0007/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0007",
+      "baseline": "A0001",
+      "mode": "generation",
+      "batch": 8,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.8581452071666718,
+          "values": [
+            -0.8581452071666718
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.3914016919832193,
+          "values": [
+            0.3914016919832193
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -1.249546899149891,
+          "values": [
+            -1.249546899149891
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9993759566235437,
+          "values": [
+            0.9993759566235437
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 1374.2789679206908,
+          "baseline_gpu_ms": 1350.4845379541318,
+          "candidate_offload_ms": 1375.1371131278574,
+          "candidate_gpu_ms": 1350.0931362621486
+        }
+      ],
+      "gpu_savings_bytes": [
+        2901671936
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0007/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0007",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 4,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.4937439225614071,
+          "values": [
+            0.4937439225614071
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.07455544546246529,
+          "values": [
+            0.07455544546246529
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.4191884770989418,
+          "values": [
+            0.4191884770989418
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0045111681418046,
+          "values": [
+            1.0045111681418046
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 109.94298346340656,
+          "baseline_gpu_ms": 106.0460401698947,
+          "candidate_offload_ms": 109.44923954084516,
+          "candidate_gpu_ms": 105.97148472443223
+        }
+      ],
+      "gpu_savings_bytes": [
+        3036282880
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0007/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0007",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 512,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.002442300319671631,
+          "values": [
+            -0.002442300319671631
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.024274270981550217,
+          "values": [
+            -0.024274270981550217
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.021831970661878586,
+          "values": [
+            0.021831970661878586
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9999558475046894,
+          "values": [
+            0.9999558475046894
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 55.31267188489437,
+          "baseline_gpu_ms": 52.084195613861084,
+          "candidate_offload_ms": 55.31511418521404,
+          "candidate_gpu_ms": 52.108469884842634
+        }
+      ],
+      "gpu_savings_bytes": [
+        3102998528
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0007/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0007",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 4096,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 3.077960293740034,
+          "values": [
+            3.077960293740034
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.39943186566233635,
+          "values": [
+            0.39943186566233635
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 2.6785284280776978,
+          "values": [
+            2.6785284280776978
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0069189153304383,
+          "values": [
+            1.0069189153304383
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 447.93963972479105,
+          "baseline_gpu_ms": 442.5804628059268,
+          "candidate_offload_ms": 444.861679431051,
+          "candidate_gpu_ms": 442.18103094026446
+        }
+      ],
+      "gpu_savings_bytes": [
+        2633236480
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0007/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0007",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.6113706156611443,
+          "values": [
+            -0.6113706156611443
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.9657934308052063,
+          "values": [
+            0.9657934308052063
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -1.5771640464663506,
+          "values": [
+            -1.5771640464663506
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9993870333063601,
+          "values": [
+            0.9993870333063601
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 996.7847717925906,
+          "baseline_gpu_ms": 991.8493367731571,
+          "candidate_offload_ms": 997.3961424082518,
+          "candidate_gpu_ms": 990.8835433423519
+        }
+      ],
+      "gpu_savings_bytes": [
+        2096365568
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0007/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0007",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 16,
+      "length": 2048,
+      "screen_promising": false,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -1.3154971413314342
+        },
+        "gap_reduction_ms": {
+          "mean": -1.066588331013918
+        }
+      },
+      "source_results": [
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R01/J10-prefill-ma_gpu-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0007/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0007/R01/J10-prefill-ma_gpu-b16-l2048.json"
+      ],
+      "nomination_source": "historical_screen_only"
+    },
+    {
+      "attempt": "A0008",
+      "baseline": "A0001",
+      "mode": "decode",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.005462393164634705,
+          "values": [
+            -0.005462393164634705
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.0768330879509449,
+          "values": [
+            -0.0768330879509449
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.0713706947863102,
+          "values": [
+            0.0713706947863102
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9998428189766397,
+          "values": [
+            0.9998428189766397
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 34.746780898422,
+          "baseline_gpu_ms": 34.59360748529434,
+          "candidate_offload_ms": 34.75224329158664,
+          "candidate_gpu_ms": 34.67044057324529
+        }
+      ],
+      "gpu_savings_bytes": [
+        2096398336
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0008/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0008",
+      "baseline": "A0001",
+      "mode": "generation",
+      "batch": 1,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 17.718783424546245,
+          "values": [
+            17.718783424546245
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -9.228734889378188,
+          "values": [
+            -9.228734889378188
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 26.947518313924434,
+          "values": [
+            26.947518313924434
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0284106550574796,
+          "values": [
+            1.0284106550574796
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 641.3856221052507,
+          "baseline_gpu_ms": 587.2656977425019,
+          "candidate_offload_ms": 623.6668386807045,
+          "candidate_gpu_ms": 596.49443263188
+        }
+      ],
+      "gpu_savings_bytes": [
+        3137241088
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0008/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0008",
+      "baseline": "A0001",
+      "mode": "generation",
+      "batch": 8,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -4.093336624403946,
+          "values": [
+            -4.093336624403946
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.061369997759584294,
+          "values": [
+            0.061369997759584294
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -4.1547066221635305,
+          "values": [
+            -4.1547066221635305
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9970252625702349,
+          "values": [
+            0.9970252625702349
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 1371.9395809186,
+          "baseline_gpu_ms": 1350.1748131898541,
+          "candidate_offload_ms": 1376.032917543004,
+          "candidate_gpu_ms": 1350.1134431920946
+        }
+      ],
+      "gpu_savings_bytes": [
+        2901671936
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0008/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0008",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 4,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.3834720700979233,
+          "values": [
+            0.3834720700979233
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.09289570152759552,
+          "values": [
+            0.09289570152759552
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.29057636857032776,
+          "values": [
+            0.29057636857032776
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0035175037500499,
+          "values": [
+            1.0035175037500499
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 109.40171265974641,
+          "baseline_gpu_ms": 105.81597127020359,
+          "candidate_offload_ms": 109.01824058964849,
+          "candidate_gpu_ms": 105.723075568676
+        }
+      ],
+      "gpu_savings_bytes": [
+        3036282880
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0008/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0008",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 512,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 1.8061278387904167,
+          "values": [
+            1.8061278387904167
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.02921679988503456,
+          "values": [
+            0.02921679988503456
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 1.7769110389053822,
+          "values": [
+            1.7769110389053822
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.034017501152421,
+          "values": [
+            1.034017501152421
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 54.900205228477716,
+          "baseline_gpu_ms": 52.09940318018198,
+          "candidate_offload_ms": 53.0940773896873,
+          "candidate_gpu_ms": 52.070186380296946
+        }
+      ],
+      "gpu_savings_bytes": [
+        3102998528
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0008/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0008",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 4096,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -8.04909998551011,
+          "values": [
+            -8.04909998551011
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.10884525254368782,
+          "values": [
+            -0.10884525254368782
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -7.940254732966423,
+          "values": [
+            -7.940254732966423
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9823354252858278,
+          "values": [
+            0.9823354252858278
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 447.61428935453296,
+          "baseline_gpu_ms": 442.7762348204851,
+          "candidate_offload_ms": 455.66338934004307,
+          "candidate_gpu_ms": 442.8850800730288
+        }
+      ],
+      "gpu_savings_bytes": [
+        2633236480
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0008/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0008",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -18.916628509759903,
+          "values": [
+            -18.916628509759903
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.1397654414176941,
+          "values": [
+            -0.1397654414176941
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -18.77686306834221,
+          "values": [
+            -18.77686306834221
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9813955131348092,
+          "values": [
+            0.9813955131348092
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 997.8611330501735,
+          "baseline_gpu_ms": 990.8207575790584,
+          "candidate_offload_ms": 1016.7777615599334,
+          "candidate_gpu_ms": 990.9605230204761
+        }
+      ],
+      "gpu_savings_bytes": [
+        2096365568
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0008/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0008",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 16,
+      "length": 2048,
+      "screen_promising": false,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -11.16122743114829
+        },
+        "gap_reduction_ms": {
+          "mean": -11.015844997018576
+        }
+      },
+      "source_results": [
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R01/J10-prefill-ma_gpu-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0008/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0008/R01/J10-prefill-ma_gpu-b16-l2048.json"
+      ],
+      "nomination_source": "historical_screen_only"
+    },
+    {
+      "attempt": "A0009",
+      "baseline": "A0001",
+      "mode": "decode",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.011179782450199127,
+          "values": [
+            -0.011179782450199127
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.00620158389210701,
+          "values": [
+            0.00620158389210701
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -0.017381366342306137,
+          "values": [
+            -0.017381366342306137
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9996778697863494,
+          "values": [
+            0.9996778697863494
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 34.69460681080818,
+          "baseline_gpu_ms": 34.65861678123474,
+          "candidate_offload_ms": 34.70578659325838,
+          "candidate_gpu_ms": 34.652415197342634
+        }
+      ],
+      "gpu_savings_bytes": [
+        2095874048
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0009/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0009",
+      "baseline": "A0001",
+      "mode": "generation",
+      "batch": 8,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -3.2660194362201764,
+          "values": [
+            -3.2660194362201764
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.6517121257882081,
+          "values": [
+            0.6517121257882081
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -3.9177315620083846,
+          "values": [
+            -3.9177315620083846
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9976251890239571,
+          "values": [
+            0.9976251890239571
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 1372.0095158244173,
+          "baseline_gpu_ms": 1350.4808766456943,
+          "candidate_offload_ms": 1375.2755352606375,
+          "candidate_gpu_ms": 1349.829164519906
+        }
+      ],
+      "gpu_savings_bytes": [
+        2901540864
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0009/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0009",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 4,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -2.331660594791174,
+          "values": [
+            -2.331660594791174
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.16642194241285324,
+          "values": [
+            0.16642194241285324
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -2.498082537204027,
+          "values": [
+            -2.498082537204027
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.979140684447173,
+          "values": [
+            0.979140684447173
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 109.44864153862,
+          "baseline_gpu_ms": 105.93009609729052,
+          "candidate_offload_ms": 111.78030213341117,
+          "candidate_gpu_ms": 105.76367415487766
+        }
+      ],
+      "gpu_savings_bytes": [
+        3036217344
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0009/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0009",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 4096,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -1.7626415938138962,
+          "values": [
+            -1.7626415938138962
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.7141439244151115,
+          "values": [
+            0.7141439244151115
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -2.4767855182290077,
+          "values": [
+            -2.4767855182290077
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9960553820926092,
+          "values": [
+            0.9960553820926092
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 445.08459055796266,
+          "baseline_gpu_ms": 442.7895803935826,
+          "candidate_offload_ms": 446.84723215177655,
+          "candidate_gpu_ms": 442.07543646916747
+        }
+      ],
+      "gpu_savings_bytes": [
+        2632974336
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0009/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0009",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.9048500098288059,
+          "values": [
+            0.9048500098288059
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 1.2947273440659046,
+          "values": [
+            1.2947273440659046
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -0.3898773342370987,
+          "values": [
+            -0.3898773342370987
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.000908769810623,
+          "values": [
+            1.000908769810623
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 996.5915456414223,
+          "baseline_gpu_ms": 993.4018908068538,
+          "candidate_offload_ms": 995.6866956315935,
+          "candidate_gpu_ms": 992.1071634627879
+        }
+      ],
+      "gpu_savings_bytes": [
+        2095841280
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0009/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0009",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 16,
+      "length": 2048,
+      "screen_promising": false,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -2.027061488479376
+        },
+        "gap_reduction_ms": {
+          "mean": -1.7205841839313507
+        }
+      },
+      "source_results": [
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R01/J10-prefill-ma_gpu-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0009/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0009/R01/J10-prefill-ma_gpu-b16-l2048.json"
+      ],
+      "nomination_source": "historical_screen_only"
+    },
+    {
+      "attempt": "A0010",
+      "baseline": "A0001",
+      "mode": "decode",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.012312456965446472,
+          "values": [
+            0.012312456965446472
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.04027746617794037,
+          "values": [
+            -0.04027746617794037
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.05258992314338684,
+          "values": [
+            0.05258992314338684
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.000354703446881,
+          "values": [
+            1.000354703446881
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 34.72428685054183,
+          "baseline_gpu_ms": 34.62193114683032,
+          "candidate_offload_ms": 34.711974393576384,
+          "candidate_gpu_ms": 34.66220861300826
+        }
+      ],
+      "gpu_savings_bytes": [
+        2096398336
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0010/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0010",
+      "baseline": "A0001",
+      "mode": "generation",
+      "batch": 1,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.5964801646769047,
+          "values": [
+            0.5964801646769047
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -9.296882276733754,
+          "values": [
+            -9.296882276733754
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 9.893362441410659,
+          "values": [
+            9.893362441410659
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.000934969257868,
+          "values": [
+            1.000934969257868
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 638.5641562752426,
+          "baseline_gpu_ms": 580.4614716830353,
+          "candidate_offload_ms": 637.9676761105657,
+          "candidate_gpu_ms": 589.758353959769
+        }
+      ],
+      "gpu_savings_bytes": [
+        3137241088
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0010/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0010",
+      "baseline": "A0001",
+      "mode": "generation",
+      "batch": 8,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -2.010104681054827,
+          "values": [
+            -2.010104681054827
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.18292743091774355,
+          "values": [
+            0.18292743091774355
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -2.1930321119725704,
+          "values": [
+            -2.1930321119725704
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9985371758019321,
+          "values": [
+            0.9985371758019321
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 1372.1158386208117,
+          "baseline_gpu_ms": 1350.3625356592238,
+          "candidate_offload_ms": 1374.1259433018665,
+          "candidate_gpu_ms": 1350.179608228306
+        }
+      ],
+      "gpu_savings_bytes": [
+        2901671936
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0010/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0010",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 4,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.8338386192917824,
+          "values": [
+            0.8338386192917824
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.22208550944924355,
+          "values": [
+            0.22208550944924355
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.6117531098425388,
+          "values": [
+            0.6117531098425388
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0076590068018565,
+          "values": [
+            1.0076590068018565
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 109.70417140051723,
+          "baseline_gpu_ms": 105.97264971584082,
+          "candidate_offload_ms": 108.87033278122544,
+          "candidate_gpu_ms": 105.75056420639157
+        }
+      ],
+      "gpu_savings_bytes": [
+        3036282880
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0010/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0010",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 512,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -1.1712257750332355,
+          "values": [
+            -1.1712257750332355
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.0361206941306591,
+          "values": [
+            -0.0361206941306591
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -1.1351050809025764,
+          "values": [
+            -1.1351050809025764
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9791396842638062,
+          "values": [
+            0.9791396842638062
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 54.97489348053932,
+          "baseline_gpu_ms": 52.00465703383088,
+          "candidate_offload_ms": 56.14611925557256,
+          "candidate_gpu_ms": 52.04077772796154
+        }
+      ],
+      "gpu_savings_bytes": [
+        3102998528
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0010/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0010",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 4096,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.9920287877321243,
+          "values": [
+            0.9920287877321243
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 1.0321109555661678,
+          "values": [
+            1.0321109555661678
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -0.0400821678340435,
+          "values": [
+            -0.0400821678340435
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0022198560394904,
+          "values": [
+            1.0022198560394904
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 447.8808225132525,
+          "baseline_gpu_ms": 443.6498890630901,
+          "candidate_offload_ms": 446.8887937255204,
+          "candidate_gpu_ms": 442.6177781075239
+        }
+      ],
+      "gpu_savings_bytes": [
+        2633236480
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0010/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0010",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 1.4980904757976532,
+          "values": [
+            1.4980904757976532
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 1.6339560970664024,
+          "values": [
+            1.6339560970664024
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -0.13586562126874924,
+          "values": [
+            -0.13586562126874924
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.001502895492873,
+          "values": [
+            1.001502895492873
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 998.300917353481,
+          "baseline_gpu_ms": 991.7408824898303,
+          "candidate_offload_ms": 996.8028268776834,
+          "candidate_gpu_ms": 990.1069263927639
+        }
+      ],
+      "gpu_savings_bytes": [
+        2096365568
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0010/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0010",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 16,
+      "length": 2048,
+      "screen_promising": false,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -1.3085237704217434
+        },
+        "gap_reduction_ms": {
+          "mean": -1.0040550492703915
+        }
+      },
+      "source_results": [
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R01/J10-prefill-ma_gpu-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0010/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0010/R01/J10-prefill-ma_gpu-b16-l2048.json"
+      ],
+      "nomination_source": "historical_screen_only"
+    },
+    {
+      "attempt": "A0011",
+      "baseline": "A0001",
+      "mode": "decode",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.8017371408641338,
+          "values": [
+            0.8017371408641338
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.01715468242764473,
+          "values": [
+            -0.01715468242764473
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.8188918232917786,
+          "values": [
+            0.8188918232917786
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0230822464158984,
+          "values": [
+            1.0230822464158984
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 35.535667557269335,
+          "baseline_gpu_ms": 34.624973963946104,
+          "candidate_offload_ms": 34.7339304164052,
+          "candidate_gpu_ms": 34.64212864637375
+        }
+      ],
+      "gpu_savings_bytes": [
+        2096398336
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0011/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0011",
+      "baseline": "A0001",
+      "mode": "generation",
+      "batch": 1,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -5.166852225859884,
+          "values": [
+            -5.166852225859884
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -8.790263657768492,
+          "values": [
+            -8.790263657768492
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 3.6234114319086075,
+          "values": [
+            3.6234114319086075
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9919848251396532,
+          "values": [
+            0.9919848251396532
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 639.466897615542,
+          "baseline_gpu_ms": 588.4491150577863,
+          "candidate_offload_ms": 644.6337498414019,
+          "candidate_gpu_ms": 597.2393787155548
+        }
+      ],
+      "gpu_savings_bytes": [
+        3137241088
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0011/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0011",
+      "baseline": "A0001",
+      "mode": "generation",
+      "batch": 8,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -4.389443496863123,
+          "values": [
+            -4.389443496863123
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.37675307442736994,
+          "values": [
+            0.37675307442736994
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -4.766196571290493,
+          "values": [
+            -4.766196571290493
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9968138673198997,
+          "values": [
+            0.9968138673198997
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 1373.2818393968046,
+          "baseline_gpu_ms": 1350.2325885308285,
+          "candidate_offload_ms": 1377.6712828936677,
+          "candidate_gpu_ms": 1349.855835456401
+        }
+      ],
+      "gpu_savings_bytes": [
+        2901671936
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0011/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0011",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 4,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 1.642710156738758,
+          "values": [
+            1.642710156738758
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.2385430969297886,
+          "values": [
+            0.2385430969297886
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 1.4041670598089695,
+          "values": [
+            1.4041670598089695
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0150539787678567,
+          "values": [
+            1.0150539787678567
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 110.76403828337789,
+          "baseline_gpu_ms": 106.05797739699483,
+          "candidate_offload_ms": 109.12132812663913,
+          "candidate_gpu_ms": 105.81943430006504
+        }
+      ],
+      "gpu_savings_bytes": [
+        3036282880
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0011/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0011",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 512,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.6729281507432461,
+          "values": [
+            -0.6729281507432461
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.13093017041683197,
+          "values": [
+            -0.13093017041683197
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -0.5419979803264141,
+          "values": [
+            -0.5419979803264141
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9875764930432903,
+          "values": [
+            0.9875764930432903
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 53.492787946015596,
+          "baseline_gpu_ms": 52.002492267638445,
+          "candidate_offload_ms": 54.16571609675884,
+          "candidate_gpu_ms": 52.13342243805528
+        }
+      ],
+      "gpu_savings_bytes": [
+        3102998528
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0011/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0011",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 4096,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.46347929164767265,
+          "values": [
+            0.46347929164767265
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.7271561771631241,
+          "values": [
+            -0.7271561771631241
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 1.1906354688107967,
+          "values": [
+            1.1906354688107967
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0010374242821913,
+          "values": [
+            1.0010374242821913
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 447.223112359643,
+          "baseline_gpu_ms": 442.64291748404503,
+          "candidate_offload_ms": 446.7596330679953,
+          "candidate_gpu_ms": 443.37007366120815
+        }
+      ],
+      "gpu_savings_bytes": [
+        2633236480
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0011/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0011",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.6497434340417385,
+          "values": [
+            0.6497434340417385
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.12279506772756577,
+          "values": [
+            0.12279506772756577
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.5269483663141727,
+          "values": [
+            0.5269483663141727
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0006517394590113,
+          "values": [
+            1.0006517394590113
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 997.5871316157281,
+          "baseline_gpu_ms": 990.7949965447187,
+          "candidate_offload_ms": 996.9373881816864,
+          "candidate_gpu_ms": 990.6722014769912
+        }
+      ],
+      "gpu_savings_bytes": [
+        2096365568
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0011/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0011",
+      "baseline": "A0001",
+      "mode": "decode",
+      "batch": 4,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.034360773861408234,
+          "values": [
+            0.034360773861408234
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.009698327630758286,
+          "values": [
+            -0.009698327630758286
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.04405910149216652,
+          "values": [
+            0.04405910149216652
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0046896316160685,
+          "values": [
+            1.0046896316160685
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 7.361327297985554,
+          "baseline_gpu_ms": 7.212699018418789,
+          "candidate_offload_ms": 7.3269665241241455,
+          "candidate_gpu_ms": 7.222397346049547
+        }
+      ],
+      "gpu_savings_bytes": [
+        3036299264
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0011/screen-bulk-addendum/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0011",
+      "baseline": "A0001",
+      "mode": "decode",
+      "batch": 8,
+      "length": 512,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.2711494453251362,
+          "values": [
+            -0.2711494453251362
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.0027171336114406586,
+          "values": [
+            0.0027171336114406586
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -0.27386657893657684,
+          "values": [
+            -0.27386657893657684
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9545418960667122,
+          "values": [
+            0.9545418960667122
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 5.693671386688948,
+          "baseline_gpu_ms": 5.602341052144766,
+          "candidate_offload_ms": 5.964820832014084,
+          "candidate_gpu_ms": 5.599623918533325
+        }
+      ],
+      "gpu_savings_bytes": [
+        3103031296
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0011/screen-bulk-addendum/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0011",
+      "baseline": "A0001",
+      "mode": "decode",
+      "batch": 8,
+      "length": 4096,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.032052863389253616,
+          "values": [
+            0.032052863389253616
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.0017211772501468658,
+          "values": [
+            -0.0017211772501468658
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.03377404063940048,
+          "values": [
+            0.03377404063940048
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0016769612772678,
+          "values": [
+            1.0016769612772678
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 19.145710300654173,
+          "baseline_gpu_ms": 18.933974858373404,
+          "candidate_offload_ms": 19.11365743726492,
+          "candidate_gpu_ms": 18.93569603562355
+        }
+      ],
+      "gpu_savings_bytes": [
+        2633269248
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0011/screen-bulk-addendum/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0011",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 16,
+      "length": 2048,
+      "screen_promising": false,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -1.4775272458791733
+        },
+        "gap_reduction_ms": {
+          "mean": -0.922984816133976
+        }
+      },
+      "source_results": [
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R01/J10-prefill-ma_gpu-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0011/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0011/R01/J10-prefill-ma_gpu-b16-l2048.json"
+      ],
+      "nomination_source": "historical_screen_only"
+    },
+    {
+      "attempt": "A0011",
+      "baseline": "A0001",
+      "mode": "decode",
+      "batch": 16,
+      "length": 2048,
+      "screen_promising": true,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.005781929939985275
+        },
+        "gap_reduction_ms": {
+          "mean": 0.014497898519039154
+        }
+      },
+      "source_results": [
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R01/J11-decode-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R01/J12-decode-ma_gpu-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0011/R01/J11-decode-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0011/R01/J12-decode-ma_gpu-b16-l2048.json"
+      ],
+      "nomination_source": "historical_screen_only"
+    },
+    {
+      "attempt": "A0012",
+      "baseline": "A0001",
+      "mode": "decode",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.05145519971847534,
+          "values": [
+            -0.05145519971847534
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.02539427950978279,
+          "values": [
+            -0.02539427950978279
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -0.02606092020869255,
+          "values": [
+            -0.02606092020869255
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9985201619219746,
+          "values": [
+            0.9985201619219746
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 34.71937580034137,
+          "baseline_gpu_ms": 34.62013406679034,
+          "candidate_offload_ms": 34.77083100005984,
+          "candidate_gpu_ms": 34.645528346300125
+        }
+      ],
+      "gpu_savings_bytes": [
+        2096398336
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0012/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0012",
+      "baseline": "A0001",
+      "mode": "generation",
+      "batch": 1,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 21.86032921696699,
+          "values": [
+            21.86032921696699
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -9.651662191997048,
+          "values": [
+            -9.651662191997048
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 31.511991408964036,
+          "values": [
+            31.511991408964036
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0346833760386633,
+          "values": [
+            1.0346833760386633
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 652.1429520100355,
+          "baseline_gpu_ms": 582.2619020628432,
+          "candidate_offload_ms": 630.2826227930685,
+          "candidate_gpu_ms": 591.9135642548403
+        }
+      ],
+      "gpu_savings_bytes": [
+        3137241088
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0012/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0012",
+      "baseline": "A0001",
+      "mode": "generation",
+      "batch": 8,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -2.8543928948543,
+          "values": [
+            -2.8543928948543
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.3381432965397835,
+          "values": [
+            0.3381432965397835
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -3.1925361913940833,
+          "values": [
+            -3.1925361913940833
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9979243448186619,
+          "values": [
+            0.9979243448186619
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 1372.322428630044,
+          "baseline_gpu_ms": 1350.3286950600643,
+          "candidate_offload_ms": 1375.1768215248983,
+          "candidate_gpu_ms": 1349.9905517635245
+        }
+      ],
+      "gpu_savings_bytes": [
+        2901671936
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0012/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0012",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 4,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.21140296012163162,
+          "values": [
+            -0.21140296012163162
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.15706587582826614,
+          "values": [
+            0.15706587582826614
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -0.36846883594989777,
+          "values": [
+            -0.36846883594989777
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9980665744542035,
+          "values": [
+            0.9980665744542035
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 109.12974057719111,
+          "baseline_gpu_ms": 105.91097353026271,
+          "candidate_offload_ms": 109.34114353731275,
+          "candidate_gpu_ms": 105.75390765443444
+        }
+      ],
+      "gpu_savings_bytes": [
+        3036282880
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0012/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0012",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 512,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.005170423537492752,
+          "values": [
+            -0.005170423537492752
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.08940137922763824,
+          "values": [
+            0.08940137922763824
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -0.094571802765131,
+          "values": [
+            -0.094571802765131
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9999058252865906,
+          "values": [
+            0.9999058252865906
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 54.89729065448046,
+          "baseline_gpu_ms": 52.15235371142626,
+          "candidate_offload_ms": 54.90246107801795,
+          "candidate_gpu_ms": 52.06295233219862
+        }
+      ],
+      "gpu_savings_bytes": [
+        3102998528
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0012/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0012",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 4096,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.506021361798048,
+          "values": [
+            -0.506021361798048
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.20561674609780312,
+          "values": [
+            -0.20561674609780312
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -0.3004046157002449,
+          "values": [
+            -0.3004046157002449
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9988699698682716,
+          "values": [
+            0.9988699698682716
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 447.2885529510677,
+          "baseline_gpu_ms": 442.87463119253516,
+          "candidate_offload_ms": 447.79457431286573,
+          "candidate_gpu_ms": 443.08024793863297
+        }
+      ],
+      "gpu_savings_bytes": [
+        2633236480
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0012/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0012",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 1.431870087981224,
+          "values": [
+            1.431870087981224
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.08453410118818283,
+          "values": [
+            -0.08453410118818283
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 1.516404189169407,
+          "values": [
+            1.516404189169407
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0014369851312772,
+          "values": [
+            1.0014369851312772
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 997.8723041713238,
+          "baseline_gpu_ms": 991.1251312121749,
+          "candidate_offload_ms": 996.4404340833426,
+          "candidate_gpu_ms": 991.2096653133631
+        }
+      ],
+      "gpu_savings_bytes": [
+        2096365568
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0012/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0012",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 16,
+      "length": 2048,
+      "screen_promising": false,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.7855694741010666
+        },
+        "gap_reduction_ms": {
+          "mean": -0.7125905714929104
+        }
+      },
+      "source_results": [
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R01/J10-prefill-ma_gpu-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0012/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0012/R01/J10-prefill-ma_gpu-b16-l2048.json"
+      ],
+      "nomination_source": "historical_screen_only"
+    },
+    {
+      "attempt": "A0013",
+      "baseline": "A0001",
+      "mode": "decode",
+      "batch": 8,
+      "length": 512,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.03925366327166557,
+          "values": [
+            -0.03925366327166557
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.0018633902072906494,
+          "values": [
+            -0.0018633902072906494
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -0.037390273064374924,
+          "values": [
+            -0.037390273064374924
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.993183742328793,
+          "values": [
+            0.993183742328793
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 5.719575472176075,
+          "baseline_gpu_ms": 5.6078242138028145,
+          "candidate_offload_ms": 5.7588291354477406,
+          "candidate_gpu_ms": 5.609687604010105
+        }
+      ],
+      "gpu_savings_bytes": [
+        3103031296
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0013/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0013",
+      "baseline": "A0001",
+      "mode": "decode",
+      "batch": 8,
+      "length": 4096,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.045143719762563705,
+          "values": [
+            -0.045143719762563705
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.017282459884881973,
+          "values": [
+            0.017282459884881973
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -0.06242617964744568,
+          "values": [
+            -0.06242617964744568
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9976294035167128,
+          "values": [
+            0.9976294035167128
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 18.99804649874568,
+          "baseline_gpu_ms": 18.937788996845484,
+          "candidate_offload_ms": 19.043190218508244,
+          "candidate_gpu_ms": 18.920506536960602
+        }
+      ],
+      "gpu_savings_bytes": [
+        2633269248
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0013/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0013",
+      "baseline": "A0001",
+      "mode": "decode",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.06017470732331276,
+          "values": [
+            -0.06017470732331276
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.05835723131895065,
+          "values": [
+            -0.05835723131895065
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -0.0018174760043621063,
+          "values": [
+            -0.0018174760043621063
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9982671864548579,
+          "values": [
+            0.9982671864548579
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 34.66641632840037,
+          "baseline_gpu_ms": 34.585632756352425,
+          "candidate_offload_ms": 34.726591035723686,
+          "candidate_gpu_ms": 34.643989987671375
+        }
+      ],
+      "gpu_savings_bytes": [
+        2096398336
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0013/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0013",
+      "baseline": "A0001",
+      "mode": "generation",
+      "batch": 8,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 31.59783215572429,
+          "values": [
+            31.59783215572429
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.4866308532655239,
+          "values": [
+            -0.4866308532655239
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 32.084463008989815,
+          "values": [
+            32.084463008989815
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0234971044970373,
+          "values": [
+            1.0234971044970373
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 1376.3521255925298,
+          "baseline_gpu_ms": 1348.594208713621,
+          "candidate_offload_ms": 1344.7542934368055,
+          "candidate_gpu_ms": 1349.0808395668864
+        }
+      ],
+      "gpu_savings_bytes": [
+        2901671936
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0013/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0013",
+      "baseline": "A0001",
+      "mode": "decode",
+      "batch": 16,
+      "length": 2048,
+      "screen_promising": true,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.01970771700143814
+        },
+        "gap_reduction_ms": {
+          "mean": 0.011284369975328445
+        }
+      },
+      "source_results": [
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R01/J11-decode-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R01/J12-decode-ma_gpu-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0013/R01/J11-decode-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0013/R01/J12-decode-ma_gpu-b16-l2048.json"
+      ],
+      "nomination_source": "historical_screen_only"
+    },
+    {
+      "attempt": "A0014",
+      "baseline": "A0001",
+      "mode": "decode",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.005817227065563202,
+          "values": [
+            -0.005817227065563202
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.026110652834177017,
+          "values": [
+            -0.026110652834177017
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.020293425768613815,
+          "values": [
+            0.020293425768613815
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9998325328453208,
+          "values": [
+            0.9998325328453208
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 34.73070813342929,
+          "baseline_gpu_ms": 34.621673077344894,
+          "candidate_offload_ms": 34.73652536049485,
+          "candidate_gpu_ms": 34.64778373017907
+        }
+      ],
+      "gpu_savings_bytes": [
+        2901704704
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0014/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0014",
+      "baseline": "A0001",
+      "mode": "generation",
+      "batch": 1,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -18.83302303031087,
+          "values": [
+            -18.83302303031087
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 3.340821961561801,
+          "values": [
+            3.340821961561801
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -22.17384499187267,
+          "values": [
+            -22.17384499187267
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.971338030852303,
+          "values": [
+            0.971338030852303
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 638.2405692711473,
+          "baseline_gpu_ms": 592.744919937104,
+          "candidate_offload_ms": 657.0735923014581,
+          "candidate_gpu_ms": 589.4040979755422
+        }
+      ],
+      "gpu_savings_bytes": [
+        3162406912
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0014/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0014",
+      "baseline": "A0001",
+      "mode": "generation",
+      "batch": 8,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.5407416572172679,
+          "values": [
+            -0.5407416572172679
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.47536961113405596,
+          "values": [
+            0.47536961113405596
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -1.0161112683513238,
+          "values": [
+            -1.0161112683513238
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.999606725859208,
+          "values": [
+            0.999606725859208
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 1374.433102613936,
+          "baseline_gpu_ms": 1350.259307709833,
+          "candidate_offload_ms": 1374.9738442711532,
+          "candidate_gpu_ms": 1349.7839380986989
+        }
+      ],
+      "gpu_savings_bytes": [
+        3102998528
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0014/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0014",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 4,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 2.4287096224725246,
+          "values": [
+            2.4287096224725246
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.18933285027742386,
+          "values": [
+            0.18933285027742386
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 2.239376772195101,
+          "values": [
+            2.239376772195101
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0228371805089838,
+          "values": [
+            1.0228371805089838
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 108.77763573080301,
+          "baseline_gpu_ms": 105.95018463209271,
+          "candidate_offload_ms": 106.34892610833049,
+          "candidate_gpu_ms": 105.76085178181529
+        }
+      ],
+      "gpu_savings_bytes": [
+        3136946176
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0014/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0014",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 512,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 2.0122235640883446,
+          "values": [
+            2.0122235640883446
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.055777933448553085,
+          "values": [
+            -0.055777933448553085
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 2.0680014975368977,
+          "values": [
+            2.0680014975368977
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0384408935237888,
+          "values": [
+            1.0384408935237888
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 54.35813385993242,
+          "baseline_gpu_ms": 51.987692806869745,
+          "candidate_offload_ms": 52.34591029584408,
+          "candidate_gpu_ms": 52.0434707403183
+        }
+      ],
+      "gpu_savings_bytes": [
+        3153330176
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0014/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0014",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 4096,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 2.323094103485346,
+          "values": [
+            2.323094103485346
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.6268488243222237,
+          "values": [
+            0.6268488243222237
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 1.6962452791631222,
+          "values": [
+            1.6962452791631222
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0052221202405802,
+          "values": [
+            1.0052221202405802
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 447.17958848923445,
+          "baseline_gpu_ms": 443.63406524062157,
+          "candidate_offload_ms": 444.8564943857491,
+          "candidate_gpu_ms": 443.00721641629934
+        }
+      ],
+      "gpu_savings_bytes": [
+        3035889664
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0014/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0014",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 3.092384710907936,
+          "values": [
+            3.092384710907936
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.38174744695425034,
+          "values": [
+            0.38174744695425034
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 2.7106372639536858,
+          "values": [
+            2.7106372639536858
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.003110930237633,
+          "values": [
+            1.003110930237633
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 997.1309759654105,
+          "baseline_gpu_ms": 990.4423609375954,
+          "candidate_offload_ms": 994.0385912545025,
+          "candidate_gpu_ms": 990.0606134906411
+        }
+      ],
+      "gpu_savings_bytes": [
+        2901671936
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0014/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0014",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 16,
+      "length": 2048,
+      "screen_promising": true,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.42462218552827835
+        },
+        "gap_reduction_ms": {
+          "mean": 1.0926713235676289
+        }
+      },
+      "source_results": [
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R01/J10-prefill-ma_gpu-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0014/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0014/R01/J10-prefill-ma_gpu-b16-l2048.json"
+      ],
+      "nomination_source": "historical_screen_only"
+    },
+    {
+      "attempt": "A0015",
+      "baseline": "A0001",
+      "mode": "decode",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.0795719213783741,
+          "values": [
+            -0.0795719213783741
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.030673295259475708,
+          "values": [
+            0.030673295259475708
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -0.11024521663784981,
+          "values": [
+            -0.11024521663784981
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9977101389040139,
+          "values": [
+            0.9977101389040139
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 34.670099802315235,
+          "baseline_gpu_ms": 34.67458551749587,
+          "candidate_offload_ms": 34.74967172369361,
+          "candidate_gpu_ms": 34.643912222236395
+        }
+      ],
+      "gpu_savings_bytes": [
+        2095874048
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0015/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0015",
+      "baseline": "A0001",
+      "mode": "generation",
+      "batch": 8,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 2.5434229833383597,
+          "values": [
+            2.5434229833383597
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.33620428293943405,
+          "values": [
+            0.33620428293943405
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 2.2072187003989256,
+          "values": [
+            2.2072187003989256
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.001854120523919,
+          "values": [
+            1.001854120523919
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 1374.3113045891125,
+          "baseline_gpu_ms": 1350.3171967963378,
+          "candidate_offload_ms": 1371.7678816057742,
+          "candidate_gpu_ms": 1349.9809925133984
+        }
+      ],
+      "gpu_savings_bytes": [
+        2901540864
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0015/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0015",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 4,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.3087247721850872,
+          "values": [
+            0.3087247721850872
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.08126748725771904,
+          "values": [
+            0.08126748725771904
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.22745728492736816,
+          "values": [
+            0.22745728492736816
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0028451845561213,
+          "values": [
+            1.0028451845561213
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 108.81654424592853,
+          "baseline_gpu_ms": 105.77775556594133,
+          "candidate_offload_ms": 108.50781947374344,
+          "candidate_gpu_ms": 105.69648807868361
+        }
+      ],
+      "gpu_savings_bytes": [
+        3036217344
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0015/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0015",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 4096,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 2.694847993552685,
+          "values": [
+            2.694847993552685
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.02692677080631256,
+          "values": [
+            -0.02692677080631256
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 2.7217747643589973,
+          "values": [
+            2.7217747643589973
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0060836990832789,
+          "values": [
+            1.0060836990832789
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 445.6569269299507,
+          "baseline_gpu_ms": 442.0275144279003,
+          "candidate_offload_ms": 442.96207893639803,
+          "candidate_gpu_ms": 442.0544411987066
+        }
+      ],
+      "gpu_savings_bytes": [
+        2632974336
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0015/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0015",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 7.415603846311569,
+          "values": [
+            7.415603846311569
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 1.2214341200888157,
+          "values": [
+            1.2214341200888157
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 6.1941697262227535,
+          "values": [
+            6.1941697262227535
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0074959171650233,
+          "values": [
+            1.0074959171650233
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 996.7013287357986,
+          "baseline_gpu_ms": 992.5008337944746,
+          "candidate_offload_ms": 989.285724889487,
+          "candidate_gpu_ms": 991.2793996743858
+        }
+      ],
+      "gpu_savings_bytes": [
+        2095841280
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0015/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0015",
+      "baseline": "A0001",
+      "mode": "prefill",
+      "batch": 16,
+      "length": 2048,
+      "screen_promising": true,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 2.0737159065902233
+        },
+        "gap_reduction_ms": {
+          "mean": 2.1450072526931763
+        }
+      },
+      "source_results": [
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0001/R01/J10-prefill-ma_gpu-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0015/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0015/R01/J10-prefill-ma_gpu-b16-l2048.json"
+      ],
+      "nomination_source": "historical_screen_only"
+    },
+    {
+      "attempt": "A0017",
+      "baseline": "A0016",
+      "mode": "decode",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.10497849434614182,
+          "values": [
+            0.10497849434614182
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.02044234424829483,
+          "values": [
+            0.02044234424829483
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.08453615009784698,
+          "values": [
+            0.08453615009784698
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0030241342897868,
+          "values": [
+            1.0030241342897868
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 34.81854749843478,
+          "baseline_gpu_ms": 34.658440947532654,
+          "candidate_offload_ms": 34.71356900408864,
+          "candidate_gpu_ms": 34.63799860328436
+        }
+      ],
+      "gpu_savings_bytes": [
+        2096398336
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0017/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0017",
+      "baseline": "A0016",
+      "mode": "generation",
+      "batch": 8,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 1.4257694284121953,
+          "values": [
+            1.4257694284121953
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.28062000249815355,
+          "values": [
+            0.28062000249815355
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 1.1451494259140418,
+          "values": [
+            1.1451494259140418
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.001038563938956,
+          "values": [
+            1.001038563938956
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 1374.2535510721307,
+          "baseline_gpu_ms": 1350.2121965711315,
+          "candidate_offload_ms": 1372.8277816437185,
+          "candidate_gpu_ms": 1349.9315765686333
+        }
+      ],
+      "gpu_savings_bytes": [
+        2901671936
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0017/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0017",
+      "baseline": "A0016",
+      "mode": "prefill",
+      "batch": 4,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 3.275322075933218,
+          "values": [
+            3.275322075933218
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.00289110466837883,
+          "values": [
+            -0.00289110466837883
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 3.278213180601597,
+          "values": [
+            3.278213180601597
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0306927947167481,
+          "values": [
+            1.0306927947167481
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 109.98838311061263,
+          "baseline_gpu_ms": 105.70346489548683,
+          "candidate_offload_ms": 106.71306103467941,
+          "candidate_gpu_ms": 105.70635600015521
+        }
+      ],
+      "gpu_savings_bytes": [
+        3036282880
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0017/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0017",
+      "baseline": "A0016",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 4096,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 1.436503790318966,
+          "values": [
+            1.436503790318966
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.0033517368137836456,
+          "values": [
+            0.0033517368137836456
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 1.4331520535051823,
+          "values": [
+            1.4331520535051823
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0032363109854996,
+          "values": [
+            1.0032363109854996
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 445.3072556294501,
+          "baseline_gpu_ms": 442.18659680336714,
+          "candidate_offload_ms": 443.8707518391311,
+          "candidate_gpu_ms": 442.18324506655335
+        }
+      ],
+      "gpu_savings_bytes": [
+        2633236480
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0017/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0017",
+      "baseline": "A0016",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 1.917539443820715,
+          "values": [
+            1.917539443820715
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 1.345592550933361,
+          "values": [
+            1.345592550933361
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.5719468928873539,
+          "values": [
+            0.5719468928873539
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0019299110744848,
+          "values": [
+            1.0019299110744848
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 995.507072750479,
+          "baseline_gpu_ms": 993.4745556674898,
+          "candidate_offload_ms": 993.5895333066583,
+          "candidate_gpu_ms": 992.1289631165564
+        }
+      ],
+      "gpu_savings_bytes": [
+        2096365568
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0017/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0017",
+      "baseline": "A0016",
+      "mode": "prefill",
+      "batch": 16,
+      "length": 2048,
+      "screen_promising": true,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 2.0037923008203506
+        },
+        "gap_reduction_ms": {
+          "mean": 2.042000461369753
+        }
+      },
+      "source_results": [
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R01/J10-prefill-ma_gpu-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0017/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0017/R01/J10-prefill-ma_gpu-b16-l2048.json"
+      ],
+      "nomination_source": "historical_screen_only"
+    },
+    {
+      "attempt": "A0018",
+      "baseline": "A0016",
+      "mode": "decode",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.006693694740533829,
+          "values": [
+            0.006693694740533829
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.018178485333919525,
+          "values": [
+            -0.018178485333919525
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.024872180074453354,
+          "values": [
+            0.024872180074453354
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0001928171166656,
+          "values": [
+            1.0001928171166656
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 34.72194541245699,
+          "baseline_gpu_ms": 34.62085593491793,
+          "candidate_offload_ms": 34.715251717716455,
+          "candidate_gpu_ms": 34.639034420251846
+        }
+      ],
+      "gpu_savings_bytes": [
+        2096398336
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0018/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0018",
+      "baseline": "A0016",
+      "mode": "generation",
+      "batch": 1,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 17.391055605063798,
+          "values": [
+            17.391055605063798
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -7.756356429308653,
+          "values": [
+            -7.756356429308653
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 25.14741203437245,
+          "values": [
+            25.14741203437245
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0274869106422484,
+          "values": [
+            1.0274869106422484
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 650.094229541719,
+          "baseline_gpu_ms": 583.8994634958605,
+          "candidate_offload_ms": 632.7031739366552,
+          "candidate_gpu_ms": 591.6558199251691
+        }
+      ],
+      "gpu_savings_bytes": [
+        3162406912
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0018/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0018",
+      "baseline": "A0016",
+      "mode": "generation",
+      "batch": 8,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.22026139001059164,
+          "values": [
+            0.22026139001059164
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.12706629931926727,
+          "values": [
+            0.12706629931926727
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.09319509069132437,
+          "values": [
+            0.09319509069132437
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0001603425571248,
+          "values": [
+            1.0001603425571248
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 1373.9128977060318,
+          "baseline_gpu_ms": 1350.1104379383225,
+          "candidate_offload_ms": 1373.6926363160212,
+          "candidate_gpu_ms": 1349.9833716390033
+        }
+      ],
+      "gpu_savings_bytes": [
+        2901671936
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0018/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0018",
+      "baseline": "A0016",
+      "mode": "prefill",
+      "batch": 4,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.5843013525009155,
+          "values": [
+            0.5843013525009155
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.16109002754092216,
+          "values": [
+            -0.16109002754092216
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.7453913800418377,
+          "values": [
+            0.7453913800418377
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0053167589050975,
+          "values": [
+            1.0053167589050975
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 110.48233564943075,
+          "baseline_gpu_ms": 105.78484134748578,
+          "candidate_offload_ms": 109.89803429692984,
+          "candidate_gpu_ms": 105.9459313750267
+        }
+      ],
+      "gpu_savings_bytes": [
+        3036282880
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0018/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0018",
+      "baseline": "A0016",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 512,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.41030654683709145,
+          "values": [
+            -0.41030654683709145
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.003492552787065506,
+          "values": [
+            0.003492552787065506
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -0.41379909962415695,
+          "values": [
+            -0.41379909962415695
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9924402237641999,
+          "values": [
+            0.9924402237641999
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 53.864652663469315,
+          "baseline_gpu_ms": 51.99754107743502,
+          "candidate_offload_ms": 54.274959210306406,
+          "candidate_gpu_ms": 51.99404852464795
+        }
+      ],
+      "gpu_savings_bytes": [
+        3102998528
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0018/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0018",
+      "baseline": "A0016",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 4096,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -1.1154565960168839,
+          "values": [
+            -1.1154565960168839
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -2.9861108399927616,
+          "values": [
+            -2.9861108399927616
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 1.8706542439758778,
+          "values": [
+            1.8706542439758778
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9975031536097357,
+          "values": [
+            0.9975031536097357
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 445.6307270564139,
+          "baseline_gpu_ms": 441.65507443249226,
+          "candidate_offload_ms": 446.7461836524308,
+          "candidate_gpu_ms": 444.641185272485
+        }
+      ],
+      "gpu_savings_bytes": [
+        2633236480
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0018/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0018",
+      "baseline": "A0016",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.726794358342886,
+          "values": [
+            0.726794358342886
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.1359734684228897,
+          "values": [
+            -0.1359734684228897
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.8627678267657757,
+          "values": [
+            0.8627678267657757
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0007290251971854,
+          "values": [
+            1.0007290251971854
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 997.6667645387352,
+          "baseline_gpu_ms": 991.4915066212416,
+          "candidate_offload_ms": 996.9399701803923,
+          "candidate_gpu_ms": 991.6274800896645
+        }
+      ],
+      "gpu_savings_bytes": [
+        2096365568
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0018/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0018",
+      "baseline": "A0016",
+      "mode": "prefill",
+      "batch": 16,
+      "length": 2048,
+      "screen_promising": true,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.18412992358207703
+        },
+        "gap_reduction_ms": {
+          "mean": 0.3503543324768543
+        }
+      },
+      "source_results": [
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R01/J10-prefill-ma_gpu-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0018/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0018/R01/J10-prefill-ma_gpu-b16-l2048.json"
+      ],
+      "nomination_source": "historical_screen_only"
+    },
+    {
+      "attempt": "A0019",
+      "baseline": "A0016",
+      "mode": "decode",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.0073685310781002045,
+          "values": [
+            -0.0073685310781002045
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.0671539455652237,
+          "values": [
+            -0.0671539455652237
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.05978541448712349,
+          "values": [
+            0.05978541448712349
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.999787829911495,
+          "values": [
+            0.999787829911495
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 34.72199002280831,
+          "baseline_gpu_ms": 34.59604047238827,
+          "candidate_offload_ms": 34.729358553886414,
+          "candidate_gpu_ms": 34.66319441795349
+        }
+      ],
+      "gpu_savings_bytes": [
+        2096398336
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0019/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0019",
+      "baseline": "A0016",
+      "mode": "generation",
+      "batch": 1,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 2.0284472654263936,
+          "values": [
+            2.0284472654263936
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 5.111152150978683,
+          "values": [
+            5.111152150978683
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -3.082704885552289,
+          "values": [
+            -3.082704885552289
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.003152978511741,
+          "values": [
+            1.003152978511741
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 645.3716409703096,
+          "baseline_gpu_ms": 597.1896988650163,
+          "candidate_offload_ms": 643.3431937048832,
+          "candidate_gpu_ms": 592.0785467140377
+        }
+      ],
+      "gpu_savings_bytes": [
+        3170795520
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0019/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0019",
+      "baseline": "A0016",
+      "mode": "generation",
+      "batch": 8,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -1.3037619801859819,
+          "values": [
+            -1.3037619801859819
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.030221790075302124,
+          "values": [
+            -0.030221790075302124
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -1.2735401901106798,
+          "values": [
+            -1.2735401901106798
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9990515249924964,
+          "values": [
+            0.9990515249924964
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 1373.2838337620099,
+          "baseline_gpu_ms": 1350.2468392873805,
+          "candidate_offload_ms": 1374.5875957421958,
+          "candidate_gpu_ms": 1350.2770610774558
+        }
+      ],
+      "gpu_savings_bytes": [
+        2968780800
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0019/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0019",
+      "baseline": "A0016",
+      "mode": "prefill",
+      "batch": 4,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.04792660474777222,
+          "values": [
+            -0.04792660474777222
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.1804058440029621,
+          "values": [
+            0.1804058440029621
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -0.22833244875073433,
+          "values": [
+            -0.22833244875073433
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9995643492983204,
+          "values": [
+            0.9995643492983204
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 109.96361374855042,
+          "baseline_gpu_ms": 105.9419747442007,
+          "candidate_offload_ms": 110.01154035329819,
+          "candidate_gpu_ms": 105.76156890019774
+        }
+      ],
+      "gpu_savings_bytes": [
+        3069837312
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0019/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0019",
+      "baseline": "A0016",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 512,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.7145985960960388,
+          "values": [
+            0.7145985960960388
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.04606116563081741,
+          "values": [
+            0.04606116563081741
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.6685374304652214,
+          "values": [
+            0.6685374304652214
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0130558313621714,
+          "values": [
+            1.0130558313621714
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 55.44865392148495,
+          "baseline_gpu_ms": 52.04555103555322,
+          "candidate_offload_ms": 54.73405532538891,
+          "candidate_gpu_ms": 51.9994898699224
+        }
+      ],
+      "gpu_savings_bytes": [
+        3119775744
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0019/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0019",
+      "baseline": "A0016",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 4096,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.10197125375270844,
+          "values": [
+            0.10197125375270844
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.5693134851753712,
+          "values": [
+            -0.5693134851753712
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.6712847389280796,
+          "values": [
+            0.6712847389280796
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0002279298404886,
+          "values": [
+            1.0002279298404886
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 447.48197877779603,
+          "baseline_gpu_ms": 442.3313465900719,
+          "candidate_offload_ms": 447.3800075240433,
+          "candidate_gpu_ms": 442.9006600752473
+        }
+      ],
+      "gpu_savings_bytes": [
+        2767454208
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0019/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0019",
+      "baseline": "A0016",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.843365304172039,
+          "values": [
+            0.843365304172039
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 1.6954543069005013,
+          "values": [
+            1.6954543069005013
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -0.8520890027284622,
+          "values": [
+            -0.8520890027284622
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0008467174986655,
+          "values": [
+            1.0008467174986655
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 996.8843181617558,
+          "baseline_gpu_ms": 991.6080076247454,
+          "candidate_offload_ms": 996.0409528575838,
+          "candidate_gpu_ms": 989.9125533178449
+        }
+      ],
+      "gpu_savings_bytes": [
+        2364801024
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0019/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0019",
+      "baseline": "A0016",
+      "mode": "prefill",
+      "batch": 16,
+      "length": 2048,
+      "screen_promising": false,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.20144637674093246
+        },
+        "gap_reduction_ms": {
+          "mean": 0.15227636322379112
+        }
+      },
+      "source_results": [
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R01/J10-prefill-ma_gpu-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0019/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0019/R01/J10-prefill-ma_gpu-b16-l2048.json"
+      ],
+      "nomination_source": "historical_screen_only"
+    },
+    {
+      "attempt": "A0020",
+      "baseline": "A0016",
+      "mode": "decode",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.005057360976934433,
+          "values": [
+            0.005057360976934433
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -0.05889516323804855,
+          "values": [
+            -0.05889516323804855
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.06395252421498299,
+          "values": [
+            0.06395252421498299
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0001456283399728,
+          "values": [
+            1.0001456283399728
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 34.73291993141174,
+          "baseline_gpu_ms": 34.608457796275616,
+          "candidate_offload_ms": 34.72786257043481,
+          "candidate_gpu_ms": 34.667352959513664
+        }
+      ],
+      "gpu_savings_bytes": [
+        2096398336
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0020/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0020",
+      "baseline": "A0016",
+      "mode": "generation",
+      "batch": 1,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 13.538308783123853,
+          "values": [
+            13.538308783123853
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": -1.7839258847137671,
+          "values": [
+            -1.7839258847137671
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 15.32223466783762,
+          "values": [
+            15.32223466783762
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0214674068765468,
+          "values": [
+            1.0214674068765468
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 644.1831212180356,
+          "baseline_gpu_ms": 590.2895461767912,
+          "candidate_offload_ms": 630.6448124349117,
+          "candidate_gpu_ms": 592.073472061505
+        }
+      ],
+      "gpu_savings_bytes": [
+        3162406912
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0020/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0020",
+      "baseline": "A0016",
+      "mode": "generation",
+      "batch": 8,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -0.3857634961605072,
+          "values": [
+            -0.3857634961605072
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.12672115117311478,
+          "values": [
+            0.12672115117311478
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -0.512484647333622,
+          "values": [
+            -0.512484647333622
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.9997193454256031,
+          "values": [
+            0.9997193454256031
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 1374.1277180301647,
+          "baseline_gpu_ms": 1350.0535173962514,
+          "candidate_offload_ms": 1374.5134815263252,
+          "candidate_gpu_ms": 1349.9267962450783
+        }
+      ],
+      "gpu_savings_bytes": [
+        2901671936
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0020/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0020",
+      "baseline": "A0016",
+      "mode": "prefill",
+      "batch": 4,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 1.132281869649887,
+          "values": [
+            1.132281869649887
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.014132168143987656,
+          "values": [
+            0.014132168143987656
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 1.1181497015058994,
+          "values": [
+            1.1181497015058994
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0104154698686805,
+          "values": [
+            1.0104154698686805
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 109.84383150935173,
+          "baseline_gpu_ms": 105.73705676943064,
+          "candidate_offload_ms": 108.71154963970184,
+          "candidate_gpu_ms": 105.72292460128665
+        }
+      ],
+      "gpu_savings_bytes": [
+        3036282880
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0020/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0020",
+      "baseline": "A0016",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 512,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 1.784506905823946,
+          "values": [
+            1.784506905823946
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.07024779915809631,
+          "values": [
+            0.07024779915809631
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 1.7142591066658497,
+          "values": [
+            1.7142591066658497
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.033021931353438,
+          "values": [
+            1.033021931353438
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 55.82455946132541,
+          "baseline_gpu_ms": 52.014784049242735,
+          "candidate_offload_ms": 54.04005255550146,
+          "candidate_gpu_ms": 51.94453625008464
+        }
+      ],
+      "gpu_savings_bytes": [
+        3102998528
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0020/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0020",
+      "baseline": "A0016",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 4096,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": -1.422248501330614,
+          "values": [
+            -1.422248501330614
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 1.0910212062299252,
+          "values": [
+            1.0910212062299252
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": -2.5132697075605392,
+          "values": [
+            -2.5132697075605392
+          ]
+        },
+        "offload_speedup": {
+          "mean": 0.99681368399964,
+          "values": [
+            0.99681368399964
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 444.9391610920429,
+          "baseline_gpu_ms": 442.86446003243327,
+          "candidate_offload_ms": 446.36140959337354,
+          "candidate_gpu_ms": 441.77343882620335
+        }
+      ],
+      "gpu_savings_bytes": [
+        2633236480
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0020/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": false
+    },
+    {
+      "attempt": "A0020",
+      "baseline": "A0016",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 8192,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 1.1585898697376251,
+          "values": [
+            1.1585898697376251
+          ]
+        },
+        "gpu_reduction_ms": {
+          "mean": 0.5948497913777828,
+          "values": [
+            0.5948497913777828
+          ]
+        },
+        "gap_reduction_ms": {
+          "mean": 0.5637400783598423,
+          "values": [
+            0.5637400783598423
+          ]
+        },
+        "offload_speedup": {
+          "mean": 1.0011626993869989,
+          "values": [
+            1.0011626993869989
+          ]
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 997.6241274736822,
+          "baseline_gpu_ms": 991.8340692296624,
+          "candidate_offload_ms": 996.4655376039445,
+          "candidate_gpu_ms": 991.2392194382846
+        }
+      ],
+      "gpu_savings_bytes": [
+        2096365568
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/supplemental-01/A0020/screen/manifest.json",
+      "accepted": false,
+      "screen_promising": true
+    },
+    {
+      "attempt": "A0020",
+      "baseline": "A0016",
+      "mode": "prefill",
+      "batch": 16,
+      "length": 2048,
+      "screen_promising": true,
+      "statistics": {
+        "offload_reduction_ms": {
+          "mean": 0.08180234581232071
+        },
+        "gap_reduction_ms": {
+          "mean": 0.17089201137423515
+        }
+      },
+      "source_results": [
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0016/R01/J10-prefill-ma_gpu-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0020/R01/J09-prefill-ma_offload-b16-l2048.json",
+        "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0020/R01/J10-prefill-ma_gpu-b16-l2048.json"
+      ],
+      "nomination_source": "historical_screen_only"
+    }
+  ],
+  "nominees": 66,
+  "raw_new_results": 472
+}
