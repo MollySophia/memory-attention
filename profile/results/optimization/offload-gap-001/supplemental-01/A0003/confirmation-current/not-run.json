@@ -1,0 +1,4 @@
+{
+  "status": "not_run_parent_gate",
+  "reason": "No nominated parent workload passed the fixed local gate; all potential current hypotheses retain p=1 in the family."
+}
