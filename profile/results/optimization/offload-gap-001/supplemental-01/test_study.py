@@ -26,3 +26,12 @@ def test_raw_audit_rejects_wrong_provenance_or_shape(field,value):
  s.audit_job(j,d/(j['name']+'.json'))
  j[field]=value
  with pytest.raises(AssertionError):s.audit_job(j,d/(j['name']+'.json'))
+
+def test_holm_keeps_fixed_unrun_family_and_is_monotone():
+ import sys
+ sys.path.insert(0,str(Path(__file__).parent))
+ from confirm import holm
+ assert holm([.01,.04,1.])==pytest.approx([.03,.08,1.])
+ assert holm([.04,.01,1.])==pytest.approx([.08,.03,1.])
+ assert holm([.001,.001,.001])==pytest.approx([.003,.003,.003])
+ assert holm([])==[]

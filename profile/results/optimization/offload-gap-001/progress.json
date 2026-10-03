@@ -18,5 +18,12 @@
   "final_audit": "continuation-02/final/core-audit.json",
   "publication": "continuation-02/final/publication.json",
   "continuation": "continuation-02/manifest.json",
-  "next_actions": []
+  "next_actions": [],
+  "supplemental_study": {
+    "id": "supplemental-01",
+    "status": "running",
+    "plan": "supplemental-01/PLAN.md",
+    "screen_controller": "supplemental-01/screen-controller.json",
+    "note": "Separate shape survey; original 20 attempts and two retained sources remain finalized."
+  }
 }
