@@ -90,7 +90,14 @@ def analyze():
  for f,adj in zip(family,holm([f['p_for_multiplicity'] for f in family])):
   f['holm_adjusted_p']=adj;f['confirmed_local_gain']=f['status']=='measured' and passes(f['result']) and adj<0.05
  result=dict(status='completed',family_size=len(family),family=family,confirmed_local_comparisons=sum(f['confirmed_local_gain'] for f in family),accepted_new_attempts=0,retained_source='A0016',note='Local evidence only. Three-block t assumptions and power limits remain. Current-only or parent-only successes do not establish an integrated, regression-free improvement.')
- s.save(D/'confirmation-summary.json',result);print('FINAL',result['confirmed_local_comparisons'],'local comparisons',flush=True)
+ indexed={(f['attempt'],f['comparator'],f['mode'],f['batch'],f['length']):f for f in family}
+ useful=[]
+ for f in family:
+  if f['comparator']!='parent' or not f['confirmed_local_gain']:continue
+  current=f if f['baseline']=='A0016' else indexed[f['attempt'],'current',f['mode'],f['batch'],f['length']]
+  if current['confirmed_local_gain']:useful.append(dict(attempt=f['attempt'],mode=f['mode'],batch=f['batch'],length=f['length'],parent_comparison=f,current_comparison=current))
+ result['local_gains_vs_parent_and_current']=useful
+ s.save(D/'confirmation-summary.json',result);print('FINAL',result['confirmed_local_comparisons'],'local comparisons;',len(useful),'workloads pass both parent/current gates',flush=True)
 
 if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('action',choices=['prepare','run','analyze']);a=p.parse_args();globals()[a.action]()
