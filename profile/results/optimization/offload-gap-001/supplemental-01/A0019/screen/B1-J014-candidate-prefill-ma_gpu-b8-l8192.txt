@@ -1,0 +1,1 @@
+ma_gpu           prefill  median=  989.913 ms  min=  989.913  max=  989.913  spread=0.00%  policy=none
