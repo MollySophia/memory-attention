@@ -1,5 +1,5 @@
 """Regenerate survey tables/figures from audited raw screen and confirmation data."""
-import csv,json,math
+import csv,json,math,statistics
 from pathlib import Path
 import study as s
 D=s.D
@@ -40,6 +40,7 @@ def main():
    raw=manifest.parent/(job['name']+'.json');payload=s.read(raw);r=payload['results'][0]
    row={k:job[k] for k in ('attempt','implementation','candidate_sha','mode','batch','length','variant','block')}
    row.update(comparison_attempt=data['attempt'],stage=manifest.parent.name,latency_ms=r['mean_ms'],tokens_per_second=r['tokens_per_second'],samples_ms=json.dumps(r['samples_ms']),source_result=str(raw))
+   flat=[x for rnd in r['samples_ms'] for x in rnd];row.update(sample_sd_ms=statistics.stdev(flat),sample_min_ms=min(flat),sample_max_ms=max(flat),sample_p50_ms=r['sample_p50_ms'],sample_p95_ms=r['sample_p95_ms'],median_ms=r['median_ms'])
    for k,v in r['memory_after'].items():row[k]=json.dumps(v) if isinstance(v,(list,dict)) else v
    measurements.append(row)
  export(measurements,out/'measurements.csv')
