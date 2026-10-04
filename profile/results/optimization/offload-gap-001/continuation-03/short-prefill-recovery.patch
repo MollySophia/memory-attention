@@ -1,0 +1,27 @@
+diff --git a/fla/models/memory/configuration_memory.py b/fla/models/memory/configuration_memory.py
+index ed3f72a..9ce1f15 100644
+--- a/fla/models/memory/configuration_memory.py
++++ b/fla/models/memory/configuration_memory.py
+@@ -46,3 +46,3 @@ class MemoryConfig(PretrainedConfig):
+         memory_offload_bulk_max_tokens: int = 1024,
+-        memory_offload_single_slot_max_tokens: int = 2048,
++        memory_offload_single_slot_max_tokens: int = 4096,
+         memory_offload_chunk_size: int = 1024,
+diff --git a/tests/test_memory_offload_regressions.py b/tests/test_memory_offload_regressions.py
+index 669d068..8c402b9 100644
+--- a/tests/test_memory_offload_regressions.py
++++ b/tests/test_memory_offload_regressions.py
+@@ -234,6 +234,6 @@ def test_selective_depth_boundary_capacity_and_exactness(model, policy):
+     model.config.memory_offload_policy = policy
+-    assert model.config.memory_offload_single_slot_max_tokens == 2048
++    assert model.config.memory_offload_single_slot_max_tokens == 4096
+     model.config.memory_offload_prefetch_depth = 4
+     gate = load_script('test_memory_offload')
+-    for batch, length in [(1,1024),(1,1025),(1,2048),(1,2049),(2,1025),(1,1025)]:
++    for batch, length in [(1,1024),(1,1025),(1,2048),(1,2049),(2,2048),(1,4097),(2,2049),(8,512),(8,513),(1,1025)]:
+         ids = torch.randint(0,128,(batch,length),device='cuda')
+@@ -248,3 +248,3 @@ def test_selective_depth_boundary_capacity_and_exactness(model, policy):
+         else:
+-            slots = 1 if policy == 'auto' and batch * length <= 2048 else min(4,len(model.model.layers))
++            slots = 1 if policy == 'auto' and batch * length <= 4096 else min(4,len(model.model.layers))
+             assert off.policy == 'pipeline' and len(off.slots) == slots

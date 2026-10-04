@@ -1,0 +1,17 @@
+{
+  "status": "patch_applies_cleanly_to_A0022_but_not_activated",
+  "recovered_attempt": "A0021",
+  "original_opportunity": "A0014",
+  "change": "Selective auto single-slot bound2048->4096 total tokens, with adjacent-boundary and shape-reuse tests",
+  "source_sha": "35a4af8",
+  "candidate_parent": "A0022 only if verified and retained",
+  "patch": "short-prefill-recovery.patch",
+  "known_tradeoff": "A0021 b1 decode gap regression remains part of evidence. A mapped-table parent changes placement/transport; regression removal must be measured, never presumed.",
+  "required_gates": [
+    "Register new candidate and actual parent before activation",
+    "Full64-process screen, every matrix/generation point",
+    "Fixed independent confirmation including b1 decode control",
+    "Complete remaining paired coverage and full correctness before retention"
+  ],
+  "note": "This is a saved patch and applicability check only. Live A0022 source/worktree is unchanged."
+}
