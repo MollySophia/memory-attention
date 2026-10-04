@@ -8,7 +8,7 @@
   "accepted_step": null,
   "label": "Recover mapped host bulk gather on selective pipeline parent",
   "status": "registered",
-  "workflow_stage": "screening",
+  "workflow_stage": "confirmation",
   "hypothesis": "Recover the independently confirmed A0013 b8 generation benefit while retaining A0016 small-prefill pipeline policy; GPU gathers fresh8..16-token bulk inputs directly from the pinned host table.",
   "change": "Port exact A0013 mapped bulk kernel/lifetime handling and pinned-table telemetry atop A0016. No A0021 threshold change in this candidate.",
   "profile_evidence": [
@@ -86,5 +86,8 @@
       "standalone-correctness.txt"
     ]
   },
-  "screen_manifest": "R01-complete-screen/manifest.json"
+  "screen_manifest": "R01-complete-screen/manifest.json",
+  "screen_summary": "R01-complete-screen/summary.json",
+  "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json",
+  "screen_decision": "All64 complete-matrix jobs audited. b8 generation offload/gap reductions87.8616/87.7322ms are screening signals only. Mapped single-step decode results mixed. Fixed9-workload108-process independent confirmation estimated2754.38s; all original primary controls retained."
 }

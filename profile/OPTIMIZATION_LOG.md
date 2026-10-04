@@ -608,3 +608,5 @@ A0021 finalized nonretained: target b8/512 prefill gain confirmed (offload2.3145
 ## A0022 registered: recover mapped bulk on A0016
 
 Port A0013 mapped host bulk8..16-token path and full pinned-table telemetry onto verified A0016; retain its selective2048-token pipeline policy. Target b8 generation and affected b8/b16 decode. Full64-process screen, independent confirmation and complete gates precede retention. A0021 local pipeline gain remains preserved for later integration after this parent is evaluated.
+
+A0022 full screen completed64/64 and audited. b8 generation reduction87.8616ms and gap87.7322ms are descriptive only; isolated decode results mixed. Fixed independent confirmation selects9 workloads (108 processes, estimate2754.38s), including all four primary controls, b4/b16 decode, b8/8192 prefill and both generation batches. Full validation remains conditional on eligible confirmed gain and no resolved regression.

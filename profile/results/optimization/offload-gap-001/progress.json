@@ -1,8 +1,8 @@
 {
   "campaign_id": "offload-gap-001",
   "status": "active",
-  "workflow_stage": "screening",
-  "goal_progress": "A0021 local gain preserved but nonretained due gap guard. A0022 mapped-bulk recovery on A0016 passed correctness; full64-process screen frozen.",
+  "workflow_stage": "confirmation",
+  "goal_progress": "A0022 complete64-process screen audited;9-workload108-process confirmation running. Generation screening signal not yet accepted.",
   "completed_optimization_verdicts": 21,
   "additional_completed_verdicts": 10,
   "additional_attempt_target": [
@@ -11,7 +11,7 @@
   ],
   "accepted_steps": 2,
   "active_attempt": "A0022",
-  "controller_pid": 3461454,
+  "controller_pid": 3478072,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "0ce6645eb4c4bc3992258ad0878c72ea3c37a64e",
   "final_report": "continuation-02/final/REPORT.md",
@@ -19,8 +19,7 @@
   "publication": "continuation-02/final/publication.json",
   "continuation": "continuation-03/manifest.json",
   "next_actions": [
-    "Complete A0022 full64-process screen",
-    "Freeze and execute nominated independent confirmations and primary controls",
+    "Complete fixed A0022 confirmation",
     "If gates pass, complete remaining paired matrix/folding/full-model correctness",
     "Integrate recovered short-prefill gain on verified mapped-bulk parent",
     "Optimize remaining gaps and independently audit all16 near-GPU conditions"
@@ -42,6 +41,6 @@
     "workloads_passing_parent_and_current": 1,
     "accepted_new_attempts": 0
   },
-  "active_manifest": "A0022/R01-complete-screen/manifest.json",
+  "active_manifest": "A0022/R02-parent-confirmation/manifest.json",
   "continuation_completed_verdicts": 1
 }
