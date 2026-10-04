@@ -52,5 +52,13 @@
   "screen_manifest": "R01-complete-screen/manifest.json",
   "screen_summary": "R01-complete-screen/summary.json",
   "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json",
-  "screen_decision": "All64 jobs completed and audited. Target b8/512 prefill offload/gap reductions2.4052/2.3635ms. Fixed9-workload confirmation includes original primary controls and all joint-positive screens;108 fresh processes, estimate2374.64s. No acceptance from screen; unchanged-path fluctuations cannot independently attribute the intended policy gain."
+  "screen_decision": "All64 jobs completed and audited. Target b8/512 prefill offload/gap reductions2.4052/2.3635ms. Fixed9-workload confirmation includes original primary controls and all joint-positive screens;108 fresh processes, estimate2374.64s. No acceptance from screen; unchanged-path fluctuations cannot independently attribute the intended policy gain.",
+  "eligible_gain_workloads": [
+    [
+      "prefill",
+      8,
+      512
+    ]
+  ],
+  "eligible_gain_note": "Structured representation of the already registered target. Other positive screen points are still confirmed and reported; unchanged-path noise cannot qualify this policy for retention."
 }
