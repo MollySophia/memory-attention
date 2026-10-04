@@ -11,7 +11,7 @@
   ],
   "acceptance": "Confirmed offload+gap gain at any fixed workload, no resolved complete-matrix regression, correct computation and preserved GPU savings. No automatic adoption of historical sources.",
   "target_tolerance": {
-    "status": "provisional_pending_user_preference",
+    "status": "user_confirmed",
     "absolute_ms": 0.1,
     "relative_fraction": 0.01,
     "rule": "upper one-sided simultaneous95% bound of offload minus GPU minus max(.1ms,.01*GPU) <=0 at every workload; unproven until independent final evidence"

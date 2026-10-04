@@ -1,0 +1,6 @@
+
+profile/results/optimization/offload-gap-001/continuation-03/test_driver.py::test_complete_scope_has_no_duplicate_or_missing_workload PASSED [ 33%]
+profile/results/optimization/offload-gap-001/continuation-03/test_driver.py::test_screen_plans_all_placements_and_short_full_trajectories PASSED [ 66%]
+profile/results/optimization/offload-gap-001/continuation-03/test_driver.py::test_confirmation_blocks_remain_balanced_and_separate PASSED [100%]
+
+============================== 3 passed in 0.24s ===============================

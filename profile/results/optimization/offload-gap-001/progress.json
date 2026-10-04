@@ -1,8 +1,8 @@
 {
   "campaign_id": "offload-gap-001",
-  "status": "complete",
-  "workflow_stage": "final_report",
-  "goal_progress": "All ten additional attempts A0011\u2013A0020 finalized: one accepted, five within noise, four rejected. Final code is verified A0016.",
+  "status": "active",
+  "workflow_stage": "screening",
+  "goal_progress": "Integrate recovered A0014/A0013 local gains, then optimize every fixed workload to user-confirmed resident-latency tolerance.",
   "completed_optimization_verdicts": 20,
   "additional_completed_verdicts": 10,
   "additional_attempt_target": [
@@ -10,15 +10,20 @@
     10
   ],
   "accepted_steps": 2,
-  "active_attempt": null,
+  "active_attempt": "A0021",
   "controller_pid": null,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "0ce6645eb4c4bc3992258ad0878c72ea3c37a64e",
   "final_report": "continuation-02/final/REPORT.md",
   "final_audit": "continuation-02/final/core-audit.json",
   "publication": "continuation-02/final/publication.json",
-  "continuation": "continuation-02/manifest.json",
-  "next_actions": [],
+  "continuation": "continuation-03/manifest.json",
+  "next_actions": [
+    "A0021 complete64-process screen",
+    "Independent confirmation of nominated gains/regressions and primary controls",
+    "Full retention gates; A0013 mapped-bulk integration on verified parent",
+    "All16-workload independent near-GPU completion audit"
+  ],
   "supplemental_study": {
     "id": "supplemental-01",
     "status": "complete",

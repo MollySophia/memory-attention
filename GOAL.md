@@ -460,7 +460,8 @@ The original target was 5–10 focused, profiling-supported attempts; the comple
 original campaign contains 20 attempts and two retained steps. Continuation-03
 is now authorized without a fixed attempt cap; completing another bounded batch
 does not satisfy its all-workload latency objective. The final near-GPU tolerance
-must be recorded explicitly, with independent uncertainty assessed at all 16
+must be recorded explicitly, as max(1% of matched resident latency, 0.1 ms), confirmed by the user,
+with independent uncertainty assessed at all 16
 workloads; a small observed mean alone is insufficient. Future attempt counts
 are not a required number of accepted improvements. Preserve every
 attempt, including failures, reversions and within_noise results, with its implementation, evidence and
