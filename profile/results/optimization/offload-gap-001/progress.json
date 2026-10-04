@@ -11,7 +11,7 @@
   ],
   "accepted_steps": 2,
   "active_attempt": "A0022",
-  "controller_pid": null,
+  "controller_pid": 3461454,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "0ce6645eb4c4bc3992258ad0878c72ea3c37a64e",
   "final_report": "continuation-02/final/REPORT.md",
@@ -19,10 +19,11 @@
   "publication": "continuation-02/final/publication.json",
   "continuation": "continuation-03/manifest.json",
   "next_actions": [
-    "A0021 complete64-process screen",
-    "Independent confirmation of nominated gains/regressions and primary controls",
-    "Full retention gates; A0013 mapped-bulk integration on verified parent",
-    "All16-workload independent near-GPU completion audit"
+    "Complete A0022 full64-process screen",
+    "Freeze and execute nominated independent confirmations and primary controls",
+    "If gates pass, complete remaining paired matrix/folding/full-model correctness",
+    "Integrate recovered short-prefill gain on verified mapped-bulk parent",
+    "Optimize remaining gaps and independently audit all16 near-GPU conditions"
   ],
   "supplemental_study": {
     "id": "supplemental-01",
@@ -40,5 +41,7 @@
     "confirmed_local_comparisons": 3,
     "workloads_passing_parent_and_current": 1,
     "accepted_new_attempts": 0
-  }
+  },
+  "active_manifest": "A0022/R01-complete-screen/manifest.json",
+  "continuation_completed_verdicts": 1
 }
