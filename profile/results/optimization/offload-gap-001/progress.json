@@ -1,8 +1,8 @@
 {
   "campaign_id": "offload-gap-001",
   "status": "active",
-  "workflow_stage": "integration_preparation",
-  "goal_progress": "A0021 secondary gain confirmed but gap-regression guard failed; restore A0016 and integrate mapped bulk first. Goal remains active.",
+  "workflow_stage": "screening",
+  "goal_progress": "A0021 local gain preserved but nonretained due gap guard. A0022 mapped-bulk recovery on A0016 passed correctness; full64-process screen frozen.",
   "completed_optimization_verdicts": 21,
   "additional_completed_verdicts": 10,
   "additional_attempt_target": [
@@ -10,7 +10,7 @@
     10
   ],
   "accepted_steps": 2,
-  "active_attempt": null,
+  "active_attempt": "A0022",
   "controller_pid": null,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "0ce6645eb4c4bc3992258ad0878c72ea3c37a64e",

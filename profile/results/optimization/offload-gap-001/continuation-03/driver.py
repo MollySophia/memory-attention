@@ -60,12 +60,17 @@ def audit_job(j,path):
  assert Path(p['env']['model_module']).resolve()==recorded_root/'fla/models/memory/modeling_memory.py'
  for key,value in dict(hidden_size=2048,num_hidden_layers=24,num_heads=32,num_kv_heads=32,intermediate_size=5632,vocab_size=32000,qk_norm=False,use_gate=False,fuse_norm=False,tie_word_embeddings=False).items():assert p['model_config'][key]==value
  if j['variant']=='ma_offload':
-  memory=row['memory_after'];validate_offload_memory(j['attempt'],memory)
-  if j['attempt']=='A0021':
-   for cap in memory['offloader_capacities']:
-    tokens=cap['batch']*cap['length'];depth=1 if tokens<=4096 else 4
-    expected=tokens*2048*2*(24 if cap['policy']=='bulk' else depth)
-    assert cap['host_bytes']==cap['gpu_bytes']==expected
+  memory=row['memory_after'];model_cfg=p['model_config']
+  expected_cfg=record(j['attempt']).get('expected_offload_config',{})
+  for field,value in expected_cfg.items():assert model_cfg[field]==value
+  mapped=model_cfg.get('memory_offload_mapped_bulk',False)
+  validate_offload_memory('A0013' if mapped else j['attempt'],memory)
+  for cap in memory['offloader_capacities']:
+   tokens=cap['batch']*cap['length'];depth=1 if tokens<=model_cfg.get('memory_offload_single_slot_max_tokens',0) else 4
+   assert cap['policy']==('bulk' if tokens<=model_cfg['memory_offload_bulk_max_tokens'] else 'pipeline')
+   expected=tokens*2048*2*(24 if cap['policy']=='bulk' else depth)
+   mapped_shape=mapped and cap['policy']=='bulk' and model_cfg['memory_offload_mapped_bulk_min_tokens']<=tokens<=model_cfg['memory_offload_mapped_bulk_max_tokens']
+   assert cap['gpu_bytes']==expected and cap['host_bytes']==(0 if mapped_shape else expected)
  env=p['environment_before'];e=p['env']
  return (e['torch'],e['torch_cuda'],e['flash_attn'],e['gpu'],e['python'],env['gpu_telemetry']['stdout'].splitlines()[1].split(', ')[1],tuple(env['cpu_affinity']),env['torch_threads'],env['torch_interop_threads'],json.dumps(env['thread_environment'],sort_keys=True)),row
 

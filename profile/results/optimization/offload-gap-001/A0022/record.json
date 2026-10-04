@@ -8,7 +8,7 @@
   "accepted_step": null,
   "label": "Recover mapped host bulk gather on selective pipeline parent",
   "status": "registered",
-  "workflow_stage": "implementation",
+  "workflow_stage": "screening",
   "hypothesis": "Recover the independently confirmed A0013 b8 generation benefit while retaining A0016 small-prefill pipeline policy; GPU gathers fresh8..16-token bulk inputs directly from the pinned host table.",
   "change": "Port exact A0013 mapped bulk kernel/lifetime handling and pinned-table telemetry atop A0016. No A0021 threshold change in this candidate.",
   "profile_evidence": [
@@ -68,5 +68,23 @@
     ]
   },
   "confirmation_rule": "Same predeclared continuation03 nomination and three-block Holm/guard rules as A0021; no optional extension.",
-  "created_unix": 1791078802.8966794
+  "created_unix": 1791078802.8966794,
+  "candidate_sha": "c84bef59417adb5179c177d732632a10a4226d39",
+  "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0022",
+  "expected_offload_config": {
+    "memory_offload_bulk_max_tokens": 1024,
+    "memory_offload_single_slot_max_tokens": 2048,
+    "memory_offload_mapped_bulk": true,
+    "memory_offload_mapped_bulk_min_tokens": 8,
+    "memory_offload_mapped_bulk_max_tokens": 16
+  },
+  "correctness": {
+    "pytest": "56 passed in12.91s",
+    "standalone": "PASS; worst max difference0",
+    "logs": [
+      "correctness-tests.txt",
+      "standalone-correctness.txt"
+    ]
+  },
+  "screen_manifest": "R01-complete-screen/manifest.json"
 }
