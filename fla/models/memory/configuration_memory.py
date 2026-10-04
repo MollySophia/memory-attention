@@ -46,6 +46,9 @@ class MemoryConfig(PretrainedConfig):
         memory_offload_bulk_max_tokens: int = 1024,
         memory_offload_single_slot_max_tokens: int = 2048,
         memory_offload_chunk_size: int = 1024,
+        memory_offload_mapped_bulk: bool = True,
+        memory_offload_mapped_bulk_min_tokens: int = 8,
+        memory_offload_mapped_bulk_max_tokens: int = 16,
         **kwargs,
     ):
 
@@ -62,6 +65,11 @@ class MemoryConfig(PretrainedConfig):
             raise ValueError("single-slot token limit must be nonnegative")
         self.memory_offload_single_slot_max_tokens = memory_offload_single_slot_max_tokens
         self.memory_offload_chunk_size = memory_offload_chunk_size
+        self.memory_offload_mapped_bulk = memory_offload_mapped_bulk
+        if not 1 <= memory_offload_mapped_bulk_min_tokens <= memory_offload_mapped_bulk_max_tokens:
+            raise ValueError("invalid mapped bulk token range")
+        self.memory_offload_mapped_bulk_min_tokens = memory_offload_mapped_bulk_min_tokens
+        self.memory_offload_mapped_bulk_max_tokens = memory_offload_mapped_bulk_max_tokens
         self.hidden_size = hidden_size
         self.num_hidden_layers = num_hidden_layers
         self.num_heads = num_heads
