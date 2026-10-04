@@ -1,8 +1,8 @@
 {
   "campaign_id": "offload-gap-001",
   "status": "active",
-  "workflow_stage": "screening",
-  "goal_progress": "Integrate recovered A0014/A0013 local gains, then optimize every fixed workload to user-confirmed resident-latency tolerance.",
+  "workflow_stage": "confirmation",
+  "goal_progress": "A0021 complete64-process screen audited;9-workload108-process independent confirmation frozen; recovered short-prefill gain not yet accepted.",
   "completed_optimization_verdicts": 20,
   "additional_completed_verdicts": 10,
   "additional_attempt_target": [
