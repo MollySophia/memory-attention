@@ -1,0 +1,308 @@
+diff --git a/fla/layers/memory_mapped_bulk.py b/fla/layers/memory_mapped_bulk.py
+new file mode 100644
+index 0000000..a5a9996
+--- /dev/null
++++ b/fla/layers/memory_mapped_bulk.py
+@@ -0,0 +1,103 @@
++"""All-layer GPU gather from a pinned host table for small bulk inputs."""
++from __future__ import annotations
++
++import threading
++
++import torch
++import triton
++import triton.language as tl
++
++from fla.layers.memory_offload import PendingM, _BulkTicket
++
++
++@triton.jit
++def _mapped_bulk_gather(table, ids, output, WIDTH: tl.constexpr,
++                        VOCAB: tl.constexpr, BLOCK: tl.constexpr):
++    row = tl.program_id(0)
++    column = tl.program_id(1) * BLOCK + tl.arange(0, BLOCK)
++    token = tl.load(ids + row)
++    # GPU embedding checks IDs before the entry dependency. Mask additionally
++    # so an invalid input cannot cause an out-of-bounds mapped-host read.
++    values = tl.load(table + token * WIDTH + column,
++                     mask=(column < WIDTH) & (token >= 0) & (token < VOCAB), other=0)
++    tl.store(output + row * WIDTH + column, values, mask=column < WIDTH)
++
++
++class MappedBulkMemoryTableOffloader:
++    policy = "bulk"
++    accepts_gpu_ids = True
++
++    def __init__(self, weights, batch, seq_len, device):
++        if weights.device.type != "cpu" or weights.ndim != 3 or not weights.is_pinned() or not weights.is_contiguous():
++            raise ValueError("mapped table must be contiguous pinned CPU [vocab,layers,dim]")
++        if min(batch, seq_len) < 1:
++            raise ValueError("shapes must be positive")
++        self.weights = weights
++        self.batch, self.seq_len = batch, seq_len
++        self.layers, self.dim = weights.shape[1:]
++        self.group = self.layers
++        self.device = torch.device(device)
++        self.gpu = torch.empty((batch * seq_len, self.layers, self.dim),
++                               dtype=weights.dtype, device=self.device)
++        self.values = [self.gpu[:, i].view(batch, seq_len, self.dim) for i in range(self.layers)]
++        self.host = torch.empty(0, dtype=weights.dtype, pin_memory=True)
++        self.slots = [{"host": self.host, "gpu": self.gpu}]
++        self.copy_stream = torch.cuda.Stream(device=self.device)
++        self.copy_stream.wait_stream(torch.cuda.current_stream(self.device))
++        self.copied = torch.cuda.Event()
++        self.consumed = torch.cuda.Event()
++        self.started = self.closed = self.broken = False
++        self.lock = threading.Lock()
++
++    @property
++    def group_size(self):
++        return self.group
++
++    @torch.inference_mode()
++    def forward(self, ids, consume):
++        if self.closed or self.broken:
++            raise RuntimeError("offloader is closed or failed")
++        if ids.dtype != torch.long or tuple(ids.shape) != (self.batch, self.seq_len):
++            raise ValueError("IDs must be int64 with the preallocated shape")
++        if not self.lock.acquire(blocking=False):
++            raise RuntimeError("concurrent forwards are unsupported")
++        try:
++            if ids.device.type == "cpu" and (bool((ids < 0).any()) or bool((ids >= self.weights.shape[0]).any())):
++                raise IndexError("memory table index out of range")
++            ids_gpu = ids.to(self.device, non_blocking=True).reshape(-1).contiguous()
++            self.copy_stream.wait_stream(torch.cuda.current_stream(self.device))
++            with torch.cuda.device(self.device), torch.cuda.stream(self.copy_stream):
++                if self.started:
++                    self.copy_stream.wait_event(self.consumed)
++                width = self.layers * self.dim
++                _mapped_bulk_gather[(self.batch * self.seq_len, triton.cdiv(width, 512))](
++                    self.weights, ids_gpu, self.gpu, width, self.weights.shape[0], 512, num_warps=4)
++                self.copied.record(self.copy_stream)
++            ticket = _BulkTicket(self)
++            for layer in range(self.layers):
++                if layer == 0 or layer == self.layers - 1:
++                    handle = PendingM(ticket, layer)
++                    consume(layer, handle)
++                    if not handle.released:
++                        raise RuntimeError("consumer did not release M")
++                else:
++                    consume(layer, self.values[layer])
++            # Preserve fresh CPU-table mutation and IDs lifetime semantics.
++            self.copy_stream.synchronize()
++            self.started = True
++        except BaseException:
++            self.broken = True
++            self.copy_stream.synchronize()
++            raise
++        finally:
++            self.lock.release()
++
++    def close(self):
++        self.closed = True
++        torch.cuda.synchronize(self.device)
++
++    def __enter__(self):
++        return self
++
++    def __exit__(self, *args):
++        self.close()
+diff --git a/fla/models/memory/configuration_memory.py b/fla/models/memory/configuration_memory.py
+index b76a7dc..08b6789 100644
+--- a/fla/models/memory/configuration_memory.py
++++ b/fla/models/memory/configuration_memory.py
+@@ -45,6 +45,9 @@ class MemoryConfig(PretrainedConfig):
+         memory_offload_prefetch_depth: int = 4,
+         memory_offload_bulk_max_tokens: int = 1024,
+         memory_offload_chunk_size: int = 1024,
++        memory_offload_mapped_bulk: bool = True,
++        memory_offload_mapped_bulk_min_tokens: int = 8,
++        memory_offload_mapped_bulk_max_tokens: int = 16,
+         **kwargs,
+     ):
+ 
+@@ -58,6 +61,11 @@ class MemoryConfig(PretrainedConfig):
+         self.memory_offload_prefetch_depth = memory_offload_prefetch_depth
+         self.memory_offload_bulk_max_tokens = memory_offload_bulk_max_tokens
+         self.memory_offload_chunk_size = memory_offload_chunk_size
++        self.memory_offload_mapped_bulk = memory_offload_mapped_bulk
++        if not 1 <= memory_offload_mapped_bulk_min_tokens <= memory_offload_mapped_bulk_max_tokens:
++            raise ValueError("invalid mapped bulk token range")
++        self.memory_offload_mapped_bulk_min_tokens = memory_offload_mapped_bulk_min_tokens
++        self.memory_offload_mapped_bulk_max_tokens = memory_offload_mapped_bulk_max_tokens
+         self.hidden_size = hidden_size
+         self.num_hidden_layers = num_hidden_layers
+         self.num_heads = num_heads
+diff --git a/fla/models/memory/modeling_memory.py b/fla/models/memory/modeling_memory.py
+index 5de07d6..23e6903 100644
+--- a/fla/models/memory/modeling_memory.py
++++ b/fla/models/memory/modeling_memory.py
+@@ -12,6 +12,7 @@ from transformers.utils import logging
+ from transformers.utils.deprecation import deprecate_kwarg
+ 
+ from fla.layers.memory_attn import MemoryAttention
++from fla.layers.memory_mapped_bulk import MappedBulkMemoryTableOffloader
+ from fla.layers.memory_offload import (
+     BulkMemoryTableOffloader,
+     MemoryTableOffloader,
+@@ -248,7 +249,7 @@ class MemoryModel(MemoryPreTrainedModel):
+         for layer in self.layers:
+             layer.attn.m_proj = None
+ 
+-        self.memory_table = table
++        self.memory_table = table.pin_memory() if config.memory_offload_mapped_bulk else table
+         self._offload_device = device
+         self._offload_dtype = dtype
+         self._offload_fold_norm = fold_norm
+@@ -327,6 +328,9 @@ class MemoryModel(MemoryPreTrainedModel):
+         if policy == "auto":
+             policy = "bulk" if batch * seq_len <= config.memory_offload_bulk_max_tokens else "pipeline"
+         if policy == "bulk":
++            if (config.memory_offload_mapped_bulk and
++                    config.memory_offload_mapped_bulk_min_tokens <= batch * seq_len <= config.memory_offload_mapped_bulk_max_tokens):
++                return MappedBulkMemoryTableOffloader(self.memory_table, batch, seq_len, device)
+             return BulkMemoryTableOffloader(self.memory_table, batch, seq_len, device)
+         return MemoryTableOffloader(
+             self.memory_table, batch, seq_len,
+@@ -437,7 +441,11 @@ class MemoryModel(MemoryPreTrainedModel):
+             # IDs on CPU. Accept them on either device and stage the embedding
+             # lookup on the compute device.
+             device = next(self.parameters()).device
+-            ids_cpu = input_ids.to("cpu") if input_ids is not None else None
++            offloader = self._offloader_for(*input_ids.shape) if input_ids is not None else None
++            if getattr(offloader, "accepts_gpu_ids", False):
++                ids_cpu = input_ids  # This bulk path consumes fresh GPU IDs directly.
++            else:
++                ids_cpu = input_ids.to("cpu") if input_ids is not None else None
+             if inputs_embeds is None:
+                 if input_ids is None:
+                     raise ValueError("offloaded forward requires input_ids or inputs_embeds")
+@@ -534,7 +542,7 @@ class MemoryModel(MemoryPreTrainedModel):
+             if use_cache:
+                 state["past"] = outputs[1]
+ 
+-        # input_ids must stay on CPU: the producer gathers from host memory.
++        # Ordinary producers use CPU IDs; mapped bulk accepts CPU or GPU IDs.
+         if input_states_ids is None:
+             raise ValueError("offloaded forward requires input_ids")
+         offloader.forward(input_states_ids, consume)
+diff --git a/profile/benchmark_telemetry.py b/profile/benchmark_telemetry.py
+index 9eb4f98..4434bf3 100644
+--- a/profile/benchmark_telemetry.py
++++ b/profile/benchmark_telemetry.py
+@@ -31,6 +31,8 @@ def memory_snapshot(model, device, cache=None):
+     if active is not None and all(active is not item for item in offloaders):
+         offloaders.append(active)
+     slots = [slot for off in offloaders for slot in off.slots]
++    table = getattr(body, 'memory_table', None)
++    pinned_table = [table] if table is not None and table.is_pinned() else []
+     status = dict(line.split(':', 1) for line in Path('/proc/self/status').read_text().splitlines() if ':' in line)
+     return dict(
+         gpu_allocated_bytes=torch.cuda.memory_allocated(device),
+@@ -42,7 +44,8 @@ def memory_snapshot(model, device, cache=None):
+         host_high_water_scope='process lifetime, including model loading',
+         raw_table_snapshot_bytes=storage_bytes(getattr(body, '_raw_m_proj_weights', None) or []),
+         cpu_table_bytes=storage_bytes([getattr(body, 'memory_table', None)]),
+-        offload_pinned_bytes=storage_bytes(s['host'] for s in slots),
++        cpu_table_pinned_bytes=storage_bytes(pinned_table),
++        offload_pinned_bytes=storage_bytes([s['host'] for s in slots] + pinned_table),
+         offload_gpu_buffer_bytes=storage_bytes(s['gpu'] for s in slots),
+         offloader_capacities=[dict(batch=off.batch, length=off.seq_len, policy=off.policy,
+                                   host_bytes=storage_bytes(s['host'] for s in off.slots),
+diff --git a/profile/test_memory_offload.py b/profile/test_memory_offload.py
+index 0c91408..14fd9b5 100644
+--- a/profile/test_memory_offload.py
++++ b/profile/test_memory_offload.py
+@@ -211,7 +211,8 @@ def main():
+     model.enable_memory_offload(device="cuda:0", dtype=torch.bfloat16, fold_norm=True)
+     resident = torch.cuda.memory_allocated()
+     table_mib = model.model.memory_table.numel() * model.model.memory_table.element_size() / 2**20
+-    print(f"  folded CPU table   : {table_mib:.1f} MiB (ordinary CPU, {model.model.memory_table.shape})")
++    placement = "pinned CPU" if model.model.memory_table.is_pinned() else "ordinary CPU"
++    print(f"  folded CPU table   : {table_mib:.1f} MiB ({placement}, {model.model.memory_table.shape})")
+     print(f"  GPU after offload  : {resident / 2**20:.1f} MiB")
+ 
+     ok = worst < 0.05
+diff --git a/tests/test_memory_offload_regressions.py b/tests/test_memory_offload_regressions.py
+index f52598c..b0f3cba 100644
+--- a/tests/test_memory_offload_regressions.py
++++ b/tests/test_memory_offload_regressions.py
+@@ -170,6 +170,8 @@ def test_growing_cache_exact_with_slot_reuse(seed, policy, padded):
+                           num_kv_heads=2, vocab_size=128, qk_norm=True,
+                           use_gate=True, fuse_norm=False,
+                           memory_offload_policy=policy,
++                          memory_offload_mapped_bulk_min_tokens=1,
++                          memory_offload_mapped_bulk_max_tokens=1024,
+                           memory_offload_group_size=2, memory_offload_prefetch_depth=1)
+     with torch.inference_mode():
+         model = MemoryForCausalLM(config).to('cuda', dtype=torch.bfloat16).eval()
+@@ -225,3 +227,69 @@ def test_auto_policy_boundary_and_shape_reuse(model):
+             actual = model(input_ids=ids, use_cache=False).logits.float()
+             assert model.model.memory_offloader.policy == policy
+             torch.testing.assert_close(actual, ref, rtol=0, atol=0)
++
++
++@pytest.mark.parametrize('batch', [8, 16])
++@pytest.mark.parametrize('ids_device', ['cpu', 'cuda'])
++def test_mapped_bulk_fresh_weights_cross_stream_and_host_lifetime(batch, ids_device):
++    from fla.layers.memory_mapped_bulk import MappedBulkMemoryTableOffloader
++    from fla.layers.memory_offload import PendingM
++    with torch.inference_mode():
++        weights=torch.randn(73,5,64,dtype=torch.bfloat16).pin_memory()
++        off=MappedBulkMemoryTableOffloader(weights,batch,1,'cuda')
++        streams=[torch.cuda.Stream(),torch.cuda.Stream()]
++        for stream in streams:stream.wait_stream(torch.cuda.current_stream())
++        try:
++            for iteration in range(4):
++                ids=torch.randint(0,73,(batch,1))
++                expected=weights.index_select(0,ids.flatten()).clone()
++                values=[]
++                with torch.cuda.stream(streams[iteration%2]):
++                    device_ids=ids.to(ids_device)
++                    def consume(layer,value):
++                        handle=value if isinstance(value,PendingM) else None
++                        if handle is not None:value=handle.acquire()
++                        torch.cuda._sleep(100000)
++                        values.append(value.clone())
++                        if handle is not None:handle.release()
++                    off.forward(device_ids,consume)
++                # No GPU synchronization before host mutation: forward must
++                # already have completed every mapped read of CPU storage.
++                weights.add_(torch.tensor(.125,dtype=weights.dtype))
++                streams[iteration%2].synchronize()
++                actual=torch.stack(values,dim=2).reshape(batch,5,64).cpu()
++                torch.testing.assert_close(actual,expected,rtol=0,atol=0)
++        finally:off.close()
++
++
++def test_mapped_bulk_error_cleanup_and_cpu_bounds():
++    from fla.layers.memory_mapped_bulk import MappedBulkMemoryTableOffloader
++    with torch.inference_mode():
++        weights=torch.randn(17,3,64,dtype=torch.bfloat16).pin_memory()
++        for invalid in (False,True):
++            off=MappedBulkMemoryTableOffloader(weights,8,1,'cuda')
++            try:
++                if invalid:
++                    with pytest.raises(IndexError,match='out of range'):
++                        off.forward(torch.full((8,1),17),lambda *args:None)
++                else:
++                    def fail(*args):raise ValueError('consumer failure')
++                    with pytest.raises(ValueError,match='consumer failure'):
++                        off.forward(torch.zeros((8,1),device='cuda',dtype=torch.long),fail)
++                assert off.broken
++                with pytest.raises(RuntimeError,match='closed or failed'):
++                    off.forward(torch.zeros((8,1),dtype=torch.long),lambda *args:None)
++            finally:off.close()
++
++
++def test_mapped_bulk_model_selection_and_pinned_table_accounting(model):
++    from fla.layers.memory_mapped_bulk import MappedBulkMemoryTableOffloader
++    from fla.layers.memory_offload import BulkMemoryTableOffloader
++    model.enable_memory_offload()
++    assert isinstance(model.model._offloader_for(1,1),BulkMemoryTableOffloader)
++    mapped=model.model._offloader_for(8,1)
++    assert isinstance(mapped,MappedBulkMemoryTableOffloader)
++    assert mapped.host.numel()==0
++    snapshot=load_script('benchmark_telemetry').memory_snapshot(model,'cuda')
++    assert snapshot['cpu_table_pinned_bytes']==snapshot['cpu_table_bytes']
++    assert snapshot['offload_pinned_bytes']==snapshot['cpu_table_bytes']+sum(v['host_bytes'] for v in snapshot['offloader_capacities'])

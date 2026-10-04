@@ -1,0 +1,22 @@
+{
+  "status": "implementation_patch_preserved_pending_verified_parent",
+  "recovered_attempt": "A0013",
+  "source_sha": "5d5eb4858f5102b5e7c0c004e359304b13ac38c8",
+  "patch": "mapped-bulk-recovery.patch",
+  "intended_parent": "A0021 if retained; otherwise best verified parent with explicit record",
+  "trigger": "8..16 total tokens on existing bulk path; applies to b8/b16 decode and b8 generation, not prefill pipeline",
+  "evidence": "../supplemental-01/A0013/confirmation-current/summary.json",
+  "expected_gain": "b8 full generation; remeasure independently on integrated parent rather than adding historical speedups",
+  "tradeoffs": [
+    "Pin complete3000MiB table, include in host telemetry",
+    "Mapped output allocation retained per shape, no output or lookup caching",
+    "Preserve final read-stream synchronization for fresh CPU table mutation and ID lifetime"
+  ],
+  "activation_gates": [
+    "Do not alter live frozen A0021 timing checkout",
+    "Resolve patch against actual verified parent; register new attempt before changing main implementation",
+    "Keep selective single-slot policy and validate all old/new boundaries",
+    "Rerun mapped-table mutation, release/lifetime, growing-KV correctness tests",
+    "Full64-process screen then fixed independent confirmation and full retention gates"
+  ]
+}
