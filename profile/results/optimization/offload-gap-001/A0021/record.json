@@ -1,0 +1,42 @@
+{
+  "campaign_id": "offload-gap-001",
+  "continuation_id": "continuation-03",
+  "attempt_id": "A0021",
+  "parent_attempt_id": "A0016",
+  "parent_source_sha": "0ce6645eb4c4bc3992258ad0878c72ea3c37a64e",
+  "accepted_step": null,
+  "label": "Extend selective single-slot auto pipeline through4096 tokens",
+  "status": "registered",
+  "workflow_stage": "implementation",
+  "hypothesis": "Recover A0014 b8/512 prefill gain without changing b8/2048 prefix capacity implicated in its historical decode regression.",
+  "change": "Default single-slot total-token boundary2048 ->4096; manual policy and larger pipeline calls unchanged.",
+  "profile_evidence": [
+    "../A0014/record.json",
+    "../supplemental-01/A0014/confirmation-current/summary.json"
+  ],
+  "primary_target": "prefill b8/512; all16 workloads screened, no early performance exit",
+  "screen": {
+    "workloads": 16,
+    "placements": [
+      "ma_offload",
+      "ma_gpu"
+    ],
+    "fresh_parent_candidate_processes": 64,
+    "prefill_decode": [
+      3,
+      5,
+      1
+    ],
+    "generation": [
+      2,
+      3,
+      1
+    ]
+  },
+  "confirmation_rule": "All joint positive offload/gap screens with memory savings nominate. Suspected regression if mean offload or gap worsens more than max(.1ms,1% parent offload), resident worsens more than max(.05ms,1% resident), or memory savings lost. Confirm union plus four original primary workloads, exactly3 new balanced blocks; Holm across fixed joint gain hypotheses; two-sided95% regression/resident guards; no optional extension.",
+  "tradeoffs": [
+    "Boundary generalizes to total4096 tokens, not just b8/512; correctness tests cover adjacent boundary and shape switches.",
+    "Historical A0014 regression is not presumed fixed; full screening and confirmation required."
+  ],
+  "created_unix": 1791074946.26813
+}

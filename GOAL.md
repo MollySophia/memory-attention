@@ -1,18 +1,26 @@
 # Memory Attention inference performance experiments
 
-Status: new experiment specification; not started. Editing this document does
-not resume the paused campaign or launch measurements.
+Status: original campaign `offload-gap-001` and supplemental survey completed:
+20 attempts, two retained steps (A0001 and A0016). Current retained execution
+source is A0016 (`0ce6645eb4c4bc3992258ad0878c72ea3c37a64e`). Editing this
+document alone does not launch measurements. The user has now authorized
+continuation-03: integrate the recovered local gains into a cumulative source
+chain, then optimize until offload approaches resident latency at every matrix
+and generation workload. This is an active objective with no fixed attempt cap.
 
-Campaign ID: `offload-gap-001`. Start from the restored `feat/offload` code at
-`81684d34e44db04a0511698081cab336abf4a60d`, not an accepted implementation from
-the archived campaign. Prepare and verify the measurement harness, then freeze
-its exact source commit as this campaign's new A0000. No baseline measurements
-or accepted optimization steps exist yet for this campaign.
+Workflow revision (2026-10-04): future candidates require complete matrix
+screening before a performance verdict. Coverage is mandatory; sampling effort
+is staged. Apply this prospectively, preserving all original plans, verdicts,
+raw results and supplemental findings. See
+[completed survey](profile/results/optimization/offload-gap-001/supplemental-01/final/REPORT.md).
+Continue any subsequently authorized work from the best verified implementation;
+do not restart the completed campaign or reuse attempt IDs.
 
-Keep the old `attempts/paper-001` branch and archived results as historical
-records only. Do not import their accepted-step counts, baseline measurements
-or source changes into the new experiment. Use the staged workflow below to
-obtain a primary baseline before spending on full validation.
+Historical campaign origin: restored `feat/offload` source
+`81684d34e44db04a0511698081cab336abf4a60d`; verified harness/baseline A0000 is
+`62942a0387608fe21baaeb2dce9ef3b0947dde4d`. Keep the old `attempts/paper-001`
+branch and its archived results separate; do not import their accepted-step
+counts, timings or model changes into this campaign.
 
 ## Objective and constraints
 
@@ -38,10 +46,20 @@ For each matched workload, report T_offload and T_gpu, the absolute gap
 `T_offload - T_gpu` in milliseconds, and the relative overhead
 `T_offload / T_gpu - 1`. Preserve signed values and uncertainty. Measure both
 placements for baseline and candidate under matched plans; keep the resident
-reference behavior fixed. A retained step must repeatably reduce offload
-latency and its absolute gap for at least one of the four predefined primary
-workloads (prefill/decode at batches 1 and 8, length/context 2048), without a
-resolved regression in any other primary workload or loss of memory savings.
+reference behavior fixed. Under the newly authorized continuation, a retained
+step must repeatably reduce offload latency and its absolute gap for at least
+one of the fixed 16 matrix/generation workloads, without a resolved regression
+elsewhere in the complete matrix or loss of memory savings. The four original
+primary workloads remain mandatory regression/reporting points; a secondary
+workload can now justify retention after the same full gates. This prospective
+change does not relabel historical acceptance decisions.
+Retention remains distinct from local effectiveness:
+a confirmed gain at any secondary matrix or generation workload must be
+recorded even if no primary workload improves or the candidate is not retained.
+Do not discard such a candidate before completing its matrix screen and the
+predeclared confirmation of nominated points. A shape-specific policy based on
+these findings is a new candidate requiring its own validation, not an automatic
+integration of the best observed points.
 A slower resident reference cannot count as closing the gap. A shared speedup
 without evidence of lower offload overhead does not satisfy the objective.
 Do not change model dimensions, attention semantics, precision or output scope
@@ -69,31 +87,40 @@ Attention Q/K/V heads have dimension 64. Prefill transfers at most
 batch * length * layers * kv_dim * sizeof(dtype): 192 MiB at batch 1 and
 1536 MiB at batch 8. Decode transfers 0.09375 and 0.75 MiB per step, respectively.
 
-Initial baseline screening: measure batches 1, 4, 8 and 16 at length/context
-2048, both prefill and decode, with ma_offload and ma_gpu. This is 16 isolated
-process jobs under the screening sampling plan. It establishes batch scaling
-before candidate selection; it is not formal confirmation or full validation.
-Do not infer small-batch overhead from batch 8 alone.
+Complete performance matrix (fixed scope for screening and final validation):
 
-Final validation matrix (frozen for the current campaign):
+- Batch sweep: 1, 4, 8, 16 at prefill/context length 2048, both prefill and decode.
+- Length sweep: 512, 2048, 4096, 8192 at batch 8, both prefill and decode.
+- Deduplicate batch8/length2048: seven unique shapes, 14 prefill/decode workloads.
+- Growing-cache generation: 128 decode steps after a 2048-token prefix,
+  batches 1 and 8, fixed predetermined tokens, excluding sampling.
+- Record OOM, unsupported and failed points explicitly; never silently drop
+  them or substitute zero timings.
 
-- Batch sweep: 1, 4, 8, 16 at prefill/context length 2048.
-- Length sweep: 512, 2048, 4096, 8192 at batch 8.
-- Record OOM and unsupported points explicitly; do not silently drop them.
-- A growing-cache generation run: 128 decode steps after a 2048-token prefix,
-  batches 1 and 8, fixed predetermined tokens for equivalence across variants.
+Every correctness-passing candidate must screen all 16 workloads with both
+ma_offload and ma_gpu, regardless of its expected active branch or primary-shape
+outcome. That is 32 isolated processes per implementation, or 64 for a fresh
+matched parent/candidate screen. No extra Cartesian product of all batches and
+lengths is implied. Use the current verified parent as the screen comparator;
+retain frozen A0000 for cumulative validation. Do not stop a performance screen
+because primary points are slow or unpromising. A correctness, OOM, unsupported
+or benchmark failure may prevent completion; preserve it and record every
+unmeasured cell and reason without claiming full coverage.
 
-Every candidate screening covers both primary batches 1 and 8, prefill and
-decode, and both placements (8 jobs per implementation). Candidates affecting
-transfer volume or pipeline scheduling also screen batch 16 (4 additional jobs
-per implementation), against matched frozen-baseline points. Declare these
-additional points before collecting candidate timings. The full matrix is an acceptance gate
-for a candidate nominated for retention, not a prerequisite for profiling or
-screening every idea. Include regression checks against the frozen baseline at
-all other shapes before accepting a retained candidate. If the final
-implementation is the same verified source with the same measurement plan and
-environment, reuse that full-matrix evidence rather than rerunning it simply
-because the candidate is now called final.
+A new baseline, when required, covers the same 32-process matrix. Profiling may
+start after the primary baseline points are ready, but profiling and timing
+must run sequentially. Existing campaign evidence can supply screening points
+only when source, scope, sampling plan and environment match; list reused and
+fresh points explicitly. A source path believed unchanged is not by itself a
+reason to omit a workload: setup, allocation and earlier prefix execution can
+affect it. Confirmation always uses fresh independent pairs.
+
+Full matrix coverage does not mean formal sampling at every point in every
+round. Screen the whole matrix cheaply, then independently confirm nominated
+gains and suspected regressions. A candidate proposed for retention still
+requires full validation, generation, memory and correctness gates. Reuse valid
+completed validation for an identical source/plan/environment rather than
+rerunning it merely because that source is now called final.
 
 ## Measurement scope and staged sampling plans
 
@@ -124,30 +151,30 @@ Define and persist a protocol version in every result:
 
 Separate measurement scope from sampling effort. Persist `protocol_version`,
 `measurement_plan_id`, `stage`, warmup, repeats and rounds in each future run.
-Use a new protocol identifier for this campaign after verifying the harness.
-Leave archived records and their metadata unchanged. Freeze each plan before
-collecting its data.
+Keep the verified campaign protocol for unchanged measurement scope; use a
+new sampling-plan ID for revised effort and a new protocol ID for changed
+measurement semantics. Leave archived records and metadata unchanged. Freeze
+each plan before collecting its data.
 These are starting plans, not universal sample-size guarantees. Independence
 comes from separate paired processes; many samples in one process do not replace
 that requirement. Do not apply the old 30-warmup/150-sample plan to every point.
 
 | Stage | Workloads and placements | Warmup / samples per round / rounds | Purpose |
 | --- | --- | --- | --- |
-| Screening | Initial baseline: batches 1/4/8/16 (16 jobs); candidates: batches 1/8 (8 jobs per implementation), plus batch 16 for transfer-volume/pipeline changes; prefill/decode at length/context 2048, ma_offload and ma_gpu | 3 / 5 / 1 per point | Reject poor ideas quickly; no accepted gain claims |
-| Confirmation | All four primary workloads: prefill/decode at batches 1/8, length/context 2048; independent baseline/candidate pairs for both ma_offload and ma_gpu in balanced blocks | 10 / 10 / 3 per point | Repeatable offload gap reduction and primary regression checks |
+| Screening | Complete 14-workload prefill/decode matrix, both ma_offload and ma_gpu, matched parent/candidate | 3 / 5 / 1 per point | Find local gains and suspected regressions across all shapes; no confirmed gain claims |
+| Generation screening | Both generation workloads, matched parent/candidate and both placements | 2 full-trajectory warmups / 3 trajectories / 1 round | Complete each candidate screen without shortening the 128-step workload |
+| Confirmation | All nominated gain/regression points, including secondary shapes and generation; all four primary workloads additionally required for retention | Prefill/decode: 10 / 10 / 3; generation: 2 / 5 / 3, in at least 3 fresh balanced independent process blocks | Confirm local effects and distinguish them from retention eligibility |
 | Full validation | Complete batch/length matrix for a candidate nominated for retention, including placement/folding references | 10 / 10 / 3 per prefill/decode point | Scaling, memory and regression acceptance gates |
 | Generation validation | Prefix2048 + 128 steps; batches1/8, placement/folding references | 2 full-trajectory warmups / 5 trajectories / 3 rounds | Growing-cache latency and memory |
 
-Harness preparation is required before these plans can run. The restored
-checkout's `profile/bench_fla.py` still defaults to 30/30/5; the archived
-`--stage`, matrix driver and diagnostic profiler are not present in this
-checkout. Do not describe those interfaces as already implemented or launch
-the old defaults. Port only the necessary measurement infrastructure, review
-it independently of archived model optimizations, and verify it before A0000.
-
-The prepared single-configuration and matrix drivers must default to screening
-(generation to generation validation), record actual counts and custom plan
-IDs, and offer a plan-only mode with commands, job counts and estimated work.
+The verified campaign harness already records stages and sampling plans.
+Prefill/decode defaults to screening (3/5/1); generation currently defaults to
+generation_validation (2/5/3). For the shorter generation screen, explicitly
+pass warmup=2, repeats=3 and rounds=1, persist a distinct screening/custom plan
+ID and verify the recorded effective counts. Do not silently use default
+validation effort or label shorter screen data as validation. This document
+revision does not itself modify the harness. Plan-only commands must expose
+actual counts, job totals and estimated work before timing starts.
 Diagnostic profiling should default to 10 warmup calls, allow an explicit
 override, and run after a primary baseline without waiting for a full matrix.
 Independent alternating baseline/candidate runs must cover both placements;
@@ -157,8 +184,8 @@ Screening still requires compilation and offload buffer setup before timing.
 If the short warmup is insufficient, increase it for both baseline and candidate
 and record the revised plan before comparing. Short-plan results are provisional
 and must never supply headline or accepted-step speedups. These sampling plans
-do not shorten correctness tests: retain multi-step/growing-cache gates even
-when generation performance is not measured during screening.
+do not shorten correctness tests: retain multi-step/growing-cache gates.
+Generation performance is also mandatory in each complete candidate screen.
 
 A generation warmup/sample is an entire prefix plus 128-step trajectory, not
 one decode call. Its warmup count is independent of the single-call benchmark.
@@ -167,6 +194,31 @@ plan. For subsequent comparisons within this campaign, reuse valid measurements
 only when source, scope, plan and environment match; collect fresh independent
 runs for confirmation. Do not compare different sampling plans as matched
 evidence or rerun unrelated matrix points merely to refresh one comparison.
+
+Before screening, freeze the nomination rule: every workload with positive
+mean offload-latency and absolute-gap reductions and preserved GPU memory
+savings is a gain nominee. Also freeze a suspected-regression rule for offload
+latency, gap, resident latency and memory guards, with thresholds justified by
+baseline variability or a declared practical tolerance before candidate timing.
+A negative screen mean alone is not a resolved regression. Preserve all signed
+results, including those below the confirmation trigger. Do not select a
+post-hoc top-K list, tune thresholds after results or omit secondary shapes.
+Complete the screen before freezing the confirmation workload list, comparators,
+block count, stopping rule and multiple-testing family. Confirm the union of
+nominees once per comparator; screen observations do not enter confirmation
+statistics. For retention, include all four primary workloads even if they
+were not nominated by the screen.
+
+Use at least three fresh balanced independent blocks per selected point; choose
+the exact count before confirmation and do not extend it until favorable.
+Correct gain claims across the frozen family of tested workloads/comparators
+(e.g. Holm with a joint latency/gap test), while also reporting ordinary paired
+95% intervals, resident behavior and memory guards. Predeclare regression
+criteria separately and retain adverse evidence even when inconclusive.
+If the historical parent differs from the current retained source, distinguish
+parent-relative effects from current-source superiority; measure both before
+claiming both. Any conditional comparator slots stay in the frozen family
+(unrun slots receive p=1), not a smaller family selected after results.
 
 Escalate measurement effort only for a concrete unresolved question: compilation
 or allocation still occurring during measurement, warmup drift, run-order or
@@ -197,8 +249,10 @@ Profile as soon as the primary baseline is available; do not wait for a full
 baseline matrix or generation sweep before investigating bottlenecks. Run GPU
 profiling and GPU timing sequentially so they do not interfere. Use ma_gpu_unfolded
 for the folding ablation and full validation, rather than automatically including
-it in every screening run. For a rejected screen, record the evidence and move
-on without running its full matrix or generation performance sweep.
+it in every screening run. After complete screening and the fixed confirmation
+of nominated points, record local findings and the separate retention verdict.
+A nonretained candidate need not run the more expensive final validation stage;
+its full matrix and generation screening evidence must still be preserved.
 
 ## Memory and environment
 
@@ -215,10 +269,10 @@ Record GPU, driver, CUDA, torch, FlashAttention, Python, CPU, thread settings,
 commit and source hash. Note GPU temperature/clocks and competing GPU work.
 Use a new result directory per attempt/protocol/environment. Preserve source
 or a patch for dirty attempts; a hash alone cannot reconstruct the code.
-Create a new frozen checkout from the prepared A0000 commit and record its
-path, source hash and environment in this campaign's manifest. Neither the
-historical tracked sweep nor the archived campaign's baseline is this new
-baseline. Claimed improvements require fresh matching paired runs; a stored
+Preserve the frozen A0000 checkout and freeze each new candidate separately;
+record checkout paths, source hashes and environment in the manifest. Neither
+the historical tracked sweep nor the archived campaign's baseline substitutes
+for this campaign's A0000. Claimed improvements require fresh matching paired runs; a stored
 baseline point alone cannot replace independent confirmation.
 
 ## Correctness gates
@@ -253,8 +307,8 @@ Write an entry in profile/OPTIMIZATION_LOG.md and a structured record under
 profile/results/optimization/offload-gap-001/<attempt_id>/, including failed
 or reverted attempts. Include `campaign_id` in every record and log entry.
 
-Within this new campaign use `A0000` for the new frozen baseline, then `A0001`,
-`A0002`, etc. These IDs are scoped to `offload-gap-001`; they do not refer to
+Within this campaign `A0000` identifies the frozen baseline; A0001–A0020
+already exist. Continue monotonically with A0021 or the next unused ID. These IDs are scoped to `offload-gap-001`; they do not refer to
 archived attempts. Never reuse an ID within this campaign after failure or
 reversion. Separate an attempt from its repeated runs:
 use run IDs such as `R01`, `R02` within the attempt directory. A code change
@@ -276,8 +330,16 @@ Record:
 - Per-shape prefill/decode latency, throughput, memory and paired speedup
   against the new frozen baseline; matched resident latency, absolute gap,
   relative overhead and gap reduction with uncertainty.
-- Status: accepted, rejected, within_noise, correctness_failed, oom,
+- Retention status: accepted, rejected, within_noise, correctness_failed, oom,
   unsupported, benchmark_failed or interrupted. Include reason and next insight.
+- Per-workload finding, separately from retention status: screening signal,
+  confirmed local gain, resolved regression, within_noise or unavailable.
+  Record comparator, effect size, uncertainty, corrected gain decision, memory
+  tradeoffs and the specific reason preventing retention. "Not retained" does
+  not mean "no useful gain". Preserve local gains even when another shape fails.
+- Coverage ledger for all 16 workloads and both placements on each side:
+  measured/reused/failed/not run, source and plan IDs, and reasons. Distinguish
+  completed full screening from full validation and independent confirmation.
 - For attempts blocked before timing, record performance as unavailable and
   explain why. Never substitute zero for failed/missing measurements.
 
@@ -303,10 +365,10 @@ include the attempt ID in both commit messages, for example
 `results(A0001): rejected due to decode regression`. The results commit is
 identified through Git history; do not try to embed its own SHA in itself.
 
-Use the new campaign branch `exp-0/attempts/offload-gap-001`, created from the
-restored source revision when execution begins. Keep harness preparation and
-the new baseline freeze on this branch; do not continue `attempts/paper-001`.
-Keep all new attempts and result commits on the new branch.
+Continue using campaign branch `exp-0/attempts/offload-gap-001`; preserve its
+harness, baseline and attempt history. Do not recreate it from the restored
+source or continue `attempts/paper-001`. Keep new attempt/result commits on
+this campaign branch.
 Any additional branches for this campaign must also use the `exp-0/` prefix.
 For a rejected attempt, commit its evidence first, then revert the code change
 with a new commit before the next attempt. Do not reset, squash or force-push
@@ -356,48 +418,52 @@ Workload scaling figures use batch size or context length on the x-axis;
 they answer a different question from optimization history. Do not connect
 incomparable protocol/configuration points in a single series.
 
+Show confirmed secondary-shape or generation gains in separate workload panels
+against explicitly named comparators, with latency/gap reductions, intervals,
+corrected decisions and unresolved regression/memory tradeoffs. Keep screening
+heatmaps descriptive. Do not insert nonretained local gains into the cumulative
+accepted-step figure or combine different candidates' best points into a
+fictional final implementation.
+
 ## Execution order
 
-1. Start a new campaign from the restored source. Prepare and verify the
-   harness/correctness gates, freeze scope/configuration and the new A0000
-   source, then measure the fresh 16-job initial baseline screen: batches
-   1/4/8/16, prefill/decode at length/context 2048, ma_offload and ma_gpu.
-   Record their absolute gaps and relative overheads. Do not reuse archived
-   baseline timings. Profile as soon as the primary batch-1/8 results are
-   available, with timing jobs paused or finished to avoid interference; the
-   remaining baseline batch points must finish before selecting a candidate.
-   A complete validation matrix is not a prerequisite for the first profile.
-2. Profile prefill/decode at both primary batches 1 and 8 separately from timing. Identify a concrete
-   offload bottleneck and its contribution to the resident/offload gap before
-   registering and implementing a focused candidate. If a
-   profiling backend lacks GPU events, record that limitation and use a working
-   diagnostic path; never treat unavailable timings as zero.
-3. Register and commit the candidate, run correctness gates, then screen primary
-   offload prefill/decode at batches 1 and 8 with the short plan; add batch 16
-   for transfer-volume or pipeline-scheduling changes. Compare against a matching frozen
-   baseline run, including matched resident measurements to attribute gap
-   changes. Reject clear regressions or unpromising ideas promptly.
-4. For a promising candidate, run formal primary confirmation with at least
-   three independent alternating baseline/candidate process pairs per placement
-   for each of the four primary workloads. Confirm lower offload latency and
-   absolute gap in at least one, preserved memory savings, and no resolved
-   regression in any of the others. Record inconclusive results as within_noise,
-   not accepted.
-5. Nominate a candidate for retention only after confirmation. Run the full
-   matrix, generation validation and all applicable correctness checks before
-   acceptance. Reuse valid existing measurements where source, scope, sampling
-   plan and environment match; rerun matching baseline points where required
-   for comparisons. Investigate regressions rather than silently dropping them.
-6. Commit the verdict/evidence, accept or revert, and continue from the best
-   verified implementation. Generate final figures and reproducible commands
-   from accepted evidence without duplicating an already completed identical
-   validation run.
+1. For subsequently authorized work, verify the retained source, harness and
+   evidence ledger. Continue monotonically after existing attempt IDs. If a
+   new baseline is necessary, plan the complete matrix screen and profile once
+   its primary points are ready, with timing/profiling sequential. Do not
+   restart the completed campaign or rerun valid evidence without a reason.
+2. Profile the relevant prefill/decode or generation path separately from
+   timing. Identify a concrete offload bottleneck before registering a focused
+   candidate. Record unavailable diagnostic data explicitly, never as zero.
+3. Register and commit the candidate and full screening plan, run correctness
+   gates, then complete all batch/length and generation screen points with
+   matched parent/candidate offload and resident placements. Primary results
+   cannot terminate the screen or exclude other shapes. Preserve failures and
+   explicitly incomplete coverage when execution cannot finish.
+4. Apply the predeclared nomination rule across the complete screen. Freeze
+   and execute independent confirmation of gains and suspected regressions,
+   including secondary/generation points, with paired uncertainty and fixed
+   multiplicity accounting. Record local findings separately from retention.
+   Inconclusive evidence remains within_noise, not equivalent or accepted.
+5. For a candidate proposed for retention, confirm all four original primary
+   workloads and the nominated gain, and meet the all-workload retention criterion. Complete the formal
+   matrix, generation, applicable correctness and memory/regression gates.
+   Reuse valid evidence where permitted; investigate regressions. A local gain
+   with a regression elsewhere can motivate a separately registered
+   shape-specific candidate, but cannot authorize automatic integration.
+6. Commit the complete evidence and verdict, accept or revert, and continue
+   from the best verified implementation only when further work is authorized.
+   Plot retained cumulative improvements and nonretained local findings
+   separately, preserving unfavorable and inconclusive results.
 
-The target is 5–10 focused, profiling-supported offload optimization attempts
-in this new campaign, starting with no accepted steps. This is an attempt
-count, not a requirement for 5–10 accepted improvements. Register candidates
-from A0001 after freezing A0000. Preserve every attempt, including failures,
-reversions and within_noise results, with its implementation, evidence and
+The original target was 5–10 focused, profiling-supported attempts; the completed
+original campaign contains 20 attempts and two retained steps. Continuation-03
+is now authorized without a fixed attempt cap; completing another bounded batch
+does not satisfy its all-workload latency objective. The final near-GPU tolerance
+must be recorded explicitly, with independent uncertainty assessed at all 16
+workloads; a small observed mean alone is insufficient. Future attempt counts
+are not a required number of accepted improvements. Preserve every
+attempt, including failures, reversions and within_noise results, with its implementation, evidence and
 verdict. Rejected, noisy or failed attempts count toward the attempt target
 when they test a concrete offload hypothesis and record the outcome; they
 do not advance accepted_step. Harness preparation and repeated runs of

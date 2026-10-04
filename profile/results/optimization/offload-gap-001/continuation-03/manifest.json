@@ -1,0 +1,20 @@
+{
+  "status": "active",
+  "objective": "Integrate recovered local gains into one validated cumulative implementation, then approach resident latency at all16 fixed workloads.",
+  "retained_start": "A0016",
+  "retained_source": "0ce6645eb4c4bc3992258ad0878c72ea3c37a64e",
+  "historical_seal": "2cac8b4df73966fff2b9b4f724000d3b3a19e2f0",
+  "proposed_chain": [
+    "A0016",
+    "A0021: single-slot auto pipeline through4096 total tokens (A0014 recovery)",
+    "next: mapped bulk8..16 tokens from A0013 atop verified parent"
+  ],
+  "acceptance": "Confirmed offload+gap gain at any fixed workload, no resolved complete-matrix regression, correct computation and preserved GPU savings. No automatic adoption of historical sources.",
+  "target_tolerance": {
+    "status": "provisional_pending_user_preference",
+    "absolute_ms": 0.1,
+    "relative_fraction": 0.01,
+    "rule": "upper one-sided simultaneous95% bound of offload minus GPU minus max(.1ms,.01*GPU) <=0 at every workload; unproven until independent final evidence"
+  },
+  "created_unix": 1791074946.2680318
+}
