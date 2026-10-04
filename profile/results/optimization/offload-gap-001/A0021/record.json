@@ -6,8 +6,8 @@
   "parent_source_sha": "0ce6645eb4c4bc3992258ad0878c72ea3c37a64e",
   "accepted_step": null,
   "label": "Extend selective single-slot auto pipeline through4096 tokens",
-  "status": "registered",
-  "workflow_stage": "confirmation",
+  "status": "rejected",
+  "workflow_stage": "final_verdict",
   "hypothesis": "Recover A0014 b8/512 prefill gain without changing b8/2048 prefix capacity implicated in its historical decode regression.",
   "change": "Default single-slot total-token boundary2048 ->4096; manual policy and larger pipeline calls unchanged.",
   "profile_evidence": [
@@ -60,5 +60,25 @@
       512
     ]
   ],
-  "eligible_gain_note": "Structured representation of the already registered target. Other positive screen points are still confirmed and reported; unchanged-path noise cannot qualify this policy for retention."
+  "eligible_gain_note": "Structured representation of the already registered target. Other positive screen points are still confirmed and reported; unchanged-path noise cannot qualify this policy for retention.",
+  "parent_confirmation_analysis": "R02-parent-confirmation/analysis.json",
+  "decision": "Complete64-process screen and108-process independent confirmation. Target b8/512 prefill is a confirmed local gain: offload reduction2.31452ms CI[1.51509,3.11395], gap2.31708 CI[1.59000,3.04416], Holm p=.0287215. However b1 decode gap worsens .12804ms CI[-.23351,-.02258] in reduction units; offload reduction-.09552 CI[-.25041,.05937] is inconclusive. The predeclared gap-regression guard fails; do not retain or extend until favorable.",
+  "local_findings": [
+    {
+      "mode": "prefill",
+      "batch": 8,
+      "length": 512,
+      "status": "confirmed_local_gain"
+    },
+    {
+      "mode": "decode",
+      "batch": 1,
+      "length": 2048,
+      "status": "resolved_gap_regression"
+    }
+  ],
+  "not_run": {
+    "full_validation": "Predeclared confirmation regression guard failed; conditional controller stopped before validation."
+  },
+  "next_insight": "Retain recovered local evidence without relabeling acceptance. Restore verified A0016, integrate A0013 mapped bulk first, then reconsider short-prefill policy on that verified parent. Unchanged b1 algorithm does not authorize discarding its adverse measured result."
 }
