@@ -38,3 +38,24 @@ def test_fixed_family_holm_does_not_drop_unfavorable_values():
  from confirm import holm
  import pytest
  assert holm([.001,.04,1.])==pytest.approx([.003,.08,1.])
+
+def test_validation_completes_only_missing_points_and_keeps_folding_scope(tmp_path,monkeypatch):
+ import validation as v
+ import confirm
+ monkeypatch.setattr(d,'C',tmp_path)
+ monkeypatch.setattr(d,'record',lambda a:dict(parent_attempt_id='A0016'))
+ monkeypatch.setattr(d,'signature',lambda a:dict(attempt=a,commit='frozen-'+a,source_sha256='digest-'+a,root=str(d.root(a))))
+ monkeypatch.setattr(d,'estimate',lambda *args:1.)
+ for number in (9,16):
+  a='A'+str(number);(tmp_path/a).mkdir()
+  observed=d.WORKLOADS[:number]
+  monkeypatch.setattr(confirm,'analyze',lambda a:dict(confirmed_local_gains=[('prefill',8,512)],resolved_regressions=[],rows=[dict(mode=m,batch=b,length=l) for m,b,l in observed]))
+  v.prepare(a)
+  rest=d.read(tmp_path/a/'R03-remaining-confirmation/manifest.json')
+  assert len(rest['jobs'])==(16-number)*12
+  assert {(j['mode'],j['batch'],j['length']) for j in rest['jobs']}==set(d.WORKLOADS)-set(observed)
+  fold=d.read(tmp_path/a/'R04-unfolded-reference/manifest.json')
+  assert len(fold['jobs'])==32
+  assert all(j['variant']=='ma_gpu_unfolded' and j['command'][j['command'].index('--rounds')+1]=='3' for j in fold['jobs'])
+  correct=d.read(tmp_path/a/'validation-plan.json')['correctness_pairs']
+  assert len(correct)==6 and {'batch':8,'length':512,'seed':4321} in correct

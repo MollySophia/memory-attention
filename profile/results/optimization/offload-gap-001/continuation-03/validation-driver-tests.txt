@@ -1,0 +1,9 @@
+
+profile/results/optimization/offload-gap-001/continuation-03/test_driver.py::test_complete_scope_has_no_duplicate_or_missing_workload PASSED [ 16%]
+profile/results/optimization/offload-gap-001/continuation-03/test_driver.py::test_screen_plans_all_placements_and_short_full_trajectories PASSED [ 33%]
+profile/results/optimization/offload-gap-001/continuation-03/test_driver.py::test_confirmation_blocks_remain_balanced_and_separate PASSED [ 50%]
+profile/results/optimization/offload-gap-001/continuation-03/test_driver.py::test_nomination_keeps_secondary_gains_primary_controls_and_regressions PASSED [ 66%]
+profile/results/optimization/offload-gap-001/continuation-03/test_driver.py::test_fixed_family_holm_does_not_drop_unfavorable_values PASSED [ 83%]
+profile/results/optimization/offload-gap-001/continuation-03/test_driver.py::test_validation_completes_only_missing_points_and_keeps_folding_scope PASSED [100%]
+
+============================== 6 passed in 0.29s ===============================
