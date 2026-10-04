@@ -604,3 +604,7 @@ User authorized a cumulative integration of recovered local gains followed by op
 A0021 complete-matrix screen:64/64 processes audited. Target b8/512 prefill offload/gap reductions2.4052/2.3635ms. Frozen independent confirmation:9 workloads,108 processes (three balanced blocks), estimated2374.64s. All primary controls, positive secondary signals and both generation points included; negative results preserved. Screening evidence does not establish retention or near-GPU completion.
 
 A0021 finalized nonretained: target b8/512 prefill gain confirmed (offload2.31452ms [1.51509,3.11395], gap2.31708ms [1.59000,3.04416], Holm p=.02872), but b1 decode gap reduction−.12804ms [−.23351,−.02258] fails the declared regression guard. Offload slowdown alone is inconclusive. Preserve local gain and all adverse samples; no optional extension. Full validation intentionally not run. Restore A0016, recover A0013 first, then test cumulative short-prefill integration on a verified parent.
+
+## A0022 registered: recover mapped bulk on A0016
+
+Port A0013 mapped host bulk8..16-token path and full pinned-table telemetry onto verified A0016; retain its selective2048-token pipeline policy. Target b8 generation and affected b8/b16 decode. Full64-process screen, independent confirmation and complete gates precede retention. A0021 local pipeline gain remains preserved for later integration after this parent is evaluated.

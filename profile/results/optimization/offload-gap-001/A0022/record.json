@@ -1,0 +1,72 @@
+{
+  "campaign_id": "offload-gap-001",
+  "continuation_id": "continuation-03",
+  "attempt_id": "A0022",
+  "parent_attempt_id": "A0016",
+  "parent_source_sha": "0ce6645eb4c4bc3992258ad0878c72ea3c37a64e",
+  "parent_sha": "5037fd74b7cd480e0c5739a1adfa97b68b7421b0",
+  "accepted_step": null,
+  "label": "Recover mapped host bulk gather on selective pipeline parent",
+  "status": "registered",
+  "workflow_stage": "implementation",
+  "hypothesis": "Recover the independently confirmed A0013 b8 generation benefit while retaining A0016 small-prefill pipeline policy; GPU gathers fresh8..16-token bulk inputs directly from the pinned host table.",
+  "change": "Port exact A0013 mapped bulk kernel/lifetime handling and pinned-table telemetry atop A0016. No A0021 threshold change in this candidate.",
+  "profile_evidence": [
+    "../A0013/record.json",
+    "../supplemental-01/A0013/confirmation-current/summary.json",
+    "../continuation-02/mapped-bulk.json"
+  ],
+  "eligible_gain_workloads": [
+    [
+      "generation",
+      8,
+      2048
+    ],
+    [
+      "decode",
+      8,
+      512
+    ],
+    [
+      "decode",
+      8,
+      2048
+    ],
+    [
+      "decode",
+      8,
+      4096
+    ],
+    [
+      "decode",
+      8,
+      8192
+    ],
+    [
+      "decode",
+      16,
+      2048
+    ]
+  ],
+  "tradeoffs": [
+    "Whole3000MiB folded host table pinned and counted once",
+    "GPU resources used for host reads; retain source lifetime synchronization",
+    "A0021 secondary gain preserved for later cumulative integration, not assumed regression-free"
+  ],
+  "screen": {
+    "workloads": 16,
+    "fresh_parent_candidate_processes": 64,
+    "prefill_decode": [
+      3,
+      5,
+      1
+    ],
+    "generation": [
+      2,
+      3,
+      1
+    ]
+  },
+  "confirmation_rule": "Same predeclared continuation03 nomination and three-block Holm/guard rules as A0021; no optional extension.",
+  "created_unix": 1791078802.8966794
+}
