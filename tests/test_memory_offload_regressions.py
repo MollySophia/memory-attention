@@ -170,8 +170,6 @@ def test_growing_cache_exact_with_slot_reuse(seed, policy, padded):
                           num_kv_heads=2, vocab_size=128, qk_norm=True,
                           use_gate=True, fuse_norm=False,
                           memory_offload_policy=policy,
-                          memory_offload_mapped_bulk_min_tokens=1,
-                          memory_offload_mapped_bulk_max_tokens=1024,
                           memory_offload_group_size=2,
                           memory_offload_bulk_max_tokens=1,
                           memory_offload_prefetch_depth=4 if policy == 'auto' else 1)
@@ -265,69 +263,3 @@ def test_single_slot_limit_can_be_disabled_and_validated(model):
     model.enable_memory_offload()
     model.set_offload_offloader(1,1025)
     assert len(model.model.memory_offloader.slots) == min(4,len(model.model.layers))
-
-
-@pytest.mark.parametrize('batch', [8, 16])
-@pytest.mark.parametrize('ids_device', ['cpu', 'cuda'])
-def test_mapped_bulk_fresh_weights_cross_stream_and_host_lifetime(batch, ids_device):
-    from fla.layers.memory_mapped_bulk import MappedBulkMemoryTableOffloader
-    from fla.layers.memory_offload import PendingM
-    with torch.inference_mode():
-        weights=torch.randn(73,5,64,dtype=torch.bfloat16).pin_memory()
-        off=MappedBulkMemoryTableOffloader(weights,batch,1,'cuda')
-        streams=[torch.cuda.Stream(),torch.cuda.Stream()]
-        for stream in streams:stream.wait_stream(torch.cuda.current_stream())
-        try:
-            for iteration in range(4):
-                ids=torch.randint(0,73,(batch,1))
-                expected=weights.index_select(0,ids.flatten()).clone()
-                values=[]
-                with torch.cuda.stream(streams[iteration%2]):
-                    device_ids=ids.to(ids_device)
-                    def consume(layer,value):
-                        handle=value if isinstance(value,PendingM) else None
-                        if handle is not None:value=handle.acquire()
-                        torch.cuda._sleep(100000)
-                        values.append(value.clone())
-                        if handle is not None:handle.release()
-                    off.forward(device_ids,consume)
-                # No GPU synchronization before host mutation: forward must
-                # already have completed every mapped read of CPU storage.
-                weights.add_(torch.tensor(.125,dtype=weights.dtype))
-                streams[iteration%2].synchronize()
-                actual=torch.stack(values,dim=2).reshape(batch,5,64).cpu()
-                torch.testing.assert_close(actual,expected,rtol=0,atol=0)
-        finally:off.close()
-
-
-def test_mapped_bulk_error_cleanup_and_cpu_bounds():
-    from fla.layers.memory_mapped_bulk import MappedBulkMemoryTableOffloader
-    with torch.inference_mode():
-        weights=torch.randn(17,3,64,dtype=torch.bfloat16).pin_memory()
-        for invalid in (False,True):
-            off=MappedBulkMemoryTableOffloader(weights,8,1,'cuda')
-            try:
-                if invalid:
-                    with pytest.raises(IndexError,match='out of range'):
-                        off.forward(torch.full((8,1),17),lambda *args:None)
-                else:
-                    def fail(*args):raise ValueError('consumer failure')
-                    with pytest.raises(ValueError,match='consumer failure'):
-                        off.forward(torch.zeros((8,1),device='cuda',dtype=torch.long),fail)
-                assert off.broken
-                with pytest.raises(RuntimeError,match='closed or failed'):
-                    off.forward(torch.zeros((8,1),dtype=torch.long),lambda *args:None)
-            finally:off.close()
-
-
-def test_mapped_bulk_model_selection_and_pinned_table_accounting(model):
-    from fla.layers.memory_mapped_bulk import MappedBulkMemoryTableOffloader
-    from fla.layers.memory_offload import BulkMemoryTableOffloader
-    model.enable_memory_offload()
-    assert isinstance(model.model._offloader_for(1,1),BulkMemoryTableOffloader)
-    mapped=model.model._offloader_for(8,1)
-    assert isinstance(mapped,MappedBulkMemoryTableOffloader)
-    assert mapped.host.numel()==0
-    snapshot=load_script('benchmark_telemetry').memory_snapshot(model,'cuda')
-    assert snapshot['cpu_table_pinned_bytes']==snapshot['cpu_table_bytes']
-    assert snapshot['offload_pinned_bytes']==snapshot['cpu_table_bytes']+sum(v['host_bytes'] for v in snapshot['offloader_capacities'])

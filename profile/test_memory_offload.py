@@ -211,8 +211,7 @@ def main():
     model.enable_memory_offload(device="cuda:0", dtype=torch.bfloat16, fold_norm=True)
     resident = torch.cuda.memory_allocated()
     table_mib = model.model.memory_table.numel() * model.model.memory_table.element_size() / 2**20
-    placement = "pinned CPU" if model.model.memory_table.is_pinned() else "ordinary CPU"
-    print(f"  folded CPU table   : {table_mib:.1f} MiB ({placement}, {model.model.memory_table.shape})")
+    print(f"  folded CPU table   : {table_mib:.1f} MiB (ordinary CPU, {model.model.memory_table.shape})")
     print(f"  GPU after offload  : {resident / 2**20:.1f} MiB")
 
     ok = worst < 0.05
