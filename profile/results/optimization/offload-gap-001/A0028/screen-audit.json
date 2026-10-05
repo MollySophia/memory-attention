@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "raw_results": 64,
+  "workloads": 16,
+  "source_signatures": {
+    "baseline": {
+      "attempt": "A0023",
+      "root": "/home/molly/workspace-memory-attn/offload-gap-001-A0023",
+      "commit": "5f3d5958fea25f953bb91f5ef6f35880ff37fcfa",
+      "source_sha256": "f814b29a0e08503e2fa4ba56c1434f4056a76ea30bb35dd96173eaa3a0795285"
+    },
+    "candidate": {
+      "attempt": "A0028",
+      "root": "/home/molly/workspace-memory-attn/offload-gap-001-A0028",
+      "commit": "6cc9354760ebde3bab9a90996a7713a936dfb439",
+      "source_sha256": "ab51cd6f60cb476b5baf42e8d3a50dbcad772845dbdf77174a08f4e3ac2016d1"
+    }
+  },
+  "confirmation_jobs": 120,
+  "nomination_rule_recomputed": true,
+  "fixed_gain_family": 10,
+  "balanced_order_validated": true,
+  "screen_data_excluded_from_confirmation": true,
+  "host_capacity_note": "At b8/2048:64MiB host staging and256MiB GPU ring; pinned full3000MiB table counted once.",
+  "accepted": false
+}
