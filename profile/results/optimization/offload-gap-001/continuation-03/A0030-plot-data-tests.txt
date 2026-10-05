@@ -1,0 +1,5 @@
+
+profile/results/optimization/offload-gap-001/continuation-03/test_plot_workload_scaling.py::test_six_block_plot_data_checks_coverage_and_uses_every_process PASSED [ 50%]
+profile/results/optimization/offload-gap-001/continuation-03/test_plot_workload_scaling.py::test_archived_three_block_plot_data_remains_exact PASSED [100%]
+
+============================== 2 passed in 0.31s ===============================

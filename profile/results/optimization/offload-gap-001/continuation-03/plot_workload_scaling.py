@@ -7,10 +7,6 @@ import argparse
 import csv
 from pathlib import Path
 
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
-
 import driver as d
 
 VARIANTS = ('ma_gpu', 'ma_offload')
@@ -20,7 +16,7 @@ MEMORY = ('gpu_peak_allocated_bytes', 'host_rss_bytes', 'offload_pinned_bytes',
           'cpu_table_bytes', 'cpu_table_pinned_bytes', 'offload_gpu_buffer_bytes',
           'kv_cache_storage_bytes')
 CAPTION = ('2.836B BF16 · RTX 5090 · last-token logits + real KV cache · random weights/tokens\n'
-           'Three independent process blocks; two-sided 95% t intervals (df=2). Screening excluded.\n'
+           '{blocks} independent process blocks; two-sided 95% t intervals (df={df}). Screening excluded.\n'
            'Retained-source diagnostic data; not independent final target acceptance.')
 
 
@@ -36,11 +32,13 @@ def load(attempt):
         manifest_path = Path(r['source_manifest'])
         manifest = d.read(manifest_path)
         assert manifest['status'] == 'completed'
+        blocks = d.planned_blocks(manifest)
+        assert blocks == d.confirmation_blocks(attempt)
         for variant in VARIANTS:
             jobs = sorted([j for j in manifest['jobs'] if j['implementation'] == 'candidate'
                            and j['variant'] == variant and
                            (j['mode'], j['batch'], j['length']) == shape], key=lambda j:j['block'])
-            assert [j['block'] for j in jobs] == [1, 2, 3]
+            assert [j['block'] for j in jobs] == list(range(1, blocks + 1))
             values = {k: [] for k in ('latency_ms', 'tokens_per_second', *MEMORY)}
             for job in jobs:
                 assert job['status'] == 'completed' and job['attempt'] == attempt
@@ -63,18 +61,19 @@ def load(attempt):
                                 raw_path=str(path.relative_to(d.C)),
                                 latency_ms=mean, memory=result['memory_after']))
             out = dict(attempt=attempt, mode=shape[0], batch=shape[1], length=shape[2],
-                       variant=variant, blocks=3, source_manifest=str(manifest_path.relative_to(d.C)))
+                       variant=variant, blocks=blocks, source_manifest=str(manifest_path.relative_to(d.C)))
             for key, samples in values.items():
                 interval = d.interval(samples)
                 for field in ('mean', 'lower_95', 'upper_95'):
                     out[f'{key}_{field}'] = interval[field]
             rows.append(out)
-    assert len(envs) == 1 and len(raw) == 96
+    assert len(envs) == 1 and len(raw) == 32 * d.confirmation_blocks(attempt)
     return rows, raw
 
 
-def save(fig, directory, name, note=''):
-    fig.text(.5, .015, CAPTION + ('\n' + note if note else ''), ha='center', fontsize=8)
+def save(fig, directory, name, note='', blocks=3):
+    import matplotlib.pyplot as plt
+    fig.text(.5, .015, CAPTION.format(blocks=blocks, df=blocks-1) + ('\n' + note if note else ''), ha='center', fontsize=8)
     fig.tight_layout(rect=(0, .13, 1, .94))
     for extension in ('png', 'svg', 'pdf'):
         fig.savefig(directory / f'{name}.{extension}', dpi=180)
@@ -91,6 +90,10 @@ def errorbars(ax, subset, key, x, color, label, scale=1):
 
 
 def plots(rows, directory, attempt):
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    blocks = d.confirmation_blocks(attempt)
     for metric, ylabel in [('latency_ms', 'Latency (ms)'), ('tokens_per_second', 'Tokens / second')]:
         fig, axes = plt.subplots(2, 2, figsize=(12, 8))
         for mi, mode in enumerate(('prefill', 'decode')):
@@ -109,7 +112,7 @@ def plots(rows, directory, attempt):
                 ax.set_title(f'{mode.capitalize()} · ' + ('context 2048' if sweep == 'batch' else 'batch 8'))
         axes[0, 0].legend()
         fig.suptitle(f'{attempt}: workload scaling')
-        save(fig, directory, metric+'-scaling')
+        save(fig, directory, metric+'-scaling', blocks=blocks)
     fig, axes = plt.subplots(1, 2, figsize=(11, 5))
     for ax, metric, ylabel in zip(axes, ('latency_ms', 'tokens_per_second'),
                                   ('Total generation latency (ms)', 'Output tokens / second')):
@@ -120,7 +123,7 @@ def plots(rows, directory, attempt):
         ax.set_xticks([1, 8]); ax.set_xlabel('Batch size'); ax.set_ylabel(ylabel)
     axes[0].legend()
     fig.suptitle(f'{attempt}: generation, 2048-token prefix + 128 growing decode steps')
-    save(fig, directory, 'generation', 'Output-token throughput includes prefix time; predetermined tokens, not a quality evaluation.')
+    save(fig, directory, 'generation', 'Output-token throughput includes prefix time; predetermined tokens, not a quality evaluation.', blocks=blocks)
     metrics = [('gpu_peak_allocated_bytes', 'Peak allocated GPU memory'),
                ('host_rss_bytes', 'Host process RSS after workload'),
                ('offload_pinned_bytes', 'Pinned host table + staging buffers')]
@@ -136,22 +139,25 @@ def plots(rows, directory, attempt):
         ax.set_ylabel('MiB'); ax.set_title(title)
     axes[0].legend()
     fig.suptitle(f'{attempt}: complete-matrix GPU and host memory')
-    save(fig, directory, 'memory', 'Host RSS includes runtime and retained loading state. Pinned table is counted once; not added to RSS.')
+    save(fig, directory, 'memory', 'Host RSS includes runtime and retained loading state. Pinned table is counted once; not added to RSS.', blocks=blocks)
 
 
-def main(attempt):
+def main(attempt, data_only=False):
     rows, raw = load(attempt)
     out = d.C / attempt / 'workload-diagnostics'
     out.mkdir(exist_ok=True)
     d.save(out / 'workloads.json', dict(status='retained_source_diagnostics', attempt=attempt,
            final_goal_accepted=False, rows=rows, raw_processes=raw,
-           note=CAPTION+' Throughput is computed per process block before summarizing; generation counts 128 output tokens per sequence.'))
+           note=CAPTION.format(blocks=d.confirmation_blocks(attempt), df=d.confirmation_blocks(attempt)-1)+' Throughput is computed per process block before summarizing; generation counts 128 output tokens per sequence.'))
     with (out / 'workloads.csv').open('w') as f:
         writer = csv.DictWriter(f, fieldnames=list(rows[0])); writer.writeheader(); writer.writerows(rows)
-    plots(rows, out, attempt)
+    if not data_only:
+        plots(rows, out, attempt)
     print(f'Exported {len(rows)} placement/workload rows from {len(raw)} audited processes to {out}')
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(); parser.add_argument('--attempt', required=True)
-    main(parser.parse_args().attempt)
+    parser.add_argument('--data-only', action='store_true', help='Defer rendering while GPU timing is active')
+    args = parser.parse_args()
+    main(args.attempt, args.data_only)
