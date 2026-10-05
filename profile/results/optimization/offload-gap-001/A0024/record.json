@@ -8,7 +8,7 @@
   "accepted_step": null,
   "label": "Recover short-prefill single-slot pipeline on mapped parent",
   "status": "registered",
-  "workflow_stage": "correctness",
+  "workflow_stage": "screening",
   "hypothesis": "Extend selective single-slot pipeline to4096 total tokens, recovering A0014/A0021 b8/512 prefill gain on accepted mapped1..16 parent. Reduced pinned/GPU slot capacity and transfer scheduling overhead; prior b1 decode regression must be tested again under new transport.",
   "change": "Only auto single-slot maximum2048->4096 and boundary/reuse tests; mapped1..16 and bulk1024 unchanged.",
   "profile_evidence": [
@@ -49,5 +49,15 @@
     "memory_offload_mapped_bulk_min_tokens": 1,
     "memory_offload_mapped_bulk_max_tokens": 16
   },
-  "created_unix": 1791174358.0120673
+  "created_unix": 1791174358.0120673,
+  "candidate_sha": "e6f4f361dbbafd5c2bd1836ded4acdca0fb095a0",
+  "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0024",
+  "correctness": {
+    "pytest": "41 passed in13.04s",
+    "standalone": "PASS; worst max difference0",
+    "logs": [
+      "correctness-tests.txt",
+      "standalone-correctness.txt"
+    ]
+  }
 }

@@ -638,3 +638,5 @@ A0023 accepted as cumulative step3 after full review: all288 performance results
 ## A0024 registered: recover short-prefill policy on A0023
 
 Campaign offload-gap-001, parent verified A0023. Raise auto single-slot bound2048→4096 total tokens, preserving mapped1..16 and bulk1024. Recover prior A0014/A0021 b8/512 prefill mechanism in one cumulative source. Prior A0021 b1 decode gap regression remains adverse historical evidence; full64-process screen and fixed independent confirmation including primary controls required. No presumed regression fix, no optional sampling extension.
+
+A0024 frozen sourcee6f4f36;41 offload/decode tests pass, standalone worst difference0. Complete64-process screen frozen before launch with verified A0023 comparator, estimate1154.67s (~19min). Same nomination/independent confirmation/regression rules apply; no source or plan reuse from rejected A0021.
