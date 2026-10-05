@@ -32,9 +32,11 @@ model computation and the CPU offload memory saving. Use fixed seeded
 random weights and input tokens; these experiments support performance and
 numerical equivalence claims, not language model quality claims.
 
-Final acceptance (user-confirmed): every one of the 16 fixed matrix and
+Final acceptance (user-confirmed, reaffirmed 2026-10-06): every one of the 16 fixed matrix and
 generation workloads must satisfy
 `T_offload - T_gpu <= max(0.01 * T_gpu, 0.1 ms)`.
+Use the larger of the relative and absolute allowances, with all latencies
+expressed in milliseconds (e.g. 5 ms GPU allows 0.1 ms extra; 20 ms allows 0.2 ms).
 For resident latency at or below 10 ms, the allowed extra latency is 0.1 ms;
 above 10 ms, it is 1% of that workload's matched resident latency. Each
 correctness-passing candidate must complete the full matrix screen. Final
