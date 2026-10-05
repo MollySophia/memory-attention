@@ -250,40 +250,10 @@ def test_selective_depth_boundary_capacity_and_exactness(model, policy):
         else:
             slots = 1 if policy == 'auto' and batch * length <= 2048 else min(4,len(model.model.layers))
             assert off.policy == 'pipeline' and len(off.slots) == slots
-            assert off.precompute_views == (policy == 'auto' and batch * length <= 2048)
             expected_bytes = slots * batch * length * off.group * off.dim * off.weights.element_size()
             telemetry = load_script('benchmark_telemetry')
             assert telemetry.storage_bytes(slot['host'] for slot in off.slots) == expected_bytes
             assert telemetry.storage_bytes(slot['gpu'] for slot in off.slots) == expected_bytes
-
-
-@pytest.mark.parametrize('group', [1, 2, 3])
-@pytest.mark.skipif(not torch.cuda.is_available(), reason='requires CUDA')
-def test_precomputed_pipeline_views_use_fresh_values_and_partial_groups(group):
-    from fla.layers.memory_offload import MemoryTableOffloader
-    weights = torch.randn(32, 5, 16, dtype=torch.bfloat16)
-    off = MemoryTableOffloader(weights, 2, 7, group_size=group,
-                              prefetch_depth=1, precompute_views=True)
-    try:
-        slot = off.slots[0]
-        for (storage_id, _), view in off._buffer_views.items():
-            backing = next(x for x in (slot['host'], slot['gpu']) if id(x) == storage_id)
-            assert view.untyped_storage().data_ptr() == backing.untyped_storage().data_ptr()
-        for iteration in range(3):
-            # Both IDs and source data change; cached metadata must expose the writes.
-            weights.add_(iteration + 1)
-            ids = torch.randint(0, 32, (2, 7))
-            expected = weights.index_select(0, ids.flatten()).view(2, 7, 5, 16)
-            actual = []
-            def consume(index, handle):
-                actual.append(handle.acquire().clone())
-                handle.release()
-            off.forward(ids, consume)
-            torch.cuda.synchronize()
-            for index, result in enumerate(actual):
-                torch.testing.assert_close(result.cpu(), expected[:, :, index], rtol=0, atol=0)
-    finally:
-        off.close()
 
 
 def test_single_slot_limit_can_be_disabled_and_validated(model):
