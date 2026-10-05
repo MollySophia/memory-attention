@@ -1,8 +1,8 @@
 {
   "campaign_id": "offload-gap-001",
   "status": "active",
-  "workflow_stage": "full_validation_running",
-  "goal_progress": "A0028 R01/R02 all184 raw results audited. Confirmed b8/512 prefill offload/gap gains under fixed Holm10; no selected-point resolved regressions. Remaining72 parent-paired processes then32 folding references and six correctness pairs are predeclared and running. Not accepted; verified retained source remains A0023.",
+  "workflow_stage": "folding_and_correctness_validation",
+  "goal_progress": "A0028 complete all16 three-block parent comparisons audited, no resolved regression or memory loss. Confirmed short-prefill gain; R04 folding and R05 correctness pending. Accepted source remains A0023.",
   "completed_optimization_verdicts": 27,
   "additional_completed_verdicts": 10,
   "additional_attempt_target": [
@@ -41,6 +41,6 @@
     "workloads_passing_parent_and_current": 1,
     "accepted_new_attempts": 0
   },
-  "active_manifest": "A0028/R03-remaining-confirmation/manifest.json",
+  "active_manifest": "A0028/R04-unfolded-reference/manifest.json",
   "continuation_completed_verdicts": 7
 }

@@ -1,0 +1,22 @@
+{
+  "attempt": "A0028",
+  "evidence_integrity": "passed",
+  "process_counts": {
+    "R01-complete-screen": 64,
+    "R02-parent-confirmation": 120,
+    "R03-remaining-confirmation": 72
+  },
+  "formal_workloads": 16,
+  "independent_blocks": 3,
+  "checks": [
+    "frozen sources",
+    "complete unique screening and formal coverage",
+    "no reused R02/R03 cells",
+    "balanced order",
+    "raw configuration/sampling/memory and single environment",
+    "identical recomputed full-matrix guards"
+  ],
+  "resolved_regressions": [],
+  "accepted": false,
+  "note": "Performance audit only; R04 folding and R05 full-model correctness still pending."
+}
