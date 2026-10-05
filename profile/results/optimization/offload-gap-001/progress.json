@@ -1,8 +1,8 @@
 {
   "campaign_id": "offload-gap-001",
   "status": "active",
-  "workflow_stage": "screening",
-  "goal_progress": "A0023 complete screen resumed pending62 jobs after configuration-driven memory audit repair; first2 raw results preserved, model/source/plan unchanged.",
+  "workflow_stage": "confirmation",
+  "goal_progress": "A0023 complete64-process screen audited; b1/b8 generation positive signals, independent9-workload108-process confirmation running.",
   "completed_optimization_verdicts": 22,
   "additional_completed_verdicts": 10,
   "additional_attempt_target": [
@@ -11,7 +11,7 @@
   ],
   "accepted_steps": 2,
   "active_attempt": "A0023",
-  "controller_pid": 3974359,
+  "controller_pid": 3991276,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "0ce6645eb4c4bc3992258ad0878c72ea3c37a64e",
   "final_report": "continuation-02/final/REPORT.md",
@@ -19,11 +19,11 @@
   "publication": "continuation-02/final/publication.json",
   "continuation": "continuation-03/manifest.json",
   "next_actions": [
-    "Complete A0023 full64-process screen",
-    "Run fixed independent confirmation and conditional full validation",
-    "Audit complete evidence before any retention",
-    "Integrate confirmed short-prefill opportunity on verified parent",
-    "Optimize remaining gaps and verify all16 final latency targets"
+    "Complete fixed A0023 independent confirmation",
+    "If eligible gain and no resolved regression, finish complete validation",
+    "Audit full evidence before retention",
+    "Integrate recovered short-prefill gain on verified transport parent",
+    "Optimize remaining all16 gaps and verify final tolerance"
   ],
   "supplemental_study": {
     "id": "supplemental-01",
@@ -42,6 +42,6 @@
     "workloads_passing_parent_and_current": 1,
     "accepted_new_attempts": 0
   },
-  "active_manifest": "A0023/R01-complete-screen/manifest.json",
+  "active_manifest": "A0023/R02-parent-confirmation/manifest.json",
   "continuation_completed_verdicts": 2
 }
