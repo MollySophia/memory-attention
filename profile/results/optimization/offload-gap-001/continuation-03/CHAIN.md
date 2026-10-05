@@ -1,6 +1,6 @@
-# Verified optimization chain through A0028
+# Verified optimization chain through A0030
 
-This evidence index records the verified implementation through accepted step 4.
+This evidence index records the verified implementation through accepted step 5.
 Later candidates do not change this chain until their complete retention gates
 pass. The overall all-workload near-GPU objective remains unmet.
 
@@ -11,9 +11,10 @@ pass. The overall all-workload near-GPU objective remains unmet.
 | 2 | A0016 | A0001 | Use one automatic pipeline slot through 2048 input tokens | [Incremental confirmation](../A0016/parent-confirmation-analysis.json), [cumulative A0000 confirmation](../A0016/validation-v3-confirmation-analysis.json), [verdict](../A0016/record.json) |
 | 3 | A0023 | A0016 | Read mapped host tables for bulk inputs of 1–16 tokens | [Incremental confirmation](../A0023/R02-parent-confirmation/analysis.json), [all-workload guards](../A0023/full-parent-analysis.json), [integrity and correctness audit](../A0023/final-evidence-audit.json), [verdict](../A0023/record.json) |
 | 4 | A0028 | A0023 | Share one host staging allocation at 4096–16384 input tokens, preserving four GPU slots | [Incremental confirmation](../A0028/R02-parent-confirmation/analysis.json), [all-workload guards](../A0028/full-parent-analysis.json), [integrity and correctness audit](../A0028/final-evidence-audit.json), [verdict](../A0028/record.json) |
+| 5 | A0030 | A0028 | Resolve offload metadata once per forward | [Confirmation](../A0030/R02-parent-confirmation/analysis.json), [all-workload guards](../A0030/full-parent-analysis.json), [integrity and correctness audit](../A0030/final-integrity-audit.json), [verdict](../A0030/record.json) |
 
-Exact implementation commits are in each record. The current verified A0028
-source is `6cc9354760ebde3bab9a90996a7713a936dfb439`. It retains the earlier
+Exact implementation commits are in each record. The current verified A0030
+source is `a9e5bda62a020e4e1994037732b0dbb7606d5dda`. It retains the earlier
 cutoff, selective single-slot and mapped policies, adding shared host staging
 without reducing GPU lookahead. Mapped lookup pins the complete
 3000 MiB host table, which is explicitly counted in the memory evidence.
@@ -67,8 +68,8 @@ tokens. These effects must not be added to results measured at other workloads.
 
 ## Latest findings and figures
 
-[A0030](../A0030/record.json) is undergoing full validation on A0028 after
-its complete64-process screen and fixed six-block240-process confirmation.
+[A0030](../A0030/record.json) is retained as step 5 on A0028 after its
+64-process screen, fixed six-block confirmation and complete validation.
 Its per-forward offload metadata/callback change now has two corrected local
 gains: batch-1 generation offload reduction10.4770ms (95%CI4.4593–16.4947),
 gap reduction14.4679ms (7.3746–21.5613), Holm10 p=0.02946; and
@@ -76,11 +77,10 @@ batch-8/context2048 decode offload reduction0.00999ms (0.00501–0.01498),
 gap reduction0.01363ms (0.00790–0.01937), p=0.01801.
 [Confirmation audit](../A0030/confirmation-audit.json) recomputed all240 raw
 means, paired statistics and decisions and checked unique balanced coverage,
-source/configuration/memory and one environment. No selected-point regression
-was resolved. Six remaining workloads require144 further formal processes,
-followed by folding and full-model correctness gates. A0030 is not yet a
-retained step; the verified chain remains through A0028. Selection data do not
-establish final independent near-GPU acceptance.
+source/configuration/memory and one environment. The remaining 144 formal processes and 32 folding references are complete.
+All 16 workloads have no resolved regression or memory loss; all 480 timing
+results and six bit-exact full-model pairs pass the final integrity audit.
+Selection data do not establish final independent near-GPU acceptance.
 
 Source `a9e5bda` passed56 regression tests and a standalone zero-difference
 correctness check. The six-block count was predeclared before measurements;
@@ -154,7 +154,7 @@ split across lines to avoid overlap as new attempts were added.
 
 ## Remaining final evidence
 
-Use accepted steps0–4 for the cumulative implementation figure, with a common
+Use accepted steps0–5 for the cumulative implementation figure, with a common
 frozen baseline and comparable protocols. Do not splice different candidates'
 best points into a fictional implementation. The final publication still needs
 fresh cumulative A0000 comparisons, updated final-source cumulative figures,

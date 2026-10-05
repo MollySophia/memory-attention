@@ -2,8 +2,8 @@
 
 Status: original campaign `offload-gap-001` and supplemental survey completed:
 20 attempts, two retained steps (A0001 and A0016). Current retained execution
-source is A0028 (`6cc9354760ebde3bab9a90996a7713a936dfb439`), accepted
-as step 4 after A0001, A0016 and A0023 in continuation-03. Editing this
+source is A0030 (`a9e5bda62a020e4e1994037732b0dbb7606d5dda`), accepted
+as step 5 after A0001, A0016, A0023 and A0028 in continuation-03. Editing this
 document alone does not launch measurements. The user has now authorized
 continuation-03: integrate the recovered local gains into a cumulative source
 chain, then optimize until offload approaches resident latency at every matrix

@@ -5,10 +5,10 @@
   "parent_attempt_id": "A0028",
   "parent_source_sha": "6cc9354760ebde3bab9a90996a7713a936dfb439",
   "parent_sha": "b95d471681813bd839749f9f50db1af9ebcbce91",
-  "accepted_step": null,
+  "accepted_step": 5,
   "label": "Resolve offload dispatch metadata once per forward",
-  "status": "testing",
-  "workflow_stage": "full_validation",
+  "status": "accepted",
+  "workflow_stage": "verdict",
   "hypothesis": "Remove repeated offload-only device/offloader/layer metadata discovery and dictionary callback state. Actual frozen offload loop with CPU stub layers costs35.356827us versus22.085108us for per-call resolved metadata; full-model benefit is unproven.",
   "change": "Use embedding weight device for offload input staging, pass the already resolved offloader into the offloaded stack, snapshot layer references once per forward, and use closure locals for evolving hidden/cache state. Preserve layer __call__ hooks, all output/cache semantics, producer/consumer order and transport policies. No compiled launcher or event changes.",
   "profile_evidence": [
@@ -1739,5 +1739,11 @@
       "candidate_target_residual_upper_one_sided_95_bonferroni16": 0.6065755177853869
     }
   ],
-  "validation_plan": "validation-plan.json"
+  "validation_plan": "validation-plan.json",
+  "finished_unix": 1791219167.6086028,
+  "independent_confirmation": "R02-parent-confirmation/analysis.json",
+  "full_parent_analysis": "full-parent-analysis.json",
+  "full_performance_audit": "remaining-audit.json",
+  "final_evidence_audit": "final-integrity-audit.json",
+  "verdict_reason": "Fixed six-block Holm10 confirmation establishes b8/context2048 decode and b1 generation offload/gap gains versus A0028. All16 paired workloads have no resolved offload/gap/resident regression and preserve GPU savings. All480 performance raws and six full-model bit-exact pairs pass audit. Retain per-forward metadata resolution as step5; final independent near-GPU acceptance remains unproven."
 }
