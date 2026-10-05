@@ -1,0 +1,2 @@
+actual_indexed_dict_loop 35.35682703368366
+resolved_per_call_metadata 22.085108195564576

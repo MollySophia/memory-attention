@@ -1,0 +1,101 @@
+{
+  "status": "cpu_dispatch_diagnostic_only",
+  "source": "/home/molly/workspace-memory-attn/offload-gap-001-A0028",
+  "source_commit": "6cc9354760ebde3bab9a90996a7713a936dfb439",
+  "modeling_sha256": "e267e9c3060083be692c0940cd7b0aa03de9ebb7b2a01f4137c303666471d9b8",
+  "helper_sha256": "761b65e369e99a68f8bde226e8a60b162d0f56e48ce1870dfe8c658b3749f76d",
+  "torch": "2.9.0+cu130",
+  "rows": [
+    {
+      "block": 1,
+      "method": "actual_indexed_dict_loop",
+      "iterations": 10000,
+      "us_per_call": 35.095305601134896
+    },
+    {
+      "block": 1,
+      "method": "resolved_per_call_metadata",
+      "iterations": 10000,
+      "us_per_call": 21.80952997878194
+    },
+    {
+      "block": 2,
+      "method": "resolved_per_call_metadata",
+      "iterations": 10000,
+      "us_per_call": 21.97350049391389
+    },
+    {
+      "block": 2,
+      "method": "actual_indexed_dict_loop",
+      "iterations": 10000,
+      "us_per_call": 35.28404990211129
+    },
+    {
+      "block": 3,
+      "method": "actual_indexed_dict_loop",
+      "iterations": 10000,
+      "us_per_call": 35.757592879235744
+    },
+    {
+      "block": 3,
+      "method": "resolved_per_call_metadata",
+      "iterations": 10000,
+      "us_per_call": 22.373364306986332
+    },
+    {
+      "block": 4,
+      "method": "resolved_per_call_metadata",
+      "iterations": 10000,
+      "us_per_call": 22.337960498407483
+    },
+    {
+      "block": 4,
+      "method": "actual_indexed_dict_loop",
+      "iterations": 10000,
+      "us_per_call": 35.33122902736068
+    },
+    {
+      "block": 5,
+      "method": "actual_indexed_dict_loop",
+      "iterations": 10000,
+      "us_per_call": 35.31727269291878
+    },
+    {
+      "block": 5,
+      "method": "resolved_per_call_metadata",
+      "iterations": 10000,
+      "us_per_call": 22.02444369904697
+    },
+    {
+      "block": 6,
+      "method": "resolved_per_call_metadata",
+      "iterations": 10000,
+      "us_per_call": 21.964914305135608
+    },
+    {
+      "block": 6,
+      "method": "actual_indexed_dict_loop",
+      "iterations": 10000,
+      "us_per_call": 35.10337183251977
+    },
+    {
+      "block": 7,
+      "method": "actual_indexed_dict_loop",
+      "iterations": 10000,
+      "us_per_call": 35.608967300504446
+    },
+    {
+      "block": 7,
+      "method": "resolved_per_call_metadata",
+      "iterations": 10000,
+      "us_per_call": 22.112044086679816
+    }
+  ],
+  "exactness": "Stub output/cache/hidden-state results match; replacing a layer between forwards is visible.",
+  "limitations": [
+    "Stub layers and offloader; no table lookup, CUDA work or whole-model performance evidence.",
+    "Measures combined per-call metadata discovery and callback bookkeeping hypothesis only.",
+    "Layer references are rebuilt every forward; no cross-call output/token cache.",
+    "Actual frozen offload loop is the comparator; production source is unchanged."
+  ]
+}

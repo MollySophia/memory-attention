@@ -1,0 +1,60 @@
+{
+  "status": "diagnostic_only",
+  "source_analysis": "../A0029/R02-parent-confirmation/analysis.json",
+  "blocks": [
+    {
+      "block": 1,
+      "baseline": {
+        "mean_ms": 598.9521483890712,
+        "sample_sd_ms": 1.9505684597402286,
+        "samples": 15,
+        "raw_path": "A0029/R02-parent-confirmation/B1-J041-baseline-generation-ma_offload-b1-l2048.json"
+      },
+      "candidate": {
+        "mean_ms": 601.419767892609,
+        "sample_sd_ms": 1.8981033390396227,
+        "samples": 15,
+        "raw_path": "A0029/R02-parent-confirmation/B1-J042-candidate-generation-ma_offload-b1-l2048.json"
+      },
+      "offload_reduction_ms": -2.467619503537776,
+      "descriptive_within_process_pair_mean_se_ms": 0.7027334061509022
+    },
+    {
+      "block": 2,
+      "baseline": {
+        "mean_ms": 604.5551455890139,
+        "sample_sd_ms": 1.7502993357239702,
+        "samples": 15,
+        "raw_path": "A0029/R02-parent-confirmation/B2-J056-baseline-generation-ma_offload-b1-l2048.json"
+      },
+      "candidate": {
+        "mean_ms": 599.0948603488505,
+        "sample_sd_ms": 1.5315210118141274,
+        "samples": 15,
+        "raw_path": "A0029/R02-parent-confirmation/B2-J055-candidate-generation-ma_offload-b1-l2048.json"
+      },
+      "offload_reduction_ms": 5.460285240163444,
+      "descriptive_within_process_pair_mean_se_ms": 0.6005055855562567
+    },
+    {
+      "block": 3,
+      "baseline": {
+        "mean_ms": 599.5614953028659,
+        "sample_sd_ms": 1.8931180935355345,
+        "samples": 15,
+        "raw_path": "A0029/R02-parent-confirmation/B3-J137-baseline-generation-ma_offload-b1-l2048.json"
+      },
+      "candidate": {
+        "mean_ms": 589.1080508008599,
+        "sample_sd_ms": 0.9970947933043501,
+        "samples": 15,
+        "raw_path": "A0029/R02-parent-confirmation/B3-J138-candidate-generation-ma_offload-b1-l2048.json"
+      },
+      "offload_reduction_ms": 10.453444502005937,
+      "descriptive_within_process_pair_mean_se_ms": 0.5524547729848578
+    }
+  ],
+  "between_block_reduction_sd_ms": 6.515842335859592,
+  "interpretation": "Run-level reduction spread exceeds within-process mean spread; more inner samples alone would not resolve it. Descriptive SE assumes inner-sample independence and is not acceptance evidence.",
+  "decision": "Preserve A0029 within_noise verdict. Predeclare six independent blocks for new A0030 hypothesis, without changing inner samples, gain correction or regression guards."
+}

@@ -1,0 +1,20 @@
+{
+  "status": "diagnostic_only",
+  "source_parent": "A0028",
+  "evidence": [
+    "../continuation-03/offload-dispatch-A0028-post29.json",
+    "../continuation-03/generation-A0028-offload-post28.json",
+    "../continuation-03/generation-variance-A0029.json"
+  ],
+  "observations": [
+    "Frozen-loop CPU stub dispatch35.356827 to22.085108us/call; output/cache/hidden-state parity and layer replacement visibility checked.",
+    "Prior real-generation profiler records repeated offloader/device discovery and ModuleList lookups, with instrumentation overhead.",
+    "A0029 process-level uncertainty dominates its inner-sample spread; its verdict remains within_noise."
+  ],
+  "next_hypothesis": "A0030 offload per-forward metadata resolution; six independent confirmation blocks predeclared before implementation or measurements.",
+  "limitations": [
+    "No new GPU measurement in this diagnostic.",
+    "No compiled-launcher integration or retrospective reclassification.",
+    "Future helper support for six blocks must preserve and re-audit historical three-block results before launch."
+  ]
+}

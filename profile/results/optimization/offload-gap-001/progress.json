@@ -1,8 +1,8 @@
 {
   "campaign_id": "offload-gap-001",
   "status": "active",
-  "workflow_stage": "diagnosis",
-  "goal_progress": "A0029 within_noise after208 audited raws; source reverted separately to exact verified A0028. Ledger/history/local findings now through A0029; A0028 scaling, memory, absolute/relative gap diagnostics rendered. Final all16 target still unproven; next profiling-supported optimization pending.",
+  "workflow_stage": "registered",
+  "goal_progress": "A0030 registered on verified A0028 after CPU dispatch diagnostic and A0029 variance review. Six independent confirmation blocks predeclared for the new hypothesis; helper support, implementation and full gates pending. A0029 remains within_noise and reverted; final target unmet.",
   "completed_optimization_verdicts": 29,
   "additional_completed_verdicts": 10,
   "additional_attempt_target": [
@@ -10,7 +10,7 @@
     10
   ],
   "accepted_steps": 4,
-  "active_attempt": null,
+  "active_attempt": "A0030",
   "controller_pid": null,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "6cc9354760ebde3bab9a90996a7713a936dfb439",
