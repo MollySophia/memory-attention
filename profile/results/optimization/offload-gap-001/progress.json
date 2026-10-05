@@ -1,8 +1,8 @@
 {
   "campaign_id": "offload-gap-001",
   "status": "active",
-  "workflow_stage": "screening",
-  "goal_progress": "A0025 single-slot view metadata optimization frozen after44 tests+standalone exactness; full64-process screen next. Retained parent A0023; short-prefill integration pending verified metadata verdict.",
+  "workflow_stage": "confirmation",
+  "goal_progress": "A0025 all64 screen results audited; b1 prefill/generation regression signals. Fixed8-workload96-process independent confirmation running, no verdict.",
   "completed_optimization_verdicts": 24,
   "additional_completed_verdicts": 10,
   "additional_attempt_target": [
@@ -11,7 +11,7 @@
   ],
   "accepted_steps": 3,
   "active_attempt": "A0025",
-  "controller_pid": null,
+  "controller_pid": 4140397,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "5f3d5958fea25f953bb91f5ef6f35880ff37fcfa",
   "final_report": "continuation-02/final/REPORT.md",
@@ -41,6 +41,6 @@
     "workloads_passing_parent_and_current": 1,
     "accepted_new_attempts": 0
   },
-  "active_manifest": "A0025/R01-complete-screen/manifest.json",
+  "active_manifest": "A0025/R02-parent-confirmation/manifest.json",
   "continuation_completed_verdicts": 4
 }
