@@ -556,5 +556,8 @@
     }
   ],
   "confirmation_decision": "Three confirmed gains (b1/b8 generation and b16 decode), no resolved regression among9 selected workloads. Not yet accepted; complete remaining7 paired workloads, folding references and full-model correctness.",
-  "validation_plan": "validation-plan.json"
+  "validation_plan": "validation-plan.json",
+  "full_parent_analysis": "full-parent-analysis.json",
+  "full_matrix_decision": "All16 parent-paired workloads complete across192 formal processes; no resolved offload/gap/resident regression and memory savings preserved. Source/environment/sampling/memory audit across256 screen+formal raw results passed. Folding/full-model correctness still pending.",
+  "candidate_gap_preview": "candidate-gap-preview.json"
 }
