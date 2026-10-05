@@ -300,24 +300,67 @@ def test_mapped_bulk_fresh_weights_cross_stream_and_host_lifetime(batch, ids_dev
         finally:off.close()
 
 
-def test_mapped_bulk_error_cleanup_and_cpu_bounds():
+@pytest.mark.parametrize('batch', [1, 8])
+def test_mapped_bulk_error_cleanup_and_cpu_bounds(batch):
     from fla.layers.memory_mapped_bulk import MappedBulkMemoryTableOffloader
     with torch.inference_mode():
         weights=torch.randn(17,3,64,dtype=torch.bfloat16).pin_memory()
         for invalid in (False,True):
-            off=MappedBulkMemoryTableOffloader(weights,8,1,'cuda')
+            off=MappedBulkMemoryTableOffloader(weights,batch,1,'cuda')
             try:
                 if invalid:
                     with pytest.raises(IndexError,match='out of range'):
-                        off.forward(torch.full((8,1),17),lambda *args:None)
+                        off.forward(torch.full((batch,1),17),lambda *args:None)
                 else:
                     def fail(*args):raise ValueError('consumer failure')
                     with pytest.raises(ValueError,match='consumer failure'):
-                        off.forward(torch.zeros((8,1),device='cuda',dtype=torch.long),fail)
+                        off.forward(torch.zeros((batch,1),device='cuda',dtype=torch.long),fail)
                 assert off.broken
                 with pytest.raises(RuntimeError,match='closed or failed'):
-                    off.forward(torch.zeros((8,1),dtype=torch.long),lambda *args:None)
+                    off.forward(torch.zeros((batch,1),dtype=torch.long),lambda *args:None)
             finally:off.close()
+
+
+def test_mapped_bulk_overlapping_callers_and_gather_only_completion():
+    from fla.layers.memory_mapped_bulk import MappedBulkMemoryTableOffloader
+    from fla.layers.memory_offload import PendingM
+    with torch.inference_mode():
+        weights = torch.randn(73, 5, 64, dtype=torch.bfloat16).pin_memory()
+        off = MappedBulkMemoryTableOffloader(weights, 1, 1, 'cuda')
+        streams = [torch.cuda.Stream(), torch.cuda.Stream()]
+        for stream in streams:
+            stream.wait_stream(torch.cuda.current_stream())
+        results = []
+        try:
+            for iteration in range(4):
+                ids = torch.tensor([[iteration + 1]])
+                expected = weights.index_select(0, ids.flatten()).clone()
+                values = []
+                with torch.cuda.stream(streams[iteration % 2]):
+                    def consume(layer, value):
+                        handle = value if isinstance(value, PendingM) else None
+                        if handle is not None:
+                            value = handle.acquire()
+                        # Last-layer read must still be pending when the next
+                        # caller on a different stream tries to reuse output.
+                        if layer == 4:
+                            torch.cuda._sleep(100000000)
+                        values.append(value.clone())
+                        if handle is not None:
+                            handle.release()
+                    off.forward(ids, consume)
+                    done = torch.cuda.Event()
+                    done.record()
+                assert not done.query(), 'forward synchronized consumer compute'
+                weights.add_(torch.tensor(.125, dtype=weights.dtype))
+                results.append((values, expected))
+            for stream in streams:
+                stream.synchronize()
+            for values, expected in results:
+                actual = torch.stack(values, dim=2).reshape(1, 5, 64).cpu()
+                torch.testing.assert_close(actual, expected, rtol=0, atol=0)
+        finally:
+            off.close()
 
 
 def test_mapped_bulk_model_selection_and_pinned_table_accounting(model):

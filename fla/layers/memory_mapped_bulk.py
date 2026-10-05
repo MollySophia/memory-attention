@@ -23,6 +23,19 @@ def _mapped_bulk_gather(table, ids, output, WIDTH: tl.constexpr,
     tl.store(output + row * WIDTH + column, values, mask=column < WIDTH)
 
 
+class _CallerStreamTicket(_BulkTicket):
+    def __init__(self, owner, stream):
+        super().__init__(owner)
+        self.stream = stream
+
+    def acquire(self, offset):
+        if offset == 0:
+            current = torch.cuda.current_stream(self.owner.device)
+            if current != self.stream:
+                current.wait_event(self.owner.copied)
+        return self.owner.values[offset]
+
+
 class MappedBulkMemoryTableOffloader:
     policy = "bulk"
     accepts_gpu_ids = True
@@ -61,19 +74,32 @@ class MappedBulkMemoryTableOffloader:
             raise ValueError("IDs must be int64 with the preallocated shape")
         if not self.lock.acquire(blocking=False):
             raise RuntimeError("concurrent forwards are unsupported")
+        gather_stream = self.copy_stream
+        gather_recorded = False
         try:
             if ids.device.type == "cpu" and (bool((ids < 0).any()) or bool((ids >= self.weights.shape[0]).any())):
                 raise IndexError("memory table index out of range")
             ids_gpu = ids.to(self.device, non_blocking=True).reshape(-1).contiguous()
-            self.copy_stream.wait_stream(torch.cuda.current_stream(self.device))
-            with torch.cuda.device(self.device), torch.cuda.stream(self.copy_stream):
+            if self.batch * self.seq_len == 1:
+                gather_stream = torch.cuda.current_stream(self.device)
                 if self.started:
-                    self.copy_stream.wait_event(self.consumed)
+                    gather_stream.wait_event(self.consumed)
                 width = self.layers * self.dim
-                _mapped_bulk_gather[(self.batch * self.seq_len, triton.cdiv(width, 512))](
+                _mapped_bulk_gather[(1, triton.cdiv(width, 512))](
                     self.weights, ids_gpu, self.gpu, width, self.weights.shape[0], 512, num_warps=4)
-                self.copied.record(self.copy_stream)
-            ticket = _BulkTicket(self)
+                self.copied.record(gather_stream)
+                ticket = _CallerStreamTicket(self, gather_stream)
+            else:
+                self.copy_stream.wait_stream(torch.cuda.current_stream(self.device))
+                with torch.cuda.device(self.device), torch.cuda.stream(self.copy_stream):
+                    if self.started:
+                        self.copy_stream.wait_event(self.consumed)
+                    width = self.layers * self.dim
+                    _mapped_bulk_gather[(self.batch * self.seq_len, triton.cdiv(width, 512))](
+                        self.weights, ids_gpu, self.gpu, width, self.weights.shape[0], 512, num_warps=4)
+                    self.copied.record(self.copy_stream)
+                ticket = _BulkTicket(self)
+            gather_recorded = True
             for layer in range(self.layers):
                 if layer == 0 or layer == self.layers - 1:
                     handle = PendingM(ticket, layer)
@@ -83,11 +109,17 @@ class MappedBulkMemoryTableOffloader:
                 else:
                     consume(layer, self.values[layer])
             # Preserve fresh CPU-table mutation and IDs lifetime semantics.
-            self.copy_stream.synchronize()
+            if self.batch * self.seq_len == 1:
+                self.copied.synchronize()
+            else:
+                self.copy_stream.synchronize()
             self.started = True
         except BaseException:
             self.broken = True
-            self.copy_stream.synchronize()
+            if gather_recorded and self.batch * self.seq_len == 1:
+                self.copied.synchronize()
+            else:
+                gather_stream.synchronize()
             raise
         finally:
             self.lock.release()
