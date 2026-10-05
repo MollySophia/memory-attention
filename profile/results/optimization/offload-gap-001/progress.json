@@ -1,8 +1,8 @@
 {
   "campaign_id": "offload-gap-001",
   "status": "active",
-  "workflow_stage": "diagnosis",
-  "goal_progress": "A0024 rejected: short-prefill gain confirmed2.57045ms, but b1 prefill resolved slowdown. Preserve evidence; restore verified A0023 and diagnose cumulative integration.",
+  "workflow_stage": "screening",
+  "goal_progress": "A0025 single-slot view metadata optimization frozen after44 tests+standalone exactness; full64-process screen next. Retained parent A0023; short-prefill integration pending verified metadata verdict.",
   "completed_optimization_verdicts": 24,
   "additional_completed_verdicts": 10,
   "additional_attempt_target": [
@@ -10,7 +10,7 @@
     10
   ],
   "accepted_steps": 3,
-  "active_attempt": null,
+  "active_attempt": "A0025",
   "controller_pid": null,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "5f3d5958fea25f953bb91f5ef6f35880ff37fcfa",
@@ -41,6 +41,6 @@
     "workloads_passing_parent_and_current": 1,
     "accepted_new_attempts": 0
   },
-  "active_manifest": null,
+  "active_manifest": "A0025/R01-complete-screen/manifest.json",
   "continuation_completed_verdicts": 4
 }

@@ -8,7 +8,7 @@
   "accepted_step": null,
   "label": "Precompute views for automatic single-slot pipeline",
   "status": "registered",
-  "workflow_stage": "correctness",
+  "workflow_stage": "screening",
   "hypothesis": "Remove repeated tensor metadata creation on producer/consumer threads for automatic single-slot pipeline. Current b1 diagnostic records96 buffer views totaling.216ms overlapping CPU time; independent full-model gain must be demonstrated.",
   "change": "Precompute immutable source and buffer/layer views only for automatic single-slot pipeline; preserve2048-token threshold, mapped1..16 and larger pipeline. Isolate metadata change before attempting short-prefill reintegration.",
   "profile_evidence": [
@@ -49,5 +49,15 @@
     "memory_offload_mapped_bulk_min_tokens": 1,
     "memory_offload_mapped_bulk_max_tokens": 16
   },
-  "created_unix": 1791178633.070012
+  "created_unix": 1791178633.070012,
+  "candidate_sha": "9778315be1e06335f0c1206ba136dce4a7c546da",
+  "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0025",
+  "correctness": {
+    "pytest": "44 passed in12.89s",
+    "standalone": "PASS; worst max difference0",
+    "logs": [
+      "correctness-tests.txt",
+      "standalone-correctness.txt"
+    ]
+  }
 }
