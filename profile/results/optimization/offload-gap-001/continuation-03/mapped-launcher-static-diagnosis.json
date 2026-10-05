@@ -1,0 +1,36 @@
+{
+  "status": "static_source_observation_only",
+  "created_unix": 1791190402.87851,
+  "parent_evidence": [
+    "generation-post26-diagnosis.json",
+    "mapped-spans-A0023-post26.json"
+  ],
+  "installed_source_files": [
+    {
+      "path": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/runtime/jit.py",
+      "sha256": "ea831e03e08675654c94a21e2e6917ada4b772e97f266c2ce141e7a6645ee16d"
+    },
+    {
+      "path": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/compiler/compiler.py",
+      "sha256": "c37149275a03d063fc1c339cd76a19da1c17e3d555410372e6cad29eedef6202"
+    }
+  ],
+  "observations": [
+    "JITFunction.run at runtime/jit.py:709 binds arguments, computes specialization key and checks used globals on every launch.",
+    "CompiledKernel.__getitem__ at compiler/compiler.py:498 creates a runner preserving runtime launch hooks but skipping JIT binding/cache dispatch.",
+    "Existing mapped offloader has fixed weights/output allocation and fixed shape per instance, but fresh IDs can have different pointer alignment."
+  ],
+  "hypothesis": "Retain A0023 copy-stream overlap and benchmark a compiled-kernel launcher to reduce per-call Python dispatch. This is distinct from A0027 caller-stream scheduling.",
+  "required_diagnostic": [
+    "Wait for all active GPU measurements to finish; do not overlap diagnostics.",
+    "Compare identical kernel arithmetic and streams, fresh input IDs and host-table mutation; measure CPU submit and synchronized wall time separately.",
+    "Control or key pointer-alignment specialization; never blindly reuse an aligned specialization for offset IDs.",
+    "Check exact outputs for changing IDs, changing host values and alternating caller streams; keep gather completion lifetime semantics.",
+    "Any candidate must be newly registered after A0027 verdict and pass correctness, complete64 screen and fixed independent confirmation."
+  ],
+  "limitations": [
+    "No GPU diagnostic has been run for this hypothesis.",
+    "No claimed speedup, accepted implementation change, cached output or cached token lookup.",
+    "Internal installed Triton interface may need explicit compatibility guard or ordinary-launch fallback."
+  ]
+}
