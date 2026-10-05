@@ -1,0 +1,61 @@
+{
+  "status": "diagnostic_only",
+  "results": [
+    {
+      "attempt": "A0016",
+      "wall_ms": 626.9549410790205,
+      "prefix_submission_ms": 26.781387627124786,
+      "decode_submission_mean_ms": 4.682588347350247,
+      "decode_process_cpu_mean_ms": 59.14247053125021,
+      "gc_events": [
+        {
+          "relative_ms": 371.53501715511084,
+          "phase": "start",
+          "info": {
+            "generation": 0,
+            "collected": 0,
+            "uncollectable": 0
+          }
+        },
+        {
+          "relative_ms": 371.5581111609936,
+          "phase": "stop",
+          "info": {
+            "generation": 0,
+            "collected": 0,
+            "uncollectable": 0
+          }
+        }
+      ]
+    },
+    {
+      "attempt": "A0022",
+      "wall_ms": 686.726788058877,
+      "prefix_submission_ms": 26.400848757475615,
+      "decode_submission_mean_ms": 5.152727768290788,
+      "decode_process_cpu_mean_ms": 62.39747748437468,
+      "gc_events": [
+        {
+          "relative_ms": 404.18719919398427,
+          "phase": "start",
+          "info": {
+            "generation": 0,
+            "collected": 0,
+            "uncollectable": 0
+          }
+        },
+        {
+          "relative_ms": 404.2130778543651,
+          "phase": "stop",
+          "info": {
+            "generation": 0,
+            "collected": 0,
+            "uncollectable": 0
+          }
+        }
+      ]
+    }
+  ],
+  "limitations": "One instrumented trajectory per source after2 full warmups; separate processes, not independent confirmation. CPU process time spans all threads; submission wall time includes waits, not per-token GPU latency.",
+  "next_question": "Separate ID D2H and CPU gather overhead from whole-table pinning. Existing mapped microbenchmark b1 adds~1.45us but excludes asynchronous model trajectory; profile mapped range expanded to1 before registering a new candidate."
+}
