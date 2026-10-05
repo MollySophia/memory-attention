@@ -1,8 +1,8 @@
 {
   "campaign_id": "offload-gap-001",
   "status": "active",
-  "workflow_stage": "diagnosis",
-  "goal_progress": "A0022 finalized rejected: b8 generation gain preserved, b1 generation regression blocks retention. Best remains A0016; diagnose before next attempt.",
+  "workflow_stage": "screening",
+  "goal_progress": "A0023 mapped bulk1..16 registered, frozen and correctness-passed; complete64-process screen running. Fixed sequential confirmation/validation queued, no automatic acceptance.",
   "completed_optimization_verdicts": 22,
   "additional_completed_verdicts": 10,
   "additional_attempt_target": [
@@ -10,8 +10,8 @@
     10
   ],
   "accepted_steps": 2,
-  "active_attempt": null,
-  "controller_pid": null,
+  "active_attempt": "A0023",
+  "controller_pid": 3972840,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "0ce6645eb4c4bc3992258ad0878c72ea3c37a64e",
   "final_report": "continuation-02/final/REPORT.md",
@@ -19,10 +19,11 @@
   "publication": "continuation-02/final/publication.json",
   "continuation": "continuation-03/manifest.json",
   "next_actions": [
-    "Commit A0022 evidence and restore A0016 in separate source commit",
-    "Diagnose b1 generation regression and mapped transport scope",
-    "Integrate verified mapped and short-prefill gains in a new tested chain",
-    "Independently verify all16 latency targets and deliver complete figures"
+    "Complete A0023 full64-process screen",
+    "Run fixed independent confirmation and conditional full validation",
+    "Audit complete evidence before any retention",
+    "Integrate confirmed short-prefill opportunity on verified parent",
+    "Optimize remaining gaps and verify all16 final latency targets"
   ],
   "supplemental_study": {
     "id": "supplemental-01",
@@ -41,6 +42,6 @@
     "workloads_passing_parent_and_current": 1,
     "accepted_new_attempts": 0
   },
-  "active_manifest": null,
+  "active_manifest": "A0023/R01-complete-screen/manifest.json",
   "continuation_completed_verdicts": 2
 }
