@@ -680,3 +680,7 @@ Campaign offload-gap-001, verified parent A0023. Isolate b1 mapped scheduling af
 ### A0027 implementation and correctness
 
 Frozen candidate `700f5f8` on A0023 uses the caller stream only for one total mapped input token. Previous-consumed event protects reuse; gather event completion protects fresh host mutation and IDs lifetime without waiting for consumer compute. Other mapped shapes retain the copy stream. 43 tests passed in12.98s, including delayed last-layer consumers across alternating streams; standalone worst difference0. Candidate correctness logs are in A0027. Full64-process screen and fixed independent nomination rules remain required; no performance claim yet.
+
+### A0027 complete screen and frozen independent confirmation
+
+All64 screen processes completed and source/configuration/sampling/memory/environment audits passed. Changed b1 decode offload reduction0.049087ms but gap reduction-0.030371ms; b1 generation offload/gap reductions-4.968814/-5.322337ms are adverse screening observations below the fixed1% nomination trigger. Other unchanged paths show screen gains; do not attribute them to one-token stream scheduling without formal evidence. Fixed nomination union has7 workloads including all4 original primary controls;84 new processes,3 balanced blocks, Holm family7, estimated2064.81s. Exact union and source signatures rechecked; no extension or acceptance based on screen.

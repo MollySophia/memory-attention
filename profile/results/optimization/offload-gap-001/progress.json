@@ -1,8 +1,8 @@
 {
   "campaign_id": "offload-gap-001",
   "status": "active",
-  "workflow_stage": "complete_screen_running",
-  "goal_progress": "A0027 frozen700f5f8 complete64-process screen running; observer will freeze independent confirmation union after complete screen.43 correctness tests and standalone exactness passed. Current verified implementation remainsA0023.",
+  "workflow_stage": "parent_confirmation_running",
+  "goal_progress": "A0027 complete64 screen audited;7workload84process independent confirmation running. Changed b1 targets lack positive dual screen evidence. No acceptance; verified sourceA0023.",
   "completed_optimization_verdicts": 26,
   "additional_completed_verdicts": 10,
   "additional_attempt_target": [
@@ -11,7 +11,7 @@
   ],
   "accepted_steps": 3,
   "active_attempt": "A0027",
-  "controller_pid": 53206,
+  "controller_pid": 71576,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "5f3d5958fea25f953bb91f5ef6f35880ff37fcfa",
   "final_report": "continuation-02/final/REPORT.md",
@@ -41,6 +41,6 @@
     "workloads_passing_parent_and_current": 1,
     "accepted_new_attempts": 0
   },
-  "active_manifest": "A0027/R01-complete-screen/manifest.json",
+  "active_manifest": "A0027/R02-parent-confirmation/manifest.json",
   "continuation_completed_verdicts": 6
 }

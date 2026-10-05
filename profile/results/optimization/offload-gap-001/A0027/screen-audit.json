@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "raw_results": 64,
+  "workloads": 16,
+  "source_signatures": {
+    "baseline": {
+      "attempt": "A0023",
+      "root": "/home/molly/workspace-memory-attn/offload-gap-001-A0023",
+      "commit": "5f3d5958fea25f953bb91f5ef6f35880ff37fcfa",
+      "source_sha256": "f814b29a0e08503e2fa4ba56c1434f4056a76ea30bb35dd96173eaa3a0795285"
+    },
+    "candidate": {
+      "attempt": "A0027",
+      "root": "/home/molly/workspace-memory-attn/offload-gap-001-A0027",
+      "commit": "700f5f81a2e2b798d11e323c7508f4010d28ed53",
+      "source_sha256": "5a7a83999143929b2f2584e4c034612726b567e0f918deafea627d0b807dfb1e"
+    }
+  },
+  "confirmation_jobs": 84,
+  "nomination_rule_recomputed": true,
+  "fixed_gain_family": 7,
+  "balanced_order_validated": true,
+  "screen_data_excluded_from_confirmation": true,
+  "accepted": false
+}
