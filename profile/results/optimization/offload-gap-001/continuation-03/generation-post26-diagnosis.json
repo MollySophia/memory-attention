@@ -1,0 +1,54 @@
+{
+  "campaign_id": "offload-gap-001",
+  "purpose": "Post-A0026 diagnostic only; does not reopen verdict or establish performance gain",
+  "generation_diagnostics": [
+    {
+      "attempt": "A0023",
+      "source_sha": "5f3d5958fea25f953bb91f5ef6f35880ff37fcfa",
+      "raw": "generation-A0023-post26.json",
+      "wall_ms": 596.9449519179761,
+      "prefix_submission_ms": 26.428846642374992,
+      "mean_decode_submission_ms": 4.452601464436157,
+      "trace_categories": [
+        "Trace",
+        "cpu_op"
+      ]
+    },
+    {
+      "attempt": "A0026",
+      "source_sha": "315478c7cf22fc12429d877c11fe6aab99b8833a",
+      "raw": "generation-A0026-post26.json",
+      "wall_ms": 595.9644028916955,
+      "prefix_submission_ms": 26.360612362623215,
+      "mean_decode_submission_ms": 4.4456467403506394,
+      "trace_categories": [
+        "Trace",
+        "cpu_op"
+      ]
+    }
+  ],
+  "mapped_scheduling_diagnostic": {
+    "raw": "mapped-spans-A0023-post26.json",
+    "calls": 128,
+    "mean_cpu_spans_ms": {
+      "total_ms": 4.38907675,
+      "consumer_ms": 4.32901303125,
+      "before_first_consumer_ms": 0.0475554765625,
+      "after_last_consumer_ms": 0.0046543671875,
+      "nonconsumer_ms": 0.06006371875
+    }
+  },
+  "findings": [
+    "Single diagnostic trajectories do not reproduce A0026 formal generation regression; retain formal adverse evidence. b1 uses same single-slot prefix and mapped decode branches in both sources.",
+    "GC spans about0.022ms cannot account for formal7.873ms regression.",
+    "CUDA profiler events unavailable: traces contain CPU operators only. No GPU kernel timing claim.",
+    "Mapped nonconsumer CPU spans average0.060064ms per decode; before-first-consumer portion0.047555ms. Includes GPU dependencies and Python dispatch, not all removable time."
+  ],
+  "next_hypothesis": "For b1 mapped lookup only, enqueue gather on caller compute stream to remove copy-stream entry/context and first-layer cross-stream dependency. Preserve prior-consumed wait for cross-stream forwards and synchronize a gather-completion event before returning so CPU weights and IDs lifetime remain safe. Isolate this scheduling candidate on A0023 before integrating shared-host prefill gains.",
+  "risks": [
+    "Loss of gather/QK overlap may outweigh dispatch reduction",
+    "Must wait only gather completion at return, not synchronize whole compute stream",
+    "Shared GPU output cannot be overwritten before previous consumers, including changed caller streams",
+    "Requires new candidate registration, exactness and complete64-process screen plus fixed independent gates"
+  ]
+}

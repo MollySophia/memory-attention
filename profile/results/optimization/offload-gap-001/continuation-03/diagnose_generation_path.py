@@ -8,6 +8,7 @@ p=argparse.ArgumentParser(description=__doc__)
 p.add_argument('--source-root',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
 p.add_argument('--mapped-min-tokens',type=int,default=None)
 p.add_argument('--profile',action='store_true')
+p.add_argument('--mapped-spans',action='store_true',help='Instrument mapped scheduling excluding layer consumers; diagnostic only')
 a=p.parse_args();root=a.source_root.resolve();sys.path[:0]=[str(root/'profile'),str(root)]
 import torch
 from bench_fla import build,env_fingerprint
@@ -29,13 +30,34 @@ with torch.inference_mode():
   return output
  for _ in range(2):trajectory()
  torch.cuda.synchronize()
+ mapped_spans=[];mapped_original=None
+ if a.mapped_spans:
+  from fla.layers.memory_mapped_bulk import MappedBulkMemoryTableOffloader
+  mapped_original=MappedBulkMemoryTableOffloader.forward
+  def mapped_traced(self,ids,consume):
+   calls=[]
+   def traced_consume(layer,value):
+    begin=time.perf_counter_ns()
+    try:return consume(layer,value)
+    finally:calls.append((begin,time.perf_counter_ns()))
+   begin=time.perf_counter_ns()
+   result=mapped_original(self,ids,traced_consume)
+   end=time.perf_counter_ns()
+   mapped_spans.append(dict(total_ms=(end-begin)/1e6,consumer_ms=sum(y-x for x,y in calls)/1e6,
+                            before_first_consumer_ms=(calls[0][0]-begin)/1e6,
+                            after_last_consumer_ms=(end-calls[-1][1])/1e6,
+                            nonconsumer_ms=((end-begin)-sum(y-x for x,y in calls))/1e6))
+   return result
+  MappedBulkMemoryTableOffloader.forward=mapped_traced
  wall=[0.]*129;cpu=[0.]*129;events=[]
  def callback(phase,info):events.append((time.perf_counter(),phase,dict(info)))
  gc.callbacks.append(callback)
  start=time.perf_counter();output=trajectory(wall,cpu);torch.cuda.synchronize();elapsed=(time.perf_counter()-start)*1000
  gc.callbacks.remove(callback)
+ if mapped_original is not None:MappedBulkMemoryTableOffloader.forward=mapped_original
  payload=dict(campaign_id='offload-gap-001',purpose='diagnostic only; CPU submission includes stream waits; not isolated per-token GPU time',command=sys.argv,source=source_state(),env=env_fingerprint(),environment=environment_details(),helper_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),model_config=model.config.to_dict(),warmup_trajectories=2,measured_trajectories=1,wall_ms=elapsed,call_wall_ms=wall,call_process_cpu_ms=cpu,gc_events=[dict(relative_ms=(t-start)*1000,phase=phase,info=info) for t,phase,info in events])
  a.output.parent.mkdir(parents=True,exist_ok=True)
+ if a.mapped_spans:payload['mapped_spans']=mapped_spans
  if a.profile:
   with torch.profiler.profile(activities=[torch.profiler.ProfilerActivity.CPU,torch.profiler.ProfilerActivity.CUDA]) as prof:
    for token in tokens[:4]:
