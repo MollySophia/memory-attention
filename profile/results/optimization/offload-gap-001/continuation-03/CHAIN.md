@@ -52,6 +52,11 @@ tokens. These effects must not be added to results measured at other workloads.
 
 ## Figure inputs and remaining evidence
 
+The [complete ledger through A0026](ledger-through-A0026/LEDGER.md) preserves
+all 26 finalized attempts and the A0000 baseline, with full record snapshots
+in JSON and an index in CSV. Active candidates remain outside that finalized
+snapshot until their verdict is recorded.
+
 Use accepted steps 0–3 for the cumulative implementation figure. Use separate
 workload panels for the recovered, nonretained local gains, retaining their
 named comparator, intervals and adverse findings. Do not splice the fastest
