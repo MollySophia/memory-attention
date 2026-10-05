@@ -32,6 +32,15 @@ model computation and the CPU offload memory saving. Use fixed seeded
 random weights and input tokens; these experiments support performance and
 numerical equivalence claims, not language model quality claims.
 
+Final acceptance (user-confirmed): every one of the 16 fixed matrix and
+generation workloads must satisfy
+`T_offload - T_gpu <= max(0.01 * T_gpu, 0.1 ms)`.
+For resident latency at or below 10 ms, the allowed extra latency is 0.1 ms;
+above 10 ms, it is 1% of that workload's matched resident latency. Each
+correctness-passing candidate must complete the full matrix screen. Final
+acceptance additionally requires independent paired repeats and the simultaneous
+confidence-bound criterion specified below; a screening mean is insufficient.
+
 Primary target: ma_offload. Keep a frozen ma_offload implementation as the
 optimization baseline, and ma_gpu as the folded resident placement reference.
 Use ma_gpu_unfolded to measure the norm-folding contribution separately.
@@ -482,7 +491,8 @@ unchanged code do not count as new optimization attempts. Each retained step req
 confirmation, regression and memory gates. Do not substitute generic model
 optimizations or superficial edits to reach the count. If offload-specific
 opportunities are exhausted, report the evidence and the unmet target honestly.
-No numeric speedup target or total runtime budget has been set. Before launching
+No additional speedup target or total runtime budget has been set beyond the
+per-workload near-GPU acceptance criterion above. Before launching
 an expensive matrix, record the job count and estimated cost from measured
 latencies, including warmup trajectories and per-process setup. These are
 planning estimates, not permission gates or timeouts for live jobs.
