@@ -460,10 +460,19 @@ fictional final implementation.
 The original target was 5–10 focused, profiling-supported attempts; the completed
 original campaign contains 20 attempts and two retained steps. Continuation-03
 is now authorized without a fixed attempt cap; completing another bounded batch
-does not satisfy its all-workload latency objective. The final near-GPU tolerance
-must be recorded explicitly, as max(1% of matched resident latency, 0.1 ms), confirmed by the user,
-with independent uncertainty assessed at all 16
-workloads; a small observed mean alone is insufficient. Future attempt counts
+does not satisfy its all-workload latency objective. The user-confirmed final
+near-GPU criterion applies separately to all 16 workloads, including generation:
+`T_offload - T_gpu <= max(0.01 * T_gpu, 0.1 ms)`.
+Use matched resident latency for each workload, not a matrix-wide average.
+Freeze the final independent paired-repeat plan before collecting its results;
+do not use screening or candidate-selection observations as final confirmation.
+For each independent pair, compute the signed residual
+`T_offload - T_gpu - max(0.01 * T_gpu, 0.1 ms)` and assess its uncertainty.
+Require the simultaneous one-sided 95% upper confidence bounds across all 16
+workloads (Bonferroni correction over the fixed family of 16) to be at most zero.
+A favorable mean or an inconclusive bound does not establish equivalence.
+Report every workload's latency, gap, tolerance and residual bound; no missing
+or failing workload can be offset by a gain elsewhere. Future attempt counts
 are not a required number of accepted improvements. Preserve every
 attempt, including failures, reversions and within_noise results, with its implementation, evidence and
 verdict. Rejected, noisy or failed attempts count toward the attempt target
