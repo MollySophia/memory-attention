@@ -6,11 +6,16 @@ from pathlib import Path
 from types import SimpleNamespace
 p=argparse.ArgumentParser(description=__doc__)
 p.add_argument('--source-root',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
+p.add_argument('--variant',choices=('ma_offload','ma_gpu'),default='ma_offload',
+               help='Compare offload with the same folded resident reference; diagnostic only')
 p.add_argument('--mapped-min-tokens',type=int,default=None)
 p.add_argument('--profile',action='store_true')
 p.add_argument('--python-profile',action='store_true',help='Profile Python call overhead in four additional decode calls; diagnostic only')
 p.add_argument('--mapped-spans',action='store_true',help='Instrument mapped scheduling excluding layer consumers; diagnostic only')
-a=p.parse_args();root=a.source_root.resolve();sys.path[:0]=[str(root/'profile'),str(root)]
+a=p.parse_args()
+if a.variant == 'ma_gpu' and (a.mapped_min_tokens is not None or a.mapped_spans):
+ p.error('Mapped-path overrides/instrumentation require ma_offload')
+root=a.source_root.resolve();sys.path[:0]=[str(root/'profile'),str(root)]
 import torch
 from bench_fla import build,env_fingerprint
 from benchmark_telemetry import source_state,environment_details
@@ -18,7 +23,10 @@ args=SimpleNamespace(seed=1234,hidden_size=2048,num_layers=24,num_heads=32,num_k
 with torch.inference_mode():
  model=build(args)
  if a.mapped_min_tokens is not None:model.config.memory_offload_mapped_bulk_min_tokens=a.mapped_min_tokens
- model.enable_memory_offload();model.set_offload_offloader(1,2048);model.set_offload_offloader(1,1)
+ if a.variant == 'ma_offload':
+  model.enable_memory_offload();model.set_offload_offloader(1,2048);model.set_offload_offloader(1,1)
+ else:
+  model.fold_memory_table_on_gpu(dtype=torch.bfloat16)
  torch.manual_seed(1235);prefix=torch.randint(0,32000,(1,2048),device='cuda');tokens=torch.randint(0,32000,(128,1,1),device='cuda').unbind()
  def trajectory(wall=None,cpu=None):
   output=None
@@ -58,6 +66,7 @@ with torch.inference_mode():
  if mapped_original is not None:MappedBulkMemoryTableOffloader.forward=mapped_original
  payload=dict(campaign_id='offload-gap-001',purpose='diagnostic only; CPU submission includes stream waits; not isolated per-token GPU time',command=sys.argv,source=source_state(),env=env_fingerprint(),environment=environment_details(),helper_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),model_config=model.config.to_dict(),warmup_trajectories=2,measured_trajectories=1,wall_ms=elapsed,call_wall_ms=wall,call_process_cpu_ms=cpu,gc_events=[dict(relative_ms=(t-start)*1000,phase=phase,info=info) for t,phase,info in events])
  a.output.parent.mkdir(parents=True,exist_ok=True)
+ payload['variant']=a.variant
  if a.mapped_spans:payload['mapped_spans']=mapped_spans
  if a.profile:
   with torch.profiler.profile(activities=[torch.profiler.ProfilerActivity.CPU,torch.profiler.ProfilerActivity.CUDA]) as prof:
@@ -79,4 +88,5 @@ with torch.inference_mode():
   payload['python_profile_scope']='Four additional growing decode calls; instrumentation perturbs Python cost; excluded from wall_ms'
   payload['python_profile']=[dict(file=key[0],line=key[1],function=key[2],primitive_calls=value[0],calls=value[1],self_ms=value[2]*1000,cumulative_ms=value[3]*1000)
                              for key,value in sorted(stats.stats.items(),key=lambda item:item[1][2],reverse=True)]
- a.output.write_text(json.dumps(payload,indent=2)+'\n');model.close_memory_offload()
+ a.output.write_text(json.dumps(payload,indent=2)+'\n')
+ if a.variant == 'ma_offload':model.close_memory_offload()
