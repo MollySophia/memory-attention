@@ -43,6 +43,16 @@ These comparisons identify an integration opportunity, not its cause or a
 retained cumulative benefit. The [raw-evidence audit](../A0026/evidence-integrity.json)
 checks all 64 screen and 144 independent confirmation processes.
 
+[A0027](../A0027/record.json) tested caller-stream mapped gather for one token.
+Its 64-process screen and 84-process independent confirmation found no
+corrected gain. Batch-8 generation slowed by 0.2363 ms (95% CI
+0.0727–0.4000 ms), failing the signed regression guard; the gap and resident
+changes remained unresolved. This does not identify the cause: the one-token
+branch is inactive at batch 8. The candidate was reverted after its
+[148-result audit](../A0027/evidence-integrity.json). A0023 remains the verified
+source. [A0028](../A0028/record.json) is testing a separate, profiling-supported
+extension of A0026's shared-host range to 16384 tokens; it is not retained.
+
 A0023's independently confirmed incremental offload reductions are 27.9865 ms
 for batch-1 generation, 30.8881 ms for batch-8 generation, and 0.1010 ms for
 batch-16/context-2048 decode. These refer to matched A0016 comparisons; the
@@ -52,8 +62,8 @@ tokens. These effects must not be added to results measured at other workloads.
 
 ## Figure inputs and remaining evidence
 
-The [complete ledger through A0026](ledger-through-A0026/LEDGER.md) preserves
-all 26 finalized attempts and the A0000 baseline, with full record snapshots
+The [complete ledger through A0027](ledger-through-A0027/LEDGER.md) preserves
+all 27 finalized attempts and the A0000 baseline, with full record snapshots
 in JSON and an index in CSV. Active candidates remain outside that finalized
 snapshot until their verdict is recorded.
 

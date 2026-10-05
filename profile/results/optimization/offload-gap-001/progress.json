@@ -1,8 +1,8 @@
 {
   "campaign_id": "offload-gap-001",
   "status": "active",
-  "workflow_stage": "preparing_complete_screen",
-  "goal_progress": "A0028 shared-host staging4096..16384 implemented/frozen6cc9354;46 correctness tests,31 sampling/helpers,standalone exactness pass. Preparing fresh64-process screen against verifiedA0023.",
+  "workflow_stage": "complete_screen_running",
+  "goal_progress": "A0028 frozen6cc9354 complete64-process screen running.46 correctness,31 sampling/helpers and standalone exactness passed. Current verified retained source remainsA0023.",
   "completed_optimization_verdicts": 27,
   "additional_completed_verdicts": 10,
   "additional_attempt_target": [
@@ -11,7 +11,7 @@
   ],
   "accepted_steps": 3,
   "active_attempt": "A0028",
-  "controller_pid": null,
+  "controller_pid": 105529,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "5f3d5958fea25f953bb91f5ef6f35880ff37fcfa",
   "final_report": "continuation-02/final/REPORT.md",
