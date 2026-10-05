@@ -1,0 +1,1 @@
+{"buffer_view": {"count": 96, "sum_ms": 0.549876}, "gather": {"count": 24, "sum_ms": 18.071076}, "producer_dma_sync": {"count": 24, "sum_ms": 15.879356}, "producer_release_wait": {"count": 24, "sum_ms": 1.450279}, "ticket_setup": {"count": 24, "sum_ms": 0.032098}}

@@ -1,0 +1,191 @@
+{
+  "status": "diagnostic_only",
+  "purpose": "A0024 short-prefill integration versus A0023; no optional acceptance retesting",
+  "rows": [
+    {
+      "file": "pipeline-A0023-b1-l2048.json",
+      "batch": 1,
+      "length": 2048,
+      "wall_ms": 29.04874598607421,
+      "summary": {
+        "buffer_view": {
+          "count": 96,
+          "sum_ms": 0.216305
+        },
+        "gather": {
+          "count": 24,
+          "sum_ms": 2.783644
+        },
+        "producer_dma_sync": {
+          "count": 24,
+          "sum_ms": 21.112280000000002
+        },
+        "producer_release_wait": {
+          "count": 24,
+          "sum_ms": 1.452553
+        },
+        "ticket_setup": {
+          "count": 24,
+          "sum_ms": 0.035916
+        }
+      },
+      "source": {
+        "source_sha256": "f814b29a0e08503e2fa4ba56c1434f4056a76ea30bb35dd96173eaa3a0795285",
+        "git_commit": {
+          "returncode": 0,
+          "stdout": "5f3d5958fea25f953bb91f5ef6f35880ff37fcfa\n",
+          "stderr": ""
+        },
+        "git_status": {
+          "returncode": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        "source_patch": {
+          "returncode": 0,
+          "stdout": "",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "file": "pipeline-A0023-b8-l512.json",
+      "batch": 8,
+      "length": 512,
+      "wall_ms": 55.283868219703436,
+      "summary": {
+        "buffer_view": {
+          "count": 96,
+          "sum_ms": 0.549876
+        },
+        "gather": {
+          "count": 24,
+          "sum_ms": 18.071076
+        },
+        "producer_dma_sync": {
+          "count": 24,
+          "sum_ms": 15.879356
+        },
+        "producer_release_wait": {
+          "count": 24,
+          "sum_ms": 1.450279
+        },
+        "ticket_setup": {
+          "count": 24,
+          "sum_ms": 0.032098
+        }
+      },
+      "source": {
+        "source_sha256": "f814b29a0e08503e2fa4ba56c1434f4056a76ea30bb35dd96173eaa3a0795285",
+        "git_commit": {
+          "returncode": 0,
+          "stdout": "5f3d5958fea25f953bb91f5ef6f35880ff37fcfa\n",
+          "stderr": ""
+        },
+        "git_status": {
+          "returncode": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        "source_patch": {
+          "returncode": 0,
+          "stdout": "",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "file": "pipeline-A0024-b1-l2048.json",
+      "batch": 1,
+      "length": 2048,
+      "wall_ms": 29.124439228326082,
+      "summary": {
+        "buffer_view": {
+          "count": 96,
+          "sum_ms": 0.252602
+        },
+        "gather": {
+          "count": 24,
+          "sum_ms": 2.810829
+        },
+        "producer_dma_sync": {
+          "count": 24,
+          "sum_ms": 20.815098
+        },
+        "producer_release_wait": {
+          "count": 24,
+          "sum_ms": 1.425783
+        },
+        "ticket_setup": {
+          "count": 24,
+          "sum_ms": 0.027703000000000002
+        }
+      },
+      "source": {
+        "source_sha256": "d70d4bf8bcaf3a9514bf56f385a6e1953907065086dc70f869ca47f8576ecd11",
+        "git_commit": {
+          "returncode": 0,
+          "stdout": "e6f4f361dbbafd5c2bd1836ded4acdca0fb095a0\n",
+          "stderr": ""
+        },
+        "git_status": {
+          "returncode": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        "source_patch": {
+          "returncode": 0,
+          "stdout": "",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "file": "pipeline-A0024-b8-l512.json",
+      "batch": 8,
+      "length": 512,
+      "wall_ms": 52.555987145751715,
+      "summary": {
+        "buffer_view": {
+          "count": 96,
+          "sum_ms": 0.228792
+        },
+        "gather": {
+          "count": 24,
+          "sum_ms": 5.399728
+        },
+        "producer_dma_sync": {
+          "count": 24,
+          "sum_ms": 39.085986
+        },
+        "producer_release_wait": {
+          "count": 24,
+          "sum_ms": 1.465046
+        },
+        "ticket_setup": {
+          "count": 24,
+          "sum_ms": 0.031961
+        }
+      },
+      "source": {
+        "source_sha256": "d70d4bf8bcaf3a9514bf56f385a6e1953907065086dc70f869ca47f8576ecd11",
+        "git_commit": {
+          "returncode": 0,
+          "stdout": "e6f4f361dbbafd5c2bd1836ded4acdca0fb095a0\n",
+          "stderr": ""
+        },
+        "git_status": {
+          "returncode": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        "source_patch": {
+          "returncode": 0,
+          "stdout": "",
+          "stderr": ""
+        }
+      }
+    }
+  ],
+  "limitations": "One instrumented call after10 warmups per frozen implementation/workload. CPU spans overlap GPU work and one another; not additive removable latency. No causal attribution of b1 formal regression from identical b1 execution path."
+}
