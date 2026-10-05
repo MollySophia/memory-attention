@@ -32,14 +32,22 @@ def attempts(root):
         assert record['campaign_id']=='offload-gap-001'
         summary=directory/record.get('screen_summary','R01-summary.json')
         rows=json.loads(summary.read_text())['rows'] if summary.exists() else []
-        rows={(r['mode'],r['batch']):r for r in rows if r['length']==2048 and r['batch'] in (1,8)}
+        rows={(r['mode'],r['batch']):r for r in rows
+              if r['length']==2048 and (r['mode'],r['batch']) in WORKLOADS
+              and 'offload_ms' in r and 'measurement_plan_id' in r}
         # A valid offload timing belongs in history even if its resident
         # partner failed and therefore no matched gap summary was possible.
         manifest_path=directory/record.get('screen_manifest','R01/manifest.json')
         if manifest_path.exists():
             manifest=json.loads(manifest_path.read_text())
             for job in manifest['jobs']:
-                if job['status']!='completed' or job['variant']!='ma_offload' or job['batch'] not in (1,8) or job['length']!=2048:
+                # Continuation screens contain both parent and candidate jobs
+                # in alternating order. History belongs to the named candidate.
+                if job.get('implementation', 'candidate') != 'candidate':
+                    continue
+                if job.get('attempt', record['attempt_id']) != record['attempt_id']:
+                    continue
+                if job['status']!='completed' or job['variant']!='ma_offload' or (job['mode'],job['batch']) not in WORKLOADS or job['length']!=2048:
                     continue
                 raw=manifest_path.parent/(job['name']+'.json')
                 payload=json.loads(raw.read_text())
@@ -162,9 +170,12 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--campaign',type=Path,default=Path(__file__).resolve().parent)
     p.add_argument('--output',type=Path,required=True)
+    p.add_argument('--through',help='Last attempt ID to include in this snapshot')
+    p.add_argument('--history-only',action='store_true',help='Export screening history without requiring cumulative A0000 confirmation')
     args=p.parse_args();args.output.mkdir(parents=True,exist_ok=True)
     entries=attempts(args.campaign)
-    sources=dict(history=history(entries,args.output),accepted_steps=accepted_steps(entries,args.output),
+    if args.through:entries=[e for e in entries if e['record']['attempt_id']<=args.through]
+    sources=dict(history=history(entries,args.output),accepted_steps=[] if args.history_only else accepted_steps(entries,args.output),
                  records=[e['record'] for e in entries])
     (args.output/'history-source.json').write_text(json.dumps(sources,indent=2)+'\n')
     for name in ('history','accepted_steps'):

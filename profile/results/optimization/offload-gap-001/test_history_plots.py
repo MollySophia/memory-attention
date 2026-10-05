@@ -46,3 +46,28 @@ def test_valid_offload_point_survives_failed_resident_partner(tmp_path):
     (run/'offload.json').write_text(json.dumps(dict(protocol_version='offload_gap_v1',stage='screening',measurement_plan_id='unit_test_fixture',results=[dict(mean_ms=10,samples_ms=[[9,10,11]])])))
     loaded=module.attempts(tmp_path)
     assert loaded[0]['rows'][('prefill',1)]['offload_ms']==10
+
+
+@pytest.mark.parametrize('reverse', [False, True])
+def test_paired_screen_history_uses_candidate_not_parent_or_generation(tmp_path, reverse):
+    import json
+    directory=tmp_path/'A0021';run=directory/'R01-complete-screen';run.mkdir(parents=True)
+    (directory/'record.json').write_text(json.dumps(dict(campaign_id='offload-gap-001',
+        attempt_id='A0021',label='test fixture',status='rejected',accepted_step=None,
+        screen_manifest='R01-complete-screen/manifest.json',screen_summary='R01-complete-screen/summary.json')))
+    # Modern summaries have paired statistics rather than a single offload_ms.
+    (run/'summary.json').write_text(json.dumps(dict(rows=[dict(mode='prefill',batch=1,length=2048,statistics={})])))
+    jobs=[]
+    for impl,attempt,mean in [('baseline','A0016',20),('candidate','A0021',10)]:
+        jobs.append(dict(name=impl,attempt=attempt,implementation=impl,mode='prefill',
+                         variant='ma_offload',batch=1,length=2048,status='completed'))
+        (run/(impl+'.json')).write_text(json.dumps(dict(protocol_version='offload_gap_v1',
+            stage='screening',measurement_plan_id='screen_v1_w3_n5_r1',
+            results=[dict(mean_ms=mean,samples_ms=[[mean-1,mean,mean+1]])])))
+    jobs.append(dict(name='generation',attempt='A0021',implementation='candidate',mode='generation',
+                     variant='ma_offload',batch=1,length=2048,status='completed'))
+    # No generation file: a primary prefill/decode history must not read it.
+    (run/'manifest.json').write_text(json.dumps(dict(jobs=jobs[::-1] if reverse else jobs)))
+    loaded=module.attempts(tmp_path)
+    assert list(loaded[0]['rows'])==[('prefill',1)]
+    assert loaded[0]['rows'][('prefill',1)]['offload_ms']==10

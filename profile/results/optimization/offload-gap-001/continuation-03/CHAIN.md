@@ -57,6 +57,16 @@ all 26 finalized attempts and the A0000 baseline, with full record snapshots
 in JSON and an index in CSV. Active candidates remain outside that finalized
 snapshot until their verdict is recorded.
 
+The [attempt-history figure](history-through-A0026/attempt-history-screen_v1_w3_n5_r1.pdf)
+shows all 27 baseline/candidate records on the four original primary workload
+panels. Its [CSV](history-through-A0026/history-source.csv) and
+[JSON](history-through-A0026/history-source.json) retain measured candidate
+latencies, sample standard deviations and the incumbent implementation.
+These are screening observations, not confirmed cumulative gains. Reproduce:
+`python profile/results/optimization/offload-gap-001/plot_history.py --output profile/results/optimization/offload-gap-001/continuation-03/history-through-A0026 --through A0026 --history-only`.
+The loader selects candidate jobs explicitly in paired continuation screens
+and excludes generation from the primary prefill/decode history.
+
 Use accepted steps 0–3 for the cumulative implementation figure. Use separate
 workload panels for the recovered, nonretained local gains, retaining their
 named comparator, intervals and adverse findings. Do not splice the fastest
