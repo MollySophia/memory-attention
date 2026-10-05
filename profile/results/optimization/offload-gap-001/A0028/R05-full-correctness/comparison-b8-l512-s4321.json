@@ -1,0 +1,51 @@
+{
+  "campaign_id": "offload-gap-001",
+  "seed": 4321,
+  "batch_size": 8,
+  "status": "completed",
+  "bit_exact": true,
+  "max_absolute_error": 0,
+  "relative_error": 0,
+  "relative_error_near_zero_rule": "denominator max(abs(reference),1e-8); zero derived only after exact byte fingerprints match",
+  "normalized_rms_error": 0,
+  "argmax_agreement": 1,
+  "evidence": "SHA256 fingerprints of contiguous BF16 tensor bytes, shape/dtype checks, finiteness and explicit logit argmax",
+  "scope": "logits every step; all hidden and KV states at prefix and decode steps 1,2,128; unpadded full model",
+  "mismatches": [],
+  "reference_source": {
+    "source_sha256": "2619ff2e7bcb18eacff1f57d6b8988596f986d95017e43b87b9f3c059216b80d",
+    "git_commit": {
+      "returncode": 0,
+      "stdout": "62942a0387608fe21baaeb2dce9ef3b0947dde4d\n",
+      "stderr": ""
+    },
+    "git_status": {
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "source_patch": {
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  "candidate_source": {
+    "source_sha256": "ab51cd6f60cb476b5baf42e8d3a50dbcad772845dbdf77174a08f4e3ac2016d1",
+    "git_commit": {
+      "returncode": 0,
+      "stdout": "6cc9354760ebde3bab9a90996a7713a936dfb439\n",
+      "stderr": ""
+    },
+    "git_status": {
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "source_patch": {
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  }
+}

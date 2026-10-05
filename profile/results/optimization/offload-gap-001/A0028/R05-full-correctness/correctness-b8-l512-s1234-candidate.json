@@ -1,0 +1,8481 @@
+{
+  "campaign_id": "offload-gap-001",
+  "purpose": "correctness only, not performance",
+  "seed": 1234,
+  "batch_size": 8,
+  "prefix_length": 512,
+  "variant": "ma_offload",
+  "source": {
+    "source_sha256": "ab51cd6f60cb476b5baf42e8d3a50dbcad772845dbdf77174a08f4e3ac2016d1",
+    "git_commit": {
+      "returncode": 0,
+      "stdout": "6cc9354760ebde3bab9a90996a7713a936dfb439\n",
+      "stderr": ""
+    },
+    "git_status": {
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "source_patch": {
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  "environment": {
+    "cpu": {
+      "returncode": 0,
+      "stdout": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           48 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  32\nOn-line CPU(s) list:                     0-31\nVendor ID:                               AuthenticAMD\nModel name:                              AMD Ryzen 9 9950X 16-Core Processor\nCPU family:                              26\nModel:                                   68\nThread(s) per core:                      2\nCore(s) per socket:                      16\nSocket(s):                               1\nStepping:                                0\nMicrocode version:                       0xb404035\nFrequency boost:                         enabled\nCPU(s) scaling MHz:                      67%\nCPU max MHz:                             5756.4521\nCPU min MHz:                             624.1940\nBogoMIPS:                                8584.34\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good amd_lbr_v2 nopl xtopology nonstop_tsc cpuid extd_apicid aperfmperf rapl pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpuid_fault cpb cat_l3 cdp_l3 hw_pstate ssbd mba perfmon_v2 ibrs ibpb stibp ibrs_enhanced vmmcall fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid cqm rdt_a avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local user_shstk avx_vnni avx512_bf16 clzero irperf xsaveerptr rdpru wbnoinvd cppc arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif x2avic v_spec_ctrl vnmi avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid bus_lock_detect movdiri movdir64b overflow_recov succor smca fsrm avx512_vp2intersect flush_l1d amd_lbr_pmc_freeze\nVirtualization:                          AMD-V\nL1d cache:                               768 KiB (16 instances)\nL1i cache:                               512 KiB (16 instances)\nL2 cache:                                16 MiB (16 instances)\nL3 cache:                                64 MiB (2 instances)\nNUMA node(s):                            1\nNUMA node0 CPU(s):                       0-31\nVulnerability Gather data sampling:      Not affected\nVulnerability Ghostwrite:                Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Not affected\nVulnerability Mds:                       Not affected\nVulnerability Meltdown:                  Not affected\nVulnerability Mmio stale data:           Not affected\nVulnerability Old microcode:             Not affected\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Not affected\nVulnerability Spec rstack overflow:      Mitigation; IBPB on VMEXIT only\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Enhanced / Automatic IBRS; IBPB conditional; STIBP always-on; PBRSB-eIBRS Not affected; BHI Not affected\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Not affected\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Mitigation; IBPB on VMEXIT\n",
+      "stderr": ""
+    },
+    "cpu_affinity": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31
+    ],
+    "platform": "Linux-6.18.9-arch1-2-molly-x86_64-with-glibc2.44",
+    "torch_threads": 16,
+    "torch_interop_threads": 32,
+    "thread_environment": {
+      "OMP_NUM_THREADS": null,
+      "MKL_NUM_THREADS": null,
+      "OPENBLAS_NUM_THREADS": null
+    },
+    "nvidia_smi": {
+      "returncode": 0,
+      "stdout": "Mon Oct  5 19:35:06 2026       \n+-----------------------------------------------------------------------------------------+\n| NVIDIA-SMI 610.57.04              KMD Version: 610.57.04     CUDA UMD Version: 13.3     |\n+-----------------------------------------+------------------------+----------------------+\n| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |\n| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |\n|                                         |                        |               MIG M. |\n|=========================================+========================+======================|\n|   0  NVIDIA GeForce RTX 5090        Off |   00000000:01:00.0 Off |                  N/A |\n| 31%   45C    P3             46W /  575W |     698MiB /  32607MiB |      0%      Default |\n|                                         |                        |                  N/A |\n+-----------------------------------------+------------------------+----------------------+\n\n+-----------------------------------------------------------------------------------------+\n| Processes:                                                                              |\n|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |\n|        ID   ID                                                               Usage      |\n|=========================================================================================|\n|    0   N/A  N/A         3625831      C   ...ngtz/trm-mcp/.venv/bin/python        654MiB |\n+-----------------------------------------------------------------------------------------+\n",
+      "stderr": ""
+    },
+    "gpu_telemetry": {
+      "returncode": 0,
+      "stdout": "name, driver_version, temperature.gpu, clocks.current.sm [MHz], clocks.current.memory [MHz], power.draw [W], utilization.gpu [%], memory.used [MiB]\nNVIDIA GeForce RTX 5090, 610.57.04, 45, 495 MHz, 7001 MHz, 46.89 W, 0 %, 698 MiB\n",
+      "stderr": ""
+    }
+  },
+  "env": {
+    "git_commit": "e007c7e",
+    "model_module": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/models/memory/modeling_memory.py",
+    "torch": "2.9.0+cu130",
+    "torch_cuda": "13.0",
+    "flash_attn": "2.8.3",
+    "fla": "0.4.2",
+    "python": "3.12.2",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "gpu_capability": "sm_120",
+    "cuda_visible_devices": ""
+  },
+  "checkpoints": [
+    {
+      "step": 0,
+      "context_length": 512,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "e840e6380c7f3867cd9ea9c59ab952ad9f19ff6fc2c41d11a81881b7c2e70e3c",
+        "finite": true
+      },
+      "argmax": [
+        [
+          3137
+        ],
+        [
+          16344
+        ],
+        [
+          16394
+        ],
+        [
+          19921
+        ],
+        [
+          24760
+        ],
+        [
+          133
+        ],
+        [
+          9808
+        ],
+        [
+          2618
+        ]
+      ],
+      "hidden_states": [
+        {
+          "shape": [
+            8,
+            512,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "eb8d72e841d9bc0ad59233f6627e6d61a3e17c83b1cc8289760e5c5e031b7684",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            512,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "7b9b48e7ccec69a32d2768305a0edc8b06108d111c0f1a832e9839a82a5a9425",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            512,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "4ec73c32c77c8d7b136c383f07be58652f5c9ea4fd5b1e66be8876ab845c724e",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            512,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "8c7c806dd47e2dbbe1042eae168a5c09643831ca0bdb3c447fa480105d8e6428",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            512,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "6d15c5fe2ad1c192a937220419d6fad584d7c5b0116fb9264c52045baa998961",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            512,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "af9065c76e512d0a41ca9d2a73060231de91ce2d4213592a6ff40ac3679eb8ae",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            512,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "6dc3849aa15f967cf0e8f21343b81c6c560815fcb0957ebbcdc70b901cd30d85",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            512,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "f473d15eb364582796becc2844c1315b5c5cf5359d78c1134cdd6cf0bc8eb598",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            512,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "9cf19b21f089a66b9af0d298bdf99792c9684567e5953ef369d1ac2d434c4279",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            512,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "2f4da921c949caaa3f1f6552e22939eb5810b408330ba943f68fd102b25ae977",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            512,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "bdb21a25b048238211a06e4bd3f0fbe4fb9121f27e1ed8b88f6ab7abf6efeb5f",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            512,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "a8f476f763ec6c46eefd5ed707c695ee8d1cc8fb0697a6765bb6dc56a8a0b4c3",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            512,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "33eb2e11bf0b67f5388917808d90b718fda8c2590c95df8998d25cadea0fcf9b",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            512,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "cdae510b5e4317ed50ce1d13579ec0ae3029de2b14b5a8942b57a2175eadd8d4",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            512,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "dc762fd93834ca9eea64ca928674a0036e7acbff2f7fcf6d822651288e03a3b3",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            512,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "3e7d8f1863426687433b92264a5426454490294c0631ff494214808245fb8fd8",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            512,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "0d765d0a57feb32e1071e0d71c3e2204129b64d2663e476219735e3652baa328",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            512,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "ce52ef7ee776c887d34e836ef0567f094f5ff9fe3fdbd22ca4c8f630ad19b4c4",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            512,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "e5a86ad9cb846000239d0d408e09f2e73f7295ae0ae2d46963e7d2a1cd24d080",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            512,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "19cee5ef1650cd7f2d10454a8d559115f496b46cbad4cbeebb14c4a7888aeb73",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            512,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "681cdcad5bdce3534e6f6150c5b598e0739e43f64943aea3606740c9b817f320",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            512,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "009891bcaaf14aca45659d2b0271759ee5bfeefc2266bf199bbab13d310e347d",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            512,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "9b6e40f6709a8cfedb5fdfebcf27f0526b15f7950dd9af28fd0dcaf863c4c1d0",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            512,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "4190502e878468854bb668ee8eaae83b6003e7a941790ee3e2f31dad956540b3",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            512,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "db7ad9a82a0b06d25d382e5444c4cdcf205f4b73c820a6c29e840564a3813327",
+          "finite": true
+        }
+      ],
+      "kv_states": [
+        [
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "bcf5900348af9e894f1befb3ce6c12f44eacf513a0493ede8b76ca514784acc3",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "9e3da311cb9243fccb4e63592d3b2dcf85b5ace6211aa1fa49fa10e3f2afeedf",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "6d182917a54b249bacd0a21aeb75d5ea6ac3fba5b8c65894cd3e36096f3f3889",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "466db5219378240a703da78de3cceb901af4a5f52e2db94de462a3d25502f769",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "154a46546f19e7c87d88218933c1dd18f6b6ea1dcb9acff84bad4a9b791ed66c",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "0dc5656c123878da0ac8717aac69ad47af58cf98b0a80ddfbd27e02b2b5aaa89",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "5b337df0fb1a15ef4a3078707c78769bbe94e9366513e002066f94075723308e",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "5942f3b52e08e4659709e2b898756fec90de40154ef9c39ef3b14b3f4ad1a691",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "a7b096e8c9d384501daf2ccccbabee8fe1b537a8aa8bab249686f05135908843",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "88fd3f2d8df355feb24476b230120795b5e765492a629aba452fcdde8802b133",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "ddd02e7a81d1b3a7a28615b37e9c5993142b90575e4373086ba84162d0f8b5f1",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "e618946f10945d8eb1cfaaab482dcf65ad4de2d8d20033698a691623741f9b4f",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "e8a163513a8581a6f888327929100dd8f95a82dda0e50144c19a3587ff427246",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "2cc2b19a6985aec640926614e4bf702b583c9d4dd58bd4f2dd9924e0f16cbb90",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "40fc5e4a2f13349b95f905d7eab07e29ac53b91620580141117a6fd9813e57e1",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "31448fc5a5dc279ec693cc35a75a6f9358d6f989d4359f0a8663da1ba263d647",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "d047c0355a8e28894cdda89b46a91e6c7a89f301e55a259e17192cce521b5918",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "fab2fba069ed1daed4ca7d15642ae0ae8b73e08ab4da0302d0a1028903db7a85",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "5bfefcc47b46962ca00ee202b62630695aef749d8cef1b35c3b865d9d9306865",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "78b1b91a686d4f8f650b49c45e5b562e74091edb0c396c284a69d3670cda9121",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "ba42e21ae584c8b583a14a479a477c5bb0ab423f559b7479aa986486a2c060f5",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "85ccabda77a1420416550a6c3dba39cf198119a62a551311dc7ad71c9be64bae",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "cba422bf67450892227a0bb3ea2803bea21225b52f1df673c12c70bba32ec8dd",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "6b0ae9fbd2091d5b836b420fa2ef1d1894e96fc7c2de96f33aa8a4ad6ba602db",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "dc56e3f29db5f1e793530339a04f22c1e52e87d842d683986ba4ba7f6b99df50",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "2f29e1b40a528286584aec6b888bc2a603c18c88a4ef95de2bed40e9bd6bde13",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "ff788cc5bf163af57ae8fececef76ea68458dfad1c5865177e285ee854d52eb4",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "8df4d167374c605af6afc0c8e78cc1c3f63825c7ac640c1cd63b81d9bbdcfca5",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "6787cabb651a70b673895c629421b83ca378c91354fc9e811c632c2f0d94abfa",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "2c6526d6b50dfc4d7c6d2a213ae67e83671dec3f752b20e2fc273706393ecb36",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "ecab9f74f74d53d3f1f6cfb635c1ba0afa4736bdf8c9b8e4a44510f8912b7654",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "7ec7f3e1f00223fc556bcdf1214a0e7b54f29a64645164a50ca06ab61c441707",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "08525985536eca41d5a3c2e4743d4f6a8d3108c8cdda65dcca701b97ae1a0734",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "61b3c3b70c3fde6db87cf70e8027c29e3bbe0445acfedf9ba1dd8bae80fab6ab",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "f1181ce096dffab8eb857b66f895706f4c3ebb3c2bc64d2e7f34796397952716",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "7e9f950e362cdff187628022df8258f2c9e90e5e80f69efcec5937f7bcc998b6",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "a5dedd60c0f93f96188056871c963d2d2fd5198351b166e3c71bdd0414094761",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "2aa9589b4938562daedb62dd10e3070d1cb135eb24962626468b1d1f7c502134",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "1e09cce8712a7f090b4bc1e76b063929767773681976eb8a893f224ee4918fdd",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "5a71745c9696fc0bb93e028100e8dfe2d14234ad907ed625f0eb247d5c03a104",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "ef44c4bb702b1021f061eb59d093a5c94219f485a74ec3516ef54837f44a1e23",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "d8f453b7635cf474ab76dc411c3709d59e04a0f23c04128e1ca2abd2d308dcc0",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "f4731eae92906b05065b8ab95b707b9e8c9e3cd28c32e87dacf44f6c0402832e",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "bd9d7416a70cb73dfaeccb54a6a368143028c7236fd9bdec7cef328c33463caf",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "726b0864a513d1f5c34f05cccaf05a5e51fd71a90120ec7333481547083edab9",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "349d1bf40d1f9f15ba51637825d1048522d63752c8b8d0b8c6a7e8b73c630330",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "9b8e2d9429723e06f953fa85ad42821acf80b4b7eabb725a93165b17d1f30383",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              512,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "2902edbdb70e5926048ee8af77ecb9e71ecc73945471718e947c18ee0d0dc9b6",
+            "finite": true
+          }
+        ]
+      ]
+    },
+    {
+      "step": 1,
+      "context_length": 513,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "398df171690227680437e616c0fac5a0dec29f4b62be814a120f349a3cfb3c20",
+        "finite": true
+      },
+      "argmax": [
+        [
+          11909
+        ],
+        [
+          4700
+        ],
+        [
+          11615
+        ],
+        [
+          9073
+        ],
+        [
+          8200
+        ],
+        [
+          23350
+        ],
+        [
+          6423
+        ],
+        [
+          11282
+        ]
+      ],
+      "hidden_states": [
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "b0f5041f7f8651777baee19059a126d6a6f2f8f91fb434dc12fe82d1ef023f57",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "5033ba5260ec6552d17119f4505235e7cd2c33a1607e39bea12cde72a6181c4f",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "f938add3a914f2cad19d244e166b1c2a2af0db9b1cd796a9d1769236f4d06789",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "8a3158efd4185199ecc39330c80d64fcc82c776157bd8d9cea1a39f3dfc551db",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "ea0496cc3171828f6b8d3e117f0d3288fabd35dbb1f5eabb3ac2d5ae2760d4a5",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "f9d6fa35a20f863b19635b31ba452fd787a68188e8ad90c01a637e912fa06579",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "d36efedf8bd03773c7c95102e093e426963027358261c58bda941f69a13763b4",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "88778127ec658c36130df4dfc57ef3e0acb068338303c7f3a37373f23963c876",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "4626bde6192fa225e16ff249f61cf606df6c9bbb1ecd921dfdb7eb1dfb53eb32",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "b0466a06c13f83053f1534a5d1b5dda8ba544857e66b11ed93cf6caf4f2503b9",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "622095476b31a12a5fc00dcddb7270c17d67e2ae4d7496bddc63fbba7b3c4fa7",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "94a23606d5b5e66b7b90d7da05370f3c5075c0a828cdc3e628079e96c250f746",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "424b61e4406a90a0fecb20a1a58afea09287a40da93adbb5342131616044467a",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "a6cda4fb40c3cd42b94b663536c47df231ce090b7c79086431707b903558f052",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "c5c7dad382b81a1f6f9f47109de7e5b0d7c4278e9924251e484cf80de83d9427",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "0b249d092e8d56da96673c6ca196bef09703db7b2587254057eb6a80bd6740f9",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "008919128468a50616ff410361af017d6c87f812ab8a35cc32ebd976146754f6",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "753b5142a9153fd066d21b88e42230532f136b98cb18ca470fe262617de3c573",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "276f13b59e78ec96d04c4fca8569e6427566c945e0a56d8bfa305a7c8cb59e20",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "a60d1da5f57f142105d121bc123fcb5f28fc216af12d98376704d333de087490",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "28231413cbab882c95a8d75b67d7ec9663a7fc5a97596ccd73efbc0404333bce",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "2e32ea4031f42d1e60f5518ea2d85883c92e7e30e3f2f913e6513772ccc126f4",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "e2c8ecd2caee0f14f770eba3bf174482c5eb0b65b2b08a4dc6854113304a8f76",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "ef210760af05f1781017d1022238d445e17fb3338e51bb77e1fd460aac3ca91f",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "0289f21264984693092d0bab671547a6c24d4728b7ec92982cbf56f2ea167632",
+          "finite": true
+        }
+      ],
+      "kv_states": [
+        [
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "ce4f7b073f1d570df1423c84eb91592761c4519a822590338da773d643f552a5",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "93c7260061420f84f66938b5855484cfef1fc1d08f68fe358fa49146ab5f00d8",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "d2fb8cce652bcd0cad6711eb2b7536ad13c6eaeab1f3aa0a68fde33f519ddf69",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "d542490f238ce3ec6beb26049b6f4892ba9fd7442b857efb288d377d93d67580",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "eafa8e267e6204958954f3c8d9d768f623d52f769b70339c8e507f43fdeb41e4",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "5345b49ede9e9e79ef73e4c6382ebe5f8311bc968eb9be735c509a46a42eb224",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "b35d03dfc2e70747db2fc39284687883099af826db452148fa33c959d271a80a",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "ccfdb04909910d25c9a886ca39d7f3230b7510f86d7af600962f12468ebacdb7",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "62df50faaf8f77cc70a683342045023d3986b7495dda251d26041ffe532fac3a",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "8aa7f990a60858d3d1baa70b40af53d3c8d1cebfd801c37cff95106bf566e7b4",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "0b374483c7505a8e734da7327d549d70bf00ef4516d1c5906c9ba2d41d7884f7",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "75605d087c21aef4690489ec7db30ecde0822ea6ce2271d807bcf1d46169b9e1",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "b54dbb30ee0dda73706ecdca1b80f0ffda330625614f73aa614f5c5044a68c75",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "6c1157b6046b4452303e2a14901adf0677b317a6fbfdee9a7f27994950ab2025",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "d3c6e209525865fd74441adc73f1fa0599b02c0756791deab207c378b8a8ea85",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "a49c708f128ef0da014d1a6fca7d847087665d428928f27016eabda75d8abe1b",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "80dc47a72349d05b6587f203289ff1b7114dd31b6aaa9de212e192874342743d",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "bdea26fd17abf91ec93d494cf7e20612a589bc7e01a1ab4482e904f8eb685b47",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "2f826d43e7012fcf91a4ced1e28f88d8215fe70afc3a0d43a10bbf2d965ae36c",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "fc8ca3470271eddc4ba2d07de56e1520b49645cecc68a4ceb4085e492e2246d2",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "a33dff3386f3717958ef57f090300ee12aa2566e423736030ca9ecdef96cd2ca",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "f6e77844f7919b60cfa417c0e8d6ea8740182861cbcd89facba64d7aaf18e659",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "f5b3133496c83ab2f2e06b668f14fa1659f0d5d148056e6559297ff397a3b50c",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "cd16b1289cd9c72f43a9204f3ac33984364768b46d616b788804bde7feff097b",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "85c31cc5bf1705c4a4a0c24e84cad3346f60f4574c901def01b83c06f97e8e2d",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "bd2ca0116f4942586a142ac3e33406a67bcaa2c28849c02ca3297102d53da55f",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "d0f5eac15e83c05d673580614d56ada47418995635d50e3648adb0051815cb37",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "e85ade603cb0a731a28cd195835e31237939a796e301535f22b0902d6d44cc67",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "4a384967e2181cd9b5af6c581842cc38fa90f60ed09c6e49c8ee0815649ff180",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "91f53fae0c3af40e8798dfe4e6ed709c66e38e921565bad2d372458bab754f5a",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "b5b9514fe86be7ea250fc6634064b217a23722c842e19571348e6d1d9368ee19",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "072dee3622f6cdce1a4d58edc1b2341423ae64c76d7a563e1d3c811e404df565",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "f753846c840325fa652ebea438d5e4f142e9f947f4ba3a3cc6eff9f9d63c7d3a",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "e1ac32530e8df4ca05f7ea4c5878afeb3ecd59cfdaaaaf62c2b59a9e656a8e20",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "39dfd2e7af3ee0d1a7d3d55fd3e0caab2b45b41580aa8439d69d4a57f9e16f6d",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "f7a772c84029fc5ce0e2c708cd5a2bfe419ca2e008bcb2c8f03953c42e659a3e",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "85c44ad912d18fa92b2bc8c12753c9022d59b639e2329f5e9d42818191ed4da4",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "4b4bc5238dbf4282f910e61a79dd8ea4edb56ca654fa127ad4b643c52ec9ecd3",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "8fbdd04126e86de6ec6cb8bc41076a56e18d52aa6717db68b34866ff41921d56",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "266a5e139dc5ebaf92534e7fc8ddb000a940eab2e5b98e9f36757d6508b1dd16",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "c418629f7229ffc2f06d241e54cba95a9ef9d8273cdbd13483d5dc8e9a689456",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "fa2c82b2cad3a1a6bc7e99fffc2991ed6ecaf31cbc4e5423a39e00da3f221466",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "a48b56590a1daf7bb57369eadf75c7408a226de26e311b8e031ca2f1e826616f",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "fe1dbc221eb4e8c560cfd4a4e2c84adfe7a5f6c2a34218672121ca49b29639a0",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "9860e12c2505ce0791456ddebae3d74bb5537f20bb8f129658ed669776b248eb",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "3282cccb33623696fa5ab4e488f337d1d8f69b81c7eafc17f61f7e0c95890ae2",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "c2806afcc83fbbe6aaa648e1ef8cff78f3205d9111d604e5a738d0ce6cd03534",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              513,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "be3a304ebd069f3f303ff07244952de2052ae748216e3752dab240f9b89a2f9f",
+            "finite": true
+          }
+        ]
+      ]
+    },
+    {
+      "step": 2,
+      "context_length": 514,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "aaee12331e078a331b79f2fc2db5e8ff8db43cff258d44139a7367ec51b7b74f",
+        "finite": true
+      },
+      "argmax": [
+        [
+          15702
+        ],
+        [
+          5047
+        ],
+        [
+          8671
+        ],
+        [
+          16907
+        ],
+        [
+          29678
+        ],
+        [
+          9249
+        ],
+        [
+          24472
+        ],
+        [
+          304
+        ]
+      ],
+      "hidden_states": [
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "01a46036036ee309acf8d96f4a6306f9cba95120e28c93ca7a95c891c72c1daa",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "012c59f7ed10ef85f81392c09b2b47c86378bb2367c366e573dafa57ff9e485b",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "91bb505b5358af545ed21caf479a936af6465bed59f7eec9a26b0effb4269dad",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "eba0ab7ece628cf2625169b571861790f39738ca60b81092201353d1e9a147c6",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "13c998f6e8c18adff0d3795312f2fe84ab323e13a8c0417327c03ad0009e0a42",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "a1bfbe10e4567c2c375159817693925df93bff4f509cb5ad1c575c7c47458536",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "716b7125b98263b9bb313b236d59e203fe329487a18d331c0eb87320ff53666c",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "1c8fa9c0b2709e444eb6372cc5089c88576bfa53f9af9a6afbe21596f2e5aa62",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "6a9d1f0b6971831e209005a0ddb7aed2d3421939b626e4637da4f48543bc19df",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "d85af1ee6dbc54dce8231008029c59b3f66b8ec04992ae90c6dd5fa4ecb4bc6e",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "ac71634c0275f0c82022af0c323c7cabc61bf9e354c4ea31a690d0f0fe873655",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "71960909269ff79e22730253ae912255bef23ad8d18fce3a1fb5b6aaf332debf",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "3b7ac3eafd1cc7493936b8e9c782282e8847e28b98c51c3878d8ae1e726856f1",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "2ea96bd678b35f46223dd4af7a2ba93210e2d2a551a7a96af5f6a7cb43f889a1",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "3a9636f860f5d8d9e6029484ed89466631393f2c762f7449c3c8deba75384a91",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "67ab4e5e033ef407cc58a4ea45959b0609ed5c480c7664377ba2b16d8a0125d9",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "bfe814268a68b82b37ca8c23669b451eece97dc5fd92bbb1127f33943e70725f",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "a654587713c23a82a9b5c4f708478ab3e28653ce812af182984bb20725546ef5",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "f1e60a28eb9f19cf78fdec98a75d6d9cf7749c72140081a3ea10adb8218f1c55",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "5e202b93e0e9a3ab400416b6892f95765dcc4b87c6b7e93f2e7b573b23baad8c",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "1b990f7aaba919999227a2c40d577a23ec7330bd9a1345f86514305421281db0",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "ffa4d5150ba1cc1ea0953b09bc0a247ad1be3dbe55b37d411b52090fb126a6fb",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "202d992a28f3395522bc4cd7c12c689bd0ec3dcc9c554d8da6c306333b922702",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "2980b8b6a92814e604b17ebf7333541ca95789e7c6a2e1964c2a83fe94abd268",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "dac6cff5e79fd0a0e12bb8cee99d7ffe1cc7a299826b7ceb8277488c82328def",
+          "finite": true
+        }
+      ],
+      "kv_states": [
+        [
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "19d3dcdb56053b09cf4550fa0a1fa54da03260f18d1b3d0e9883705e2b3c3460",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "2d4405d147866b0d9c77ad53e716da77172073fca4d8840450010002c4f7b72d",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "977a00aece53ad1cf3a3c6d6919fe0a6a0040e4f18c7d385b9f2116996d3ac63",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "13c4f7f35959be31ba6047937a4425da52be58574364ff65f84aa5bde38aaf57",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "d45563bb61f694fdf5732581dfdd63a8d26948fe8c782e367974b0fe503ecb4d",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "853a5b050f87399bbdb79561265cadd68c9eb85ecd58b02ccb3e4e583de89743",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "f8179edf4984a81ef0970d913b2a2430e80fd42619e9c7d7d10a308903924938",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "95c72d8a302051393230ae9a1b6650e06fb620d80f48382162020d69f1809d55",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "f5e5a9ef4987c013b16dfebaab850bcb820a05513188e7ebcefaa71c937b08a8",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "b77e646dd9b2eb104b0865ae4495f170fe71803f3c0392c30babb9b8788de866",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "e0b41da5a6dc66a00a90ef8845797b0dbd5f1cfa046ae466944b3c756ac011d2",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "cb7115a907cfe8b0f0f5961f7299a2c5fba3f81b7faa667f64359ba2b20a1228",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "61b4cd2f2d8221b7416f62bb64ff4177f78ae959faae4fc86a8e4c5e51bfd70f",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "d7bb5cdfcc5275fc0353546199eaccd153dfce93434043d297dea9c8f1696bc9",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "77a8c88f94d1e78c06a607480b330d96b5ebd8e1ae26015fdef216c97132d31c",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "bfe0c473d7762cb00b395e2c62274c73f4b37c55b98f19d1a2f87ad33481b728",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "a2cc580cbbccf999ce74dcd926a1407d043aa941b04f79353e51359c70190425",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "d994b1cbf7278ff4e40dbf1b5045a6a8e90d5572e70a96018482f6f12354bf2c",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "b0508e3af2f4a053127052790d143c65f8974bebb95798320871bb91959fc583",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "98616d8b30f7f2e938a4a9c4878edc9a3c385f4001052c8dcf0ae173f0147f53",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "a7af463656430cc5757a3a2405711ffe9d0437d62cd14e0a87e2f36c41141cc9",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "586c0e99ccecdd085670c8a7bc2db761dc2ce8dc694bf59977e22bf276b7c67e",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "32031dbc6e361a21036721b15f1a720c250154edbe9c18827fc8dbc2b953fb3e",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "441bacff16a4df64753b5c918c5178c6619cdf298beaa68a76d928e3c2c05fc9",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "800343f9aa42c46e78aa12c37b7ccd4dc25c8970b295f7dd662fabb9e41c2637",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "f10d37105f85d66e2bdca4836f180a5daa3cf8265e940aa23636394f0effe1f1",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "91c3c69f7bb2240bfabc8798a732839225ca4f0d8a41d4109fdb0e6d966bba22",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "a53777c36fcc38bc48bfb7e3501768339d9b5aae2c4c6b29659a0f91b66622a5",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "1b81373b5dd74a1c7b4f20174e674f41c521aee279732af97b0510155249f344",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "5fddcaaaf271498e1c3b61feb92bcbe0640a0a90a3bb3a9c4ea0a377928e6fef",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "dff43c884102604dfd1c971c84476c3d99a76e5e5fa6682f142685a5c5cda0f7",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "a450a9e1b72ef63cc847c5a63a09a96af284699d8fc005e639f0425c0ef891a1",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "43f1c3670a14257e2c7439350f4b26d37e129cf2f1d91ae42f44e6d6fa778246",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "7dc177bd57bb9b1390d812034f0573aedefabb635c6cc6ec91bdf6551dc9a8c4",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "622bc90ae1600ef6e1a88e6f120ac99525011b269d727bab956f1390f4c39ee1",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "2e763eedbce87a7c475d1169d8ae36c303c4a9c5f71b13e3d86bbd5d7458bccc",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "446c18efd59d59f10358ea470d26e6e502f7ba1dbf6bf0c39ecac34a269f1f6e",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "8a6ae26ed681d2febbffc140ff7197899c21b577e2759f7c7aae635b7b6768fa",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "5116117fcef31f6552496b340ac21f25b942749dbfa6cd002ad4a897cc0509ec",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "c47107f50f31fe0a5cdf4706da73aa86b7360efd94b97de508f0de57e6dee43d",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "55575da713e92aeb7ff351c970c23bcc3181209851b21627ec404a9a23099072",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "8eb197797c52b02578212514ccf5300a361448b58a613df90c4fe8612a24541e",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "49725c232d24f02d762431664a902a4c88188582de9b22b30c9f15d8675fb0be",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "fdbe6fdd13e802f871755ec2aa13c00adf1eee3eb345c5dcfa053cde66419281",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "00145937c76ff12424606a39524fb3e0db4b296eb5cc7c6f24beecb953856926",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "d397b6b27c5edb2ade21a34426a43dfd80010ddbf5b81851ec604e8b3a3f8137",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "5d76488625d24947e91e3c672a073d49315d1b2c31509d5f0f4e98355135c0a6",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              514,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "7697d39a8f0534baeb3e0f0e681ce2a3cb86213e696a320aacf1e48a49ebab4c",
+            "finite": true
+          }
+        ]
+      ]
+    },
+    {
+      "step": 3,
+      "context_length": 515,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "24e4b1e62dd9fa1546f4ca37807f77a9e5dcc7b23cc366f88000828faa37399e",
+        "finite": true
+      },
+      "argmax": [
+        [
+          1561
+        ],
+        [
+          1141
+        ],
+        [
+          29260
+        ],
+        [
+          11036
+        ],
+        [
+          29791
+        ],
+        [
+          5501
+        ],
+        [
+          13968
+        ],
+        [
+          27135
+        ]
+      ]
+    },
+    {
+      "step": 4,
+      "context_length": 516,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "5b5257a3d1d12ad614cde381197e1947e4efd0781dd98f110b111d63fb9c5217",
+        "finite": true
+      },
+      "argmax": [
+        [
+          20211
+        ],
+        [
+          1946
+        ],
+        [
+          7960
+        ],
+        [
+          29545
+        ],
+        [
+          233
+        ],
+        [
+          18153
+        ],
+        [
+          21532
+        ],
+        [
+          12905
+        ]
+      ]
+    },
+    {
+      "step": 5,
+      "context_length": 517,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "a86b8c0476038e421d914b98ce926c4bbc610afd82186ed0278380d08c4a1a54",
+        "finite": true
+      },
+      "argmax": [
+        [
+          22827
+        ],
+        [
+          30406
+        ],
+        [
+          26850
+        ],
+        [
+          6390
+        ],
+        [
+          3114
+        ],
+        [
+          24337
+        ],
+        [
+          25420
+        ],
+        [
+          11786
+        ]
+      ]
+    },
+    {
+      "step": 6,
+      "context_length": 518,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "0296cc85474fb96d370ad22e788555440ac51aa8a94a93f1cc015a233e988a13",
+        "finite": true
+      },
+      "argmax": [
+        [
+          13852
+        ],
+        [
+          26345
+        ],
+        [
+          1571
+        ],
+        [
+          10833
+        ],
+        [
+          2171
+        ],
+        [
+          10232
+        ],
+        [
+          4691
+        ],
+        [
+          21973
+        ]
+      ]
+    },
+    {
+      "step": 7,
+      "context_length": 519,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "f686dd1db79db26b7213e7dd1408f73f4518fe387db186d6852e807df2a0831d",
+        "finite": true
+      },
+      "argmax": [
+        [
+          14700
+        ],
+        [
+          4922
+        ],
+        [
+          21784
+        ],
+        [
+          6736
+        ],
+        [
+          2428
+        ],
+        [
+          12779
+        ],
+        [
+          28839
+        ],
+        [
+          9963
+        ]
+      ]
+    },
+    {
+      "step": 8,
+      "context_length": 520,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "960600c7946d41d942c8592fd737c8d0200bab1f8c93f3472fec6ff62c8ad4f0",
+        "finite": true
+      },
+      "argmax": [
+        [
+          26329
+        ],
+        [
+          27586
+        ],
+        [
+          30748
+        ],
+        [
+          10243
+        ],
+        [
+          7885
+        ],
+        [
+          31342
+        ],
+        [
+          2220
+        ],
+        [
+          940
+        ]
+      ]
+    },
+    {
+      "step": 9,
+      "context_length": 521,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "7791a4b5cd1e93133575945e891109dd19de3b0b4af0a1950eec2aa47b0e8439",
+        "finite": true
+      },
+      "argmax": [
+        [
+          23871
+        ],
+        [
+          22416
+        ],
+        [
+          26076
+        ],
+        [
+          4853
+        ],
+        [
+          22786
+        ],
+        [
+          3796
+        ],
+        [
+          26650
+        ],
+        [
+          3121
+        ]
+      ]
+    },
+    {
+      "step": 10,
+      "context_length": 522,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "6f7aa23e88ba9ddd9887ffce84c9a56669fbdd75968309684fcbfff6298a9002",
+        "finite": true
+      },
+      "argmax": [
+        [
+          9356
+        ],
+        [
+          7773
+        ],
+        [
+          8404
+        ],
+        [
+          31043
+        ],
+        [
+          28398
+        ],
+        [
+          16515
+        ],
+        [
+          19620
+        ],
+        [
+          31046
+        ]
+      ]
+    },
+    {
+      "step": 11,
+      "context_length": 523,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "666a9034c11a36f56e8877743d5108f93842ca94de247a32c256c13e398ca26a",
+        "finite": true
+      },
+      "argmax": [
+        [
+          8031
+        ],
+        [
+          3041
+        ],
+        [
+          2984
+        ],
+        [
+          25137
+        ],
+        [
+          14512
+        ],
+        [
+          9088
+        ],
+        [
+          2192
+        ],
+        [
+          24317
+        ]
+      ]
+    },
+    {
+      "step": 12,
+      "context_length": 524,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "3409a44249b9936f3ca9e57a35cf705a0f59d29229711bf62bd458110c255be7",
+        "finite": true
+      },
+      "argmax": [
+        [
+          14688
+        ],
+        [
+          26817
+        ],
+        [
+          8466
+        ],
+        [
+          8740
+        ],
+        [
+          570
+        ],
+        [
+          31434
+        ],
+        [
+          10309
+        ],
+        [
+          10583
+        ]
+      ]
+    },
+    {
+      "step": 13,
+      "context_length": 525,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "952e266ba925e66c1fc00cb09df169e0f51246efdaddd8b1648e693edbbd7957",
+        "finite": true
+      },
+      "argmax": [
+        [
+          24458
+        ],
+        [
+          6816
+        ],
+        [
+          20161
+        ],
+        [
+          18961
+        ],
+        [
+          7620
+        ],
+        [
+          31781
+        ],
+        [
+          18805
+        ],
+        [
+          30839
+        ]
+      ]
+    },
+    {
+      "step": 14,
+      "context_length": 526,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "381447a8024feef3237bd9c1aba66dfedff05dad362bdf7ff7ad8cbf2432acc4",
+        "finite": true
+      },
+      "argmax": [
+        [
+          31786
+        ],
+        [
+          1821
+        ],
+        [
+          2319
+        ],
+        [
+          5898
+        ],
+        [
+          16043
+        ],
+        [
+          18076
+        ],
+        [
+          2220
+        ],
+        [
+          9563
+        ]
+      ]
+    },
+    {
+      "step": 15,
+      "context_length": 527,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "ca4ba909af218b636ca85f5af1a3e11a47e3e5f7351f73be3380b38347b09e41",
+        "finite": true
+      },
+      "argmax": [
+        [
+          22888
+        ],
+        [
+          25733
+        ],
+        [
+          8538
+        ],
+        [
+          10930
+        ],
+        [
+          16975
+        ],
+        [
+          14175
+        ],
+        [
+          564
+        ],
+        [
+          30574
+        ]
+      ]
+    },
+    {
+      "step": 16,
+      "context_length": 528,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "edb3b3ce291b8c7a654d25615298381be343fb5aa95f05436287f3e95895716c",
+        "finite": true
+      },
+      "argmax": [
+        [
+          15243
+        ],
+        [
+          15911
+        ],
+        [
+          8497
+        ],
+        [
+          19920
+        ],
+        [
+          22435
+        ],
+        [
+          27504
+        ],
+        [
+          19331
+        ],
+        [
+          13134
+        ]
+      ]
+    },
+    {
+      "step": 17,
+      "context_length": 529,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "84acb3226eaf3db1ee213def5aa65dabc4860d3cfb75b5fb5bf37b0f82418535",
+        "finite": true
+      },
+      "argmax": [
+        [
+          9961
+        ],
+        [
+          16033
+        ],
+        [
+          31033
+        ],
+        [
+          6213
+        ],
+        [
+          8351
+        ],
+        [
+          29962
+        ],
+        [
+          7788
+        ],
+        [
+          9285
+        ]
+      ]
+    },
+    {
+      "step": 18,
+      "context_length": 530,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "c4a87b54f96d768a98069a9d56afc6733e21b88b1f6616304102c45fa2036669",
+        "finite": true
+      },
+      "argmax": [
+        [
+          17248
+        ],
+        [
+          7677
+        ],
+        [
+          31548
+        ],
+        [
+          10797
+        ],
+        [
+          942
+        ],
+        [
+          28870
+        ],
+        [
+          8272
+        ],
+        [
+          28516
+        ]
+      ]
+    },
+    {
+      "step": 19,
+      "context_length": 531,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "c4d3910b1900d7215566877fe15518c913339b93d26a8d45d16c3715dda6fdf2",
+        "finite": true
+      },
+      "argmax": [
+        [
+          12270
+        ],
+        [
+          31814
+        ],
+        [
+          24705
+        ],
+        [
+          20317
+        ],
+        [
+          20796
+        ],
+        [
+          5993
+        ],
+        [
+          18840
+        ],
+        [
+          13541
+        ]
+      ]
+    },
+    {
+      "step": 20,
+      "context_length": 532,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "1d9e3a48cb54d14729eab48c0bc7e96432caaee06558a3ebf0465c4128a17629",
+        "finite": true
+      },
+      "argmax": [
+        [
+          2096
+        ],
+        [
+          27531
+        ],
+        [
+          15500
+        ],
+        [
+          2103
+        ],
+        [
+          25501
+        ],
+        [
+          26988
+        ],
+        [
+          20852
+        ],
+        [
+          24317
+        ]
+      ]
+    },
+    {
+      "step": 21,
+      "context_length": 533,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "3c98c24719eb12aab5f8bdf12bfa7b575617ed783940af455216e38d0520506d",
+        "finite": true
+      },
+      "argmax": [
+        [
+          14413
+        ],
+        [
+          31351
+        ],
+        [
+          19898
+        ],
+        [
+          3371
+        ],
+        [
+          10471
+        ],
+        [
+          14876
+        ],
+        [
+          1322
+        ],
+        [
+          17873
+        ]
+      ]
+    },
+    {
+      "step": 22,
+      "context_length": 534,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "d715f6e9e48f058c666b19d0b392592d27809c29eda888d12a3f4a94453890c0",
+        "finite": true
+      },
+      "argmax": [
+        [
+          24600
+        ],
+        [
+          4987
+        ],
+        [
+          28961
+        ],
+        [
+          4016
+        ],
+        [
+          28104
+        ],
+        [
+          5182
+        ],
+        [
+          31464
+        ],
+        [
+          10700
+        ]
+      ]
+    },
+    {
+      "step": 23,
+      "context_length": 535,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "2bbedfbcd0704ca72f68dd9acd94c5ef7eb4f18beb1e44f139b41c1c7e66279c",
+        "finite": true
+      },
+      "argmax": [
+        [
+          3302
+        ],
+        [
+          19377
+        ],
+        [
+          19509
+        ],
+        [
+          17964
+        ],
+        [
+          25687
+        ],
+        [
+          1794
+        ],
+        [
+          15959
+        ],
+        [
+          26463
+        ]
+      ]
+    },
+    {
+      "step": 24,
+      "context_length": 536,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "00d8a0a478629b622c87b8165d114a72531a60b587cf6dd4e936fc91fc7c4e7b",
+        "finite": true
+      },
+      "argmax": [
+        [
+          19849
+        ],
+        [
+          3599
+        ],
+        [
+          8839
+        ],
+        [
+          15594
+        ],
+        [
+          613
+        ],
+        [
+          20141
+        ],
+        [
+          28499
+        ],
+        [
+          30109
+        ]
+      ]
+    },
+    {
+      "step": 25,
+      "context_length": 537,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "b48636e43b0079deaf3cc930a81e8188b56240e15d2b21dc9193f8d840d5929e",
+        "finite": true
+      },
+      "argmax": [
+        [
+          11881
+        ],
+        [
+          6716
+        ],
+        [
+          27422
+        ],
+        [
+          21806
+        ],
+        [
+          7871
+        ],
+        [
+          8245
+        ],
+        [
+          16493
+        ],
+        [
+          8007
+        ]
+      ]
+    },
+    {
+      "step": 26,
+      "context_length": 538,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "876f59925c112887743a8b72be1d6a24e8f80cffe37d907af6893e2d1ed0e093",
+        "finite": true
+      },
+      "argmax": [
+        [
+          10311
+        ],
+        [
+          26779
+        ],
+        [
+          28317
+        ],
+        [
+          21806
+        ],
+        [
+          2499
+        ],
+        [
+          17671
+        ],
+        [
+          11446
+        ],
+        [
+          10791
+        ]
+      ]
+    },
+    {
+      "step": 27,
+      "context_length": 539,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "b5b7215544381c5e7fa6df9ca35ff060f82fe8273a277fb4401b770b72a36e68",
+        "finite": true
+      },
+      "argmax": [
+        [
+          18790
+        ],
+        [
+          22610
+        ],
+        [
+          19860
+        ],
+        [
+          15143
+        ],
+        [
+          2116
+        ],
+        [
+          2719
+        ],
+        [
+          13082
+        ],
+        [
+          28843
+        ]
+      ]
+    },
+    {
+      "step": 28,
+      "context_length": 540,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "df155758da4207b7b9f795b8d244060bda67e64361fd84983234d8669c1f99fe",
+        "finite": true
+      },
+      "argmax": [
+        [
+          8182
+        ],
+        [
+          20675
+        ],
+        [
+          30768
+        ],
+        [
+          15529
+        ],
+        [
+          11433
+        ],
+        [
+          12529
+        ],
+        [
+          30084
+        ],
+        [
+          21764
+        ]
+      ]
+    },
+    {
+      "step": 29,
+      "context_length": 541,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "72620d4e69143d694fa7c653e2bc42b508d3127bab6ea4732aa37b7b375b13ac",
+        "finite": true
+      },
+      "argmax": [
+        [
+          24202
+        ],
+        [
+          9032
+        ],
+        [
+          19027
+        ],
+        [
+          22551
+        ],
+        [
+          13155
+        ],
+        [
+          16165
+        ],
+        [
+          20956
+        ],
+        [
+          21852
+        ]
+      ]
+    },
+    {
+      "step": 30,
+      "context_length": 542,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "56de516e655b13ea832bda08e8f27cdaa786cb4d03220788c0eeb7d4cb3e6810",
+        "finite": true
+      },
+      "argmax": [
+        [
+          4620
+        ],
+        [
+          434
+        ],
+        [
+          9608
+        ],
+        [
+          15061
+        ],
+        [
+          8100
+        ],
+        [
+          20764
+        ],
+        [
+          30169
+        ],
+        [
+          21886
+        ]
+      ]
+    },
+    {
+      "step": 31,
+      "context_length": 543,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "f5264fbc62a016e9ffc500837288642b6338d3f33f13513e56b5e6abebea687d",
+        "finite": true
+      },
+      "argmax": [
+        [
+          23949
+        ],
+        [
+          30729
+        ],
+        [
+          10914
+        ],
+        [
+          4386
+        ],
+        [
+          13903
+        ],
+        [
+          10232
+        ],
+        [
+          2527
+        ],
+        [
+          7599
+        ]
+      ]
+    },
+    {
+      "step": 32,
+      "context_length": 544,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "719bc1364d07becc9408ea759d57e728726c414d12b9ca63047721816a62302e",
+        "finite": true
+      },
+      "argmax": [
+        [
+          2813
+        ],
+        [
+          24128
+        ],
+        [
+          13512
+        ],
+        [
+          9962
+        ],
+        [
+          29314
+        ],
+        [
+          573
+        ],
+        [
+          31564
+        ],
+        [
+          20969
+        ]
+      ]
+    },
+    {
+      "step": 33,
+      "context_length": 545,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "ae777b8767445fc7b403c84944b09749c59df782391afcb34a619e5c859ad140",
+        "finite": true
+      },
+      "argmax": [
+        [
+          25846
+        ],
+        [
+          7317
+        ],
+        [
+          20290
+        ],
+        [
+          820
+        ],
+        [
+          24573
+        ],
+        [
+          17655
+        ],
+        [
+          1202
+        ],
+        [
+          30613
+        ]
+      ]
+    },
+    {
+      "step": 34,
+      "context_length": 546,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "35a8bda00019fdca97f6974f7bdcd1c90a46bd6188452da4c89293945444d2d2",
+        "finite": true
+      },
+      "argmax": [
+        [
+          9679
+        ],
+        [
+          26027
+        ],
+        [
+          30939
+        ],
+        [
+          15682
+        ],
+        [
+          23986
+        ],
+        [
+          9287
+        ],
+        [
+          21414
+        ],
+        [
+          11468
+        ]
+      ]
+    },
+    {
+      "step": 35,
+      "context_length": 547,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "9f3b39ce164bd3d7d3e97b8d02c7630686cc16c06c272a4aaa77dcbf82acb399",
+        "finite": true
+      },
+      "argmax": [
+        [
+          20249
+        ],
+        [
+          25987
+        ],
+        [
+          25257
+        ],
+        [
+          10797
+        ],
+        [
+          10431
+        ],
+        [
+          11101
+        ],
+        [
+          5940
+        ],
+        [
+          10143
+        ]
+      ]
+    },
+    {
+      "step": 36,
+      "context_length": 548,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "78cde89f6ab7249452939bc589467db313689bca6e56121458f955acede42f40",
+        "finite": true
+      },
+      "argmax": [
+        [
+          77
+        ],
+        [
+          17928
+        ],
+        [
+          13424
+        ],
+        [
+          4671
+        ],
+        [
+          4341
+        ],
+        [
+          9942
+        ],
+        [
+          13402
+        ],
+        [
+          1243
+        ]
+      ]
+    },
+    {
+      "step": 37,
+      "context_length": 549,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "477ed444d5bb858db40ab6d6c095d27a881a18c222a6319bd42e111f8e3992e8",
+        "finite": true
+      },
+      "argmax": [
+        [
+          31509
+        ],
+        [
+          20903
+        ],
+        [
+          18037
+        ],
+        [
+          17217
+        ],
+        [
+          4737
+        ],
+        [
+          1020
+        ],
+        [
+          14872
+        ],
+        [
+          26463
+        ]
+      ]
+    },
+    {
+      "step": 38,
+      "context_length": 550,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "902dd945b85e1cbddc83c1da5e0161f7442b30634c790ff5dacb062f2dd29d5e",
+        "finite": true
+      },
+      "argmax": [
+        [
+          13528
+        ],
+        [
+          14963
+        ],
+        [
+          20687
+        ],
+        [
+          6079
+        ],
+        [
+          4018
+        ],
+        [
+          16380
+        ],
+        [
+          2135
+        ],
+        [
+          30437
+        ]
+      ]
+    },
+    {
+      "step": 39,
+      "context_length": 551,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "e6ddf77c1981adabcf135bf93a1788bfb4d0bcc3da836d4d02ab0ec1cdf77ad7",
+        "finite": true
+      },
+      "argmax": [
+        [
+          22888
+        ],
+        [
+          8257
+        ],
+        [
+          27602
+        ],
+        [
+          10088
+        ],
+        [
+          21900
+        ],
+        [
+          4368
+        ],
+        [
+          15955
+        ],
+        [
+          28105
+        ]
+      ]
+    },
+    {
+      "step": 40,
+      "context_length": 552,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "a0fca71c46778cf69c72db4e91c8f8eb001592811442b9395dec3a42367f8627",
+        "finite": true
+      },
+      "argmax": [
+        [
+          9021
+        ],
+        [
+          23470
+        ],
+        [
+          3583
+        ],
+        [
+          17657
+        ],
+        [
+          28015
+        ],
+        [
+          30770
+        ],
+        [
+          5524
+        ],
+        [
+          12428
+        ]
+      ]
+    },
+    {
+      "step": 41,
+      "context_length": 553,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "bd2d92d687009e6b841795a1dbbc7ce5662caa0f2fbe015eb358efbe40a8cbec",
+        "finite": true
+      },
+      "argmax": [
+        [
+          380
+        ],
+        [
+          21873
+        ],
+        [
+          25225
+        ],
+        [
+          2254
+        ],
+        [
+          29131
+        ],
+        [
+          26815
+        ],
+        [
+          324
+        ],
+        [
+          26351
+        ]
+      ]
+    },
+    {
+      "step": 42,
+      "context_length": 554,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "f851974ae1cd687807ac14b5dcff3fb7cc6e122c5ac4e188e96bdc5a0306b879",
+        "finite": true
+      },
+      "argmax": [
+        [
+          24083
+        ],
+        [
+          15166
+        ],
+        [
+          14917
+        ],
+        [
+          9652
+        ],
+        [
+          19055
+        ],
+        [
+          18683
+        ],
+        [
+          94
+        ],
+        [
+          4055
+        ]
+      ]
+    },
+    {
+      "step": 43,
+      "context_length": 555,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "ecbe2878885af175e7ed4fdb27371dc700ba42d254027d11894960a51a585340",
+        "finite": true
+      },
+      "argmax": [
+        [
+          2813
+        ],
+        [
+          11712
+        ],
+        [
+          14439
+        ],
+        [
+          5039
+        ],
+        [
+          16204
+        ],
+        [
+          19941
+        ],
+        [
+          15990
+        ],
+        [
+          11569
+        ]
+      ]
+    },
+    {
+      "step": 44,
+      "context_length": 556,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "993de53771d4181e99516bf29d0adccad253e1f889b8788c4cef733a9f529a28",
+        "finite": true
+      },
+      "argmax": [
+        [
+          11240
+        ],
+        [
+          2437
+        ],
+        [
+          24256
+        ],
+        [
+          15426
+        ],
+        [
+          11149
+        ],
+        [
+          8093
+        ],
+        [
+          15427
+        ],
+        [
+          22288
+        ]
+      ]
+    },
+    {
+      "step": 45,
+      "context_length": 557,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "614528372abb83d3883e41d168c083c8eb4d3ca3930bf148076bb77ed9462e7b",
+        "finite": true
+      },
+      "argmax": [
+        [
+          22321
+        ],
+        [
+          3992
+        ],
+        [
+          31274
+        ],
+        [
+          6337
+        ],
+        [
+          22233
+        ],
+        [
+          30120
+        ],
+        [
+          1113
+        ],
+        [
+          24317
+        ]
+      ]
+    },
+    {
+      "step": 46,
+      "context_length": 558,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "2d7300669de0dfe1ff734a235f5fbc85cc5af231b592ef667500f094b12a7a38",
+        "finite": true
+      },
+      "argmax": [
+        [
+          13981
+        ],
+        [
+          14849
+        ],
+        [
+          31749
+        ],
+        [
+          8958
+        ],
+        [
+          6709
+        ],
+        [
+          8606
+        ],
+        [
+          18888
+        ],
+        [
+          13762
+        ]
+      ]
+    },
+    {
+      "step": 47,
+      "context_length": 559,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "3d03d4744fe2ed52a48407c18ea613ead5bea504e8bbec95fb748d6b29a27c82",
+        "finite": true
+      },
+      "argmax": [
+        [
+          2202
+        ],
+        [
+          6039
+        ],
+        [
+          5440
+        ],
+        [
+          10821
+        ],
+        [
+          6988
+        ],
+        [
+          26472
+        ],
+        [
+          18916
+        ],
+        [
+          3681
+        ]
+      ]
+    },
+    {
+      "step": 48,
+      "context_length": 560,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "fd796d20ce068ae1c63f772e7579bd66a80f3bb55d6c0ad956efed3ae1ddbe2a",
+        "finite": true
+      },
+      "argmax": [
+        [
+          26476
+        ],
+        [
+          24156
+        ],
+        [
+          12038
+        ],
+        [
+          26965
+        ],
+        [
+          12726
+        ],
+        [
+          26351
+        ],
+        [
+          16661
+        ],
+        [
+          24101
+        ]
+      ]
+    },
+    {
+      "step": 49,
+      "context_length": 561,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "df3acad6828726b2ac3a2c65b3d3865492ee6dedad2509572ebb84ffa5cf0c17",
+        "finite": true
+      },
+      "argmax": [
+        [
+          24083
+        ],
+        [
+          21647
+        ],
+        [
+          12883
+        ],
+        [
+          4395
+        ],
+        [
+          17315
+        ],
+        [
+          14515
+        ],
+        [
+          21177
+        ],
+        [
+          15404
+        ]
+      ]
+    },
+    {
+      "step": 50,
+      "context_length": 562,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "596fb7b5ccde2404c88532c6cf4c13ec16369b86c18828f4e90527c14f7548e0",
+        "finite": true
+      },
+      "argmax": [
+        [
+          12265
+        ],
+        [
+          25864
+        ],
+        [
+          25589
+        ],
+        [
+          8767
+        ],
+        [
+          15809
+        ],
+        [
+          14177
+        ],
+        [
+          17761
+        ],
+        [
+          14179
+        ]
+      ]
+    },
+    {
+      "step": 51,
+      "context_length": 563,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "c32efebdec3e2939c1dca286c92a5046ee6f0509b1f173ed196c6df207f73fa9",
+        "finite": true
+      },
+      "argmax": [
+        [
+          16224
+        ],
+        [
+          30578
+        ],
+        [
+          29029
+        ],
+        [
+          10949
+        ],
+        [
+          21117
+        ],
+        [
+          14064
+        ],
+        [
+          2814
+        ],
+        [
+          17231
+        ]
+      ]
+    },
+    {
+      "step": 52,
+      "context_length": 564,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "60d48d4475d1f6fd9c7002cc6da89ca28e53aa5e017037a9cbdb72c4aad463e5",
+        "finite": true
+      },
+      "argmax": [
+        [
+          24370
+        ],
+        [
+          25341
+        ],
+        [
+          1548
+        ],
+        [
+          4149
+        ],
+        [
+          27890
+        ],
+        [
+          14876
+        ],
+        [
+          5658
+        ],
+        [
+          8467
+        ]
+      ]
+    },
+    {
+      "step": 53,
+      "context_length": 565,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "82f45e5a021f7faf0718609568a03365856a69eefa744498a1beada03d480adb",
+        "finite": true
+      },
+      "argmax": [
+        [
+          21115
+        ],
+        [
+          1285
+        ],
+        [
+          1401
+        ],
+        [
+          17258
+        ],
+        [
+          2772
+        ],
+        [
+          20973
+        ],
+        [
+          22594
+        ],
+        [
+          1380
+        ]
+      ]
+    },
+    {
+      "step": 54,
+      "context_length": 566,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "549bd6208be8a800b412c985337649fcc73472139751a275ceac7baa85982d2e",
+        "finite": true
+      },
+      "argmax": [
+        [
+          228
+        ],
+        [
+          22610
+        ],
+        [
+          12188
+        ],
+        [
+          3965
+        ],
+        [
+          27158
+        ],
+        [
+          13163
+        ],
+        [
+          21414
+        ],
+        [
+          9820
+        ]
+      ]
+    },
+    {
+      "step": 55,
+      "context_length": 567,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "59c8a2a3b07cdb05c3f8f98ad1ecff971735e8d46595737178a618529fe93319",
+        "finite": true
+      },
+      "argmax": [
+        [
+          16383
+        ],
+        [
+          26113
+        ],
+        [
+          9375
+        ],
+        [
+          26868
+        ],
+        [
+          25151
+        ],
+        [
+          4028
+        ],
+        [
+          4498
+        ],
+        [
+          19798
+        ]
+      ]
+    },
+    {
+      "step": 56,
+      "context_length": 568,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "da774d95d8ee87eebe26576cdd728d2c14984bb88fda1eb393f3a1653f975330",
+        "finite": true
+      },
+      "argmax": [
+        [
+          279
+        ],
+        [
+          20854
+        ],
+        [
+          15410
+        ],
+        [
+          13873
+        ],
+        [
+          23812
+        ],
+        [
+          674
+        ],
+        [
+          25664
+        ],
+        [
+          25307
+        ]
+      ]
+    },
+    {
+      "step": 57,
+      "context_length": 569,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "7fcb43d95fadb44c3f1bf432fd0f637153acf39826bea2d9125fe75280289103",
+        "finite": true
+      },
+      "argmax": [
+        [
+          12547
+        ],
+        [
+          389
+        ],
+        [
+          26743
+        ],
+        [
+          31682
+        ],
+        [
+          14233
+        ],
+        [
+          24678
+        ],
+        [
+          7006
+        ],
+        [
+          23079
+        ]
+      ]
+    },
+    {
+      "step": 58,
+      "context_length": 570,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "4f934e1060423ca4331d75f18ec67516902479d10c96b214013ca4214eb9d1d5",
+        "finite": true
+      },
+      "argmax": [
+        [
+          27450
+        ],
+        [
+          5410
+        ],
+        [
+          18760
+        ],
+        [
+          16407
+        ],
+        [
+          17315
+        ],
+        [
+          22595
+        ],
+        [
+          15644
+        ],
+        [
+          27226
+        ]
+      ]
+    },
+    {
+      "step": 59,
+      "context_length": 571,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "f89f8f18a7caf818223a1610746eb55dd8526562aec889ff9e6198c4b47ff3d2",
+        "finite": true
+      },
+      "argmax": [
+        [
+          22488
+        ],
+        [
+          17199
+        ],
+        [
+          12838
+        ],
+        [
+          12687
+        ],
+        [
+          25754
+        ],
+        [
+          9691
+        ],
+        [
+          13173
+        ],
+        [
+          1257
+        ]
+      ]
+    },
+    {
+      "step": 60,
+      "context_length": 572,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "05f2b32c48e7c42e38d406ab8336c3a32b66170d523fee1c9c366b5947a70a13",
+        "finite": true
+      },
+      "argmax": [
+        [
+          29488
+        ],
+        [
+          14399
+        ],
+        [
+          12322
+        ],
+        [
+          30496
+        ],
+        [
+          13579
+        ],
+        [
+          29421
+        ],
+        [
+          22490
+        ],
+        [
+          19161
+        ]
+      ]
+    },
+    {
+      "step": 61,
+      "context_length": 573,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "1ea21a79b29064c77d068de7372bffac52d788b0a383bc3d757522be0d8693af",
+        "finite": true
+      },
+      "argmax": [
+        [
+          25846
+        ],
+        [
+          6039
+        ],
+        [
+          28106
+        ],
+        [
+          5039
+        ],
+        [
+          23837
+        ],
+        [
+          22639
+        ],
+        [
+          20187
+        ],
+        [
+          439
+        ]
+      ]
+    },
+    {
+      "step": 62,
+      "context_length": 574,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "deb913f9205301ab3497fa1d1b5c55bbb682a4072e5eb6b0b7cc4bfc453cf70c",
+        "finite": true
+      },
+      "argmax": [
+        [
+          21623
+        ],
+        [
+          13903
+        ],
+        [
+          29291
+        ],
+        [
+          19920
+        ],
+        [
+          24770
+        ],
+        [
+          18485
+        ],
+        [
+          27999
+        ],
+        [
+          762
+        ]
+      ]
+    },
+    {
+      "step": 63,
+      "context_length": 575,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "a952a1e2e3e62ac8d3a0c952dc5b747d494ef87647a4e2eb28bc20416729abc3",
+        "finite": true
+      },
+      "argmax": [
+        [
+          20096
+        ],
+        [
+          21275
+        ],
+        [
+          10547
+        ],
+        [
+          31682
+        ],
+        [
+          9525
+        ],
+        [
+          15385
+        ],
+        [
+          22208
+        ],
+        [
+          26218
+        ]
+      ]
+    },
+    {
+      "step": 64,
+      "context_length": 576,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "0e6c67689cd78cac19c727eb8baa7b235333aa976fbcfd3d3d94c5b49e26b2b1",
+        "finite": true
+      },
+      "argmax": [
+        [
+          1027
+        ],
+        [
+          7844
+        ],
+        [
+          1548
+        ],
+        [
+          23199
+        ],
+        [
+          29499
+        ],
+        [
+          12325
+        ],
+        [
+          15955
+        ],
+        [
+          26447
+        ]
+      ]
+    },
+    {
+      "step": 65,
+      "context_length": 577,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "ee66164b24f7267b33cd0e7138ceacec11edd15f62c29e02c5dff7a841f9e323",
+        "finite": true
+      },
+      "argmax": [
+        [
+          13477
+        ],
+        [
+          22299
+        ],
+        [
+          23930
+        ],
+        [
+          28356
+        ],
+        [
+          12931
+        ],
+        [
+          11751
+        ],
+        [
+          14729
+        ],
+        [
+          30231
+        ]
+      ]
+    },
+    {
+      "step": 66,
+      "context_length": 578,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "d4db034ac2dc8e97fa06b459410b594a5c8bdbc58fb578f11303e388fa7e19d8",
+        "finite": true
+      },
+      "argmax": [
+        [
+          13058
+        ],
+        [
+          1753
+        ],
+        [
+          15266
+        ],
+        [
+          9962
+        ],
+        [
+          18055
+        ],
+        [
+          31675
+        ],
+        [
+          13190
+        ],
+        [
+          9285
+        ]
+      ]
+    },
+    {
+      "step": 67,
+      "context_length": 579,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "923ce98ddd9759758d913206e8f303d95fd21c67bbf5deb751e39c09f65ef3ac",
+        "finite": true
+      },
+      "argmax": [
+        [
+          8734
+        ],
+        [
+          30457
+        ],
+        [
+          7234
+        ],
+        [
+          28160
+        ],
+        [
+          13597
+        ],
+        [
+          21473
+        ],
+        [
+          7998
+        ],
+        [
+          14179
+        ]
+      ]
+    },
+    {
+      "step": 68,
+      "context_length": 580,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "5383f4a20fa4f9f8079bd05aeb77c2cb806c4bb921096021891a4afdcec0f8ce",
+        "finite": true
+      },
+      "argmax": [
+        [
+          22389
+        ],
+        [
+          27950
+        ],
+        [
+          11075
+        ],
+        [
+          21347
+        ],
+        [
+          19613
+        ],
+        [
+          24618
+        ],
+        [
+          10594
+        ],
+        [
+          27702
+        ]
+      ]
+    },
+    {
+      "step": 69,
+      "context_length": 581,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "dd294827f625818267d37f29f204bea8054e2dc0d537b5a7aac896ca11748422",
+        "finite": true
+      },
+      "argmax": [
+        [
+          12547
+        ],
+        [
+          2129
+        ],
+        [
+          28863
+        ],
+        [
+          7583
+        ],
+        [
+          16156
+        ],
+        [
+          6358
+        ],
+        [
+          7292
+        ],
+        [
+          28857
+        ]
+      ]
+    },
+    {
+      "step": 70,
+      "context_length": 582,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "9807447d56402392ecd23963eeea503a2466cc8e199d427e175e0764363c8cc6",
+        "finite": true
+      },
+      "argmax": [
+        [
+          558
+        ],
+        [
+          3082
+        ],
+        [
+          15444
+        ],
+        [
+          15631
+        ],
+        [
+          24733
+        ],
+        [
+          24060
+        ],
+        [
+          23144
+        ],
+        [
+          30839
+        ]
+      ]
+    },
+    {
+      "step": 71,
+      "context_length": 583,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "c58f720d1a2518ec6439301509a3a2aacfd885e1be04047c0c144b073cb43b9f",
+        "finite": true
+      },
+      "argmax": [
+        [
+          1239
+        ],
+        [
+          22416
+        ],
+        [
+          30954
+        ],
+        [
+          16935
+        ],
+        [
+          724
+        ],
+        [
+          29712
+        ],
+        [
+          20819
+        ],
+        [
+          9059
+        ]
+      ]
+    },
+    {
+      "step": 72,
+      "context_length": 584,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "49bb6d883b619863cd11c84cc7c1cccdd273b64158296334f3e99163061e97bc",
+        "finite": true
+      },
+      "argmax": [
+        [
+          14425
+        ],
+        [
+          1928
+        ],
+        [
+          18716
+        ],
+        [
+          23000
+        ],
+        [
+          22480
+        ],
+        [
+          11901
+        ],
+        [
+          12068
+        ],
+        [
+          11786
+        ]
+      ]
+    },
+    {
+      "step": 73,
+      "context_length": 585,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "dfb3716e6140c9b6f45fe64d27d5bcad7633a2802cb32a6f9ed2585a37f03790",
+        "finite": true
+      },
+      "argmax": [
+        [
+          29050
+        ],
+        [
+          20903
+        ],
+        [
+          19685
+        ],
+        [
+          10797
+        ],
+        [
+          23318
+        ],
+        [
+          10121
+        ],
+        [
+          9000
+        ],
+        [
+          22814
+        ]
+      ]
+    },
+    {
+      "step": 74,
+      "context_length": 586,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "ceb4776b1ecf3cc7f255ed995b2446510b77f8eff6f5eea2c941f685e14bd412",
+        "finite": true
+      },
+      "argmax": [
+        [
+          8750
+        ],
+        [
+          9147
+        ],
+        [
+          6062
+        ],
+        [
+          7203
+        ],
+        [
+          13489
+        ],
+        [
+          17930
+        ],
+        [
+          9311
+        ],
+        [
+          25152
+        ]
+      ]
+    },
+    {
+      "step": 75,
+      "context_length": 587,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "1bf8ae67eb3e6987a276fc9464796e0754d527e0873c583b4ddc6ed2188a4526",
+        "finite": true
+      },
+      "argmax": [
+        [
+          5498
+        ],
+        [
+          29941
+        ],
+        [
+          17852
+        ],
+        [
+          26432
+        ],
+        [
+          27890
+        ],
+        [
+          1431
+        ],
+        [
+          2329
+        ],
+        [
+          460
+        ]
+      ]
+    },
+    {
+      "step": 76,
+      "context_length": 588,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "efb331bbf092bf39a382141d255a7e87d4d96f95e5e43a3f93d4403afa8fe0d5",
+        "finite": true
+      },
+      "argmax": [
+        [
+          23340
+        ],
+        [
+          27502
+        ],
+        [
+          10039
+        ],
+        [
+          15542
+        ],
+        [
+          20540
+        ],
+        [
+          462
+        ],
+        [
+          18805
+        ],
+        [
+          27135
+        ]
+      ]
+    },
+    {
+      "step": 77,
+      "context_length": 589,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "bc9c63abed4d0f6e86a312b3f20f14bbe282ba7dd10e5557fa629ff9c001574a",
+        "finite": true
+      },
+      "argmax": [
+        [
+          3755
+        ],
+        [
+          9144
+        ],
+        [
+          2262
+        ],
+        [
+          20502
+        ],
+        [
+          24770
+        ],
+        [
+          31594
+        ],
+        [
+          7795
+        ],
+        [
+          24317
+        ]
+      ]
+    },
+    {
+      "step": 78,
+      "context_length": 590,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "8f68ccaf380aaad2a3ee394b7f2314ecf66642316bf434185c9430002b23c7a9",
+        "finite": true
+      },
+      "argmax": [
+        [
+          29246
+        ],
+        [
+          11259
+        ],
+        [
+          28653
+        ],
+        [
+          11657
+        ],
+        [
+          30901
+        ],
+        [
+          18033
+        ],
+        [
+          27552
+        ],
+        [
+          1257
+        ]
+      ]
+    },
+    {
+      "step": 79,
+      "context_length": 591,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "dd10dd5344832ae8af70f83932586dfdcce28992f2aeccdfc06fb0f2ff1a031e",
+        "finite": true
+      },
+      "argmax": [
+        [
+          16392
+        ],
+        [
+          9173
+        ],
+        [
+          14305
+        ],
+        [
+          24570
+        ],
+        [
+          9101
+        ],
+        [
+          8138
+        ],
+        [
+          7006
+        ],
+        [
+          10010
+        ]
+      ]
+    },
+    {
+      "step": 80,
+      "context_length": 592,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "528041279b9d92b044f327c2f4c842c9a3b33afb4cfb6c81c0836768e0ad8571",
+        "finite": true
+      },
+      "argmax": [
+        [
+          2358
+        ],
+        [
+          1767
+        ],
+        [
+          10138
+        ],
+        [
+          12653
+        ],
+        [
+          2506
+        ],
+        [
+          2901
+        ],
+        [
+          22010
+        ],
+        [
+          24317
+        ]
+      ]
+    },
+    {
+      "step": 81,
+      "context_length": 593,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "b85f61d1642ff71b292d3107515bc9c51b5ee6b42567d736a08b58f729436cc7",
+        "finite": true
+      },
+      "argmax": [
+        [
+          6470
+        ],
+        [
+          15056
+        ],
+        [
+          16173
+        ],
+        [
+          13468
+        ],
+        [
+          18924
+        ],
+        [
+          19196
+        ],
+        [
+          9122
+        ],
+        [
+          28888
+        ]
+      ]
+    },
+    {
+      "step": 82,
+      "context_length": 594,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "5f78518fc0a2fadf825ff58d66acad759f2df161898732da422af68d66160279",
+        "finite": true
+      },
+      "argmax": [
+        [
+          12078
+        ],
+        [
+          8253
+        ],
+        [
+          1401
+        ],
+        [
+          21745
+        ],
+        [
+          6382
+        ],
+        [
+          23474
+        ],
+        [
+          3805
+        ],
+        [
+          5810
+        ]
+      ]
+    },
+    {
+      "step": 83,
+      "context_length": 595,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "b16f682dc9e9a201635212479226199e0137c985dcc28e99fb993832c2eca475",
+        "finite": true
+      },
+      "argmax": [
+        [
+          6492
+        ],
+        [
+          5788
+        ],
+        [
+          1006
+        ],
+        [
+          12639
+        ],
+        [
+          5590
+        ],
+        [
+          12149
+        ],
+        [
+          7006
+        ],
+        [
+          11444
+        ]
+      ]
+    },
+    {
+      "step": 84,
+      "context_length": 596,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "376dfc22ef1431a715b3ac45854db181747ceb12dfdd6ad87610e7d15f7cb446",
+        "finite": true
+      },
+      "argmax": [
+        [
+          20036
+        ],
+        [
+          18743
+        ],
+        [
+          16815
+        ],
+        [
+          20368
+        ],
+        [
+          5298
+        ],
+        [
+          16400
+        ],
+        [
+          18746
+        ],
+        [
+          10428
+        ]
+      ]
+    },
+    {
+      "step": 85,
+      "context_length": 597,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "eb7734032f103f834125c624e4d37b29068863c0fd690be274a197c589a931c8",
+        "finite": true
+      },
+      "argmax": [
+        [
+          15901
+        ],
+        [
+          16033
+        ],
+        [
+          20900
+        ],
+        [
+          24494
+        ],
+        [
+          18604
+        ],
+        [
+          11901
+        ],
+        [
+          3805
+        ],
+        [
+          25808
+        ]
+      ]
+    },
+    {
+      "step": 86,
+      "context_length": 598,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "ca0bd577251f93d32f9b9dcdfa97521fe0f0c00c148820dbe059c822ce17a440",
+        "finite": true
+      },
+      "argmax": [
+        [
+          18511
+        ],
+        [
+          20084
+        ],
+        [
+          5783
+        ],
+        [
+          28427
+        ],
+        [
+          2810
+        ],
+        [
+          24060
+        ],
+        [
+          31564
+        ],
+        [
+          26351
+        ]
+      ]
+    },
+    {
+      "step": 87,
+      "context_length": 599,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "3fbe44291293223d309f6440544629d81181290ab81523b85401ce6bf1c861eb",
+        "finite": true
+      },
+      "argmax": [
+        [
+          17248
+        ],
+        [
+          355
+        ],
+        [
+          11276
+        ],
+        [
+          31489
+        ],
+        [
+          4708
+        ],
+        [
+          28017
+        ],
+        [
+          6592
+        ],
+        [
+          5435
+        ]
+      ]
+    },
+    {
+      "step": 88,
+      "context_length": 600,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "4384dccc06905db7e5fd4d3be7806ce929c1f8e3c1c13037065c74293651beb1",
+        "finite": true
+      },
+      "argmax": [
+        [
+          13700
+        ],
+        [
+          27145
+        ],
+        [
+          221
+        ],
+        [
+          13383
+        ],
+        [
+          2115
+        ],
+        [
+          4548
+        ],
+        [
+          8992
+        ],
+        [
+          23635
+        ]
+      ]
+    },
+    {
+      "step": 89,
+      "context_length": 601,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "f5b00e28626aa48e408d105e17ffde1cf2d0bae6f255b94697ca80d2a0e9a228",
+        "finite": true
+      },
+      "argmax": [
+        [
+          5826
+        ],
+        [
+          22059
+        ],
+        [
+          10629
+        ],
+        [
+          24540
+        ],
+        [
+          3284
+        ],
+        [
+          16940
+        ],
+        [
+          7606
+        ],
+        [
+          4199
+        ]
+      ]
+    },
+    {
+      "step": 90,
+      "context_length": 602,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "edf5260c76f5af3d81264220a7f2d7c77ce133a5f088329716b5167f3bd9aceb",
+        "finite": true
+      },
+      "argmax": [
+        [
+          11549
+        ],
+        [
+          2021
+        ],
+        [
+          10295
+        ],
+        [
+          25966
+        ],
+        [
+          27742
+        ],
+        [
+          14876
+        ],
+        [
+          12968
+        ],
+        [
+          7605
+        ]
+      ]
+    },
+    {
+      "step": 91,
+      "context_length": 603,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "b4e4aeb84e00af7e0f64df1c4783a617ce8f6f06cd2341af007ba695692be660",
+        "finite": true
+      },
+      "argmax": [
+        [
+          30912
+        ],
+        [
+          6724
+        ],
+        [
+          20603
+        ],
+        [
+          17809
+        ],
+        [
+          6461
+        ],
+        [
+          20295
+        ],
+        [
+          12068
+        ],
+        [
+          15366
+        ]
+      ]
+    },
+    {
+      "step": 92,
+      "context_length": 604,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "08c2bf2e0558596657c2d2b36c59040051d22884beae4ee82e862e8cfda67210",
+        "finite": true
+      },
+      "argmax": [
+        [
+          25846
+        ],
+        [
+          11028
+        ],
+        [
+          12376
+        ],
+        [
+          24540
+        ],
+        [
+          10265
+        ],
+        [
+          28702
+        ],
+        [
+          324
+        ],
+        [
+          7123
+        ]
+      ]
+    },
+    {
+      "step": 93,
+      "context_length": 605,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "971275f16de66b632aacd5ce5942f72f6cc403cd63784f32466ad291bbb1f066",
+        "finite": true
+      },
+      "argmax": [
+        [
+          5826
+        ],
+        [
+          5963
+        ],
+        [
+          23674
+        ],
+        [
+          31435
+        ],
+        [
+          30030
+        ],
+        [
+          24823
+        ],
+        [
+          31458
+        ],
+        [
+          24985
+        ]
+      ]
+    },
+    {
+      "step": 94,
+      "context_length": 606,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "9db3012612d4fb2e7814641dc891b065047fcbc74c52675927d9f17c0cf23370",
+        "finite": true
+      },
+      "argmax": [
+        [
+          9186
+        ],
+        [
+          26027
+        ],
+        [
+          15286
+        ],
+        [
+          3116
+        ],
+        [
+          23837
+        ],
+        [
+          11276
+        ],
+        [
+          4644
+        ],
+        [
+          23730
+        ]
+      ]
+    },
+    {
+      "step": 95,
+      "context_length": 607,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "e32ee1ebf8c15b0de05741c75ff7f47e3319c0ce6e08183a9e4e696f557fb3ac",
+        "finite": true
+      },
+      "argmax": [
+        [
+          6600
+        ],
+        [
+          11541
+        ],
+        [
+          7988
+        ],
+        [
+          14527
+        ],
+        [
+          11954
+        ],
+        [
+          18690
+        ],
+        [
+          31175
+        ],
+        [
+          9742
+        ]
+      ]
+    },
+    {
+      "step": 96,
+      "context_length": 608,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "e56cfd3e87e1c3428bfee53dc7136a389c2139098c6d08d641b1172efb3ec04a",
+        "finite": true
+      },
+      "argmax": [
+        [
+          18603
+        ],
+        [
+          27643
+        ],
+        [
+          26272
+        ],
+        [
+          30438
+        ],
+        [
+          28177
+        ],
+        [
+          13080
+        ],
+        [
+          7823
+        ],
+        [
+          13483
+        ]
+      ]
+    },
+    {
+      "step": 97,
+      "context_length": 609,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "7dff29aa4c5f33746ad0a95986a4ad0c03e057eea4ae74e856ba8aae2847fa7b",
+        "finite": true
+      },
+      "argmax": [
+        [
+          24602
+        ],
+        [
+          12693
+        ],
+        [
+          7359
+        ],
+        [
+          31455
+        ],
+        [
+          13050
+        ],
+        [
+          26072
+        ],
+        [
+          2868
+        ],
+        [
+          22798
+        ]
+      ]
+    },
+    {
+      "step": 98,
+      "context_length": 610,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "d863dbd5652f59c38fafd01dc0a71880409ee3a826b1dfd882160a6221b26d42",
+        "finite": true
+      },
+      "argmax": [
+        [
+          9720
+        ],
+        [
+          22299
+        ],
+        [
+          28346
+        ],
+        [
+          1520
+        ],
+        [
+          17282
+        ],
+        [
+          5461
+        ],
+        [
+          10089
+        ],
+        [
+          16982
+        ]
+      ]
+    },
+    {
+      "step": 99,
+      "context_length": 611,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "ef172567a05902eaad2fbdbdb6e05dfdef4dc01818fc6a2dac2adc3292f8772e",
+        "finite": true
+      },
+      "argmax": [
+        [
+          13477
+        ],
+        [
+          15336
+        ],
+        [
+          26667
+        ],
+        [
+          4880
+        ],
+        [
+          1895
+        ],
+        [
+          2911
+        ],
+        [
+          3209
+        ],
+        [
+          17268
+        ]
+      ]
+    },
+    {
+      "step": 100,
+      "context_length": 612,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "6eb631b7451b77a00249b3cd191f2c22bc988f7f8563ee6c3be607a7f29b1a86",
+        "finite": true
+      },
+      "argmax": [
+        [
+          379
+        ],
+        [
+          17909
+        ],
+        [
+          15460
+        ],
+        [
+          20176
+        ],
+        [
+          212
+        ],
+        [
+          8551
+        ],
+        [
+          9000
+        ],
+        [
+          8259
+        ]
+      ]
+    },
+    {
+      "step": 101,
+      "context_length": 613,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "0695e02639804526430ccabfa4f86523c8f8231499219bc97aff6ae940ba533d",
+        "finite": true
+      },
+      "argmax": [
+        [
+          5826
+        ],
+        [
+          14192
+        ],
+        [
+          19954
+        ],
+        [
+          20801
+        ],
+        [
+          21491
+        ],
+        [
+          8629
+        ],
+        [
+          27569
+        ],
+        [
+          4908
+        ]
+      ]
+    },
+    {
+      "step": 102,
+      "context_length": 614,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "2dbecaafee92834081c47bb6873058eadffa4c29f03d4e24e1c5816febfa2cab",
+        "finite": true
+      },
+      "argmax": [
+        [
+          23949
+        ],
+        [
+          26467
+        ],
+        [
+          27298
+        ],
+        [
+          11021
+        ],
+        [
+          16699
+        ],
+        [
+          19659
+        ],
+        [
+          25665
+        ],
+        [
+          1243
+        ]
+      ]
+    },
+    {
+      "step": 103,
+      "context_length": 615,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "ea6e26a9ea7746d09bed2cb3f944f3c85127dc00bc1c8efe9cddd20cb4da0a19",
+        "finite": true
+      },
+      "argmax": [
+        [
+          29010
+        ],
+        [
+          16703
+        ],
+        [
+          1509
+        ],
+        [
+          14001
+        ],
+        [
+          2772
+        ],
+        [
+          14876
+        ],
+        [
+          17663
+        ],
+        [
+          25462
+        ]
+      ]
+    },
+    {
+      "step": 104,
+      "context_length": 616,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "3e431cf7b7409f3e3680491b84399c557475186c9f3c97f62b0ef5f89ce16481",
+        "finite": true
+      },
+      "argmax": [
+        [
+          10240
+        ],
+        [
+          22233
+        ],
+        [
+          10493
+        ],
+        [
+          7372
+        ],
+        [
+          14512
+        ],
+        [
+          14491
+        ],
+        [
+          23542
+        ],
+        [
+          24485
+        ]
+      ]
+    },
+    {
+      "step": 105,
+      "context_length": 617,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "2e07f6f6acaea8ac4fb0afa2c3a755aee854eac4941236619f25b87ef0d8169b",
+        "finite": true
+      },
+      "argmax": [
+        [
+          11745
+        ],
+        [
+          30588
+        ],
+        [
+          11909
+        ],
+        [
+          25623
+        ],
+        [
+          15678
+        ],
+        [
+          15008
+        ],
+        [
+          7011
+        ],
+        [
+          12598
+        ]
+      ]
+    },
+    {
+      "step": 106,
+      "context_length": 618,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "d52a2fc67fa86fa458c9730442d85cb708a4d680ae1e86efed448ac8fc520557",
+        "finite": true
+      },
+      "argmax": [
+        [
+          3755
+        ],
+        [
+          3948
+        ],
+        [
+          25930
+        ],
+        [
+          12643
+        ],
+        [
+          31442
+        ],
+        [
+          1914
+        ],
+        [
+          5269
+        ],
+        [
+          3018
+        ]
+      ]
+    },
+    {
+      "step": 107,
+      "context_length": 619,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "1198bd3126a58816e6dc2e8fa7e75efcd42d9b62f54082cebaccb38350cf3675",
+        "finite": true
+      },
+      "argmax": [
+        [
+          8456
+        ],
+        [
+          17835
+        ],
+        [
+          20148
+        ],
+        [
+          26946
+        ],
+        [
+          15290
+        ],
+        [
+          4321
+        ],
+        [
+          6259
+        ],
+        [
+          11445
+        ]
+      ]
+    },
+    {
+      "step": 108,
+      "context_length": 620,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "7fddc42f4b3589a1fee66e70cd222bfd0a4d619dbb8939ca28ea6fedb96010da",
+        "finite": true
+      },
+      "argmax": [
+        [
+          28790
+        ],
+        [
+          22233
+        ],
+        [
+          27067
+        ],
+        [
+          30706
+        ],
+        [
+          17500
+        ],
+        [
+          3062
+        ],
+        [
+          8684
+        ],
+        [
+          8241
+        ]
+      ]
+    },
+    {
+      "step": 109,
+      "context_length": 621,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "392cbff00c6112395085bf35484394f152527f9b6efceb61637967a4dd0daad8",
+        "finite": true
+      },
+      "argmax": [
+        [
+          998
+        ],
+        [
+          18697
+        ],
+        [
+          5758
+        ],
+        [
+          18382
+        ],
+        [
+          27501
+        ],
+        [
+          23917
+        ],
+        [
+          2123
+        ],
+        [
+          31602
+        ]
+      ]
+    },
+    {
+      "step": 110,
+      "context_length": 622,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "bfd602572d62645eaa84895916ba070bac338e6f6e5af1319d1e8c4778788a3e",
+        "finite": true
+      },
+      "argmax": [
+        [
+          16193
+        ],
+        [
+          8253
+        ],
+        [
+          2060
+        ],
+        [
+          9513
+        ],
+        [
+          29780
+        ],
+        [
+          3487
+        ],
+        [
+          10731
+        ],
+        [
+          28374
+        ]
+      ]
+    },
+    {
+      "step": 111,
+      "context_length": 623,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "04e1fa8e1a52845bc7e972748cd2e707053e4ad17d5a40f34c17096dac28d490",
+        "finite": true
+      },
+      "argmax": [
+        [
+          19521
+        ],
+        [
+          16121
+        ],
+        [
+          12771
+        ],
+        [
+          15542
+        ],
+        [
+          18131
+        ],
+        [
+          28017
+        ],
+        [
+          25628
+        ],
+        [
+          16242
+        ]
+      ]
+    },
+    {
+      "step": 112,
+      "context_length": 624,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "aa3a55697e2099d73b4536d9225420636cba8cbd5158ce1af51186792a88200c",
+        "finite": true
+      },
+      "argmax": [
+        [
+          2813
+        ],
+        [
+          17387
+        ],
+        [
+          5288
+        ],
+        [
+          10196
+        ],
+        [
+          18550
+        ],
+        [
+          24618
+        ],
+        [
+          19795
+        ],
+        [
+          22096
+        ]
+      ]
+    },
+    {
+      "step": 113,
+      "context_length": 625,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "edca9894b8130d8e442ca280bf98b421e1a49eefda7d5e9a7dc21319555edc3e",
+        "finite": true
+      },
+      "argmax": [
+        [
+          21115
+        ],
+        [
+          25864
+        ],
+        [
+          18336
+        ],
+        [
+          2954
+        ],
+        [
+          10597
+        ],
+        [
+          25660
+        ],
+        [
+          1862
+        ],
+        [
+          7402
+        ]
+      ]
+    },
+    {
+      "step": 114,
+      "context_length": 626,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "c915d1dde050e8ef31d931fea0a66486ebcd2890eb462bcd889f158e81102b53",
+        "finite": true
+      },
+      "argmax": [
+        [
+          10847
+        ],
+        [
+          13589
+        ],
+        [
+          28656
+        ],
+        [
+          30496
+        ],
+        [
+          18531
+        ],
+        [
+          896
+        ],
+        [
+          1085
+        ],
+        [
+          1409
+        ]
+      ]
+    },
+    {
+      "step": 115,
+      "context_length": 627,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "e43415578b97c4bd5bc0096f23b4af860ffd8e39dcdf0e59a302109d4ed1153b",
+        "finite": true
+      },
+      "argmax": [
+        [
+          17273
+        ],
+        [
+          11302
+        ],
+        [
+          29295
+        ],
+        [
+          3965
+        ],
+        [
+          26641
+        ],
+        [
+          1260
+        ],
+        [
+          29419
+        ],
+        [
+          2314
+        ]
+      ]
+    },
+    {
+      "step": 116,
+      "context_length": 628,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "d36a6adefa84b926096e9526050f304d2bf011b588f6751dca400a717ccf0cc4",
+        "finite": true
+      },
+      "argmax": [
+        [
+          11881
+        ],
+        [
+          26051
+        ],
+        [
+          10412
+        ],
+        [
+          1122
+        ],
+        [
+          27030
+        ],
+        [
+          25715
+        ],
+        [
+          11663
+        ],
+        [
+          2573
+        ]
+      ]
+    },
+    {
+      "step": 117,
+      "context_length": 629,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "a2c21b717f3c5416ed3246d1dca69119a6db16f5c9288730276b7aee1ac3bfe0",
+        "finite": true
+      },
+      "argmax": [
+        [
+          2813
+        ],
+        [
+          6503
+        ],
+        [
+          6428
+        ],
+        [
+          18762
+        ],
+        [
+          2608
+        ],
+        [
+          24151
+        ],
+        [
+          17752
+        ],
+        [
+          6814
+        ]
+      ]
+    },
+    {
+      "step": 118,
+      "context_length": 630,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "24cf62cb4938e69153b80a365cdcfe9567e735110b26639fb489e6a49fd8ead9",
+        "finite": true
+      },
+      "argmax": [
+        [
+          18814
+        ],
+        [
+          12555
+        ],
+        [
+          2495
+        ],
+        [
+          10684
+        ],
+        [
+          26875
+        ],
+        [
+          9664
+        ],
+        [
+          13496
+        ],
+        [
+          4437
+        ]
+      ]
+    },
+    {
+      "step": 119,
+      "context_length": 631,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "2a9395ad303602f8cf4289d9059f748840973dc387530fa31bb5019c681c4551",
+        "finite": true
+      },
+      "argmax": [
+        [
+          18603
+        ],
+        [
+          24369
+        ],
+        [
+          17214
+        ],
+        [
+          468
+        ],
+        [
+          17385
+        ],
+        [
+          17870
+        ],
+        [
+          30048
+        ],
+        [
+          27647
+        ]
+      ]
+    },
+    {
+      "step": 120,
+      "context_length": 632,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "02a007ae1d27264d1b8cc16937114466ba616de9b4e0a62eb423f5938532822b",
+        "finite": true
+      },
+      "argmax": [
+        [
+          5297
+        ],
+        [
+          6208
+        ],
+        [
+          11164
+        ],
+        [
+          19938
+        ],
+        [
+          30452
+        ],
+        [
+          4372
+        ],
+        [
+          17754
+        ],
+        [
+          14179
+        ]
+      ]
+    },
+    {
+      "step": 121,
+      "context_length": 633,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "cee79c109488864495637a848163c189f06e2891e7f9740df5ccaebcaec69662",
+        "finite": true
+      },
+      "argmax": [
+        [
+          16664
+        ],
+        [
+          21834
+        ],
+        [
+          18517
+        ],
+        [
+          17505
+        ],
+        [
+          9828
+        ],
+        [
+          1990
+        ],
+        [
+          10314
+        ],
+        [
+          12546
+        ]
+      ]
+    },
+    {
+      "step": 122,
+      "context_length": 634,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "89b3c04f2a290d5581a1660cc83400499aa50b2058ad118b8cedb458c6412abc",
+        "finite": true
+      },
+      "argmax": [
+        [
+          24083
+        ],
+        [
+          3268
+        ],
+        [
+          2513
+        ],
+        [
+          13448
+        ],
+        [
+          26268
+        ],
+        [
+          6161
+        ],
+        [
+          24068
+        ],
+        [
+          26700
+        ]
+      ]
+    },
+    {
+      "step": 123,
+      "context_length": 635,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "ba1e061a412b2810e87e3b632809090906d298e6d3f2fc09a56061cbd836dbd8",
+        "finite": true
+      },
+      "argmax": [
+        [
+          20551
+        ],
+        [
+          26941
+        ],
+        [
+          21643
+        ],
+        [
+          20853
+        ],
+        [
+          21538
+        ],
+        [
+          10456
+        ],
+        [
+          2192
+        ],
+        [
+          16706
+        ]
+      ]
+    },
+    {
+      "step": 124,
+      "context_length": 636,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "755042d465e70db87ed0ec2453eefe4f2e0569305644f2722a01211c5bf37956",
+        "finite": true
+      },
+      "argmax": [
+        [
+          28377
+        ],
+        [
+          13794
+        ],
+        [
+          15943
+        ],
+        [
+          30291
+        ],
+        [
+          20281
+        ],
+        [
+          14876
+        ],
+        [
+          26168
+        ],
+        [
+          27867
+        ]
+      ]
+    },
+    {
+      "step": 125,
+      "context_length": 637,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "a8622340a8ad8ca2e0def0c8484016f07d2e75aec83a8f32bb7f947f20b830c9",
+        "finite": true
+      },
+      "argmax": [
+        [
+          5598
+        ],
+        [
+          28051
+        ],
+        [
+          6779
+        ],
+        [
+          19764
+        ],
+        [
+          9175
+        ],
+        [
+          27028
+        ],
+        [
+          15072
+        ],
+        [
+          19872
+        ]
+      ]
+    },
+    {
+      "step": 126,
+      "context_length": 638,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "a46bc43155ac4aa714f1274043a69d27dc3afbaf9d8dd971a121517ec876052b",
+        "finite": true
+      },
+      "argmax": [
+        [
+          23834
+        ],
+        [
+          3587
+        ],
+        [
+          7254
+        ],
+        [
+          10249
+        ],
+        [
+          9297
+        ],
+        [
+          22845
+        ],
+        [
+          12251
+        ],
+        [
+          7479
+        ]
+      ]
+    },
+    {
+      "step": 127,
+      "context_length": 639,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "124f3145fe23559c4ffcf3bd6c8ecdf0559980bc9402b1da6f5a45bcc83f6f0a",
+        "finite": true
+      },
+      "argmax": [
+        [
+          5229
+        ],
+        [
+          22233
+        ],
+        [
+          8884
+        ],
+        [
+          21703
+        ],
+        [
+          8401
+        ],
+        [
+          12476
+        ],
+        [
+          1826
+        ],
+        [
+          4544
+        ]
+      ]
+    },
+    {
+      "step": 128,
+      "context_length": 640,
+      "logits": {
+        "shape": [
+          8,
+          1,
+          32000
+        ],
+        "dtype": "torch.bfloat16",
+        "sha256": "7e1845b05f59c56fe7d0830f110e9969576ef5198d680cfcc7662176002ba9a3",
+        "finite": true
+      },
+      "argmax": [
+        [
+          27644
+        ],
+        [
+          9144
+        ],
+        [
+          20302
+        ],
+        [
+          4993
+        ],
+        [
+          4269
+        ],
+        [
+          751
+        ],
+        [
+          13809
+        ],
+        [
+          1443
+        ]
+      ],
+      "hidden_states": [
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "f43a405eaa98137742dc97833bceeaeda141f1cc58c59411b0a89d939ee17573",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "7ca827dab134a404786c4fcaa887f1411b5d20e5822e67c63f01e0639e0208eb",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "6dfbde1b7de608a6f91d2167533c86f39ef88a1188c9063122f3a97eb71abbd3",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "22c77d508b89e7f04c9b9f2229558620df67008bc7cbfd5a25e6951f8213c989",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "6f2439a20b99eb54eb67fe521479b4823660bb2a60015575964e7d398798fdc3",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "f56c43b95f59b791cdf36aa40e9794b13e1d7bb96a2ae02309dbb166cc3d1f6e",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "3069758d758704306366d56b840e5e55fd1bd1b86c97139a105462462d67abac",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "b26ca69b9db6f78803e397caede1fcd34bc75f7bcec5c1b6d644d79ecf5286ac",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "99b2c9b79df2d312a8c40ec9ba78bb2bebcbb92f5d64197dc62b68d35f3ff32a",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "3811684015732eec22f4c62bd21055187effaeddbdacf9c2ce32c16ff2bd278f",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "b5cac394ff47a816a4b9f6be62273667fb5d5e1dee476808dc6857c172cfbfca",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "5f991d662c8c365c35ff8a12df43aaf0f763c6dc640b238124b3f237dd99ee40",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "a582c378f71fc0c361d55b306f29f38b49e870a64ddbed4503fdc3017f39e627",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "49787a246021763005f46eae6a8500e94b5ec72fd08019e7c865d9ecb59e2672",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "6b71c6361c2f7c223263a35baa3c7fc20f28c9e66a7c752606963b25f330d5d7",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "4484931298a3de246b4d043004ad3a704f99a8185b2d4a65d8614fc8083b2f92",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "1e21749cb4efc376ad43f0ca01fd3ff8f8bb5dba8cab2727c80a06a189a954cc",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "cd637056a24fb7753a843619ed06602ad21307b47f07d8bbc51c984b0548a9bc",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "cfdcdc1b61655910ff85631cc6f506b30cd21725779e691498517acdf56e2f3b",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "4d0b5afb2ad94e5e38765b2e4591584d627d9d9db9954bdb0959c90c12d58cd3",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "40fcc85fcdb2fe64884f753bb04771563a5df971e9dfe037c35589799cd5aab0",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "2d4994e2dfb954efc021d13343f0f73d4c59a2af97d9a31307ef41484bf645c1",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "deee5bd8ee7fc089230e7095e248961d148be60f79ac7240dd07d47c47412ebc",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "e528118ff9091000c60d08fb5d7011da141ec105c77c667e529efab82b1adac3",
+          "finite": true
+        },
+        {
+          "shape": [
+            8,
+            1,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "sha256": "7d68d32bec96ec1634f5cf8f1506fc2f725965c3ba58baba5f0bac11c217646a",
+          "finite": true
+        }
+      ],
+      "kv_states": [
+        [
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "b2db00dfda1045e7caa4616ca7ba5f7d4b77ebef9b8d3cbbd3418df4e7a3384f",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "a5e50fac66f3e0123f5846d257779890627b3c57fc37de71482051399ad9417b",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "c1f151c2c76502b75e6276458ba1b18ffc03ac2713828517292c34efe95ea2bb",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "a8144b3e6bce892d5458504d13eb529d650d3c49d0243bb99c516e60398a8f08",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "154d011f5bf119603daa73ef6212660f2ddcc4b46fa871a2d96b39aa7503b309",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "c876c718be4b0b36b4a259dff5a2fbe8fd7d5ba71ac77e37d3f7aded0a123583",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "3839c9d8d866b422ac1eafab460b0c42fc34d14bc983e8155fd09e3177abc595",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "5b4e55a33b954607f0c77b0c5356f027dfd5cbeac8ca08b98cb5ab612ff18ef5",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "1f1edb296776bbc7895b07be6d3071f6b020ed2a11d9be3214bf20a68cb5acd0",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "50d539bf08506de7bf78ef783d9d13a4f7e5c54e14e02af0f5cec3289608b38a",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "a9ebab21fe89c87a95a6b3402e0f422ba7a28d1dcc3ecc997ed76f3676ab68ae",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "56f1fe932c2cac05517c4adc3b0c62918691c86ab7a50446eae564f289a7210c",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "c92413dd0925941920e3ed2a2b548e143c7c8821effa7361a74ac22d494bbef7",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "acc0781291108cc6e044da2d9a72b65d617f5f441dcdb9adc5c279d6ffe525b2",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "87d1b7fb0a08094d8109ca3e274ebfca6187511db228e5dc6b3ae50466533214",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "35fe9aa819dc350b1fa3426f5c272881bec1b2f79ecf66ca9def1c48017cef53",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "074c59413a27bfa733e0f48126913edb93b6e34de80859c8b320e5076aa93e0d",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "7224d316589e5317270363816daef9dd89912f5ee3ae4d718027ba04c668aba1",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "998245d96a49b5577959c166f4bc09ef0854692d1dcfd2f59daf9bdba6a31144",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "58362bc8674db84134795cc5962794afdab42d6b5d89c05bff9be62a865a057c",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "8a8b02f865193668ebad02b91a6970276fb8ca4dbec51af4d082bce3294ef13e",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "69333aae22d759b7036640c99301a5a9d17b2626e54077f539737b93f22b4946",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "a1bab93f7855d0c4c07886e2db4d4cbc8c1a829764f3c87247282c5f2b6bbb92",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "d0ec00b492b8c549ec24eee5a2960bd872e23b02c7f5aee615b043aea6fb38e7",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "a26d51cb19e04e233a36b12492b83d3623367e88b91022b47dcb8cdd7a00b932",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "173521a03f6e1f444d2045f533a74a9e19cff796acc7afd260d00aafd63ecbe1",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "9e65be6e54477f148184c4541fe9a3e0d295ae32d4138acd20a7c795c553a8ff",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "0dff2e8875760e6822117fcaf9994d3dd99932edc75e2dd31774408e9992aef0",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "223822a4de23d76761aff0174a7656c44d1d0f4ffa71d877eb5e60452e9832b1",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "3ddff0f53ad02b31376a3ef3460ee17e78f31f29838efa5ba8978e76caa09ee8",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "cbf59e736b027bcd5c24b00856bd725426e0ea252c8440d6316d4f0cbec607a9",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "3bb0e5f4dfe879bc0926ad9d6ba4f884e964e24197644061e7cf77e185697816",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "5eaddf1d38fa1a6e91967ae3dc7154eb8fb365d4a98ad2a151b70594dbc70c6e",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "4509a3bf75e8b168dd1ebacd86f7a2d01509c5743104463fb0d180e9074e407b",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "636763d1533943488f7ec802eff5da32a297b2fb08ca3816dd070b3dd655cae2",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "2852825937aca4eab3c1d8aa5c4cf49e0cb6d5567538d9e0e052d3161942da60",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "e8956e60d8856cebd81e823b90f99f71bfacac90a2c1a1d9faa79b6cbd93c824",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "bb83672335f48b68f878fde0b188b8bc068b2e1dd8a4b8b3b59e3bbb6f51c493",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "d5f3cd1623cbdc850da10c87e24ba6287e3d7dc077eb213a39881de26604cc8f",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "187911b051f6c98143e351f2e28dd931e84109db47039ddeabb19cac347f1a35",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "1cfe61719d5d5a19bf27b1119651fc737f2ab8a5361745b75df3c10bf58e3f4d",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "a165d764ebe338bb17024b1168574029a4f8f5ebf32bb58933e0a52ec7c83e61",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "df35a15ca57f818a87220f1efa60c714131b8c63ae64dae40d7a1b36fda91833",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "42d9b02761b1bdb7008bec220c83d941f55b3a65e730c7752f68fcafef88f665",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "ec672db05d11e8f229188eecdaac4fc43075eef1b8edaace3e728b29b84dd72a",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "177fd0b15e963098c9bcd23ba0c6d19a880822aff9458efa702636ef78af498e",
+            "finite": true
+          }
+        ],
+        [
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "30043c60d198fbc7cb6c728a52af92c4b173e60f8fc7abab129645080a619c70",
+            "finite": true
+          },
+          {
+            "shape": [
+              8,
+              640,
+              2048
+            ],
+            "dtype": "torch.bfloat16",
+            "sha256": "33241a95e648d9291cc5e232f7725e9a7d2693437655a8819693bd139b0b7020",
+            "finite": true
+          }
+        ]
+      ]
+    }
+  ],
+  "status": "completed",
+  "scope": "logits every step; all hidden and KV states at prefix and decode steps 1,2,128; unpadded full model",
+  "model_config": {
+    "use_gate": false,
+    "use_head_gate": false,
+    "memory_offload": false,
+    "memory_offload_policy": "auto",
+    "memory_offload_group_size": 1,
+    "memory_offload_prefetch_depth": 4,
+    "memory_offload_bulk_max_tokens": 1024,
+    "memory_offload_single_slot_max_tokens": 2048,
+    "memory_offload_single_host_min_tokens": 4096,
+    "memory_offload_single_host_max_tokens": 16384,
+    "memory_offload_chunk_size": 1024,
+    "memory_offload_mapped_bulk": true,
+    "memory_offload_mapped_bulk_min_tokens": 1,
+    "memory_offload_mapped_bulk_max_tokens": 16,
+    "hidden_size": 2048,
+    "num_hidden_layers": 24,
+    "num_heads": 32,
+    "num_kv_heads": 32,
+    "qkv_bias": false,
+    "qk_norm": false,
+    "window_size": null,
+    "rope_theta": 10000.0,
+    "max_position_embeddings": 2048,
+    "hidden_ratio": 4,
+    "intermediate_size": 5632,
+    "hidden_act": "swish",
+    "initializer_range": 0.02,
+    "elementwise_affine": true,
+    "norm_eps": 1e-06,
+    "use_cache": true,
+    "fuse_norm": false,
+    "fuse_swiglu": true,
+    "fuse_cross_entropy": true,
+    "fuse_linear_cross_entropy": false,
+    "use_l2warp": false,
+    "vocab_size": 32000,
+    "return_dict": true,
+    "output_hidden_states": false,
+    "dtype": null,
+    "chunk_size_feed_forward": 0,
+    "is_encoder_decoder": false,
+    "architectures": null,
+    "id2label": {
+      "0": "LABEL_0",
+      "1": "LABEL_1"
+    },
+    "label2id": {
+      "LABEL_0": 0,
+      "LABEL_1": 1
+    },
+    "problem_type": null,
+    "_name_or_path": "",
+    "transformers_version": "5.3.0",
+    "pad_token_id": null,
+    "bos_token_id": 1,
+    "eos_token_id": 2,
+    "tie_word_embeddings": false,
+    "model_type": "memory",
+    "output_attentions": false
+  },
+  "memory": {
+    "gpu_allocated_bytes": 3618770944,
+    "gpu_reserved_bytes": 5993660416,
+    "gpu_peak_allocated_bytes": 5840924672,
+    "gpu_peak_reserved_bytes": 5993660416,
+    "host_rss_bytes": 12864094208,
+    "host_process_high_water_bytes": 15171538944,
+    "host_high_water_scope": "process lifetime, including model loading",
+    "raw_table_snapshot_bytes": 3145728000,
+    "cpu_table_bytes": 3145728000,
+    "cpu_table_pinned_bytes": 3145728000,
+    "offload_pinned_bytes": 3162505216,
+    "offload_gpu_buffer_bytes": 67895296,
+    "offloader_capacities": [
+      {
+        "batch": 8,
+        "length": 512,
+        "policy": "pipeline",
+        "host_bytes": 16777216,
+        "gpu_bytes": 67108864
+      },
+      {
+        "batch": 8,
+        "length": 1,
+        "policy": "bulk",
+        "host_bytes": 0,
+        "gpu_bytes": 786432
+      }
+    ],
+    "kv_cache_storage_bytes": 1006632960
+  }
+}

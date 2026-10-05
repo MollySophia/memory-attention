@@ -2,12 +2,12 @@
   "status": "active",
   "objective": "Integrate recovered local gains into one validated cumulative implementation, then approach resident latency at all16 fixed workloads.",
   "retained_start": "A0016",
-  "retained_source": "5f3d5958fea25f953bb91f5ef6f35880ff37fcfa",
+  "retained_source": "6cc9354760ebde3bab9a90996a7713a936dfb439",
   "historical_seal": "2cac8b4df73966fff2b9b4f724000d3b3a19e2f0",
   "proposed_chain": [
     "A0016",
     "A0023: mapped bulk1..16 accepted step3",
-    "integrate confirmed A0021 short-prefill opportunity on verified transport parent",
+    "A0028: shared host staging4096..16384 accepted step4",
     "profile and optimize remaining all16 target gaps"
   ],
   "acceptance": "Confirmed offload+gap gain at any fixed workload, no resolved complete-matrix regression, correct computation and preserved GPU savings. No automatic adoption of historical sources.",
@@ -71,7 +71,16 @@
       "confirmed_local_gains": [],
       "blocking_reason": "No confirmed gain; b8 generation offload regression",
       "evidence": "../A0027/evidence-integrity.json"
+    },
+    {
+      "attempt": "A0028",
+      "status": "accepted",
+      "accepted_step": 4,
+      "confirmed_local_gains": [
+        "prefill b8/512"
+      ],
+      "evidence": "../A0028/final-evidence-audit.json"
     }
   ],
-  "retained_current": "A0023"
+  "retained_current": "A0028"
 }

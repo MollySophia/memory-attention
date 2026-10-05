@@ -1,6 +1,6 @@
-# Verified optimization chain through A0023
+# Verified optimization chain through A0028
 
-This evidence index records the verified implementation through accepted step 3.
+This evidence index records the verified implementation through accepted step 4.
 Later candidates do not change this chain until their complete retention gates
 pass. The overall all-workload near-GPU objective remains unmet.
 
@@ -11,9 +11,12 @@ pass. The overall all-workload near-GPU objective remains unmet.
 | 2 | A0016 | A0001 | Use one automatic pipeline slot through 2048 input tokens | [Incremental confirmation](../A0016/parent-confirmation-analysis.json), [cumulative A0000 confirmation](../A0016/validation-v3-confirmation-analysis.json), [verdict](../A0016/record.json) |
 | 3 | A0023 | A0016 | Read mapped host tables for bulk inputs of 1–16 tokens | [Incremental confirmation](../A0023/R02-parent-confirmation/analysis.json), [all-workload guards](../A0023/full-parent-analysis.json), [integrity and correctness audit](../A0023/final-evidence-audit.json), [verdict](../A0023/record.json) |
 
-Exact implementation commits are in each record. The current verified A0023
-source is `5f3d5958fea25f953bb91f5ef6f35880ff37fcfa`. It retains the earlier
-cutoff and selective single-slot policy; mapped lookup pins the complete
+| 4 | A0028 | A0023 | Share one host staging allocation at 4096–16384 input tokens, preserving four GPU slots | [Incremental confirmation](../A0028/R02-parent-confirmation/analysis.json), [all-workload guards](../A0028/full-parent-analysis.json), [integrity and correctness audit](../A0028/final-evidence-audit.json), [verdict](../A0028/record.json) |
+
+Exact implementation commits are in each record. The current verified A0028
+source is `6cc9354760ebde3bab9a90996a7713a936dfb439`. It retains the earlier
+cutoff, selective single-slot and mapped policies, adding shared host staging
+without reducing GPU lookahead. Mapped lookup pins the complete
 3000 MiB host table, which is explicitly counted in the memory evidence.
 
 ## How recovered local gains connect to the chain
@@ -22,11 +25,11 @@ The [supplemental survey](../supplemental-01/final/REPORT.md) preserves the
 historical verdicts and distinguishes gains against historical parents from
 gains against the then-current A0016. It motivated two integration paths:
 
-| Mechanism | Recovery evidence | Integration outcome through A0026 |
+| Mechanism | Recovery evidence | Integration outcome through A0028 |
 | --- | --- | --- |
 | Mapped host lookup for small bulk inputs | A0013 improved batch-8 generation against A0016 in the supplemental survey. [A0022](../A0022/record.json) confirmed this mechanism on A0016 but regressed batch-1 generation. | [A0023](../A0023/record.json) extended the mapped range to include batch 1 and passed all retention gates. This recovery is now in accepted step 3. |
-| One pipeline slot for short prefill | A0014 improved batch-8/512 prefill in the supplemental survey. [A0021](../A0021/record.json) confirmed a local gain on A0016 but regressed the batch-1 decode gap. | [A0024](../A0024/record.json) confirmed the short-prefill gain on A0023, but its batch-1 prefill latency regression failed the fixed retention gate. This recovery remains unintegrated. |
-| One host staging buffer while retaining multiple GPU slots | [A0026](../A0026/record.json) separated the host working-set hypothesis from GPU lookahead. Its [independent confirmation](../A0026/R02-parent-confirmation/analysis.json) found gains at batch-4/2048 and batch-8/512 prefill against A0023. | A batch-1 generation offload slowdown failed the fixed retention gate, although the shared-host branch is inactive at batch 1. Both local gains remain preserved for a separately registered integration; A0026 is not in the accepted chain. |
+| One pipeline slot for short prefill | A0014 improved batch-8/512 prefill in the supplemental survey. [A0021](../A0021/record.json) confirmed a local gain on A0016 but regressed the batch-1 decode gap. | [A0024](../A0024/record.json) confirmed the short-prefill gain on A0023, but its batch-1 prefill latency regression failed the fixed retention gate. The short-prefill opportunity is now recovered through A0028 shared host staging; the one-GPU-slot mechanism itself remains unretained. |
+| One host staging buffer while retaining multiple GPU slots | [A0026](../A0026/record.json) separated the host working-set hypothesis from GPU lookahead. Its [independent confirmation](../A0026/R02-parent-confirmation/analysis.json) found gains at batch-4/2048 and batch-8/512 prefill against A0023. | A batch-1 generation offload slowdown failed the fixed retention gate, although the shared-host branch is inactive at batch 1. A0028 separately extended the shared-host range and passed all gates, confirming the short-prefill gain as step 4. Its batch-4 gain remains nominal after correction. A0026 itself is not in the accepted chain. |
 
 A0015's nominal corrected batch-16 prefill gain failed its resident-reference
 guard in the supplemental survey. It is not an accepted offload improvement.
@@ -49,9 +52,12 @@ corrected gain. Batch-8 generation slowed by 0.2363 ms (95% CI
 0.0727–0.4000 ms), failing the signed regression guard; the gap and resident
 changes remained unresolved. This does not identify the cause: the one-token
 branch is inactive at batch 8. The candidate was reverted after its
-[148-result audit](../A0027/evidence-integrity.json). A0023 remains the verified
-source. [A0028](../A0028/record.json) is testing a separate, profiling-supported
-extension of A0026's shared-host range to 16384 tokens; it is not retained.
+[148-result audit](../A0027/evidence-integrity.json). [A0028](../A0028/record.json) separately extended A0026's shared-host range
+to 16384 tokens and is now retained after all 288 performance results and six
+bit-exact full-model comparisons passed audit. Its batch-8/512 prefill offload
+reduction is 2.4604 ms (95% CI 2.2925–2.6282); gap reduction is 2.3024 ms
+(1.7967–2.8080), with Holm10 adjusted p=0.01298 against A0023. No resolved
+regression or memory loss was found across all 16 workloads.
 
 A0023's independently confirmed incremental offload reductions are 27.9865 ms
 for batch-1 generation, 30.8881 ms for batch-8 generation, and 0.1010 ms for
@@ -62,8 +68,8 @@ tokens. These effects must not be added to results measured at other workloads.
 
 ## Figure inputs and remaining evidence
 
-The [complete ledger through A0027](ledger-through-A0027/LEDGER.md) preserves
-all 27 finalized attempts and the A0000 baseline, with full record snapshots
+The [complete ledger through A0028](ledger-through-A0028/LEDGER.md) preserves
+all 28 finalized attempts and the A0000 baseline, with full record snapshots
 in JSON and an index in CSV. Active candidates remain outside that finalized
 snapshot until their verdict is recorded.
 
@@ -77,7 +83,7 @@ These are screening observations, not confirmed cumulative gains. Reproduce:
 The loader selects candidate jobs explicitly in paired continuation screens
 and excludes generation from the primary prefill/decode history.
 
-Use accepted steps 0–3 for the cumulative implementation figure. Use separate
+Use accepted steps 0–4 for the cumulative implementation figure. Use separate
 workload panels for the recovered, nonretained local gains, retaining their
 named comparator, intervals and adverse findings. Do not splice the fastest
 points from different candidates into a final implementation.

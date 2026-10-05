@@ -1,28 +1,28 @@
 {
   "campaign_id": "offload-gap-001",
   "status": "active",
-  "workflow_stage": "full_model_correctness_running",
-  "goal_progress": "A0028 all288 performance/folding raws audited; all16 parent regression/memory gates pass. Six full-model correctness pairs running. Not accepted; verified source remains A0023.",
-  "completed_optimization_verdicts": 27,
+  "workflow_stage": "diagnosis",
+  "goal_progress": "A0028 accepted step4 after all288 performance results and six bit-exact correctness pairs pass. Recovered short-prefill gain now integrated on A0023 mapped transport. b1 generation remains above tolerance in diagnostic means; final independent all16 proof still pending.",
+  "completed_optimization_verdicts": 28,
   "additional_completed_verdicts": 10,
   "additional_attempt_target": [
     10,
     10
   ],
-  "accepted_steps": 3,
-  "active_attempt": "A0028",
-  "controller_pid": 105614,
+  "accepted_steps": 4,
+  "active_attempt": null,
+  "controller_pid": null,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
-  "source_final": "5f3d5958fea25f953bb91f5ef6f35880ff37fcfa",
+  "source_final": "6cc9354760ebde3bab9a90996a7713a936dfb439",
   "final_report": "continuation-02/final/REPORT.md",
   "final_audit": "continuation-02/final/core-audit.json",
   "publication": "continuation-02/final/publication.json",
   "continuation": "continuation-03/manifest.json",
   "next_actions": [
-    "Integrate recovered short-prefill gain on verified A0023 parent",
-    "Profile/optimize remaining prefill and b1 generation gaps",
+    "Profile b1 generation offload-specific overhead against folded resident reference",
+    "Optimize remaining target margins from verified A0028",
     "Fresh cumulative A0000 comparison and independent all16 target verification",
-    "Publish complete ledger and figures"
+    "Update complete ledger and figures"
   ],
   "supplemental_study": {
     "id": "supplemental-01",
@@ -41,6 +41,6 @@
     "workloads_passing_parent_and_current": 1,
     "accepted_new_attempts": 0
   },
-  "active_manifest": "A0028/validation-controller.json",
-  "continuation_completed_verdicts": 7
+  "active_manifest": null,
+  "continuation_completed_verdicts": 8
 }
