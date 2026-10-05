@@ -1,0 +1,59 @@
+{
+  "campaign_id": "offload-gap-001",
+  "continuation_id": "continuation-03",
+  "attempt_id": "A0027",
+  "parent_attempt_id": "A0023",
+  "parent_source_sha": "5f3d5958fea25f953bb91f5ef6f35880ff37fcfa",
+  "parent_sha": "6dcc5c893d1a959fbcfe20c2af20472ccbf408a3",
+  "accepted_step": null,
+  "label": "Caller-stream mapped gather for one-token inputs",
+  "status": "planned",
+  "workflow_stage": "registered",
+  "hypothesis": "Reduce b1 mapped scheduling CPU overhead (diagnostic nonconsumer0.060064ms/call, before-first-consumer0.047555ms) by removing copy-stream context and entry dependency. Lost gather/QK overlap may offset improvement.",
+  "change": "Mapped bulk at one total input token only uses caller compute stream. Wait for previous consumed event before output reuse; synchronize gather-completion event before returning to preserve host table and ID lifetime. Keep other mapped/pipeline/bulk paths and buffers unchanged.",
+  "profile_evidence": [
+    "../continuation-03/generation-post26-diagnosis.json",
+    "../continuation-03/mapped-spans-A0023-post26.json"
+  ],
+  "eligible_gain_workloads": [
+    [
+      "decode",
+      1,
+      2048
+    ],
+    [
+      "generation",
+      1,
+      2048
+    ]
+  ],
+  "tradeoffs": [
+    "Removes gather/QK overlap at one token",
+    "Must synchronize gather completion only, not full caller-stream compute",
+    "Preserve previous-consumed event dependency for different caller streams",
+    "Shared-host prefill integration deferred until this isolated schedule validates"
+  ],
+  "screen": {
+    "workloads": 16,
+    "fresh_parent_candidate_processes": 64,
+    "prefill_decode": [
+      3,
+      5,
+      1
+    ],
+    "generation": [
+      2,
+      3,
+      1
+    ]
+  },
+  "confirmation_rule": "Unchanged complete-screen nomination, exactly3 fresh balanced blocks, fixed Holm family, signed95% regression guards; no optional extension.",
+  "expected_offload_config": {
+    "memory_offload_bulk_max_tokens": 1024,
+    "memory_offload_single_slot_max_tokens": 2048,
+    "memory_offload_mapped_bulk": true,
+    "memory_offload_mapped_bulk_min_tokens": 1,
+    "memory_offload_mapped_bulk_max_tokens": 16
+  },
+  "created_unix": 1791188312.8948636
+}
