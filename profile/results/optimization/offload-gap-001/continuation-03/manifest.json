@@ -2,11 +2,11 @@
   "status": "active",
   "objective": "Integrate recovered local gains into one validated cumulative implementation, then approach resident latency at all16 fixed workloads.",
   "retained_start": "A0016",
-  "retained_source": "0ce6645eb4c4bc3992258ad0878c72ea3c37a64e",
+  "retained_source": "5f3d5958fea25f953bb91f5ef6f35880ff37fcfa",
   "historical_seal": "2cac8b4df73966fff2b9b4f724000d3b3a19e2f0",
   "proposed_chain": [
     "A0016",
-    "A0023: mapped bulk1..16 pending validation",
+    "A0023: mapped bulk1..16 accepted step3",
     "integrate confirmed A0021 short-prefill opportunity on verified transport parent",
     "profile and optimize remaining all16 target gaps"
   ],
@@ -30,6 +30,18 @@
       "status": "rejected",
       "confirmed_local_gain": "generation b8/2048",
       "blocking_regression": "generation b1/2048 latency and gap"
+    },
+    {
+      "attempt": "A0023",
+      "status": "accepted",
+      "accepted_step": 3,
+      "confirmed_local_gains": [
+        "generation b1/2048",
+        "generation b8/2048",
+        "decode b16/2048"
+      ],
+      "evidence": "../A0023/final-evidence-audit.json"
     }
-  ]
+  ],
+  "retained_current": "A0023"
 }

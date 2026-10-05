@@ -1,29 +1,28 @@
 {
   "campaign_id": "offload-gap-001",
   "status": "active",
-  "workflow_stage": "full_validation",
-  "goal_progress": "A0023 all performance stages complete:288 raw results pass cross-stage integrity audit. Six full-model correctness pairs running, first b1/2048 seed1234 bit-exact.",
-  "completed_optimization_verdicts": 22,
+  "workflow_stage": "integration",
+  "goal_progress": "A0023 accepted as step3 after complete evidence audit. Next integrate short-prefill policy on verified mapped parent; final all16 tolerance not met.",
+  "completed_optimization_verdicts": 23,
   "additional_completed_verdicts": 10,
   "additional_attempt_target": [
     10,
     10
   ],
-  "accepted_steps": 2,
-  "active_attempt": "A0023",
-  "controller_pid": 3974665,
+  "accepted_steps": 3,
+  "active_attempt": null,
+  "controller_pid": null,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
-  "source_final": "0ce6645eb4c4bc3992258ad0878c72ea3c37a64e",
+  "source_final": "5f3d5958fea25f953bb91f5ef6f35880ff37fcfa",
   "final_report": "continuation-02/final/REPORT.md",
   "final_audit": "continuation-02/final/core-audit.json",
   "publication": "continuation-02/final/publication.json",
   "continuation": "continuation-03/manifest.json",
   "next_actions": [
-    "Complete32 unfolded references and6 full-model correctness pairs",
-    "Run complete cross-stage audit and retention decision",
-    "Integrate recovered short-prefill gain on verified parent",
+    "Integrate recovered short-prefill gain on verified A0023 parent",
     "Profile/optimize remaining prefill and b1 generation gaps",
-    "Independently verify all16 final target bounds and publish figures"
+    "Fresh cumulative A0000 comparison and independent all16 target verification",
+    "Publish complete ledger and figures"
   ],
   "supplemental_study": {
     "id": "supplemental-01",
@@ -42,6 +41,6 @@
     "workloads_passing_parent_and_current": 1,
     "accepted_new_attempts": 0
   },
-  "active_manifest": "A0023/validation-controller.json",
-  "continuation_completed_verdicts": 2
+  "active_manifest": null,
+  "continuation_completed_verdicts": 3
 }

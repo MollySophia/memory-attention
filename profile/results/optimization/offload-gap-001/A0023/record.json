@@ -5,10 +5,10 @@
   "parent_attempt_id": "A0016",
   "parent_source_sha": "0ce6645eb4c4bc3992258ad0878c72ea3c37a64e",
   "parent_sha": "5089e76867f97864a6d6109fd7db2dad4172fb24",
-  "accepted_step": null,
+  "accepted_step": 3,
   "label": "Mapped bulk for all1..16-token inputs",
-  "status": "registered",
-  "workflow_stage": "full_validation",
+  "status": "accepted",
+  "workflow_stage": "verdict",
   "hypothesis": "Avoid b1/b4 GPU-ID D2H and CPU gather by extending recovered mapped bulk to1..16 tokens, while preserving b8 generation mechanism and A0016 selective pipeline.",
   "change": "Port A0022 mapped implementation onto verified A0016 with mapped minimum1 instead of8. Do not integrate short-prefill threshold until transport candidate validates.",
   "profile_evidence": [
@@ -100,7 +100,8 @@
       "correctness-tests.txt",
       "standalone-correctness.txt",
       "sampling-and-helper-tests.txt"
-    ]
+    ],
+    "full_model": "Six pairs against A0000 folded resident, two seeds at b1/2048,b8/2048,b8/512;129 logits checkpoints and hidden/KV checks; bit-exact."
   },
   "workflow_recovery": {
     "reason": "Historical mapped8..16 memory-audit assumption rejected valid new mapped1 capacity",
@@ -567,5 +568,8 @@
     "remaining_confirmation": 84,
     "unfolded_reference": 32,
     "command": "python continuation-03/audit_completed.py --attempt A0023 (audit_manifests function only; full correctness pending)"
-  }
+  },
+  "finished_unix": 1791174327.9838839,
+  "final_evidence_audit": "final-evidence-audit.json",
+  "verdict_reason": "Three eligible independently confirmed offload and gap gains; all16 formal paired workloads show no resolved offload/gap/resident regression and preserve GPU memory savings. All288 performance raw results and6 bit-exact full-model pairs pass integrity audit. Full3000MiB CPU table pinned, explicitly accounted. Overall near-GPU goal remains unmet."
 }
