@@ -1,0 +1,61 @@
+{
+  "campaign_id": "offload-gap-001",
+  "continuation_id": "continuation-03",
+  "attempt_id": "A0026",
+  "parent_attempt_id": "A0023",
+  "parent_source_sha": "5f3d5958fea25f953bb91f5ef6f35880ff37fcfa",
+  "parent_sha": "d44d2978b7ffd4294e77e76ae385f4309351c75a",
+  "accepted_step": null,
+  "label": "One host staging buffer with multi-slot GPU prefetch",
+  "status": "planned",
+  "workflow_stage": "registered",
+  "hypothesis": "Reduce active pinned-host working set and CPU gather cost while retaining GPU lookahead. CPU diagnostic four-to-one host buffer means14.738 to6.288ms at4096 tokens and33.462 to14.128ms at8192, without H2D/model overlap. Full-model benefit is unproven.",
+  "change": "Share one pinned host buffer only for automatic pipeline with4096..8192 total tokens; retain separate GPU slots, consumed events and existing2048 single-slot bound. Synchronize most recent host DMA before any overwrite, across slots and forwards.",
+  "profile_evidence": [
+    "../continuation-03/host-ring-diagnosis.json",
+    "../continuation-03/host-ring-A0023.json",
+    "../continuation-03/pipeline-A0023-b4-l2048.json"
+  ],
+  "eligible_gain_workloads": [
+    [
+      "prefill",
+      8,
+      512
+    ],
+    [
+      "prefill",
+      4,
+      2048
+    ]
+  ],
+  "tradeoffs": [
+    "Host reuse serializes gather behind latest H2D completion; may offset working-set benefit",
+    "GPU capacity unchanged; shared pinned host storage counted once",
+    "No cross-call lookup cache; fresh gather on every call"
+  ],
+  "screen": {
+    "workloads": 16,
+    "fresh_parent_candidate_processes": 64,
+    "prefill_decode": [
+      3,
+      5,
+      1
+    ],
+    "generation": [
+      2,
+      3,
+      1
+    ]
+  },
+  "confirmation_rule": "Unchanged complete-screen nomination, exactly3 fresh balanced blocks, fixed Holm family, signed95% regression guards; no optional extension.",
+  "expected_offload_config": {
+    "memory_offload_bulk_max_tokens": 1024,
+    "memory_offload_single_slot_max_tokens": 2048,
+    "memory_offload_mapped_bulk": true,
+    "memory_offload_mapped_bulk_min_tokens": 1,
+    "memory_offload_mapped_bulk_max_tokens": 16,
+    "memory_offload_single_host_min_tokens": 4096,
+    "memory_offload_single_host_max_tokens": 8192
+  },
+  "created_unix": 1791182905.2521293
+}
