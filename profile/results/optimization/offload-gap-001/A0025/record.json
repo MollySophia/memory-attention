@@ -1,0 +1,53 @@
+{
+  "campaign_id": "offload-gap-001",
+  "continuation_id": "continuation-03",
+  "attempt_id": "A0025",
+  "parent_attempt_id": "A0023",
+  "parent_source_sha": "5f3d5958fea25f953bb91f5ef6f35880ff37fcfa",
+  "parent_sha": "a8b93bc2b689811c0493f1897eb1e8add6f98f08",
+  "accepted_step": null,
+  "label": "Precompute views for automatic single-slot pipeline",
+  "status": "registered",
+  "workflow_stage": "correctness",
+  "hypothesis": "Remove repeated tensor metadata creation on producer/consumer threads for automatic single-slot pipeline. Current b1 diagnostic records96 buffer views totaling.216ms overlapping CPU time; independent full-model gain must be demonstrated.",
+  "change": "Precompute immutable source and buffer/layer views only for automatic single-slot pipeline; preserve2048-token threshold, mapped1..16 and larger pipeline. Isolate metadata change before attempting short-prefill reintegration.",
+  "profile_evidence": [
+    "../continuation-03/pipeline-integration-diagnosis.json",
+    "../A0007/record.json",
+    "../A0024/record.json"
+  ],
+  "eligible_gain_workloads": [
+    [
+      "prefill",
+      1,
+      2048
+    ]
+  ],
+  "tradeoffs": [
+    "Additional tensor-view metadata only, no new backing storage or cached lookup values",
+    "Historical global-view A0007 rejected; restricted single-slot parent differs and needs full validation"
+  ],
+  "screen": {
+    "workloads": 16,
+    "fresh_parent_candidate_processes": 64,
+    "prefill_decode": [
+      3,
+      5,
+      1
+    ],
+    "generation": [
+      2,
+      3,
+      1
+    ]
+  },
+  "confirmation_rule": "Unchanged continuation03 complete-screen nomination, exactly3 balanced fresh blocks, fixed Holm gain family and signed95% regression guards; no optional extension.",
+  "expected_offload_config": {
+    "memory_offload_bulk_max_tokens": 1024,
+    "memory_offload_single_slot_max_tokens": 2048,
+    "memory_offload_mapped_bulk": true,
+    "memory_offload_mapped_bulk_min_tokens": 1,
+    "memory_offload_mapped_bulk_max_tokens": 16
+  },
+  "created_unix": 1791178633.070012
+}
