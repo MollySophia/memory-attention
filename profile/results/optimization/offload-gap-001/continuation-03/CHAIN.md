@@ -89,8 +89,21 @@ parent-paired validation. Regenerate them with [plot_candidate_gaps.py](plot_can
 They reuse candidate-selection evidence and therefore do not establish the
 final independent near-GPU acceptance required by [GOAL.md](../../../../../GOAL.md).
 
-Final deliverables still require the complete attempt ledger, the remaining
-scaling/throughput/memory/history figures, fresh cumulative A0000 comparisons,
-and independent all-16 confirmation of the user-approved latency tolerance for
-the final retained source. This index is not a final publication or completion
-claim.
+The same retained A0023 source now has complete
+[latency scaling](../A0023/workload-diagnostics/latency_ms-scaling.pdf),
+[throughput scaling](../A0023/workload-diagnostics/tokens_per_second-scaling.pdf),
+[generation](../A0023/workload-diagnostics/generation.pdf), and
+[GPU/host memory](../A0023/workload-diagnostics/memory.pdf) figures, with PNG/SVG
+companions and [CSV](../A0023/workload-diagnostics/workloads.csv) /
+[JSON](../A0023/workload-diagnostics/workloads.json) sources. The exporter
+`python profile/results/optimization/offload-gap-001/continuation-03/plot_workload_scaling.py --attempt A0023`
+audits all 96 contributing raw processes (16 workloads × two placements ×
+three blocks). It derives throughput per process before estimating uncertainty.
+Generation throughput counts output tokens and includes prefix time. Host RSS
+includes runtime/loading state; pinned storage is reported separately, never
+added to RSS. These are retention diagnostics, not final independent acceptance.
+
+Final deliverables still require updated ledger/figures through the final
+retained source, fresh cumulative A0000 comparisons, and independent all-16
+confirmation of the user-approved latency tolerance. This index is not a final
+publication or completion claim.
