@@ -48,10 +48,6 @@ class MappedBulkMemoryTableOffloader:
         self.consumed = torch.cuda.Event()
         self.started = self.closed = self.broken = False
         self.lock = threading.Lock()
-        # Shape, dtype, device and table/output storage are fixed by this
-        # owner. Contiguous int64 IDs can still have different pointer
-        # alignment (for example an odd-offset slice), so specialize each.
-        self._gather_runners = {}
 
     @property
     def group_size(self):
@@ -70,25 +66,12 @@ class MappedBulkMemoryTableOffloader:
                 raise IndexError("memory table index out of range")
             ids_gpu = ids.to(self.device, non_blocking=True).reshape(-1).contiguous()
             self.copy_stream.wait_stream(torch.cuda.current_stream(self.device))
-            with torch.cuda.device(self.device):
+            with torch.cuda.device(self.device), torch.cuda.stream(self.copy_stream):
                 if self.started:
                     self.copy_stream.wait_event(self.consumed)
                 width = self.layers * self.dim
-                alignment = ids_gpu.data_ptr() % 16
-                runner = self._gather_runners.get(alignment)
-                if runner is None:
-                    grid = (self.batch * self.seq_len, triton.cdiv(width, 512), 1)
-                    with torch.cuda.stream(self.copy_stream):
-                        compiled = _mapped_bulk_gather[grid](
-                            self.weights, ids_gpu, self.gpu, width,
-                            self.weights.shape[0], 512, num_warps=4)
-                    self._gather_runners[alignment] = compiled[grid]
-                else:
-                    # The compiled runner preserves Triton launch hooks. It
-                    # reads fresh IDs/table values on the original copy stream.
-                    runner(self.weights, ids_gpu, self.gpu, width,
-                           self.weights.shape[0], 512,
-                           stream=self.copy_stream.cuda_stream)
+                _mapped_bulk_gather[(self.batch * self.seq_len, triton.cdiv(width, 512))](
+                    self.weights, ids_gpu, self.gpu, width, self.weights.shape[0], 512, num_warps=4)
                 self.copied.record(self.copy_stream)
             ticket = _BulkTicket(self)
             for layer in range(self.layers):

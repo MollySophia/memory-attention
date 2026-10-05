@@ -379,50 +379,6 @@ def test_mapped_bulk_fresh_weights_cross_stream_and_host_lifetime(batch, ids_dev
         finally:off.close()
 
 
-@pytest.mark.parametrize('batch', [1, 8])
-def test_mapped_bulk_compiled_launch_offset_ids_and_stream_order(batch):
-    from fla.layers.memory_mapped_bulk import MappedBulkMemoryTableOffloader
-    from fla.layers.memory_offload import PendingM
-    with torch.inference_mode():
-        weights = torch.randn(73, 5, 64, dtype=torch.bfloat16).pin_memory()
-        off = MappedBulkMemoryTableOffloader(weights, batch, 1, 'cuda')
-        streams = [torch.cuda.Stream(), torch.cuda.Stream()]
-        for stream in streams:
-            stream.wait_stream(torch.cuda.current_stream())
-        try:
-            # Compile both alignments, then reuse each on different streams.
-            for iteration, offset in enumerate((0, 1, 1, 0, 0, 1)):
-                ids = torch.randint(0, 73, (batch, 1))
-                expected = weights.index_select(0, ids.flatten()).clone()
-                values = []
-                stream = streams[iteration % 2]
-                with torch.cuda.stream(stream):
-                    storage = torch.empty(batch + 1, dtype=torch.long, device='cuda')
-                    device_ids = storage[offset:offset + batch].view(batch, 1)
-                    assert device_ids.data_ptr() % 16 == offset * 8
-                    # The copy-stream launch must wait for fresh caller IDs.
-                    torch.cuda._sleep(100000)
-                    device_ids.copy_(ids)
-                    def consume(layer, value):
-                        handle = value if isinstance(value, PendingM) else None
-                        if handle is not None:
-                            value = handle.acquire()
-                        torch.cuda._sleep(100000)
-                        values.append(value.clone())
-                        if handle is not None:
-                            handle.release()
-                    off.forward(device_ids, consume)
-                # Host mutation is permitted immediately after forward, even
-                # while the consumer stream is still using the GPU output.
-                weights.add_(.125)
-                stream.synchronize()
-                actual = torch.stack(values, dim=2).reshape(batch, 5, 64).cpu()
-                torch.testing.assert_close(actual, expected, rtol=0, atol=0)
-            assert set(off._gather_runners) == {0, 8}
-        finally:
-            off.close()
-
-
 def test_mapped_bulk_error_cleanup_and_cpu_bounds():
     from fla.layers.memory_mapped_bulk import MappedBulkMemoryTableOffloader
     with torch.inference_mode():
