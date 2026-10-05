@@ -1,0 +1,21 @@
+{
+  "status": "prepared_not_run",
+  "purpose": "After A0030 validation, investigate whether full-layer working-set behavior differs from historical fixed-layer layout microbenchmarks.",
+  "historical_reference": "../A0000/lookup-layout-diagnostic.json",
+  "historical_helper": "../diagnose_lookup_layout.py",
+  "historical_finding": "At2048 tokens/group1, repeated fixed-layer means were0.0204731ms vocab-major and0.0205213ms layer-major: no layout benefit established. The old helper repeatedly gathers layer12 after warmup; it does not walk all24 layers per invocation.",
+  "current_question": "A0030 selected-point diagnostics leave b1 prefill near the tolerance boundary: mean offload-GPU0.289217ms; simultaneous residual upper0.059397ms. These are selection diagnostics, not final acceptance evidence.",
+  "new_scope": "Use actual32000x24x2048 BF16 dimensions, both full layouts pinned as in current mapped-enabled offload. Gather all24 layers sequentially per invocation with one reused pinned output buffer, fixed matched IDs,10 warmup walks and30 balanced alternating measured walks per layout. Start with2048/4096/8192/16384 token counts.",
+  "helper": "diagnose_layer_working_set.py",
+  "semantic_test": "test_layer_working_set.py",
+  "semantic_test_log": "layer-working-set-helper-tests.txt",
+  "execution_constraint": "Do not run until current GPU timing, folding and correctness jobs have finished. require_idle detects live bench_fla/full_correctness/test_memory_offload script processes; live guard was exercised and rejected execution during R03.",
+  "command_template": "python profile/results/optimization/offload-gap-001/continuation-03/diagnose_layer_working_set.py --source-root FROZEN_VERIFIED_SOURCE --output NEW_DIAGNOSTIC_JSON",
+  "limitations": [
+    "No production table-layout change or new candidate is registered.",
+    "Both pinned layouts coexist (~6000MiB), unlike a possible one-layout implementation.",
+    "CPU-only gather diagnostic excludes H2D and model overlap; no end-to-end gain inference.",
+    "Mapped bulk currently requires contiguous vocab-major storage; any candidate must validate small-input paths and fresh table mutation semantics.",
+    "No real diagnostic timings have been collected."
+  ]
+}
