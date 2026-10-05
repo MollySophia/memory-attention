@@ -1,0 +1,13 @@
+{
+  "status": "stopped_needs_review",
+  "controller_pid": 3973344,
+  "observed_pid": 3972840,
+  "observed_identity": [
+    "S",
+    "357990200"
+  ],
+  "started_unix": 1791167051.2620904,
+  "accepted": false,
+  "error": "AssertionError('Existing screen exited without completed evidence; no restart')",
+  "finished_unix": 1791167061.2629702
+}

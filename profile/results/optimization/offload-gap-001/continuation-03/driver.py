@@ -64,7 +64,13 @@ def audit_job(j,path):
   expected_cfg=record(j['attempt']).get('expected_offload_config',{})
   for field,value in expected_cfg.items():assert model_cfg[field]==value
   mapped=model_cfg.get('memory_offload_mapped_bulk',False)
-  validate_offload_memory('A0013' if mapped else j['attempt'],memory)
+  # Continuation policies are configuration-driven; historical A0013 fixed8..16
+  # audit is not valid for an expanded mapped range. Count every allocation.
+  assert memory['cpu_table_bytes']==3000*2**20
+  table_pinned=memory.get('cpu_table_pinned_bytes',0)
+  assert table_pinned==(3000*2**20 if mapped else 0)
+  assert memory['offload_gpu_buffer_bytes']==sum(c['gpu_bytes'] for c in memory['offloader_capacities'])
+  assert memory['offload_pinned_bytes']==table_pinned+sum(c['host_bytes'] for c in memory['offloader_capacities'])
   for cap in memory['offloader_capacities']:
    tokens=cap['batch']*cap['length'];depth=1 if tokens<=model_cfg.get('memory_offload_single_slot_max_tokens',0) else 4
    assert cap['policy']==('bulk' if tokens<=model_cfg['memory_offload_bulk_max_tokens'] else 'pipeline')
@@ -74,12 +80,23 @@ def audit_job(j,path):
  env=p['environment_before'];e=p['env']
  return (e['torch'],e['torch_cuda'],e['flash_attn'],e['gpu'],e['python'],env['gpu_telemetry']['stdout'].splitlines()[1].split(', ')[1],tuple(env['cpu_affinity']),env['torch_threads'],env['torch_interop_threads'],json.dumps(env['thread_environment'],sort_keys=True)),row
 
-def run(directory):
- path=directory/'manifest.json';p=read(path);assert p['status']=='planned'
+def run(directory,resume=False):
+ path=directory/'manifest.json';p=read(path)
+ if resume:
+  assert p['status']=='stopped_needs_review'
+  assert all(j['status'] in ('completed','pending') for j in p['jobs'])
+  for j in p['jobs']:
+   if j['status']=='completed':
+    assert j['returncode']==0
+    audit_job(j,directory/(j['name']+'.json'))
+  p.setdefault('recovery_history',[]).append(dict(previous_controller_pid=p.get('controller_pid'),previous_error=p.get('error'),resumed_unix=time.time(),reason='Explicit audited recovery; retain completed raw jobs and execute pending only'))
+  p.pop('error',None)
+ else:assert p['status']=='planned'
  for s in p['source_signatures'].values():assert signature(s['attempt'])==s
  p.update(status='running',controller_pid=os.getpid(),started_unix=time.time());save(path,p)
  try:
   for j in p['jobs']:
+   if resume and j['status']=='completed':continue
    assert j['status']=='pending';print('START',p['attempt'],j['name'],flush=True);j['started_unix']=time.time()
    with (directory/(j['name']+'.txt')).open('w') as log:
     child=subprocess.Popen(j['command'],cwd=j['cwd'],stdout=log,stderr=subprocess.STDOUT);j.update(pid=child.pid,status='running');save(path,p);j['returncode']=child.wait()
@@ -128,8 +145,8 @@ def prepare(a):
  save(directory/'manifest.json',p);print(json.dumps(p['planned_work']))
 
 if __name__=='__main__':
- parser=argparse.ArgumentParser();parser.add_argument('action',choices=['prepare','run','summarize']);parser.add_argument('--attempt',required=True);args=parser.parse_args()
+ parser=argparse.ArgumentParser();parser.add_argument('action',choices=['prepare','run','resume','summarize']);parser.add_argument('--attempt',required=True);args=parser.parse_args()
  directory=C/args.attempt/'R01-complete-screen'
  if args.action=='prepare':prepare(args.attempt)
- elif args.action=='run':run(directory);summarize(directory)
+ elif args.action in ('run','resume'):run(directory,resume=args.action=='resume');summarize(directory)
  else:summarize(directory)

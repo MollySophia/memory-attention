@@ -1,0 +1,13 @@
+START A0023 B1-J001-baseline-prefill-ma_offload-b1-l2048
+START A0023 B1-J002-candidate-prefill-ma_offload-b1-l2048
+Traceback (most recent call last):
+  File "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/continuation-03/driver.py", line 134, in <module>
+    elif args.action=='run':run(directory);summarize(directory)
+                            ^^^^^^^^^^^^^^
+  File "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/continuation-03/driver.py", line 91, in run
+    audit_job(j,result)
+  File "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/continuation-03/driver.py", line 67, in audit_job
+    validate_offload_memory('A0013' if mapped else j['attempt'],memory)
+  File "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/audit_continuation.py", line 35, in validate_offload_memory
+    assert host == gpu
+AssertionError

@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/continuation-03/after_screen.py", line 41, in <module>
+    p=argparse.ArgumentParser();p.add_argument('--attempt',required=True);args=p.parse_args();main(args.attempt)
+                                                                                              ^^^^^^^^^^^^^^^^^^
+  File "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/continuation-03/after_screen.py", line 21, in main
+    assert d.read(screen)['status']=='completed','Existing screen exited without completed evidence; no restart'
+AssertionError: Existing screen exited without completed evidence; no restart

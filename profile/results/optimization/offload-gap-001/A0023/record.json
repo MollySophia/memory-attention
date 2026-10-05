@@ -101,5 +101,15 @@
       "standalone-correctness.txt",
       "sampling-and-helper-tests.txt"
     ]
+  },
+  "workflow_recovery": {
+    "reason": "Historical mapped8..16 memory-audit assumption rejected valid new mapped1 capacity",
+    "archived_stop": "screen-audit-stop",
+    "model_source_unchanged": true,
+    "completed_processes_preserved": 2,
+    "pending_processes": 62,
+    "estimated_remaining_seconds": 1120.8668526291847,
+    "re_audited_raw_results": 346,
+    "tests": "10 passed"
   }
 }
