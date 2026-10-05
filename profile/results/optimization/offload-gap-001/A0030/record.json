@@ -8,7 +8,7 @@
   "accepted_step": null,
   "label": "Resolve offload dispatch metadata once per forward",
   "status": "testing",
-  "workflow_stage": "registered",
+  "workflow_stage": "correctness_passed",
   "hypothesis": "Remove repeated offload-only device/offloader/layer metadata discovery and dictionary callback state. Actual frozen offload loop with CPU stub layers costs35.356827us versus22.085108us for per-call resolved metadata; full-model benefit is unproven.",
   "change": "Use embedding weight device for offload input staging, pass the already resolved offloader into the offloaded stack, snapshot layer references once per forward, and use closure locals for evolving hidden/cache state. Preserve layer __call__ hooks, all output/cache semantics, producer/consumer order and transport policies. No compiled launcher or event changes.",
   "profile_evidence": [
@@ -131,5 +131,17 @@
     "memory_offload_single_host_min_tokens": 4096,
     "memory_offload_single_host_max_tokens": 16384
   },
-  "created_unix": 1791206487.2225587
+  "created_unix": 1791206487.2225587,
+  "candidate_sha": "a9e5bda62a020e4e1994037732b0dbb7606d5dda",
+  "correctness": {
+    "regression_tests": 56,
+    "standalone_max_diff": 0.0,
+    "helper_tests": 47,
+    "logs": [
+      "correctness-tests.txt",
+      "standalone-correctness.txt",
+      "../continuation-03/A0030-helper-tests.txt"
+    ],
+    "historical_statistics_audit": "../continuation-03/A0030-helper-history-audit.json"
+  }
 }
