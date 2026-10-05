@@ -1,173 +1,9 @@
 {
-  "campaign_id": "offload-gap-001",
-  "continuation_id": "continuation-03",
-  "attempt_id": "A0030",
-  "parent_attempt_id": "A0028",
-  "parent_source_sha": "6cc9354760ebde3bab9a90996a7713a936dfb439",
-  "parent_sha": "b95d471681813bd839749f9f50db1af9ebcbce91",
-  "accepted_step": null,
-  "label": "Resolve offload dispatch metadata once per forward",
-  "status": "testing",
-  "workflow_stage": "full_validation",
-  "hypothesis": "Remove repeated offload-only device/offloader/layer metadata discovery and dictionary callback state. Actual frozen offload loop with CPU stub layers costs35.356827us versus22.085108us for per-call resolved metadata; full-model benefit is unproven.",
-  "change": "Use embedding weight device for offload input staging, pass the already resolved offloader into the offloaded stack, snapshot layer references once per forward, and use closure locals for evolving hidden/cache state. Preserve layer __call__ hooks, all output/cache semantics, producer/consumer order and transport policies. No compiled launcher or event changes.",
-  "profile_evidence": [
-    "../continuation-03/offload-dispatch-A0028-post29.json",
-    "../continuation-03/generation-A0028-offload-post28.json",
-    "../continuation-03/generation-variance-A0029.json"
-  ],
-  "eligible_gain_workloads": [
-    [
-      "prefill",
-      1,
-      2048
-    ],
-    [
-      "decode",
-      1,
-      2048
-    ],
-    [
-      "prefill",
-      4,
-      2048
-    ],
-    [
-      "decode",
-      4,
-      2048
-    ],
-    [
-      "prefill",
-      8,
-      2048
-    ],
-    [
-      "decode",
-      8,
-      2048
-    ],
-    [
-      "prefill",
-      16,
-      2048
-    ],
-    [
-      "decode",
-      16,
-      2048
-    ],
-    [
-      "prefill",
-      8,
-      512
-    ],
-    [
-      "decode",
-      8,
-      512
-    ],
-    [
-      "prefill",
-      8,
-      4096
-    ],
-    [
-      "decode",
-      8,
-      4096
-    ],
-    [
-      "prefill",
-      8,
-      8192
-    ],
-    [
-      "decode",
-      8,
-      8192
-    ],
-    [
-      "generation",
-      1,
-      2048
-    ],
-    [
-      "generation",
-      8,
-      2048
-    ]
-  ],
-  "tradeoffs": [
-    "Per-call layer tuple must reflect replacements between forwards; no persistent layer/output/token cache.",
-    "Resolved offloader must match current batch/sequence shape; retain fallback resolution for direct internal calls.",
-    "Current device/input staging and cache/hidden-state/tuple-return behavior must remain equivalent.",
-    "Stub diagnostic does not execute real layers or CUDA; no end-to-end speedup claim.",
-    "A0029 remains unretained, and its compiled-launcher changes are not included."
-  ],
-  "screen": {
-    "workloads": 16,
-    "fresh_parent_candidate_processes": 64,
-    "prefill_decode": [
-      3,
-      5,
-      1
-    ],
-    "generation": [
-      2,
-      3,
-      1
-    ]
-  },
-  "confirmation_blocks": 6,
-  "confirmation_rule": "Prospectively fixed six fresh balanced independent process blocks for selected workloads and remaining all16 validation. Same inner formal sampling, fixed Holm family and signed95% regression guards. No optional extension or reuse of A0029 confirmation.",
-  "sampling_rationale": "A0029 b1 generation between-block reduction SD6.515842ms versus descriptive within-process pair-mean SE0.55..0.70ms; preserve its verdict and increase independent process replication only for this newly registered hypothesis.",
-  "expected_offload_config": {
-    "memory_offload_bulk_max_tokens": 1024,
-    "memory_offload_single_slot_max_tokens": 2048,
-    "memory_offload_mapped_bulk": true,
-    "memory_offload_mapped_bulk_min_tokens": 1,
-    "memory_offload_mapped_bulk_max_tokens": 16,
-    "memory_offload_single_host_min_tokens": 4096,
-    "memory_offload_single_host_max_tokens": 16384
-  },
-  "created_unix": 1791206487.2225587,
-  "candidate_sha": "a9e5bda62a020e4e1994037732b0dbb7606d5dda",
-  "correctness": {
-    "regression_tests": 56,
-    "standalone_max_diff": 0.0,
-    "helper_tests": 47,
-    "logs": [
-      "correctness-tests.txt",
-      "standalone-correctness.txt",
-      "../continuation-03/A0030-helper-tests.txt"
-    ],
-    "historical_statistics_audit": "../continuation-03/A0030-helper-history-audit.json"
-  },
-  "screen_manifest": "R01-complete-screen/manifest.json",
-  "screen_summary": "R01-complete-screen/summary.json",
-  "screen_audit": "screen-audit.json",
-  "confirmation_manifest": "R02-parent-confirmation/manifest.json",
-  "confirmation_fixed_family": 10,
-  "confirmation_processes": 240,
-  "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0030",
-  "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json",
-  "parent_confirmation_analysis": "R02-parent-confirmation/analysis.json",
-  "confirmation_audit": "confirmation-audit.json",
-  "confirmation_decision": "Six fixed independent blocks and Holm10 confirm decode b8/2048 and generation b1/2048 gains versus A0028; no resolved selected-point regressions. Remaining all16 validation, folding and full-model correctness still required before retention.",
-  "confirmed_local_gains": [
-    [
-      "decode",
-      8,
-      2048
-    ],
-    [
-      "generation",
-      1,
-      2048
-    ]
-  ],
-  "local_findings": [
+  "status": "completed",
+  "attempt": "A0030",
+  "baseline": "A0028",
+  "fixed_gain_family": 10,
+  "rows": [
     {
       "attempt": "A0030",
       "baseline": "A0028",
@@ -1739,5 +1575,19 @@
       "candidate_target_residual_upper_one_sided_95_bonferroni16": 0.6065755177853869
     }
   ],
-  "validation_plan": "validation-plan.json"
+  "confirmed_local_gains": [
+    [
+      "decode",
+      8,
+      2048
+    ],
+    [
+      "generation",
+      1,
+      2048
+    ]
+  ],
+  "resolved_regressions": [],
+  "accepted": false,
+  "note": "No automatic acceptance. Complete correctness/full validation required; target residual bounds cover selected points only, not final goal completion."
 }

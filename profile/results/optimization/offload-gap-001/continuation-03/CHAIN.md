@@ -67,20 +67,32 @@ tokens. These effects must not be added to results measured at other workloads.
 
 ## Latest findings and figures
 
-[A0030](../A0030/record.json) is in progress on A0028, testing per-forward
-resolution of offload device, offloader and layer metadata plus closure-local
-callback state. Source `a9e5bda` passed 56 regression tests and the standalone
-zero-difference correctness check. Its committed screen covers all16 workloads
-in64 fresh parent/candidate placement processes. Six independent confirmation
-blocks were predeclared before measurements, motivated by the post-A0029
-between-process generation variance; the inner sampling and gain/regression
-gates are unchanged. This is not a retained step or a confirmed gain. The
-A0029 verdict stays fixed. [Helper tests](A0030-helper-tests.txt) and
-[historical recomputation audit](A0030-helper-history-audit.json) verify that
-variable block counts preserve all prior continuation statistics. Scaling
-exports now derive sample count and degrees of freedom from the frozen plan;
-[plot-data tests](A0030-plot-data-tests.txt) cover six-block completeness and
-unchanged A0023/A0028 source data. No new figures are rendered during timing.
+[A0030](../A0030/record.json) is undergoing full validation on A0028 after
+its complete64-process screen and fixed six-block240-process confirmation.
+Its per-forward offload metadata/callback change now has two corrected local
+gains: batch-1 generation offload reduction10.4770ms (95%CI4.4593–16.4947),
+gap reduction14.4679ms (7.3746–21.5613), Holm10 p=0.02946; and
+batch-8/context2048 decode offload reduction0.00999ms (0.00501–0.01498),
+gap reduction0.01363ms (0.00790–0.01937), p=0.01801.
+[Confirmation audit](../A0030/confirmation-audit.json) recomputed all240 raw
+means, paired statistics and decisions and checked unique balanced coverage,
+source/configuration/memory and one environment. No selected-point regression
+was resolved. Six remaining workloads require144 further formal processes,
+followed by folding and full-model correctness gates. A0030 is not yet a
+retained step; the verified chain remains through A0028. Selection data do not
+establish final independent near-GPU acceptance.
+
+Source `a9e5bda` passed56 regression tests and a standalone zero-difference
+correctness check. The six-block count was predeclared before measurements;
+A0029's verdict stays fixed. [Helper tests](A0030-helper-tests.txt) and
+[historical recomputation audit](A0030-helper-history-audit.json) preserve
+prior continuation statistics. Scaling exports derive sample count and degrees
+of freedom from the frozen plan; [plot-data tests](A0030-plot-data-tests.txt)
+cover six-block completeness and unchanged historical data. No new figures are
+rendered during timing. Final evidence tooling is described in
+[FINAL_VERIFICATION.md](FINAL_VERIFICATION.md) and
+[CUMULATIVE_VERIFICATION.md](CUMULATIVE_VERIFICATION.md); no real final target or
+cumulative A0000 plan has been launched yet.
 
 [A0029](../A0029/record.json) tested alignment-specialized compiled mapped
 launchers on A0028. All208 screen/confirmation results were audited; no gain

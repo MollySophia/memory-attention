@@ -1,0 +1,1 @@
+ma_gpu           decode   median=    4.478 ms  min=    4.460  max=    4.483  spread=0.52%  policy=none

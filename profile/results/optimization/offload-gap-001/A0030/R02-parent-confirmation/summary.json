@@ -1,173 +1,7 @@
 {
-  "campaign_id": "offload-gap-001",
-  "continuation_id": "continuation-03",
-  "attempt_id": "A0030",
-  "parent_attempt_id": "A0028",
-  "parent_source_sha": "6cc9354760ebde3bab9a90996a7713a936dfb439",
-  "parent_sha": "b95d471681813bd839749f9f50db1af9ebcbce91",
-  "accepted_step": null,
-  "label": "Resolve offload dispatch metadata once per forward",
-  "status": "testing",
-  "workflow_stage": "full_validation",
-  "hypothesis": "Remove repeated offload-only device/offloader/layer metadata discovery and dictionary callback state. Actual frozen offload loop with CPU stub layers costs35.356827us versus22.085108us for per-call resolved metadata; full-model benefit is unproven.",
-  "change": "Use embedding weight device for offload input staging, pass the already resolved offloader into the offloaded stack, snapshot layer references once per forward, and use closure locals for evolving hidden/cache state. Preserve layer __call__ hooks, all output/cache semantics, producer/consumer order and transport policies. No compiled launcher or event changes.",
-  "profile_evidence": [
-    "../continuation-03/offload-dispatch-A0028-post29.json",
-    "../continuation-03/generation-A0028-offload-post28.json",
-    "../continuation-03/generation-variance-A0029.json"
-  ],
-  "eligible_gain_workloads": [
-    [
-      "prefill",
-      1,
-      2048
-    ],
-    [
-      "decode",
-      1,
-      2048
-    ],
-    [
-      "prefill",
-      4,
-      2048
-    ],
-    [
-      "decode",
-      4,
-      2048
-    ],
-    [
-      "prefill",
-      8,
-      2048
-    ],
-    [
-      "decode",
-      8,
-      2048
-    ],
-    [
-      "prefill",
-      16,
-      2048
-    ],
-    [
-      "decode",
-      16,
-      2048
-    ],
-    [
-      "prefill",
-      8,
-      512
-    ],
-    [
-      "decode",
-      8,
-      512
-    ],
-    [
-      "prefill",
-      8,
-      4096
-    ],
-    [
-      "decode",
-      8,
-      4096
-    ],
-    [
-      "prefill",
-      8,
-      8192
-    ],
-    [
-      "decode",
-      8,
-      8192
-    ],
-    [
-      "generation",
-      1,
-      2048
-    ],
-    [
-      "generation",
-      8,
-      2048
-    ]
-  ],
-  "tradeoffs": [
-    "Per-call layer tuple must reflect replacements between forwards; no persistent layer/output/token cache.",
-    "Resolved offloader must match current batch/sequence shape; retain fallback resolution for direct internal calls.",
-    "Current device/input staging and cache/hidden-state/tuple-return behavior must remain equivalent.",
-    "Stub diagnostic does not execute real layers or CUDA; no end-to-end speedup claim.",
-    "A0029 remains unretained, and its compiled-launcher changes are not included."
-  ],
-  "screen": {
-    "workloads": 16,
-    "fresh_parent_candidate_processes": 64,
-    "prefill_decode": [
-      3,
-      5,
-      1
-    ],
-    "generation": [
-      2,
-      3,
-      1
-    ]
-  },
-  "confirmation_blocks": 6,
-  "confirmation_rule": "Prospectively fixed six fresh balanced independent process blocks for selected workloads and remaining all16 validation. Same inner formal sampling, fixed Holm family and signed95% regression guards. No optional extension or reuse of A0029 confirmation.",
-  "sampling_rationale": "A0029 b1 generation between-block reduction SD6.515842ms versus descriptive within-process pair-mean SE0.55..0.70ms; preserve its verdict and increase independent process replication only for this newly registered hypothesis.",
-  "expected_offload_config": {
-    "memory_offload_bulk_max_tokens": 1024,
-    "memory_offload_single_slot_max_tokens": 2048,
-    "memory_offload_mapped_bulk": true,
-    "memory_offload_mapped_bulk_min_tokens": 1,
-    "memory_offload_mapped_bulk_max_tokens": 16,
-    "memory_offload_single_host_min_tokens": 4096,
-    "memory_offload_single_host_max_tokens": 16384
-  },
-  "created_unix": 1791206487.2225587,
-  "candidate_sha": "a9e5bda62a020e4e1994037732b0dbb7606d5dda",
-  "correctness": {
-    "regression_tests": 56,
-    "standalone_max_diff": 0.0,
-    "helper_tests": 47,
-    "logs": [
-      "correctness-tests.txt",
-      "standalone-correctness.txt",
-      "../continuation-03/A0030-helper-tests.txt"
-    ],
-    "historical_statistics_audit": "../continuation-03/A0030-helper-history-audit.json"
-  },
-  "screen_manifest": "R01-complete-screen/manifest.json",
-  "screen_summary": "R01-complete-screen/summary.json",
-  "screen_audit": "screen-audit.json",
-  "confirmation_manifest": "R02-parent-confirmation/manifest.json",
-  "confirmation_fixed_family": 10,
-  "confirmation_processes": 240,
-  "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0030",
-  "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json",
-  "parent_confirmation_analysis": "R02-parent-confirmation/analysis.json",
-  "confirmation_audit": "confirmation-audit.json",
-  "confirmation_decision": "Six fixed independent blocks and Holm10 confirm decode b8/2048 and generation b1/2048 gains versus A0028; no resolved selected-point regressions. Remaining all16 validation, folding and full-model correctness still required before retention.",
-  "confirmed_local_gains": [
-    [
-      "decode",
-      8,
-      2048
-    ],
-    [
-      "generation",
-      1,
-      2048
-    ]
-  ],
-  "local_findings": [
+  "status": "audited",
+  "formal": true,
+  "rows": [
     {
       "attempt": "A0030",
       "baseline": "A0028",
@@ -288,42 +122,7 @@
       "screen_promising": true,
       "joint_one_sided_p": 0.23574199484595937,
       "nominal_dual_gain": false,
-      "resolved_resident_slowdown": false,
-      "holm_adjusted_p": 0.7824501823028261,
-      "confirmed_local_gain": false,
-      "resolved_offload_regression": false,
-      "resolved_gap_regression": false,
-      "candidate_gap_ms": {
-        "values": [
-          -0.05757582063476274,
-          -0.07120841182768345,
-          -0.11914999534686377,
-          -0.0474242183069391,
-          0.010798281679551103,
-          -0.1590916576484842
-        ],
-        "mean": -0.07394197034753036,
-        "lower_95": -0.1359451634873287,
-        "upper_95": -0.011938777207732017,
-        "method": "paired process-block mean +/- t(df=5,0.975)*SE",
-        "n": 6
-      },
-      "candidate_target_residual_ms": {
-        "values": [
-          -0.15757582063476275,
-          -0.17120841182768345,
-          -0.21914999534686377,
-          -0.1474242183069391,
-          -0.0892017183204489,
-          -0.2590916576484842
-        ],
-        "mean": -0.17394197034753037,
-        "lower_95": -0.2359451634873287,
-        "upper_95": -0.11193877720773204,
-        "method": "paired process-block mean +/- t(df=5,0.975)*SE",
-        "n": 6
-      },
-      "candidate_target_residual_upper_one_sided_95_bonferroni16": -0.06478035744248703
+      "resolved_resident_slowdown": false
     },
     {
       "attempt": "A0030",
@@ -445,42 +244,7 @@
       "screen_promising": true,
       "joint_one_sided_p": 0.007116600442943544,
       "nominal_dual_gain": true,
-      "resolved_resident_slowdown": false,
-      "holm_adjusted_p": 0.05693280354354835,
-      "confirmed_local_gain": false,
-      "resolved_offload_regression": false,
-      "resolved_gap_regression": false,
-      "candidate_gap_ms": {
-        "values": [
-          0.0405624353637295,
-          0.05559010120729635,
-          0.04495307803153992,
-          0.04703953551749418,
-          0.045467851062615416,
-          0.05081825268765261
-        ],
-        "mean": 0.04740520897838799,
-        "lower_95": 0.04194481678643365,
-        "upper_95": 0.052865601170342336,
-        "method": "paired process-block mean +/- t(df=5,0.975)*SE",
-        "n": 6
-      },
-      "candidate_target_residual_ms": {
-        "values": [
-          -0.05943756463627051,
-          -0.044409898792703656,
-          -0.05504692196846009,
-          -0.052960464482505826,
-          -0.05453214893738459,
-          -0.049181747312347396
-        ],
-        "mean": -0.05259479102161201,
-        "lower_95": -0.058055183213566355,
-        "upper_95": -0.04713439882965767,
-        "method": "paired process-block mean +/- t(df=5,0.975)*SE",
-        "n": 6
-      },
-      "candidate_target_residual_upper_one_sided_95_bonferroni16": -0.042981330995063134
+      "resolved_resident_slowdown": false
     },
     {
       "attempt": "A0030",
@@ -602,42 +366,7 @@
       "screen_promising": true,
       "joint_one_sided_p": 0.010365393634554555,
       "nominal_dual_gain": true,
-      "resolved_resident_slowdown": false,
-      "holm_adjusted_p": 0.0725577554418819,
-      "confirmed_local_gain": false,
-      "resolved_offload_regression": false,
-      "resolved_gap_regression": false,
-      "candidate_gap_ms": {
-        "values": [
-          0.0021789843837423106,
-          0.0038654388238992254,
-          0.00010731940468122758,
-          -0.004568494235475562,
-          -0.00636138332386782,
-          -0.0075194984674453735
-        ],
-        "mean": -0.002049605569077665,
-        "lower_95": -0.007024793983084867,
-        "upper_95": 0.002925582844929537,
-        "method": "paired process-block mean +/- t(df=5,0.975)*SE",
-        "n": 6
-      },
-      "candidate_target_residual_ms": {
-        "values": [
-          -0.0978210156162577,
-          -0.09613456117610078,
-          -0.09989268059531878,
-          -0.10456849423547557,
-          -0.10636138332386783,
-          -0.10751949846744538
-        ],
-        "mean": -0.10204960556907768,
-        "lower_95": -0.10702479398308487,
-        "upper_95": -0.09707441715507048,
-        "method": "paired process-block mean +/- t(df=5,0.975)*SE",
-        "n": 6
-      },
-      "candidate_target_residual_upper_one_sided_95_bonferroni16": -0.09329038585349002
+      "resolved_resident_slowdown": false
     },
     {
       "attempt": "A0030",
@@ -759,42 +488,7 @@
       "screen_promising": true,
       "joint_one_sided_p": 0.0018012722694367629,
       "nominal_dual_gain": true,
-      "resolved_resident_slowdown": false,
-      "holm_adjusted_p": 0.018012722694367628,
-      "confirmed_local_gain": true,
-      "resolved_offload_regression": false,
-      "resolved_gap_regression": false,
-      "candidate_gap_ms": {
-        "values": [
-          0.026609236374497414,
-          0.0031900436927880804,
-          0.0029989052563905716,
-          0.006842163080969854,
-          -0.009322306141257286,
-          0.0011481034258995493
-        ],
-        "mean": 0.0052443576148813635,
-        "lower_95": -0.0071482312364981185,
-        "upper_95": 0.017636946466260846,
-        "method": "paired process-block mean +/- t(df=5,0.975)*SE",
-        "n": 6
-      },
-      "candidate_target_residual_ms": {
-        "values": [
-          -0.0825820037474235,
-          -0.10598413568610887,
-          -0.10623301829521856,
-          -0.10231832150990824,
-          -0.11863066985582313,
-          -0.10807949087272148
-        ],
-        "mean": -0.10397127332786729,
-        "lower_95": -0.11639878540622989,
-        "upper_95": -0.0915437612495047,
-        "method": "paired process-block mean +/- t(df=5,0.975)*SE",
-        "n": 6
-      },
-      "candidate_target_residual_upper_one_sided_95_bonferroni16": -0.08209163787405717
+      "resolved_resident_slowdown": false
     },
     {
       "attempt": "A0030",
@@ -916,42 +610,7 @@
       "screen_promising": true,
       "joint_one_sided_p": 0.03669171744237584,
       "nominal_dual_gain": false,
-      "resolved_resident_slowdown": false,
-      "holm_adjusted_p": 0.18345858721187921,
-      "confirmed_local_gain": false,
-      "resolved_offload_regression": false,
-      "resolved_gap_regression": false,
-      "candidate_gap_ms": {
-        "values": [
-          0.0035879978289159453,
-          -0.01192847266793251,
-          -0.013962403560682901,
-          -0.010733616848781935,
-          -0.014307365442313369,
-          -0.02062111161649227
-        ],
-        "mean": -0.01132749538454784,
-        "lower_95": -0.01979325402272756,
-        "upper_95": -0.0028617367463681202,
-        "method": "paired process-block mean +/- t(df=5,0.975)*SE",
-        "n": 6
-      },
-      "candidate_target_residual_ms": {
-        "values": [
-          -0.34216811694205285,
-          -0.3584030272128681,
-          -0.35999860148877383,
-          -0.3571639508008909,
-          -0.36031877823794645,
-          -0.3670925577171147
-        ],
-        "mean": -0.3575241720666078,
-        "lower_95": -0.36620595723414495,
-        "upper_95": -0.34884238689907066,
-        "method": "paired process-block mean +/- t(df=5,0.975)*SE",
-        "n": 6
-      },
-      "candidate_target_residual_upper_one_sided_95_bonferroni16": -0.34223919037789663
+      "resolved_resident_slowdown": false
     },
     {
       "attempt": "A0030",
@@ -1073,42 +732,7 @@
       "screen_promising": true,
       "joint_one_sided_p": 0.017016399327770763,
       "nominal_dual_gain": true,
-      "resolved_resident_slowdown": false,
-      "holm_adjusted_p": 0.10209839596662458,
-      "confirmed_local_gain": false,
-      "resolved_offload_regression": false,
-      "resolved_gap_regression": false,
-      "candidate_gap_ms": {
-        "values": [
-          -0.11462032174070558,
-          -0.1056365823994092,
-          -0.11527095921337605,
-          -0.11324168493350584,
-          -0.12344969436526299,
-          -0.11839883712431032
-        ],
-        "mean": -0.115103013296095,
-        "lower_95": -0.1212914560490314,
-        "upper_95": -0.1089145705431586,
-        "method": "paired process-block mean +/- t(df=5,0.975)*SE",
-        "n": 6
-      },
-      "candidate_target_residual_ms": {
-        "values": [
-          -0.31694889968881884,
-          -0.3079123756227406,
-          -0.317642027977854,
-          -0.31565204728394985,
-          -0.325872253626585,
-          -0.3207350205630088
-        ],
-        "mean": -0.31746043746049285,
-        "lower_95": -0.32369044378595474,
-        "upper_95": -0.31123043113503096,
-        "method": "paired process-block mean +/- t(df=5,0.975)*SE",
-        "n": 6
-      },
-      "candidate_target_residual_upper_one_sided_95_bonferroni16": -0.3064920097964099
+      "resolved_resident_slowdown": false
     },
     {
       "attempt": "A0030",
@@ -1230,42 +854,7 @@
       "screen_promising": true,
       "joint_one_sided_p": 0.0032730921437740925,
       "nominal_dual_gain": true,
-      "resolved_resident_slowdown": false,
-      "holm_adjusted_p": 0.02945782929396683,
-      "confirmed_local_gain": true,
-      "resolved_offload_regression": false,
-      "resolved_gap_regression": false,
-      "candidate_gap_ms": {
-        "values": [
-          -7.710400844613673,
-          -17.61144921183586,
-          -5.928723576168181,
-          2.1122980241974574,
-          -2.9485622731348258,
-          -10.173389719178203
-        ],
-        "mean": -7.043371266788881,
-        "lower_95": -14.063811697365582,
-        "upper_95": -0.02293083621218095,
-        "method": "paired process-block mean +/- t(df=5,0.975)*SE",
-        "n": 6
-      },
-      "candidate_target_residual_ms": {
-        "values": [
-          -13.62360152633236,
-          -23.60415770827482,
-          -11.883736290658476,
-          -3.7588909349093456,
-          -8.838751984449763,
-          -16.107308284379464
-        ],
-        "mean": -12.969407788167372,
-        "lower_95": -20.031835437371456,
-        "upper_95": -5.906980138963286,
-        "method": "paired process-block mean +/- t(df=5,0.975)*SE",
-        "n": 6
-      },
-      "candidate_target_residual_upper_one_sided_95_bonferroni16": -0.5354353720364333
+      "resolved_resident_slowdown": false
     },
     {
       "attempt": "A0030",
@@ -1387,42 +976,7 @@
       "screen_promising": true,
       "joint_one_sided_p": 0.3426060146656271,
       "nominal_dual_gain": false,
-      "resolved_resident_slowdown": false,
-      "holm_adjusted_p": 0.7824501823028261,
-      "confirmed_local_gain": false,
-      "resolved_offload_regression": false,
-      "resolved_gap_regression": false,
-      "candidate_gap_ms": {
-        "values": [
-          -6.152719880143877,
-          -6.889696139842272,
-          -6.304502890755884,
-          -6.98661723484588,
-          -6.020697330435269,
-          -7.12019341687369
-        ],
-        "mean": -6.579071148816145,
-        "lower_95": -7.076716021151837,
-        "upper_95": -6.081426276480453,
-        "method": "paired process-block mean +/- t(df=5,0.975)*SE",
-        "n": 6
-      },
-      "candidate_target_residual_ms": {
-        "values": [
-          -19.642464411134597,
-          -20.39520159177482,
-          -19.794974812306616,
-          -20.490937785555843,
-          -19.508437356911752,
-          -20.626942872690734
-        ],
-        "mean": -20.076493138395726,
-        "lower_95": -20.583416227732513,
-        "upper_95": -19.56957004905894,
-        "method": "paired process-block mean +/- t(df=5,0.975)*SE",
-        "n": 6
-      },
-      "candidate_target_residual_upper_one_sided_95_bonferroni16": -19.18401423128454
+      "resolved_resident_slowdown": false
     },
     {
       "attempt": "A0030",
@@ -1544,42 +1098,7 @@
       "screen_promising": false,
       "joint_one_sided_p": 0.5167876536526743,
       "nominal_dual_gain": false,
-      "resolved_resident_slowdown": false,
-      "holm_adjusted_p": 0.7824501823028261,
-      "confirmed_local_gain": false,
-      "resolved_offload_regression": false,
-      "resolved_gap_regression": false,
-      "candidate_gap_ms": {
-        "values": [
-          0.24682839090625563,
-          0.2762437487641982,
-          0.2838823323448487,
-          0.3405274823307991,
-          0.27560642920434475,
-          0.31221395668884355
-        ],
-        "mean": 0.28921705670654835,
-        "lower_95": 0.25491983224554976,
-        "upper_95": 0.32351428116754694,
-        "method": "paired process-block mean +/- t(df=5,0.975)*SE",
-        "n": 6
-      },
-      "candidate_target_residual_ms": {
-        "values": [
-          -0.04271865387757501,
-          -0.013959791200855165,
-          -0.006094460220387787,
-          0.050495320154974876,
-          -0.014527059781054674,
-          0.02213161205873132
-        ],
-        "mean": -0.0007788388110277397,
-        "lower_95": -0.0349585021284009,
-        "upper_95": 0.03340082450634542,
-        "method": "paired process-block mean +/- t(df=5,0.975)*SE",
-        "n": 6
-      },
-      "candidate_target_residual_upper_one_sided_95_bonferroni16": 0.05939720999122163
+      "resolved_resident_slowdown": false
     },
     {
       "attempt": "A0030",
@@ -1701,43 +1220,9 @@
       "screen_promising": true,
       "joint_one_sided_p": 0.19561254557570654,
       "nominal_dual_gain": false,
-      "resolved_resident_slowdown": false,
-      "holm_adjusted_p": 0.7824501823028261,
-      "confirmed_local_gain": false,
-      "resolved_offload_regression": false,
-      "resolved_gap_regression": false,
-      "candidate_gap_ms": {
-        "values": [
-          1.7333766600738159,
-          1.8222093116492033,
-          0.4966863586257091,
-          2.2459991897146097,
-          0.8337878622114658,
-          0.49724479516345355
-        ],
-        "mean": 1.2715506962397096,
-        "lower_95": 0.47818031380309345,
-        "upper_95": 2.064921078676326,
-        "method": "paired process-block mean +/- t(df=5,0.975)*SE",
-        "n": 6
-      },
-      "candidate_target_residual_ms": {
-        "values": [
-          -0.3273390056565213,
-          -0.24685709131881595,
-          -1.5756773487664568,
-          0.18227625405417802,
-          -1.236342551652342,
-          -1.5709953233599854
-        ],
-        "mean": -0.7958225111166572,
-        "lower_95": -1.5923768449237627,
-        "upper_95": 0.0007318226904483582,
-        "method": "paired process-block mean +/- t(df=5,0.975)*SE",
-        "n": 6
-      },
-      "candidate_target_residual_upper_one_sided_95_bonferroni16": 0.6065755177853869
+      "resolved_resident_slowdown": false
     }
   ],
-  "validation_plan": "validation-plan.json"
+  "checked_raw_results": 240,
+  "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0030/R02-parent-confirmation/manifest.json"
 }
