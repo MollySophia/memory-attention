@@ -68,6 +68,8 @@ tokens. These effects must not be added to results measured at other workloads.
 
 ## Latest findings and figures
 
+The [ledger through A0030](ledger-through-A0030/LEDGER.md) now records 31 entries and five retained steps. Updated [local-findings JSON](local-findings-through-A0030/findings.json) and [CSV](local-findings-through-A0030/findings.csv) contain 94 nominated comparisons, including 11 corrected local gains; A0030 uses six independent blocks (df=5). A0030 scaling data were exported from 192 formal candidate processes. These new exports are data only: rendered figures and visual checks are pending until GPU timing is idle. Earlier figure snapshots below remain historical.
+
 [A0030](../A0030/record.json) is retained as step 5 on A0028 after its
 64-process screen, fixed six-block confirmation and complete validation.
 Its per-forward offload metadata/callback change now has two corrected local
