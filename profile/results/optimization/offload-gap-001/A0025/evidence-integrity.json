@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "attempt": "A0025",
+  "counts": {
+    "R01-complete-screen": 64,
+    "R02-parent-confirmation": 96
+  },
+  "matched_environments": 1,
+  "checks": [
+    "exact frozen source signatures",
+    "raw source/config/sampling/memory",
+    "complete unique screen and fixed three-block confirmation coverage",
+    "balanced confirmation order",
+    "stored analysis recomputed identically after JSON normalization"
+  ],
+  "accepted": false
+}

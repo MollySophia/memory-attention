@@ -5,7 +5,7 @@
   "baseline": "A0023",
   "stage": "independent_confirmation",
   "formal": true,
-  "status": "running",
+  "status": "completed",
   "source_signatures": {
     "baseline": {
       "attempt": "A0023",
@@ -153,9 +153,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B1-J002-candidate-prefill-ma_offload-b1-l2048.json"
       ],
       "estimated_seconds": 17.828266552090646,
-      "status": "running",
+      "status": "completed",
       "started_unix": 1791179967.6089578,
-      "pid": 4140790
+      "pid": 4140790,
+      "returncode": 0,
+      "finished_unix": 1791179986.1464665
     },
     {
       "name": "B1-J003-candidate-prefill-ma_gpu-b1-l2048",
@@ -220,7 +222,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B1-J003-candidate-prefill-ma_gpu-b1-l2048.json"
       ],
       "estimated_seconds": 16.870169261097907,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791179986.1482043,
+      "pid": 4141170,
+      "returncode": 0,
+      "finished_unix": 1791180003.201201
     },
     {
       "name": "B1-J004-baseline-prefill-ma_gpu-b1-l2048",
@@ -285,7 +291,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B1-J004-baseline-prefill-ma_gpu-b1-l2048.json"
       ],
       "estimated_seconds": 16.870169261097907,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180003.2028546,
+      "pid": 4141457,
+      "returncode": 0,
+      "finished_unix": 1791180020.2294388
     },
     {
       "name": "B1-J005-baseline-decode-ma_gpu-b1-l2048",
@@ -350,7 +360,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B1-J005-baseline-decode-ma_gpu-b1-l2048.json"
       ],
       "estimated_seconds": 16.00741952061653,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180020.23136,
+      "pid": 4141700,
+      "returncode": 0,
+      "finished_unix": 1791180036.312715
     },
     {
       "name": "B1-J006-candidate-decode-ma_gpu-b1-l2048",
@@ -415,7 +429,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B1-J006-candidate-decode-ma_gpu-b1-l2048.json"
       ],
       "estimated_seconds": 16.00741952061653,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180036.3141513,
+      "pid": 4141957,
+      "returncode": 0,
+      "finished_unix": 1791180052.4043999
     },
     {
       "name": "B1-J007-candidate-decode-ma_offload-b1-l2048",
@@ -480,7 +498,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B1-J007-candidate-decode-ma_offload-b1-l2048.json"
       ],
       "estimated_seconds": 16.712643590569495,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180052.4058323,
+      "pid": 4142183,
+      "returncode": 0,
+      "finished_unix": 1791180069.992592
     },
     {
       "name": "B1-J008-baseline-decode-ma_offload-b1-l2048",
@@ -545,7 +567,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B1-J008-baseline-decode-ma_offload-b1-l2048.json"
       ],
       "estimated_seconds": 16.712643590569495,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180069.9945729,
+      "pid": 4142443,
+      "returncode": 0,
+      "finished_unix": 1791180087.6232831
     },
     {
       "name": "B1-J009-baseline-prefill-ma_offload-b8-l2048",
@@ -610,7 +636,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B1-J009-baseline-prefill-ma_offload-b8-l2048.json"
       ],
       "estimated_seconds": 24.894899666309357,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180087.6250231,
+      "pid": 4142730,
+      "returncode": 0,
+      "finished_unix": 1791180113.4475791
     },
     {
       "name": "B1-J010-candidate-prefill-ma_offload-b8-l2048",
@@ -675,7 +705,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B1-J010-candidate-prefill-ma_offload-b8-l2048.json"
       ],
       "estimated_seconds": 24.894899666309357,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180113.4493182,
+      "pid": 4143023,
+      "returncode": 0,
+      "finished_unix": 1791180139.2547386
     },
     {
       "name": "B1-J011-candidate-prefill-ma_gpu-b8-l2048",
@@ -740,7 +774,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B1-J011-candidate-prefill-ma_gpu-b8-l2048.json"
       ],
       "estimated_seconds": 24.02968961596489,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180139.2563813,
+      "pid": 4143336,
+      "returncode": 0,
+      "finished_unix": 1791180163.3526773
     },
     {
       "name": "B1-J012-baseline-prefill-ma_gpu-b8-l2048",
@@ -805,7 +843,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B1-J012-baseline-prefill-ma_gpu-b8-l2048.json"
       ],
       "estimated_seconds": 24.02968961596489,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180163.3544748,
+      "pid": 4143620,
+      "returncode": 0,
+      "finished_unix": 1791180187.456365
     },
     {
       "name": "B1-J013-baseline-decode-ma_gpu-b8-l2048",
@@ -870,7 +912,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B1-J013-baseline-decode-ma_gpu-b8-l2048.json"
       ],
       "estimated_seconds": 16.363235872983932,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180187.4580858,
+      "pid": 4143903,
+      "returncode": 0,
+      "finished_unix": 1791180203.9331906
     },
     {
       "name": "B1-J014-candidate-decode-ma_gpu-b8-l2048",
@@ -935,7 +981,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B1-J014-candidate-decode-ma_gpu-b8-l2048.json"
       ],
       "estimated_seconds": 16.363235872983932,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180203.9349115,
+      "pid": 4144154,
+      "returncode": 0,
+      "finished_unix": 1791180220.467994
     },
     {
       "name": "B1-J015-candidate-decode-ma_offload-b8-l2048",
@@ -1000,7 +1050,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B1-J015-candidate-decode-ma_offload-b8-l2048.json"
       ],
       "estimated_seconds": 17.185545346140863,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180220.469439,
+      "pid": 4144389,
+      "returncode": 0,
+      "finished_unix": 1791180238.5243526
     },
     {
       "name": "B1-J016-baseline-decode-ma_offload-b8-l2048",
@@ -1065,7 +1119,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B1-J016-baseline-decode-ma_offload-b8-l2048.json"
       ],
       "estimated_seconds": 17.185545346140863,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180238.52596,
+      "pid": 4144676,
+      "returncode": 0,
+      "finished_unix": 1791180256.581918
     },
     {
       "name": "B1-J017-baseline-prefill-ma_offload-b16-l2048",
@@ -1130,7 +1188,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B1-J017-baseline-prefill-ma_offload-b16-l2048.json"
       ],
       "estimated_seconds": 33.28188357055187,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180256.5875075,
+      "pid": 4144942,
+      "returncode": 0,
+      "finished_unix": 1791180290.8164787
     },
     {
       "name": "B1-J018-candidate-prefill-ma_offload-b16-l2048",
@@ -1195,7 +1257,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B1-J018-candidate-prefill-ma_offload-b16-l2048.json"
       ],
       "estimated_seconds": 33.28188357055187,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180290.818472,
+      "pid": 4145351,
+      "returncode": 0,
+      "finished_unix": 1791180325.0920963
     },
     {
       "name": "B1-J019-candidate-prefill-ma_gpu-b16-l2048",
@@ -1260,7 +1326,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B1-J019-candidate-prefill-ma_gpu-b16-l2048.json"
       ],
       "estimated_seconds": 32.29416094422341,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180325.0938923,
+      "pid": 4145704,
+      "returncode": 0,
+      "finished_unix": 1791180357.6459644
     },
     {
       "name": "B1-J020-baseline-prefill-ma_gpu-b16-l2048",
@@ -1325,7 +1395,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B1-J020-baseline-prefill-ma_gpu-b16-l2048.json"
       ],
       "estimated_seconds": 32.29416094422341,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180357.6475546,
+      "pid": 4146035,
+      "returncode": 0,
+      "finished_unix": 1791180390.3105917
     },
     {
       "name": "B1-J021-baseline-prefill-ma_gpu-b8-l512",
@@ -1390,7 +1464,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B1-J021-baseline-prefill-ma_gpu-b8-l512.json"
       ],
       "estimated_seconds": 17.842101354524495,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180390.3123214,
+      "pid": 4146406,
+      "returncode": 0,
+      "finished_unix": 1791180408.3022132
     },
     {
       "name": "B1-J022-candidate-prefill-ma_gpu-b8-l512",
@@ -1455,7 +1533,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B1-J022-candidate-prefill-ma_gpu-b8-l512.json"
       ],
       "estimated_seconds": 17.842101354524495,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180408.3038235,
+      "pid": 4146654,
+      "returncode": 0,
+      "finished_unix": 1791180426.2190297
     },
     {
       "name": "B1-J023-candidate-prefill-ma_offload-b8-l512",
@@ -1520,7 +1602,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B1-J023-candidate-prefill-ma_offload-b8-l512.json"
       ],
       "estimated_seconds": 18.599576462060213,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180426.2205832,
+      "pid": 4146885,
+      "returncode": 0,
+      "finished_unix": 1791180445.8068097
     },
     {
       "name": "B1-J024-baseline-prefill-ma_offload-b8-l512",
@@ -1585,7 +1671,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B1-J024-baseline-prefill-ma_offload-b8-l512.json"
       ],
       "estimated_seconds": 18.599576462060213,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180445.8085349,
+      "pid": 4147178,
+      "returncode": 0,
+      "finished_unix": 1791180465.410776
     },
     {
       "name": "B1-J025-baseline-prefill-ma_offload-b8-l8192",
@@ -1650,7 +1740,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B1-J025-baseline-prefill-ma_offload-b8-l8192.json"
       ],
       "estimated_seconds": 50.07619248330593,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180465.4125137,
+      "pid": 4147461,
+      "returncode": 0,
+      "finished_unix": 1791180523.2389336
     },
     {
       "name": "B1-J026-candidate-prefill-ma_offload-b8-l8192",
@@ -1715,7 +1809,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B1-J026-candidate-prefill-ma_offload-b8-l8192.json"
       ],
       "estimated_seconds": 50.07619248330593,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180523.2406447,
+      "pid": 4147951,
+      "returncode": 0,
+      "finished_unix": 1791180581.3881636
     },
     {
       "name": "B1-J027-candidate-prefill-ma_gpu-b8-l8192",
@@ -1780,7 +1878,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B1-J027-candidate-prefill-ma_gpu-b8-l8192.json"
       ],
       "estimated_seconds": 48.780042661726476,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180581.3898582,
+      "pid": 4148467,
+      "returncode": 0,
+      "finished_unix": 1791180637.7556798
     },
     {
       "name": "B1-J028-baseline-prefill-ma_gpu-b8-l8192",
@@ -1845,7 +1947,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B1-J028-baseline-prefill-ma_gpu-b8-l8192.json"
       ],
       "estimated_seconds": 48.780042661726476,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180637.757381,
+      "pid": 4148965,
+      "returncode": 0,
+      "finished_unix": 1791180694.2005877
     },
     {
       "name": "B1-J029-baseline-generation-ma_gpu-b1-l2048",
@@ -1910,7 +2016,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B1-J029-baseline-generation-ma_gpu-b1-l2048.json"
       ],
       "estimated_seconds": 26.20853256667033,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180694.202314,
+      "pid": 4149418,
+      "returncode": 0,
+      "finished_unix": 1791180720.577799
     },
     {
       "name": "B1-J030-candidate-generation-ma_gpu-b1-l2048",
@@ -1975,7 +2085,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B1-J030-candidate-generation-ma_gpu-b1-l2048.json"
       ],
       "estimated_seconds": 26.20853256667033,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180720.5793655,
+      "pid": 4149712,
+      "returncode": 0,
+      "finished_unix": 1791180746.9508967
     },
     {
       "name": "B1-J031-candidate-generation-ma_offload-b1-l2048",
@@ -2040,7 +2154,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B1-J031-candidate-generation-ma_offload-b1-l2048.json"
       ],
       "estimated_seconds": 28.199524895939977,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180746.9527762,
+      "pid": 4150015,
+      "returncode": 0,
+      "finished_unix": 1791180774.8317258
     },
     {
       "name": "B1-J032-baseline-generation-ma_offload-b1-l2048",
@@ -2105,7 +2223,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B1-J032-baseline-generation-ma_offload-b1-l2048.json"
       ],
       "estimated_seconds": 28.199524895939977,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180774.8336375,
+      "pid": 4150340,
+      "returncode": 0,
+      "finished_unix": 1791180802.7440355
     },
     {
       "name": "B2-J033-baseline-generation-ma_offload-b1-l2048",
@@ -2170,7 +2292,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B2-J033-baseline-generation-ma_offload-b1-l2048.json"
       ],
       "estimated_seconds": 28.199524895939977,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180802.7459261,
+      "pid": 4150688,
+      "returncode": 0,
+      "finished_unix": 1791180830.8155239
     },
     {
       "name": "B2-J034-candidate-generation-ma_offload-b1-l2048",
@@ -2235,7 +2361,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B2-J034-candidate-generation-ma_offload-b1-l2048.json"
       ],
       "estimated_seconds": 28.199524895939977,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180830.8172736,
+      "pid": 4151012,
+      "returncode": 0,
+      "finished_unix": 1791180858.9606066
     },
     {
       "name": "B2-J035-candidate-generation-ma_gpu-b1-l2048",
@@ -2300,7 +2430,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B2-J035-candidate-generation-ma_gpu-b1-l2048.json"
       ],
       "estimated_seconds": 26.20853256667033,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180858.962324,
+      "pid": 4151334,
+      "returncode": 0,
+      "finished_unix": 1791180885.4155545
     },
     {
       "name": "B2-J036-baseline-generation-ma_gpu-b1-l2048",
@@ -2365,7 +2499,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B2-J036-baseline-generation-ma_gpu-b1-l2048.json"
       ],
       "estimated_seconds": 26.20853256667033,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180885.4170444,
+      "pid": 4151644,
+      "returncode": 0,
+      "finished_unix": 1791180911.766405
     },
     {
       "name": "B2-J037-baseline-prefill-ma_gpu-b8-l8192",
@@ -2430,7 +2568,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B2-J037-baseline-prefill-ma_gpu-b8-l8192.json"
       ],
       "estimated_seconds": 48.780042661726476,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180911.7679842,
+      "pid": 4151914,
+      "returncode": 0,
+      "finished_unix": 1791180967.719481
     },
     {
       "name": "B2-J038-candidate-prefill-ma_gpu-b8-l8192",
@@ -2495,7 +2637,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B2-J038-candidate-prefill-ma_gpu-b8-l8192.json"
       ],
       "estimated_seconds": 48.780042661726476,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791180967.7209804,
+      "pid": 4152336,
+      "returncode": 0,
+      "finished_unix": 1791181023.9566069
     },
     {
       "name": "B2-J039-candidate-prefill-ma_offload-b8-l8192",
@@ -2560,7 +2706,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B2-J039-candidate-prefill-ma_offload-b8-l8192.json"
       ],
       "estimated_seconds": 50.07619248330593,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181023.958102,
+      "pid": 4152782,
+      "returncode": 0,
+      "finished_unix": 1791181082.3293715
     },
     {
       "name": "B2-J040-baseline-prefill-ma_offload-b8-l8192",
@@ -2625,7 +2775,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B2-J040-baseline-prefill-ma_offload-b8-l8192.json"
       ],
       "estimated_seconds": 50.07619248330593,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181082.3310494,
+      "pid": 4153292,
+      "returncode": 0,
+      "finished_unix": 1791181140.7900012
     },
     {
       "name": "B2-J041-baseline-prefill-ma_offload-b8-l512",
@@ -2690,7 +2844,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B2-J041-baseline-prefill-ma_offload-b8-l512.json"
       ],
       "estimated_seconds": 18.599576462060213,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181140.7918744,
+      "pid": 4153981,
+      "returncode": 0,
+      "finished_unix": 1791181160.5061102
     },
     {
       "name": "B2-J042-candidate-prefill-ma_offload-b8-l512",
@@ -2755,7 +2913,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B2-J042-candidate-prefill-ma_offload-b8-l512.json"
       ],
       "estimated_seconds": 18.599576462060213,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181160.50787,
+      "pid": 4154285,
+      "returncode": 0,
+      "finished_unix": 1791181180.2355912
     },
     {
       "name": "B2-J043-candidate-prefill-ma_gpu-b8-l512",
@@ -2820,7 +2982,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B2-J043-candidate-prefill-ma_gpu-b8-l512.json"
       ],
       "estimated_seconds": 17.842101354524495,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181180.2373033,
+      "pid": 4154586,
+      "returncode": 0,
+      "finished_unix": 1791181198.215304
     },
     {
       "name": "B2-J044-baseline-prefill-ma_gpu-b8-l512",
@@ -2885,7 +3051,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B2-J044-baseline-prefill-ma_gpu-b8-l512.json"
       ],
       "estimated_seconds": 17.842101354524495,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181198.2170522,
+      "pid": 4154831,
+      "returncode": 0,
+      "finished_unix": 1791181216.1735861
     },
     {
       "name": "B2-J045-baseline-prefill-ma_gpu-b16-l2048",
@@ -2950,7 +3120,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B2-J045-baseline-prefill-ma_gpu-b16-l2048.json"
       ],
       "estimated_seconds": 32.29416094422341,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181216.1751683,
+      "pid": 4155099,
+      "returncode": 0,
+      "finished_unix": 1791181248.8350983
     },
     {
       "name": "B2-J046-candidate-prefill-ma_gpu-b16-l2048",
@@ -3015,7 +3189,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B2-J046-candidate-prefill-ma_gpu-b16-l2048.json"
       ],
       "estimated_seconds": 32.29416094422341,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181248.8366182,
+      "pid": 4155427,
+      "returncode": 0,
+      "finished_unix": 1791181281.5070457
     },
     {
       "name": "B2-J047-candidate-prefill-ma_offload-b16-l2048",
@@ -3080,7 +3258,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B2-J047-candidate-prefill-ma_offload-b16-l2048.json"
       ],
       "estimated_seconds": 33.28188357055187,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181281.5085454,
+      "pid": 4155761,
+      "returncode": 0,
+      "finished_unix": 1791181315.9937146
     },
     {
       "name": "B2-J048-baseline-prefill-ma_offload-b16-l2048",
@@ -3145,7 +3327,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B2-J048-baseline-prefill-ma_offload-b16-l2048.json"
       ],
       "estimated_seconds": 33.28188357055187,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181315.995436,
+      "pid": 4156114,
+      "returncode": 0,
+      "finished_unix": 1791181350.4662144
     },
     {
       "name": "B2-J049-baseline-decode-ma_offload-b8-l2048",
@@ -3210,7 +3396,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B2-J049-baseline-decode-ma_offload-b8-l2048.json"
       ],
       "estimated_seconds": 17.185545346140863,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181350.4680643,
+      "pid": 4156526,
+      "returncode": 0,
+      "finished_unix": 1791181368.667916
     },
     {
       "name": "B2-J050-candidate-decode-ma_offload-b8-l2048",
@@ -3275,7 +3465,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B2-J050-candidate-decode-ma_offload-b8-l2048.json"
       ],
       "estimated_seconds": 17.185545346140863,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181368.6696403,
+      "pid": 4156791,
+      "returncode": 0,
+      "finished_unix": 1791181386.874688
     },
     {
       "name": "B2-J051-candidate-decode-ma_gpu-b8-l2048",
@@ -3340,7 +3534,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B2-J051-candidate-decode-ma_gpu-b8-l2048.json"
       ],
       "estimated_seconds": 16.363235872983932,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181386.8772793,
+      "pid": 4157074,
+      "returncode": 0,
+      "finished_unix": 1791181403.480802
     },
     {
       "name": "B2-J052-baseline-decode-ma_gpu-b8-l2048",
@@ -3405,7 +3603,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B2-J052-baseline-decode-ma_gpu-b8-l2048.json"
       ],
       "estimated_seconds": 16.363235872983932,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181403.4823723,
+      "pid": 4157350,
+      "returncode": 0,
+      "finished_unix": 1791181420.0370555
     },
     {
       "name": "B2-J053-baseline-prefill-ma_gpu-b8-l2048",
@@ -3470,7 +3672,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B2-J053-baseline-prefill-ma_gpu-b8-l2048.json"
       ],
       "estimated_seconds": 24.02968961596489,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181420.0389163,
+      "pid": 4157593,
+      "returncode": 0,
+      "finished_unix": 1791181444.2220023
     },
     {
       "name": "B2-J054-candidate-prefill-ma_gpu-b8-l2048",
@@ -3535,7 +3741,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B2-J054-candidate-prefill-ma_gpu-b8-l2048.json"
       ],
       "estimated_seconds": 24.02968961596489,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181444.2237308,
+      "pid": 4157894,
+      "returncode": 0,
+      "finished_unix": 1791181468.4024448
     },
     {
       "name": "B2-J055-candidate-prefill-ma_offload-b8-l2048",
@@ -3600,7 +3810,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B2-J055-candidate-prefill-ma_offload-b8-l2048.json"
       ],
       "estimated_seconds": 24.894899666309357,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181468.4041634,
+      "pid": 4158190,
+      "returncode": 0,
+      "finished_unix": 1791181494.3016129
     },
     {
       "name": "B2-J056-baseline-prefill-ma_offload-b8-l2048",
@@ -3665,7 +3879,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B2-J056-baseline-prefill-ma_offload-b8-l2048.json"
       ],
       "estimated_seconds": 24.894899666309357,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181494.3033435,
+      "pid": 4158624,
+      "returncode": 0,
+      "finished_unix": 1791181520.2226238
     },
     {
       "name": "B2-J057-baseline-decode-ma_offload-b1-l2048",
@@ -3730,7 +3948,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B2-J057-baseline-decode-ma_offload-b1-l2048.json"
       ],
       "estimated_seconds": 16.712643590569495,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181520.2244463,
+      "pid": 4158936,
+      "returncode": 0,
+      "finished_unix": 1791181537.9199111
     },
     {
       "name": "B2-J058-candidate-decode-ma_offload-b1-l2048",
@@ -3795,7 +4017,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B2-J058-candidate-decode-ma_offload-b1-l2048.json"
       ],
       "estimated_seconds": 16.712643590569495,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181537.9216564,
+      "pid": 4159262,
+      "returncode": 0,
+      "finished_unix": 1791181555.5484195
     },
     {
       "name": "B2-J059-candidate-decode-ma_gpu-b1-l2048",
@@ -3860,7 +4086,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B2-J059-candidate-decode-ma_gpu-b1-l2048.json"
       ],
       "estimated_seconds": 16.00741952061653,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181555.5501344,
+      "pid": 4159527,
+      "returncode": 0,
+      "finished_unix": 1791181571.7040823
     },
     {
       "name": "B2-J060-baseline-decode-ma_gpu-b1-l2048",
@@ -3925,7 +4155,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B2-J060-baseline-decode-ma_gpu-b1-l2048.json"
       ],
       "estimated_seconds": 16.00741952061653,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181571.7056167,
+      "pid": 4159771,
+      "returncode": 0,
+      "finished_unix": 1791181587.826036
     },
     {
       "name": "B2-J061-baseline-prefill-ma_gpu-b1-l2048",
@@ -3990,7 +4224,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B2-J061-baseline-prefill-ma_gpu-b1-l2048.json"
       ],
       "estimated_seconds": 16.870169261097907,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181587.8276505,
+      "pid": 4160043,
+      "returncode": 0,
+      "finished_unix": 1791181604.878123
     },
     {
       "name": "B2-J062-candidate-prefill-ma_gpu-b1-l2048",
@@ -4055,7 +4293,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B2-J062-candidate-prefill-ma_gpu-b1-l2048.json"
       ],
       "estimated_seconds": 16.870169261097907,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181604.879654,
+      "pid": 4160276,
+      "returncode": 0,
+      "finished_unix": 1791181621.8970387
     },
     {
       "name": "B2-J063-candidate-prefill-ma_offload-b1-l2048",
@@ -4120,7 +4362,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B2-J063-candidate-prefill-ma_offload-b1-l2048.json"
       ],
       "estimated_seconds": 17.828266552090646,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181621.8989506,
+      "pid": 4160534,
+      "returncode": 0,
+      "finished_unix": 1791181640.4849703
     },
     {
       "name": "B2-J064-baseline-prefill-ma_offload-b1-l2048",
@@ -4185,7 +4431,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B2-J064-baseline-prefill-ma_offload-b1-l2048.json"
       ],
       "estimated_seconds": 17.828266552090646,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181640.4866452,
+      "pid": 4160828,
+      "returncode": 0,
+      "finished_unix": 1791181659.0922716
     },
     {
       "name": "B3-J065-baseline-prefill-ma_offload-b1-l2048",
@@ -4250,7 +4500,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B3-J065-baseline-prefill-ma_offload-b1-l2048.json"
       ],
       "estimated_seconds": 17.828266552090646,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181659.094039,
+      "pid": 4161118,
+      "returncode": 0,
+      "finished_unix": 1791181677.6453352
     },
     {
       "name": "B3-J066-candidate-prefill-ma_offload-b1-l2048",
@@ -4315,7 +4569,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B3-J066-candidate-prefill-ma_offload-b1-l2048.json"
       ],
       "estimated_seconds": 17.828266552090646,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181677.647115,
+      "pid": 4161361,
+      "returncode": 0,
+      "finished_unix": 1791181696.267467
     },
     {
       "name": "B3-J067-candidate-prefill-ma_gpu-b1-l2048",
@@ -4380,7 +4638,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B3-J067-candidate-prefill-ma_gpu-b1-l2048.json"
       ],
       "estimated_seconds": 16.870169261097907,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181696.2691827,
+      "pid": 4161633,
+      "returncode": 0,
+      "finished_unix": 1791181713.2495067
     },
     {
       "name": "B3-J068-baseline-prefill-ma_gpu-b1-l2048",
@@ -4445,7 +4707,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B3-J068-baseline-prefill-ma_gpu-b1-l2048.json"
       ],
       "estimated_seconds": 16.870169261097907,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181713.2513142,
+      "pid": 4161915,
+      "returncode": 0,
+      "finished_unix": 1791181730.2509499
     },
     {
       "name": "B3-J069-baseline-decode-ma_gpu-b1-l2048",
@@ -4510,7 +4776,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B3-J069-baseline-decode-ma_gpu-b1-l2048.json"
       ],
       "estimated_seconds": 16.00741952061653,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181730.2528994,
+      "pid": 4162160,
+      "returncode": 0,
+      "finished_unix": 1791181746.334315
     },
     {
       "name": "B3-J070-candidate-decode-ma_gpu-b1-l2048",
@@ -4575,7 +4845,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B3-J070-candidate-decode-ma_gpu-b1-l2048.json"
       ],
       "estimated_seconds": 16.00741952061653,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181746.3360772,
+      "pid": 4162406,
+      "returncode": 0,
+      "finished_unix": 1791181762.378477
     },
     {
       "name": "B3-J071-candidate-decode-ma_offload-b1-l2048",
@@ -4640,7 +4914,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B3-J071-candidate-decode-ma_offload-b1-l2048.json"
       ],
       "estimated_seconds": 16.712643590569495,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181762.3800519,
+      "pid": 4162650,
+      "returncode": 0,
+      "finished_unix": 1791181779.9854383
     },
     {
       "name": "B3-J072-baseline-decode-ma_offload-b1-l2048",
@@ -4705,7 +4983,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B3-J072-baseline-decode-ma_offload-b1-l2048.json"
       ],
       "estimated_seconds": 16.712643590569495,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181779.9872913,
+      "pid": 4162927,
+      "returncode": 0,
+      "finished_unix": 1791181797.6039965
     },
     {
       "name": "B3-J073-baseline-prefill-ma_offload-b8-l2048",
@@ -4770,7 +5052,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B3-J073-baseline-prefill-ma_offload-b8-l2048.json"
       ],
       "estimated_seconds": 24.894899666309357,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181797.6057794,
+      "pid": 4163193,
+      "returncode": 0,
+      "finished_unix": 1791181823.3925898
     },
     {
       "name": "B3-J074-candidate-prefill-ma_offload-b8-l2048",
@@ -4835,7 +5121,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B3-J074-candidate-prefill-ma_offload-b8-l2048.json"
       ],
       "estimated_seconds": 24.894899666309357,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181823.3944294,
+      "pid": 4163537,
+      "returncode": 0,
+      "finished_unix": 1791181849.2561872
     },
     {
       "name": "B3-J075-candidate-prefill-ma_gpu-b8-l2048",
@@ -4900,7 +5190,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B3-J075-candidate-prefill-ma_gpu-b8-l2048.json"
       ],
       "estimated_seconds": 24.02968961596489,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181849.2581508,
+      "pid": 4163844,
+      "returncode": 0,
+      "finished_unix": 1791181873.3525424
     },
     {
       "name": "B3-J076-baseline-prefill-ma_gpu-b8-l2048",
@@ -4965,7 +5259,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B3-J076-baseline-prefill-ma_gpu-b8-l2048.json"
       ],
       "estimated_seconds": 24.02968961596489,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181873.3541088,
+      "pid": 4164106,
+      "returncode": 0,
+      "finished_unix": 1791181897.4999406
     },
     {
       "name": "B3-J077-baseline-decode-ma_gpu-b8-l2048",
@@ -5030,7 +5328,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B3-J077-baseline-decode-ma_gpu-b8-l2048.json"
       ],
       "estimated_seconds": 16.363235872983932,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181897.5014865,
+      "pid": 4164509,
+      "returncode": 0,
+      "finished_unix": 1791181914.002337
     },
     {
       "name": "B3-J078-candidate-decode-ma_gpu-b8-l2048",
@@ -5095,7 +5397,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B3-J078-candidate-decode-ma_gpu-b8-l2048.json"
       ],
       "estimated_seconds": 16.363235872983932,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181914.003923,
+      "pid": 4164755,
+      "returncode": 0,
+      "finished_unix": 1791181930.4973729
     },
     {
       "name": "B3-J079-candidate-decode-ma_offload-b8-l2048",
@@ -5160,7 +5466,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B3-J079-candidate-decode-ma_offload-b8-l2048.json"
       ],
       "estimated_seconds": 17.185545346140863,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181930.4989436,
+      "pid": 4164992,
+      "returncode": 0,
+      "finished_unix": 1791181948.5729356
     },
     {
       "name": "B3-J080-baseline-decode-ma_offload-b8-l2048",
@@ -5225,7 +5535,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B3-J080-baseline-decode-ma_offload-b8-l2048.json"
       ],
       "estimated_seconds": 17.185545346140863,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181948.5746841,
+      "pid": 4165255,
+      "returncode": 0,
+      "finished_unix": 1791181966.6557672
     },
     {
       "name": "B3-J081-baseline-prefill-ma_offload-b16-l2048",
@@ -5290,7 +5604,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B3-J081-baseline-prefill-ma_offload-b16-l2048.json"
       ],
       "estimated_seconds": 33.28188357055187,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791181966.657578,
+      "pid": 4165535,
+      "returncode": 0,
+      "finished_unix": 1791182000.964892
     },
     {
       "name": "B3-J082-candidate-prefill-ma_offload-b16-l2048",
@@ -5355,7 +5673,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B3-J082-candidate-prefill-ma_offload-b16-l2048.json"
       ],
       "estimated_seconds": 33.28188357055187,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791182000.9666898,
+      "pid": 4165880,
+      "returncode": 0,
+      "finished_unix": 1791182035.229082
     },
     {
       "name": "B3-J083-candidate-prefill-ma_gpu-b16-l2048",
@@ -5420,7 +5742,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B3-J083-candidate-prefill-ma_gpu-b16-l2048.json"
       ],
       "estimated_seconds": 32.29416094422341,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791182035.230836,
+      "pid": 4166253,
+      "returncode": 0,
+      "finished_unix": 1791182067.8409407
     },
     {
       "name": "B3-J084-baseline-prefill-ma_gpu-b16-l2048",
@@ -5485,7 +5811,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B3-J084-baseline-prefill-ma_gpu-b16-l2048.json"
       ],
       "estimated_seconds": 32.29416094422341,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791182067.8427403,
+      "pid": 4166612,
+      "returncode": 0,
+      "finished_unix": 1791182100.442565
     },
     {
       "name": "B3-J085-baseline-prefill-ma_gpu-b8-l512",
@@ -5550,7 +5880,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B3-J085-baseline-prefill-ma_gpu-b8-l512.json"
       ],
       "estimated_seconds": 17.842101354524495,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791182100.4444437,
+      "pid": 4166944,
+      "returncode": 0,
+      "finished_unix": 1791182118.3969421
     },
     {
       "name": "B3-J086-candidate-prefill-ma_gpu-b8-l512",
@@ -5615,7 +5949,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B3-J086-candidate-prefill-ma_gpu-b8-l512.json"
       ],
       "estimated_seconds": 17.842101354524495,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791182118.3984993,
+      "pid": 4167200,
+      "returncode": 0,
+      "finished_unix": 1791182136.3545423
     },
     {
       "name": "B3-J087-candidate-prefill-ma_offload-b8-l512",
@@ -5680,7 +6018,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B3-J087-candidate-prefill-ma_offload-b8-l512.json"
       ],
       "estimated_seconds": 18.599576462060213,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791182136.356101,
+      "pid": 4167485,
+      "returncode": 0,
+      "finished_unix": 1791182155.9346755
     },
     {
       "name": "B3-J088-baseline-prefill-ma_offload-b8-l512",
@@ -5745,7 +6087,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B3-J088-baseline-prefill-ma_offload-b8-l512.json"
       ],
       "estimated_seconds": 18.599576462060213,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791182155.936398,
+      "pid": 4167779,
+      "returncode": 0,
+      "finished_unix": 1791182175.5239503
     },
     {
       "name": "B3-J089-baseline-prefill-ma_offload-b8-l8192",
@@ -5810,7 +6156,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B3-J089-baseline-prefill-ma_offload-b8-l8192.json"
       ],
       "estimated_seconds": 50.07619248330593,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791182175.5261033,
+      "pid": 4168045,
+      "returncode": 0,
+      "finished_unix": 1791182233.333043
     },
     {
       "name": "B3-J090-candidate-prefill-ma_offload-b8-l8192",
@@ -5875,7 +6225,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B3-J090-candidate-prefill-ma_offload-b8-l8192.json"
       ],
       "estimated_seconds": 50.07619248330593,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791182233.3349867,
+      "pid": 4168527,
+      "returncode": 0,
+      "finished_unix": 1791182291.5132995
     },
     {
       "name": "B3-J091-candidate-prefill-ma_gpu-b8-l8192",
@@ -5940,7 +6294,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B3-J091-candidate-prefill-ma_gpu-b8-l8192.json"
       ],
       "estimated_seconds": 48.780042661726476,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791182291.5152829,
+      "pid": 4169260,
+      "returncode": 0,
+      "finished_unix": 1791182347.916635
     },
     {
       "name": "B3-J092-baseline-prefill-ma_gpu-b8-l8192",
@@ -6005,7 +6363,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B3-J092-baseline-prefill-ma_gpu-b8-l8192.json"
       ],
       "estimated_seconds": 48.780042661726476,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791182347.9182181,
+      "pid": 4169720,
+      "returncode": 0,
+      "finished_unix": 1791182404.3312607
     },
     {
       "name": "B3-J093-baseline-generation-ma_gpu-b1-l2048",
@@ -6070,7 +6432,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B3-J093-baseline-generation-ma_gpu-b1-l2048.json"
       ],
       "estimated_seconds": 26.20853256667033,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791182404.3328485,
+      "pid": 4170194,
+      "returncode": 0,
+      "finished_unix": 1791182430.7372599
     },
     {
       "name": "B3-J094-candidate-generation-ma_gpu-b1-l2048",
@@ -6135,7 +6501,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B3-J094-candidate-generation-ma_gpu-b1-l2048.json"
       ],
       "estimated_seconds": 26.20853256667033,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791182430.7388434,
+      "pid": 4170562,
+      "returncode": 0,
+      "finished_unix": 1791182457.0818498
     },
     {
       "name": "B3-J095-candidate-generation-ma_offload-b1-l2048",
@@ -6200,7 +6570,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B3-J095-candidate-generation-ma_offload-b1-l2048.json"
       ],
       "estimated_seconds": 28.199524895939977,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791182457.0834122,
+      "pid": 4170850,
+      "returncode": 0,
+      "finished_unix": 1791182485.0487561
     },
     {
       "name": "B3-J096-baseline-generation-ma_offload-b1-l2048",
@@ -6265,7 +6639,11 @@
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0025/R02-parent-confirmation/B3-J096-baseline-generation-ma_offload-b1-l2048.json"
       ],
       "estimated_seconds": 28.199524895939977,
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791182485.0504947,
+      "pid": 4171160,
+      "returncode": 0,
+      "finished_unix": 1791182513.098547
     }
   ],
   "planned_work": {
@@ -6347,5 +6725,6 @@
   "stopping_rule": "Exactly3 balanced independent blocks; no optional extension. Screens excluded. No automatic retention.",
   "regression_rule": "Resolved slowdown: paired two-sided95% interval of offload or gap reduction entirely below0; resident guard likewise; preserve adverse directions and memory losses.",
   "controller_pid": 4140397,
-  "started_unix": 1791179949.0285933
+  "started_unix": 1791179949.0285933,
+  "finished_unix": 1791182513.1004646
 }

@@ -1,0 +1,1 @@
+ma_gpu           generation median=  593.655 ms  min=  593.407  max=  594.058  spread=0.11%  policy=none

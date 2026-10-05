@@ -1,149 +1,9 @@
 {
-  "campaign_id": "offload-gap-001",
-  "continuation_id": "continuation-03",
-  "attempt_id": "A0025",
-  "parent_attempt_id": "A0023",
-  "parent_source_sha": "5f3d5958fea25f953bb91f5ef6f35880ff37fcfa",
-  "parent_sha": "a8b93bc2b689811c0493f1897eb1e8add6f98f08",
-  "accepted_step": null,
-  "label": "Precompute views for automatic single-slot pipeline",
-  "status": "rejected",
-  "workflow_stage": "verdict",
-  "hypothesis": "Remove repeated tensor metadata creation on producer/consumer threads for automatic single-slot pipeline. Current b1 diagnostic records96 buffer views totaling.216ms overlapping CPU time; independent full-model gain must be demonstrated.",
-  "change": "Precompute immutable source and buffer/layer views only for automatic single-slot pipeline; preserve2048-token threshold, mapped1..16 and larger pipeline. Isolate metadata change before attempting short-prefill reintegration.",
-  "profile_evidence": [
-    "../continuation-03/pipeline-integration-diagnosis.json",
-    "../A0007/record.json",
-    "../A0024/record.json"
-  ],
-  "eligible_gain_workloads": [
-    [
-      "prefill",
-      1,
-      2048
-    ]
-  ],
-  "tradeoffs": [
-    "Additional tensor-view metadata only, no new backing storage or cached lookup values",
-    "Historical global-view A0007 rejected; restricted single-slot parent differs and needs full validation"
-  ],
-  "screen": {
-    "workloads": 16,
-    "fresh_parent_candidate_processes": 64,
-    "prefill_decode": [
-      3,
-      5,
-      1
-    ],
-    "generation": [
-      2,
-      3,
-      1
-    ]
-  },
-  "confirmation_rule": "Unchanged continuation03 complete-screen nomination, exactly3 balanced fresh blocks, fixed Holm gain family and signed95% regression guards; no optional extension.",
-  "expected_offload_config": {
-    "memory_offload_bulk_max_tokens": 1024,
-    "memory_offload_single_slot_max_tokens": 2048,
-    "memory_offload_mapped_bulk": true,
-    "memory_offload_mapped_bulk_min_tokens": 1,
-    "memory_offload_mapped_bulk_max_tokens": 16
-  },
-  "created_unix": 1791178633.070012,
-  "candidate_sha": "9778315be1e06335f0c1206ba136dce4a7c546da",
-  "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0025",
-  "correctness": {
-    "pytest": "44 passed in12.89s",
-    "standalone": "PASS; worst max difference0",
-    "logs": [
-      "correctness-tests.txt",
-      "standalone-correctness.txt"
-    ]
-  },
-  "screen_manifest": "R01-complete-screen/manifest.json",
-  "screen_summary": "R01-complete-screen/summary.json",
-  "parent_confirmation_manifest": "R02-parent-confirmation/manifest.json",
-  "screen_decision": "All64 complete and audited. Target b1 prefill offload reduction-.487921ms/gap-.462199ms; b1 generation reductions-11.819930/-16.183931ms trigger independent regression confirmation. Other positive signals preserved but cannot alone justify metadata mechanism retention. Fixed8 workloads96 processes; no verdict from screen.",
-  "confirmation_plan_summary": {
-    "workloads": [
-      {
-        "mode": "prefill",
-        "batch": 1,
-        "length": 2048,
-        "reasons": [
-          "offload regression trigger",
-          "gap regression trigger",
-          "mandatory original primary control"
-        ]
-      },
-      {
-        "mode": "decode",
-        "batch": 1,
-        "length": 2048,
-        "reasons": [
-          "mandatory original primary control"
-        ]
-      },
-      {
-        "mode": "prefill",
-        "batch": 8,
-        "length": 2048,
-        "reasons": [
-          "mandatory original primary control"
-        ]
-      },
-      {
-        "mode": "decode",
-        "batch": 8,
-        "length": 2048,
-        "reasons": [
-          "positive offload and gap screen with GPU savings",
-          "mandatory original primary control"
-        ]
-      },
-      {
-        "mode": "prefill",
-        "batch": 16,
-        "length": 2048,
-        "reasons": [
-          "positive offload and gap screen with GPU savings"
-        ]
-      },
-      {
-        "mode": "prefill",
-        "batch": 8,
-        "length": 512,
-        "reasons": [
-          "positive offload and gap screen with GPU savings"
-        ]
-      },
-      {
-        "mode": "prefill",
-        "batch": 8,
-        "length": 8192,
-        "reasons": [
-          "positive offload and gap screen with GPU savings"
-        ]
-      },
-      {
-        "mode": "generation",
-        "batch": 1,
-        "length": 2048,
-        "reasons": [
-          "offload regression trigger",
-          "gap regression trigger"
-        ]
-      }
-    ],
-    "planned_work": {
-      "jobs": 96,
-      "estimated_seconds": 2431.043306188658
-    },
-    "fixed_gain_family": 8
-  },
-  "finished_unix": 1791182633.51924,
-  "independent_confirmation": "R02-parent-confirmation/analysis.json",
-  "local_findings": [
+  "status": "completed",
+  "attempt": "A0025",
+  "baseline": "A0023",
+  "fixed_gain_family": 8,
+  "rows": [
     {
       "attempt": "A0025",
       "baseline": "A0023",
@@ -1089,6 +949,7 @@
       "candidate_target_residual_upper_one_sided_95_bonferroni16": 6.6284776316184395
     }
   ],
+  "confirmed_local_gains": [],
   "resolved_regressions": [
     [
       "decode",
@@ -1096,8 +957,6 @@
       2048
     ]
   ],
-  "verdict_reason": "No confirmed local gain in fixed Holm family8. Eligible b1 prefill offload reduction0.0399815ms CI[-0.2221529,0.3021160] and gap0.0550257ms CI[-0.3068166,0.4168679] remain within noise. b1 decode resident slowdown fails the fixed guard (GPU reduction-0.0467220ms CI[-0.0822097,-0.0112343]); do not attribute reference drift to an offload-only mechanism. Reject without optional repeats; restore A0023.",
-  "full_validation": "Not run: no eligible confirmed gain and resident guard failed.",
-  "evidence_integrity": "evidence-integrity.json",
-  "next_insight": "Restricted view precomputation did not confirm the profiled potential. Preserve A0024 short-prefill finding; profile a different offload bottleneck on A0023 before registering another integration candidate."
+  "accepted": false,
+  "note": "No automatic acceptance. Complete correctness/full validation required; target residual bounds cover selected points only, not final goal completion."
 }
