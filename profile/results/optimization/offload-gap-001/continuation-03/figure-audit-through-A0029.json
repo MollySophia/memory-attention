@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "through": "A0029",
+  "retained_source": "A0028",
+  "ledger_records": 30,
+  "retained_steps": 4,
+  "history_points": 120,
+  "formal_local_findings": 84,
+  "confirmed_local_findings": 9,
+  "scaling_rows": 32,
+  "scaling_audited_processes": 96,
+  "checks": [
+    "all ledger snapshots match authoritative records",
+    "latest8 primary history values match candidate raw means",
+    "A0028 remains history incumbent after A0029",
+    "A0029 within-noise findings retained without confirmed gains",
+    "all current index links resolve",
+    "nine figure families visually inspected; local-gain label overlap corrected"
+  ],
+  "final_goal_accepted": false
+}

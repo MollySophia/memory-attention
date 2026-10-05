@@ -1,8 +1,8 @@
 {
   "campaign_id": "offload-gap-001",
   "status": "active",
-  "workflow_stage": "revert_pending",
-  "goal_progress": "A0029 all208 screen/confirmation raws audited. No Holm12-confirmed gain and no resolved regression; verdict within_noise. Separate source revert pending. A0028 remains verified step4; final target unmet.",
+  "workflow_stage": "diagnosis",
+  "goal_progress": "A0029 within_noise after208 audited raws; source reverted separately to exact verified A0028. Ledger/history/local findings now through A0029; A0028 scaling, memory, absolute/relative gap diagnostics rendered. Final all16 target still unproven; next profiling-supported optimization pending.",
   "completed_optimization_verdicts": 29,
   "additional_completed_verdicts": 10,
   "additional_attempt_target": [

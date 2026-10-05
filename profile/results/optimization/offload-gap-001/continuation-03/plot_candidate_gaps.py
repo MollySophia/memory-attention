@@ -79,31 +79,38 @@ def export(attempt, data_only=False):
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
-    fig, axes = plt.subplots(1, 3, figsize=(15, 5), gridspec_kw={'width_ratios': [3, 3, 1.5]})
-    for ax, mode in zip(axes, ('prefill', 'decode', 'generation')):
-        subset = [r for r in rows if r['mode'] == mode]
-        x = list(range(len(subset)))
-        y = [r['gap_ms'] for r in subset]
-        ax.errorbar(x, y, yerr=[[r['gap_ms'] - r['gap_lower_95_ms'] for r in subset],
-                    [r['gap_upper_95_ms'] - r['gap_ms'] for r in subset]],
-                    fmt='o', capsize=3, color='#20639b', label='Offload − GPU (95% CI)')
-        ax.scatter(x, [r['tolerance_at_mean_gpu_ms'] for r in subset], marker='_', s=180,
-                   color='#c44432', label='Tolerance at mean GPU')
-        ax.axhline(0, color='grey', linewidth=.8)
-        ax.set_xticks(x, [f"{r['batch']}/{r['length']}" for r in subset], rotation=55, ha='right')
-        ax.set_title(mode.capitalize() + (' (prefix + 128 steps)' if mode == 'generation' else ''))
-        ax.set_xlabel('Batch / context length')
-        ax.set_ylabel('Latency gap (ms); lower is better')
-        ax.grid(axis='y', alpha=.25)
-    axes[0].legend(fontsize=8)
-    fig.suptitle(f'{attempt}: matched offload versus folded all-GPU, complete 16-workload matrix')
-    fig.text(.5, .015, '2.836B BF16 · RTX 5090 · last-token logits + real KV cache · random weights/tokens\n'
-             'Three independent paired blocks; screening excluded. Diagnostic retention data; final goal not accepted.',
-             ha='center', fontsize=9)
-    fig.tight_layout(rect=(0, .09, 1, .93))
-    for extension in ('png', 'svg', 'pdf'):
-        fig.savefig(out / f'gaps.{extension}', dpi=180)
-    plt.close(fig)
+    for name, value, low, high, scale, ylabel in (
+            ('gaps', 'gap_ms', 'gap_lower_95_ms', 'gap_upper_95_ms', 1,
+             'Latency gap (ms); lower is better'),
+            ('relative-overhead', 'relative_overhead', 'relative_overhead_lower_95',
+             'relative_overhead_upper_95', 100, 'Relative overhead (%); lower is better')):
+        fig, axes = plt.subplots(1, 3, figsize=(15, 5), gridspec_kw={'width_ratios': [3, 3, 1.5]})
+        for ax, mode in zip(axes, ('prefill', 'decode', 'generation')):
+            subset = [r for r in rows if r['mode'] == mode]
+            x = list(range(len(subset)))
+            ax.errorbar(x, [scale*r[value] for r in subset], yerr=[
+                [scale*(r[value]-r[low]) for r in subset],
+                [scale*(r[high]-r[value]) for r in subset]],
+                fmt='o', capsize=3, color='#20639b', label='Offload vs GPU (95% CI)')
+            tolerances = [r['tolerance_at_mean_gpu_ms'] if name == 'gaps' else
+                          100*r['tolerance_at_mean_gpu_ms']/r['gpu_ms'] for r in subset]
+            ax.scatter(x, tolerances, marker='_', s=180,
+                       color='#c44432', label='Tolerance at mean GPU')
+            ax.axhline(0, color='grey', linewidth=.8)
+            ax.set_xticks(x, [f"{r['batch']}/{r['length']}" for r in subset], rotation=55, ha='right')
+            ax.set_title(mode.capitalize() + (' (prefix + 128 steps)' if mode == 'generation' else ''))
+            ax.set_xlabel('Batch / context length')
+            ax.set_ylabel(ylabel)
+            ax.grid(axis='y', alpha=.25)
+        axes[0].legend(fontsize=8)
+        fig.suptitle(f'{attempt}: matched offload versus folded all-GPU, complete 16-workload matrix')
+        fig.text(.5, .015, '2.836B BF16 · RTX 5090 · last-token logits + real KV cache · random weights/tokens\n'
+                 'Three independent paired blocks; screening excluded. Diagnostic retention data; final goal not accepted.',
+                 ha='center', fontsize=9)
+        fig.tight_layout(rect=(0, .09, 1, .93))
+        for extension in ('png', 'svg', 'pdf'):
+            fig.savefig(out / f'{name}.{extension}', dpi=180)
+        plt.close(fig)
     print(json.dumps(result))
 
 

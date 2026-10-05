@@ -66,80 +66,75 @@ linked confirmation contains paired intervals, gap reductions and corrected
 decisions. Generation uses a 2048-token prefix plus 128 predetermined decode
 tokens. These effects must not be added to results measured at other workloads.
 
-## Figure inputs and remaining evidence
-
-The [complete ledger through A0028](ledger-through-A0028/LEDGER.md) preserves
-all 28 finalized attempts and the A0000 baseline, with full record snapshots
-in JSON and an index in CSV. Active candidates remain outside that finalized
-snapshot until their verdict is recorded.
-
-The [attempt-history figure](history-through-A0026/attempt-history-screen_v1_w3_n5_r1.pdf)
-shows all 27 baseline/candidate records on the four original primary workload
-panels. Its [CSV](history-through-A0026/history-source.csv) and
-[JSON](history-through-A0026/history-source.json) retain measured candidate
-latencies, sample standard deviations and the incumbent implementation.
-These are screening observations, not confirmed cumulative gains. Reproduce:
-`python profile/results/optimization/offload-gap-001/plot_history.py --output profile/results/optimization/offload-gap-001/continuation-03/history-through-A0026 --through A0026 --history-only`.
-The loader selects candidate jobs explicitly in paired continuation screens
-and excludes generation from the primary prefill/decode history.
-
-Use accepted steps 0–4 for the cumulative implementation figure. Use separate
-workload panels for the recovered, nonretained local gains, retaining their
-named comparator, intervals and adverse findings. Do not splice the fastest
-points from different candidates into a final implementation.
-
-Continuation findings through A0026 are now exported as paired
-[local-gain panels](local-findings-through-A0026/local-gains.pdf) and
-[blocking-guard panels](local-findings-through-A0026/blocking-guards.pdf), with
-PNG/SVG companions. The complete 55 nominated workload comparisons, including
-within-noise results, are in [CSV](local-findings-through-A0026/findings.csv) and
-[JSON](local-findings-through-A0026/findings.json). Regenerate with
-`python profile/results/optimization/offload-gap-001/continuation-03/plot_local_findings.py --through A0026`.
-The script recomputes paired intervals and checks the frozen Holm adjustment;
-it does not merge evidence from different comparators or revise verdicts.
-
-[A0023 gap diagnostics](../A0023/gap-diagnostics/gaps.json) and the accompanying
-[CSV](../A0023/gap-diagnostics/gaps.csv) and
-[plot](../A0023/gap-diagnostics/gaps.pdf) cover all 16 workloads from its formal
-parent-paired validation. Regenerate them with [plot_candidate_gaps.py](plot_candidate_gaps.py).
-They reuse candidate-selection evidence and therefore do not establish the
-final independent near-GPU acceptance required by [GOAL.md](../../../../../GOAL.md).
-
-The same retained A0023 source now has complete
-[latency scaling](../A0023/workload-diagnostics/latency_ms-scaling.pdf),
-[throughput scaling](../A0023/workload-diagnostics/tokens_per_second-scaling.pdf),
-[generation](../A0023/workload-diagnostics/generation.pdf), and
-[GPU/host memory](../A0023/workload-diagnostics/memory.pdf) figures, with PNG/SVG
-companions and [CSV](../A0023/workload-diagnostics/workloads.csv) /
-[JSON](../A0023/workload-diagnostics/workloads.json) sources. The exporter
-`python profile/results/optimization/offload-gap-001/continuation-03/plot_workload_scaling.py --attempt A0023`
-audits all 96 contributing raw processes (16 workloads × two placements ×
-three blocks). It derives throughput per process before estimating uncertainty.
-Generation throughput counts output tokens and includes prefix time. Host RSS
-includes runtime/loading state; pinned storage is reported separately, never
-added to RSS. These are retention diagnostics, not final independent acceptance.
-
-Final deliverables still require updated ledger/figures through the final
-retained source, fresh cumulative A0000 comparisons, and independent all-16
-confirmation of the user-approved latency tolerance. This index is not a final
-publication or completion claim.
-
-A0028's [current gap data](../A0028/gap-diagnostics/gaps.json) and
-[CSV](../A0028/gap-diagnostics/gaps.csv) cover all16 workloads. Only6/16
-diagnostic simultaneous bounds meet tolerance despite15/16 favorable means.
-All7 prefill points, batch-1/batch-4 decode and batch-1 generation remain
-unproven. These reuse retention evidence, not final independent verification.
-Plot rendering is deferred while A0029 times the GPU; reproduce the data with
-`python profile/results/optimization/offload-gap-001/continuation-03/plot_candidate_gaps.py --attempt A0028 --data-only`.
-
-The [independent final verification workflow](FINAL_VERIFICATION.md) now has a
-standalone runner/auditor and12 CPU-tested statistical/evidence guards. No real
-final source/count plan has been frozen or executed by that helper yet.
+## Latest findings and figures
 
 [A0029](../A0029/record.json) tested alignment-specialized compiled mapped
 launchers on A0028. All208 screen/confirmation results were audited; no gain
 survived fixed Holm12 correction, and no regression was resolved. Batch-1
 generation offload reduction4.4820ms had95%CI[-11.7042,20.6683]; the positive
 gap interval alone is insufficient. Batch-4 decode's nominal dual gain failed
-correction (p=0.08269). The verdict is within_noise; it does not enter the
-accepted chain and its execution change is reverted separately.
+correction (p=0.08269). The verdict is within_noise; source commitf4cead8 was
+reverted separately byf06bfdf. The verified implementation remains A0028.
+
+The [complete ledger through A0029](ledger-through-A0029/LEDGER.md) preserves
+all29 finalized attempts and A0000, with exact record snapshots in JSON and an
+index in CSV. There are four retained optimization steps.
+
+The [attempt-history figure](history-through-A0029/attempt-history-screen_v1_w3_n5_r1.pdf)
+shows30 baseline/candidate records on four primary-workload panels, including
+A0029 as within_noise. Its [CSV](history-through-A0029/history-source.csv) and
+[JSON](history-through-A0029/history-source.json) contain120 measured points,
+sample standard deviations and the accepted incumbent. The incumbent after
+A0028 remains A0028; screening points are not confirmed cumulative gains.
+Reproduce with `python profile/results/optimization/offload-gap-001/plot_history.py --output profile/results/optimization/offload-gap-001/continuation-03/history-through-A0029 --through A0029 --history-only`.
+
+Continuation findings through A0029 are exported as
+[confirmed local gains](local-findings-through-A0029/local-gains.pdf) and
+[blocking guards](local-findings-through-A0029/blocking-guards.pdf), with PNG/SVG
+companions. All84 nominated workload comparisons, including within-noise and
+adverse evidence, are in [CSV](local-findings-through-A0029/findings.csv) and
+[JSON](local-findings-through-A0029/findings.json). Nine confirmed local gains
+include A0028's integrated short-prefill improvement. A0029 has no corrected
+gain; its nominal effects remain in the data, not the confirmed-gain panels.
+The standalone exporter recomputes paired intervals and fixed Holm corrections:
+`python profile/results/optimization/offload-gap-001/continuation-03/plot_local_findings.py --through A0029`.
+Effects have explicitly named comparators and must not be added across sources.
+
+Current retained A0028 has complete [latency scaling](../A0028/workload-diagnostics/latency_ms-scaling.pdf),
+[throughput scaling](../A0028/workload-diagnostics/tokens_per_second-scaling.pdf),
+[generation](../A0028/workload-diagnostics/generation.pdf), and
+[GPU/host memory](../A0028/workload-diagnostics/memory.pdf) figures with PNG/SVG
+companions and [CSV](../A0028/workload-diagnostics/workloads.csv) /
+[JSON](../A0028/workload-diagnostics/workloads.json) sources. These32 placement
+rows use96 audited formal processes. Throughput is derived per process before
+estimating uncertainty; generation counts output tokens and includes prefix
+time. Host RSS includes runtime/loading state; pinned storage is separate.
+Reproduce with `python profile/results/optimization/offload-gap-001/continuation-03/plot_workload_scaling.py --attempt A0028`.
+
+[A0028 absolute gap](../A0028/gap-diagnostics/gaps.pdf) and
+[relative overhead](../A0028/gap-diagnostics/relative-overhead.pdf) figures cover
+all16 workloads with paired intervals and tolerance markers, plus PNG/SVG,
+[CSV](../A0028/gap-diagnostics/gaps.csv) and
+[JSON](../A0028/gap-diagnostics/gaps.json). Only6/16 diagnostic simultaneous
+residual bounds meet tolerance despite15/16 favorable means. All7 prefill
+points, batch-1/batch-4 decode and batch-1 generation remain unproven. Reproduce
+with `python profile/results/optimization/offload-gap-001/continuation-03/plot_candidate_gaps.py --attempt A0028`;
+`--data-only` defers rendering while timing is live. These plots reuse retention
+data and do not establish final independent acceptance.
+
+Previous A0023 and through-A0026 snapshots remain preserved in their original
+directories. Every latest figure was visually checked; local-gain labels were
+split across lines to avoid overlap as new attempts were added.
+
+## Remaining final evidence
+
+Use accepted steps0–4 for the cumulative implementation figure, with a common
+frozen baseline and comparable protocols. Do not splice different candidates'
+best points into a fictional implementation. The final publication still needs
+fresh cumulative A0000 comparisons, updated final-source cumulative figures,
+and independent confirmation of the user-approved tolerance at every workload.
+
+The [independent final verification workflow](FINAL_VERIFICATION.md) has a
+standalone runner/auditor and12 CPU-tested statistical/evidence guards. No real
+final source/count plan has been frozen or executed by that helper yet. The
+all-workload near-GPU goal remains active and unproven.

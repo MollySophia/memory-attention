@@ -84,7 +84,7 @@ def figures(rows, directory):
                     fmt='o', markersize=4, capsize=3, color=COLORS[mi], label=LABELS[mi])
             ax.axhline(0, color='black', linewidth=.7)
             labels = [f"{r['attempt']} vs {r['comparator']}\n{r['candidate_status']}" +
-                      (f" · Holm p={r['holm_adjusted_p']:.4f}" if name == 'local-gains' else '')
+                      (f"\nHolm p={r['holm_adjusted_p']:.4f}" if name == 'local-gains' else '')
                       for r in subset]
             ax.set_xticks(range(len(subset)), labels, fontsize=8)
             ax.set_xlim(-.55, len(subset) - .45)
