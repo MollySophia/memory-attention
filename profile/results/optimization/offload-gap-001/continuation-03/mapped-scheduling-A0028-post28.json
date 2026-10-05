@@ -1,0 +1,178 @@
+{
+  "status": "diagnostic_only",
+  "source": "/home/molly/workspace-memory-attn/offload-gap-001-A0028",
+  "source_commit": "6cc9354760ebde3bab9a90996a7713a936dfb439",
+  "helper_sha256": "3005aa125ddc982fabb09a540d7d862f3a0c0d5b039fb991d2c87c21e274599e",
+  "mapped_module_sha256": "d8220f60f21af06ccaca6d8180c9d0692eb8e4e2cbf918c19fbbde508764db0d",
+  "torch": "2.9.0+cu130",
+  "triton": "3.5.0",
+  "rows": [
+    {
+      "batch": 1,
+      "block": 1,
+      "method": "jit_stream_context",
+      "launches": 128,
+      "submit_us_per_call": 10.06196875,
+      "drained_us_per_call": 10.139453125
+    },
+    {
+      "batch": 1,
+      "block": 1,
+      "method": "compiled_explicit_stream",
+      "launches": 128,
+      "submit_us_per_call": 3.8351328125,
+      "drained_us_per_call": 3.8776328125
+    },
+    {
+      "batch": 1,
+      "block": 2,
+      "method": "compiled_explicit_stream",
+      "launches": 128,
+      "submit_us_per_call": 3.8115703125,
+      "drained_us_per_call": 3.85665625
+    },
+    {
+      "batch": 1,
+      "block": 2,
+      "method": "jit_stream_context",
+      "launches": 128,
+      "submit_us_per_call": 9.980484375,
+      "drained_us_per_call": 10.02103125
+    },
+    {
+      "batch": 1,
+      "block": 3,
+      "method": "jit_stream_context",
+      "launches": 128,
+      "submit_us_per_call": 9.9349296875,
+      "drained_us_per_call": 10.0068671875
+    },
+    {
+      "batch": 1,
+      "block": 3,
+      "method": "compiled_explicit_stream",
+      "launches": 128,
+      "submit_us_per_call": 3.908703125,
+      "drained_us_per_call": 3.95065625
+    },
+    {
+      "batch": 1,
+      "block": 4,
+      "method": "compiled_explicit_stream",
+      "launches": 128,
+      "submit_us_per_call": 3.8923515625,
+      "drained_us_per_call": 3.937046875
+    },
+    {
+      "batch": 1,
+      "block": 4,
+      "method": "jit_stream_context",
+      "launches": 128,
+      "submit_us_per_call": 10.0196953125,
+      "drained_us_per_call": 10.0590703125
+    },
+    {
+      "batch": 1,
+      "block": 5,
+      "method": "jit_stream_context",
+      "launches": 128,
+      "submit_us_per_call": 12.22721875,
+      "drained_us_per_call": 12.3034609375
+    },
+    {
+      "batch": 1,
+      "block": 5,
+      "method": "compiled_explicit_stream",
+      "launches": 128,
+      "submit_us_per_call": 3.8252734375,
+      "drained_us_per_call": 3.863859375
+    },
+    {
+      "batch": 8,
+      "block": 1,
+      "method": "jit_stream_context",
+      "launches": 128,
+      "submit_us_per_call": 9.757796875,
+      "drained_us_per_call": 16.5996953125
+    },
+    {
+      "batch": 8,
+      "block": 1,
+      "method": "compiled_explicit_stream",
+      "launches": 128,
+      "submit_us_per_call": 3.67396875,
+      "drained_us_per_call": 16.628421875
+    },
+    {
+      "batch": 8,
+      "block": 2,
+      "method": "compiled_explicit_stream",
+      "launches": 128,
+      "submit_us_per_call": 3.658390625,
+      "drained_us_per_call": 16.5912421875
+    },
+    {
+      "batch": 8,
+      "block": 2,
+      "method": "jit_stream_context",
+      "launches": 128,
+      "submit_us_per_call": 9.8252734375,
+      "drained_us_per_call": 16.617234375
+    },
+    {
+      "batch": 8,
+      "block": 3,
+      "method": "jit_stream_context",
+      "launches": 128,
+      "submit_us_per_call": 9.9356328125,
+      "drained_us_per_call": 16.6231796875
+    },
+    {
+      "batch": 8,
+      "block": 3,
+      "method": "compiled_explicit_stream",
+      "launches": 128,
+      "submit_us_per_call": 3.749109375,
+      "drained_us_per_call": 16.562515625
+    },
+    {
+      "batch": 8,
+      "block": 4,
+      "method": "compiled_explicit_stream",
+      "launches": 128,
+      "submit_us_per_call": 3.7562265625,
+      "drained_us_per_call": 16.585453125
+    },
+    {
+      "batch": 8,
+      "block": 4,
+      "method": "jit_stream_context",
+      "launches": 128,
+      "submit_us_per_call": 9.85571875,
+      "drained_us_per_call": 16.5882734375
+    },
+    {
+      "batch": 8,
+      "block": 5,
+      "method": "jit_stream_context",
+      "launches": 128,
+      "submit_us_per_call": 9.8526640625,
+      "drained_us_per_call": 16.551875
+    },
+    {
+      "batch": 8,
+      "block": 5,
+      "method": "compiled_explicit_stream",
+      "launches": 128,
+      "submit_us_per_call": 3.7218671875,
+      "drained_us_per_call": 16.5823203125
+    }
+  ],
+  "exactness": "Fresh IDs and host mutations bit-exact for both methods, batches1/8, aligned and8-byte-offset int64 IDs.",
+  "limitations": [
+    "No consumer overlap or model execution; not a whole-model gain.",
+    "Device context preserved; no event dependencies removed.",
+    "The compiled runner must be keyed by ID pointer alignment; dtype/device/shapes/table/output fixed here.",
+    "No output cache; all kernels read fresh table rows."
+  ]
+}

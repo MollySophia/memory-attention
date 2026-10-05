@@ -1,0 +1,97 @@
+{
+  "campaign_id": "offload-gap-001",
+  "continuation_id": "continuation-03",
+  "attempt_id": "A0029",
+  "parent_attempt_id": "A0028",
+  "parent_source_sha": "6cc9354760ebde3bab9a90996a7713a936dfb439",
+  "parent_sha": "00294593e8fb6c42c634ea0ce370a83528dc9fcf",
+  "accepted_step": null,
+  "label": "Explicit-stream compiled mapped gather launch",
+  "status": "testing",
+  "workflow_stage": "registered",
+  "hypothesis": "Mapped launch Python dispatch and stream context cost can be reduced using the same compiled kernel runner with explicit copy-stream handle; isolated b1 submit10.444859 to3.854606us, b8 submit9.845417 to3.711913us. Whole-model benefit remains unproven.",
+  "change": "Cache the exact compiled mapped-gather runner per ID pointer-alignment specialization after ordinary JIT launch, use explicit copy stream thereafter, preserving device context and all existing entry/consumed/copied/lifetime dependencies. No event reuse, caller-stream gather, callback or generic model changes.",
+  "profile_evidence": [
+    "../continuation-03/generation-A0028-offload-post28.json",
+    "../continuation-03/generation-A0028-gpu-post28.json",
+    "../continuation-03/mapped-scheduling-A0028-post28.json"
+  ],
+  "eligible_gain_workloads": [
+    [
+      "generation",
+      1,
+      2048
+    ],
+    [
+      "generation",
+      8,
+      2048
+    ],
+    [
+      "decode",
+      1,
+      2048
+    ],
+    [
+      "decode",
+      4,
+      2048
+    ],
+    [
+      "decode",
+      8,
+      2048
+    ],
+    [
+      "decode",
+      16,
+      2048
+    ],
+    [
+      "decode",
+      8,
+      512
+    ],
+    [
+      "decode",
+      8,
+      4096
+    ],
+    [
+      "decode",
+      8,
+      8192
+    ]
+  ],
+  "tradeoffs": [
+    "Compiled runner must match dtype/device/shapes and pointer-alignment specialization; offset IDs need their own compilation key.",
+    "Retain CPU-table mutation and GPU-ID lifetime semantics, error cleanup, cross-stream consumption and original synchronization.",
+    "Isolated launch saving is not an additive prediction of full-generation speedup; b8 drained kernel cost is unchanged.",
+    "Keep A0028 shared-host and earlier mapped/pipeline policies unchanged; no output/token lookup caching."
+  ],
+  "screen": {
+    "workloads": 16,
+    "fresh_parent_candidate_processes": 64,
+    "prefill_decode": [
+      3,
+      5,
+      1
+    ],
+    "generation": [
+      2,
+      3,
+      1
+    ]
+  },
+  "confirmation_rule": "Unchanged complete-screen nomination, exactly3 fresh balanced blocks, fixed Holm family and signed95% regression guards; no optional extension.",
+  "expected_offload_config": {
+    "memory_offload_bulk_max_tokens": 1024,
+    "memory_offload_single_slot_max_tokens": 2048,
+    "memory_offload_mapped_bulk": true,
+    "memory_offload_mapped_bulk_min_tokens": 1,
+    "memory_offload_mapped_bulk_max_tokens": 16,
+    "memory_offload_single_host_min_tokens": 4096,
+    "memory_offload_single_host_max_tokens": 16384
+  },
+  "created_unix": 1791200610.5305603
+}

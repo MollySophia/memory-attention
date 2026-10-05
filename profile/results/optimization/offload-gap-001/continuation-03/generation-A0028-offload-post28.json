@@ -1,0 +1,5016 @@
+{
+  "campaign_id": "offload-gap-001",
+  "purpose": "diagnostic only; CPU submission includes stream waits; not isolated per-token GPU time",
+  "command": [
+    "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/continuation-03/diagnose_generation_path.py",
+    "--source-root",
+    "/home/molly/workspace-memory-attn/offload-gap-001-A0028",
+    "--variant",
+    "ma_offload",
+    "--python-profile",
+    "--mapped-spans",
+    "--output",
+    "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/continuation-03/generation-A0028-offload-post28.json"
+  ],
+  "source": {
+    "source_sha256": "ab51cd6f60cb476b5baf42e8d3a50dbcad772845dbdf77174a08f4e3ac2016d1",
+    "git_commit": {
+      "returncode": 0,
+      "stdout": "6cc9354760ebde3bab9a90996a7713a936dfb439\n",
+      "stderr": ""
+    },
+    "git_status": {
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "source_patch": {
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  "env": {
+    "git_commit": "6cc9354",
+    "model_module": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/models/memory/modeling_memory.py",
+    "torch": "2.9.0+cu130",
+    "torch_cuda": "13.0",
+    "flash_attn": "2.8.3",
+    "fla": "0.4.2",
+    "python": "3.12.2",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "gpu_capability": "sm_120",
+    "cuda_visible_devices": ""
+  },
+  "environment": {
+    "cpu": {
+      "returncode": 0,
+      "stdout": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           48 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  32\nOn-line CPU(s) list:                     0-31\nVendor ID:                               AuthenticAMD\nModel name:                              AMD Ryzen 9 9950X 16-Core Processor\nCPU family:                              26\nModel:                                   68\nThread(s) per core:                      2\nCore(s) per socket:                      16\nSocket(s):                               1\nStepping:                                0\nMicrocode version:                       0xb404035\nFrequency boost:                         enabled\nCPU(s) scaling MHz:                      69%\nCPU max MHz:                             5756.4521\nCPU min MHz:                             624.1940\nBogoMIPS:                                8584.34\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good amd_lbr_v2 nopl xtopology nonstop_tsc cpuid extd_apicid aperfmperf rapl pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpuid_fault cpb cat_l3 cdp_l3 hw_pstate ssbd mba perfmon_v2 ibrs ibpb stibp ibrs_enhanced vmmcall fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid cqm rdt_a avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local user_shstk avx_vnni avx512_bf16 clzero irperf xsaveerptr rdpru wbnoinvd cppc arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif x2avic v_spec_ctrl vnmi avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid bus_lock_detect movdiri movdir64b overflow_recov succor smca fsrm avx512_vp2intersect flush_l1d amd_lbr_pmc_freeze\nVirtualization:                          AMD-V\nL1d cache:                               768 KiB (16 instances)\nL1i cache:                               512 KiB (16 instances)\nL2 cache:                                16 MiB (16 instances)\nL3 cache:                                64 MiB (2 instances)\nNUMA node(s):                            1\nNUMA node0 CPU(s):                       0-31\nVulnerability Gather data sampling:      Not affected\nVulnerability Ghostwrite:                Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Not affected\nVulnerability Mds:                       Not affected\nVulnerability Meltdown:                  Not affected\nVulnerability Mmio stale data:           Not affected\nVulnerability Old microcode:             Not affected\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Not affected\nVulnerability Spec rstack overflow:      Mitigation; IBPB on VMEXIT only\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Enhanced / Automatic IBRS; IBPB conditional; STIBP always-on; PBRSB-eIBRS Not affected; BHI Not affected\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Not affected\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Mitigation; IBPB on VMEXIT\n",
+      "stderr": ""
+    },
+    "cpu_affinity": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31
+    ],
+    "platform": "Linux-6.18.9-arch1-2-molly-x86_64-with-glibc2.44",
+    "torch_threads": 16,
+    "torch_interop_threads": 32,
+    "thread_environment": {
+      "OMP_NUM_THREADS": null,
+      "MKL_NUM_THREADS": null,
+      "OPENBLAS_NUM_THREADS": null
+    },
+    "nvidia_smi": {
+      "returncode": 0,
+      "stdout": "Mon Oct  5 19:39:12 2026       \n+-----------------------------------------------------------------------------------------+\n| NVIDIA-SMI 610.57.04              KMD Version: 610.57.04     CUDA UMD Version: 13.3     |\n+-----------------------------------------+------------------------+----------------------+\n| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |\n| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |\n|                                         |                        |               MIG M. |\n|=========================================+========================+======================|\n|   0  NVIDIA GeForce RTX 5090        Off |   00000000:01:00.0 Off |                  N/A |\n|  0%   48C    P1            292W /  575W |    7117MiB /  32607MiB |     66%      Default |\n|                                         |                        |                  N/A |\n+-----------------------------------------+------------------------+----------------------+\n\n+-----------------------------------------------------------------------------------------+\n| Processes:                                                                              |\n|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |\n|        ID   ID                                                               Usage      |\n|=========================================================================================|\n|    0   N/A  N/A          196861      C   ...da3/envs/fla-bench/bin/python       6406MiB |\n|    0   N/A  N/A         3625831      C   ...ngtz/trm-mcp/.venv/bin/python        654MiB |\n+-----------------------------------------------------------------------------------------+\n",
+      "stderr": ""
+    },
+    "gpu_telemetry": {
+      "returncode": 0,
+      "stdout": "name, driver_version, temperature.gpu, clocks.current.sm [MHz], clocks.current.memory [MHz], power.draw [W], utilization.gpu [%], memory.used [MiB]\nNVIDIA GeForce RTX 5090, 610.57.04, 48, 2880 MHz, 13801 MHz, 292.29 W, 66 %, 7117 MiB\n",
+      "stderr": ""
+    }
+  },
+  "helper_sha256": "25d08f7f568caa91fafd75782d4633bddb3d3147c4d57dc63e0f06387590e39d",
+  "model_config": {
+    "use_gate": false,
+    "use_head_gate": false,
+    "memory_offload": false,
+    "memory_offload_policy": "auto",
+    "memory_offload_group_size": 1,
+    "memory_offload_prefetch_depth": 4,
+    "memory_offload_bulk_max_tokens": 1024,
+    "memory_offload_single_slot_max_tokens": 2048,
+    "memory_offload_single_host_min_tokens": 4096,
+    "memory_offload_single_host_max_tokens": 16384,
+    "memory_offload_chunk_size": 1024,
+    "memory_offload_mapped_bulk": true,
+    "memory_offload_mapped_bulk_min_tokens": 1,
+    "memory_offload_mapped_bulk_max_tokens": 16,
+    "hidden_size": 2048,
+    "num_hidden_layers": 24,
+    "num_heads": 32,
+    "num_kv_heads": 32,
+    "qkv_bias": false,
+    "qk_norm": false,
+    "window_size": null,
+    "rope_theta": 10000.0,
+    "max_position_embeddings": 2048,
+    "hidden_ratio": 4,
+    "intermediate_size": 5632,
+    "hidden_act": "swish",
+    "initializer_range": 0.02,
+    "elementwise_affine": true,
+    "norm_eps": 1e-06,
+    "use_cache": true,
+    "fuse_norm": false,
+    "fuse_swiglu": true,
+    "fuse_cross_entropy": true,
+    "fuse_linear_cross_entropy": false,
+    "use_l2warp": false,
+    "vocab_size": 32000,
+    "return_dict": true,
+    "output_hidden_states": false,
+    "dtype": null,
+    "chunk_size_feed_forward": 0,
+    "is_encoder_decoder": false,
+    "architectures": null,
+    "id2label": {
+      "0": "LABEL_0",
+      "1": "LABEL_1"
+    },
+    "label2id": {
+      "LABEL_0": 0,
+      "LABEL_1": 1
+    },
+    "problem_type": null,
+    "_name_or_path": "",
+    "transformers_version": "5.3.0",
+    "pad_token_id": null,
+    "bos_token_id": 1,
+    "eos_token_id": 2,
+    "tie_word_embeddings": false,
+    "model_type": "memory",
+    "output_attentions": false
+  },
+  "warmup_trajectories": 2,
+  "measured_trajectories": 1,
+  "wall_ms": 602.1791538223624,
+  "call_wall_ms": [
+    26.733811013400555,
+    4.879320971667767,
+    4.473736044019461,
+    4.4783842749893665,
+    4.463826771825552,
+    4.469448234885931,
+    4.45315707474947,
+    4.461582750082016,
+    4.43984242156148,
+    4.458827897906303,
+    4.4613732025027275,
+    4.450222011655569,
+    4.459249321371317,
+    4.4518751092255116,
+    4.491039086133242,
+    4.5373160392045975,
+    4.504813812673092,
+    4.471281077712774,
+    4.590395838022232,
+    4.491880070418119,
+    4.462855868041515,
+    4.533728584647179,
+    4.508360754698515,
+    4.528339020907879,
+    4.508460871875286,
+    4.506828263401985,
+    4.502139985561371,
+    4.500566050410271,
+    4.506687633693218,
+    4.497550893574953,
+    4.476421047002077,
+    4.5012678019702435,
+    4.480629228055477,
+    4.501757677644491,
+    4.496108274906874,
+    4.48179105296731,
+    4.495205823332071,
+    4.505464807152748,
+    4.473875742405653,
+    4.48504788801074,
+    4.498342052102089,
+    4.500966984778643,
+    4.475870169699192,
+    4.505546297878027,
+    4.551672842353582,
+    4.503472242504358,
+    4.456553142517805,
+    4.485537763684988,
+    4.47566993534565,
+    4.491690080612898,
+    4.48170118033886,
+    5.2803088910877705,
+    4.528610035777092,
+    4.463906865566969,
+    4.454439971596003,
+    4.507630132138729,
+    4.501678049564362,
+    4.495776724070311,
+    4.473544657230377,
+    4.47837496176362,
+    4.554518032819033,
+    4.517328925430775,
+    4.488273058086634,
+    4.438308998942375,
+    4.477502778172493,
+    4.467515274882317,
+    4.546774085611105,
+    4.483344033360481,
+    4.466573242098093,
+    4.448988940566778,
+    4.4692568480968475,
+    4.492522217333317,
+    4.476119764149189,
+    4.456833936274052,
+    4.459979943931103,
+    4.482762888073921,
+    4.463696852326393,
+    4.450512118637562,
+    4.472464323043823,
+    4.459227900952101,
+    4.484866745769978,
+    4.453166853636503,
+    4.474797751754522,
+    4.4664121232926846,
+    4.492641426622868,
+    4.461952950805426,
+    4.460650961846113,
+    4.4560725800693035,
+    4.51892102137208,
+    4.48419526219368,
+    4.4733756221830845,
+    4.478374030441046,
+    4.4592879712581635,
+    4.477982874959707,
+    4.447706043720245,
+    4.455090966075659,
+    4.467083141207695,
+    4.489905666559935,
+    4.449499770998955,
+    4.4706398621201515,
+    4.452956840395927,
+    4.458557348698378,
+    4.452125169336796,
+    4.440333228558302,
+    4.467494320124388,
+    4.479397088289261,
+    4.473494831472635,
+    4.4686757028102875,
+    4.497149959206581,
+    4.465330392122269,
+    4.5270761474967,
+    4.498002119362354,
+    4.469167906790972,
+    4.527186043560505,
+    4.457505885511637,
+    4.450702108442783,
+    4.471752792596817,
+    4.458637908101082,
+    4.46966802701354,
+    4.467473831027746,
+    4.476160742342472,
+    4.540411755442619,
+    4.460760857909918,
+    4.478054121136665,
+    4.472393076866865,
+    4.488464444875717,
+    4.468386061489582,
+    4.517658613622189,
+    4.449930973351002
+  ],
+  "call_process_cpu_ms": [
+    418.1633749999989,
+    58.87492599999433,
+    4.461802000001569,
+    4.463827000002141,
+    4.452215000000592,
+    4.469013999994331,
+    4.441865000003986,
+    4.446706000003076,
+    4.428192000005993,
+    4.444298000002789,
+    4.449690999997813,
+    4.435734000004743,
+    4.447835999997096,
+    4.439740000002246,
+    4.475156000005143,
+    4.520499999998151,
+    4.4936319999990815,
+    4.456701999998813,
+    4.581057000002886,
+    4.477373000000284,
+    4.451362000004622,
+    4.517107000005183,
+    4.496617000000924,
+    4.513349999996308,
+    4.4966990000006035,
+    4.492251000002057,
+    4.490488000001847,
+    4.486186000001169,
+    4.501417000000174,
+    4.483035999996332,
+    4.46618000000143,
+    4.486699999993959,
+    4.468946000002916,
+    4.487189999998975,
+    4.484848000004149,
+    4.466671999999505,
+    4.48353499999854,
+    4.4901059999986614,
+    4.46178300000355,
+    4.470089999998095,
+    4.489806999998791,
+    4.485610000003248,
+    4.462697000001015,
+    4.4908449999994104,
+    4.539158000000043,
+    4.487781000001689,
+    4.444632000002002,
+    4.471264000002861,
+    4.4641969999972275,
+    4.477070999996613,
+    4.477753999999834,
+    5.216939000000309,
+    4.512429000001816,
+    4.451955999996926,
+    4.439179000002014,
+    4.494684999997389,
+    4.486840000005543,
+    4.4844689999976595,
+    4.457164000001512,
+    4.466602000000819,
+    4.53954900000042,
+    4.503333000002385,
+    4.477211000001091,
+    4.425384999997561,
+    4.462914000001206,
+    4.45233399999978,
+    4.530342000002463,
+    4.465620000004833,
+    4.45154599999853,
+    4.43710500000094,
+    4.44863599999934,
+    4.480618000002323,
+    4.469557999996709,
+    4.444569999996872,
+    4.444171000002939,
+    4.470049999994785,
+    4.448856999999862,
+    4.43871899999948,
+    4.457527999996103,
+    4.445601999996995,
+    4.473195999999291,
+    4.438247000003059,
+    4.462132999996982,
+    4.451611999996885,
+    4.479084999999827,
+    4.4467150000002675,
+    4.448677999995709,
+    4.441512999996178,
+    4.506336000005717,
+    4.4685849999979155,
+    4.461083999999005,
+    4.463837999999498,
+    4.446433999994781,
+    4.467062999999882,
+    4.443551000001378,
+    4.440514999998868,
+    4.453959999999313,
+    4.4749059999986684,
+    4.437989999999559,
+    4.448458999995353,
+    4.438710000002288,
+    4.446794999999781,
+    4.4374410000003195,
+    4.428240999999389,
+    4.452774000000659,
+    4.468146999997202,
+    4.458487999997374,
+    4.45959900000048,
+    4.479435999996895,
+    4.45356699999877,
+    4.511858000000757,
+    4.486248999995723,
+    4.45358599999679,
+    4.490967000002399,
+    4.442357000002062,
+    4.438458999999284,
+    4.440842999997585,
+    4.454719999998247,
+    4.4560520000018755,
+    4.455642000003479,
+    4.463998999995056,
+    4.520673999998337,
+    4.447847000001559,
+    4.463827000002141,
+    4.460350000002222,
+    4.4740430000018705,
+    4.456442999995147,
+    4.491217999998298,
+    4.437987999999393
+  ],
+  "gc_events": [
+    {
+      "relative_ms": 296.32713086903095,
+      "phase": "start",
+      "info": {
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      }
+    },
+    {
+      "relative_ms": 296.3506546802819,
+      "phase": "stop",
+      "info": {
+        "generation": 0,
+        "collected": 0,
+        "uncollectable": 0
+      }
+    }
+  ],
+  "variant": "ma_offload",
+  "mapped_spans": [
+    {
+      "total_ms": 4.759315,
+      "consumer_ms": 4.654596,
+      "before_first_consumer_ms": 0.083778,
+      "after_last_consumer_ms": 0.01021,
+      "nonconsumer_ms": 0.104719
+    },
+    {
+      "total_ms": 4.388986,
+      "consumer_ms": 4.320326,
+      "before_first_consumer_ms": 0.053952,
+      "after_last_consumer_ms": 0.0053,
+      "nonconsumer_ms": 0.06866
+    },
+    {
+      "total_ms": 4.40185,
+      "consumer_ms": 4.341598,
+      "before_first_consumer_ms": 0.046828,
+      "after_last_consumer_ms": 0.004729,
+      "nonconsumer_ms": 0.060252
+    },
+    {
+      "total_ms": 4.388274,
+      "consumer_ms": 4.328924,
+      "before_first_consumer_ms": 0.046728,
+      "after_last_consumer_ms": 0.004679,
+      "nonconsumer_ms": 0.05935
+    },
+    {
+      "total_ms": 4.393244,
+      "consumer_ms": 4.334496,
+      "before_first_consumer_ms": 0.046067,
+      "after_last_consumer_ms": 0.004759,
+      "nonconsumer_ms": 0.058748
+    },
+    {
+      "total_ms": 4.377955,
+      "consumer_ms": 4.318595,
+      "before_first_consumer_ms": 0.046658,
+      "after_last_consumer_ms": 0.004659,
+      "nonconsumer_ms": 0.05936
+    },
+    {
+      "total_ms": 4.386471,
+      "consumer_ms": 4.3272,
+      "before_first_consumer_ms": 0.046518,
+      "after_last_consumer_ms": 0.004648,
+      "nonconsumer_ms": 0.059271
+    },
+    {
+      "total_ms": 4.363879,
+      "consumer_ms": 4.305017,
+      "before_first_consumer_ms": 0.046088,
+      "after_last_consumer_ms": 0.004769,
+      "nonconsumer_ms": 0.058862
+    },
+    {
+      "total_ms": 4.383676,
+      "consumer_ms": 4.324867,
+      "before_first_consumer_ms": 0.046267,
+      "after_last_consumer_ms": 0.004639,
+      "nonconsumer_ms": 0.058809
+    },
+    {
+      "total_ms": 4.385148,
+      "consumer_ms": 4.326246,
+      "before_first_consumer_ms": 0.046377,
+      "after_last_consumer_ms": 0.004608,
+      "nonconsumer_ms": 0.058902
+    },
+    {
+      "total_ms": 4.374699,
+      "consumer_ms": 4.31628,
+      "before_first_consumer_ms": 0.045997,
+      "after_last_consumer_ms": 0.004719,
+      "nonconsumer_ms": 0.058419
+    },
+    {
+      "total_ms": 4.383586,
+      "consumer_ms": 4.324192,
+      "before_first_consumer_ms": 0.046498,
+      "after_last_consumer_ms": 0.00505,
+      "nonconsumer_ms": 0.059394
+    },
+    {
+      "total_ms": 4.375871,
+      "consumer_ms": 4.316891,
+      "before_first_consumer_ms": 0.046067,
+      "after_last_consumer_ms": 0.004739,
+      "nonconsumer_ms": 0.05898
+    },
+    {
+      "total_ms": 4.415415,
+      "consumer_ms": 4.355153,
+      "before_first_consumer_ms": 0.04776,
+      "after_last_consumer_ms": 0.004618,
+      "nonconsumer_ms": 0.060262
+    },
+    {
+      "total_ms": 4.455261,
+      "consumer_ms": 4.396952,
+      "before_first_consumer_ms": 0.046097,
+      "after_last_consumer_ms": 0.004849,
+      "nonconsumer_ms": 0.058309
+    },
+    {
+      "total_ms": 4.428069,
+      "consumer_ms": 4.367819,
+      "before_first_consumer_ms": 0.04795,
+      "after_last_consumer_ms": 0.004698,
+      "nonconsumer_ms": 0.06025
+    },
+    {
+      "total_ms": 4.39124,
+      "consumer_ms": 4.332276,
+      "before_first_consumer_ms": 0.046798,
+      "after_last_consumer_ms": 0.004569,
+      "nonconsumer_ms": 0.058964
+    },
+    {
+      "total_ms": 4.514493,
+      "consumer_ms": 4.455943,
+      "before_first_consumer_ms": 0.045937,
+      "after_last_consumer_ms": 0.005089,
+      "nonconsumer_ms": 0.05855
+    },
+    {
+      "total_ms": 4.415456,
+      "consumer_ms": 4.355665,
+      "before_first_consumer_ms": 0.047299,
+      "after_last_consumer_ms": 0.004719,
+      "nonconsumer_ms": 0.059791
+    },
+    {
+      "total_ms": 4.387223,
+      "consumer_ms": 4.328071,
+      "before_first_consumer_ms": 0.046568,
+      "after_last_consumer_ms": 0.004779,
+      "nonconsumer_ms": 0.059152
+    },
+    {
+      "total_ms": 4.457335,
+      "consumer_ms": 4.398572,
+      "before_first_consumer_ms": 0.045797,
+      "after_last_consumer_ms": 0.005009,
+      "nonconsumer_ms": 0.058763
+    },
+    {
+      "total_ms": 4.431877,
+      "consumer_ms": 4.371453,
+      "before_first_consumer_ms": 0.04763,
+      "after_last_consumer_ms": 0.004889,
+      "nonconsumer_ms": 0.060424
+    },
+    {
+      "total_ms": 4.453678,
+      "consumer_ms": 4.395157,
+      "before_first_consumer_ms": 0.046417,
+      "after_last_consumer_ms": 0.005,
+      "nonconsumer_ms": 0.058521
+    },
+    {
+      "total_ms": 4.43367,
+      "consumer_ms": 4.373816,
+      "before_first_consumer_ms": 0.047549,
+      "after_last_consumer_ms": 0.004749,
+      "nonconsumer_ms": 0.059854
+    },
+    {
+      "total_ms": 4.431937,
+      "consumer_ms": 4.372666,
+      "before_first_consumer_ms": 0.046438,
+      "after_last_consumer_ms": 0.004679,
+      "nonconsumer_ms": 0.059271
+    },
+    {
+      "total_ms": 4.425726,
+      "consumer_ms": 4.366254,
+      "before_first_consumer_ms": 0.046669,
+      "after_last_consumer_ms": 0.004849,
+      "nonconsumer_ms": 0.059472
+    },
+    {
+      "total_ms": 4.425224,
+      "consumer_ms": 4.366353,
+      "before_first_consumer_ms": 0.046267,
+      "after_last_consumer_ms": 0.004919,
+      "nonconsumer_ms": 0.058871
+    },
+    {
+      "total_ms": 4.431626,
+      "consumer_ms": 4.372397,
+      "before_first_consumer_ms": 0.047149,
+      "after_last_consumer_ms": 0.004829,
+      "nonconsumer_ms": 0.059229
+    },
+    {
+      "total_ms": 4.421778,
+      "consumer_ms": 4.363125,
+      "before_first_consumer_ms": 0.046027,
+      "after_last_consumer_ms": 0.004789,
+      "nonconsumer_ms": 0.058653
+    },
+    {
+      "total_ms": 4.400387,
+      "consumer_ms": 4.341585,
+      "before_first_consumer_ms": 0.046488,
+      "after_last_consumer_ms": 0.004889,
+      "nonconsumer_ms": 0.058802
+    },
+    {
+      "total_ms": 4.425625,
+      "consumer_ms": 4.367212,
+      "before_first_consumer_ms": 0.045896,
+      "after_last_consumer_ms": 0.004729,
+      "nonconsumer_ms": 0.058413
+    },
+    {
+      "total_ms": 4.404486,
+      "consumer_ms": 4.345662,
+      "before_first_consumer_ms": 0.046348,
+      "after_last_consumer_ms": 0.004569,
+      "nonconsumer_ms": 0.058824
+    },
+    {
+      "total_ms": 4.425885,
+      "consumer_ms": 4.36716,
+      "before_first_consumer_ms": 0.046237,
+      "after_last_consumer_ms": 0.004959,
+      "nonconsumer_ms": 0.058725
+    },
+    {
+      "total_ms": 4.420465,
+      "consumer_ms": 4.361977,
+      "before_first_consumer_ms": 0.045967,
+      "after_last_consumer_ms": 0.004719,
+      "nonconsumer_ms": 0.058488
+    },
+    {
+      "total_ms": 4.405167,
+      "consumer_ms": 4.345789,
+      "before_first_consumer_ms": 0.046368,
+      "after_last_consumer_ms": 0.004849,
+      "nonconsumer_ms": 0.059378
+    },
+    {
+      "total_ms": 4.419083,
+      "consumer_ms": 4.359884,
+      "before_first_consumer_ms": 0.046868,
+      "after_last_consumer_ms": 0.004699,
+      "nonconsumer_ms": 0.059199
+    },
+    {
+      "total_ms": 4.430023,
+      "consumer_ms": 4.371391,
+      "before_first_consumer_ms": 0.045877,
+      "after_last_consumer_ms": 0.004879,
+      "nonconsumer_ms": 0.058632
+    },
+    {
+      "total_ms": 4.398453,
+      "consumer_ms": 4.338642,
+      "before_first_consumer_ms": 0.04784,
+      "after_last_consumer_ms": 0.004528,
+      "nonconsumer_ms": 0.059811
+    },
+    {
+      "total_ms": 4.409836,
+      "consumer_ms": 4.350591,
+      "before_first_consumer_ms": 0.046428,
+      "after_last_consumer_ms": 0.004909,
+      "nonconsumer_ms": 0.059245
+    },
+    {
+      "total_ms": 4.421928,
+      "consumer_ms": 4.362806,
+      "before_first_consumer_ms": 0.046728,
+      "after_last_consumer_ms": 0.004959,
+      "nonconsumer_ms": 0.059122
+    },
+    {
+      "total_ms": 4.424733,
+      "consumer_ms": 4.365853,
+      "before_first_consumer_ms": 0.046438,
+      "after_last_consumer_ms": 0.004739,
+      "nonconsumer_ms": 0.05888
+    },
+    {
+      "total_ms": 4.400387,
+      "consumer_ms": 4.341315,
+      "before_first_consumer_ms": 0.046838,
+      "after_last_consumer_ms": 0.004538,
+      "nonconsumer_ms": 0.059072
+    },
+    {
+      "total_ms": 4.429222,
+      "consumer_ms": 4.370579,
+      "before_first_consumer_ms": 0.046308,
+      "after_last_consumer_ms": 0.004629,
+      "nonconsumer_ms": 0.058643
+    },
+    {
+      "total_ms": 4.475038,
+      "consumer_ms": 4.414991,
+      "before_first_consumer_ms": 0.047369,
+      "after_last_consumer_ms": 0.004949,
+      "nonconsumer_ms": 0.060047
+    },
+    {
+      "total_ms": 4.426687,
+      "consumer_ms": 4.366779,
+      "before_first_consumer_ms": 0.04785,
+      "after_last_consumer_ms": 0.004739,
+      "nonconsumer_ms": 0.059908
+    },
+    {
+      "total_ms": 4.379999,
+      "consumer_ms": 4.321439,
+      "before_first_consumer_ms": 0.046507,
+      "after_last_consumer_ms": 0.004529,
+      "nonconsumer_ms": 0.05856
+    },
+    {
+      "total_ms": 4.410417,
+      "consumer_ms": 4.351816,
+      "before_first_consumer_ms": 0.046278,
+      "after_last_consumer_ms": 0.004639,
+      "nonconsumer_ms": 0.058601
+    },
+    {
+      "total_ms": 4.399055,
+      "consumer_ms": 4.339595,
+      "before_first_consumer_ms": 0.047089,
+      "after_last_consumer_ms": 0.004679,
+      "nonconsumer_ms": 0.05946
+    },
+    {
+      "total_ms": 4.416248,
+      "consumer_ms": 4.357831,
+      "before_first_consumer_ms": 0.045887,
+      "after_last_consumer_ms": 0.004619,
+      "nonconsumer_ms": 0.058417
+    },
+    {
+      "total_ms": 4.4069,
+      "consumer_ms": 4.347847,
+      "before_first_consumer_ms": 0.046688,
+      "after_last_consumer_ms": 0.004769,
+      "nonconsumer_ms": 0.059053
+    },
+    {
+      "total_ms": 5.203464,
+      "consumer_ms": 5.142882,
+      "before_first_consumer_ms": 0.045576,
+      "after_last_consumer_ms": 0.00523,
+      "nonconsumer_ms": 0.060582
+    },
+    {
+      "total_ms": 4.451604,
+      "consumer_ms": 4.39115,
+      "before_first_consumer_ms": 0.048281,
+      "after_last_consumer_ms": 0.004638,
+      "nonconsumer_ms": 0.060454
+    },
+    {
+      "total_ms": 4.387914,
+      "consumer_ms": 4.329725,
+      "before_first_consumer_ms": 0.045957,
+      "after_last_consumer_ms": 0.004498,
+      "nonconsumer_ms": 0.058189
+    },
+    {
+      "total_ms": 4.380019,
+      "consumer_ms": 4.323165,
+      "before_first_consumer_ms": 0.044865,
+      "after_last_consumer_ms": 0.004378,
+      "nonconsumer_ms": 0.056854
+    },
+    {
+      "total_ms": 4.431656,
+      "consumer_ms": 4.374637,
+      "before_first_consumer_ms": 0.044754,
+      "after_last_consumer_ms": 0.004488,
+      "nonconsumer_ms": 0.057019
+    },
+    {
+      "total_ms": 4.426617,
+      "consumer_ms": 4.367174,
+      "before_first_consumer_ms": 0.046948,
+      "after_last_consumer_ms": 0.004509,
+      "nonconsumer_ms": 0.059443
+    },
+    {
+      "total_ms": 4.421117,
+      "consumer_ms": 4.363651,
+      "before_first_consumer_ms": 0.045266,
+      "after_last_consumer_ms": 0.004489,
+      "nonconsumer_ms": 0.057466
+    },
+    {
+      "total_ms": 4.399145,
+      "consumer_ms": 4.340119,
+      "before_first_consumer_ms": 0.046788,
+      "after_last_consumer_ms": 0.004569,
+      "nonconsumer_ms": 0.059026
+    },
+    {
+      "total_ms": 4.404535,
+      "consumer_ms": 4.347458,
+      "before_first_consumer_ms": 0.044945,
+      "after_last_consumer_ms": 0.004398,
+      "nonconsumer_ms": 0.057077
+    },
+    {
+      "total_ms": 4.479917,
+      "consumer_ms": 4.421898,
+      "before_first_consumer_ms": 0.045716,
+      "after_last_consumer_ms": 0.004478,
+      "nonconsumer_ms": 0.058019
+    },
+    {
+      "total_ms": 4.442197,
+      "consumer_ms": 4.384381,
+      "before_first_consumer_ms": 0.045536,
+      "after_last_consumer_ms": 0.004379,
+      "nonconsumer_ms": 0.057816
+    },
+    {
+      "total_ms": 4.413031,
+      "consumer_ms": 4.354469,
+      "before_first_consumer_ms": 0.047169,
+      "after_last_consumer_ms": 0.004368,
+      "nonconsumer_ms": 0.058562
+    },
+    {
+      "total_ms": 4.362196,
+      "consumer_ms": 4.30504,
+      "before_first_consumer_ms": 0.045356,
+      "after_last_consumer_ms": 0.004439,
+      "nonconsumer_ms": 0.057156
+    },
+    {
+      "total_ms": 4.404054,
+      "consumer_ms": 4.347097,
+      "before_first_consumer_ms": 0.044835,
+      "after_last_consumer_ms": 0.004188,
+      "nonconsumer_ms": 0.056957
+    },
+    {
+      "total_ms": 4.393034,
+      "consumer_ms": 4.334962,
+      "before_first_consumer_ms": 0.045847,
+      "after_last_consumer_ms": 0.004418,
+      "nonconsumer_ms": 0.058072
+    },
+    {
+      "total_ms": 4.472243,
+      "consumer_ms": 4.413962,
+      "before_first_consumer_ms": 0.045466,
+      "after_last_consumer_ms": 0.004749,
+      "nonconsumer_ms": 0.058281
+    },
+    {
+      "total_ms": 4.40736,
+      "consumer_ms": 4.348855,
+      "before_first_consumer_ms": 0.046608,
+      "after_last_consumer_ms": 0.004288,
+      "nonconsumer_ms": 0.058505
+    },
+    {
+      "total_ms": 4.392042,
+      "consumer_ms": 4.334713,
+      "before_first_consumer_ms": 0.045446,
+      "after_last_consumer_ms": 0.004348,
+      "nonconsumer_ms": 0.057329
+    },
+    {
+      "total_ms": 4.374879,
+      "consumer_ms": 4.317843,
+      "before_first_consumer_ms": 0.044854,
+      "after_last_consumer_ms": 0.004348,
+      "nonconsumer_ms": 0.057036
+    },
+    {
+      "total_ms": 4.394216,
+      "consumer_ms": 4.337024,
+      "before_first_consumer_ms": 0.044825,
+      "after_last_consumer_ms": 0.004699,
+      "nonconsumer_ms": 0.057192
+    },
+    {
+      "total_ms": 4.418361,
+      "consumer_ms": 4.360626,
+      "before_first_consumer_ms": 0.045346,
+      "after_last_consumer_ms": 0.004448,
+      "nonconsumer_ms": 0.057735
+    },
+    {
+      "total_ms": 4.40206,
+      "consumer_ms": 4.344642,
+      "before_first_consumer_ms": 0.045215,
+      "after_last_consumer_ms": 0.004468,
+      "nonconsumer_ms": 0.057418
+    },
+    {
+      "total_ms": 4.382654,
+      "consumer_ms": 4.326009,
+      "before_first_consumer_ms": 0.044724,
+      "after_last_consumer_ms": 0.004389,
+      "nonconsumer_ms": 0.056645
+    },
+    {
+      "total_ms": 4.38577,
+      "consumer_ms": 4.324142,
+      "before_first_consumer_ms": 0.045446,
+      "after_last_consumer_ms": 0.005511,
+      "nonconsumer_ms": 0.061628
+    },
+    {
+      "total_ms": 4.408873,
+      "consumer_ms": 4.351173,
+      "before_first_consumer_ms": 0.045496,
+      "after_last_consumer_ms": 0.004408,
+      "nonconsumer_ms": 0.0577
+    },
+    {
+      "total_ms": 4.388755,
+      "consumer_ms": 4.330852,
+      "before_first_consumer_ms": 0.045265,
+      "after_last_consumer_ms": 0.004438,
+      "nonconsumer_ms": 0.057903
+    },
+    {
+      "total_ms": 4.375089,
+      "consumer_ms": 4.318615,
+      "before_first_consumer_ms": 0.044363,
+      "after_last_consumer_ms": 0.004458,
+      "nonconsumer_ms": 0.056474
+    },
+    {
+      "total_ms": 4.393194,
+      "consumer_ms": 4.335246,
+      "before_first_consumer_ms": 0.045827,
+      "after_last_consumer_ms": 0.004459,
+      "nonconsumer_ms": 0.057948
+    },
+    {
+      "total_ms": 4.384378,
+      "consumer_ms": 4.326376,
+      "before_first_consumer_ms": 0.045657,
+      "after_last_consumer_ms": 0.004529,
+      "nonconsumer_ms": 0.058002
+    },
+    {
+      "total_ms": 4.409925,
+      "consumer_ms": 4.352557,
+      "before_first_consumer_ms": 0.045556,
+      "after_last_consumer_ms": 0.004388,
+      "nonconsumer_ms": 0.057368
+    },
+    {
+      "total_ms": 4.374498,
+      "consumer_ms": 4.315928,
+      "before_first_consumer_ms": 0.046127,
+      "after_last_consumer_ms": 0.004338,
+      "nonconsumer_ms": 0.05857
+    },
+    {
+      "total_ms": 4.399976,
+      "consumer_ms": 4.34232,
+      "before_first_consumer_ms": 0.045766,
+      "after_last_consumer_ms": 0.004408,
+      "nonconsumer_ms": 0.057656
+    },
+    {
+      "total_ms": 4.391842,
+      "consumer_ms": 4.33463,
+      "before_first_consumer_ms": 0.044795,
+      "after_last_consumer_ms": 0.004529,
+      "nonconsumer_ms": 0.057212
+    },
+    {
+      "total_ms": 4.417229,
+      "consumer_ms": 4.359701,
+      "before_first_consumer_ms": 0.045266,
+      "after_last_consumer_ms": 0.004488,
+      "nonconsumer_ms": 0.057528
+    },
+    {
+      "total_ms": 4.387062,
+      "consumer_ms": 4.329139,
+      "before_first_consumer_ms": 0.045396,
+      "after_last_consumer_ms": 0.004348,
+      "nonconsumer_ms": 0.057923
+    },
+    {
+      "total_ms": 4.385319,
+      "consumer_ms": 4.328617,
+      "before_first_consumer_ms": 0.044535,
+      "after_last_consumer_ms": 0.004298,
+      "nonconsumer_ms": 0.056702
+    },
+    {
+      "total_ms": 4.380891,
+      "consumer_ms": 4.323995,
+      "before_first_consumer_ms": 0.044685,
+      "after_last_consumer_ms": 0.004418,
+      "nonconsumer_ms": 0.056896
+    },
+    {
+      "total_ms": 4.443389,
+      "consumer_ms": 4.385527,
+      "before_first_consumer_ms": 0.045456,
+      "after_last_consumer_ms": 0.004689,
+      "nonconsumer_ms": 0.057862
+    },
+    {
+      "total_ms": 4.408012,
+      "consumer_ms": 4.349008,
+      "before_first_consumer_ms": 0.046568,
+      "after_last_consumer_ms": 0.004509,
+      "nonconsumer_ms": 0.059004
+    },
+    {
+      "total_ms": 4.399045,
+      "consumer_ms": 4.342057,
+      "before_first_consumer_ms": 0.045045,
+      "after_last_consumer_ms": 0.004349,
+      "nonconsumer_ms": 0.056988
+    },
+    {
+      "total_ms": 4.403293,
+      "consumer_ms": 4.344871,
+      "before_first_consumer_ms": 0.046248,
+      "after_last_consumer_ms": 0.004438,
+      "nonconsumer_ms": 0.058422
+    },
+    {
+      "total_ms": 4.381041,
+      "consumer_ms": 4.323042,
+      "before_first_consumer_ms": 0.045837,
+      "after_last_consumer_ms": 0.004398,
+      "nonconsumer_ms": 0.057999
+    },
+    {
+      "total_ms": 4.402502,
+      "consumer_ms": 4.344946,
+      "before_first_consumer_ms": 0.045146,
+      "after_last_consumer_ms": 0.004599,
+      "nonconsumer_ms": 0.057556
+    },
+    {
+      "total_ms": 4.372845,
+      "consumer_ms": 4.314487,
+      "before_first_consumer_ms": 0.046207,
+      "after_last_consumer_ms": 0.004399,
+      "nonconsumer_ms": 0.058358
+    },
+    {
+      "total_ms": 4.38014,
+      "consumer_ms": 4.321698,
+      "before_first_consumer_ms": 0.046288,
+      "after_last_consumer_ms": 0.004439,
+      "nonconsumer_ms": 0.058442
+    },
+    {
+      "total_ms": 4.392011,
+      "consumer_ms": 4.333349,
+      "before_first_consumer_ms": 0.046267,
+      "after_last_consumer_ms": 0.004378,
+      "nonconsumer_ms": 0.058662
+    },
+    {
+      "total_ms": 4.414013,
+      "consumer_ms": 4.356115,
+      "before_first_consumer_ms": 0.045636,
+      "after_last_consumer_ms": 0.004478,
+      "nonconsumer_ms": 0.057898
+    },
+    {
+      "total_ms": 4.374298,
+      "consumer_ms": 4.315738,
+      "before_first_consumer_ms": 0.046077,
+      "after_last_consumer_ms": 0.004578,
+      "nonconsumer_ms": 0.05856
+    },
+    {
+      "total_ms": 4.395969,
+      "consumer_ms": 4.33847,
+      "before_first_consumer_ms": 0.045205,
+      "after_last_consumer_ms": 0.004559,
+      "nonconsumer_ms": 0.057499
+    },
+    {
+      "total_ms": 4.373607,
+      "consumer_ms": 4.314429,
+      "before_first_consumer_ms": 0.046869,
+      "after_last_consumer_ms": 0.004549,
+      "nonconsumer_ms": 0.059178
+    },
+    {
+      "total_ms": 4.383957,
+      "consumer_ms": 4.326249,
+      "before_first_consumer_ms": 0.044905,
+      "after_last_consumer_ms": 0.004469,
+      "nonconsumer_ms": 0.057708
+    },
+    {
+      "total_ms": 4.377224,
+      "consumer_ms": 4.318202,
+      "before_first_consumer_ms": 0.045827,
+      "after_last_consumer_ms": 0.004679,
+      "nonconsumer_ms": 0.059022
+    },
+    {
+      "total_ms": 4.36494,
+      "consumer_ms": 4.3067,
+      "before_first_consumer_ms": 0.045796,
+      "after_last_consumer_ms": 0.004418,
+      "nonconsumer_ms": 0.05824
+    },
+    {
+      "total_ms": 4.389617,
+      "consumer_ms": 4.323237,
+      "before_first_consumer_ms": 0.045997,
+      "after_last_consumer_ms": 0.012142,
+      "nonconsumer_ms": 0.06638
+    },
+    {
+      "total_ms": 4.404515,
+      "consumer_ms": 4.346547,
+      "before_first_consumer_ms": 0.045295,
+      "after_last_consumer_ms": 0.004439,
+      "nonconsumer_ms": 0.057968
+    },
+    {
+      "total_ms": 4.398434,
+      "consumer_ms": 4.340427,
+      "before_first_consumer_ms": 0.045767,
+      "after_last_consumer_ms": 0.004368,
+      "nonconsumer_ms": 0.058007
+    },
+    {
+      "total_ms": 4.393765,
+      "consumer_ms": 4.336437,
+      "before_first_consumer_ms": 0.045025,
+      "after_last_consumer_ms": 0.004449,
+      "nonconsumer_ms": 0.057328
+    },
+    {
+      "total_ms": 4.421688,
+      "consumer_ms": 4.362831,
+      "before_first_consumer_ms": 0.046508,
+      "after_last_consumer_ms": 0.004609,
+      "nonconsumer_ms": 0.058857
+    },
+    {
+      "total_ms": 4.388986,
+      "consumer_ms": 4.330787,
+      "before_first_consumer_ms": 0.046007,
+      "after_last_consumer_ms": 0.004458,
+      "nonconsumer_ms": 0.058199
+    },
+    {
+      "total_ms": 4.450783,
+      "consumer_ms": 4.392632,
+      "before_first_consumer_ms": 0.045646,
+      "after_last_consumer_ms": 0.00493,
+      "nonconsumer_ms": 0.058151
+    },
+    {
+      "total_ms": 4.420685,
+      "consumer_ms": 4.361612,
+      "before_first_consumer_ms": 0.047179,
+      "after_last_consumer_ms": 0.004408,
+      "nonconsumer_ms": 0.059073
+    },
+    {
+      "total_ms": 4.394446,
+      "consumer_ms": 4.335562,
+      "before_first_consumer_ms": 0.046127,
+      "after_last_consumer_ms": 0.004548,
+      "nonconsumer_ms": 0.058884
+    },
+    {
+      "total_ms": 4.452335,
+      "consumer_ms": 4.394682,
+      "before_first_consumer_ms": 0.045646,
+      "after_last_consumer_ms": 0.004519,
+      "nonconsumer_ms": 0.057653
+    },
+    {
+      "total_ms": 4.382223,
+      "consumer_ms": 4.323114,
+      "before_first_consumer_ms": 0.046879,
+      "after_last_consumer_ms": 0.004488,
+      "nonconsumer_ms": 0.059109
+    },
+    {
+      "total_ms": 4.376152,
+      "consumer_ms": 4.318463,
+      "before_first_consumer_ms": 0.045706,
+      "after_last_consumer_ms": 0.004369,
+      "nonconsumer_ms": 0.057689
+    },
+    {
+      "total_ms": 4.397512,
+      "consumer_ms": 4.339802,
+      "before_first_consumer_ms": 0.045546,
+      "after_last_consumer_ms": 0.004369,
+      "nonconsumer_ms": 0.05771
+    },
+    {
+      "total_ms": 4.384377,
+      "consumer_ms": 4.327376,
+      "before_first_consumer_ms": 0.044895,
+      "after_last_consumer_ms": 0.004428,
+      "nonconsumer_ms": 0.057001
+    },
+    {
+      "total_ms": 4.391821,
+      "consumer_ms": 4.334807,
+      "before_first_consumer_ms": 0.044634,
+      "after_last_consumer_ms": 0.004518,
+      "nonconsumer_ms": 0.057014
+    },
+    {
+      "total_ms": 4.392102,
+      "consumer_ms": 4.333921,
+      "before_first_consumer_ms": 0.046007,
+      "after_last_consumer_ms": 0.004278,
+      "nonconsumer_ms": 0.058181
+    },
+    {
+      "total_ms": 4.40138,
+      "consumer_ms": 4.340301,
+      "before_first_consumer_ms": 0.048813,
+      "after_last_consumer_ms": 0.004288,
+      "nonconsumer_ms": 0.061079
+    },
+    {
+      "total_ms": 4.461643,
+      "consumer_ms": 4.40275,
+      "before_first_consumer_ms": 0.046448,
+      "after_last_consumer_ms": 0.004619,
+      "nonconsumer_ms": 0.058893
+    },
+    {
+      "total_ms": 4.384597,
+      "consumer_ms": 4.325983,
+      "before_first_consumer_ms": 0.046107,
+      "after_last_consumer_ms": 0.004588,
+      "nonconsumer_ms": 0.058614
+    },
+    {
+      "total_ms": 4.399485,
+      "consumer_ms": 4.337853,
+      "before_first_consumer_ms": 0.046107,
+      "after_last_consumer_ms": 0.004468,
+      "nonconsumer_ms": 0.061632
+    },
+    {
+      "total_ms": 4.39691,
+      "consumer_ms": 4.339513,
+      "before_first_consumer_ms": 0.045235,
+      "after_last_consumer_ms": 0.004478,
+      "nonconsumer_ms": 0.057397
+    },
+    {
+      "total_ms": 4.413732,
+      "consumer_ms": 4.352357,
+      "before_first_consumer_ms": 0.048962,
+      "after_last_consumer_ms": 0.004368,
+      "nonconsumer_ms": 0.061375
+    },
+    {
+      "total_ms": 4.394035,
+      "consumer_ms": 4.336174,
+      "before_first_consumer_ms": 0.045776,
+      "after_last_consumer_ms": 0.004328,
+      "nonconsumer_ms": 0.057861
+    },
+    {
+      "total_ms": 4.442928,
+      "consumer_ms": 4.383976,
+      "before_first_consumer_ms": 0.046598,
+      "after_last_consumer_ms": 0.004509,
+      "nonconsumer_ms": 0.058952
+    },
+    {
+      "total_ms": 4.37534,
+      "consumer_ms": 4.317134,
+      "before_first_consumer_ms": 0.046247,
+      "after_last_consumer_ms": 0.004459,
+      "nonconsumer_ms": 0.058206
+    }
+  ],
+  "python_profile_scope": "Four additional growing decode calls; instrumentation perturbs Python cost; excluded from wall_ms",
+  "python_profile": [
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method torch._C._nn.linear>",
+      "primitive_calls": 580,
+      "calls": 580,
+      "self_ms": 3.253662,
+      "cumulative_ms": 3.253662
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/runtime/autotuner.py",
+      "line": 210,
+      "function": "run",
+      "primitive_calls": 288,
+      "calls": 288,
+      "self_ms": 2.2191190000000005,
+      "cumulative_ms": 14.414662000000002
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/runtime/jit.py",
+      "line": 709,
+      "function": "run",
+      "primitive_calls": 292,
+      "calls": 292,
+      "self_ms": 1.619432,
+      "cumulative_ms": 11.43523
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/nn/modules/module.py",
+      "line": 1779,
+      "function": "_call_impl",
+      "primitive_calls": 0,
+      "calls": 1168,
+      "self_ms": 1.4568560000000002,
+      "cumulative_ms": 0.0
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method builtins.isinstance>",
+      "primitive_calls": 18620,
+      "calls": 19212,
+      "self_ms": 1.312715,
+      "cumulative_ms": 1.691089
+    },
+    {
+      "file": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/layers/memory_attn.py",
+      "line": 102,
+      "function": "forward",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 1.292224,
+      "cumulative_ms": 37.051715
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method apply>",
+      "primitive_calls": 384,
+      "calls": 384,
+      "self_ms": 1.175631,
+      "cumulative_ms": 24.538222
+    },
+    {
+      "file": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/models/memory/modeling_memory.py",
+      "line": 73,
+      "function": "forward",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 1.1450120000000001,
+      "cumulative_ms": 47.607808
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method flash_attn_2_cuda.fwd>",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 1.140281,
+      "cumulative_ms": 1.140281
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/runtime/jit.py",
+      "line": 353,
+      "function": "specialize_impl",
+      "primitive_calls": 1932,
+      "calls": 1932,
+      "self_ms": 0.981305,
+      "cumulative_ms": 1.9947100000000002
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method torch.rms_norm>",
+      "primitive_calls": 196,
+      "calls": 196,
+      "self_ms": 0.9420780000000001,
+      "cumulative_ms": 0.9420780000000001
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'to' of 'torch._C.TensorBase' objects>",
+      "primitive_calls": 200,
+      "calls": 200,
+      "self_ms": 0.9221,
+      "cumulative_ms": 0.9221
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method torch.cat>",
+      "primitive_calls": 192,
+      "calls": 192,
+      "self_ms": 0.9142020000000001,
+      "cumulative_ms": 0.9142020000000001
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method torch.pow>",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.8720840000000001,
+      "cumulative_ms": 0.8720840000000001
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/runtime/jit.py",
+      "line": 1082,
+      "function": "__call__",
+      "primitive_calls": 868,
+      "calls": 868,
+      "self_ms": 0.8233180000000001,
+      "cumulative_ms": 1.742864
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method torch.arange>",
+      "primitive_calls": 192,
+      "calls": 192,
+      "self_ms": 0.810332,
+      "cumulative_ms": 0.810332
+    },
+    {
+      "file": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/modules/rotary.py",
+      "line": 135,
+      "function": "rotary_embedding_fwdbwd",
+      "primitive_calls": 192,
+      "calls": 192,
+      "self_ms": 0.800315,
+      "cumulative_ms": 13.930231000000001
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/einops/einops.py",
+      "line": 459,
+      "function": "reduce",
+      "primitive_calls": 480,
+      "calls": 480,
+      "self_ms": 0.7842280000000001,
+      "cumulative_ms": 2.1361030000000003
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/nn/modules/module.py",
+      "line": 1771,
+      "function": "_wrapped_call_impl",
+      "primitive_calls": 0,
+      "calls": 1168,
+      "self_ms": 0.720997,
+      "cumulative_ms": 0.0
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/nn/modules/module.py",
+      "line": 1951,
+      "function": "__getattr__",
+      "primitive_calls": 3008,
+      "calls": 3008,
+      "self_ms": 0.6967340000000001,
+      "cumulative_ms": 0.6967340000000001
+    },
+    {
+      "file": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/modules/rotary.py",
+      "line": 385,
+      "function": "_compute_inv_freq",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.691758,
+      "cumulative_ms": 2.795926
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method torch._ops.flash_attn._flash_attn_forward>",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.675784,
+      "cumulative_ms": 2.6466760000000003
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method __triton_launcher.launch>",
+      "primitive_calls": 192,
+      "calls": 192,
+      "self_ms": 0.675751,
+      "cumulative_ms": 0.7618280000000001
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'get' of 'dict' objects>",
+      "primitive_calls": 4944,
+      "calls": 4944,
+      "self_ms": 0.6599090000000001,
+      "cumulative_ms": 0.6599090000000001
+    },
+    {
+      "file": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/utils.py",
+      "line": 150,
+      "function": "wrapper",
+      "primitive_calls": 192,
+      "calls": 192,
+      "self_ms": 0.565996,
+      "cumulative_ms": 15.648932
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/_functorch/utils.py",
+      "line": 34,
+      "function": "<genexpr>",
+      "primitive_calls": 3264,
+      "calls": 3264,
+      "self_ms": 0.534572,
+      "cumulative_ms": 0.9464110000000001
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/nn/modules/module.py",
+      "line": 1968,
+      "function": "__setattr__",
+      "primitive_calls": 296,
+      "calls": 296,
+      "self_ms": 0.466989,
+      "cumulative_ms": 1.17401
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/autograd/function.py",
+      "line": 565,
+      "function": "apply",
+      "primitive_calls": 384,
+      "calls": 384,
+      "self_ms": 0.465218,
+      "cumulative_ms": 26.464515000000002
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/flash_attn/flash_attn_interface.py",
+      "line": 808,
+      "function": "forward",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.43509600000000004,
+      "cumulative_ms": 3.1535570000000006
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/_tensor.py",
+      "line": 1077,
+      "function": "__rdiv__",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.426792,
+      "cumulative_ms": 0.732396
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/language/core.py",
+      "line": 346,
+      "function": "_unwrap_if_constexpr",
+      "primitive_calls": 1352,
+      "calls": 1352,
+      "self_ms": 0.422495,
+      "cumulative_ms": 0.675081
+    },
+    {
+      "file": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/modules/rotary.py",
+      "line": 394,
+      "function": "_update_cos_sin_cache",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.41029,
+      "cumulative_ms": 6.765521
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method builtins.hasattr>",
+      "primitive_calls": 5676,
+      "calls": 5676,
+      "self_ms": 0.39809100000000003,
+      "cumulative_ms": 0.39809100000000003
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/einops/einops.py",
+      "line": 229,
+      "function": "_apply_recipe",
+      "primitive_calls": 480,
+      "calls": 480,
+      "self_ms": 0.393969,
+      "cumulative_ms": 0.9284930000000001
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/_functorch/utils.py",
+      "line": 32,
+      "function": "unwrap_dead_wrappers",
+      "primitive_calls": 384,
+      "calls": 384,
+      "self_ms": 0.391981,
+      "cumulative_ms": 1.338392
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method torch.outer>",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.386637,
+      "cumulative_ms": 0.386637
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method builtins.eval>",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.370138,
+      "cumulative_ms": 0.37111
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method torch.empty_like>",
+      "primitive_calls": 288,
+      "calls": 288,
+      "self_ms": 0.36721800000000004,
+      "cumulative_ms": 0.36721800000000004
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/runtime/jit.py",
+      "line": 419,
+      "function": "<lambda>",
+      "primitive_calls": 292,
+      "calls": 292,
+      "self_ms": 0.36678000000000005,
+      "cumulative_ms": 14.924701
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/backends/compiler.py",
+      "line": 81,
+      "function": "get_arg_specialization",
+      "primitive_calls": 1260,
+      "calls": 1260,
+      "self_ms": 0.364659,
+      "cumulative_ms": 0.5690900000000001
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'reshape' of 'torch._C.TensorBase' objects>",
+      "primitive_calls": 580,
+      "calls": 580,
+      "self_ms": 0.34342500000000004,
+      "cumulative_ms": 0.34342500000000004
+    },
+    {
+      "file": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/utils.py",
+      "line": 152,
+      "function": "<genexpr>",
+      "primitive_calls": 1728,
+      "calls": 1728,
+      "self_ms": 0.30903200000000003,
+      "cumulative_ms": 0.510144
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'reciprocal' of 'torch._C.TensorBase' objects>",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.305604,
+      "cumulative_ms": 0.305604
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method torch.cos>",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.305398,
+      "cumulative_ms": 0.305398
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method torch.sin>",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.304138,
+      "cumulative_ms": 0.304138
+    },
+    {
+      "file": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/models/utils.py",
+      "line": 34,
+      "function": "update",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.302134,
+      "cumulative_ms": 1.3491810000000002
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/runtime/jit.py",
+      "line": 602,
+      "function": "compute_cache_key",
+      "primitive_calls": 292,
+      "calls": 292,
+      "self_ms": 0.299283,
+      "cumulative_ms": 0.438199
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/backends/nvidia/driver.py",
+      "line": 699,
+      "function": "__call__",
+      "primitive_calls": 292,
+      "calls": 292,
+      "self_ms": 0.280007,
+      "cumulative_ms": 1.4903070000000003
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/compiler/compiler.py",
+      "line": 487,
+      "function": "launch_metadata",
+      "primitive_calls": 292,
+      "calls": 292,
+      "self_ms": 0.252697,
+      "cumulative_ms": 1.3647000000000002
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method cuda_utils.load_binary>",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.24788800000000002,
+      "cumulative_ms": 0.24788800000000002
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'items' of 'dict' objects>",
+      "primitive_calls": 2504,
+      "calls": 2504,
+      "self_ms": 0.24695199999999998,
+      "cumulative_ms": 0.24695199999999998
+    },
+    {
+      "file": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/modules/rotary.py",
+      "line": 440,
+      "function": "forward",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.240298,
+      "cumulative_ms": 24.305164
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method torch._C._get_tracing_state>",
+      "primitive_calls": 1172,
+      "calls": 1172,
+      "self_ms": 0.23619900000000002,
+      "cumulative_ms": 0.23619900000000002
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method builtins.len>",
+      "primitive_calls": 2764,
+      "calls": 2956,
+      "self_ms": 0.23578500000000002,
+      "cumulative_ms": 0.269326
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/nn/modules/linear.py",
+      "line": 130,
+      "function": "forward",
+      "primitive_calls": 484,
+      "calls": 484,
+      "self_ms": 0.220148,
+      "cumulative_ms": 3.165195
+    },
+    {
+      "file": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/models/memory/modeling_memory.py",
+      "line": 534,
+      "function": "consume",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.20861700000000002,
+      "cumulative_ms": 48.471175
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/collections/__init__.py",
+      "line": 355,
+      "function": "namedtuple",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.20528900000000003,
+      "cumulative_ms": 0.6786930000000001
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/einops/einops.py",
+      "line": 536,
+      "function": "rearrange",
+      "primitive_calls": 480,
+      "calls": 480,
+      "self_ms": 0.20243500000000003,
+      "cumulative_ms": 2.3385380000000002
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method torch._C._functorch.unwrap_if_dead>",
+      "primitive_calls": 1152,
+      "calls": 1152,
+      "self_ms": 0.19978100000000001,
+      "cumulative_ms": 0.19978100000000001
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'flatten' of 'torch._C.TensorBase' objects>",
+      "primitive_calls": 192,
+      "calls": 192,
+      "self_ms": 0.18232600000000002,
+      "cumulative_ms": 0.18232600000000002
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/knobs.py",
+      "line": 74,
+      "function": "__get__",
+      "primitive_calls": 336,
+      "calls": 344,
+      "self_ms": 0.18213200000000002,
+      "cumulative_ms": 0.397117
+    },
+    {
+      "file": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/modules/rotary.py",
+      "line": 211,
+      "function": "forward",
+      "primitive_calls": 192,
+      "calls": 192,
+      "self_ms": 0.180199,
+      "cumulative_ms": 14.145321000000001
+    },
+    {
+      "file": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/modules/mlp.py",
+      "line": 59,
+      "function": "forward",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.17927300000000002,
+      "cumulative_ms": 6.97269
+    },
+    {
+      "file": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/models/utils.py",
+      "line": 310,
+      "function": "update",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.17622200000000002,
+      "cumulative_ms": 1.5307350000000002
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/nn/parameter.py",
+      "line": 21,
+      "function": "__instancecheck__",
+      "primitive_calls": 296,
+      "calls": 296,
+      "self_ms": 0.17531100000000002,
+      "cumulative_ms": 0.24266400000000002
+    },
+    {
+      "file": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/modules/activations.py",
+      "line": 467,
+      "function": "swiglu_fwd",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.165551,
+      "cumulative_ms": 3.7736070000000006
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/runtime/autotuner.py",
+      "line": 336,
+      "function": "all_kwargs",
+      "primitive_calls": 288,
+      "calls": 288,
+      "self_ms": 0.16470700000000002,
+      "cumulative_ms": 0.16470700000000002
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method _io.open>",
+      "primitive_calls": 32,
+      "calls": 32,
+      "self_ms": 0.142569,
+      "cumulative_ms": 0.23214
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/knobs.py",
+      "line": 417,
+      "function": "__call__",
+      "primitive_calls": 592,
+      "calls": 592,
+      "self_ms": 0.140052,
+      "cumulative_ms": 0.140052
+    },
+    {
+      "file": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/layers/memory_mapped_bulk.py",
+      "line": 56,
+      "function": "forward",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.139964,
+      "cumulative_ms": 49.063036000000004
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/einops/_backends.py",
+      "line": 87,
+      "function": "shape",
+      "primitive_calls": 960,
+      "calls": 960,
+      "self_ms": 0.13865,
+      "cumulative_ms": 0.13865
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/amp/autocast_mode.py",
+      "line": 522,
+      "function": "decorate_fwd",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.13167,
+      "cumulative_ms": 4.560102
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'append' of 'list' objects>",
+      "primitive_calls": 1336,
+      "calls": 1336,
+      "self_ms": 0.12602200000000002,
+      "cumulative_ms": 0.12602200000000002
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'data_ptr' of 'torch._C.TensorBase' objects>",
+      "primitive_calls": 1068,
+      "calls": 1068,
+      "self_ms": 0.12543400000000002,
+      "cumulative_ms": 0.12543400000000002
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/nn/parameter.py",
+      "line": 233,
+      "function": "__instancecheck__",
+      "primitive_calls": 296,
+      "calls": 296,
+      "self_ms": 0.12524700000000002,
+      "cumulative_ms": 0.177936
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/einops/_backends.py",
+      "line": 22,
+      "function": "get_backend",
+      "primitive_calls": 480,
+      "calls": 480,
+      "self_ms": 0.122893,
+      "cumulative_ms": 0.181935
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/cuda/__init__.py",
+      "line": 1067,
+      "function": "current_device",
+      "primitive_calls": 308,
+      "calls": 308,
+      "self_ms": 0.12257500000000002,
+      "cumulative_ms": 0.380347
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/flash_attn/flash_attn_interface.py",
+      "line": 76,
+      "function": "_flash_attn_forward",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.11797300000000001,
+      "cumulative_ms": 1.3767530000000001
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/backends/nvidia/driver.py",
+      "line": 128,
+      "function": "make_launcher",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.11754200000000001,
+      "cumulative_ms": 0.26922799999999997
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/_tensor.py",
+      "line": 38,
+      "function": "wrapped",
+      "primitive_calls": 192,
+      "calls": 192,
+      "self_ms": 0.11703000000000001,
+      "cumulative_ms": 1.779952
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method torch.embedding>",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.1169,
+      "cumulative_ms": 0.1169
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py",
+      "line": 1039,
+      "function": "_fn",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.116417,
+      "cumulative_ms": 1.662255
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/transformers/configuration_utils.py",
+      "line": 161,
+      "function": "__getattribute__",
+      "primitive_calls": 112,
+      "calls": 120,
+      "self_ms": 0.11598000000000001,
+      "cumulative_ms": 0.118234
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method torch._C._any_output_is_alias_to_input_or_output>",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.113134,
+      "cumulative_ms": 0.113134
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/compiler/compiler.py",
+      "line": 413,
+      "function": "__init__",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.10759600000000001,
+      "cumulative_ms": 1.440407
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/nn/modules/normalization.py",
+      "line": 410,
+      "function": "forward",
+      "primitive_calls": 196,
+      "calls": 196,
+      "self_ms": 0.107347,
+      "cumulative_ms": 1.2056550000000001
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'contiguous' of 'torch._C.TensorBase' objects>",
+      "primitive_calls": 580,
+      "calls": 580,
+      "self_ms": 0.101897,
+      "cumulative_ms": 0.101897
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/einops/_backends.py",
+      "line": 91,
+      "function": "reshape",
+      "primitive_calls": 480,
+      "calls": 480,
+      "self_ms": 0.101877,
+      "cumulative_ms": 0.37425200000000003
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/__init__.py",
+      "line": 71,
+      "function": "next_power_of_2",
+      "primitive_calls": 384,
+      "calls": 384,
+      "self_ms": 0.101055,
+      "cumulative_ms": 0.101055
+    },
+    {
+      "file": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/modules/rotary.py",
+      "line": 268,
+      "function": "rotary_embedding",
+      "primitive_calls": 192,
+      "calls": 192,
+      "self_ms": 0.09356,
+      "cumulative_ms": 17.279580000000003
+    },
+    {
+      "file": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/modules/activations.py",
+      "line": 518,
+      "function": "forward",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.088861,
+      "cumulative_ms": 4.336655
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/_library/custom_ops.py",
+      "line": 342,
+      "function": "backend_impl",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.088551,
+      "cumulative_ms": 1.970892
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/transformers/modeling_layers.py",
+      "line": 59,
+      "function": "__call__",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.087378,
+      "cumulative_ms": 47.953019000000005
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/nn/modules/container.py",
+      "line": 378,
+      "function": "__getitem__",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.085518,
+      "cumulative_ms": 0.269782
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/nn/functional.py",
+      "line": 2906,
+      "function": "rms_norm",
+      "primitive_calls": 196,
+      "calls": 196,
+      "self_ms": 0.085492,
+      "cumulative_ms": 1.0557260000000002
+    },
+    {
+      "file": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/models/utils.py",
+      "line": 79,
+      "function": "<genexpr>",
+      "primitive_calls": 288,
+      "calls": 288,
+      "self_ms": 0.082876,
+      "cumulative_ms": 0.997078
+    },
+    {
+      "file": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/utils.py",
+      "line": 468,
+      "function": "custom_device_ctx",
+      "primitive_calls": 192,
+      "calls": 192,
+      "self_ms": 0.08124200000000001,
+      "cumulative_ms": 0.182924
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/nn/modules/container.py",
+      "line": 363,
+      "function": "_get_abs_string_index",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.08014900000000001,
+      "cumulative_ms": 0.177214
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/pathlib.py",
+      "line": 387,
+      "function": "_parse_path",
+      "primitive_calls": 40,
+      "calls": 40,
+      "self_ms": 0.079863,
+      "cumulative_ms": 0.16515300000000002
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/cuda/__init__.py",
+      "line": 333,
+      "function": "is_initialized",
+      "primitive_calls": 328,
+      "calls": 328,
+      "self_ms": 0.079484,
+      "cumulative_ms": 0.12707500000000002
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/base64.py",
+      "line": 166,
+      "function": "_b32encode",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.079442,
+      "cumulative_ms": 0.088095
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method posix.stat>",
+      "primitive_calls": 52,
+      "calls": 52,
+      "self_ms": 0.079206,
+      "cumulative_ms": 0.079206
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'values' of 'dict' objects>",
+      "primitive_calls": 704,
+      "calls": 704,
+      "self_ms": 0.078464,
+      "cumulative_ms": 0.078464
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/cuda/_utils.py",
+      "line": 344,
+      "function": "_get_device_index",
+      "primitive_calls": 220,
+      "calls": 220,
+      "self_ms": 0.077379,
+      "cumulative_ms": 0.18988700000000003
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method sys.intern>",
+      "primitive_calls": 456,
+      "calls": 456,
+      "self_ms": 0.07464300000000001,
+      "cumulative_ms": 0.07464300000000001
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/_utils.py",
+      "line": 32,
+      "function": "_impl",
+      "primitive_calls": 8,
+      "calls": 160,
+      "self_ms": 0.073621,
+      "cumulative_ms": 0.125617
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method torch._C._cuda_getDevice>",
+      "primitive_calls": 308,
+      "calls": 308,
+      "self_ms": 0.07352700000000001,
+      "cumulative_ms": 0.07352700000000001
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/flash_attn/flash_attn_interface.py",
+      "line": 1135,
+      "function": "flash_attn_func",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.07298,
+      "cumulative_ms": 4.148600000000001
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method torch._C._are_functorch_transforms_active>",
+      "primitive_calls": 384,
+      "calls": 384,
+      "self_ms": 0.072066,
+      "cumulative_ms": 0.072066
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/cuda/__init__.py",
+      "line": 382,
+      "function": "_lazy_init",
+      "primitive_calls": 328,
+      "calls": 328,
+      "self_ms": 0.069613,
+      "cumulative_ms": 0.196688
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/runtime/jit.py",
+      "line": 685,
+      "function": "_pack_args",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.066201,
+      "cumulative_ms": 0.577578
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'size' of 'torch._C.TensorBase' objects>",
+      "primitive_calls": 192,
+      "calls": 192,
+      "self_ms": 0.066139,
+      "cumulative_ms": 0.066139
+    },
+    {
+      "file": "<frozen genericpath>",
+      "line": 39,
+      "function": "isdir",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.065904,
+      "cumulative_ms": 0.07467
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/__init__.py",
+      "line": 66,
+      "function": "cdiv",
+      "primitive_calls": 484,
+      "calls": 484,
+      "self_ms": 0.064625,
+      "cumulative_ms": 0.064625
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'read' of '_io.TextIOWrapper' objects>",
+      "primitive_calls": 28,
+      "calls": 28,
+      "self_ms": 0.06392500000000001,
+      "cumulative_ms": 0.11878600000000002
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/knobs.py",
+      "line": 129,
+      "function": "get",
+      "primitive_calls": 308,
+      "calls": 308,
+      "self_ms": 0.063006,
+      "cumulative_ms": 0.12062200000000001
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method builtins.getattr>",
+      "primitive_calls": 616,
+      "calls": 616,
+      "self_ms": 0.060257000000000005,
+      "cumulative_ms": 0.060257000000000005
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py",
+      "line": 148,
+      "function": "_maybe_set_eval_frame",
+      "primitive_calls": 192,
+      "calls": 192,
+      "self_ms": 0.059963,
+      "cumulative_ms": 0.082982
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/cuda/__init__.py",
+      "line": 528,
+      "function": "__init__",
+      "primitive_calls": 196,
+      "calls": 196,
+      "self_ms": 0.059756000000000004,
+      "cumulative_ms": 0.111651
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'stride' of 'torch._C.TensorBase' objects>",
+      "primitive_calls": 288,
+      "calls": 288,
+      "self_ms": 0.059293000000000005,
+      "cumulative_ms": 0.059293000000000005
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/flash_attn/flash_attn_interface.py",
+      "line": 19,
+      "function": "maybe_contiguous",
+      "primitive_calls": 288,
+      "calls": 288,
+      "self_ms": 0.059206,
+      "cumulative_ms": 0.11849900000000001
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/backends/nvidia/compiler.py",
+      "line": 172,
+      "function": "parse_options",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.05796,
+      "cumulative_ms": 0.426827
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/compiler/compiler.py",
+      "line": 444,
+      "function": "_init_handles",
+      "primitive_calls": 292,
+      "calls": 292,
+      "self_ms": 0.057773000000000005,
+      "cumulative_ms": 1.0650260000000003
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method triton._C.libtriton.getenv_bool>",
+      "primitive_calls": 308,
+      "calls": 308,
+      "self_ms": 0.05761600000000001,
+      "cumulative_ms": 0.05761600000000001
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method torch.get_autocast_dtype>",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.057127000000000004,
+      "cumulative_ms": 0.057127000000000004
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method triton._C.libtriton.get_cache_invalidating_env_vars>",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.054913000000000003,
+      "cumulative_ms": 0.054913000000000003
+    },
+    {
+      "file": "<frozen posixpath>",
+      "line": 71,
+      "function": "join",
+      "primitive_calls": 44,
+      "calls": 44,
+      "self_ms": 0.054110000000000005,
+      "cumulative_ms": 0.082292
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/cuda/__init__.py",
+      "line": 535,
+      "function": "__exit__",
+      "primitive_calls": 196,
+      "calls": 196,
+      "self_ms": 0.051285000000000004,
+      "cumulative_ms": 0.09490200000000001
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/autograd/function.py",
+      "line": 598,
+      "function": "_is_setup_context_defined",
+      "primitive_calls": 384,
+      "calls": 384,
+      "self_ms": 0.050617,
+      "cumulative_ms": 0.050617
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/runtime/driver.py",
+      "line": 25,
+      "function": "active",
+      "primitive_calls": 600,
+      "calls": 600,
+      "self_ms": 0.049985,
+      "cumulative_ms": 0.049985
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/cuda/__init__.py",
+      "line": 532,
+      "function": "__enter__",
+      "primitive_calls": 196,
+      "calls": 196,
+      "self_ms": 0.049888,
+      "cumulative_ms": 0.09933000000000002
+    },
+    {
+      "file": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/modules/activations.py",
+      "line": 470,
+      "function": "<lambda>",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.049534,
+      "cumulative_ms": 0.33239900000000006
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method torch._C._cuda_exchangeDevice>",
+      "primitive_calls": 196,
+      "calls": 196,
+      "self_ms": 0.04944200000000001,
+      "cumulative_ms": 0.04944200000000001
+    },
+    {
+      "file": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/models/utils.py",
+      "line": 348,
+      "function": "get_seq_length",
+      "primitive_calls": 192,
+      "calls": 192,
+      "self_ms": 0.049272,
+      "cumulative_ms": 0.062182999999999995
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/_compile.py",
+      "line": 41,
+      "function": "inner",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.048301000000000004,
+      "cumulative_ms": 1.724667
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<function _ParameterMeta.__instancecheck__ at 0x7f7d8374d9e0>",
+      "primitive_calls": 592,
+      "calls": 592,
+      "self_ms": 0.048245,
+      "cumulative_ms": 0.048245
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method torch._C._cuda_isInBadFork>",
+      "primitive_calls": 328,
+      "calls": 328,
+      "self_ms": 0.04759100000000001,
+      "cumulative_ms": 0.04759100000000001
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/backends/nvidia/driver.py",
+      "line": 675,
+      "function": "__init__",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.04743000000000001,
+      "cumulative_ms": 0.696165
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method torch._C._cuda_getCurrentRawStream>",
+      "primitive_calls": 292,
+      "calls": 292,
+      "self_ms": 0.047134,
+      "cumulative_ms": 0.047134
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/compiler/compiler.py",
+      "line": 222,
+      "function": "compile",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.046872000000000004,
+      "cumulative_ms": 2.354264
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method builtins.min>",
+      "primitive_calls": 192,
+      "calls": 192,
+      "self_ms": 0.045606,
+      "cumulative_ms": 0.045606
+    },
+    {
+      "file": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/models/memory/modeling_memory.py",
+      "line": 625,
+      "function": "forward",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.045535000000000006,
+      "cumulative_ms": 49.848177
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'join' of 'str' objects>",
+      "primitive_calls": 92,
+      "calls": 92,
+      "self_ms": 0.045194,
+      "cumulative_ms": 0.065404
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method torch._C._cuda_maybeExchangeDevice>",
+      "primitive_calls": 196,
+      "calls": 196,
+      "self_ms": 0.043617,
+      "cumulative_ms": 0.043617
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/backends/nvidia/driver.py",
+      "line": 701,
+      "function": "allocate_scratch",
+      "primitive_calls": 584,
+      "calls": 584,
+      "self_ms": 0.042245,
+      "cumulative_ms": 0.042245
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/json/decoder.py",
+      "line": 343,
+      "function": "raw_decode",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.04222000000000001,
+      "cumulative_ms": 0.04222000000000001
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/_library/custom_ops.py",
+      "line": 371,
+      "function": "wrapped_fn",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.042024000000000006,
+      "cumulative_ms": 1.4187770000000002
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method _codecs.utf_8_decode>",
+      "primitive_calls": 28,
+      "calls": 28,
+      "self_ms": 0.041889,
+      "cumulative_ms": 0.041889
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/runtime/jit.py",
+      "line": 413,
+      "function": "__getitem__",
+      "primitive_calls": 292,
+      "calls": 292,
+      "self_ms": 0.041448,
+      "cumulative_ms": 0.041448
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/dataclasses.py",
+      "line": 1269,
+      "function": "fields",
+      "primitive_calls": 44,
+      "calls": 44,
+      "self_ms": 0.04071,
+      "cumulative_ms": 0.06632400000000001
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method _hashlib.openssl_sha256>",
+      "primitive_calls": 16,
+      "calls": 16,
+      "self_ms": 0.039994,
+      "cumulative_ms": 0.039994
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/pathlib.py",
+      "line": 358,
+      "function": "__init__",
+      "primitive_calls": 56,
+      "calls": 56,
+      "self_ms": 0.039828,
+      "cumulative_ms": 0.06241700000000001
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/compiler/compiler.py",
+      "line": 71,
+      "function": "hash",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.038668,
+      "cumulative_ms": 0.09586
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/_library/utils.py",
+      "line": 366,
+      "function": "_c_check_aliasing_constraint",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.038228,
+      "cumulative_ms": 0.157674
+    },
+    {
+      "file": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/modules/mlp.py",
+      "line": 73,
+      "function": "forward",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.038040000000000004,
+      "cumulative_ms": 5.255491
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/_ops.py",
+      "line": 1244,
+      "function": "__call__",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.037358,
+      "cumulative_ms": 2.684034
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/autograd/function.py",
+      "line": 39,
+      "function": "save_for_backward",
+      "primitive_calls": 288,
+      "calls": 288,
+      "self_ms": 0.036872,
+      "cumulative_ms": 0.036872
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/backends/nvidia/compiler.py",
+      "line": 143,
+      "function": "hash",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.036628,
+      "cumulative_ms": 0.055705000000000005
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/transformers/utils/generic.py",
+      "line": 430,
+      "function": "__setattr__",
+      "primitive_calls": 36,
+      "calls": 36,
+      "self_ms": 0.035166,
+      "cumulative_ms": 0.09184300000000001
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method builtins.sorted>",
+      "primitive_calls": 28,
+      "calls": 28,
+      "self_ms": 0.034951,
+      "cumulative_ms": 0.034951
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/_tensor.py",
+      "line": 1111,
+      "function": "__rpow__",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.034932000000000005,
+      "cumulative_ms": 0.907016
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/utils/_contextlib.py",
+      "line": 117,
+      "function": "decorate_context",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.034888,
+      "cumulative_ms": 49.444707
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method torch.is_autocast_enabled>",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.03465,
+      "cumulative_ms": 0.03465
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'startswith' of 'str' objects>",
+      "primitive_calls": 388,
+      "calls": 388,
+      "self_ms": 0.034573,
+      "cumulative_ms": 0.034573
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/einops/einops.py",
+      "line": 154,
+      "function": "_reconstruct_from_shape_uncached",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.034152,
+      "cumulative_ms": 0.042589
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method builtins.max>",
+      "primitive_calls": 100,
+      "calls": 100,
+      "self_ms": 0.033875,
+      "cumulative_ms": 0.036059
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/nn/modules/container.py",
+      "line": 399,
+      "function": "__len__",
+      "primitive_calls": 192,
+      "calls": 192,
+      "self_ms": 0.033541,
+      "cumulative_ms": 0.045223000000000006
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/backends/nvidia/compiler.py",
+      "line": 133,
+      "function": "__post_init__",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.033059000000000005,
+      "cumulative_ms": 0.272944
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<function Event.record at 0x7f7dd1d4d6c0>",
+      "primitive_calls": 12,
+      "calls": 12,
+      "self_ms": 0.032611,
+      "cumulative_ms": 0.032611
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/compiler/compiler.py",
+      "line": 380,
+      "function": "__init__",
+      "primitive_calls": 292,
+      "calls": 292,
+      "self_ms": 0.031775,
+      "cumulative_ms": 0.031775
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/pathlib.py",
+      "line": 437,
+      "function": "__str__",
+      "primitive_calls": 32,
+      "calls": 32,
+      "self_ms": 0.031128000000000003,
+      "cumulative_ms": 0.12351300000000001
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/transformers/utils/generic.py",
+      "line": 356,
+      "function": "__post_init__",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.030592,
+      "cumulative_ms": 0.069929
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method __new__ of type object at 0x55d7c683b300>",
+      "primitive_calls": 84,
+      "calls": 84,
+      "self_ms": 0.030136,
+      "cumulative_ms": 0.030136
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/pathlib.py",
+      "line": 407,
+      "function": "_load_parts",
+      "primitive_calls": 40,
+      "calls": 40,
+      "self_ms": 0.029484,
+      "cumulative_ms": 0.216889
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method torch._C._dynamo.eval_frame.set_eval_frame>",
+      "primitive_calls": 384,
+      "calls": 384,
+      "self_ms": 0.029215,
+      "cumulative_ms": 0.029215
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method builtins.callable>",
+      "primitive_calls": 292,
+      "calls": 292,
+      "self_ms": 0.029081000000000003,
+      "cumulative_ms": 0.029081000000000003
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method posix.mkdir>",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.028805000000000004,
+      "cumulative_ms": 0.028805000000000004
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method '__exit__' of '_io._IOBase' objects>",
+      "primitive_calls": 32,
+      "calls": 32,
+      "self_ms": 0.028785,
+      "cumulative_ms": 0.028785
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method torch._C._has_torch_function_variadic>",
+      "primitive_calls": 200,
+      "calls": 200,
+      "self_ms": 0.028726,
+      "cumulative_ms": 0.028726
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/cuda/__init__.py",
+      "line": 1099,
+      "function": "current_stream",
+      "primitive_calls": 16,
+      "calls": 16,
+      "self_ms": 0.028385,
+      "cumulative_ms": 0.147459
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/typing.py",
+      "line": 2132,
+      "function": "cast",
+      "primitive_calls": 480,
+      "calls": 480,
+      "self_ms": 0.026843,
+      "cumulative_ms": 0.026843
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py",
+      "line": 201,
+      "function": "_callback_from_stance",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.026247000000000003,
+      "cumulative_ms": 0.026247000000000003
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'numel' of 'torch._C.TensorBase' objects>",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.02589,
+      "cumulative_ms": 0.02589
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/_utils.py",
+      "line": 26,
+      "function": "find_paths_if",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.025488,
+      "cumulative_ms": 0.16401800000000002
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/autograd/grad_mode.py",
+      "line": 287,
+      "function": "__exit__",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.025428000000000003,
+      "cumulative_ms": 49.148557000000004
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/runtime/jit.py",
+      "line": 838,
+      "function": "_do_compile",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.025077000000000002,
+      "cumulative_ms": 2.411674
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/compiler/compiler.py",
+      "line": 370,
+      "function": "make_backend",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.024692,
+      "cumulative_ms": 0.037289
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/compiler/compiler.py",
+      "line": 481,
+      "function": "run",
+      "primitive_calls": 292,
+      "calls": 292,
+      "self_ms": 0.024666,
+      "cumulative_ms": 0.024666
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method torch._C._has_torch_function>",
+      "primitive_calls": 192,
+      "calls": 192,
+      "self_ms": 0.02351,
+      "cumulative_ms": 0.02351
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/pathlib.py",
+      "line": 591,
+      "function": "suffix",
+      "primitive_calls": 48,
+      "calls": 48,
+      "self_ms": 0.023384000000000002,
+      "cumulative_ms": 0.147204
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/pathlib.py",
+      "line": 1157,
+      "function": "__init__",
+      "primitive_calls": 56,
+      "calls": 56,
+      "self_ms": 0.023343,
+      "cumulative_ms": 0.08576
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/pathlib.py",
+      "line": 1022,
+      "function": "read_text",
+      "primitive_calls": 24,
+      "calls": 24,
+      "self_ms": 0.022706000000000004,
+      "cumulative_ms": 0.31807
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/_utils.py",
+      "line": 28,
+      "function": "<lambda>",
+      "primitive_calls": 160,
+      "calls": 160,
+      "self_ms": 0.022557,
+      "cumulative_ms": 0.036018
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/runtime/cache.py",
+      "line": 73,
+      "function": "get_group",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.022430000000000002,
+      "cumulative_ms": 0.20916400000000002
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/backends/nvidia/driver.py",
+      "line": 130,
+      "function": "_expand_signature",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.021575000000000004,
+      "cumulative_ms": 0.03701
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'read' of '_io.BufferedReader' objects>",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.021400000000000002,
+      "cumulative_ms": 0.021400000000000002
+    },
+    {
+      "file": "<frozen importlib._bootstrap_external>",
+      "line": 802,
+      "function": "spec_from_file_location",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.021131,
+      "cumulative_ms": 0.052208000000000004
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/autograd/grad_mode.py",
+      "line": 283,
+      "function": "__enter__",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.020580000000000005,
+      "cumulative_ms": 0.039274
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/_utils.py",
+      "line": 831,
+      "function": "_get_device_index",
+      "primitive_calls": 24,
+      "calls": 24,
+      "self_ms": 0.020090000000000004,
+      "cumulative_ms": 0.095043
+    },
+    {
+      "file": "<frozen posixpath>",
+      "line": 138,
+      "function": "splitroot",
+      "primitive_calls": 40,
+      "calls": 40,
+      "self_ms": 0.020071000000000002,
+      "cumulative_ms": 0.026541000000000002
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/compiler/compiler.py",
+      "line": 54,
+      "function": "__init__",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.020005000000000002,
+      "cumulative_ms": 0.028373000000000002
+    },
+    {
+      "file": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/models/memory/modeling_memory.py",
+      "line": 512,
+      "function": "_forward_offloaded",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.019204000000000002,
+      "cumulative_ms": 49.597063000000006
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/runtime/cache.py",
+      "line": 307,
+      "function": "get_cache_key",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.019116,
+      "cumulative_ms": 0.17481000000000002
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/runtime/build.py",
+      "line": 70,
+      "function": "compile_module_from_src",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.018859,
+      "cumulative_ms": 0.32940300000000006
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method _functools.reduce>",
+      "primitive_calls": 76,
+      "calls": 76,
+      "self_ms": 0.018708000000000002,
+      "cumulative_ms": 0.022808000000000002
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/pathlib.py",
+      "line": 569,
+      "function": "_tail",
+      "primitive_calls": 88,
+      "calls": 88,
+      "self_ms": 0.018285000000000003,
+      "cumulative_ms": 0.10825500000000002
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/backends/nvidia/driver.py",
+      "line": 187,
+      "function": "format_of",
+      "primitive_calls": 76,
+      "calls": 76,
+      "self_ms": 0.017800000000000003,
+      "cumulative_ms": 0.030421000000000004
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/dataclasses.py",
+      "line": 1284,
+      "function": "<genexpr>",
+      "primitive_calls": 244,
+      "calls": 244,
+      "self_ms": 0.017225,
+      "cumulative_ms": 0.017225
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/backends/nvidia/driver.py",
+      "line": 84,
+      "function": "ty_to_cpp",
+      "primitive_calls": 40,
+      "calls": 40,
+      "self_ms": 0.016628999999999998,
+      "cumulative_ms": 0.019010000000000003
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/nn/modules/module.py",
+      "line": 2636,
+      "function": "_named_members",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.016559,
+      "cumulative_ms": 0.038822
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'endswith' of 'str' objects>",
+      "primitive_calls": 124,
+      "calls": 124,
+      "self_ms": 0.016438,
+      "cumulative_ms": 0.016438
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/pathlib.py",
+      "line": 551,
+      "function": "drive",
+      "primitive_calls": 40,
+      "calls": 40,
+      "self_ms": 0.016322,
+      "cumulative_ms": 0.143241
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<function Event.wait at 0x7f7dd1d4d760>",
+      "primitive_calls": 12,
+      "calls": 12,
+      "self_ms": 0.016251,
+      "cumulative_ms": 0.016251
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/backends/nvidia/driver.py",
+      "line": 649,
+      "function": "<genexpr>",
+      "primitive_calls": 80,
+      "calls": 80,
+      "self_ms": 0.015713,
+      "cumulative_ms": 0.024887
+    },
+    {
+      "file": "<frozen os>",
+      "line": 200,
+      "function": "makedirs",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.015689,
+      "cumulative_ms": 0.16712500000000002
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'encode' of 'str' objects>",
+      "primitive_calls": 24,
+      "calls": 24,
+      "self_ms": 0.015359,
+      "cumulative_ms": 0.015359
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<function Stream.synchronize at 0x7f7dd1d4d080>",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.014729,
+      "cumulative_ms": 0.014729
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/pathlib.py",
+      "line": 1164,
+      "function": "__new__",
+      "primitive_calls": 56,
+      "calls": 56,
+      "self_ms": 0.014698000000000001,
+      "cumulative_ms": 0.02331
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method torch.is_grad_enabled>",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.014576,
+      "cumulative_ms": 0.014576
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/nn/modules/module.py",
+      "line": 2823,
+      "function": "named_modules",
+      "primitive_calls": 16,
+      "calls": 20,
+      "self_ms": 0.014557000000000002,
+      "cumulative_ms": 0.016201
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/runtime/cache.py",
+      "line": 38,
+      "function": "__init__",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.014440000000000001,
+      "cumulative_ms": 0.256323
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/backends/nvidia/driver.py",
+      "line": 169,
+      "function": "_flatten_signature",
+      "primitive_calls": 76,
+      "calls": 76,
+      "self_ms": 0.014418000000000002,
+      "cumulative_ms": 0.022848000000000004
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'split' of 'str' objects>",
+      "primitive_calls": 40,
+      "calls": 40,
+      "self_ms": 0.01438,
+      "cumulative_ms": 0.01438
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/runtime/cache.py",
+      "line": 246,
+      "function": "get_cache_manager",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.014166000000000002,
+      "cumulative_ms": 0.397909
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'disable' of '_lsprof.Profiler' objects>",
+      "primitive_calls": 1,
+      "calls": 1,
+      "self_ms": 0.013977,
+      "cumulative_ms": 0.013977
+    },
+    {
+      "file": "<frozen genericpath>",
+      "line": 16,
+      "function": "exists",
+      "primitive_calls": 44,
+      "calls": 44,
+      "self_ms": 0.013893,
+      "cumulative_ms": 0.08557600000000001
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/pathlib.py",
+      "line": 429,
+      "function": "_format_parsed_parts",
+      "primitive_calls": 40,
+      "calls": 40,
+      "self_ms": 0.013813,
+      "cumulative_ms": 0.023952
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'add' of 'set' objects>",
+      "primitive_calls": 152,
+      "calls": 152,
+      "self_ms": 0.013356,
+      "cumulative_ms": 0.014147
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'hexdigest' of '_hashlib.HASH' objects>",
+      "primitive_calls": 16,
+      "calls": 16,
+      "self_ms": 0.013337000000000002,
+      "cumulative_ms": 0.013337000000000002
+    },
+    {
+      "file": "<frozen codecs>",
+      "line": 319,
+      "function": "decode",
+      "primitive_calls": 28,
+      "calls": 28,
+      "self_ms": 0.012972000000000001,
+      "cumulative_ms": 0.054861
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'isidentifier' of 'str' objects>",
+      "primitive_calls": 140,
+      "calls": 140,
+      "self_ms": 0.012930000000000002,
+      "cumulative_ms": 0.012930000000000002
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/_utils.py",
+      "line": 14,
+      "function": "get_iterable_path",
+      "primitive_calls": 72,
+      "calls": 72,
+      "self_ms": 0.012901000000000001,
+      "cumulative_ms": 0.033005
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method torch.cuda._get_device_properties>",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.012834000000000002,
+      "cumulative_ms": 0.012834000000000002
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/runtime/cache.py",
+      "line": 241,
+      "function": "_base32",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.012379000000000001,
+      "cumulative_ms": 0.11388600000000001
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/json/decoder.py",
+      "line": 332,
+      "function": "decode",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.012074,
+      "cumulative_ms": 0.064962
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/cuda/streams.py",
+      "line": 34,
+      "function": "__new__",
+      "primitive_calls": 16,
+      "calls": 16,
+      "self_ms": 0.011914000000000001,
+      "cumulative_ms": 0.026001
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/transformers/utils/generic.py",
+      "line": 423,
+      "function": "__getitem__",
+      "primitive_calls": 4,
+      "calls": 12,
+      "self_ms": 0.011786,
+      "cumulative_ms": 0.025118
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/collections/__init__.py",
+      "line": 429,
+      "function": "<genexpr>",
+      "primitive_calls": 140,
+      "calls": 140,
+      "self_ms": 0.011776,
+      "cumulative_ms": 0.011776
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method _imp.create_dynamic>",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.011733,
+      "cumulative_ms": 0.011733
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/backends/nvidia/driver.py",
+      "line": 177,
+      "function": "_extracted_type",
+      "primitive_calls": 76,
+      "calls": 76,
+      "self_ms": 0.011729,
+      "cumulative_ms": 0.019565
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method posix.fspath>",
+      "primitive_calls": 152,
+      "calls": 152,
+      "self_ms": 0.011639000000000002,
+      "cumulative_ms": 0.011639000000000002
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/_utils_internal.py",
+      "line": 179,
+      "function": "justknobs_check",
+      "primitive_calls": 192,
+      "calls": 192,
+      "self_ms": 0.011636,
+      "cumulative_ms": 0.011636
+    },
+    {
+      "file": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/models/memory/modeling_memory.py",
+      "line": 348,
+      "function": "_offloader_for",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.011564000000000001,
+      "cumulative_ms": 0.058361
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/nn/modules/module.py",
+      "line": 2656,
+      "function": "parameters",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.011481,
+      "cumulative_ms": 0.059382000000000004
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method '__contains__' of 'frozenset' objects>",
+      "primitive_calls": 140,
+      "calls": 140,
+      "self_ms": 0.011077,
+      "cumulative_ms": 0.011077
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/pathlib.py",
+      "line": 380,
+      "function": "with_segments",
+      "primitive_calls": 20,
+      "calls": 20,
+      "self_ms": 0.010902,
+      "cumulative_ms": 0.051308000000000006
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'fullmatch' of 're.Pattern' objects>",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.010570000000000001,
+      "cumulative_ms": 0.010570000000000001
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/backends/nvidia/compiler.py",
+      "line": 157,
+      "function": "_parse_arch",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.010543,
+      "cumulative_ms": 0.03718200000000001
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/compiler/compiler.py",
+      "line": 73,
+      "function": "<lambda>",
+      "primitive_calls": 52,
+      "calls": 52,
+      "self_ms": 0.010495,
+      "cumulative_ms": 0.01437
+    },
+    {
+      "file": "<frozen os>",
+      "line": 680,
+      "function": "__getitem__",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.010417000000000001,
+      "cumulative_ms": 0.017471000000000004
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method _operator.index>",
+      "primitive_calls": 96,
+      "calls": 96,
+      "self_ms": 0.010282000000000001,
+      "cumulative_ms": 0.010282000000000001
+    },
+    {
+      "file": "<frozen posixpath>",
+      "line": 100,
+      "function": "split",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.009898,
+      "cumulative_ms": 0.015279000000000001
+    },
+    {
+      "file": "<frozen codecs>",
+      "line": 309,
+      "function": "__init__",
+      "primitive_calls": 28,
+      "calls": 28,
+      "self_ms": 0.009809,
+      "cumulative_ms": 0.012292
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/pathlib.py",
+      "line": 1005,
+      "function": "open",
+      "primitive_calls": 28,
+      "calls": 28,
+      "self_ms": 0.009808,
+      "cumulative_ms": 0.19295600000000002
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/runtime/build.py",
+      "line": 61,
+      "function": "_load_module_from_path",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.009638,
+      "cumulative_ms": 0.11538700000000002
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/transformers/utils/deprecation.py",
+      "line": 119,
+      "function": "wrapped_func",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.009349,
+      "cumulative_ms": 49.85752600000001
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method builtins.any>",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.009225,
+      "cumulative_ms": 0.036769
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/pathlib.py",
+      "line": 583,
+      "function": "name",
+      "primitive_calls": 48,
+      "calls": 48,
+      "self_ms": 0.009086,
+      "cumulative_ms": 0.11488700000000002
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/pathlib.py",
+      "line": 731,
+      "function": "parent",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.008803,
+      "cumulative_ms": 0.11301400000000002
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/cuda/streams.py",
+      "line": 59,
+      "function": "wait_stream",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.008547,
+      "cumulative_ms": 0.052590000000000005
+    },
+    {
+      "file": "<string>",
+      "line": 2,
+      "function": "dynamic_func",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.008506000000000001,
+      "cumulative_ms": 0.036551
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'rfind' of 'str' objects>",
+      "primitive_calls": 60,
+      "calls": 60,
+      "self_ms": 0.00849,
+      "cumulative_ms": 0.00849
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/backends/nvidia/driver.py",
+      "line": 220,
+      "function": "<genexpr>",
+      "primitive_calls": 80,
+      "calls": 80,
+      "self_ms": 0.008434,
+      "cumulative_ms": 0.008434
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/transformers/utils/generic.py",
+      "line": 437,
+      "function": "__setitem__",
+      "primitive_calls": 16,
+      "calls": 16,
+      "self_ms": 0.008414000000000001,
+      "cumulative_ms": 0.008414000000000001
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/pathlib.py",
+      "line": 447,
+      "function": "__fspath__",
+      "primitive_calls": 28,
+      "calls": 28,
+      "self_ms": 0.008218,
+      "cumulative_ms": 0.077279
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/json/__init__.py",
+      "line": 299,
+      "function": "loads",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.008135000000000002,
+      "cumulative_ms": 0.075142
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/re/__init__.py",
+      "line": 169,
+      "function": "fullmatch",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.007915000000000002,
+      "cumulative_ms": 0.024596000000000003
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/_utils.py",
+      "line": 789,
+      "function": "_get_device_attr",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.007850000000000001,
+      "cumulative_ms": 0.06588200000000001
+    },
+    {
+      "file": "<frozen importlib._bootstrap>",
+      "line": 733,
+      "function": "_init_module_attrs",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.007765000000000001,
+      "cumulative_ms": 0.02107
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'match' of 're.Pattern' objects>",
+      "primitive_calls": 16,
+      "calls": 16,
+      "self_ms": 0.0076560000000000005,
+      "cumulative_ms": 0.0076560000000000005
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/nn/modules/sparse.py",
+      "line": 191,
+      "function": "forward",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.007625000000000001,
+      "cumulative_ms": 0.13176
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method triton._C.libtriton.getenv>",
+      "primitive_calls": 36,
+      "calls": 36,
+      "self_ms": 0.007483,
+      "cumulative_ms": 0.007483
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/runtime/jit.py",
+      "line": 704,
+      "function": "<lambda>",
+      "primitive_calls": 76,
+      "calls": 76,
+      "self_ms": 0.0074730000000000005,
+      "cumulative_ms": 0.011033000000000001
+    },
+    {
+      "file": "<frozen posixpath>",
+      "line": 41,
+      "function": "_get_sep",
+      "primitive_calls": 52,
+      "calls": 52,
+      "self_ms": 0.007462000000000001,
+      "cumulative_ms": 0.011042
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method builtins.all>",
+      "primitive_calls": 16,
+      "calls": 16,
+      "self_ms": 0.0074140000000000005,
+      "cumulative_ms": 0.013605
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/cuda/__init__.py",
+      "line": 585,
+      "function": "get_device_capability",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.007365000000000001,
+      "cumulative_ms": 0.031811000000000006
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/json/__init__.py",
+      "line": 274,
+      "function": "load",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.007322,
+      "cumulative_ms": 0.06350800000000001
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/backends/nvidia/driver.py",
+      "line": 723,
+      "function": "get_current_target",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.0072440000000000004,
+      "cumulative_ms": 0.047829
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/compiler/compiler.py",
+      "line": 415,
+      "function": "<genexpr>",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.00724,
+      "cumulative_ms": 0.019698
+    },
+    {
+      "file": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/models/memory/modeling_memory.py",
+      "line": 410,
+      "function": "forward",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.007074,
+      "cumulative_ms": 49.60413700000001
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/cuda/streams.py",
+      "line": 183,
+      "function": "record",
+      "primitive_calls": 12,
+      "calls": 12,
+      "self_ms": 0.007006,
+      "cumulative_ms": 0.039617000000000006
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/transformers/utils/generic.py",
+      "line": 450,
+      "function": "to_tuple",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.0069440000000000005,
+      "cumulative_ms": 0.020559
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/nn/modules/module.py",
+      "line": 2681,
+      "function": "named_parameters",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.006703,
+      "cumulative_ms": 0.044133000000000006
+    },
+    {
+      "file": "<string>",
+      "line": 2,
+      "function": "__init__",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.006461000000000001,
+      "cumulative_ms": 0.006461000000000001
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/knobs.py",
+      "line": 350,
+      "function": "get_triton_dir",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.006453,
+      "cumulative_ms": 0.038574
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/autograd/grad_mode.py",
+      "line": 290,
+      "function": "clone",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.006410000000000001,
+      "cumulative_ms": 0.018694000000000002
+    },
+    {
+      "file": "<frozen _collections_abc>",
+      "line": 804,
+      "function": "get",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.006294,
+      "cumulative_ms": 0.023765
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/backends/nvidia/driver.py",
+      "line": 677,
+      "function": "<lambda>",
+      "primitive_calls": 52,
+      "calls": 52,
+      "self_ms": 0.006291000000000001,
+      "cumulative_ms": 0.009484000000000001
+    },
+    {
+      "file": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/layers/memory_offload.py",
+      "line": 278,
+      "function": "release",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.0062510000000000005,
+      "cumulative_ms": 0.06704700000000001
+    },
+    {
+      "file": "<frozen importlib._bootstrap>",
+      "line": 1390,
+      "function": "_handle_fromlist",
+      "primitive_calls": 12,
+      "calls": 12,
+      "self_ms": 0.006163,
+      "cumulative_ms": 0.009769000000000002
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/base64.py",
+      "line": 249,
+      "function": "b32encode",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.0061140000000000005,
+      "cumulative_ms": 0.094209
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/cuda/__init__.py",
+      "line": 163,
+      "function": "is_available",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.006098000000000001,
+      "cumulative_ms": 0.043093
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method from_bytes>",
+      "primitive_calls": 56,
+      "calls": 56,
+      "self_ms": 0.00604,
+      "cumulative_ms": 0.00604
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/pathlib.py",
+      "line": 711,
+      "function": "joinpath",
+      "primitive_calls": 12,
+      "calls": 12,
+      "self_ms": 0.005981,
+      "cumulative_ms": 0.038963
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/pathlib.py",
+      "line": 420,
+      "function": "_from_parsed_parts",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.005979000000000001,
+      "cumulative_ms": 0.031457
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/backends/compiler.py",
+      "line": 73,
+      "function": "parse_attr",
+      "primitive_calls": 20,
+      "calls": 20,
+      "self_ms": 0.005968,
+      "cumulative_ms": 0.0068920000000000006
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/cuda/__init__.py",
+      "line": 661,
+      "function": "__enter__",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.005960000000000001,
+      "cumulative_ms": 0.053
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/nn/functional.py",
+      "line": 2428,
+      "function": "embedding",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.005922,
+      "cumulative_ms": 0.123392
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/cuda/__init__.py",
+      "line": 602,
+      "function": "get_device_properties",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.0059,
+      "cumulative_ms": 0.024446000000000002
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/autograd/grad_mode.py",
+      "line": 273,
+      "function": "__init__",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.005791,
+      "cumulative_ms": 0.006252000000000001
+    },
+    {
+      "file": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/layers/memory_offload.py",
+      "line": 273,
+      "function": "acquire",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.005492,
+      "cumulative_ms": 0.035971
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/runtime/jit.py",
+      "line": 536,
+      "function": "cache_key",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.0054600000000000004,
+      "cumulative_ms": 0.0064010000000000004
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/cuda/streams.py",
+      "line": 73,
+      "function": "record_event",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.005329,
+      "cumulative_ms": 0.030929
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'update' of 'dict' objects>",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.005131,
+      "cumulative_ms": 0.005131
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/backends/nvidia/compiler.py",
+      "line": 168,
+      "function": "__init__",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.0050810000000000004,
+      "cumulative_ms": 0.008387
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/re/__init__.py",
+      "line": 280,
+      "function": "_compile",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.00506,
+      "cumulative_ms": 0.006111
+    },
+    {
+      "file": "<frozen importlib._bootstrap>",
+      "line": 806,
+      "function": "module_from_spec",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.004978000000000001,
+      "cumulative_ms": 0.047449000000000005
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/runtime/jit.py",
+      "line": 700,
+      "function": "<lambda>",
+      "primitive_calls": 76,
+      "calls": 76,
+      "self_ms": 0.004945,
+      "cumulative_ms": 0.004945
+    },
+    {
+      "file": "<frozen importlib._bootstrap>",
+      "line": 645,
+      "function": "parent",
+      "primitive_calls": 12,
+      "calls": 12,
+      "self_ms": 0.004929,
+      "cumulative_ms": 0.008055
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/cuda/streams.py",
+      "line": 96,
+      "function": "synchronize",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.004847000000000001,
+      "cumulative_ms": 0.019576
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/autograd/grad_mode.py",
+      "line": 278,
+      "function": "__new__",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.004766,
+      "cumulative_ms": 0.006032
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/cuda/__init__.py",
+      "line": 718,
+      "function": "set_stream",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.00475,
+      "cumulative_ms": 0.012033000000000002
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/cuda/streams.py",
+      "line": 193,
+      "function": "wait",
+      "primitive_calls": 12,
+      "calls": 12,
+      "self_ms": 0.004719,
+      "cumulative_ms": 0.020970000000000003
+    },
+    {
+      "file": "<frozen importlib._bootstrap_external>",
+      "line": 1301,
+      "function": "is_package",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.004710000000000001,
+      "cumulative_ms": 0.018896
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method torch._C._cuda_setStream>",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.0047090000000000005,
+      "cumulative_ms": 0.0047090000000000005
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method torch._C._cuda_getCurrentStream>",
+      "primitive_calls": 16,
+      "calls": 16,
+      "self_ms": 0.0046760000000000005,
+      "cumulative_ms": 0.0046760000000000005
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/transformers/utils/generic.py",
+      "line": 370,
+      "function": "<genexpr>",
+      "primitive_calls": 16,
+      "calls": 16,
+      "self_ms": 0.0046570000000000005,
+      "cumulative_ms": 0.005518
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/_utils.py",
+      "line": 805,
+      "function": "_get_current_device_index",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.0046110000000000005,
+      "cumulative_ms": 0.070493
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method _io.text_encoding>",
+      "primitive_calls": 48,
+      "calls": 48,
+      "self_ms": 0.00444,
+      "cumulative_ms": 0.00444
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/runtime/cache.py",
+      "line": 59,
+      "function": "_make_path",
+      "primitive_calls": 16,
+      "calls": 16,
+      "self_ms": 0.0044020000000000005,
+      "cumulative_ms": 0.02508
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/runtime/cache.py",
+      "line": 62,
+      "function": "has_file",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.004366,
+      "cumulative_ms": 0.03262
+    },
+    {
+      "file": "<frozen importlib._bootstrap_external>",
+      "line": 1287,
+      "function": "create_module",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.0043100000000000005,
+      "cumulative_ms": 0.020589000000000003
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/cuda/__init__.py",
+      "line": 159,
+      "function": "_nvml_based_avail",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.004295,
+      "cumulative_ms": 0.031419
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/_utils.py",
+      "line": 15,
+      "function": "<lambda>",
+      "primitive_calls": 72,
+      "calls": 72,
+      "self_ms": 0.0041,
+      "cumulative_ms": 0.0041
+    },
+    {
+      "file": "<frozen os>",
+      "line": 762,
+      "function": "encode",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.00404,
+      "cumulative_ms": 0.007054
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/pathlib.py",
+      "line": 1015,
+      "function": "read_bytes",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.003888,
+      "cumulative_ms": 0.043071
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/cuda/__init__.py",
+      "line": 647,
+      "function": "__init__",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.0038580000000000003,
+      "cumulative_ms": 0.063751
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/cuda/streams.py",
+      "line": 42,
+      "function": "wait_event",
+      "primitive_calls": 12,
+      "calls": 12,
+      "self_ms": 0.0038480000000000003,
+      "cumulative_ms": 0.024818000000000003
+    },
+    {
+      "file": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/layers/memory_offload.py",
+      "line": 81,
+      "function": "acquire",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.0037730000000000003,
+      "cumulative_ms": 0.039744
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'acquire' of '_thread.lock' objects>",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.003738,
+      "cumulative_ms": 0.003738
+    },
+    {
+      "file": "<frozen importlib._bootstrap_external>",
+      "line": 132,
+      "function": "_path_split",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.003697,
+      "cumulative_ms": 0.008696
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'keys' of 'dict' objects>",
+      "primitive_calls": 24,
+      "calls": 24,
+      "self_ms": 0.003687,
+      "cumulative_ms": 0.003687
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/pathlib.py",
+      "line": 719,
+      "function": "__truediv__",
+      "primitive_calls": 12,
+      "calls": 12,
+      "self_ms": 0.0036190000000000003,
+      "cumulative_ms": 0.042582
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/transformers/utils/generic.py",
+      "line": 366,
+      "function": "<genexpr>",
+      "primitive_calls": 36,
+      "calls": 36,
+      "self_ms": 0.003598,
+      "cumulative_ms": 0.003598
+    },
+    {
+      "file": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/layers/memory_offload.py",
+      "line": 88,
+      "function": "release",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.0035470000000000002,
+      "cumulative_ms": 0.070594
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'rstrip' of 'str' objects>",
+      "primitive_calls": 16,
+      "calls": 16,
+      "self_ms": 0.0034980000000000002,
+      "cumulative_ms": 0.0034980000000000002
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/knobs.py",
+      "line": 116,
+      "function": "get",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.003465,
+      "cumulative_ms": 0.046878
+    },
+    {
+      "file": "<frozen importlib._bootstrap>",
+      "line": 491,
+      "function": "_verbose_message",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.003456,
+      "cumulative_ms": 0.003456
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/backends/nvidia/compiler.py",
+      "line": 145,
+      "function": "<genexpr>",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.0034380000000000005,
+      "cumulative_ms": 0.0034380000000000005
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/cuda/__init__.py",
+      "line": 154,
+      "function": "_is_compiled",
+      "primitive_calls": 12,
+      "calls": 12,
+      "self_ms": 0.0034270000000000004,
+      "cumulative_ms": 0.005318000000000001
+    },
+    {
+      "file": "<frozen os>",
+      "line": 779,
+      "function": "getenv",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.0033590000000000004,
+      "cumulative_ms": 0.027124000000000002
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/nn/modules/module.py",
+      "line": 2706,
+      "function": "<lambda>",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.0033590000000000004,
+      "cumulative_ms": 0.004059
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/backends/nvidia/driver.py",
+      "line": 648,
+      "function": "wrap_handle_tensordesc",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.0033460000000000004,
+      "cumulative_ms": 0.035076
+    },
+    {
+      "file": "<frozen importlib._bootstrap_external>",
+      "line": 1721,
+      "function": "_get_supported_file_loaders",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.0032750000000000006,
+      "cumulative_ms": 0.005159
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/knobs.py",
+      "line": 221,
+      "function": "get",
+      "primitive_calls": 12,
+      "calls": 12,
+      "self_ms": 0.0032280000000000004,
+      "cumulative_ms": 0.005972000000000001
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/knobs.py",
+      "line": 345,
+      "function": "<lambda>",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.0031950000000000004,
+      "cumulative_ms": 0.041769
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/cuda/__init__.py",
+      "line": 690,
+      "function": "stream",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.003185,
+      "cumulative_ms": 0.066936
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/_jit_internal.py",
+      "line": 106,
+      "function": "is_scripting",
+      "primitive_calls": 48,
+      "calls": 48,
+      "self_ms": 0.003174,
+      "cumulative_ms": 0.003174
+    },
+    {
+      "file": "<frozen importlib._bootstrap>",
+      "line": 480,
+      "function": "_call_with_frames_removed",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.0031360000000000003,
+      "cumulative_ms": 0.016832
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'rpartition' of 'str' objects>",
+      "primitive_calls": 12,
+      "calls": 12,
+      "self_ms": 0.0031260000000000003,
+      "cumulative_ms": 0.0031260000000000003
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/_utils.py",
+      "line": 772,
+      "function": "_get_available_device_type",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.003045,
+      "cumulative_ms": 0.046138000000000005
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'get' of '_contextvars.ContextVar' objects>",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.003036,
+      "cumulative_ms": 0.003036
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/sysconfig.py",
+      "line": 735,
+      "function": "get_config_var",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.0029930000000000004,
+      "cumulative_ms": 0.005379
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method builtins.next>",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.0029760000000000003,
+      "cumulative_ms": 0.067277
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/backends/nvidia/compiler.py",
+      "line": 199,
+      "function": "pack_metadata",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.0029560000000000003,
+      "cumulative_ms": 0.0029560000000000003
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/backends/nvidia/compiler.py",
+      "line": 522,
+      "function": "hash",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.0028970000000000003,
+      "cumulative_ms": 0.0028970000000000003
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/transformers/utils/generic.py",
+      "line": 454,
+      "function": "<genexpr>",
+      "primitive_calls": 12,
+      "calls": 12,
+      "self_ms": 0.002872,
+      "cumulative_ms": 0.012462
+    },
+    {
+      "file": "<frozen importlib._bootstrap_external>",
+      "line": 1304,
+      "function": "<genexpr>",
+      "primitive_calls": 16,
+      "calls": 16,
+      "self_ms": 0.002657,
+      "cumulative_ms": 0.002657
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/pathlib.py",
+      "line": 560,
+      "function": "root",
+      "primitive_calls": 40,
+      "calls": 40,
+      "self_ms": 0.002644,
+      "cumulative_ms": 0.002644
+    },
+    {
+      "file": "<frozen importlib._bootstrap_external>",
+      "line": 611,
+      "function": "_get_cached",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.0026430000000000004,
+      "cumulative_ms": 0.0038050000000000002
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/backends/compiler.py",
+      "line": 25,
+      "function": "__init__",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.002605,
+      "cumulative_ms": 0.0033060000000000003
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/cuda/__init__.py",
+      "line": 703,
+      "function": "_set_stream_by_id",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.0025740000000000003,
+      "cumulative_ms": 0.007283
+    },
+    {
+      "file": "<frozen importlib._bootstrap>",
+      "line": 632,
+      "function": "cached",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.002548,
+      "cumulative_ms": 0.006353
+    },
+    {
+      "file": "<frozen codecs>",
+      "line": 260,
+      "function": "__init__",
+      "primitive_calls": 28,
+      "calls": 28,
+      "self_ms": 0.0024830000000000004,
+      "cumulative_ms": 0.0024830000000000004
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/cuda/__init__.py",
+      "line": 676,
+      "function": "__exit__",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.002465,
+      "cumulative_ms": 0.006483
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'decode' of 'bytes' objects>",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.0024560000000000003,
+      "cumulative_ms": 0.0024560000000000003
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method fromhex>",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.0024270000000000003,
+      "cumulative_ms": 0.0024270000000000003
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/einops/einops.py",
+      "line": 28,
+      "function": "_product",
+      "primitive_calls": 16,
+      "calls": 16,
+      "self_ms": 0.0023049999999999998,
+      "cumulative_ms": 0.0023049999999999998
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'end' of 're.Match' objects>",
+      "primitive_calls": 16,
+      "calls": 16,
+      "self_ms": 0.0023020000000000002,
+      "cumulative_ms": 0.0023020000000000002
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/cuda/streams.py",
+      "line": 167,
+      "function": "__new__",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.002294,
+      "cumulative_ms": 0.0065130000000000006
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/knobs.py",
+      "line": 159,
+      "function": "get",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.002175,
+      "cumulative_ms": 0.004038
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/_tensor.py",
+      "line": 1183,
+      "function": "__hash__",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.002154,
+      "cumulative_ms": 0.0032960000000000003
+    },
+    {
+      "file": "<frozen importlib._bootstrap_external>",
+      "line": 1295,
+      "function": "exec_module",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.002083,
+      "cumulative_ms": 0.006092
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'group' of 're.Match' objects>",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.002043,
+      "cumulative_ms": 0.002043
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/_utils.py",
+      "line": 807,
+      "function": "<lambda>",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.0020210000000000002,
+      "cumulative_ms": 0.010078
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method _imp.exec_dynamic>",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.001963,
+      "cumulative_ms": 0.001963
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method _imp.extension_suffixes>",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.001884,
+      "cumulative_ms": 0.001884
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method torch._C._cuda_getDeviceCount>",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.001861,
+      "cumulative_ms": 0.001861
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'extend' of 'list' objects>",
+      "primitive_calls": 12,
+      "calls": 12,
+      "self_ms": 0.001853,
+      "cumulative_ms": 0.001853
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'lower' of 'str' objects>",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.0018160000000000001,
+      "cumulative_ms": 0.0018160000000000001
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/backends/nvidia/compiler.py",
+      "line": 153,
+      "function": "supports_target",
+      "primitive_calls": 16,
+      "calls": 16,
+      "self_ms": 0.001791,
+      "cumulative_ms": 0.001791
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/runtime/cache.py",
+      "line": 67,
+      "function": "get_file",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.001693,
+      "cumulative_ms": 0.022442000000000004
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/knobs.py",
+      "line": 106,
+      "function": "get",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.0016250000000000001,
+      "cumulative_ms": 0.002857
+    },
+    {
+      "file": "<frozen importlib._bootstrap_external>",
+      "line": 134,
+      "function": "<genexpr>",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.001512,
+      "cumulative_ms": 0.002184
+    },
+    {
+      "file": "<frozen importlib._bootstrap_external>",
+      "line": 185,
+      "function": "_path_abspath",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.001453,
+      "cumulative_ms": 0.002926
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/backends/amd/compiler.py",
+      "line": 98,
+      "function": "supports_target",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.0014420000000000001,
+      "cumulative_ms": 0.0014420000000000001
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'items' of 'collections.OrderedDict' objects>",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.001412,
+      "cumulative_ms": 0.001412
+    },
+    {
+      "file": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/layers/memory_offload.py",
+      "line": 75,
+      "function": "__init__",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.001302,
+      "cumulative_ms": 0.001302
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/cuda/__init__.py",
+      "line": 1020,
+      "function": "device_count",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.001302,
+      "cumulative_ms": 0.002905
+    },
+    {
+      "file": "<string>",
+      "line": 1,
+      "function": "<lambda>",
+      "primitive_calls": 1,
+      "calls": 1,
+      "self_ms": 0.0012920000000000002,
+      "cumulative_ms": 0.001853
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method _stat.S_ISDIR>",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.001243,
+      "cumulative_ms": 0.001243
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/transformers/configuration_utils.py",
+      "line": 305,
+      "function": "use_return_dict",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.001162,
+      "cumulative_ms": 0.0029250000000000005
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'keys' of 'collections.OrderedDict' objects>",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.001153,
+      "cumulative_ms": 0.001153
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method builtins.id>",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.001142,
+      "cumulative_ms": 0.001142
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'release' of '_thread.lock' objects>",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.001103,
+      "cumulative_ms": 0.001103
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/transformers/configuration_utils.py",
+      "line": 286,
+      "function": "output_attentions",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.001092,
+      "cumulative_ms": 0.0035470000000000002
+    },
+    {
+      "file": "<frozen importlib._bootstrap>",
+      "line": 599,
+      "function": "__init__",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.0010110000000000002,
+      "cumulative_ms": 0.0010110000000000002
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/sysconfig.py",
+      "line": 705,
+      "function": "get_config_vars",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.000943,
+      "cumulative_ms": 0.000943
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method '__exit__' of '_thread.RLock' objects>",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.0009410000000000001,
+      "cumulative_ms": 0.0009410000000000001
+    },
+    {
+      "file": "<frozen importlib._bootstrap_external>",
+      "line": 180,
+      "function": "_path_isabs",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.000932,
+      "cumulative_ms": 0.0014730000000000001
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/runtime/jit.py",
+      "line": 618,
+      "function": "_call_hook",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_ms": 0.000924,
+      "cumulative_ms": 0.000924
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method sys._getframemodulename>",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.0007720000000000001,
+      "cumulative_ms": 0.0007720000000000001
+    },
+    {
+      "file": "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/triton/compiler/compiler.py",
+      "line": 83,
+      "function": "parse_options",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.0006420000000000001,
+      "cumulative_ms": 0.0006420000000000001
+    },
+    {
+      "file": "/home/molly/workspace-memory-attn/offload-gap-001-A0028/fla/layers/memory_offload.py",
+      "line": 270,
+      "function": "__init__",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.0005800000000000001,
+      "cumulative_ms": 0.0005800000000000001
+    },
+    {
+      "file": "<frozen importlib._bootstrap_external>",
+      "line": 1276,
+      "function": "__init__",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.00043,
+      "cumulative_ms": 0.00043
+    },
+    {
+      "file": "<frozen importlib._bootstrap>",
+      "line": 653,
+      "function": "has_location",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_ms": 0.000311,
+      "cumulative_ms": 0.000311
+    },
+    {
+      "file": "<string>",
+      "line": 1,
+      "function": "<module>",
+      "primitive_calls": 1,
+      "calls": 1,
+      "self_ms": 0.00025000000000000006,
+      "cumulative_ms": 0.00025000000000000006
+    }
+  ]
+}

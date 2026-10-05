@@ -1,0 +1,4 @@
+1 jit_stream_context {'submit_us_per_call': 10.444859375, 'drained_us_per_call': 10.505976562499999}
+1 compiled_explicit_stream {'submit_us_per_call': 3.85460625, 'drained_us_per_call': 3.8971703125}
+8 jit_stream_context {'submit_us_per_call': 9.8454171875, 'drained_us_per_call': 16.596051562499998}
+8 compiled_explicit_stream {'submit_us_per_call': 3.7119125, 'drained_us_per_call': 16.589990625}

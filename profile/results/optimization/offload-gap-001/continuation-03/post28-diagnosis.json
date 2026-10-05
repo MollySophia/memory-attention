@@ -1,0 +1,21 @@
+{
+  "status": "diagnostic_only",
+  "source_parent": "A0028",
+  "evidence": [
+    "../continuation-03/generation-A0028-offload-post28.json",
+    "../continuation-03/generation-A0028-gpu-post28.json",
+    "../continuation-03/mapped-scheduling-A0028-post28.json"
+  ],
+  "observations": [
+    "Instrumented offload mapped nonconsumer mean59.0336us/call, before-first-consumer46.4493us; includes waits and instrumentation.",
+    "Separate trajectory totals602.1792ms offload and586.4662ms resident are diagnostic only, not independent confirmation; instrumentation differs.",
+    "Isolated JIT+stream-context to exact compiled explicit-stream launch reduces b1 submit10.444859 to3.854606us; b8 submit9.845417 to3.711913us, drained16.596052 to16.589991us.",
+    "Fresh IDs, host-row mutations and aligned/8-byte-offset ID pointers match exactly."
+  ],
+  "next_hypothesis": "A0029: compiled explicit-stream mapped launch on verified A0028, preserving existing dependencies.",
+  "limitations": [
+    "CPU profiler perturbs timing; no generic model-kernel optimization authorized by these profiles.",
+    "Microbenchmark is not full-model gain evidence.",
+    "All16 fresh paired screen and fixed independent gates remain mandatory."
+  ]
+}

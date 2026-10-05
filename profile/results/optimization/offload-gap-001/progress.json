@@ -1,8 +1,8 @@
 {
   "campaign_id": "offload-gap-001",
   "status": "active",
-  "workflow_stage": "diagnosis",
-  "goal_progress": "A0028 accepted step4 after all288 performance results and six bit-exact correctness pairs pass. Recovered short-prefill gain now integrated on A0023 mapped transport. b1 generation remains above tolerance in diagnostic means; final independent all16 proof still pending.",
+  "workflow_stage": "registered",
+  "goal_progress": "A0028 retained step4. Completed offload/resident generation diagnostics and aligned/offset-ID scheduling microbenchmark; A0029 registered to test same-kernel explicit-stream compiled launch. Implementation and full gates pending; final all16 target remains unmet.",
   "completed_optimization_verdicts": 28,
   "additional_completed_verdicts": 10,
   "additional_attempt_target": [
@@ -10,7 +10,7 @@
     10
   ],
   "accepted_steps": 4,
-  "active_attempt": null,
+  "active_attempt": "A0029",
   "controller_pid": null,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "6cc9354760ebde3bab9a90996a7713a936dfb439",
