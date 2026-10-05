@@ -340,9 +340,6 @@ class MemoryModel(MemoryPreTrainedModel):
             prefetch_depth=(min(config.memory_offload_prefetch_depth, 1)
                             if automatic and batch * seq_len <= config.memory_offload_single_slot_max_tokens
                             else config.memory_offload_prefetch_depth),
-            single_host_buffer=(automatic and
-                                config.memory_offload_single_host_min_tokens <= batch * seq_len <=
-                                config.memory_offload_single_host_max_tokens),
         )
 
     def _offloader_for(self, batch: int, seq_len: int):
