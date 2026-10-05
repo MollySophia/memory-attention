@@ -1,8 +1,8 @@
 {
   "campaign_id": "offload-gap-001",
   "status": "active",
-  "workflow_stage": "confirmation",
-  "goal_progress": "A0023 complete64-process screen audited; b1/b8 generation positive signals, independent9-workload108-process confirmation running.",
+  "workflow_stage": "full_validation",
+  "goal_progress": "A0023 independent confirmation complete:3 corrected gains, no resolved selected-point regression. Remaining7-workload formal paired validation running; not yet retained.",
   "completed_optimization_verdicts": 22,
   "additional_completed_verdicts": 10,
   "additional_attempt_target": [
@@ -11,7 +11,7 @@
   ],
   "accepted_steps": 2,
   "active_attempt": "A0023",
-  "controller_pid": 3991276,
+  "controller_pid": 3974665,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "0ce6645eb4c4bc3992258ad0878c72ea3c37a64e",
   "final_report": "continuation-02/final/REPORT.md",
@@ -19,11 +19,11 @@
   "publication": "continuation-02/final/publication.json",
   "continuation": "continuation-03/manifest.json",
   "next_actions": [
-    "Complete fixed A0023 independent confirmation",
-    "If eligible gain and no resolved regression, finish complete validation",
-    "Audit full evidence before retention",
-    "Integrate recovered short-prefill gain on verified transport parent",
-    "Optimize remaining all16 gaps and verify final tolerance"
+    "Complete remaining84 paired processes and all16 regression audit",
+    "Complete32 unfolded references and6 full-model correctness pairs",
+    "Run cross-stage evidence audit and decide retention",
+    "Integrate recovered short-prefill gain on verified parent",
+    "Optimize all remaining gaps and independently verify16 final target bounds"
   ],
   "supplemental_study": {
     "id": "supplemental-01",
@@ -42,6 +42,6 @@
     "workloads_passing_parent_and_current": 1,
     "accepted_new_attempts": 0
   },
-  "active_manifest": "A0023/R02-parent-confirmation/manifest.json",
+  "active_manifest": "A0023/R03-remaining-confirmation/manifest.json",
   "continuation_completed_verdicts": 2
 }
