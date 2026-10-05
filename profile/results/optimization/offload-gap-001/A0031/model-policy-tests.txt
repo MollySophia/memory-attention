@@ -1,0 +1,11 @@
+
+tests/test_memory_offload_regressions.py::test_mapped_first_group_model_policy_and_growing_cache[False-False] 
+-------------------------------- live log setup --------------------------------
+INFO     numexpr.utils:utils.py:149 Note: NumExpr detected 32 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+INFO     numexpr.utils:utils.py:162 NumExpr defaulting to 16 threads.
+PASSED                                                                   [ 25%]
+tests/test_memory_offload_regressions.py::test_mapped_first_group_model_policy_and_growing_cache[False-True] PASSED [ 50%]
+tests/test_memory_offload_regressions.py::test_mapped_first_group_model_policy_and_growing_cache[True-False] PASSED [ 75%]
+tests/test_memory_offload_regressions.py::test_mapped_first_group_model_policy_and_growing_cache[True-True] PASSED [100%]
+
+======================= 4 passed, 62 deselected in 3.15s =======================

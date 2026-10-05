@@ -1,0 +1,19 @@
+=== correctness: offloaded table vs GPU-resident baseline ===
+  reference logits captured for max |logit| = 2.406
+  policy=bulk     tokens=256    max diff=0.000000  argmax agree=100.00%  finite=True
+  policy=pipeline tokens=256    max diff=0.000000  argmax agree=100.00%  finite=True
+  policy=pipeline tokens=2048   max diff=0.000000  argmax agree=100.00%  finite=True
+  policy=pipeline tokens=2048   max diff=0.000000  argmax agree=100.00%  finite=True
+
+=== decode: real KV cache, single-token steps ===
+  decode           max diff=0.000000  argmax agree=100.00%  policy=pipeline  cached offloaders=2
+
+=== left-padded batch: unpad / varlen attention ===
+  padded batch    max diff=0.000000  argmax agree=100.00%  policy=pipeline  real lens=[96, 61, 40]
+  on real tokens  max diff=0.000000
+
+=== memory accounting ===
+  folded CPU table   : 8.0 MiB (pinned CPU, torch.Size([2048, 4, 512]))
+  GPU after offload  : 65.3 MiB
+
+RESULT: PASS (worst max diff 0.000000, tolerance 0.05)
