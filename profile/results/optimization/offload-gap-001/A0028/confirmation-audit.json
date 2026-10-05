@@ -1,0 +1,25 @@
+{
+  "attempt": "A0028",
+  "evidence_integrity": "passed",
+  "process_counts": {
+    "R01-complete-screen": 64,
+    "R02-parent-confirmation": 120
+  },
+  "checks": [
+    "frozen sources",
+    "unique complete planned coverage",
+    "balanced independent blocks",
+    "raw source/config/sampling/memory/environment",
+    "recomputed fixed Holm10 analysis"
+  ],
+  "confirmed_local_gains": [
+    [
+      "prefill",
+      8,
+      512
+    ]
+  ],
+  "resolved_regressions": [],
+  "accepted": false,
+  "note": "R01/R02 audit only; existing full-validation controller remains active."
+}
