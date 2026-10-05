@@ -7,8 +7,8 @@
   "parent_sha": "6c09ff63f1f5afaf89542f673869d4522eceba8f",
   "accepted_step": null,
   "label": "Shared host staging through16384 input tokens",
-  "status": "planned",
-  "workflow_stage": "registered",
+  "status": "testing",
+  "workflow_stage": "correctness_passed",
   "hypothesis": "Extend recovered A0026 host working-set reduction to b8/2048 while preserving GPU lookahead. Full-model instrumented diagnostic shows gather76.112 to55.179ms and wall210.316 to208.340ms, with larger DMA wait; independent benefit unproven.",
   "change": "Port A0026 shared-host staging onto verified A0023, changing automatic range from4096..8192 to4096..16384 total input tokens. Preserve mapped1..16, bulk1024, single-GPU-slot2048 and four GPU slots above2048.",
   "profile_evidence": [
@@ -64,5 +64,18 @@
     "memory_offload_single_host_min_tokens": 4096,
     "memory_offload_single_host_max_tokens": 16384
   },
-  "created_unix": 1791192888.2714872
+  "created_unix": 1791192888.2714872,
+  "candidate_sha": "6cc9354760ebde3bab9a90996a7713a936dfb439",
+  "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0028",
+  "correctness": {
+    "pytest": "46 passed in12.86s",
+    "standalone": "PASS; worst max difference0",
+    "sampling_and_helpers": "31 passed in3.03s",
+    "logs": [
+      "correctness-tests.txt",
+      "standalone-correctness.txt",
+      "sampling-and-helper-tests.txt"
+    ]
+  },
+  "screen_manifest": "R01-complete-screen/manifest.json"
 }
