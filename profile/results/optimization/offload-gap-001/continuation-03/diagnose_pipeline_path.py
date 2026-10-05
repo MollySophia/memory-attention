@@ -5,6 +5,7 @@ from types import SimpleNamespace
 p=argparse.ArgumentParser(description=__doc__)
 p.add_argument('--source-root',type=Path,required=True);p.add_argument('--batch',type=int,required=True)
 p.add_argument('--length',type=int,default=2048)
+p.add_argument('--single-host-max-tokens',type=int,default=None)
 p.add_argument('--output',type=Path,required=True);a=p.parse_args()
 sys.path[:0]=[str(a.source_root),str(a.source_root/'profile')]
 import torch
@@ -13,7 +14,11 @@ from benchmark_telemetry import source_state,environment_details
 from fla.layers.memory_offload import MemoryTableOffloader,GroupTicket
 config=SimpleNamespace(seed=1234,hidden_size=2048,num_layers=24,num_heads=32,num_kv_heads=32,vocab_size=32000,hidden_ratio=4,intermediate_size=5632,group_size=1,prefetch_depth=4,policy='auto',device='cuda:0')
 with torch.inference_mode():
- model=build(config);model.enable_memory_offload();model.set_offload_offloader(a.batch,a.length)
+ model=build(config)
+ if a.single_host_max_tokens is not None:
+  assert hasattr(model.config,'memory_offload_single_host_max_tokens')
+  model.config.memory_offload_single_host_max_tokens=a.single_host_max_tokens
+ model.enable_memory_offload();model.set_offload_offloader(a.batch,a.length)
  torch.manual_seed(1235);ids=torch.randint(0,32000,(a.batch,a.length),device='cuda')
  def one():return model(input_ids=ids,use_cache=True,logits_to_keep=1)
  for _ in range(10):one()

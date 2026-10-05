@@ -1,0 +1,23 @@
+{
+  "status": "diagnostic_only",
+  "source_parent": "A0023",
+  "recovered_source": "A0026 with explicit hostmax16384 config override",
+  "evidence": [
+    "mapped-launcher-A0023.json",
+    "python-submit-A0023-post27.json",
+    "layer-lookup-A0023.json",
+    "pipeline-A0023-b8-l2048-post27.json",
+    "pipeline-A0026-host16384-b8-l2048-post27.json"
+  ],
+  "observations": [
+    "Compiled runner reduces isolated CPU submit by2.3..2.4us/call; b8 drained kernel time unchanged. Not promoted to a candidate on this evidence alone.",
+    "ModuleList24-lookups5.131839us versus per-call tuple0.368579us; no model executes in this CPU microbenchmark. Python profiler spans exaggerate costs and are not wall-time gains.",
+    "Atb8/2048, shared host extension reduces instrumented gather76.11189 to55.179088ms; DMA sync increases60.280119 to104.986104ms; wall210.315651 to208.339890ms. These overlapping spans are not additive and one trajectory is not confirmation."
+  ],
+  "next_hypothesis": "Extend recovered shared-host staging range4096..8192 to4096..16384 total input tokens, preserving four GPU prefetch slots. Target b8/2048 plus recoveredb4/2048 andb8/512 prefill gains on verified A0023.",
+  "limitations": [
+    "A0026 and A0027 historical regressions/verdicts remain unchanged.",
+    "No claim that extending range fixes b1 generation; strict full-matrix regression gates remain required.",
+    "Fresh IDs/table reads and per-host latest-DMA dependency must be preserved."
+  ]
+}

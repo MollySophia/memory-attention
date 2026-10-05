@@ -1,0 +1,177 @@
+{
+  "status": "diagnostic_only",
+  "source": "/home/molly/workspace-memory-attn/offload-gap-001-A0023",
+  "source_commit": "5f3d5958fea25f953bb91f5ef6f35880ff37fcfa",
+  "mapped_module_sha256": "d8220f60f21af06ccaca6d8180c9d0692eb8e4e2cbf918c19fbbde508764db0d",
+  "torch": "2.9.0+cu130",
+  "triton": "3.5.0",
+  "rows": [
+    {
+      "batch": 1,
+      "block": 1,
+      "method": "jit",
+      "launches": 128,
+      "submit_us_per_call": 5.398171875,
+      "drained_us_per_call": 5.4416953125
+    },
+    {
+      "batch": 1,
+      "block": 1,
+      "method": "compiled",
+      "launches": 128,
+      "submit_us_per_call": 2.9136328125,
+      "drained_us_per_call": 3.629984375
+    },
+    {
+      "batch": 1,
+      "block": 2,
+      "method": "compiled",
+      "launches": 128,
+      "submit_us_per_call": 2.8979765625,
+      "drained_us_per_call": 3.64321875
+    },
+    {
+      "batch": 1,
+      "block": 2,
+      "method": "jit",
+      "launches": 128,
+      "submit_us_per_call": 5.2871796875,
+      "drained_us_per_call": 5.332890625
+    },
+    {
+      "batch": 1,
+      "block": 3,
+      "method": "jit",
+      "launches": 128,
+      "submit_us_per_call": 5.2372421875,
+      "drained_us_per_call": 5.281078125
+    },
+    {
+      "batch": 1,
+      "block": 3,
+      "method": "compiled",
+      "launches": 128,
+      "submit_us_per_call": 2.902203125,
+      "drained_us_per_call": 3.64728125
+    },
+    {
+      "batch": 1,
+      "block": 4,
+      "method": "compiled",
+      "launches": 128,
+      "submit_us_per_call": 2.9040078125,
+      "drained_us_per_call": 3.63546875
+    },
+    {
+      "batch": 1,
+      "block": 4,
+      "method": "jit",
+      "launches": 128,
+      "submit_us_per_call": 5.267453125,
+      "drained_us_per_call": 5.3117578125
+    },
+    {
+      "batch": 1,
+      "block": 5,
+      "method": "jit",
+      "launches": 128,
+      "submit_us_per_call": 5.272625,
+      "drained_us_per_call": 5.315984375
+    },
+    {
+      "batch": 1,
+      "block": 5,
+      "method": "compiled",
+      "launches": 128,
+      "submit_us_per_call": 2.8720625,
+      "drained_us_per_call": 3.6246640625
+    },
+    {
+      "batch": 8,
+      "block": 1,
+      "method": "jit",
+      "launches": 128,
+      "submit_us_per_call": 5.084375,
+      "drained_us_per_call": 16.5082265625
+    },
+    {
+      "batch": 8,
+      "block": 1,
+      "method": "compiled",
+      "launches": 128,
+      "submit_us_per_call": 2.826515625,
+      "drained_us_per_call": 16.4233828125
+    },
+    {
+      "batch": 8,
+      "block": 2,
+      "method": "compiled",
+      "launches": 128,
+      "submit_us_per_call": 2.9982421875,
+      "drained_us_per_call": 16.4166484375
+    },
+    {
+      "batch": 8,
+      "block": 2,
+      "method": "jit",
+      "launches": 128,
+      "submit_us_per_call": 5.166171875,
+      "drained_us_per_call": 16.4233046875
+    },
+    {
+      "batch": 8,
+      "block": 3,
+      "method": "jit",
+      "launches": 128,
+      "submit_us_per_call": 5.201078125,
+      "drained_us_per_call": 16.4249453125
+    },
+    {
+      "batch": 8,
+      "block": 3,
+      "method": "compiled",
+      "launches": 128,
+      "submit_us_per_call": 2.8568828125,
+      "drained_us_per_call": 16.427453125
+    },
+    {
+      "batch": 8,
+      "block": 4,
+      "method": "compiled",
+      "launches": 128,
+      "submit_us_per_call": 2.8476484375,
+      "drained_us_per_call": 16.43621875
+    },
+    {
+      "batch": 8,
+      "block": 4,
+      "method": "jit",
+      "launches": 128,
+      "submit_us_per_call": 5.1856640625,
+      "drained_us_per_call": 16.426203125
+    },
+    {
+      "batch": 8,
+      "block": 5,
+      "method": "jit",
+      "launches": 128,
+      "submit_us_per_call": 5.1909765625,
+      "drained_us_per_call": 16.4140703125
+    },
+    {
+      "batch": 8,
+      "block": 5,
+      "method": "compiled",
+      "launches": 128,
+      "submit_us_per_call": 2.8619765625,
+      "drained_us_per_call": 16.411640625
+    }
+  ],
+  "exactness": "Fresh IDs and host-row mutations, both methods and batches, bit-exact",
+  "limitations": [
+    "No model/consumer overlap; isolated kernel launch only.",
+    "All IDs are aligned; offset-ID specialization remains unvalidated.",
+    "Compiled runner is the same kernel returned by ordinary JIT launch.",
+    "No lookup result cache and no retained implementation change."
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "status": "cpu_metadata_diagnostic_only",
+  "rows": [
+    {
+      "block": 1,
+      "method": "modulelist",
+      "iterations": 10000,
+      "us_per_24_lookups": 5.081675015389919
+    },
+    {
+      "block": 1,
+      "method": "tuple_per_call",
+      "iterations": 10000,
+      "us_per_24_lookups": 0.37286640144884586
+    },
+    {
+      "block": 2,
+      "method": "tuple_per_call",
+      "iterations": 10000,
+      "us_per_24_lookups": 0.3725307993590832
+    },
+    {
+      "block": 2,
+      "method": "modulelist",
+      "iterations": 10000,
+      "us_per_24_lookups": 5.083714798092842
+    },
+    {
+      "block": 3,
+      "method": "modulelist",
+      "iterations": 10000,
+      "us_per_24_lookups": 5.085746571421623
+    },
+    {
+      "block": 3,
+      "method": "tuple_per_call",
+      "iterations": 10000,
+      "us_per_24_lookups": 0.3682738170027733
+    },
+    {
+      "block": 4,
+      "method": "tuple_per_call",
+      "iterations": 10000,
+      "us_per_24_lookups": 0.36927168257534504
+    },
+    {
+      "block": 4,
+      "method": "modulelist",
+      "iterations": 10000,
+      "us_per_24_lookups": 5.099159991368651
+    },
+    {
+      "block": 5,
+      "method": "modulelist",
+      "iterations": 10000,
+      "us_per_24_lookups": 5.097275413572788
+    },
+    {
+      "block": 5,
+      "method": "tuple_per_call",
+      "iterations": 10000,
+      "us_per_24_lookups": 0.36915941163897514
+    },
+    {
+      "block": 6,
+      "method": "tuple_per_call",
+      "iterations": 10000,
+      "us_per_24_lookups": 0.37034768611192703
+    },
+    {
+      "block": 6,
+      "method": "modulelist",
+      "iterations": 10000,
+      "us_per_24_lookups": 5.18193943426013
+    },
+    {
+      "block": 7,
+      "method": "modulelist",
+      "iterations": 10000,
+      "us_per_24_lookups": 5.293360911309719
+    },
+    {
+      "block": 7,
+      "method": "tuple_per_call",
+      "iterations": 10000,
+      "us_per_24_lookups": 0.357603607699275
+    }
+  ],
+  "torch": "2.9.0+cu130",
+  "limitations": [
+    "No layers execute and no GPU work; only lookup dispatch is measured.",
+    "Tuple construction is included every call; layer replacement remains visible.",
+    "This is not end-to-end evidence or an accepted implementation change."
+  ]
+}

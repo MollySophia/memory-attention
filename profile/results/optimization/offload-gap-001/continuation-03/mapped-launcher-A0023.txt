@@ -1,0 +1,4 @@
+1 jit {'submit_us_per_call': 5.292534375, 'drained_us_per_call': 5.33668125}
+1 compiled {'submit_us_per_call': 2.8979765625000002, 'drained_us_per_call': 3.6361234374999998}
+8 jit {'submit_us_per_call': 5.165653125, 'drained_us_per_call': 16.43935}
+8 compiled {'submit_us_per_call': 2.878253125, 'drained_us_per_call': 16.42306875}

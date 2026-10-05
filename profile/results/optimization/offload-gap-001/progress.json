@@ -1,8 +1,8 @@
 {
   "campaign_id": "offload-gap-001",
   "status": "active",
-  "workflow_stage": "restoring_verified_source",
-  "goal_progress": "A0027 rejected after64 screen+84 confirmation processes: no confirmed gain, b8 generation offload slowdown. Restore A0023; isolate mapped launcher dispatch next.",
+  "workflow_stage": "profiling",
+  "goal_progress": "A0027 rejected and execution restored exactly to A0023. Launcher and layer-lookup diagnostics show only small CPU savings; inspect shared-host extension to16384-token prefill before a new attempt.",
   "completed_optimization_verdicts": 27,
   "additional_completed_verdicts": 10,
   "additional_attempt_target": [

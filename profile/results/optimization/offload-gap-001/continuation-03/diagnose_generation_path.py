@@ -8,6 +8,7 @@ p=argparse.ArgumentParser(description=__doc__)
 p.add_argument('--source-root',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
 p.add_argument('--mapped-min-tokens',type=int,default=None)
 p.add_argument('--profile',action='store_true')
+p.add_argument('--python-profile',action='store_true',help='Profile Python call overhead in four additional decode calls; diagnostic only')
 p.add_argument('--mapped-spans',action='store_true',help='Instrument mapped scheduling excluding layer consumers; diagnostic only')
 a=p.parse_args();root=a.source_root.resolve();sys.path[:0]=[str(root/'profile'),str(root)]
 import torch
@@ -67,4 +68,15 @@ with torch.inference_mode():
   payload['profile_trace']=str(trace)
   payload['profile_events']=[dict(key=e.key,count=e.count,self_cpu_time_total_us=e.self_cpu_time_total,cpu_time_total_us=e.cpu_time_total) for e in prof.key_averages()]
   payload['profile_scope']='Four additional growing decode calls after diagnostic trajectory; profiler timing excluded from wall_ms'
+ if a.python_profile:
+  import cProfile,pstats
+  profiler=cProfile.Profile()
+  profiler.enable()
+  for token in tokens[:4]:
+   output=model(input_ids=token,past_key_values=output.past_key_values,use_cache=True,logits_to_keep=1)
+  profiler.disable();torch.cuda.synchronize()
+  stats=pstats.Stats(profiler)
+  payload['python_profile_scope']='Four additional growing decode calls; instrumentation perturbs Python cost; excluded from wall_ms'
+  payload['python_profile']=[dict(file=key[0],line=key[1],function=key[2],primitive_calls=value[0],calls=value[1],self_ms=value[2]*1000,cumulative_ms=value[3]*1000)
+                             for key,value in sorted(stats.stats.items(),key=lambda item:item[1][2],reverse=True)]
  a.output.write_text(json.dumps(payload,indent=2)+'\n');model.close_memory_offload()
