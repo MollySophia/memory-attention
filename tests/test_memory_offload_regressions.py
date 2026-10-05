@@ -267,6 +267,85 @@ def test_single_slot_limit_can_be_disabled_and_validated(model):
     assert len(model.model.memory_offloader.slots) == min(4,len(model.model.layers))
 
 
+@pytest.mark.parametrize('group', [1, 2, 3])
+@pytest.mark.skipif(not torch.cuda.is_available(), reason='requires CUDA')
+def test_shared_host_dma_lifetime_fresh_values_and_partial_groups(group):
+    from fla.layers.memory_offload import MemoryTableOffloader
+    telemetry = load_script('benchmark_telemetry')
+    with torch.inference_mode():
+        weights = torch.randn(73, 7, 64, dtype=torch.bfloat16)
+        off = MemoryTableOffloader(weights, 2, 17, group_size=group,
+                                   prefetch_depth=4, single_host_buffer=True)
+        streams = [torch.cuda.Stream(), torch.cuda.Stream()]
+        capacity = 2 * 17 * group * 64 * 2
+        assert telemetry.storage_bytes(s['host'] for s in off.slots) == capacity
+        assert telemetry.storage_bytes(s['gpu'] for s in off.slots) == capacity * len(off.slots)
+        try:
+            for iteration in range(4):
+                ids = torch.randint(0, 73, (2, 17))
+                weights.add_(1)
+                actual = []
+                def consume(layer, handle):
+                    value = handle.acquire()
+                    actual.append(value.clone())
+                    handle.release()
+                # Delay DMA to expose premature overwrite of the shared host
+                # buffer. Per-slot events alone cannot guard other slots.
+                with torch.cuda.stream(off.copy_stream):
+                    torch.cuda._sleep(1_000_000)
+                with torch.cuda.stream(streams[iteration % 2]):
+                    off.forward(ids, consume)
+                torch.cuda.synchronize()
+                expected = weights.index_select(0, ids.reshape(-1)).view(2, 17, 7, 64)
+                for layer, value in enumerate(actual):
+                    torch.testing.assert_close(value.cpu(), expected[:, :, layer], rtol=0, atol=0)
+            def fail(layer, handle):
+                handle.acquire()
+                raise ValueError('consumer failure')
+            with pytest.raises(ValueError, match='consumer failure'):
+                off.forward(ids, fail)
+            with pytest.raises(RuntimeError, match='closed or failed'):
+                off.forward(ids, consume)
+        finally:
+            off.close()
+
+
+@pytest.mark.parametrize('policy', ['auto', 'pipeline'])
+def test_shared_host_policy_boundaries_and_full_model_exactness(model, policy):
+    from fla.models.memory.configuration_memory import MemoryConfig
+    with pytest.raises(ValueError, match='single-host'):
+        MemoryConfig(memory_offload_single_host_min_tokens=16385,
+                     memory_offload_single_host_max_tokens=16384)
+    model.config.memory_offload_policy = policy
+    model.enable_memory_offload()
+    for tokens in (4095, 4096, 8192, 8193, 16384, 16385):
+        model.set_offload_offloader(1, tokens)
+        off = model.model.memory_offloader
+        shared = policy == 'auto' and 4096 <= tokens <= 16384
+        assert off.single_host_buffer == shared
+        # Extending host sharing must not shrink the GPU prefetch capacity.
+        assert len(off.slots) == min(4, len(model.model.layers))
+        telemetry = load_script('benchmark_telemetry')
+        capacity = tokens * off.group * off.dim * off.weights.element_size()
+        assert telemetry.storage_bytes(s['host'] for s in off.slots) == capacity * (1 if shared else len(off.slots))
+        assert telemetry.storage_bytes(s['gpu'] for s in off.slots) == capacity * len(off.slots)
+    # Exercise enabled scheduling cheaply in a full model, including tail group.
+    model.close_memory_offload()
+    model.config.memory_offload_bulk_max_tokens = 0
+    model.config.memory_offload_single_slot_max_tokens = 0
+    model.config.memory_offload_single_host_min_tokens = 1
+    model.config.memory_offload_single_host_max_tokens = 32
+    model.config.memory_offload_group_size = 2
+    gate = load_script('test_memory_offload')
+    for length in (17, 23, 17):
+        ids = torch.randint(0, 128, (1, length), device='cuda')
+        expected = gate.resident_prefill(model, ids)
+        model.enable_memory_offload()
+        for _ in range(2):
+            actual = model(input_ids=ids, use_cache=False).logits.float()
+            torch.testing.assert_close(actual, expected, rtol=0, atol=0)
+
+
 @pytest.mark.parametrize('batch', [1, 4, 8, 16])
 @pytest.mark.parametrize('ids_device', ['cpu', 'cuda'])
 def test_mapped_bulk_fresh_weights_cross_stream_and_host_lifetime(batch, ids_device):
