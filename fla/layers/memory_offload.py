@@ -55,6 +55,8 @@ class GroupTicket:
         if not self.waited:
             torch.cuda.current_stream(self.owner.device).wait_event(self.slot["copied"])
             self.waited = True
+        if self.owner.precompute_views:
+            return self.slot["values"][self.count][offset]
         values = self.owner._view(self.slot["gpu"], self.start)
         return values[:, offset].view(self.owner.batch, self.owner.seq_len, self.owner.dim)
 
@@ -106,6 +108,7 @@ class MemoryTableOffloader:
         group_size: Layers transferred per gather + H2D.
         device: CUDA device.
         prefetch_depth: Number of buffered groups. Clamped to the group count.
+        precompute_views: Retain tensor metadata aliases for fixed buffers and source slices.
     """
 
     def __init__(
@@ -116,6 +119,7 @@ class MemoryTableOffloader:
         group_size: int = 1,
         device: torch.device | str = "cuda:0",
         prefetch_depth: int = 4,
+        precompute_views: bool = False,
     ) -> None:
         if weights.device.type != "cpu" or weights.ndim != 3:
             raise ValueError("weights must be a CPU tensor of shape [vocab, layers, dim]")
@@ -146,6 +150,29 @@ class MemoryTableOffloader:
             for _ in range(min(prefetch_depth, len(self.groups)))
         ]
 
+        self.precompute_views = precompute_views
+        if precompute_views:
+            # Retain aliases only. Every call still gathers fresh table values.
+            counts = {min(self.group, self.layers - start) for start in self.groups}
+            self._buffer_views = {}
+            for slot in self.slots:
+                for flat in (slot["host"], slot["gpu"]):
+                    for count in counts:
+                        self._buffer_views[id(flat), count] = flat[: self.tokens * count * self.dim].view(
+                            self.tokens, count, self.dim
+                        )
+                slot["values"] = {
+                    count: tuple(
+                        self._buffer_views[id(slot["gpu"]), count][:, offset].view(batch, seq_len, self.dim)
+                        for offset in range(count)
+                    )
+                    for count in counts
+                }
+            self._source_views = {
+                start: self.weights[:, start: start + min(self.group, self.layers - start)]
+                for start in self.groups
+            }
+
     @property
     def policy(self) -> str:
         return "pipeline"
@@ -156,6 +183,8 @@ class MemoryTableOffloader:
 
     def _view(self, flat: torch.Tensor, start: int) -> torch.Tensor:
         count = min(self.group, self.layers - start)
+        if self.precompute_views:
+            return self._buffer_views[id(flat), count]
         return flat[: self.tokens * count * self.dim].view(self.tokens, count, self.dim)
 
     @torch.inference_mode()
@@ -177,7 +206,8 @@ class MemoryTableOffloader:
                         slot["copied"].synchronize()
                     if cancel.is_set():
                         return
-                    source = self.weights[:, ticket.start: ticket.start + ticket.count]
+                    source = (self._source_views[ticket.start] if self.precompute_views else
+                              self.weights[:, ticket.start: ticket.start + ticket.count])
                     torch.index_select(source, 0, ids, out=self._view(slot["host"], ticket.start))
                     if previous is not None:
                         # Snapshot before the event can be re-recorded.
