@@ -1,0 +1,401 @@
+{
+  "status": "partial_integrity_passed",
+  "attempt": "A0030",
+  "stage": "R03-remaining-confirmation",
+  "completed_blocks": 4,
+  "planned_blocks": 6,
+  "checked_raw_results": 96,
+  "source_signatures_verified": true,
+  "balanced_plan": true,
+  "complete_unique_checkpoint_coverage": true,
+  "raw_means_recomputed": true,
+  "one_environment": true,
+  "raw_files": [
+    {
+      "name": "B1-J001-baseline-prefill-ma_offload-b4-l2048",
+      "raw_sha256": "b92a7549aeacf7f813303b07f24c32929040ca886ba2ad075868c5fd3addc5f3"
+    },
+    {
+      "name": "B1-J002-candidate-prefill-ma_offload-b4-l2048",
+      "raw_sha256": "cecba512ca0e86e9a6ed316802c2578c92a49fb342fa25f292c419c146d6ad13"
+    },
+    {
+      "name": "B1-J003-candidate-prefill-ma_gpu-b4-l2048",
+      "raw_sha256": "b978b38bc8158682517ca3fbfc265ff8513355bbf6e6268ae0c7d103b7b3b108"
+    },
+    {
+      "name": "B1-J004-baseline-prefill-ma_gpu-b4-l2048",
+      "raw_sha256": "569981b41fa1708231fe54a9b26b8cd9552804788ee80761cb7102e1160ab39f"
+    },
+    {
+      "name": "B1-J005-baseline-prefill-ma_gpu-b16-l2048",
+      "raw_sha256": "9e916e75d753881db581faa3168ea295dc7a13b29909451dafbf68337072edc8"
+    },
+    {
+      "name": "B1-J006-candidate-prefill-ma_gpu-b16-l2048",
+      "raw_sha256": "2821043bf2fabfa7b17bf8ce75e538c915c9de31cac53b4f487d02a46c987a46"
+    },
+    {
+      "name": "B1-J007-candidate-prefill-ma_offload-b16-l2048",
+      "raw_sha256": "09702e778290531e0aa410eaa728407f78866dbbd56f7534b89d648ed411f220"
+    },
+    {
+      "name": "B1-J008-baseline-prefill-ma_offload-b16-l2048",
+      "raw_sha256": "17e24a54e640cbd1711ebd7dc794bc9714118681048cc8e48fce84646b4677e3"
+    },
+    {
+      "name": "B1-J009-baseline-prefill-ma_offload-b8-l512",
+      "raw_sha256": "fc66cff3e6db53909161a0564bb356fe5766c86ea2f9125953d5e25b3f7b3451"
+    },
+    {
+      "name": "B1-J010-candidate-prefill-ma_offload-b8-l512",
+      "raw_sha256": "df965d95d60337ba2347dffcd856ab9e3b13d463808a68a6d3d8e8430cb2038e"
+    },
+    {
+      "name": "B1-J011-candidate-prefill-ma_gpu-b8-l512",
+      "raw_sha256": "027b39ddc61f22ebee65e20558a8437faf87664091e8cf890b7ea96ec7aeab52"
+    },
+    {
+      "name": "B1-J012-baseline-prefill-ma_gpu-b8-l512",
+      "raw_sha256": "72ab8cfb0c4d146bea5d25bf485b78955c04f1148d5259aaedb7e594e2f4abae"
+    },
+    {
+      "name": "B1-J013-baseline-prefill-ma_gpu-b8-l4096",
+      "raw_sha256": "7a7175136afe174b406c8a2796e1f3da219984f60196928e044aa52070170462"
+    },
+    {
+      "name": "B1-J014-candidate-prefill-ma_gpu-b8-l4096",
+      "raw_sha256": "5d24d1b7d1e0d44b77a9b8fedd0179e2f5e0e4bfe14e5417ca1bd40235ec4ef3"
+    },
+    {
+      "name": "B1-J015-candidate-prefill-ma_offload-b8-l4096",
+      "raw_sha256": "f63b01debeb9e384776f8f9b871cab4839076f6b7246cc81733e60783abaa702"
+    },
+    {
+      "name": "B1-J016-baseline-prefill-ma_offload-b8-l4096",
+      "raw_sha256": "cf9ba308f033c8cd5f3838d3e53412386b3c97810d6d0467822ff28780dd50cb"
+    },
+    {
+      "name": "B1-J017-baseline-decode-ma_offload-b8-l4096",
+      "raw_sha256": "d2f40254acde90c5187bca7f99d9873eba3d823449f66971acc03213ad90321a"
+    },
+    {
+      "name": "B1-J018-candidate-decode-ma_offload-b8-l4096",
+      "raw_sha256": "75e71db7d80fe47061fbc22814f51ec89aafbac9502e9dce78b3e32b0f601a2e"
+    },
+    {
+      "name": "B1-J019-candidate-decode-ma_gpu-b8-l4096",
+      "raw_sha256": "849db6d3265ffa1c6d53dcaaddcb63f1a731f1b277fbcb394121859a26a98a80"
+    },
+    {
+      "name": "B1-J020-baseline-decode-ma_gpu-b8-l4096",
+      "raw_sha256": "11f041fa9045ced77b421903071022e854d49376872e54bec39914064def58f0"
+    },
+    {
+      "name": "B1-J021-baseline-prefill-ma_gpu-b8-l8192",
+      "raw_sha256": "3a050551ad5e10a9df1876da6639a047309c93e16f8e67e5f06fff4d36a5d5ef"
+    },
+    {
+      "name": "B1-J022-candidate-prefill-ma_gpu-b8-l8192",
+      "raw_sha256": "15458c87d5a8bcd4b114264c75c6742e6276daedc875c2b70b19306fe7c7c709"
+    },
+    {
+      "name": "B1-J023-candidate-prefill-ma_offload-b8-l8192",
+      "raw_sha256": "a29ec30065fcd6b52cb272f3fb9b0c1f71535b06aa9460f8c02c5fec56c3f0f1"
+    },
+    {
+      "name": "B1-J024-baseline-prefill-ma_offload-b8-l8192",
+      "raw_sha256": "6aad48ed4b7c834477510eaa8baa59e654759e4a722240eabbe708c6805432a9"
+    },
+    {
+      "name": "B2-J025-baseline-prefill-ma_offload-b8-l8192",
+      "raw_sha256": "831e6f01ea1113336ce8774d788c657677dcf131b87ca622013427dac9a1ef39"
+    },
+    {
+      "name": "B2-J026-candidate-prefill-ma_offload-b8-l8192",
+      "raw_sha256": "cfb3a624b98fa19259536e74e350ff4e73b938042536e63c8ee21e444dd75fcd"
+    },
+    {
+      "name": "B2-J027-candidate-prefill-ma_gpu-b8-l8192",
+      "raw_sha256": "973d11caa44fe2c273d43ef658ef4168ed4c34308c5d93125feab610f5f14c74"
+    },
+    {
+      "name": "B2-J028-baseline-prefill-ma_gpu-b8-l8192",
+      "raw_sha256": "ff52bd84d6e62948758bb7443445885461306d7b0ba77baec2d7ed01fcf8f704"
+    },
+    {
+      "name": "B2-J029-baseline-decode-ma_gpu-b8-l4096",
+      "raw_sha256": "fd0968881490c69ef0e6faec85046457cac53ceeadcd686ba407e264a7db3e98"
+    },
+    {
+      "name": "B2-J030-candidate-decode-ma_gpu-b8-l4096",
+      "raw_sha256": "5f60b04298226449c88c9d9b40cd036224276f8bfdd9a9e6859c96fcd5f86df1"
+    },
+    {
+      "name": "B2-J031-candidate-decode-ma_offload-b8-l4096",
+      "raw_sha256": "d0c355932975d905b53d6bf1544b7d17728341a32aa1db679ade26cd11663826"
+    },
+    {
+      "name": "B2-J032-baseline-decode-ma_offload-b8-l4096",
+      "raw_sha256": "a2e4fcb342eab8ef2232485cb4dbbc5808eced84779216d257c56b2f3e414aea"
+    },
+    {
+      "name": "B2-J033-baseline-prefill-ma_offload-b8-l4096",
+      "raw_sha256": "7597263a695673bf30a6b6f01283132e1e766cc53ed33f2bf9e014bc78bc7b92"
+    },
+    {
+      "name": "B2-J034-candidate-prefill-ma_offload-b8-l4096",
+      "raw_sha256": "13e03848289d004dbe2ed13e7bef3281801d486de35fdc9efa95d2e40b261b4c"
+    },
+    {
+      "name": "B2-J035-candidate-prefill-ma_gpu-b8-l4096",
+      "raw_sha256": "ac4fe6a5874fe059573fe20e8cfe71c857e7a8702c6d14e54a95d3278b29e072"
+    },
+    {
+      "name": "B2-J036-baseline-prefill-ma_gpu-b8-l4096",
+      "raw_sha256": "0f804beae7ee46558cd8386611a46c2a2fdf980c6487e7b3b6d6d52ce90ade90"
+    },
+    {
+      "name": "B2-J037-baseline-prefill-ma_gpu-b8-l512",
+      "raw_sha256": "ec013f86fd4128ff55ea9093513475e5cb68f56ad191679107f70f65160af499"
+    },
+    {
+      "name": "B2-J038-candidate-prefill-ma_gpu-b8-l512",
+      "raw_sha256": "88de542db3f35ba8cccc2372388a9d5c25566c8441b9b4b2717cfdc9311105a2"
+    },
+    {
+      "name": "B2-J039-candidate-prefill-ma_offload-b8-l512",
+      "raw_sha256": "5fba7d0be7497bbdd2dbc93df664816355ada7e941a10af338dce2d14459eadc"
+    },
+    {
+      "name": "B2-J040-baseline-prefill-ma_offload-b8-l512",
+      "raw_sha256": "711274a1f841b731370afce244cf19b8eba015b7d2f10c4a448dd5ee6952b1be"
+    },
+    {
+      "name": "B2-J041-baseline-prefill-ma_offload-b16-l2048",
+      "raw_sha256": "f4d759e4ab3ffb89adaa68f29263e57cb9c152f3cc03311bf045f797b338eb30"
+    },
+    {
+      "name": "B2-J042-candidate-prefill-ma_offload-b16-l2048",
+      "raw_sha256": "6843a11e8af819a7557413cd9ca14e34f19c8f2f8f9535cf445b758eb826bf00"
+    },
+    {
+      "name": "B2-J043-candidate-prefill-ma_gpu-b16-l2048",
+      "raw_sha256": "900cbd87831d27693912575042c33cc8270f798cafabadb6e76bed3588dfe14d"
+    },
+    {
+      "name": "B2-J044-baseline-prefill-ma_gpu-b16-l2048",
+      "raw_sha256": "4f35a23f88048c081976193a66d4a818ade3e2504b15a038e10eba783d634eac"
+    },
+    {
+      "name": "B2-J045-baseline-prefill-ma_gpu-b4-l2048",
+      "raw_sha256": "8dc52626035fac1e55f4c91bb2e8ecd97b4299aecd9261707f5843ccfb5c124e"
+    },
+    {
+      "name": "B2-J046-candidate-prefill-ma_gpu-b4-l2048",
+      "raw_sha256": "26472bad58c4f22b713afb38d81de0cee54abdf2c87dcd5f15519281927d654b"
+    },
+    {
+      "name": "B2-J047-candidate-prefill-ma_offload-b4-l2048",
+      "raw_sha256": "2efe05bd8014a66581cb054e8b94374da098f92e1d0bd505b2d12eaa10d7e0bb"
+    },
+    {
+      "name": "B2-J048-baseline-prefill-ma_offload-b4-l2048",
+      "raw_sha256": "f36601ed25d301a16bbd5e2deda45ffb1bfe96ec30082623a51cbdb115cceb9a"
+    },
+    {
+      "name": "B3-J049-baseline-prefill-ma_offload-b4-l2048",
+      "raw_sha256": "e5b960fb3777aaf4d03ea9520e467631a44c334ee5783c595c5a40be817ab89f"
+    },
+    {
+      "name": "B3-J050-candidate-prefill-ma_offload-b4-l2048",
+      "raw_sha256": "4b6e1c35d0be38fc91a382285af587531e34a15524980a5337247d532744ba98"
+    },
+    {
+      "name": "B3-J051-candidate-prefill-ma_gpu-b4-l2048",
+      "raw_sha256": "e3eb995eb465185bce6eded0880c3c32a19aacb00361b9664b302d8a88d3803c"
+    },
+    {
+      "name": "B3-J052-baseline-prefill-ma_gpu-b4-l2048",
+      "raw_sha256": "cfea0c3a8b0dc11854c47a6e79885389bbc4fe5c70defc1674783d3ec839b7c4"
+    },
+    {
+      "name": "B3-J053-baseline-prefill-ma_gpu-b16-l2048",
+      "raw_sha256": "963261332bb7aa8ee98f787b84052b10ea9cbaa816d017add3edc7d738dbac74"
+    },
+    {
+      "name": "B3-J054-candidate-prefill-ma_gpu-b16-l2048",
+      "raw_sha256": "ddf5da403aa6f0ff066189b4db563a88ff9c7e3d275112a86e7844dd50e7e5e2"
+    },
+    {
+      "name": "B3-J055-candidate-prefill-ma_offload-b16-l2048",
+      "raw_sha256": "b94c071ae1e4207e44df0def00451b9e5a7d176af2aac4b8198c78c950a8be77"
+    },
+    {
+      "name": "B3-J056-baseline-prefill-ma_offload-b16-l2048",
+      "raw_sha256": "fe4681eca8a17ed346a587bc746e052c549eaa8ada10062ef9f6acea0c27b2b0"
+    },
+    {
+      "name": "B3-J057-baseline-prefill-ma_offload-b8-l512",
+      "raw_sha256": "e8a24302746ce1932203830253342498d1f6b0a0571c32cb47c5754e62a90240"
+    },
+    {
+      "name": "B3-J058-candidate-prefill-ma_offload-b8-l512",
+      "raw_sha256": "52d6f9e594a97e00c0e6c03e3810b6130c7d831f11e687e8cc75a030cce3c2ab"
+    },
+    {
+      "name": "B3-J059-candidate-prefill-ma_gpu-b8-l512",
+      "raw_sha256": "d9936ebbae9bdef4857c8f66b445efed548ee1b68a479b63db914dfc7fc16f12"
+    },
+    {
+      "name": "B3-J060-baseline-prefill-ma_gpu-b8-l512",
+      "raw_sha256": "22359dfd5add252a33ccddf98eef3b163d9feb20f07d96b562eb513e36b10d37"
+    },
+    {
+      "name": "B3-J061-baseline-prefill-ma_gpu-b8-l4096",
+      "raw_sha256": "d831a665a8d309d8e1425498121879a321fcbf992d153018af393bdf9b923be7"
+    },
+    {
+      "name": "B3-J062-candidate-prefill-ma_gpu-b8-l4096",
+      "raw_sha256": "82f36d0a7ce75b551f7bb829aacb80e6d447e2a74d540bd116d6e1f98d44c261"
+    },
+    {
+      "name": "B3-J063-candidate-prefill-ma_offload-b8-l4096",
+      "raw_sha256": "c84203c12fc1ca7e3fba659662c74677251c6b6b6d55b1660fd895e471a108f4"
+    },
+    {
+      "name": "B3-J064-baseline-prefill-ma_offload-b8-l4096",
+      "raw_sha256": "59fb13ec8a148cd36824b127dbe766b10d64caf6180fe07c155d4c836848a777"
+    },
+    {
+      "name": "B3-J065-baseline-decode-ma_offload-b8-l4096",
+      "raw_sha256": "a742bfc45683aa50d00e028b4ec3e6041d15f6ce159892027e742f98d13fb63d"
+    },
+    {
+      "name": "B3-J066-candidate-decode-ma_offload-b8-l4096",
+      "raw_sha256": "d60af8a199d5b922a432b9543b69ca7c6112cdf5b9a69e48af619a0a4cea2da8"
+    },
+    {
+      "name": "B3-J067-candidate-decode-ma_gpu-b8-l4096",
+      "raw_sha256": "8e1194eacdbf11ae124b0e6c620a9d990abdf4710513e2215d497d00b5a45edd"
+    },
+    {
+      "name": "B3-J068-baseline-decode-ma_gpu-b8-l4096",
+      "raw_sha256": "7b31a0d5320fad46186cd198ebbb65423e196d56eaacedc75ab458dfee99347b"
+    },
+    {
+      "name": "B3-J069-baseline-prefill-ma_gpu-b8-l8192",
+      "raw_sha256": "79d107b77cdb7a87d4203025802ef6bed7a84bdba7c816a8c2a495d9981d71fe"
+    },
+    {
+      "name": "B3-J070-candidate-prefill-ma_gpu-b8-l8192",
+      "raw_sha256": "523bc2ea46775233a1547b2005fbf80ce96d7f075f6f24904d0d22c1158a3293"
+    },
+    {
+      "name": "B3-J071-candidate-prefill-ma_offload-b8-l8192",
+      "raw_sha256": "dc9f4a01c1124b4adcd934328e22452c03075720873c8fb9fff698297c6ebf47"
+    },
+    {
+      "name": "B3-J072-baseline-prefill-ma_offload-b8-l8192",
+      "raw_sha256": "41c3a7fecfebee7a1794f9a4530b9b8b21431d0009e7854b2f3e1cf9ec094372"
+    },
+    {
+      "name": "B4-J073-baseline-prefill-ma_offload-b8-l8192",
+      "raw_sha256": "27f3eb0d16d7b48137febfbd6460fb26cb7be6a72cfe362dfd3e45f9ae3c7f72"
+    },
+    {
+      "name": "B4-J074-candidate-prefill-ma_offload-b8-l8192",
+      "raw_sha256": "8b781e74e97991bec8c70403a3c11f75c0f42377aec5de406f74f8b8525e7298"
+    },
+    {
+      "name": "B4-J075-candidate-prefill-ma_gpu-b8-l8192",
+      "raw_sha256": "07789a12c4adf7be7e51c60c27383eb75c781af0134bff0eb3d16eab88db459b"
+    },
+    {
+      "name": "B4-J076-baseline-prefill-ma_gpu-b8-l8192",
+      "raw_sha256": "2de35235f027af66b5e1d8f8c095fac766346b4b21c12eba4197de74ff399ab6"
+    },
+    {
+      "name": "B4-J077-baseline-decode-ma_gpu-b8-l4096",
+      "raw_sha256": "5ac81dd7997bff0ec0ca1f58a3f1f68d28361ff8c66d6dc24395cbc10a3585e5"
+    },
+    {
+      "name": "B4-J078-candidate-decode-ma_gpu-b8-l4096",
+      "raw_sha256": "9bf7606c9d2988398ec9d824306de868d60fd2b351bc9690b46ca1f898df35ba"
+    },
+    {
+      "name": "B4-J079-candidate-decode-ma_offload-b8-l4096",
+      "raw_sha256": "7dcded06385c03205c3d169f3288a13631b899b1a8b5a7d001da7ef71b37feff"
+    },
+    {
+      "name": "B4-J080-baseline-decode-ma_offload-b8-l4096",
+      "raw_sha256": "c957dd0410686cfc256d3b1bd86e64afca8ded9b2e8e436c430f30aae528d850"
+    },
+    {
+      "name": "B4-J081-baseline-prefill-ma_offload-b8-l4096",
+      "raw_sha256": "81e1386c7d7e6df5e4f8f0066a3b9937802afcfc4c399c84b0f2938b63544be2"
+    },
+    {
+      "name": "B4-J082-candidate-prefill-ma_offload-b8-l4096",
+      "raw_sha256": "8509317def03731dfdfcc7bb4e3d7c72aa753bed046c101efc81ffa2ecddb459"
+    },
+    {
+      "name": "B4-J083-candidate-prefill-ma_gpu-b8-l4096",
+      "raw_sha256": "4a45a4cf5fe6268905eae37d6423ebb18ce6c5847711a392025c8964dfa1095f"
+    },
+    {
+      "name": "B4-J084-baseline-prefill-ma_gpu-b8-l4096",
+      "raw_sha256": "c40077a9617c46de3bb9514bcd1df2a39b21f1e2a4d00fb9f5e034fd508f60c9"
+    },
+    {
+      "name": "B4-J085-baseline-prefill-ma_gpu-b8-l512",
+      "raw_sha256": "43ec849c99c646e8329621ed63d23ef6dc3a940199c3a041fa75c64613e3d394"
+    },
+    {
+      "name": "B4-J086-candidate-prefill-ma_gpu-b8-l512",
+      "raw_sha256": "b8799a91736417a4a5145005626a9b2fa6f480d8062bd5f45cbe0fa79ac92ea7"
+    },
+    {
+      "name": "B4-J087-candidate-prefill-ma_offload-b8-l512",
+      "raw_sha256": "68267ca428d5a86919a3bf09bda91d3e4701bfc2524a9fe1e52187b9ef9851a0"
+    },
+    {
+      "name": "B4-J088-baseline-prefill-ma_offload-b8-l512",
+      "raw_sha256": "dd53c15ae8eed1a073c42f557669f181807aeb20f9c852f876bae3f4680a9bbf"
+    },
+    {
+      "name": "B4-J089-baseline-prefill-ma_offload-b16-l2048",
+      "raw_sha256": "b9b4b6272c92fa763cf964b22aaef83f89ff96cb31c1bcc2436510b9ed946372"
+    },
+    {
+      "name": "B4-J090-candidate-prefill-ma_offload-b16-l2048",
+      "raw_sha256": "f66e35a8f3585c55cdf49c02236bfcad0779d0745a32b542d9bfcaed7fb6677c"
+    },
+    {
+      "name": "B4-J091-candidate-prefill-ma_gpu-b16-l2048",
+      "raw_sha256": "5ca49872049601aabc01439edd97f2e09aa1ff4350fa60d9b9ccb5d47999a719"
+    },
+    {
+      "name": "B4-J092-baseline-prefill-ma_gpu-b16-l2048",
+      "raw_sha256": "f2586cb43744451361d1c02a181a359f942adb240876e82952a9041f029aa3af"
+    },
+    {
+      "name": "B4-J093-baseline-prefill-ma_gpu-b4-l2048",
+      "raw_sha256": "a7a6cb2b766c9b2391160f526a7b801116197ac326f41566345950df563fab8c"
+    },
+    {
+      "name": "B4-J094-candidate-prefill-ma_gpu-b4-l2048",
+      "raw_sha256": "7abba5b24e3f4c2f6dc861b984bfc0d0465e4cbc547fd48445a8b20178293a07"
+    },
+    {
+      "name": "B4-J095-candidate-prefill-ma_offload-b4-l2048",
+      "raw_sha256": "0c8ae2f3661204367e6d8f881d0ce71794889e61b1064334b7d29d1cd6903623"
+    },
+    {
+      "name": "B4-J096-baseline-prefill-ma_offload-b4-l2048",
+      "raw_sha256": "04ee8b69204afffba5307d10e74b09ca29bebf6c11b85c289d1a2127fde74a82"
+    }
+  ],
+  "accepted": false,
+  "note": "Integrity checkpoint only. No intermediate significance tests or retention decision; finish all six predeclared blocks."
+}
