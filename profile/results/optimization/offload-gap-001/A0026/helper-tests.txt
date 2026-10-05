@@ -1,0 +1,14 @@
+
+profile/results/optimization/offload-gap-001/continuation-03/test_driver.py::test_complete_scope_has_no_duplicate_or_missing_workload PASSED [  9%]
+profile/results/optimization/offload-gap-001/continuation-03/test_driver.py::test_screen_plans_all_placements_and_short_full_trajectories PASSED [ 18%]
+profile/results/optimization/offload-gap-001/continuation-03/test_driver.py::test_confirmation_blocks_remain_balanced_and_separate PASSED [ 27%]
+profile/results/optimization/offload-gap-001/continuation-03/test_driver.py::test_nomination_keeps_secondary_gains_primary_controls_and_regressions PASSED [ 36%]
+profile/results/optimization/offload-gap-001/continuation-03/test_driver.py::test_fixed_family_holm_does_not_drop_unfavorable_values PASSED [ 45%]
+profile/results/optimization/offload-gap-001/continuation-03/test_driver.py::test_shared_host_memory_audit_counts_one_allocation_and_rejects_old_capacity PASSED [ 54%]
+profile/results/optimization/offload-gap-001/continuation-03/test_driver.py::test_validation_completes_only_missing_points_and_keeps_folding_scope PASSED [ 63%]
+profile/results/optimization/offload-gap-001/continuation-03/test_audit_completed.py::test_cross_stage_audit_requires_complete_unique_matching_evidence PASSED [ 72%]
+profile/results/optimization/offload-gap-001/continuation-03/test_audit_completed.py::test_correctness_audit_checks_source_scope_and_recomputes_comparison PASSED [ 81%]
+profile/results/optimization/offload-gap-001/continuation-03/test_recovery.py::test_configured_mapped_range_and_strict_memory_totals PASSED [ 90%]
+profile/results/optimization/offload-gap-001/continuation-03/test_recovery.py::test_recovery_never_reruns_completed_jobs_and_rejects_live_manifest PASSED [100%]
+
+============================== 11 passed in 0.41s ==============================

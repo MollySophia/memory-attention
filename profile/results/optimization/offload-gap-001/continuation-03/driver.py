@@ -76,7 +76,11 @@ def audit_job(j,path):
    assert cap['policy']==('bulk' if tokens<=model_cfg['memory_offload_bulk_max_tokens'] else 'pipeline')
    expected=tokens*2048*2*(24 if cap['policy']=='bulk' else depth)
    mapped_shape=mapped and cap['policy']=='bulk' and model_cfg['memory_offload_mapped_bulk_min_tokens']<=tokens<=model_cfg['memory_offload_mapped_bulk_max_tokens']
-   assert cap['gpu_bytes']==expected and cap['host_bytes']==(0 if mapped_shape else expected)
+   shared_host=(cap['policy']=='pipeline' and
+                model_cfg.get('memory_offload_single_host_min_tokens',1) <= tokens <=
+                model_cfg.get('memory_offload_single_host_max_tokens',0))
+   expected_host=0 if mapped_shape else tokens*2048*2 if shared_host else expected
+   assert cap['gpu_bytes']==expected and cap['host_bytes']==expected_host
  env=p['environment_before'];e=p['env']
  return (e['torch'],e['torch_cuda'],e['flash_attn'],e['gpu'],e['python'],env['gpu_telemetry']['stdout'].splitlines()[1].split(', ')[1],tuple(env['cpu_affinity']),env['torch_threads'],env['torch_interop_threads'],json.dumps(env['thread_environment'],sort_keys=True)),row
 

@@ -39,6 +39,27 @@ def test_fixed_family_holm_does_not_drop_unfavorable_values():
  import pytest
  assert holm([.001,.04,1.])==pytest.approx([.003,.08,1.])
 
+def test_shared_host_memory_audit_counts_one_allocation_and_rejects_old_capacity(monkeypatch):
+ import copy
+ import pytest
+ directory=d.C/'A0023/R01-complete-screen'
+ manifest=d.read(directory/'manifest.json')
+ job=next(j for j in manifest['jobs'] if (j['implementation'],j['mode'],j['batch'],j['length'],j['variant'])==('candidate','prefill',4,2048,'ma_offload'))
+ path=directory/(job['name']+'.json')
+ payload=copy.deepcopy(d.read(path))
+ original=d.read
+ monkeypatch.setattr(d,'read',lambda p:payload if p==path else original(p))
+ payload['model_config'].update(memory_offload_single_host_min_tokens=4096,memory_offload_single_host_max_tokens=8192)
+ with pytest.raises(AssertionError):d.audit_job(job,path)
+ memory=payload['results'][0]['memory_after']
+ cap=next(c for c in memory['offloader_capacities'] if (c['batch'],c['length'])==(4,2048))
+ removed=cap['host_bytes']*3//4
+ cap['host_bytes']-=removed
+ memory['offload_pinned_bytes']-=removed
+ d.audit_job(job,path)
+ cap['gpu_bytes']//=4
+ with pytest.raises(AssertionError):d.audit_job(job,path)
+
 def test_validation_completes_only_missing_points_and_keeps_folding_scope(tmp_path,monkeypatch):
  import validation as v
  import confirm
