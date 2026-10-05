@@ -1,0 +1,14 @@
+{
+  "attempt": "A0029",
+  "evidence_integrity": "passed",
+  "completed_processes": 64,
+  "workloads": 16,
+  "checks": [
+    "exact unique complete coverage",
+    "frozen source signatures",
+    "raw configuration/sampling/memory/environment",
+    "recomputed nomination union matches frozen confirmation",
+    "balanced confirmation order"
+  ],
+  "accepted": false
+}
