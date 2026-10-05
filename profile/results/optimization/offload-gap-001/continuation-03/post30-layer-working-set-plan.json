@@ -1,5 +1,5 @@
 {
-  "status": "prepared_not_run",
+  "status": "completed_diagnostic",
   "purpose": "After A0030 validation, investigate whether full-layer working-set behavior differs from historical fixed-layer layout microbenchmarks.",
   "historical_reference": "../A0000/lookup-layout-diagnostic.json",
   "historical_helper": "../diagnose_lookup_layout.py",
@@ -15,7 +15,8 @@
     "No production table-layout change or new candidate is registered.",
     "Both pinned layouts coexist (~6000MiB), unlike a possible one-layout implementation.",
     "CPU-only gather diagnostic excludes H2D and model overlap; no end-to-end gain inference.",
-    "Mapped bulk currently requires contiguous vocab-major storage; any candidate must validate small-input paths and fresh table mutation semantics.",
-    "No real diagnostic timings have been collected."
-  ]
+    "Mapped bulk currently requires contiguous vocab-major storage; any candidate must validate small-input paths and fresh table mutation semantics."
+  ],
+  "result": "layer-working-set-A0030.json",
+  "conclusion": "No consistent full-layer layout improvement: layer-major slower at2048,4096,8192 tokens;16384 difference only0.11669ms in this same-process diagnostic. No layout candidate justified."
 }

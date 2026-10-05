@@ -1,0 +1,16 @@
+{
+  "status": "diagnostics_completed",
+  "verified_source": "A0030",
+  "source_commit": "a9e5bda62a020e4e1994037732b0dbb7606d5dda",
+  "layout_result": "layer-working-set-A0030.json",
+  "pipeline_result": "pipeline-A0030-b1-l2048-post30.json",
+  "gap_diagnostics": "../A0030/gap-diagnostics/gaps.json",
+  "findings": [
+    "Full24-layer CPU layout walk shows no consistent layer-major advantage; no layout candidate registered.",
+    "Instrumented b1/2048 producer spans: gather2.780785ms, DMA sync21.115204ms, release wait1.431885ms, buffer views0.206805ms, ticket setup0.035267ms. These overlap model execution and are not additive removable latency.",
+    "A0030 selection-data diagnostic simultaneous bounds are within tolerance at10/16 workloads; six prefill points remain unproven. This is not final acceptance."
+  ],
+  "next_question": "Inspect whether single-GPU-slot host/DMA dependency leaves avoidable gather stalls. Review historical double-host A0010 and existing host-ring diagnostic before a new experiment; no repeated hypothesis without distinguishing evidence.",
+  "new_attempt_registered": false,
+  "goal_accepted": false
+}
