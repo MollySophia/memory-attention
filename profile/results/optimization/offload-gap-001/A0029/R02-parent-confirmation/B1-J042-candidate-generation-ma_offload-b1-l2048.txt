@@ -1,0 +1,1 @@
+ma_offload       generation median=  600.960 ms  min=  600.542  max=  602.758  spread=0.37%  policy=bulk

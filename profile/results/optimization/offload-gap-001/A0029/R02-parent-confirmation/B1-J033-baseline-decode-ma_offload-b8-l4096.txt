@@ -1,0 +1,1 @@
+ma_offload       decode   median=   18.928 ms  min=   18.924  max=   18.933  spread=0.04%  policy=bulk

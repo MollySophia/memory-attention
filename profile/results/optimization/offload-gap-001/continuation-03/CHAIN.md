@@ -135,3 +135,11 @@ Plot rendering is deferred while A0029 times the GPU; reproduce the data with
 The [independent final verification workflow](FINAL_VERIFICATION.md) now has a
 standalone runner/auditor and12 CPU-tested statistical/evidence guards. No real
 final source/count plan has been frozen or executed by that helper yet.
+
+[A0029](../A0029/record.json) tested alignment-specialized compiled mapped
+launchers on A0028. All208 screen/confirmation results were audited; no gain
+survived fixed Holm12 correction, and no regression was resolved. Batch-1
+generation offload reduction4.4820ms had95%CI[-11.7042,20.6683]; the positive
+gap interval alone is insufficient. Batch-4 decode's nominal dual gain failed
+correction (p=0.08269). The verdict is within_noise; it does not enter the
+accepted chain and its execution change is reverted separately.

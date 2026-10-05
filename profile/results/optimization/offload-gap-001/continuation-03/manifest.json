@@ -80,6 +80,13 @@
         "prefill b8/512"
       ],
       "evidence": "../A0028/final-evidence-audit.json"
+    },
+    {
+      "attempt": "A0029",
+      "status": "within_noise",
+      "confirmed_local_gains": [],
+      "blocking_reason": "No eligible gain survives frozen Holm12; no resolved regression",
+      "evidence": "../A0029/evidence-integrity.json"
     }
   ],
   "retained_current": "A0028"

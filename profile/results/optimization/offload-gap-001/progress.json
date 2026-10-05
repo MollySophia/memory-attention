@@ -1,17 +1,17 @@
 {
   "campaign_id": "offload-gap-001",
   "status": "active",
-  "workflow_stage": "parent_confirmation_running",
-  "goal_progress": "A0029 complete64 screen audited. Fixed12-workload144-process independent confirmation running, including b1 resident slowdown trigger and both generation signals. No acceptance; verified retained sourceA0028.",
-  "completed_optimization_verdicts": 28,
+  "workflow_stage": "revert_pending",
+  "goal_progress": "A0029 all208 screen/confirmation raws audited. No Holm12-confirmed gain and no resolved regression; verdict within_noise. Separate source revert pending. A0028 remains verified step4; final target unmet.",
+  "completed_optimization_verdicts": 29,
   "additional_completed_verdicts": 10,
   "additional_attempt_target": [
     10,
     10
   ],
   "accepted_steps": 4,
-  "active_attempt": "A0029",
-  "controller_pid": 219097,
+  "active_attempt": null,
+  "controller_pid": null,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "6cc9354760ebde3bab9a90996a7713a936dfb439",
   "final_report": "continuation-02/final/REPORT.md",
@@ -41,6 +41,6 @@
     "workloads_passing_parent_and_current": 1,
     "accepted_new_attempts": 0
   },
-  "active_manifest": "A0029/R02-parent-confirmation/manifest.json",
-  "continuation_completed_verdicts": 8
+  "active_manifest": null,
+  "continuation_completed_verdicts": 9
 }

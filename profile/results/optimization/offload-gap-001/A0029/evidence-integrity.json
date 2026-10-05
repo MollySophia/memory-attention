@@ -1,0 +1,19 @@
+{
+  "attempt": "A0029",
+  "evidence_integrity": "passed",
+  "process_counts": {
+    "R01-complete-screen": 64,
+    "R02-parent-confirmation": 144
+  },
+  "checks": [
+    "frozen source identities",
+    "complete unique planned coverage",
+    "balanced order",
+    "raw config/sampling/memory/environment",
+    "identically recomputed fixed Holm12 analysis"
+  ],
+  "accepted": false,
+  "confirmed_local_gains": [],
+  "resolved_regressions": [],
+  "note": "No corrected eligible gain. Full retention validation not run; preserve within-noise evidence without optional extension."
+}

@@ -26,7 +26,7 @@ def collect(through):
     for number in range(21, int(through[1:]) + 1):
         attempt = f'A{number:04d}'
         record = d.record(attempt)
-        assert record['status'] in ('accepted', 'rejected'), (attempt, record['status'])
+        assert record['status'] in ('accepted', 'rejected', 'within_noise'), (attempt, record['status'])
         source = d.C / attempt / 'R02-parent-confirmation/analysis.json'
         result = d.read(source)
         assert result['status'] == 'completed'
