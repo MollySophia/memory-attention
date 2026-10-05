@@ -10,7 +10,6 @@ pass. The overall all-workload near-GPU objective remains unmet.
 | 1 | A0001 | A0000 | Lower automatic bulk cutoff to 1024 tokens | [Confirmation](../A0001/validation-v2-confirmation-analysis.json), [verdict and validation links](../A0001/record.json) |
 | 2 | A0016 | A0001 | Use one automatic pipeline slot through 2048 input tokens | [Incremental confirmation](../A0016/parent-confirmation-analysis.json), [cumulative A0000 confirmation](../A0016/validation-v3-confirmation-analysis.json), [verdict](../A0016/record.json) |
 | 3 | A0023 | A0016 | Read mapped host tables for bulk inputs of 1–16 tokens | [Incremental confirmation](../A0023/R02-parent-confirmation/analysis.json), [all-workload guards](../A0023/full-parent-analysis.json), [integrity and correctness audit](../A0023/final-evidence-audit.json), [verdict](../A0023/record.json) |
-
 | 4 | A0028 | A0023 | Share one host staging allocation at 4096–16384 input tokens, preserving four GPU slots | [Incremental confirmation](../A0028/R02-parent-confirmation/analysis.json), [all-workload guards](../A0028/full-parent-analysis.json), [integrity and correctness audit](../A0028/final-evidence-audit.json), [verdict](../A0028/record.json) |
 
 Exact implementation commits are in each record. The current verified A0028
@@ -67,6 +66,21 @@ decisions. Generation uses a 2048-token prefix plus 128 predetermined decode
 tokens. These effects must not be added to results measured at other workloads.
 
 ## Latest findings and figures
+
+[A0030](../A0030/record.json) is in progress on A0028, testing per-forward
+resolution of offload device, offloader and layer metadata plus closure-local
+callback state. Source `a9e5bda` passed 56 regression tests and the standalone
+zero-difference correctness check. Its committed screen covers all16 workloads
+in64 fresh parent/candidate placement processes. Six independent confirmation
+blocks were predeclared before measurements, motivated by the post-A0029
+between-process generation variance; the inner sampling and gain/regression
+gates are unchanged. This is not a retained step or a confirmed gain. The
+A0029 verdict stays fixed. [Helper tests](A0030-helper-tests.txt) and
+[historical recomputation audit](A0030-helper-history-audit.json) verify that
+variable block counts preserve all prior continuation statistics. Scaling
+exports now derive sample count and degrees of freedom from the frozen plan;
+[plot-data tests](A0030-plot-data-tests.txt) cover six-block completeness and
+unchanged A0023/A0028 source data. No new figures are rendered during timing.
 
 [A0029](../A0029/record.json) tested alignment-specialized compiled mapped
 launchers on A0028. All208 screen/confirmation results were audited; no gain
