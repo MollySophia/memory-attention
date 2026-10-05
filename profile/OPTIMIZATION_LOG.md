@@ -692,3 +692,7 @@ All148 raw results (64 screen+84 formal) pass source/configuration/sampling/memo
 ### Post-A0027 diagnostic direction
 
 Execution restored exactly to A0023. Isolated compiled mapped launcher saves2.3–2.4us CPU submission; b8 synchronized kernel time unchanged. CPU-only24-layer ModuleList lookup5.131839us versus per-call tuple0.368579us, too small to establish meaningful whole-model gain here. Python profiler spans are instrumented and not savings. Larger profile-supported opportunity: frozen A0026 with explicit shared-host maximum16384 atb8/2048 yields instrumented gather55.179088ms versus A0023 76.111890ms, DMA wait104.986104 versus60.280119ms, wall208.339890 versus210.315651ms. Overlapping spans cannot be added; one trajectory is not confirmation. New A0028 will extend the recovered host-staging mechanism to16384 tokens, retaining4 GPU slots, and must pass all fresh gates. Raw paths and limits: continuation-03/post27-diagnosis.json.
+
+## A0028 registered: shared host staging through16384 input tokens
+
+Verified parentA0023. Recover A0026 shared-host mechanism and extend upper bound8192→16384 to target b8/2048 in addition to b4/2048 andb8/512. Pre-registration evidence is the explicit-override pipeline diagnosis; CPU spans overlap and are not formal gains. Preserve latest-host-DMA lifetime, four GPU prefetch slots, allmapped/bulk/2048-slot policies and original A0026 adverse verdict. No dispatch/callback metadata changes. Correctness, fresh64-process full screen, fixed independent confirmation and full retention gates are mandatory before adoption.
