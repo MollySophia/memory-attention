@@ -131,3 +131,7 @@ All7 prefill points, batch-1/batch-4 decode and batch-1 generation remain
 unproven. These reuse retention evidence, not final independent verification.
 Plot rendering is deferred while A0029 times the GPU; reproduce the data with
 `python profile/results/optimization/offload-gap-001/continuation-03/plot_candidate_gaps.py --attempt A0028 --data-only`.
+
+The [independent final verification workflow](FINAL_VERIFICATION.md) now has a
+standalone runner/auditor and12 CPU-tested statistical/evidence guards. No real
+final source/count plan has been frozen or executed by that helper yet.

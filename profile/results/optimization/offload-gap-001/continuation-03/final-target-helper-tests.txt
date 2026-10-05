@@ -1,0 +1,15 @@
+
+profile/results/optimization/offload-gap-001/continuation-03/test_final_target.py::test_mean_below_tolerance_is_not_simultaneous_acceptance PASSED [  8%]
+profile/results/optimization/offload-gap-001/continuation-03/test_final_target.py::test_signed_residual_and_pair_specific_piecewise_tolerance PASSED [ 16%]
+profile/results/optimization/offload-gap-001/continuation-03/test_final_target.py::test_invalid_pair_evidence_rejected[gpu0-off0] PASSED [ 25%]
+profile/results/optimization/offload-gap-001/continuation-03/test_final_target.py::test_invalid_pair_evidence_rejected[gpu1-off1] PASSED [ 33%]
+profile/results/optimization/offload-gap-001/continuation-03/test_final_target.py::test_invalid_pair_evidence_rejected[gpu2-off2] PASSED [ 41%]
+profile/results/optimization/offload-gap-001/continuation-03/test_final_target.py::test_invalid_pair_evidence_rejected[gpu3-off3] PASSED [ 50%]
+profile/results/optimization/offload-gap-001/continuation-03/test_final_target.py::test_block_plan_requires_exact_all16_and_three_independent_pairs PASSED [ 58%]
+profile/results/optimization/offload-gap-001/continuation-03/test_final_target.py::test_frozen_plan_is_complete_balanced_and_not_replaceable PASSED [ 66%]
+profile/results/optimization/offload-gap-001/continuation-03/test_final_target.py::test_even_refrozen_plan_cannot_reuse_output_names PASSED [ 75%]
+profile/results/optimization/offload-gap-001/continuation-03/test_final_target.py::test_runner_rejects_preexisting_raw_evidence PASSED [ 83%]
+profile/results/optimization/offload-gap-001/continuation-03/test_final_target.py::test_plan_must_be_committed_byte_for_byte PASSED [ 91%]
+profile/results/optimization/offload-gap-001/continuation-03/test_final_target.py::test_completed_audit_uses_process_pairs_and_requires_every_workload PASSED [100%]
+
+============================== 12 passed in 0.26s ==============================
