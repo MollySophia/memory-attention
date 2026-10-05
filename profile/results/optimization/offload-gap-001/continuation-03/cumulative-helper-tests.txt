@@ -1,0 +1,10 @@
+
+profile/results/optimization/offload-gap-001/continuation-03/test_cumulative_baseline.py::test_frozen_complete_A0000_plan_and_mutation_guards[3] PASSED [ 14%]
+profile/results/optimization/offload-gap-001/continuation-03/test_cumulative_baseline.py::test_frozen_complete_A0000_plan_and_mutation_guards[6] PASSED [ 28%]
+profile/results/optimization/offload-gap-001/continuation-03/test_cumulative_baseline.py::test_cumulative_real_driver_handoff_and_exact_A0000_ratios[3] PASSED [ 42%]
+profile/results/optimization/offload-gap-001/continuation-03/test_cumulative_baseline.py::test_cumulative_real_driver_handoff_and_exact_A0000_ratios[6] PASSED [ 57%]
+profile/results/optimization/offload-gap-001/continuation-03/test_cumulative_baseline.py::test_nonretained_source_rejected PASSED [ 71%]
+profile/results/optimization/offload-gap-001/continuation-03/test_cumulative_baseline.py::test_preexisting_raw_result_prevents_launch[3] PASSED [ 85%]
+profile/results/optimization/offload-gap-001/continuation-03/test_cumulative_baseline.py::test_preexisting_raw_result_prevents_launch[6] PASSED [100%]
+
+============================== 7 passed in 3.85s ===============================
