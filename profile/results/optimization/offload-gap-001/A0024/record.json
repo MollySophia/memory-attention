@@ -1,0 +1,53 @@
+{
+  "campaign_id": "offload-gap-001",
+  "continuation_id": "continuation-03",
+  "attempt_id": "A0024",
+  "parent_attempt_id": "A0023",
+  "parent_source_sha": "5f3d5958fea25f953bb91f5ef6f35880ff37fcfa",
+  "parent_sha": "bf99d237b7c3f9dc684010187d124d7c40164104",
+  "accepted_step": null,
+  "label": "Recover short-prefill single-slot pipeline on mapped parent",
+  "status": "registered",
+  "workflow_stage": "correctness",
+  "hypothesis": "Extend selective single-slot pipeline to4096 total tokens, recovering A0014/A0021 b8/512 prefill gain on accepted mapped1..16 parent. Reduced pinned/GPU slot capacity and transfer scheduling overhead; prior b1 decode regression must be tested again under new transport.",
+  "change": "Only auto single-slot maximum2048->4096 and boundary/reuse tests; mapped1..16 and bulk1024 unchanged.",
+  "profile_evidence": [
+    "../A0021/record.json",
+    "../A0023/record.json",
+    "../continuation-03/short-prefill-recovery.patch"
+  ],
+  "eligible_gain_workloads": [
+    [
+      "prefill",
+      8,
+      512
+    ]
+  ],
+  "tradeoffs": [
+    "A0021 b1 decode gap regression preserved; no assumption mapped parent fixes it",
+    "Retains A0023 full3000MiB pinned CPU table"
+  ],
+  "screen": {
+    "workloads": 16,
+    "fresh_parent_candidate_processes": 64,
+    "prefill_decode": [
+      3,
+      5,
+      1
+    ],
+    "generation": [
+      2,
+      3,
+      1
+    ]
+  },
+  "confirmation_rule": "Unchanged continuation03 complete-screen nomination, exactly3 balanced fresh blocks, fixed Holm gain family and signed95% regression guards; no optional extension.",
+  "expected_offload_config": {
+    "memory_offload_bulk_max_tokens": 1024,
+    "memory_offload_single_slot_max_tokens": 4096,
+    "memory_offload_mapped_bulk": true,
+    "memory_offload_mapped_bulk_min_tokens": 1,
+    "memory_offload_mapped_bulk_max_tokens": 16
+  },
+  "created_unix": 1791174358.0120673
+}
