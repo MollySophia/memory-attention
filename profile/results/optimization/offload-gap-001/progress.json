@@ -1,8 +1,8 @@
 {
   "campaign_id": "offload-gap-001",
   "status": "active",
-  "workflow_stage": "profiling",
-  "goal_progress": "A0025 rejected after64 screen+96 confirmation processes: no confirmed gain; b1 decode resident guard failed. Restore A0023 and diagnose next offload-specific change.",
+  "workflow_stage": "screening",
+  "goal_progress": "A0026 shared host staging candidate passed46 regressions and standalone exactness; frozen64-process screen on A0023 comparator, estimated1154.67s.",
   "completed_optimization_verdicts": 25,
   "additional_completed_verdicts": 10,
   "additional_attempt_target": [
@@ -10,7 +10,7 @@
     10
   ],
   "accepted_steps": 3,
-  "active_attempt": null,
+  "active_attempt": "A0026",
   "controller_pid": null,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "5f3d5958fea25f953bb91f5ef6f35880ff37fcfa",
@@ -41,6 +41,6 @@
     "workloads_passing_parent_and_current": 1,
     "accepted_new_attempts": 0
   },
-  "active_manifest": null,
+  "active_manifest": "A0026/R01-complete-screen/manifest.json",
   "continuation_completed_verdicts": 5
 }

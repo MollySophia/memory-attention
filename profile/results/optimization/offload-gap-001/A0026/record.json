@@ -7,8 +7,8 @@
   "parent_sha": "d44d2978b7ffd4294e77e76ae385f4309351c75a",
   "accepted_step": null,
   "label": "One host staging buffer with multi-slot GPU prefetch",
-  "status": "planned",
-  "workflow_stage": "registered",
+  "status": "pending",
+  "workflow_stage": "screening",
   "hypothesis": "Reduce active pinned-host working set and CPU gather cost while retaining GPU lookahead. CPU diagnostic four-to-one host buffer means14.738 to6.288ms at4096 tokens and33.462 to14.128ms at8192, without H2D/model overlap. Full-model benefit is unproven.",
   "change": "Share one pinned host buffer only for automatic pipeline with4096..8192 total tokens; retain separate GPU slots, consumed events and existing2048 single-slot bound. Synchronize most recent host DMA before any overwrite, across slots and forwards.",
   "profile_evidence": [
@@ -57,5 +57,17 @@
     "memory_offload_single_host_min_tokens": 4096,
     "memory_offload_single_host_max_tokens": 8192
   },
-  "created_unix": 1791182905.2521293
+  "created_unix": 1791182905.2521293,
+  "candidate_sha": "315478c7cf22fc12429d877c11fe6aab99b8833a",
+  "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0026",
+  "correctness": {
+    "pytest": "46 passed in12.89s",
+    "standalone": "PASS; worst max difference0",
+    "helpers": "11 passed in0.41s",
+    "logs": [
+      "correctness-tests.txt",
+      "standalone-correctness.txt",
+      "helper-tests.txt"
+    ]
+  }
 }
