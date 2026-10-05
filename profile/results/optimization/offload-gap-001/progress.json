@@ -2,7 +2,7 @@
   "campaign_id": "offload-gap-001",
   "status": "active",
   "workflow_stage": "full_validation",
-  "goal_progress": "A0023 all16 formal parent-paired workloads complete, no resolved regression; folding references running. Four observed mean gaps remain above target, uncertainty and correctness gates pending.",
+  "goal_progress": "A0023 all performance stages complete:288 raw results pass cross-stage integrity audit. Six full-model correctness pairs running, first b1/2048 seed1234 bit-exact.",
   "completed_optimization_verdicts": 22,
   "additional_completed_verdicts": 10,
   "additional_attempt_target": [
@@ -42,6 +42,6 @@
     "workloads_passing_parent_and_current": 1,
     "accepted_new_attempts": 0
   },
-  "active_manifest": "A0023/R04-unfolded-reference/manifest.json",
+  "active_manifest": "A0023/validation-controller.json",
   "continuation_completed_verdicts": 2
 }

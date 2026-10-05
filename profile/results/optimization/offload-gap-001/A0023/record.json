@@ -559,5 +559,13 @@
   "validation_plan": "validation-plan.json",
   "full_parent_analysis": "full-parent-analysis.json",
   "full_matrix_decision": "All16 parent-paired workloads complete across192 formal processes; no resolved offload/gap/resident regression and memory savings preserved. Source/environment/sampling/memory audit across256 screen+formal raw results passed. Folding/full-model correctness still pending.",
-  "candidate_gap_preview": "candidate-gap-preview.json"
+  "candidate_gap_preview": "candidate-gap-preview.json",
+  "performance_integrity_audit": {
+    "status": "passed",
+    "screen": 64,
+    "selected_confirmation": 108,
+    "remaining_confirmation": 84,
+    "unfolded_reference": 32,
+    "command": "python continuation-03/audit_completed.py --attempt A0023 (audit_manifests function only; full correctness pending)"
+  }
 }

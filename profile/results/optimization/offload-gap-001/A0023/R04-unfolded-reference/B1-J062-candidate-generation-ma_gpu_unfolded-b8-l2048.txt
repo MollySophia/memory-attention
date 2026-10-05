@@ -1,0 +1,1 @@
+ma_gpu_unfolded  generation median= 1357.310 ms  min= 1356.881  max= 1358.353  spread=0.11%  policy=none
