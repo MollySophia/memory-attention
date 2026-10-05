@@ -234,10 +234,10 @@ def test_auto_policy_boundary_and_shape_reuse(model):
 @pytest.mark.parametrize('policy', ['auto', 'pipeline'])
 def test_selective_depth_boundary_capacity_and_exactness(model, policy):
     model.config.memory_offload_policy = policy
-    assert model.config.memory_offload_single_slot_max_tokens == 2048
+    assert model.config.memory_offload_single_slot_max_tokens == 4096
     model.config.memory_offload_prefetch_depth = 4
     gate = load_script('test_memory_offload')
-    for batch, length in [(1,1024),(1,1025),(1,2048),(1,2049),(2,1025),(1,1025)]:
+    for batch, length in [(1,1024),(1,1025),(1,2048),(1,2049),(2,2048),(1,4097),(2,2049),(8,512),(8,513),(1,1025)]:
         ids = torch.randint(0,128,(batch,length),device='cuda')
         expected = gate.resident_prefill(model,ids)
         model.enable_memory_offload()
@@ -248,7 +248,7 @@ def test_selective_depth_boundary_capacity_and_exactness(model, policy):
         if policy == 'auto' and batch * length <= 1024:
             assert off.policy == 'bulk'
         else:
-            slots = 1 if policy == 'auto' and batch * length <= 2048 else min(4,len(model.model.layers))
+            slots = 1 if policy == 'auto' and batch * length <= 4096 else min(4,len(model.model.layers))
             assert off.policy == 'pipeline' and len(off.slots) == slots
             expected_bytes = slots * batch * length * off.group * off.dim * off.weights.element_size()
             telemetry = load_script('benchmark_telemetry')
