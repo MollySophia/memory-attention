@@ -1,0 +1,111 @@
+{
+  "campaign_id": "offload-gap-001",
+  "continuation_id": "continuation-03",
+  "attempt_id": "A0031",
+  "parent_attempt_id": "A0030",
+  "parent_source_sha": "a9e5bda62a020e4e1994037732b0dbb7606d5dda",
+  "parent_sha": "69bd6f67e572e2e35b12c9f59ebd84b33c40d2fe",
+  "accepted_step": null,
+  "label": "Mapped first pipeline group with existing CPU-DMA steady state",
+  "status": "planned",
+  "workflow_stage": "registered",
+  "hypothesis": "A0030 compute-stream dependency diagnostics concentrate waits in first layer:0.222208/0.284640ms atb1 and2.650176/2.706816ms atb8. Historical one-layer mapped64-CTA lookup beats CPU gather/H2D, while all-layer mapped A0008 failed model screening. Restrict mapped reads to first group to reduce startup latency without replacing steady-state DMA or consuming SMs across every layer.",
+  "change": "Add an opt-in pipeline mapped-first-group path and enable it for automatic pipeline policy with the already-pinned contiguous host table. Keep all subsequent groups on current CPU gather/H2D path, preserving slot reuse, single-host policy, entry/consumed/copied dependencies and exact layer computation. Bulk and resident implementations unchanged. No cached rows or resident table subset.",
+  "profile_evidence": [
+    "../continuation-03/pipeline-dependency-diagnosis-A0030.json",
+    "../continuation-03/pipeline-dependencies-A0030-b1.json",
+    "../continuation-03/pipeline-dependencies-A0030-b8.json",
+    "../continuation-01/transfer-alternatives-bounded.json",
+    "../A0008/record.json",
+    "../A0019/record.json",
+    "../A0010/record.json"
+  ],
+  "eligible_gain_workloads": [
+    [
+      "prefill",
+      1,
+      2048
+    ],
+    [
+      "prefill",
+      4,
+      2048
+    ],
+    [
+      "prefill",
+      8,
+      2048
+    ],
+    [
+      "prefill",
+      16,
+      2048
+    ],
+    [
+      "prefill",
+      8,
+      512
+    ],
+    [
+      "prefill",
+      8,
+      4096
+    ],
+    [
+      "prefill",
+      8,
+      8192
+    ],
+    [
+      "generation",
+      1,
+      2048
+    ],
+    [
+      "generation",
+      8,
+      2048
+    ]
+  ],
+  "tradeoffs": [
+    "Mapped first-group kernel competes with first-layer compute; isolated transfer benefit may disappear.",
+    "Existing GPU-input to CPU staging remains; first-group GPU IDs may require a bounded fresh upload and must have correct stream lifetime.",
+    "Use a dedicated first-group completion event so host table mutation remains safe without forcing completion of later layer compute. Close/error cleanup must synchronize mapped reads.",
+    "First ticket must use normal copied/consumed and host ownership rules even though first host buffer has not been written by CPU gather.",
+    "No extra GPU table cache; count any new ID/event/buffer allocations in memory evidence.",
+    "Historical A0008/A0019/A0010 rejection verdicts remain unchanged; this new hybrid path must earn its own independent full-matrix result."
+  ],
+  "screen": {
+    "workloads": 16,
+    "fresh_parent_candidate_processes": 64,
+    "prefill_decode": [
+      3,
+      5,
+      1
+    ],
+    "generation": [
+      2,
+      3,
+      1
+    ]
+  },
+  "confirmation_blocks": 6,
+  "confirmation_rule": "Complete64-process fresh parent/candidate full screen. Freeze positive offload+gap nomination and regression triggers under existing driver/confirm rules, then fixed six fresh balanced independent blocks and Holm family. No optional extension. Full16 regression, folding and six full-model correctness pairs required before retention.",
+  "expected_offload_config": {
+    "memory_offload_bulk_max_tokens": 1024,
+    "memory_offload_single_slot_max_tokens": 2048,
+    "memory_offload_mapped_bulk": true,
+    "memory_offload_mapped_bulk_min_tokens": 1,
+    "memory_offload_mapped_bulk_max_tokens": 16,
+    "memory_offload_single_host_min_tokens": 4096,
+    "memory_offload_single_host_max_tokens": 16384,
+    "memory_offload_mapped_first_group": true
+  },
+  "correctness_plan": [
+    "Run existing offload/decode regression suites and standalone correctness before performance.",
+    "Exercise first and later groups, group boundaries, slot reuse, single-host and separate-host storage, changing IDs and CPU table mutations, caller-stream switches, multiple shapes/seeds and non-unit norm weights.",
+    "Cover disabled/unpinned fallback and invalid inputs; preserve CPU-table lifetime on normal/error/close paths.",
+    "Full model bit-exact against A0000 resident, six fixed pairs, before retention."
+  ],
+  "created_unix": 1791219714.9807673
+}
