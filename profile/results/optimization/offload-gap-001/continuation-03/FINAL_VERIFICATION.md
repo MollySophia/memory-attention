@@ -57,8 +57,12 @@ also needs the verified implementation, cumulative A0000 evidence, ledger,
 figures, commands and publication requirements in GOAL.md. The tool deliberately
 never sets `goal_accepted` true.
 
-CPU-only validation: `test_final_target.py`, 12 passed. The tests include a case
+CPU-only validation: `test_final_target.py`, 13 passed. The tests include a case
 where the mean and ordinary one-sided95% bound pass but the required simultaneous
 bound fails; they also reject missing/duplicate coverage, changed commands,
 preexisting output and uncommitted/modified plans. Synthetic audit evidence is
 confined to pytest temporary directories and does not count as real measurements.
+The runner handoff test also executes the real shared driver with fake benchmark
+children, verifies all96 processes and the final audit, and refuses a rerun.
+It caught and fixed a missing `formal` field assumption introduced by the
+variable-block parent-comparison update; no real final measurement was affected.

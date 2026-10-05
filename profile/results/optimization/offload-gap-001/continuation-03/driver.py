@@ -137,8 +137,9 @@ def run(directory,resume=False):
   p.setdefault('recovery_history',[]).append(dict(previous_controller_pid=p.get('controller_pid'),previous_error=p.get('error'),resumed_unix=time.time(),reason='Explicit audited recovery; retain completed raw jobs and execute pending only'))
   p.pop('error',None)
  else:assert p['status']=='planned'
- blocks=planned_blocks(p)
- if p['formal']:validate_balanced_order(p['jobs'],blocks)
+ # Parent-comparison plans carry `formal`; final target plans have their own
+ # per-workload pair validator and no baseline/candidate four-cell blocks.
+ if p.get('formal',False):validate_balanced_order(p['jobs'],planned_blocks(p))
  for s in p['source_signatures'].values():assert signature(s['attempt'])==s
  p.update(status='running',controller_pid=os.getpid(),started_unix=time.time());save(path,p)
  try:

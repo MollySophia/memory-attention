@@ -129,3 +129,36 @@ def test_completed_audit_uses_process_pairs_and_requires_every_workload(prepared
     f.d.save(directory/'manifest.json',manifest)
     with pytest.raises(AssertionError):
         f.audit(attempt)
+
+
+def test_final_plan_runs_through_shared_driver_and_audits_without_gpu(prepared,monkeypatch):
+    """Exercise the real runner handoff, with only benchmark child execution faked."""
+    from pathlib import Path
+    attempt,directory,plan,_=prepared
+    monkeypatch.setattr(f,'committed_plan',lambda path:'plan-commit')
+    launched=[]
+    class Child:
+        def __init__(self,command,**kwargs):
+            launched.append(command)
+            self.pid=10000+len(launched)
+            self.path=Path(command[command.index('--json')+1])
+        def wait(self):
+            f.d.save(self.path,dict(status='completed'))
+            return 0
+    monkeypatch.setattr(f.d.subprocess,'Popen',Child)
+    def raw(job,path):
+        gpu=job['variant']=='ma_gpu'
+        mean=100. if gpu else 99.
+        return ('same-environment',),dict(mean_ms=mean,samples_ms=[[mean]*10 for _ in range(3)],
+                                         memory_after=dict(gpu_peak_allocated_bytes=200 if gpu else 100))
+    monkeypatch.setattr(f.d,'audit_job',raw)
+    f.run(attempt)
+    assert len(launched)==len(plan['jobs'])==96
+    manifest=f.d.read(directory/'manifest.json')
+    assert manifest['status']=='completed'
+    assert all(j['status']=='completed' and j['returncode']==0 for j in manifest['jobs'])
+    result=f.d.read(directory/'analysis.json')
+    assert result['all_workloads_within_target'] and result['all_memory_savings_preserved']
+    assert not result['goal_accepted']
+    with pytest.raises(AssertionError):f.run(attempt)
+    assert len(launched)==96
