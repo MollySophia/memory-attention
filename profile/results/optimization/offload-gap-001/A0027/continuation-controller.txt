@@ -1,0 +1,2 @@
+{"jobs": 84, "estimated_seconds": 2064.809893947467}
+{"status": "completed", "attempt": "A0027", "baseline": "A0023", "fixed_gain_family": 7, "confirmed_local_gains": [], "resolved_regressions": [["generation", 8, 2048]], "accepted": false, "note": "No automatic acceptance. Complete correctness/full validation required; target residual bounds cover selected points only, not final goal completion."}

@@ -64,6 +64,13 @@
       ],
       "blocking_regression": "generation b1/2048 offload latency",
       "evidence": "../A0026/evidence-integrity.json"
+    },
+    {
+      "attempt": "A0027",
+      "status": "rejected",
+      "confirmed_local_gains": [],
+      "blocking_reason": "No confirmed gain; b8 generation offload regression",
+      "evidence": "../A0027/evidence-integrity.json"
     }
   ],
   "retained_current": "A0023"

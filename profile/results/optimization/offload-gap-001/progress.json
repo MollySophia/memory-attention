@@ -1,17 +1,17 @@
 {
   "campaign_id": "offload-gap-001",
   "status": "active",
-  "workflow_stage": "parent_confirmation_running",
-  "goal_progress": "A0027 complete64 screen audited;7workload84process independent confirmation running. Changed b1 targets lack positive dual screen evidence. No acceptance; verified sourceA0023.",
-  "completed_optimization_verdicts": 26,
+  "workflow_stage": "restoring_verified_source",
+  "goal_progress": "A0027 rejected after64 screen+84 confirmation processes: no confirmed gain, b8 generation offload slowdown. Restore A0023; isolate mapped launcher dispatch next.",
+  "completed_optimization_verdicts": 27,
   "additional_completed_verdicts": 10,
   "additional_attempt_target": [
     10,
     10
   ],
   "accepted_steps": 3,
-  "active_attempt": "A0027",
-  "controller_pid": 71576,
+  "active_attempt": null,
+  "controller_pid": null,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "5f3d5958fea25f953bb91f5ef6f35880ff37fcfa",
   "final_report": "continuation-02/final/REPORT.md",
@@ -41,6 +41,6 @@
     "workloads_passing_parent_and_current": 1,
     "accepted_new_attempts": 0
   },
-  "active_manifest": "A0027/R02-parent-confirmation/manifest.json",
-  "continuation_completed_verdicts": 6
+  "active_manifest": null,
+  "continuation_completed_verdicts": 7
 }
