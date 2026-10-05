@@ -8,7 +8,7 @@
   "accepted_step": null,
   "label": "Caller-stream mapped gather for one-token inputs",
   "status": "testing",
-  "workflow_stage": "correctness_passed",
+  "workflow_stage": "complete_screen_running",
   "hypothesis": "Reduce b1 mapped scheduling CPU overhead (diagnostic nonconsumer0.060064ms/call, before-first-consumer0.047555ms) by removing copy-stream context and entry dependency. Lost gather/QK overlap may offset improvement.",
   "change": "Mapped bulk at one total input token only uses caller compute stream. Wait for previous consumed event before output reuse; synchronize gather-completion event before returning to preserve host table and ID lifetime. Keep other mapped/pipeline/bulk paths and buffers unchanged.",
   "profile_evidence": [

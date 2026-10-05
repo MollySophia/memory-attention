@@ -57,6 +57,16 @@ workload panels for the recovered, nonretained local gains, retaining their
 named comparator, intervals and adverse findings. Do not splice the fastest
 points from different candidates into a final implementation.
 
+Continuation findings through A0026 are now exported as paired
+[local-gain panels](local-findings-through-A0026/local-gains.pdf) and
+[blocking-guard panels](local-findings-through-A0026/blocking-guards.pdf), with
+PNG/SVG companions. The complete 55 nominated workload comparisons, including
+within-noise results, are in [CSV](local-findings-through-A0026/findings.csv) and
+[JSON](local-findings-through-A0026/findings.json). Regenerate with
+`python profile/results/optimization/offload-gap-001/continuation-03/plot_local_findings.py --through A0026`.
+The script recomputes paired intervals and checks the frozen Holm adjustment;
+it does not merge evidence from different comparators or revise verdicts.
+
 [A0023 gap diagnostics](../A0023/gap-diagnostics/gaps.json) and the accompanying
 [CSV](../A0023/gap-diagnostics/gaps.csv) and
 [plot](../A0023/gap-diagnostics/gaps.pdf) cover all 16 workloads from its formal
