@@ -8,7 +8,7 @@
   "accepted_step": null,
   "label": "Mapped bulk for all1..16-token inputs",
   "status": "registered",
-  "workflow_stage": "implementation",
+  "workflow_stage": "screening",
   "hypothesis": "Avoid b1/b4 GPU-ID D2H and CPU gather by extending recovered mapped bulk to1..16 tokens, while preserving b8 generation mechanism and A0016 selective pipeline.",
   "change": "Port A0022 mapped implementation onto verified A0016 with mapped minimum1 instead of8. Do not integrate short-prefill threshold until transport candidate validates.",
   "profile_evidence": [
@@ -89,5 +89,17 @@
     "memory_offload_mapped_bulk_min_tokens": 1,
     "memory_offload_mapped_bulk_max_tokens": 16
   },
-  "created_unix": 1791166934.9834507
+  "created_unix": 1791166934.9834507,
+  "candidate_sha": "5f3d5958fea25f953bb91f5ef6f35880ff37fcfa",
+  "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0023",
+  "correctness": {
+    "pytest": "41 passed in12.90s",
+    "standalone": "PASS; worst max difference0",
+    "sampling_and_helpers": "============================== 27 passed in 2.92s ==============================",
+    "logs": [
+      "correctness-tests.txt",
+      "standalone-correctness.txt",
+      "sampling-and-helper-tests.txt"
+    ]
+  }
 }

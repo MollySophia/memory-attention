@@ -1,0 +1,34 @@
+
+tests/test_sampling_plans.py::test_cli_defaults[prefill-extra0-expected0] 
+-------------------------------- live log call ---------------------------------
+INFO     numexpr.utils:utils.py:149 Note: NumExpr detected 32 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+INFO     numexpr.utils:utils.py:162 NumExpr defaulting to 16 threads.
+PASSED                                                                   [  3%]
+tests/test_sampling_plans.py::test_cli_defaults[decode-extra1-expected1] PASSED [  7%]
+tests/test_sampling_plans.py::test_cli_defaults[generation-extra2-expected2] PASSED [ 11%]
+tests/test_sampling_plans.py::test_cli_defaults[decode-extra3-expected3] PASSED [ 14%]
+tests/test_sampling_plans.py::test_cli_defaults[prefill-extra4-expected4] PASSED [ 18%]
+tests/test_sampling_plans.py::test_cli_defaults[generation-extra5-expected5] PASSED [ 22%]
+tests/test_sampling_plans.py::test_cli_defaults[generation-extra6-expected6] PASSED [ 25%]
+tests/test_sampling_plans.py::test_cli_defaults[prefill-extra7-expected7] PASSED [ 29%]
+tests/test_sampling_plans.py::test_explicit_override_is_identified PASSED [ 33%]
+tests/test_sampling_plans.py::test_invalid_plans_rejected[generation-extra0] PASSED [ 37%]
+tests/test_sampling_plans.py::test_invalid_plans_rejected[prefill-extra1] PASSED [ 40%]
+tests/test_sampling_plans.py::test_invalid_plans_rejected[decode-extra2] PASSED [ 44%]
+tests/test_sampling_plans.py::test_invalid_plans_rejected[decode-extra3] PASSED [ 48%]
+tests/test_sampling_plans.py::test_matrix_child_plan_matches_manifest[screening-8] PASSED [ 51%]
+tests/test_sampling_plans.py::test_matrix_child_plan_matches_manifest[confirmation-8] PASSED [ 55%]
+tests/test_sampling_plans.py::test_matrix_child_plan_matches_manifest[full_validation-48] PASSED [ 59%]
+tests/test_sampling_plans.py::test_matrix_child_plan_matches_manifest[generation_validation-6] PASSED [ 62%]
+tests/test_sampling_plans.py::test_matrix_child_plan_matches_manifest[legacy-48] PASSED [ 66%]
+tests/test_sampling_plans.py::test_baseline_and_pipeline_screen_shapes PASSED [ 70%]
+profile/results/optimization/offload-gap-001/continuation-03/test_driver.py::test_complete_scope_has_no_duplicate_or_missing_workload PASSED [ 74%]
+profile/results/optimization/offload-gap-001/continuation-03/test_driver.py::test_screen_plans_all_placements_and_short_full_trajectories PASSED [ 77%]
+profile/results/optimization/offload-gap-001/continuation-03/test_driver.py::test_confirmation_blocks_remain_balanced_and_separate PASSED [ 81%]
+profile/results/optimization/offload-gap-001/continuation-03/test_driver.py::test_nomination_keeps_secondary_gains_primary_controls_and_regressions PASSED [ 85%]
+profile/results/optimization/offload-gap-001/continuation-03/test_driver.py::test_fixed_family_holm_does_not_drop_unfavorable_values PASSED [ 88%]
+profile/results/optimization/offload-gap-001/continuation-03/test_driver.py::test_validation_completes_only_missing_points_and_keeps_folding_scope PASSED [ 92%]
+profile/results/optimization/offload-gap-001/continuation-03/test_audit_completed.py::test_cross_stage_audit_requires_complete_unique_matching_evidence PASSED [ 96%]
+profile/results/optimization/offload-gap-001/continuation-03/test_audit_completed.py::test_correctness_audit_checks_source_scope_and_recomputes_comparison PASSED [100%]
+
+============================== 27 passed in 2.92s ==============================
