@@ -9,10 +9,6 @@ import json
 import math
 from pathlib import Path
 
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
-
 import driver as d
 from confirm import holm
 
@@ -42,6 +38,7 @@ def collect(through):
             out = dict(attempt=attempt, comparator=result['baseline'],
                        candidate_status=record['status'], mode=r['mode'],
                        batch=r['batch'], length=r['length'],
+                       independent_blocks=len(pairs), degrees_of_freedom=len(pairs)-1,
                        confirmed_local_gain=r['confirmed_local_gain'],
                        holm_adjusted_p=p, fixed_gain_family=result['fixed_gain_family'],
                        memory_savings_preserved=r['memory_savings_preserved'],
@@ -66,6 +63,9 @@ def adverse(row):
 
 
 def figures(rows, directory):
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
     gains = [r for r in rows if r['confirmed_local_gain']]
     guards = [r for r in rows if adverse(r)]
     for name, selected, metric_count in [('local-gains', gains, 2), ('blocking-guards', guards, 3)]:
@@ -83,7 +83,7 @@ def figures(rows, directory):
                     [r[f'{metric}_upper_95'] - r[f'{metric}_mean'] for r in subset]],
                     fmt='o', markersize=4, capsize=3, color=COLORS[mi], label=LABELS[mi])
             ax.axhline(0, color='black', linewidth=.7)
-            labels = [f"{r['attempt']} vs {r['comparator']}\n{r['candidate_status']}" +
+            labels = [f"{r['attempt']} vs {r['comparator']}\n{r['candidate_status']}; n={r['independent_blocks']}" +
                       (f"\nHolm p={r['holm_adjusted_p']:.4f}" if name == 'local-gains' else '')
                       for r in subset]
             ax.set_xticks(range(len(subset)), labels, fontsize=8)
@@ -109,7 +109,7 @@ def figures(rows, directory):
         plt.close(fig)
 
 
-def main(through):
+def main(through, data_only=False):
     rows = collect(through)
     directory = d.D / f'local-findings-through-{through}'
     directory.mkdir(exist_ok=True)
@@ -123,7 +123,8 @@ def main(through):
         writer = csv.DictWriter(f, fieldnames=list(rows[0]))
         writer.writeheader()
         writer.writerows(rows)
-    figures(rows, directory)
+    if not data_only:
+        figures(rows, directory)
     print(json.dumps(dict(output=str(directory), rows=len(rows),
                           local_gains=sum(r['confirmed_local_gain'] for r in rows),
                           blocking_guard_workloads=sum(adverse(r) for r in rows))))
@@ -132,4 +133,6 @@ def main(through):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--through', required=True)
-    main(parser.parse_args().through)
+    parser.add_argument('--data-only', action='store_true', help='Export data without rendering during live timing')
+    args = parser.parse_args()
+    main(args.through, args.data_only)

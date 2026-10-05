@@ -1,0 +1,5 @@
+
+profile/results/optimization/offload-gap-001/continuation-03/test_plot_local_findings.py::test_historical_metrics_unchanged_with_explicit_counts PASSED [ 50%]
+profile/results/optimization/offload-gap-001/continuation-03/test_plot_local_findings.py::test_synthetic_six_block_export_records_count_and_df PASSED [100%]
+
+============================== 2 passed in 0.23s ===============================
