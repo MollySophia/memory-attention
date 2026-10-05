@@ -1,0 +1,32 @@
+{
+  "status": "diagnostic_only",
+  "source": "A0022",
+  "results": [
+    {
+      "mapped_min_tokens": 8,
+      "diagnostic_trajectory_ms": 617.4881323240697,
+      "events": [
+        {
+          "key": "aten::index_select",
+          "count": 8,
+          "self_cpu_time_total_us": 199.30499999999188,
+          "cpu_time_total_us": 239.24899999999627
+        }
+      ]
+    },
+    {
+      "mapped_min_tokens": 1,
+      "diagnostic_trajectory_ms": 606.0092388652265,
+      "events": [
+        {
+          "key": "aten::index_select",
+          "count": 4,
+          "self_cpu_time_total_us": 441.1240000000139,
+          "cpu_time_total_us": 465.44000000001006
+        }
+      ]
+    }
+  ],
+  "limitation": "One trajectory per setting, profiler records later calls separately. Profiling overhead and run variability preclude performance claims.",
+  "next_hypothesis": "Map all1..16-token bulk inputs to avoid CPU ID staging and gather in b1/b4 while preserving b8 generation mechanism."
+}

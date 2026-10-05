@@ -6,9 +6,9 @@
   "historical_seal": "2cac8b4df73966fff2b9b4f724000d3b3a19e2f0",
   "proposed_chain": [
     "A0016",
-    "A0022: mapped bulk8..16 tokens recovered from A0013",
-    "next: integrate confirmed A0021 short-prefill opportunity on verified mapped parent",
-    "further profile-driven gap optimization across all16 workloads"
+    "A0023: mapped bulk1..16 pending validation",
+    "integrate confirmed A0021 short-prefill opportunity on verified transport parent",
+    "profile and optimize remaining all16 target gaps"
   ],
   "acceptance": "Confirmed offload+gap gain at any fixed workload, no resolved complete-matrix regression, correct computation and preserved GPU savings. No automatic adoption of historical sources.",
   "target_tolerance": {
@@ -24,6 +24,12 @@
       "status": "rejected",
       "confirmed_local_gain": "prefill b8/512",
       "blocking_regression": "decode b1/2048 gap"
+    },
+    {
+      "attempt": "A0022",
+      "status": "rejected",
+      "confirmed_local_gain": "generation b8/2048",
+      "blocking_regression": "generation b1/2048 latency and gap"
     }
   ]
 }

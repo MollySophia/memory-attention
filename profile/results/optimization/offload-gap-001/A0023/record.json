@@ -1,0 +1,93 @@
+{
+  "campaign_id": "offload-gap-001",
+  "continuation_id": "continuation-03",
+  "attempt_id": "A0023",
+  "parent_attempt_id": "A0016",
+  "parent_source_sha": "0ce6645eb4c4bc3992258ad0878c72ea3c37a64e",
+  "parent_sha": "5089e76867f97864a6d6109fd7db2dad4172fb24",
+  "accepted_step": null,
+  "label": "Mapped bulk for all1..16-token inputs",
+  "status": "registered",
+  "workflow_stage": "implementation",
+  "hypothesis": "Avoid b1/b4 GPU-ID D2H and CPU gather by extending recovered mapped bulk to1..16 tokens, while preserving b8 generation mechanism and A0016 selective pipeline.",
+  "change": "Port A0022 mapped implementation onto verified A0016 with mapped minimum1 instead of8. Do not integrate short-prefill threshold until transport candidate validates.",
+  "profile_evidence": [
+    "../continuation-03/b1-mapped-range-diagnosis.json",
+    "../A0022/R02-parent-confirmation/analysis.json"
+  ],
+  "eligible_gain_workloads": [
+    [
+      "generation",
+      1,
+      2048
+    ],
+    [
+      "generation",
+      8,
+      2048
+    ],
+    [
+      "decode",
+      1,
+      2048
+    ],
+    [
+      "decode",
+      4,
+      2048
+    ],
+    [
+      "decode",
+      8,
+      2048
+    ],
+    [
+      "decode",
+      16,
+      2048
+    ],
+    [
+      "decode",
+      8,
+      512
+    ],
+    [
+      "decode",
+      8,
+      4096
+    ],
+    [
+      "decode",
+      8,
+      8192
+    ]
+  ],
+  "tradeoffs": [
+    "Pins full3000MiB CPU table, counted once",
+    "GPU reads host table; lifetime synchronization unchanged",
+    "A0022 b1 regression preserved; extension is a new hypothesis, not optional retesting"
+  ],
+  "screen": {
+    "workloads": 16,
+    "fresh_parent_candidate_processes": 64,
+    "prefill_decode": [
+      3,
+      5,
+      1
+    ],
+    "generation": [
+      2,
+      3,
+      1
+    ]
+  },
+  "confirmation_rule": "Unchanged continuation03 complete-screen nomination, exactly3 balanced fresh blocks, fixed Holm gain family and signed95% regression guards; no optional extension.",
+  "expected_offload_config": {
+    "memory_offload_bulk_max_tokens": 1024,
+    "memory_offload_single_slot_max_tokens": 2048,
+    "memory_offload_mapped_bulk": true,
+    "memory_offload_mapped_bulk_min_tokens": 1,
+    "memory_offload_mapped_bulk_max_tokens": 16
+  },
+  "created_unix": 1791166934.9834507
+}
