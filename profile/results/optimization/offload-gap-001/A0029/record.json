@@ -8,7 +8,7 @@
   "accepted_step": null,
   "label": "Explicit-stream compiled mapped gather launch",
   "status": "testing",
-  "workflow_stage": "registered",
+  "workflow_stage": "screen_planned",
   "hypothesis": "Mapped launch Python dispatch and stream context cost can be reduced using the same compiled kernel runner with explicit copy-stream handle; isolated b1 submit10.444859 to3.854606us, b8 submit9.845417 to3.711913us. Whole-model benefit remains unproven.",
   "change": "Cache the exact compiled mapped-gather runner per ID pointer-alignment specialization after ordinary JIT launch, use explicit copy stream thereafter, preserving device context and all existing entry/consumed/copied/lifetime dependencies. No event reuse, caller-stream gather, callback or generic model changes.",
   "profile_evidence": [
@@ -93,5 +93,18 @@
     "memory_offload_single_host_min_tokens": 4096,
     "memory_offload_single_host_max_tokens": 16384
   },
-  "created_unix": 1791200610.5305603
+  "created_unix": 1791200610.5305603,
+  "candidate_sha": "f4cead8e0e33c6fac45adda59ac8e0e9a89067eb",
+  "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0029",
+  "correctness": {
+    "pytest": "48 passed in12.90s",
+    "standalone": "PASS; worst max difference0",
+    "sampling_and_helpers": "31 passed in3.05s",
+    "logs": [
+      "correctness-tests.txt",
+      "standalone-correctness.txt",
+      "sampling-and-helper-tests.txt"
+    ]
+  },
+  "screen_manifest": "R01-complete-screen/manifest.json"
 }
