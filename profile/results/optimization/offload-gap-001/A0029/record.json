@@ -8,7 +8,7 @@
   "accepted_step": null,
   "label": "Explicit-stream compiled mapped gather launch",
   "status": "testing",
-  "workflow_stage": "screen_planned",
+  "workflow_stage": "screening",
   "hypothesis": "Mapped launch Python dispatch and stream context cost can be reduced using the same compiled kernel runner with explicit copy-stream handle; isolated b1 submit10.444859 to3.854606us, b8 submit9.845417 to3.711913us. Whole-model benefit remains unproven.",
   "change": "Cache the exact compiled mapped-gather runner per ID pointer-alignment specialization after ordinary JIT launch, use explicit copy stream thereafter, preserving device context and all existing entry/consumed/copied/lifetime dependencies. No event reuse, caller-stream gather, callback or generic model changes.",
   "profile_evidence": [

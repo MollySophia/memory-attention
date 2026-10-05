@@ -123,3 +123,11 @@ Final deliverables still require updated ledger/figures through the final
 retained source, fresh cumulative A0000 comparisons, and independent all-16
 confirmation of the user-approved latency tolerance. This index is not a final
 publication or completion claim.
+
+A0028's [current gap data](../A0028/gap-diagnostics/gaps.json) and
+[CSV](../A0028/gap-diagnostics/gaps.csv) cover all16 workloads. Only6/16
+diagnostic simultaneous bounds meet tolerance despite15/16 favorable means.
+All7 prefill points, batch-1/batch-4 decode and batch-1 generation remain
+unproven. These reuse retention evidence, not final independent verification.
+Plot rendering is deferred while A0029 times the GPU; reproduce the data with
+`python profile/results/optimization/offload-gap-001/continuation-03/plot_candidate_gaps.py --attempt A0028 --data-only`.

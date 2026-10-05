@@ -1,8 +1,8 @@
 {
   "campaign_id": "offload-gap-001",
   "status": "active",
-  "workflow_stage": "registered",
-  "goal_progress": "A0028 retained step4. Completed offload/resident generation diagnostics and aligned/offset-ID scheduling microbenchmark; A0029 registered to test same-kernel explicit-stream compiled launch. Implementation and full gates pending; final all16 target remains unmet.",
+  "workflow_stage": "screening",
+  "goal_progress": "A0029 same-kernel explicit-stream compiled mapped launcher frozen after48 regression tests, standalone exactness and31 helper checks. Fresh64-process complete screen running against verified A0028; no performance verdict.",
   "completed_optimization_verdicts": 28,
   "additional_completed_verdicts": 10,
   "additional_attempt_target": [
@@ -11,7 +11,7 @@
   ],
   "accepted_steps": 4,
   "active_attempt": "A0029",
-  "controller_pid": null,
+  "controller_pid": 201124,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "6cc9354760ebde3bab9a90996a7713a936dfb439",
   "final_report": "continuation-02/final/REPORT.md",
@@ -41,6 +41,6 @@
     "workloads_passing_parent_and_current": 1,
     "accepted_new_attempts": 0
   },
-  "active_manifest": null,
+  "active_manifest": "A0029/R01-complete-screen/manifest.json",
   "continuation_completed_verdicts": 8
 }

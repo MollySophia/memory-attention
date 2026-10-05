@@ -10,9 +10,6 @@ import math
 import statistics
 from pathlib import Path
 
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
 from scipy.stats import t
 
 import driver as d
@@ -26,7 +23,7 @@ def interval(values):
     return mean, mean - delta, mean + delta, se
 
 
-def export(attempt):
+def export(attempt, data_only=False):
     directory = d.C / attempt
     analysis = d.read(directory / 'full-parent-analysis.json')
     assert analysis['status'] == 'audited'
@@ -72,6 +69,16 @@ def export(attempt):
         writer = csv.DictWriter(f, fieldnames=list(rows[0]))
         writer.writeheader()
         writer.writerows(rows)
+    result = dict(attempt=attempt, output=str(out),
+        diagnostic_bounds_within=sum(r['diagnostic_bound_within_target'] for r in rows),
+        not_within=[(r['mode'], r['batch'], r['length']) for r in rows if not r['diagnostic_bound_within_target']],
+        goal_accepted=False)
+    if data_only:
+        print(json.dumps(result))
+        return
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
     fig, axes = plt.subplots(1, 3, figsize=(15, 5), gridspec_kw={'width_ratios': [3, 3, 1.5]})
     for ax, mode in zip(axes, ('prefill', 'decode', 'generation')):
         subset = [r for r in rows if r['mode'] == mode]
@@ -97,13 +104,13 @@ def export(attempt):
     for extension in ('png', 'svg', 'pdf'):
         fig.savefig(out / f'gaps.{extension}', dpi=180)
     plt.close(fig)
-    print(json.dumps(dict(attempt=attempt, output=str(out),
-        diagnostic_bounds_within=sum(r['diagnostic_bound_within_target'] for r in rows),
-        not_within=[(r['mode'], r['batch'], r['length']) for r in rows if not r['diagnostic_bound_within_target']],
-        goal_accepted=False)))
+    print(json.dumps(result))
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--attempt', required=True)
-    export(parser.parse_args().attempt)
+    parser.add_argument('--data-only', action='store_true',
+                        help='Export CSV/JSON now; defer plot rendering during live timing')
+    args = parser.parse_args()
+    export(args.attempt, data_only=args.data_only)
