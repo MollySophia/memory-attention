@@ -1,0 +1,634 @@
+{
+  "status": "partial_integrity_checkpoint",
+  "attempt": "A0030",
+  "completed_blocks": [
+    1,
+    2,
+    3
+  ],
+  "planned_blocks": 6,
+  "checked_raw_results": 120,
+  "fixed_gain_family": 10,
+  "source_signatures": {
+    "baseline": {
+      "attempt": "A0028",
+      "root": "/home/molly/workspace-memory-attn/offload-gap-001-A0028",
+      "commit": "6cc9354760ebde3bab9a90996a7713a936dfb439",
+      "source_sha256": "ab51cd6f60cb476b5baf42e8d3a50dbcad772845dbdf77174a08f4e3ac2016d1"
+    },
+    "candidate": {
+      "attempt": "A0030",
+      "root": "/home/molly/workspace-memory-attn/offload-gap-001-A0030",
+      "commit": "a9e5bda62a020e4e1994037732b0dbb7606d5dda",
+      "source_sha256": "7c0566b6dbf17968f7e5bdb5834be52276bd32b19c4cc7b3981634651ba2e8d5"
+    }
+  },
+  "balanced_unique_coverage": true,
+  "raw_means_recomputed": true,
+  "one_environment": true,
+  "raw_files": [
+    {
+      "name": "B1-J001-baseline-prefill-ma_offload-b1-l2048",
+      "block": 1,
+      "raw_sha256": "c2436f64ca2d0b96ecd6fb246e06433a9b46f20b2c4d04a81ec8d2fac5cf6e52"
+    },
+    {
+      "name": "B1-J002-candidate-prefill-ma_offload-b1-l2048",
+      "block": 1,
+      "raw_sha256": "26cb5854ba1601af97910dfadaccf601efaecb04b4cd24729c660618eb595f51"
+    },
+    {
+      "name": "B1-J003-candidate-prefill-ma_gpu-b1-l2048",
+      "block": 1,
+      "raw_sha256": "d1634b13b3ef3637d13bffbbf325146f76af5c713f18e914ce36022481847aed"
+    },
+    {
+      "name": "B1-J004-baseline-prefill-ma_gpu-b1-l2048",
+      "block": 1,
+      "raw_sha256": "ce8a8925703fba7881d69007a0aebf3046dd41cc7f767f2543b11cc1a2d37bf8"
+    },
+    {
+      "name": "B1-J005-baseline-decode-ma_gpu-b1-l2048",
+      "block": 1,
+      "raw_sha256": "77dbf0983e47faeb4f69c81eecf8293ae165e009e3fa222572504a8a800de6aa"
+    },
+    {
+      "name": "B1-J006-candidate-decode-ma_gpu-b1-l2048",
+      "block": 1,
+      "raw_sha256": "8ba48ccbd95ccf10d05ad26ee536d016faf8afeee9bf9a2398b9c6e4d97e2337"
+    },
+    {
+      "name": "B1-J007-candidate-decode-ma_offload-b1-l2048",
+      "block": 1,
+      "raw_sha256": "45455a9110563a6c83abd1ae33631bcf26b54af075f0fba8f58558aa2db0506b"
+    },
+    {
+      "name": "B1-J008-baseline-decode-ma_offload-b1-l2048",
+      "block": 1,
+      "raw_sha256": "9f2e3aa2de4cf0a7c268c36f37c4a3ef510693251e6feb69dd8c4ae6aa1ee954"
+    },
+    {
+      "name": "B1-J009-baseline-decode-ma_offload-b4-l2048",
+      "block": 1,
+      "raw_sha256": "42470d27a3926a9c92f07d01982e454c76f6327561fe36a35bc9f087e290f937"
+    },
+    {
+      "name": "B1-J010-candidate-decode-ma_offload-b4-l2048",
+      "block": 1,
+      "raw_sha256": "7a0902660edbc2215c0dc7fa2c965d86a03be07fa7b6af9cfdab53f9c8bbdfe3"
+    },
+    {
+      "name": "B1-J011-candidate-decode-ma_gpu-b4-l2048",
+      "block": 1,
+      "raw_sha256": "a5738d10c306924e00c358c3afff94a21e0625fdd9d9fd04dfc69816a21d3bf3"
+    },
+    {
+      "name": "B1-J012-baseline-decode-ma_gpu-b4-l2048",
+      "block": 1,
+      "raw_sha256": "56de0fa8fa7e6e3874cd8a08752c476a7f527311ffceaa109386231b21474255"
+    },
+    {
+      "name": "B1-J013-baseline-prefill-ma_gpu-b8-l2048",
+      "block": 1,
+      "raw_sha256": "63e10513a280bda69db820b8b942c5647fe2ba04e796d655b9b18394e4772aae"
+    },
+    {
+      "name": "B1-J014-candidate-prefill-ma_gpu-b8-l2048",
+      "block": 1,
+      "raw_sha256": "e6c4b3642340ee910d6be770545e60ce040a438792d22a2ec7563527abbcf330"
+    },
+    {
+      "name": "B1-J015-candidate-prefill-ma_offload-b8-l2048",
+      "block": 1,
+      "raw_sha256": "6f969c77bcae1104b12e36298e1aeb8e0b44d1b3b5f7251a71036c69ee58d7e7"
+    },
+    {
+      "name": "B1-J016-baseline-prefill-ma_offload-b8-l2048",
+      "block": 1,
+      "raw_sha256": "4c503e00f5592476800cc6227f0870ecf156ed332e4a1d0b144e77a407861e14"
+    },
+    {
+      "name": "B1-J017-baseline-decode-ma_offload-b8-l2048",
+      "block": 1,
+      "raw_sha256": "8b116963c371e47be9dde62bb945b994211b431a436f04d85fc2edfd3007565d"
+    },
+    {
+      "name": "B1-J018-candidate-decode-ma_offload-b8-l2048",
+      "block": 1,
+      "raw_sha256": "89d65b8f3cef64f70e8ef9ef987f27bcc364c51acd97b8cb26744b6e321980a4"
+    },
+    {
+      "name": "B1-J019-candidate-decode-ma_gpu-b8-l2048",
+      "block": 1,
+      "raw_sha256": "fbaca9faa41c5a69e6eafad434a45b266fb991041debb102cc897209a80096ab"
+    },
+    {
+      "name": "B1-J020-baseline-decode-ma_gpu-b8-l2048",
+      "block": 1,
+      "raw_sha256": "8a5a5100806a5a4647d1027126db598acc48693486716a619d4e4cc6b2e7a7d3"
+    },
+    {
+      "name": "B1-J021-baseline-decode-ma_gpu-b16-l2048",
+      "block": 1,
+      "raw_sha256": "2b6634b08beeb21d30629d89061f39b2f4e4c28230816c8130099e01c7e6c257"
+    },
+    {
+      "name": "B1-J022-candidate-decode-ma_gpu-b16-l2048",
+      "block": 1,
+      "raw_sha256": "1cb3fe3fdcda9a881dc082007f38f6b2958a74bfd35c0788a714d704c6732ac9"
+    },
+    {
+      "name": "B1-J023-candidate-decode-ma_offload-b16-l2048",
+      "block": 1,
+      "raw_sha256": "cb59b86bd306e1ea2bd3352a1d2ce84c0a94cbc39a2d43a491b80a86f5522c58"
+    },
+    {
+      "name": "B1-J024-baseline-decode-ma_offload-b16-l2048",
+      "block": 1,
+      "raw_sha256": "dd0079a46dc681b3f74070fea0b193250ebd68127b9793c25fb466c0be23b034"
+    },
+    {
+      "name": "B1-J025-baseline-decode-ma_offload-b8-l512",
+      "block": 1,
+      "raw_sha256": "4271d2f2b121c1820f91afe899e6986ea27175c87a62ab31709d908395c09093"
+    },
+    {
+      "name": "B1-J026-candidate-decode-ma_offload-b8-l512",
+      "block": 1,
+      "raw_sha256": "d2552f5c5912397268e9d2e3b057f97d0f101baa97ab608b9218314b9342695e"
+    },
+    {
+      "name": "B1-J027-candidate-decode-ma_gpu-b8-l512",
+      "block": 1,
+      "raw_sha256": "62156502ee529ea9b4e0f16b0f08dc5dacb3d7e4fe0c64d9fa2421352d9dc57a"
+    },
+    {
+      "name": "B1-J028-baseline-decode-ma_gpu-b8-l512",
+      "block": 1,
+      "raw_sha256": "3ed04c386f0c5e46db7046e930a06b84754a03d18af6122c453b7e801f0e0beb"
+    },
+    {
+      "name": "B1-J029-baseline-decode-ma_gpu-b8-l8192",
+      "block": 1,
+      "raw_sha256": "4c5b43855fca6a02a7d0311bd9018aad32b2c107600034fe63affde4217de76d"
+    },
+    {
+      "name": "B1-J030-candidate-decode-ma_gpu-b8-l8192",
+      "block": 1,
+      "raw_sha256": "2dec7fe01d4bcbd885edac4f45ac492de3a0949946b450ee101c78a8e60547ea"
+    },
+    {
+      "name": "B1-J031-candidate-decode-ma_offload-b8-l8192",
+      "block": 1,
+      "raw_sha256": "33e91e39f821a5391c1be7e08817613080de119bf3b855e92418f1ae2d7743ef"
+    },
+    {
+      "name": "B1-J032-baseline-decode-ma_offload-b8-l8192",
+      "block": 1,
+      "raw_sha256": "5cc60e9965dc43970a89862d83da3fa4e9cfd1b907a13292ac37d99817919aaf"
+    },
+    {
+      "name": "B1-J033-baseline-generation-ma_offload-b1-l2048",
+      "block": 1,
+      "raw_sha256": "5d8b78e2fd535641bddcce939069c7210d891a811caabbd4a645930b6da427ca"
+    },
+    {
+      "name": "B1-J034-candidate-generation-ma_offload-b1-l2048",
+      "block": 1,
+      "raw_sha256": "b6b7c4b198b4a7a56ee1a737bb45c14905ac912f0cc497e61686d4d444906758"
+    },
+    {
+      "name": "B1-J035-candidate-generation-ma_gpu-b1-l2048",
+      "block": 1,
+      "raw_sha256": "df65940f713110d49553937c00654a5857dfddc32a8b89639a1190c56cb1609c"
+    },
+    {
+      "name": "B1-J036-baseline-generation-ma_gpu-b1-l2048",
+      "block": 1,
+      "raw_sha256": "d1b226374c236dda9aea16c92ccf44130c44cf64d5ebe0d7cf6d8b82a0402a93"
+    },
+    {
+      "name": "B1-J037-baseline-generation-ma_gpu-b8-l2048",
+      "block": 1,
+      "raw_sha256": "98cca0b94181b3ec08310fb26edc0a7058f9e6b95eed0c3c531675c3186f10b6"
+    },
+    {
+      "name": "B1-J038-candidate-generation-ma_gpu-b8-l2048",
+      "block": 1,
+      "raw_sha256": "123da75380593a809bdf5c3d670ac38b9c7a6a32d2e491b1a22f1c680e78ebbd"
+    },
+    {
+      "name": "B1-J039-candidate-generation-ma_offload-b8-l2048",
+      "block": 1,
+      "raw_sha256": "f924f7c4df73ae5e8a95b06e5daed8c8d4173aee2605ae21392ac996958fc148"
+    },
+    {
+      "name": "B1-J040-baseline-generation-ma_offload-b8-l2048",
+      "block": 1,
+      "raw_sha256": "031830a7bc7afe1e8930ad6a9ee4f239c1197cbdfa6aa507770a388cbe0a609a"
+    },
+    {
+      "name": "B2-J041-baseline-generation-ma_offload-b8-l2048",
+      "block": 2,
+      "raw_sha256": "678554a16caed46a580f1f4c0994867428bdbad95e8b6ace34434564288708fb"
+    },
+    {
+      "name": "B2-J042-candidate-generation-ma_offload-b8-l2048",
+      "block": 2,
+      "raw_sha256": "3467c45fdaac816f400be45bec9b49c0123f25fcc4eaa264a1abc4756e68e931"
+    },
+    {
+      "name": "B2-J043-candidate-generation-ma_gpu-b8-l2048",
+      "block": 2,
+      "raw_sha256": "b1988f5574e09f8d690719a5059e057a2b92bedbe7d15f31a187de8f0bd07f2f"
+    },
+    {
+      "name": "B2-J044-baseline-generation-ma_gpu-b8-l2048",
+      "block": 2,
+      "raw_sha256": "acf34b173055a002a3286c549a8145c9d9c30b6e4c30a713073adf25e64be23c"
+    },
+    {
+      "name": "B2-J045-baseline-generation-ma_gpu-b1-l2048",
+      "block": 2,
+      "raw_sha256": "b620a1b0d934ab4f28f088fdcebac5a238e10298e80ed5f8ac8bf301cd5d9a27"
+    },
+    {
+      "name": "B2-J046-candidate-generation-ma_gpu-b1-l2048",
+      "block": 2,
+      "raw_sha256": "c62ce8df90b256cefadbed955387a86153579cc2cb0c9b618ec8dbcba1c8f27e"
+    },
+    {
+      "name": "B2-J047-candidate-generation-ma_offload-b1-l2048",
+      "block": 2,
+      "raw_sha256": "a5b35df9704c908a2beccfa323f525d839be3f9723b9986dcd11606a90f1a0f8"
+    },
+    {
+      "name": "B2-J048-baseline-generation-ma_offload-b1-l2048",
+      "block": 2,
+      "raw_sha256": "05c2d3e0b04f0fbae5cbea7d6613b0e4e0e1e0d9a75111df491d1380aafa12c0"
+    },
+    {
+      "name": "B2-J049-baseline-decode-ma_offload-b8-l8192",
+      "block": 2,
+      "raw_sha256": "1637c952fbfdde296fe5e937bed49903f23ada00b7e314c217407be3e34a09bc"
+    },
+    {
+      "name": "B2-J050-candidate-decode-ma_offload-b8-l8192",
+      "block": 2,
+      "raw_sha256": "bcf9c39d3bd2f633bf925ad98f258b9487d4692479a2bbb4b77d9ea420b46a0e"
+    },
+    {
+      "name": "B2-J051-candidate-decode-ma_gpu-b8-l8192",
+      "block": 2,
+      "raw_sha256": "fb51c2601e6cca48653a1254bd14fb3b4fe7245c0b459f65c22f01ef4fb58014"
+    },
+    {
+      "name": "B2-J052-baseline-decode-ma_gpu-b8-l8192",
+      "block": 2,
+      "raw_sha256": "fbd8e35ef79aa8db450f791339fb6580b6fbb4e94a7b213f4bfd8e955c30b4a5"
+    },
+    {
+      "name": "B2-J053-baseline-decode-ma_gpu-b8-l512",
+      "block": 2,
+      "raw_sha256": "6157a5e3f05e45dd73b8688077639333d986a1677b8e3632282e1369719faa7b"
+    },
+    {
+      "name": "B2-J054-candidate-decode-ma_gpu-b8-l512",
+      "block": 2,
+      "raw_sha256": "167a0bdd5b03b4f1ed4074739ddf4e5ec764b4a82913046070056b51b009a337"
+    },
+    {
+      "name": "B2-J055-candidate-decode-ma_offload-b8-l512",
+      "block": 2,
+      "raw_sha256": "1e75e0afe58f491bf93db834d534220d0031d3639ac9efc292110fe1e56f8fd4"
+    },
+    {
+      "name": "B2-J056-baseline-decode-ma_offload-b8-l512",
+      "block": 2,
+      "raw_sha256": "7530bc6f4a3d0b3290dd0fdd32efc55b6f2e4b1f9e4f2a7efb87492d86974e9a"
+    },
+    {
+      "name": "B2-J057-baseline-decode-ma_offload-b16-l2048",
+      "block": 2,
+      "raw_sha256": "98a3bbec87a25013a1e30f8e5ab2c80c0d6f8988b49c3e537254b365aff45f24"
+    },
+    {
+      "name": "B2-J058-candidate-decode-ma_offload-b16-l2048",
+      "block": 2,
+      "raw_sha256": "8465f95cb17e9d09d8b545ae80d86e85f629f6db91d214dfc44d57f0c1db0a90"
+    },
+    {
+      "name": "B2-J059-candidate-decode-ma_gpu-b16-l2048",
+      "block": 2,
+      "raw_sha256": "85ac7c9b6fbb139c6a68a73b26b5c8ea448ab8cd075ea128b194e28f5e2829f1"
+    },
+    {
+      "name": "B2-J060-baseline-decode-ma_gpu-b16-l2048",
+      "block": 2,
+      "raw_sha256": "72c3f6dbb3b06d8e5405cfc4462ff5c55a5fb02debbcb308cc30129f7abca2c5"
+    },
+    {
+      "name": "B2-J061-baseline-decode-ma_gpu-b8-l2048",
+      "block": 2,
+      "raw_sha256": "0f8648bfbbcc8f4b7b4633e338a8eb76491d6f940f35095002f5666b706ad8c7"
+    },
+    {
+      "name": "B2-J062-candidate-decode-ma_gpu-b8-l2048",
+      "block": 2,
+      "raw_sha256": "3dd707b8fbd2a5e8a55c66120a7a318fd152a9e870963e8b8b98b344216fdebd"
+    },
+    {
+      "name": "B2-J063-candidate-decode-ma_offload-b8-l2048",
+      "block": 2,
+      "raw_sha256": "603407b492d4ae418a405aef1a3a38c671997b663c30467510a24e291c09affd"
+    },
+    {
+      "name": "B2-J064-baseline-decode-ma_offload-b8-l2048",
+      "block": 2,
+      "raw_sha256": "05dd7813ed96c603ca1674ba6d4b46c0180641eeff0a2395df4ff51ba4bbf6ad"
+    },
+    {
+      "name": "B2-J065-baseline-prefill-ma_offload-b8-l2048",
+      "block": 2,
+      "raw_sha256": "b469594765042e00bd79b8bf1574bb5b72916a26906d5c776399c6dc3fd0c31e"
+    },
+    {
+      "name": "B2-J066-candidate-prefill-ma_offload-b8-l2048",
+      "block": 2,
+      "raw_sha256": "97a50f2029a95a926334dd3d230977947807db895695e699f07bd3b9d583dffa"
+    },
+    {
+      "name": "B2-J067-candidate-prefill-ma_gpu-b8-l2048",
+      "block": 2,
+      "raw_sha256": "decb11bb782a2dd51e1f9f1aa8cd499db64f8c960faad6131c91472d43814225"
+    },
+    {
+      "name": "B2-J068-baseline-prefill-ma_gpu-b8-l2048",
+      "block": 2,
+      "raw_sha256": "e9ae2884e6e612ebbbc56fbb282708fca640a39f9383d85f1cef751fa7a43d78"
+    },
+    {
+      "name": "B2-J069-baseline-decode-ma_gpu-b4-l2048",
+      "block": 2,
+      "raw_sha256": "0b83e3495e321b60915a24a967b18e0c24ef326cefc2e863d1432f9488e45ac5"
+    },
+    {
+      "name": "B2-J070-candidate-decode-ma_gpu-b4-l2048",
+      "block": 2,
+      "raw_sha256": "fac3d03ba616d2f71ac84da3ca9565ba8618ce037a8a83686fe3fb4352b73617"
+    },
+    {
+      "name": "B2-J071-candidate-decode-ma_offload-b4-l2048",
+      "block": 2,
+      "raw_sha256": "9ca8eff3d0942843074c8fe46b119293ebd11094ce86d8cfad310ed88f128c25"
+    },
+    {
+      "name": "B2-J072-baseline-decode-ma_offload-b4-l2048",
+      "block": 2,
+      "raw_sha256": "279f615549f24ce8fc74268a1aeeee22335d2ea35dd1ac772ae2c6a610373fbb"
+    },
+    {
+      "name": "B2-J073-baseline-decode-ma_offload-b1-l2048",
+      "block": 2,
+      "raw_sha256": "92a17b1fe220a9f59b5f4e154c574dabc0b170924345dc2a55dabe5911fe433a"
+    },
+    {
+      "name": "B2-J074-candidate-decode-ma_offload-b1-l2048",
+      "block": 2,
+      "raw_sha256": "dd75b58cce7fa6f65385a410162c63e70f9c17ebd13893291a6ffe8c1c863b0e"
+    },
+    {
+      "name": "B2-J075-candidate-decode-ma_gpu-b1-l2048",
+      "block": 2,
+      "raw_sha256": "2e383f2c0050b6d89524cd112117cf375e08500a16cbfb0fa89883bced0e2635"
+    },
+    {
+      "name": "B2-J076-baseline-decode-ma_gpu-b1-l2048",
+      "block": 2,
+      "raw_sha256": "f6ad70bb2428d275cff66e57ea2e19f58a6f29e621d82662a920efb88fbde1ab"
+    },
+    {
+      "name": "B2-J077-baseline-prefill-ma_gpu-b1-l2048",
+      "block": 2,
+      "raw_sha256": "c36b0b8c3220a25c96c2fa9e8002df53961b06af5ef4bc1804dbcfde01f970e9"
+    },
+    {
+      "name": "B2-J078-candidate-prefill-ma_gpu-b1-l2048",
+      "block": 2,
+      "raw_sha256": "ce6d9540614a0c6229d3a8f17a9aaf8ecfc2e8fe4fb4272511f39b232586575b"
+    },
+    {
+      "name": "B2-J079-candidate-prefill-ma_offload-b1-l2048",
+      "block": 2,
+      "raw_sha256": "4697242c8b4ecc074a8e948b2f05a74d2f7586f419237ed18eeba548880e265d"
+    },
+    {
+      "name": "B2-J080-baseline-prefill-ma_offload-b1-l2048",
+      "block": 2,
+      "raw_sha256": "ce2768945101479eb1e946736b670fe5d4588f61de92727b46f37e254d04c8f0"
+    },
+    {
+      "name": "B3-J081-baseline-prefill-ma_offload-b1-l2048",
+      "block": 3,
+      "raw_sha256": "6d65f628649bd86999c5cbbebe26a2da6a301d50296aa1ea83d6bcd00e3af4fe"
+    },
+    {
+      "name": "B3-J082-candidate-prefill-ma_offload-b1-l2048",
+      "block": 3,
+      "raw_sha256": "eaea72b79463fcf75f186f986dfe1396691bc913acd53211ab54227e796b0ce7"
+    },
+    {
+      "name": "B3-J083-candidate-prefill-ma_gpu-b1-l2048",
+      "block": 3,
+      "raw_sha256": "3d6bfb46819edfcb95edac374c797f2b155f3a5bb1dc32ab14955269cc60008c"
+    },
+    {
+      "name": "B3-J084-baseline-prefill-ma_gpu-b1-l2048",
+      "block": 3,
+      "raw_sha256": "1c08b938ecc35c66cf7701f0b578fc6662c218920e53514ef0440ab8c77f0fad"
+    },
+    {
+      "name": "B3-J085-baseline-decode-ma_gpu-b1-l2048",
+      "block": 3,
+      "raw_sha256": "a69e5beb7c8c88f38e8caff57b917009539b770392363445cc42c34ce5956c34"
+    },
+    {
+      "name": "B3-J086-candidate-decode-ma_gpu-b1-l2048",
+      "block": 3,
+      "raw_sha256": "baabb8c5622802b724bcf219072997627904ed8bf6be398d9fc6eeffa2cb05ee"
+    },
+    {
+      "name": "B3-J087-candidate-decode-ma_offload-b1-l2048",
+      "block": 3,
+      "raw_sha256": "79ba3b6653b7b2a7232248c2bed18a7fdf3a46a96b7ba587c6303d2ee5ef7c35"
+    },
+    {
+      "name": "B3-J088-baseline-decode-ma_offload-b1-l2048",
+      "block": 3,
+      "raw_sha256": "0db2e37a2df45e29cf228cc0661c762afffe2b478918e5a83d13c66a3cdc2328"
+    },
+    {
+      "name": "B3-J089-baseline-decode-ma_offload-b4-l2048",
+      "block": 3,
+      "raw_sha256": "e1e4ba317179c9ee2cbb883fa0f2cbf2d89e59fd61a3caf064a5edc83a380804"
+    },
+    {
+      "name": "B3-J090-candidate-decode-ma_offload-b4-l2048",
+      "block": 3,
+      "raw_sha256": "dfecd7cb15c751b816aabd28f810ac7b325a7d691fdf19cc3f857b0be047eed7"
+    },
+    {
+      "name": "B3-J091-candidate-decode-ma_gpu-b4-l2048",
+      "block": 3,
+      "raw_sha256": "40509a98fc04bc6cec6d29cf6e790b2504991420344c15745e6d29e4235c8e9f"
+    },
+    {
+      "name": "B3-J092-baseline-decode-ma_gpu-b4-l2048",
+      "block": 3,
+      "raw_sha256": "076ddadff1526e22725945f2d3cebaf5894c8ef77ba82dff23eaf7693014ea29"
+    },
+    {
+      "name": "B3-J093-baseline-prefill-ma_gpu-b8-l2048",
+      "block": 3,
+      "raw_sha256": "db7f63a6ddb1f6e63a71f8df199705db5c41a510cf2aaf6cc5827bf54f54a607"
+    },
+    {
+      "name": "B3-J094-candidate-prefill-ma_gpu-b8-l2048",
+      "block": 3,
+      "raw_sha256": "6d7824890ce065b058af61923d17b2834f6720ec78348408249ce2303562d79b"
+    },
+    {
+      "name": "B3-J095-candidate-prefill-ma_offload-b8-l2048",
+      "block": 3,
+      "raw_sha256": "659ee4dd326ad8b882a1b87c9261785d0f42ba0735c1482f0f948fc2a77f4ec8"
+    },
+    {
+      "name": "B3-J096-baseline-prefill-ma_offload-b8-l2048",
+      "block": 3,
+      "raw_sha256": "8bafdde73065eb63dcd9d642dbcbe8e4eca212f12bfae8a0cc88b50b843f292f"
+    },
+    {
+      "name": "B3-J097-baseline-decode-ma_offload-b8-l2048",
+      "block": 3,
+      "raw_sha256": "f9817be25a58859dbec42f938e810dad8a43ceafa150af451ce9de286875ee4f"
+    },
+    {
+      "name": "B3-J098-candidate-decode-ma_offload-b8-l2048",
+      "block": 3,
+      "raw_sha256": "f213ba998ed6814e7cbc1a8d4242e13561a1abdd3139c7bd17cd0278903dcbe8"
+    },
+    {
+      "name": "B3-J099-candidate-decode-ma_gpu-b8-l2048",
+      "block": 3,
+      "raw_sha256": "6f1bf7428ea8f8abfcc2f21e5dfab916fc3f62daa4a051aacba6afd70b47e397"
+    },
+    {
+      "name": "B3-J100-baseline-decode-ma_gpu-b8-l2048",
+      "block": 3,
+      "raw_sha256": "c14bdceeea39e2bdb3694723a4b61e376aad437e93d1bcc3762be35187774ed3"
+    },
+    {
+      "name": "B3-J101-baseline-decode-ma_gpu-b16-l2048",
+      "block": 3,
+      "raw_sha256": "a19fe97fe9ebd201915bbb55ff9f764dbe7d167ccd37d3db03dc25bad1b8347e"
+    },
+    {
+      "name": "B3-J102-candidate-decode-ma_gpu-b16-l2048",
+      "block": 3,
+      "raw_sha256": "91aa26a8a9611ea21ffb4fd1ecb3f4188b40c369fe2194ca2cf12ed2a58becf2"
+    },
+    {
+      "name": "B3-J103-candidate-decode-ma_offload-b16-l2048",
+      "block": 3,
+      "raw_sha256": "1c09a3e7c50b2a79450b7f4c4c0a7ec96280f8dd17e4ffc977a20a3e7f422441"
+    },
+    {
+      "name": "B3-J104-baseline-decode-ma_offload-b16-l2048",
+      "block": 3,
+      "raw_sha256": "63ac5f3102d38006579dc63b41c3f4b474f091e30235632db329fce341e364de"
+    },
+    {
+      "name": "B3-J105-baseline-decode-ma_offload-b8-l512",
+      "block": 3,
+      "raw_sha256": "2589bb4e7b16045876c5f7f6a1418cd35074d0f7360c1263340ab126037a3c6e"
+    },
+    {
+      "name": "B3-J106-candidate-decode-ma_offload-b8-l512",
+      "block": 3,
+      "raw_sha256": "53318cbeead94608fe1a4d7babf26f5d27457f780945c530f4a2382e2709c28e"
+    },
+    {
+      "name": "B3-J107-candidate-decode-ma_gpu-b8-l512",
+      "block": 3,
+      "raw_sha256": "d5c64465415b50b1bddd7f8f93a05f90169658e330350544c729a692d7201c2d"
+    },
+    {
+      "name": "B3-J108-baseline-decode-ma_gpu-b8-l512",
+      "block": 3,
+      "raw_sha256": "5807bffa098ce221fba7f2d354a2474b3a5cecf6467c43a65aecf644f1717fee"
+    },
+    {
+      "name": "B3-J109-baseline-decode-ma_gpu-b8-l8192",
+      "block": 3,
+      "raw_sha256": "8e72af3e00eae4ffa6c9f17efac82ce6cee1a9f871c16513d9e226b0c7ce4dae"
+    },
+    {
+      "name": "B3-J110-candidate-decode-ma_gpu-b8-l8192",
+      "block": 3,
+      "raw_sha256": "f29cf172f217e5899392ceaca34e2e2b64fdb522e399f11e4d578c442b1f8007"
+    },
+    {
+      "name": "B3-J111-candidate-decode-ma_offload-b8-l8192",
+      "block": 3,
+      "raw_sha256": "70c9b2926a838f80fa3342731bf7c4fdd3da4e257e82765589e635380d5d0e03"
+    },
+    {
+      "name": "B3-J112-baseline-decode-ma_offload-b8-l8192",
+      "block": 3,
+      "raw_sha256": "28354a64f5cd77731242a05538d3bfd7ed054d92d07562e3058aa9537831306c"
+    },
+    {
+      "name": "B3-J113-baseline-generation-ma_offload-b1-l2048",
+      "block": 3,
+      "raw_sha256": "3fcafd21d2132b14b8fb24b04dc3954e8d2adc23a98bee768e22045e49468f9f"
+    },
+    {
+      "name": "B3-J114-candidate-generation-ma_offload-b1-l2048",
+      "block": 3,
+      "raw_sha256": "74f92e29c9505309bd9faf477947c413672a431508a68716913628d7abd96d08"
+    },
+    {
+      "name": "B3-J115-candidate-generation-ma_gpu-b1-l2048",
+      "block": 3,
+      "raw_sha256": "bf130b311cb9aa39876fd7a8de8cf37eebf16b6e41533006d6bc22e423166833"
+    },
+    {
+      "name": "B3-J116-baseline-generation-ma_gpu-b1-l2048",
+      "block": 3,
+      "raw_sha256": "91e2a2cb571ddd2d773f009f0fe522b741975ea113baa3ed141c87e2d28f818b"
+    },
+    {
+      "name": "B3-J117-baseline-generation-ma_gpu-b8-l2048",
+      "block": 3,
+      "raw_sha256": "74bbd08c0744a9089ed7710a567cee96e228bbad110db5618875c1669142f6ca"
+    },
+    {
+      "name": "B3-J118-candidate-generation-ma_gpu-b8-l2048",
+      "block": 3,
+      "raw_sha256": "a32067dd490b5385c70d96163561067f273606098103c0c64c32dd0a221654fa"
+    },
+    {
+      "name": "B3-J119-candidate-generation-ma_offload-b8-l2048",
+      "block": 3,
+      "raw_sha256": "4472291d3db46d26377a8513c7112a8643806145987ef4922368d20881de0346"
+    },
+    {
+      "name": "B3-J120-baseline-generation-ma_offload-b8-l2048",
+      "block": 3,
+      "raw_sha256": "c6012c70faa2088d2b6c15fdfdab80bfc67091328e953ec565aef1bbc441c9b3"
+    }
+  ],
+  "checked_unix": 1791211202.135638,
+  "accepted": false,
+  "note": "First three blocks only. Remaining three blocks must finish before any gain, regression or retention decision. No interim hypothesis test."
+}
