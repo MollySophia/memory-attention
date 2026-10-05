@@ -8,7 +8,7 @@
   "accepted_step": null,
   "label": "Shared host staging through16384 input tokens",
   "status": "testing",
-  "workflow_stage": "folding_and_correctness_validation",
+  "workflow_stage": "full_model_correctness_running",
   "hypothesis": "Extend recovered A0026 host working-set reduction to b8/2048 while preserving GPU lookahead. Full-model instrumented diagnostic shows gather76.112 to55.179ms and wall210.316 to208.340ms, with larger DMA wait; independent benefit unproven.",
   "change": "Port A0026 shared-host staging onto verified A0023, changing automatic range from4096..8192 to4096..16384 total input tokens. Preserve mapped1..16, bulk1024, single-GPU-slot2048 and four GPU slots above2048.",
   "profile_evidence": [
@@ -178,5 +178,6 @@
   "confirmation_decision": "Confirmed b8/512 prefill offload reduction2.4603545ms and gap reduction2.3023724ms, Holm10 adjusted p0.01297706. No resolved selected-point regressions. Other nominal gains do not pass fixed multiplicity gate. Proceed with predeclared remaining all16 validation; not accepted.",
   "full_parent_analysis": "full-parent-analysis.json",
   "full_performance_audit": "full-performance-audit.json",
-  "full_matrix_decision": "All16 three-block parent comparisons audited, no resolved offload/gap/resident regressions or memory loss. Fixed R02 Holm10 gain remains authoritative. Await folding references and full-model correctness; not accepted."
+  "full_matrix_decision": "All16 three-block parent comparisons audited, no resolved offload/gap/resident regressions or memory loss. Fixed R02 Holm10 gain remains authoritative. Await folding references and full-model correctness; not accepted.",
+  "performance_and_folding_audit": "performance-and-folding-audit.json"
 }

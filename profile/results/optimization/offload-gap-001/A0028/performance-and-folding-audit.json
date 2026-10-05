@@ -1,0 +1,12 @@
+{
+  "attempt": "A0028",
+  "evidence_integrity": "passed",
+  "process_counts": {
+    "R01-complete-screen": 64,
+    "R02-parent-confirmation": 120,
+    "R03-remaining-confirmation": 72,
+    "R04-unfolded-reference": 32
+  },
+  "accepted": false,
+  "note": "All288 performance raws audited. Six full-model correctness pairs remain pending; not acceptance."
+}
