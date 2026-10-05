@@ -1,8 +1,8 @@
 {
   "campaign_id": "offload-gap-001",
   "status": "active",
-  "workflow_stage": "screening",
-  "goal_progress": "A0023 retained step3; A0024 correctness passes41 tests+standalone bit-exact. Full64-process screen frozen, estimated1154.67s.",
+  "workflow_stage": "confirmation",
+  "goal_progress": "A0024 complete64-process screen audited; target short-prefill signal2.67835ms. Fixed8-workload96-process confirmation running, no verdict.",
   "completed_optimization_verdicts": 23,
   "additional_completed_verdicts": 10,
   "additional_attempt_target": [
@@ -11,7 +11,7 @@
   ],
   "accepted_steps": 3,
   "active_attempt": "A0024",
-  "controller_pid": null,
+  "controller_pid": 4086945,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "5f3d5958fea25f953bb91f5ef6f35880ff37fcfa",
   "final_report": "continuation-02/final/REPORT.md",
@@ -41,6 +41,6 @@
     "workloads_passing_parent_and_current": 1,
     "accepted_new_attempts": 0
   },
-  "active_manifest": "A0024/R01-complete-screen/manifest.json",
+  "active_manifest": "A0024/R02-parent-confirmation/manifest.json",
   "continuation_completed_verdicts": 3
 }
