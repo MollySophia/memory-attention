@@ -2,7 +2,7 @@
   "campaign_id": "offload-gap-001",
   "status": "active",
   "workflow_stage": "screening",
-  "goal_progress": "A0023 mapped bulk1..16 registered, frozen and correctness-passed; complete64-process screen running. Fixed sequential confirmation/validation queued, no automatic acceptance.",
+  "goal_progress": "A0023 complete screen resumed pending62 jobs after configuration-driven memory audit repair; first2 raw results preserved, model/source/plan unchanged.",
   "completed_optimization_verdicts": 22,
   "additional_completed_verdicts": 10,
   "additional_attempt_target": [
@@ -11,7 +11,7 @@
   ],
   "accepted_steps": 2,
   "active_attempt": "A0023",
-  "controller_pid": 3972840,
+  "controller_pid": 3974359,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "0ce6645eb4c4bc3992258ad0878c72ea3c37a64e",
   "final_report": "continuation-02/final/REPORT.md",
