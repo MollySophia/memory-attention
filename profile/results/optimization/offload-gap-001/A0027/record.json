@@ -7,8 +7,8 @@
   "parent_sha": "6dcc5c893d1a959fbcfe20c2af20472ccbf408a3",
   "accepted_step": null,
   "label": "Caller-stream mapped gather for one-token inputs",
-  "status": "planned",
-  "workflow_stage": "registered",
+  "status": "testing",
+  "workflow_stage": "correctness_passed",
   "hypothesis": "Reduce b1 mapped scheduling CPU overhead (diagnostic nonconsumer0.060064ms/call, before-first-consumer0.047555ms) by removing copy-stream context and entry dependency. Lost gather/QK overlap may offset improvement.",
   "change": "Mapped bulk at one total input token only uses caller compute stream. Wait for previous consumed event before output reuse; synchronize gather-completion event before returning to preserve host table and ID lifetime. Keep other mapped/pipeline/bulk paths and buffers unchanged.",
   "profile_evidence": [
@@ -55,5 +55,16 @@
     "memory_offload_mapped_bulk_min_tokens": 1,
     "memory_offload_mapped_bulk_max_tokens": 16
   },
-  "created_unix": 1791188312.8948636
+  "created_unix": 1791188312.8948636,
+  "candidate_sha": "700f5f81a2e2b798d11e323c7508f4010d28ed53",
+  "frozen_checkout": "/home/molly/workspace-memory-attn/offload-gap-001-A0027",
+  "correctness": {
+    "pytest": "43 passed in12.98s",
+    "standalone": "PASS; worst max difference0",
+    "logs": [
+      "correctness-tests.txt",
+      "standalone-correctness.txt"
+    ]
+  },
+  "screen_manifest": "R01-complete-screen/manifest.json"
 }

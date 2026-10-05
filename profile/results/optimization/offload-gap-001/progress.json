@@ -1,8 +1,8 @@
 {
   "campaign_id": "offload-gap-001",
   "status": "active",
-  "workflow_stage": "profiling",
-  "goal_progress": "A0026 rejected after64 screen+144 confirmation processes: two eligible prefill gains preserved, b1 generation offload regression. Restore A0023; profile generation before new integration.",
+  "workflow_stage": "preparing_complete_screen",
+  "goal_progress": "A0027 caller-stream one-token mapped gather:43 tests and standalone exactness passed; frozen candidate700f5f8, pending complete64-process screen.",
   "completed_optimization_verdicts": 26,
   "additional_completed_verdicts": 10,
   "additional_attempt_target": [
@@ -10,7 +10,7 @@
     10
   ],
   "accepted_steps": 3,
-  "active_attempt": null,
+  "active_attempt": "A0027",
   "controller_pid": null,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "5f3d5958fea25f953bb91f5ef6f35880ff37fcfa",
@@ -41,6 +41,6 @@
     "workloads_passing_parent_and_current": 1,
     "accepted_new_attempts": 0
   },
-  "active_manifest": null,
+  "active_manifest": "A0027/R01-complete-screen/manifest.json",
   "continuation_completed_verdicts": 6
 }

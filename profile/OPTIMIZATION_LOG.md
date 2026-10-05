@@ -676,3 +676,7 @@ Post-A0026 frozen-source b1 generation diagnostics: A0023/A0026 one trajectory59
 ## A0027 registered: caller-stream mapped gather for one-token inputs
 
 Campaign offload-gap-001, verified parent A0023. Isolate b1 mapped scheduling after CPU span diagnostic; remove copy-stream context/entry waits at one total token, preserve previous-consumed dependency and host/ID lifetime via gather-completion event synchronization. Other mapped and prefill paths unchanged; shared-host integration deferred. Eligible b1 decode/generation gains require complete64-process screen and fixed independent gates. Lost overlap is an explicit risk, no assumed improvement.
+
+### A0027 implementation and correctness
+
+Frozen candidate `700f5f8` on A0023 uses the caller stream only for one total mapped input token. Previous-consumed event protects reuse; gather event completion protects fresh host mutation and IDs lifetime without waiting for consumer compute. Other mapped shapes retain the copy stream. 43 tests passed in12.98s, including delayed last-layer consumers across alternating streams; standalone worst difference0. Candidate correctness logs are in A0027. Full64-process screen and fixed independent nomination rules remain required; no performance claim yet.
