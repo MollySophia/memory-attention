@@ -412,3 +412,86 @@ def test_mapped_bulk_model_selection_and_pinned_table_accounting(model):
     snapshot=load_script('benchmark_telemetry').memory_snapshot(model,'cuda')
     assert snapshot['cpu_table_pinned_bytes']==snapshot['cpu_table_bytes']
     assert snapshot['offload_pinned_bytes']==snapshot['cpu_table_bytes']+sum(v['host_bytes'] for v in snapshot['offloader_capacities'])
+
+
+@pytest.mark.parametrize('ids_device', ['cpu', 'cuda'])
+def test_offload_dispatch_resolves_current_shape_once_and_direct_fallback(model, monkeypatch, ids_device):
+    ids = torch.randint(0, 128, (2, 8), device=ids_device)
+    model.fold_memory_table_on_gpu()
+    reference = model(input_ids=ids.cuda(), use_cache=False, output_hidden_states=True)
+    model.close_memory_offload()
+    model.enable_memory_offload()
+    backbone = model.model
+    original = backbone._offloader_for
+    resolved = []
+
+    def track(batch, length):
+        resolved.append((batch, length))
+        return original(batch, length)
+
+    monkeypatch.setattr(backbone, '_offloader_for', track)
+    actual = model(input_ids=ids, use_cache=False, output_hidden_states=True)
+    assert resolved == [(2, 8)]
+    torch.testing.assert_close(actual.logits, reference.logits, rtol=0, atol=0)
+    for got, expected in zip(actual.hidden_states, reference.hidden_states):
+        torch.testing.assert_close(got, expected, rtol=0, atol=0)
+    one_token = ids[:, :1]
+    model(input_ids=one_token, use_cache=False)
+    assert resolved == [(2, 8), (2, 1)]
+    embedded = backbone.embeddings(ids.cuda())
+    direct = backbone._forward_offloaded(embedded, ids.cpu(), None, None, False, True, True)
+    assert resolved == [(2, 8), (2, 1), (2, 8)]
+    torch.testing.assert_close(direct.last_hidden_state, reference.hidden_states[-1], rtol=0, atol=0)
+
+
+@pytest.mark.parametrize('use_cache', [False, True])
+@pytest.mark.parametrize('collect_hidden', [False, True])
+@pytest.mark.parametrize('return_dict', [False, True])
+def test_offload_dispatch_preserves_hooks_replacements_and_callback_state(use_cache, collect_hidden, return_dict):
+    from fla.models.memory.modeling_memory import MemoryModel
+
+    class Block(torch.nn.Module):
+        def __init__(self, increment):
+            super().__init__()
+            self.increment = increment
+
+        def forward(self, hidden, **kwargs):
+            assert kwargs['memory_table'] == self.increment
+            assert kwargs['output_attentions'] is False
+            return hidden + self.increment, kwargs['past_key_values'] + self.increment
+
+    class Stub(torch.nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.layers = torch.nn.ModuleList([Block(1), Block(2)])
+            self.norm = torch.nn.Identity()
+
+        def _offloader_for(self, batch, length):
+            assert (batch, length) == (1, 1)
+            return self
+
+        def forward(self, ids, consume):
+            for index, layer in enumerate(self.layers):
+                consume(index, layer.increment)
+
+    stub = Stub()
+    hidden = torch.zeros(1, 1, 4)
+    ids = torch.zeros(1, 1, dtype=torch.long)
+    calls = []
+    for increment in (2, 4):
+        stub.layers[1] = Block(increment)
+        handle = stub.layers[1].register_forward_hook(lambda module, args, output: calls.append(module.increment))
+        result = MemoryModel._forward_offloaded(stub, hidden, ids, None, 10, use_cache, collect_hidden, return_dict)
+        output = result.last_hidden_state if return_dict else result[0]
+        cache = result.past_key_values if return_dict else result[1]
+        assert torch.equal(output, hidden + 1 + increment)
+        assert cache == (11 + increment if use_cache else 10)
+        if collect_hidden:
+            states = result.hidden_states if return_dict else result[2]
+            assert len(states) == 3
+            for got, value in zip(states, (0, 1, 1 + increment)):
+                assert torch.equal(got, hidden + value)
+        elif not return_dict:
+            assert len(result) == 2
+        handle.remove()
+    assert calls == [2, 4]
