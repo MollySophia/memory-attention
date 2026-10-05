@@ -1,0 +1,10 @@
+{
+  "campaign_id": "offload-gap-001",
+  "source_attempt": "A0023",
+  "pipeline_diagnostic": "pipeline-A0023-b4-l2048.json",
+  "host_ring_diagnostic": "host-ring-A0023.json",
+  "observation": "Reducing active pinned host output buffers from4 to1 reduces CPU-only24-layer gather spans at4096/8192/16384 tokens. Full-model b4 gather spans total45.567ms, overlapping other work.",
+  "hypothesis": "Decouple host and GPU ring depths: retain GPU lookahead while reusing a single host staging buffer after its DMA completion. Restrict initial candidate to automatic pipeline4096..8192 total tokens, where working-set diagnostic is strongest; preserve b1 and mapped decode branches.",
+  "required_safety": "Before overwriting shared host storage, synchronize its most recent H2D event, not merely the GPU slot event. Keep per-slot consumed dependency and bounded GPU storage. Count shared host capacity once; exercise repeated calls, tail groups, cross-stream lifetime and cancellation.",
+  "limitations": "Diagnostic only; no end-to-end or accepted gain. Host DMA waiting may offset gather savings. New candidate must be registered before source edits and pass full matrix workflow."
+}
