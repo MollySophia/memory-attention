@@ -54,6 +54,16 @@
       "confirmed_local_gains": [],
       "blocking_reason": "No confirmed gain; b1 decode resident guard failed",
       "evidence": "../A0025/evidence-integrity.json"
+    },
+    {
+      "attempt": "A0026",
+      "status": "rejected",
+      "confirmed_local_gains": [
+        "prefill b4/2048",
+        "prefill b8/512"
+      ],
+      "blocking_regression": "generation b1/2048 offload latency",
+      "evidence": "../A0026/evidence-integrity.json"
     }
   ],
   "retained_current": "A0023"
