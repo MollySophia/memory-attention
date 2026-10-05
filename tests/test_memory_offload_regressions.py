@@ -495,3 +495,113 @@ def test_offload_dispatch_preserves_hooks_replacements_and_callback_state(use_ca
             assert len(result) == 2
         handle.remove()
     assert calls == [2, 4]
+
+
+@pytest.mark.parametrize('group', [1, 2, 7])
+@pytest.mark.parametrize('depth', [1, 4])
+@pytest.mark.parametrize('shared', [False, True])
+@pytest.mark.skipif(not torch.cuda.is_available(), reason='requires CUDA')
+def test_mapped_first_group_fresh_reads_slot_reuse_and_host_lifetime(group, depth, shared, monkeypatch):
+    from fla.layers.memory_offload import MemoryTableOffloader
+    import fla.layers.memory_mapped_first as kernel
+    with torch.inference_mode():
+        weights = torch.randn(73, 5, 64, dtype=torch.bfloat16).pin_memory()
+        off = MemoryTableOffloader(weights, 2, 17, group_size=group,
+                                   prefetch_depth=depth, single_host_buffer=shared,
+                                   mapped_first_group=True)
+        assert off.mapped_first_group
+        streams = [torch.cuda.Stream(), torch.cuda.Stream()]
+        launches = []
+        original = kernel.mapped_first_group
+        def track(*args):
+            launches.append(args[-1])
+            return original(*args)
+        monkeypatch.setattr(kernel, 'mapped_first_group', track)
+        try:
+            for iteration in range(3):
+                ids = torch.randint(0, 73, (2, 17))
+                expected = weights.index_select(0, ids.flatten()).view(2, 17, 5, 64).clone()
+                actual = []
+                def consume(layer, handle):
+                    value = handle.acquire()
+                    torch.cuda._sleep(100000)
+                    actual.append(value.clone())
+                    handle.release()
+                with torch.cuda.stream(off.copy_stream):
+                    torch.cuda._sleep(1000000)
+                with torch.cuda.stream(streams[iteration % 2]):
+                    off.forward(ids, consume)
+                # Returning must end mapped host reads, even if compute is live.
+                weights.add_(0.125)
+                streams[iteration % 2].synchronize()
+                for layer, value in enumerate(actual):
+                    torch.testing.assert_close(value.cpu(), expected[:, :, layer], rtol=0, atol=0)
+            assert launches == [min(group, 5)] * 3
+            for bad in (-1, 73):
+                with pytest.raises(IndexError, match='out of range'):
+                    off.forward(torch.full((2, 17), bad), consume)
+            def fail(layer, handle):
+                handle.acquire()
+                raise ValueError('consumer failure')
+            with pytest.raises(ValueError, match='consumer failure'):
+                off.forward(ids, fail)
+            weights.zero_()
+            with pytest.raises(RuntimeError, match='closed or failed'):
+                off.forward(ids, consume)
+        finally:
+            off.close()
+
+
+@pytest.mark.skipif(not torch.cuda.is_available(), reason='requires CUDA')
+def test_mapped_first_group_fallback_and_launch_failure():
+    from fla.layers.memory_offload import MemoryTableOffloader
+    from unittest.mock import patch
+    with torch.inference_mode():
+        for pinned, enabled in ((False, True), (True, False)):
+            weights = torch.randn(17, 3, 64, dtype=torch.bfloat16)
+            if pinned:
+                weights = weights.pin_memory()
+            off = MemoryTableOffloader(weights, 1, 3, mapped_first_group=enabled)
+            assert not off.mapped_first_group
+            off.close()
+        weights = torch.randn(17, 3, 64, dtype=torch.bfloat16).pin_memory()
+        off = MemoryTableOffloader(weights, 1, 3, mapped_first_group=True)
+        def consume(layer, handle):
+            handle.acquire()
+            handle.release()
+        try:
+            with patch('fla.layers.memory_mapped_first.mapped_first_group', side_effect=ValueError('launch failure')):
+                with pytest.raises(RuntimeError, match='prefetch failed'):
+                    off.forward(torch.zeros((1, 3), dtype=torch.long), consume)
+            assert off.broken
+            weights.zero_()
+        finally:
+            off.close()
+
+
+@pytest.mark.parametrize('enabled', [False, True])
+@pytest.mark.parametrize('pin_table', [False, True])
+def test_mapped_first_group_model_policy_and_growing_cache(model, enabled, pin_table):
+    model.config.memory_offload_bulk_max_tokens = 0
+    model.config.memory_offload_mapped_first_group = enabled
+    model.config.memory_offload_mapped_bulk = pin_table
+    prefix = torch.randint(0, 128, (2, 17), device='cuda')
+    tokens = [torch.randint(0, 128, (2, 1), device='cuda') for _ in range(3)]
+    def trajectory():
+        output = None
+        results = []
+        for ids in [prefix, *tokens]:
+            output = model(input_ids=ids, past_key_values=None if output is None else output.past_key_values,
+                           use_cache=True, output_hidden_states=True)
+            results.append((output.logits.clone(), tuple(x.clone() for x in output.hidden_states)))
+        return results
+    model.fold_memory_table_on_gpu()
+    expected = trajectory()
+    model.close_memory_offload()
+    model.enable_memory_offload()
+    actual = trajectory()
+    assert model.model._offloader_for(2, 17).mapped_first_group == (enabled and pin_table)
+    for (logits, hidden), (ref_logits, ref_hidden) in zip(actual, expected):
+        torch.testing.assert_close(logits, ref_logits, rtol=0, atol=0)
+        for got, ref in zip(hidden, ref_hidden):
+            torch.testing.assert_close(got, ref, rtol=0, atol=0)

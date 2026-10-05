@@ -108,6 +108,8 @@ class MemoryTableOffloader:
         prefetch_depth: Number of buffered groups. Clamped to the group count.
         single_host_buffer: Reuse one host allocation after each DMA completes,
             independently of the number of GPU lookahead slots.
+        mapped_first_group: Read only the first group with a GPU kernel when
+            the table is contiguous pinned CPU memory; otherwise use CPU gather.
     """
 
     def __init__(
@@ -119,6 +121,7 @@ class MemoryTableOffloader:
         device: torch.device | str = "cuda:0",
         prefetch_depth: int = 4,
         single_host_buffer: bool = False,
+        mapped_first_group: bool = False,
     ) -> None:
         if weights.device.type != "cpu" or weights.ndim != 3:
             raise ValueError("weights must be a CPU tensor of shape [vocab, layers, dim]")
@@ -139,6 +142,8 @@ class MemoryTableOffloader:
         self.broken = False
         capacity = self.tokens * self.group * self.dim
         self.single_host_buffer = single_host_buffer
+        self.mapped_first_group = bool(mapped_first_group and weights.is_pinned() and weights.is_contiguous())
+        self._mapped_done = torch.cuda.Event() if self.mapped_first_group else None
         self._last_host_copy = None
         shared_host = (torch.empty(capacity, dtype=weights.dtype, pin_memory=True)
                        if single_host_buffer else None)
@@ -168,6 +173,8 @@ class MemoryTableOffloader:
 
     @torch.inference_mode()
     def _produce(self, ids: torch.Tensor, tickets: list[GroupTicket], entry, cancel) -> None:
+        mapped_started = mapped_recorded = False
+        ids_gpu = None
         try:
             # Current device/stream are thread-local, so select them explicitly.
             with torch.cuda.device(self.device), torch.cuda.stream(self.copy_stream):
@@ -190,17 +197,29 @@ class MemoryTableOffloader:
                     # DMA, which may use a different GPU slot or forward.
                     if self.single_host_buffer and self._last_host_copy is not None:
                         self._last_host_copy.synchronize()
-                    source = self.weights[:, ticket.start: ticket.start + ticket.count]
-                    torch.index_select(source, 0, ids, out=self._view(slot["host"], ticket.start))
+                    mapped = self.mapped_first_group and ticket.start == 0
+                    if not mapped:
+                        source = self.weights[:, ticket.start: ticket.start + ticket.count]
+                        torch.index_select(source, 0, ids, out=self._view(slot["host"], ticket.start))
                     if previous is not None:
                         # Snapshot before the event can be re-recorded.
                         self.copy_stream.wait_event(slot["consumed"])
-                    self._view(slot["gpu"], ticket.start).copy_(
-                        self._view(slot["host"], ticket.start), non_blocking=True
-                    )
+                    if mapped:
+                        from fla.layers.memory_mapped_first import mapped_first_group
+                        # Retain this fresh upload until its mapped read completes.
+                        ids_gpu = ids.to(self.device, non_blocking=True)
+                        mapped_started = True
+                        mapped_first_group(self.weights, ids_gpu, slot["gpu"], ticket.count)
+                        self._mapped_done.record(self.copy_stream)
+                        mapped_recorded = True
+                    else:
+                        self._view(slot["gpu"], ticket.start).copy_(
+                            self._view(slot["host"], ticket.start), non_blocking=True
+                        )
                     slot["copied"].record(self.copy_stream)
                     if self.single_host_buffer:
-                        self._last_host_copy = slot["copied"]
+                        # Mapped reads do not borrow the host staging allocation.
+                        self._last_host_copy = None if mapped else slot["copied"]
                     slot["previous"] = ticket
                     # "Ready" means submitted, not completed.
                     ticket.ready.set()
@@ -210,6 +229,14 @@ class MemoryTableOffloader:
                     ticket.error = exc
                     ticket.ready.set()
             raise
+        finally:
+            if mapped_started:
+                # Forward permits immediate host-table mutation on return.
+                # A dedicated event cannot be overwritten by GPU slot reuse.
+                if mapped_recorded:
+                    self._mapped_done.synchronize()
+                else:
+                    self.copy_stream.synchronize()
 
     @torch.inference_mode()
     def forward(self, ids_cpu: torch.Tensor, consume) -> None:
@@ -220,6 +247,8 @@ class MemoryTableOffloader:
             raise ValueError("ids must be CPU int64")
         if tuple(ids_cpu.shape) != (self.batch, self.seq_len):
             raise ValueError("IDs do not match the preallocated shapes")
+        if self.mapped_first_group and (bool((ids_cpu < 0).any()) or bool((ids_cpu >= self.weights.shape[0]).any())):
+            raise IndexError("memory table index out of range")
         if not self.lock.acquire(blocking=False):
             raise RuntimeError("concurrent forwards on one offloader are unsupported")
         cancel = threading.Event()
