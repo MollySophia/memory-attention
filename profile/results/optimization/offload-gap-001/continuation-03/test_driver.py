@@ -1,4 +1,5 @@
 import driver as d
+import pytest
 
 def test_complete_scope_has_no_duplicate_or_missing_workload():
  assert len(d.WORKLOADS)==len(set(d.WORKLOADS))==16
@@ -39,20 +40,21 @@ def test_fixed_family_holm_does_not_drop_unfavorable_values():
  import pytest
  assert holm([.001,.04,1.])==pytest.approx([.003,.08,1.])
 
-def test_shared_host_memory_audit_counts_one_allocation_and_rejects_old_capacity(monkeypatch):
+@pytest.mark.parametrize('batch,host_max', [(4,8192), (8,16384)])
+def test_shared_host_memory_audit_counts_one_allocation_and_rejects_old_capacity(monkeypatch,batch,host_max):
  import copy
  import pytest
  directory=d.C/'A0023/R01-complete-screen'
  manifest=d.read(directory/'manifest.json')
- job=next(j for j in manifest['jobs'] if (j['implementation'],j['mode'],j['batch'],j['length'],j['variant'])==('candidate','prefill',4,2048,'ma_offload'))
+ job=next(j for j in manifest['jobs'] if (j['implementation'],j['mode'],j['batch'],j['length'],j['variant'])==('candidate','prefill',batch,2048,'ma_offload'))
  path=directory/(job['name']+'.json')
  payload=copy.deepcopy(d.read(path))
  original=d.read
  monkeypatch.setattr(d,'read',lambda p:payload if p==path else original(p))
- payload['model_config'].update(memory_offload_single_host_min_tokens=4096,memory_offload_single_host_max_tokens=8192)
+ payload['model_config'].update(memory_offload_single_host_min_tokens=4096,memory_offload_single_host_max_tokens=host_max)
  with pytest.raises(AssertionError):d.audit_job(job,path)
  memory=payload['results'][0]['memory_after']
- cap=next(c for c in memory['offloader_capacities'] if (c['batch'],c['length'])==(4,2048))
+ cap=next(c for c in memory['offloader_capacities'] if (c['batch'],c['length'])==(batch,2048))
  removed=cap['host_bytes']*3//4
  cap['host_bytes']-=removed
  memory['offload_pinned_bytes']-=removed
