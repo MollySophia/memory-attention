@@ -82,3 +82,61 @@ def test_validation_completes_only_missing_points_and_keeps_folding_scope(tmp_pa
   assert all(j['variant']=='ma_gpu_unfolded' and j['command'][j['command'].index('--rounds')+1]=='3' for j in fold['jobs'])
   correct=d.read(tmp_path/a/'validation-plan.json')['correctness_pairs']
   assert len(correct)==6 and {'batch':8,'length':512,'seed':4321} in correct
+
+
+def test_six_block_plan_uses_process_pairs_not_inner_rounds(tmp_path,monkeypatch):
+ monkeypatch.setattr(d,'record',lambda a:dict(confirmation_blocks=6))
+ monkeypatch.setattr(d,'signature',lambda a:dict(attempt=a,commit='frozen-'+a,source_sha256='digest-'+a,root=str(d.root(a))))
+ monkeypatch.setattr(d,'estimate',lambda *args:1.)
+ p=d.plan('A0030',d.WORKLOADS,'A0028',True,tmp_path)
+ assert p['independent_blocks']==d.planned_blocks(p)==6
+ assert len(p['jobs'])==384
+ assert d.validate_balanced_order(p['jobs'],6)
+ assert all(j['command'][j['command'].index('--rounds')+1]=='3' for j in p['jobs'])
+ for malformed in (p['jobs'][:-1],p['jobs']+p['jobs'][:1],p['jobs'][:192]):
+  with pytest.raises(AssertionError):d.validate_balanced_order(malformed,6)
+ import copy
+ bad=copy.deepcopy(p['jobs'])
+ first=next(j for j in bad if j['block']==6)
+ first['implementation']='baseline' if first['implementation']=='candidate' else 'candidate'
+ with pytest.raises(AssertionError):d.validate_balanced_order(bad,6)
+ p['independent_blocks']=3
+ with pytest.raises(AssertionError):d.planned_blocks(p)
+
+
+def test_variable_intervals_preserve_historical_results():
+ import statistics
+ from scipy.stats import t
+ xs=[1.,2.,4.]
+ assert d.interval(xs)==d.legacy_interval(xs)
+ xs=[1.,2.,4.,3.,5.,6.]
+ result=d.interval(xs)
+ half=t.ppf(.975,5)*statistics.stdev(xs)/(6**.5)
+ assert result['n']==6
+ assert result['lower_95']==pytest.approx(statistics.mean(xs)-half)
+ assert result['upper_95']==pytest.approx(statistics.mean(xs)+half)
+ with pytest.raises(AssertionError):d.interval(xs[:2])
+
+
+def test_six_block_summary_uses_all_pairs_and_correct_degrees_of_freedom(tmp_path,monkeypatch):
+ import math
+ import statistics
+ from scipy.stats import t
+ monkeypatch.setattr(d,'record',lambda a:dict(confirmation_blocks=6))
+ monkeypatch.setattr(d,'signature',lambda a:dict(attempt=a,commit='frozen-'+a,source_sha256='digest-'+a,root=str(d.root(a))))
+ monkeypatch.setattr(d,'estimate',lambda *args:1.)
+ p=d.plan('A0030',[('generation',1,2048)],'A0028',True,tmp_path)
+ p['status']='completed'
+ d.save(tmp_path/'manifest.json',p)
+ xs=[1.,2.,4.,3.,5.,6.]
+ def raw(job,path):
+  off=job['variant']=='ma_offload';candidate=job['implementation']=='candidate'
+  mean=100.+(10. if off else 0.)-(xs[job['block']-1] if off and candidate else 0.)
+  return ('env',),dict(mean_ms=mean,memory_after=dict(gpu_peak_allocated_bytes=100 if off else 200))
+ monkeypatch.setattr(d,'audit_job',raw)
+ r=d.summarize(tmp_path)['rows'][0]
+ assert r['statistics']['offload_reduction_ms']==d.interval(xs)
+ assert r['statistics']['gap_reduction_ms']==d.interval(xs)
+ expected=t.sf(statistics.mean(xs)/(statistics.stdev(xs)/math.sqrt(6)),5)
+ assert r['joint_one_sided_p']==pytest.approx(expected)
+ assert len(r['latencies'])==len(r['gpu_savings_bytes'])==6

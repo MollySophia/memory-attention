@@ -4,9 +4,10 @@ import driver as d
 import audit_completed as audit
 
 
-def test_cross_stage_audit_requires_complete_unique_matching_evidence(tmp_path, monkeypatch):
+@pytest.mark.parametrize('blocks', [3, 6])
+def test_cross_stage_audit_requires_complete_unique_matching_evidence(tmp_path, monkeypatch, blocks):
     monkeypatch.setattr(d, 'C', tmp_path)
-    monkeypatch.setattr(d, 'record', lambda a: dict(parent_attempt_id='A0016'))
+    monkeypatch.setattr(d, 'record', lambda a: dict(parent_attempt_id='A0016', confirmation_blocks=blocks))
     monkeypatch.setattr(d, 'signature', lambda a: dict(attempt=a, commit='sha-'+a,
                       source_sha256='hash-'+a, root=str(d.root(a))))
     monkeypatch.setattr(d, 'estimate', lambda *args: 1.)
@@ -30,7 +31,7 @@ def test_cross_stage_audit_requires_complete_unique_matching_evidence(tmp_path, 
             j.update(status='completed', returncode=0)
         plans[stage] = p
         d.save(directory / 'manifest.json', p)
-    assert sum(audit.audit_manifests('A0022').values()) == 288
+    assert sum(audit.audit_manifests('A0022').values()) == 96+64*blocks
     path = tmp_path / 'A0022/R03-remaining-confirmation/manifest.json'
     for mutation in ('duplicate', 'missing', 'source', 'unfinished'):
         p = copy.deepcopy(plans['R03-remaining-confirmation'])

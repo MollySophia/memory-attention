@@ -1,0 +1,40 @@
+{
+  "status": "passed",
+  "historical_screen_and_formal_summaries_identical": [
+    "A0021",
+    "A0022",
+    "A0023",
+    "A0024",
+    "A0025",
+    "A0026",
+    "A0027",
+    "A0028",
+    "A0029"
+  ],
+  "historical_confirmation_analyses_identical": [
+    "A0021",
+    "A0022",
+    "A0023",
+    "A0024",
+    "A0025",
+    "A0026",
+    "A0027",
+    "A0028",
+    "A0029"
+  ],
+  "accepted_full_matrix_integrity": {
+    "A0023": {
+      "R01-complete-screen": 64,
+      "R02-parent-confirmation": 108,
+      "R03-remaining-confirmation": 84,
+      "R04-unfolded-reference": 32
+    },
+    "A0028": {
+      "R01-complete-screen": 64,
+      "R02-parent-confirmation": 120,
+      "R03-remaining-confirmation": 72,
+      "R04-unfolded-reference": 32
+    }
+  },
+  "note": "Read-only recomputation. Historical files and verdicts unchanged. Six-block helpers tested separately on synthetic plans."
+}

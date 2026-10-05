@@ -40,6 +40,11 @@ above 10 ms, it is 1% of that workload's matched resident latency. Each
 correctness-passing candidate must complete the full matrix screen. Final
 acceptance additionally requires independent paired repeats and the simultaneous
 confidence-bound criterion specified below; a screening mean is insufficient.
+Apply this threshold separately to every workload; improvements at other shapes
+cannot offset a failing point. For generation, use the total latency of prefill
+plus all 128 decode steps, rather than a per-step average. This is the final
+offload-versus-resident tolerance, not a minimum gain required to retain an
+individual optimization attempt.
 
 Primary target: ma_offload. Keep a frozen ma_offload implementation as the
 optimization baseline, and ma_gpu as the folded resident placement reference.

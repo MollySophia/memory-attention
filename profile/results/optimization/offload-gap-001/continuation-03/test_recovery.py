@@ -32,7 +32,7 @@ def test_recovery_never_reruns_completed_jobs_and_rejects_live_manifest(tmp_path
     monkeypatch.setattr(d,'signature',lambda a: dict(attempt=a))
     monkeypatch.setattr(d,'audit_job',lambda *args: None)
     monkeypatch.setattr(d.subprocess,'Popen',lambda *args,**kwargs: pytest.fail('Completed job rerun'))
-    p=dict(status='stopped_needs_review',controller_pid=123,source_signatures={'candidate':dict(attempt='A0023')},jobs=[dict(status='completed',returncode=0,name='done')])
+    p=dict(formal=False,status='stopped_needs_review',controller_pid=123,source_signatures={'candidate':dict(attempt='A0023')},jobs=[dict(status='completed',returncode=0,name='done')])
     d.save(tmp_path/'manifest.json',p)
     d.run(tmp_path,resume=True)
     final=d.read(tmp_path/'manifest.json')

@@ -32,7 +32,7 @@ def export(attempt, data_only=False):
     rows = []
     for r in analysis['rows']:
         pairs = r['latencies']
-        assert len(pairs) == 3
+        assert len(pairs) == d.confirmation_blocks(attempt)
         gpu = [p['candidate_gpu_ms'] for p in pairs]
         offload = [p['candidate_offload_ms'] for p in pairs]
         assert all(math.isfinite(x) and x > 0 for x in gpu + offload)
@@ -42,7 +42,7 @@ def export(attempt, data_only=False):
         gap, low, high, _ = interval(gaps)
         overhead, olow, ohigh, _ = interval(overheads)
         residual, rlow, rhigh, se = interval(residuals)
-        upper = residual + float(t.ppf(1 - .05 / 16, 2)) * se
+        upper = residual + float(t.ppf(1 - .05 / 16, len(pairs) - 1)) * se
         rows.append(dict(
             mode=r['mode'], batch=r['batch'], length=r['length'],
             gpu_ms=statistics.mean(gpu), offload_ms=statistics.mean(offload),
@@ -54,12 +54,12 @@ def export(attempt, data_only=False):
             residual_upper_95_ms=rhigh,
             residual_upper_simultaneous_95_ms=upper,
             diagnostic_bound_within_target=upper <= 0,
-            independent_blocks=3, source_manifest=r['source_manifest']))
+            independent_blocks=len(pairs), source_manifest=r['source_manifest']))
     rows.sort(key=lambda r: (['prefill', 'decode', 'generation'].index(r['mode']), r['batch'], r['length']))
     out = directory / 'gap-diagnostics'
     out.mkdir(exist_ok=True)
     note = ('Diagnostic reuse of retention data, not independent final goal acceptance. '
-            'Error bars: paired process-block two-sided 95% t intervals (n=3). '
+            f'Error bars: paired process-block two-sided 95% t intervals (n={d.confirmation_blocks(attempt)}). '
             'Target residual is computed per pair as offload-GPU-max(0.1ms,0.01*GPU); '
             'its one-sided simultaneous 95% upper bound uses Bonferroni over all16 workloads. '
             'Parametric t intervals assume independent approximately normal block differences.')
@@ -105,7 +105,7 @@ def export(attempt, data_only=False):
         axes[0].legend(fontsize=8)
         fig.suptitle(f'{attempt}: matched offload versus folded all-GPU, complete 16-workload matrix')
         fig.text(.5, .015, '2.836B BF16 · RTX 5090 · last-token logits + real KV cache · random weights/tokens\n'
-                 'Three independent paired blocks; screening excluded. Diagnostic retention data; final goal not accepted.',
+                 f'{d.confirmation_blocks(attempt)} independent paired blocks; screening excluded. Diagnostic retention data; final goal not accepted.',
                  ha='center', fontsize=9)
         fig.tight_layout(rect=(0, .09, 1, .93))
         for extension in ('png', 'svg', 'pdf'):

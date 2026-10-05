@@ -24,7 +24,7 @@ def audit_manifests(a):
         if formal:
             assert manifest['formal']
             if manifest['jobs']:
-                d.validate_balanced_order(manifest['jobs'])
+                d.validate_balanced_order(manifest['jobs'],d.planned_blocks(manifest))
         for job in manifest['jobs']:
             assert job['status'] == 'completed' and job['returncode'] == 0
             sig = signatures[job['implementation']]
@@ -44,9 +44,9 @@ def audit_manifests(a):
                         for i in signatures for v in variants}
             assert cells == expected, (stage, 'coverage')
         counts[stage] = len(cells)
-    expected = {(*w, b, i, v) for w in d.WORKLOADS for b in (1, 2, 3)
+    expected = {(*w, b, i, v) for w in d.WORKLOADS for b in range(1,d.confirmation_blocks(a)+1)
                 for i in signatures for v in ('ma_offload', 'ma_gpu')}
-    assert formal_cells == expected, 'All16 fresh three-block coverage required'
+    assert formal_cells == expected, 'All16 fresh predeclared-block coverage required'
     assert len(environments) == 1, 'Cross-stage environment mismatch'
     return counts
 

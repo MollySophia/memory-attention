@@ -3,14 +3,54 @@ import argparse,csv,hashlib,json,math,os,statistics,subprocess,sys,time
 from pathlib import Path
 D=Path(__file__).resolve().parent; C=D.parent
 sys.path.insert(0,str(C))
-from run_paired import source_hash,save,implementation_order,validate_balanced_order
+from run_paired import source_hash,save,implementation_order
 from audit_continuation import validate_offload_memory
-from analyze_paired import interval
+from analyze_paired import interval as legacy_interval
 SHAPES=[(1,2048),(4,2048),(8,2048),(16,2048),(8,512),(8,4096),(8,8192)]
 WORKLOADS=[(m,b,l) for b,l in SHAPES for m in ('prefill','decode')]+[('generation',b,2048) for b in (1,8)]
 def read(p):return json.loads(Path(p).read_text())
 def root(a):return Path('/home/molly/workspace-memory-attn')/('offload-gap-001-'+a)
 def record(a):return read(C/a/'record.json')
+def confirmation_blocks(a):
+ n=record(a).get('confirmation_blocks',3)
+ assert type(n) is int and n>=3,'Predeclare at least three independent blocks'
+ return n
+
+def planned_blocks(p):
+ n=p.get('independent_blocks',3 if p['formal'] else 1)
+ assert type(n) is int and n>=(3 if p['formal'] else 1)
+ if p['formal']:assert n==confirmation_blocks(p['attempt']),'Frozen plan/record block count mismatch'
+ return n
+
+def validate_balanced_order(jobs,blocks=3):
+ assert type(blocks) is int and blocks>=3
+ if not jobs:return True
+ assert {j['block'] for j in jobs}==set(range(1,blocks+1))
+ keys={(j['batch'],j['length'],j['mode']) for j in jobs}
+ for key in keys:
+  placements=[];orders={v:[] for v in ('ma_offload','ma_gpu')}
+  for block in range(1,blocks+1):
+   selected=[j for j in jobs if (j['batch'],j['length'],j['mode'])==key and j['block']==block]
+   assert len(selected)==4,'Each block requires four unique matched cells'
+   variants=list(dict.fromkeys(j['variant'] for j in selected))
+   assert set(variants)==set(orders)
+   placements.append(variants)
+   for v in orders:
+    order=[j['implementation'] for j in selected if j['variant']==v]
+    assert len(order)==2 and set(order)=={'baseline','candidate'}
+    orders[v].append(order)
+  for sequence in [placements,*orders.values()]:
+   assert all(current==list(reversed(previous)) for previous,current in zip(sequence,sequence[1:])),(key,sequence)
+ return True
+
+def interval(values):
+ if len(values)==3:return legacy_interval(values)
+ from scipy.stats import t
+ n=len(values);assert n>=3
+ mean=statistics.mean(values);half=float(t.ppf(.975,n-1))*statistics.stdev(values)/(n**.5)
+ return dict(values=values,mean=mean,lower_95=mean-half,upper_95=mean+half,
+             method=f'paired process-block mean +/- t(df={n-1},0.975)*SE',n=n)
+
 def signature(a):
  r=root(a);sha=subprocess.check_output(['git','rev-parse','HEAD'],cwd=r,text=True).strip()
  assert sha==record(a)['candidate_sha']
@@ -35,7 +75,8 @@ def estimate(a,shape,variant,formal):
  return setup+latency/1000*((17 if formal else 5) if m=='generation' else 40 if formal else 8)
 def plan(a,workloads,baseline,formal,directory):
  sig={i:signature(x) for i,x in [('baseline',baseline),('candidate',a)]};jobs=[]
- for block in range(3 if formal else 1):
+ blocks=confirmation_blocks(a) if formal else 1
+ for block in range(blocks):
   sequence=list(enumerate(workloads));sequence=sequence[::-1] if block%2 else sequence
   for wi,shape in sequence:
    variants=['ma_offload','ma_gpu'];variants=variants[::-1] if (wi+block)%2 else variants
@@ -44,8 +85,8 @@ def plan(a,workloads,baseline,formal,directory):
      aid=sig[impl]['attempt'];m,b,l=shape;name=f'B{block+1}-J{len(jobs)+1:03d}-{impl}-{m}-{v}-b{b}-l{l}'
      command=cmd(aid,shape,directory/(name+'.json'),formal);command[command.index('PLACEHOLDER')]=v
      jobs.append(dict(name=name,block=block+1,mode=m,batch=b,length=l,variant=v,implementation=impl,attempt=aid,candidate_sha=sig[impl]['commit'],source_sha256=sig[impl]['source_sha256'],cwd=sig[impl]['root'],command=command,estimated_seconds=estimate(aid,shape,v,formal),status='pending'))
- if formal:validate_balanced_order(jobs)
- return dict(campaign_id='offload-gap-001',study='continuation-03',attempt=a,baseline=baseline,stage='independent_confirmation' if formal else 'complete_matrix_screen',formal=formal,status='planned',source_signatures=sig,jobs=jobs,planned_work=dict(jobs=len(jobs),estimated_seconds=sum(j['estimated_seconds'] for j in jobs)),accepted=False)
+ if formal:validate_balanced_order(jobs,blocks)
+ return dict(campaign_id='offload-gap-001',study='continuation-03',attempt=a,baseline=baseline,stage='independent_confirmation' if formal else 'complete_matrix_screen',formal=formal,independent_blocks=blocks,status='planned',source_signatures=sig,jobs=jobs,planned_work=dict(jobs=len(jobs),estimated_seconds=sum(j['estimated_seconds'] for j in jobs)),accepted=False)
 def audit_job(j,path):
  p=read(path);assert p['status']=='completed';assert p['source']['source_sha256']==j['source_sha256'];assert p['source']['git_commit']['stdout'].strip()==j['candidate_sha']
  cfg=p['config'];row=p['results'][0]
@@ -96,6 +137,8 @@ def run(directory,resume=False):
   p.setdefault('recovery_history',[]).append(dict(previous_controller_pid=p.get('controller_pid'),previous_error=p.get('error'),resumed_unix=time.time(),reason='Explicit audited recovery; retain completed raw jobs and execute pending only'))
   p.pop('error',None)
  else:assert p['status']=='planned'
+ blocks=planned_blocks(p)
+ if p['formal']:validate_balanced_order(p['jobs'],blocks)
  for s in p['source_signatures'].values():assert signature(s['attempt'])==s
  p.update(status='running',controller_pid=os.getpid(),started_unix=time.time());save(path,p)
  try:
@@ -116,13 +159,15 @@ def run(directory,resume=False):
 
 def summarize(directory):
  p=read(directory/'manifest.json');assert p['status']=='completed';envs=set();data={};rows=[]
+ blocks=planned_blocks(p)
+ if p['formal']:validate_balanced_order(p['jobs'],blocks)
  for j in p['jobs']:
   env,r=audit_job(j,directory/(j['name']+'.json'));envs.add(env);data[j['mode'],j['batch'],j['length'],j['block'],j['implementation'],j['variant']]=r
  assert len(envs)==1,'Environment mismatch in paired results'
  from scipy.stats import t
  for shape in sorted({k[:3] for k in data}):
   values={k:[] for k in ('offload_reduction_ms','gpu_reduction_ms','gap_reduction_ms','offload_speedup')};memory=[];means=[]
-  for block in range(1,4 if p['formal'] else 2):
+  for block in range(1,blocks+1):
    rr=[data[*shape,block,i,v] for i,v in [('baseline','ma_offload'),('baseline','ma_gpu'),('candidate','ma_offload'),('candidate','ma_gpu')]]
    bo,bg,co,cg=[r['mean_ms'] for r in rr];means.append(dict(baseline_offload_ms=bo,baseline_gpu_ms=bg,candidate_offload_ms=co,candidate_gpu_ms=cg))
    for k,x in zip(values,(bo-co,bg-cg,(bo-bg)-(co-cg),bo/co)):values[k].append(x)
@@ -133,7 +178,7 @@ def summarize(directory):
   if p['formal']:
    def pv(xs):
     sd=statistics.stdev(xs);mu=statistics.mean(xs)
-    return float(t.sf(mu/(sd/(3**.5)),2)) if sd else (0.0 if mu>0 else 1.0)
+    return float(t.sf(mu/(sd/(len(xs)**.5)),len(xs)-1)) if sd else (0.0 if mu>0 else 1.0)
    row['joint_one_sided_p']=max(pv(values['offload_reduction_ms']),pv(values['gap_reduction_ms']))
    row['nominal_dual_gain']=all(stat[k]['lower_95']>0 for k in ('offload_reduction_ms','gap_reduction_ms'))
    row['resolved_resident_slowdown']=stat['gpu_reduction_ms']['upper_95']<0

@@ -33,7 +33,7 @@ def prepare(a):
  shapes=[w for w in d.WORKLOADS if w in selected]
  p=d.plan(a,shapes,d.record(a)['parent_attempt_id'],True,directory)
  p['nomination_reasons']=[dict(mode=w[0],batch=w[1],length=w[2],reasons=selected[w]) for w in shapes]
- p['fixed_gain_family']=len(shapes);p['stopping_rule']='Exactly3 balanced independent blocks; no optional extension. Screens excluded. No automatic retention.'
+ p['fixed_gain_family']=len(shapes);p['stopping_rule']=f"Exactly{d.planned_blocks(p)} balanced independent blocks; no optional extension. Screens excluded. No automatic retention."
  p['regression_rule']='Resolved slowdown: paired two-sided95% interval of offload or gap reduction entirely below0; resident guard likewise; preserve adverse directions and memory losses.'
  d.save(directory/'manifest.json',p);print(json.dumps(p['planned_work']),flush=True)
  return p
@@ -52,7 +52,7 @@ def analyze(a):
   residuals=[l['candidate_offload_ms']-l['candidate_gpu_ms']-max(.1,.01*l['candidate_gpu_ms']) for l in r['latencies']]
   r['candidate_gap_ms']=d.interval(gaps)
   r['candidate_target_residual_ms']=d.interval(residuals)
-  r['candidate_target_residual_upper_one_sided_95_bonferroni16']=statistics.mean(residuals)+float(t.ppf(1-.05/16,2))*statistics.stdev(residuals)/math.sqrt(3)
+  r['candidate_target_residual_upper_one_sided_95_bonferroni16']=statistics.mean(residuals)+float(t.ppf(1-.05/16,len(residuals)-1))*statistics.stdev(residuals)/math.sqrt(len(residuals))
  result=dict(status='completed',attempt=a,baseline=p['baseline'],fixed_gain_family=len(rows),rows=rows,confirmed_local_gains=[key(r) for r in rows if r['confirmed_local_gain']],resolved_regressions=[key(r) for r in rows if r['resolved_offload_regression'] or r['resolved_gap_regression'] or r['resolved_resident_slowdown'] or not r['memory_savings_preserved']],accepted=False,note='No automatic acceptance. Complete correctness/full validation required; target residual bounds cover selected points only, not final goal completion.')
  d.save(directory/'analysis.json',result);print(json.dumps({k:v for k,v in result.items() if k!='rows'}),flush=True)
  return result

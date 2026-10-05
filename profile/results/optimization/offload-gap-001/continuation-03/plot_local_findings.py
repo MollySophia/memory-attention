@@ -35,7 +35,7 @@ def collect(through):
         for r, p in zip(result['rows'], adjusted):
             assert math.isclose(p, r['holm_adjusted_p'], rel_tol=1e-12, abs_tol=1e-12)
             pairs = r['latencies']
-            assert len(pairs) == 3
+            assert len(pairs) == d.confirmation_blocks(attempt)
             off = [v['baseline_offload_ms'] - v['candidate_offload_ms'] for v in pairs]
             gpu = [v['baseline_gpu_ms'] - v['candidate_gpu_ms'] for v in pairs]
             values = (off, [o - g for o, g in zip(off, gpu)], gpu)
@@ -100,7 +100,7 @@ def figures(rows, directory):
                  else 'Blocking guards preserved alongside local gains')
         fig.suptitle(title)
         fig.text(.5, .02, '2.836B BF16 · RTX 5090 · last-token logits + real KV cache · random weights/tokens\n'
-                 'Independent paired process blocks (n=3), two-sided 95% t intervals; positive = improvement.\n'
+                 'Independent paired process blocks (count predeclared per attempt), two-sided 95% t intervals; positive = improvement.\n'
                  'Screening excluded. Fixed Holm family per attempt for gains; guards use signed intervals. '
                  'These are not cumulative speedups or final target acceptance.', ha='center', fontsize=8)
         fig.tight_layout(rect=(0, .095, 1, .965))
