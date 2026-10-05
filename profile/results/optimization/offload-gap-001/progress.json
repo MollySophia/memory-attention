@@ -1,17 +1,17 @@
 {
   "campaign_id": "offload-gap-001",
   "status": "active",
-  "workflow_stage": "confirmation",
-  "goal_progress": "A0022 complete64-process screen audited;9-workload108-process confirmation running. Generation screening signal not yet accepted.",
-  "completed_optimization_verdicts": 21,
+  "workflow_stage": "diagnosis",
+  "goal_progress": "A0022 finalized rejected: b8 generation gain preserved, b1 generation regression blocks retention. Best remains A0016; diagnose before next attempt.",
+  "completed_optimization_verdicts": 22,
   "additional_completed_verdicts": 10,
   "additional_attempt_target": [
     10,
     10
   ],
   "accepted_steps": 2,
-  "active_attempt": "A0022",
-  "controller_pid": 3478072,
+  "active_attempt": null,
+  "controller_pid": null,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "0ce6645eb4c4bc3992258ad0878c72ea3c37a64e",
   "final_report": "continuation-02/final/REPORT.md",
@@ -19,10 +19,10 @@
   "publication": "continuation-02/final/publication.json",
   "continuation": "continuation-03/manifest.json",
   "next_actions": [
-    "Complete fixed A0022 confirmation",
-    "If gates pass, complete remaining paired matrix/folding/full-model correctness",
-    "Integrate recovered short-prefill gain on verified mapped-bulk parent",
-    "Optimize remaining gaps and independently audit all16 near-GPU conditions"
+    "Commit A0022 evidence and restore A0016 in separate source commit",
+    "Diagnose b1 generation regression and mapped transport scope",
+    "Integrate verified mapped and short-prefill gains in a new tested chain",
+    "Independently verify all16 latency targets and deliver complete figures"
   ],
   "supplemental_study": {
     "id": "supplemental-01",
@@ -41,6 +41,6 @@
     "workloads_passing_parent_and_current": 1,
     "accepted_new_attempts": 0
   },
-  "active_manifest": "A0022/R02-parent-confirmation/manifest.json",
-  "continuation_completed_verdicts": 1
+  "active_manifest": null,
+  "continuation_completed_verdicts": 2
 }
