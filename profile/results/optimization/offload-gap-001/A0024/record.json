@@ -7,8 +7,8 @@
   "parent_sha": "bf99d237b7c3f9dc684010187d124d7c40164104",
   "accepted_step": null,
   "label": "Recover short-prefill single-slot pipeline on mapped parent",
-  "status": "registered",
-  "workflow_stage": "confirmation",
+  "status": "rejected",
+  "workflow_stage": "verdict",
   "hypothesis": "Extend selective single-slot pipeline to4096 total tokens, recovering A0014/A0021 b8/512 prefill gain on accepted mapped1..16 parent. Reduced pinned/GPU slot capacity and transfer scheduling overhead; prior b1 decode regression must be tested again under new transport.",
   "change": "Only auto single-slot maximum2048->4096 and boundary/reuse tests; mapped1..16 and bulk1024 unchanged.",
   "profile_evidence": [
@@ -137,5 +137,255 @@
       "estimated_seconds": 2483.1411046285184
     },
     "fixed_gain_family": 8
+  },
+  "finished_unix": 1791178245.7716308,
+  "independent_confirmation": "R02-parent-confirmation/analysis.json",
+  "local_findings": [
+    {
+      "attempt": "A0024",
+      "baseline": "A0023",
+      "mode": "prefill",
+      "batch": 8,
+      "length": 512,
+      "statistics": {
+        "offload_reduction_ms": {
+          "values": [
+            2.4042458118249925,
+            2.5691010834028276,
+            2.7379998782028707
+          ],
+          "mean": 2.570448924476897,
+          "lower_95": 2.1558932520532488,
+          "upper_95": 2.9850045969005454,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "gpu_reduction_ms": {
+          "values": [
+            0.10653695402046282,
+            -0.1449962767461983,
+            0.06012585945427418
+          ],
+          "mean": 0.007222178909512896,
+          "lower_95": -0.32528446622386115,
+          "upper_95": 0.3397288240428869,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "gap_reduction_ms": {
+          "values": [
+            2.2977088578045297,
+            2.714097360149026,
+            2.6778740187485965
+          ],
+          "mean": 2.563226745567384,
+          "lower_95": 1.9902419567274512,
+          "upper_95": 3.136211534407317,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "offload_speedup": {
+          "values": [
+            1.0457159538947243,
+            1.0487700219476075,
+            1.0522846219215967
+          ],
+          "mean": 1.0489235325879762,
+          "lower_95": 1.040758113340381,
+          "upper_95": 1.0570889518355715,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 54.995203825334706,
+          "baseline_gpu_ms": 52.32081369807323,
+          "candidate_offload_ms": 52.59095801350971,
+          "candidate_gpu_ms": 52.21427674405277
+        },
+        {
+          "baseline_offload_ms": 55.246975334982075,
+          "baseline_gpu_ms": 51.97130908879141,
+          "candidate_offload_ms": 52.67787425157925,
+          "candidate_gpu_ms": 52.116305365537606
+        },
+        {
+          "baseline_offload_ms": 55.1052118341128,
+          "baseline_gpu_ms": 52.19412505005797,
+          "candidate_offload_ms": 52.36721195590993,
+          "candidate_gpu_ms": 52.133999190603696
+        }
+      ],
+      "gpu_savings_bytes": [
+        3153330176,
+        3153330176,
+        3153330176
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0024/R02-parent-confirmation/manifest.json",
+      "accepted": false,
+      "screen_promising": true,
+      "joint_one_sided_p": 0.001344174009020499,
+      "nominal_dual_gain": true,
+      "resolved_resident_slowdown": false,
+      "holm_adjusted_p": 0.010753392072163992,
+      "confirmed_local_gain": true,
+      "resolved_offload_regression": false,
+      "resolved_gap_regression": false,
+      "candidate_gap_ms": {
+        "values": [
+          0.37668126945694524,
+          0.5615688860416412,
+          0.23321276530623436
+        ],
+        "mean": 0.3904876402682736,
+        "lower_95": -0.01843340129389981,
+        "upper_95": 0.799408681830447,
+        "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+        "n": 3
+      },
+      "candidate_target_residual_ms": {
+        "values": [
+          -0.14546149798358243,
+          0.04040583238626516,
+          -0.2881272265998026
+        ],
+        "mean": -0.13106096406570664,
+        "lower_95": -0.5402959759149608,
+        "upper_95": 0.2781740477835476,
+        "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+        "n": 3
+      },
+      "candidate_target_residual_upper_one_sided_95_bonferroni16": 1.0663776746420868
+    }
+  ],
+  "resolved_regressions": [
+    {
+      "attempt": "A0024",
+      "baseline": "A0023",
+      "mode": "prefill",
+      "batch": 1,
+      "length": 2048,
+      "statistics": {
+        "offload_reduction_ms": {
+          "values": [
+            -0.06876117549836636,
+            -0.04059009564419469,
+            -0.06061779956023017
+          ],
+          "mean": -0.056656356900930405,
+          "lower_95": -0.09266968927778044,
+          "upper_95": -0.020643024524080365,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "gpu_reduction_ms": {
+          "values": [
+            0.0030995657046624103,
+            0.1137228061755522,
+            -0.036491438125572984
+          ],
+          "mean": 0.026776977918213873,
+          "lower_95": -0.16662785551384496,
+          "upper_95": 0.2201818113502727,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "gap_reduction_ms": {
+          "values": [
+            -0.07186074120302877,
+            -0.15431290181974688,
+            -0.024126361434657184
+          ],
+          "mean": -0.08343333481914428,
+          "lower_95": -0.2470393595977081,
+          "upper_95": 0.08017268995941954,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        },
+        "offload_speedup": {
+          "values": [
+            0.9976533281011422,
+            0.9986189954262191,
+            0.9979360809861477
+          ],
+          "mean": 0.9980694681711697,
+          "lower_95": 0.99683619336308,
+          "upper_95": 0.9993027429792594,
+          "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+          "n": 3
+        }
+      },
+      "latencies": [
+        {
+          "baseline_offload_ms": 29.232810779164236,
+          "baseline_gpu_ms": 28.96879029770692,
+          "candidate_offload_ms": 29.301571954662602,
+          "candidate_gpu_ms": 28.96569073200226
+        },
+        {
+          "baseline_offload_ms": 29.35112693036596,
+          "baseline_gpu_ms": 29.058495598534744,
+          "candidate_offload_ms": 29.391717026010156,
+          "candidate_gpu_ms": 28.944772792359192
+        },
+        {
+          "baseline_offload_ms": 29.30962354876101,
+          "baseline_gpu_ms": 29.03314831977089,
+          "candidate_offload_ms": 29.37024134832124,
+          "candidate_gpu_ms": 29.069639757896464
+        }
+      ],
+      "gpu_savings_bytes": [
+        3162406912,
+        3162406912,
+        3162406912
+      ],
+      "memory_savings_preserved": true,
+      "source_manifest": "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0024/R02-parent-confirmation/manifest.json",
+      "accepted": false,
+      "screen_promising": false,
+      "joint_one_sided_p": 0.989432172081546,
+      "nominal_dual_gain": false,
+      "resolved_resident_slowdown": false,
+      "holm_adjusted_p": 1.0,
+      "confirmed_local_gain": false,
+      "resolved_offload_regression": true,
+      "resolved_gap_regression": false,
+      "candidate_gap_ms": {
+        "values": [
+          0.33588122266034404,
+          0.4469442336509637,
+          0.3006015904247761
+        ],
+        "mean": 0.36114234891202796,
+        "lower_95": 0.17142454313066274,
+        "upper_95": 0.5508601546933931,
+        "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+        "n": 3
+      },
+      "candidate_target_residual_ms": {
+        "values": [
+          0.046224315340321454,
+          0.15749650572737178,
+          0.009905192845811428
+        ],
+        "mean": 0.07120867130450155,
+        "lower_95": -0.11982721119895536,
+        "upper_95": 0.26224455380795847,
+        "method": "paired process-block mean +/- t(df=2,0.975)*SE",
+        "n": 3
+      },
+      "candidate_target_residual_upper_one_sided_95_bonferroni16": 0.6301875965327886
+    }
+  ],
+  "verdict_reason": "Target short-prefill offload and gap gain confirmed with fixed Holm family8, but b1/2048 prefill offload reduction-.0566564ms CI[-.0926697,-.0206430] violates predeclared no-resolved-regression gate. Gap regression itself unresolved. Reject without optional resampling; preserve local gain and restore A0023.",
+  "full_validation": "not_run: resolved confirmation regression; no retention eligibility",
+  "evidence_integrity": {
+    "status": "passed",
+    "screen": 64,
+    "confirmation": 96,
+    "single_matched_environment": true
   }
 }

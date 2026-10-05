@@ -41,6 +41,12 @@
         "decode b16/2048"
       ],
       "evidence": "../A0023/final-evidence-audit.json"
+    },
+    {
+      "attempt": "A0024",
+      "status": "rejected",
+      "confirmed_local_gain": "prefill b8/512",
+      "blocking_regression": "prefill b1/2048 offload latency"
     }
   ],
   "retained_current": "A0023"

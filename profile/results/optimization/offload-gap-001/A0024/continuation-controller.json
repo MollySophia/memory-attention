@@ -1,0 +1,47 @@
+{
+  "status": "confirmation_needs_review",
+  "controller_pid": 4068760,
+  "observed_pid": 4068677,
+  "observed_identity": [
+    "S",
+    "358730114"
+  ],
+  "started_unix": 1791174422.9299977,
+  "accepted": false,
+  "confirmation_work": {
+    "jobs": 96,
+    "estimated_seconds": 2483.1411046285184
+  },
+  "confirmation_command": [
+    "/home/molly/miniconda3/envs/fla-bench/bin/python",
+    "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/continuation-03/confirm.py",
+    "run",
+    "--attempt",
+    "A0024"
+  ],
+  "confirmation_pid": 4086945,
+  "confirmation_returncode": 0,
+  "confirmation_result": {
+    "status": "completed",
+    "attempt": "A0024",
+    "baseline": "A0023",
+    "fixed_gain_family": 8,
+    "confirmed_local_gains": [
+      [
+        "prefill",
+        8,
+        512
+      ]
+    ],
+    "resolved_regressions": [
+      [
+        "prefill",
+        1,
+        2048
+      ]
+    ],
+    "accepted": false,
+    "note": "No automatic acceptance. Complete correctness/full validation required; target residual bounds cover selected points only, not final goal completion."
+  },
+  "finished_unix": 1791178187.943163
+}

@@ -1,17 +1,17 @@
 {
   "campaign_id": "offload-gap-001",
   "status": "active",
-  "workflow_stage": "confirmation",
-  "goal_progress": "A0024 complete64-process screen audited; target short-prefill signal2.67835ms. Fixed8-workload96-process confirmation running, no verdict.",
-  "completed_optimization_verdicts": 23,
+  "workflow_stage": "diagnosis",
+  "goal_progress": "A0024 rejected: short-prefill gain confirmed2.57045ms, but b1 prefill resolved slowdown. Preserve evidence; restore verified A0023 and diagnose cumulative integration.",
+  "completed_optimization_verdicts": 24,
   "additional_completed_verdicts": 10,
   "additional_attempt_target": [
     10,
     10
   ],
   "accepted_steps": 3,
-  "active_attempt": "A0024",
-  "controller_pid": 4086945,
+  "active_attempt": null,
+  "controller_pid": null,
   "source_baseline": "62942a0387608fe21baaeb2dce9ef3b0947dde4d",
   "source_final": "5f3d5958fea25f953bb91f5ef6f35880ff37fcfa",
   "final_report": "continuation-02/final/REPORT.md",
@@ -41,6 +41,6 @@
     "workloads_passing_parent_and_current": 1,
     "accepted_new_attempts": 0
   },
-  "active_manifest": "A0024/R02-parent-confirmation/manifest.json",
-  "continuation_completed_verdicts": 3
+  "active_manifest": null,
+  "continuation_completed_verdicts": 4
 }
