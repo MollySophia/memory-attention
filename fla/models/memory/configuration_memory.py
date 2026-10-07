@@ -48,7 +48,6 @@ class MemoryConfig(PretrainedConfig):
         memory_offload_single_host_min_tokens: int = 4096,
         memory_offload_single_host_max_tokens: int = 16384,
         memory_offload_chunk_size: int = 1024,
-        memory_offload_mapped_first_group: bool = True,
         memory_offload_mapped_bulk: bool = True,
         memory_offload_mapped_bulk_min_tokens: int = 1,
         memory_offload_mapped_bulk_max_tokens: int = 16,
@@ -72,7 +71,6 @@ class MemoryConfig(PretrainedConfig):
         self.memory_offload_single_host_min_tokens = memory_offload_single_host_min_tokens
         self.memory_offload_single_host_max_tokens = memory_offload_single_host_max_tokens
         self.memory_offload_chunk_size = memory_offload_chunk_size
-        self.memory_offload_mapped_first_group = memory_offload_mapped_first_group
         self.memory_offload_mapped_bulk = memory_offload_mapped_bulk
         if not 1 <= memory_offload_mapped_bulk_min_tokens <= memory_offload_mapped_bulk_max_tokens:
             raise ValueError("invalid mapped bulk token range")
