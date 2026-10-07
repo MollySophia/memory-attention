@@ -1,13 +1,14 @@
 # Memory Attention inference performance experiments
 
-Status: original campaign `offload-gap-001` and supplemental survey completed:
-20 attempts, two retained steps (A0001 and A0016). Current retained execution
-source is A0030 (`a9e5bda62a020e4e1994037732b0dbb7606d5dda`), accepted
-as step 5 after A0001, A0016, A0023 and A0028 in continuation-03. Editing this
-document alone does not launch measurements. The user has now authorized
-continuation-03: integrate the recovered local gains into a cumulative source
-chain, then optimize until offload approaches resident latency at every matrix
-and generation workload. This is an active objective with no fixed attempt cap.
+Status (2026-10-07): paused at the user's request, retaining A0030
+(`a9e5bda62a020e4e1994037732b0dbb7606d5dda`) as accepted step 5 after
+A0001, A0016, A0023 and A0028. A0031's evidence and rejected verdict are
+archived, and its execution changes were separately reverted. Do not launch
+new optimization or performance measurements until the user resumes this work.
+The existing-results report, complete 16-workload tables and figure index are
+[A0030 results](profile/results/optimization/offload-gap-001/continuation-03/A0030-RESULTS.md).
+The final independent all-workload objective remains unproven. The requirements
+below govern future resumed work; they do not override this pause.
 
 Workflow revision (2026-10-04): future candidates require complete matrix
 screening before a performance verdict. Coverage is mandatory; sampling effort
@@ -475,7 +476,7 @@ fictional final implementation.
 
 The original target was 5–10 focused, profiling-supported attempts; the completed
 original campaign contains 20 attempts and two retained steps. Continuation-03
-is now authorized without a fixed attempt cap; completing another bounded batch
+was authorized without a fixed attempt cap and is currently paused; completing another bounded batch
 does not satisfy its all-workload latency objective. The user-confirmed final
 near-GPU criterion applies separately to all 16 workloads, including generation:
 `T_offload - T_gpu <= max(0.01 * T_gpu, 0.1 ms)`.

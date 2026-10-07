@@ -4,6 +4,10 @@ This evidence index records the verified implementation through accepted step 5.
 Later candidates do not change this chain until their complete retention gates
 pass. The overall all-workload near-GPU objective remains unmet.
 
+Paused at the user's request on 2026-10-07. Execution source has been restored
+to A0030; A0031 remains archived as rejected. Start with the
+[A0030 results report and figure index](A0030-RESULTS.md) for current tables.
+
 | Accepted step | Implementation | Parent | Change | Independent evidence |
 | --- | --- | --- | --- | --- |
 | 0 | A0000 | — | Frozen campaign baseline | [Record](../A0000/record.json) |
@@ -68,7 +72,7 @@ tokens. These effects must not be added to results measured at other workloads.
 
 ## Latest findings and figures
 
-The [ledger through A0030](ledger-through-A0030/LEDGER.md) now records 31 entries and five retained steps. Updated [local-findings JSON](local-findings-through-A0030/findings.json) and [CSV](local-findings-through-A0030/findings.csv) contain 94 nominated comparisons, including 11 corrected local gains; A0030 uses six independent blocks (df=5). A0030 scaling data were exported from 192 formal candidate processes. These new exports are data only: rendered figures and visual checks are pending until GPU timing is idle. Earlier figure snapshots below remain historical.
+The current [ledger through A0031](ledger-through-A0031/LEDGER.md) records 32 entries and five retained steps. [Local-findings JSON](local-findings-through-A0031/findings.json) and [CSV](local-findings-through-A0031/findings.csv) contain 102 nominated comparisons, including 13 corrected local gains across continuation attempts. A0030 scaling data use 192 formal candidate processes. All nine figure families in the [report](A0030-RESULTS.md) have been rendered with timing idle and visually inspected as a contact sheet. Earlier figure snapshots below remain historical.
 
 [A0030](../A0030/record.json) is retained as step 5 on A0028 after its
 64-process screen, fixed six-block confirmation and complete validation.

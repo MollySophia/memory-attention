@@ -1,0 +1,129 @@
+attempt,label,status,mode,batch,length,measurement_plan_id,measured_ms,sample_sd_ms,incumbent_attempt,incumbent_ms
+A0000,restored model with verified measurement harness,baseline,prefill,1,2048,screen_v1_w3_n5_r1,43.60288484022021,0.1335433115404926,A0000,43.60288484022021
+A0001,pipeline above 1024 tokens,accepted,prefill,1,2048,screen_v1_w3_n5_r1,29.37809396535158,0.43202527240237043,A0001,29.37809396535158
+A0002,serial byte copies for tiny CPU lookups,within_noise,prefill,1,2048,screen_v1_w3_n5_r1,29.43675108253956,0.055349668595151905,A0001,29.37809396535158
+A0003,two-layer groups in automatic pipeline,rejected,prefill,1,2048,screen_v1_w3_n5_r1,31.843384448438883,1.276848331012971,A0001,29.37809396535158
+A0004,caller-thread pipeline producer,within_noise,prefill,1,2048,screen_v1_w3_n5_r1,29.026863165199757,0.06267518938346243,A0001,29.37809396535158
+A0005,compute-stream copies for tiny bulk transfers,within_noise,prefill,1,2048,screen_v1_w3_n5_r1,29.242638871073723,0.07830530887238196,A0001,29.37809396535158
+A0006,refill host slot before consumer release,within_noise,prefill,1,2048,screen_v1_w3_n5_r1,29.144953936338425,0.05450353804917386,A0001,29.37809396535158
+A0007,precompute immutable pipeline tensor views,rejected,prefill,1,2048,screen_v1_w3_n5_r1,29.411230608820915,0.14169696053871902,A0001,29.37809396535158
+A0008,mapped-host GPU gather for pipeline,rejected,prefill,1,2048,screen_v1_w3_n5_r1,29.42277453839779,0.0506216965367489,A0001,29.37809396535158
+A0009,within-call token dedup for large pipeline inputs,rejected,prefill,1,2048,screen_v1_w3_n5_r1,29.681336414068937,0.7403451742581575,A0001,29.37809396535158
+A0010,alternate pinned host buffers per GPU slot,rejected,prefill,1,2048,screen_v1_w3_n5_r1,31.109227053821087,0.18266807797334106,A0001,29.37809396535158
+A0011,reuse pinned input-ID staging buffers,within_noise,prefill,1,2048,screen_v1_w3_n5_r1,29.42592641338706,0.11657497472754737,A0001,29.37809396535158
+A0012,blocking producer DMA completion events,within_noise,prefill,1,2048,screen_v1_w3_n5_r1,29.23710932955146,0.043960462586658255,A0001,29.37809396535158
+A0013,mapped-host all-layer gather for small bulk inputs,rejected,prefill,1,2048,screen_v1_w3_n5_r1,30.033439863473177,1.2082494830198165,A0001,29.37809396535158
+A0014,one-slot automatic pipeline lookahead,rejected,prefill,1,2048,screen_v1_w3_n5_r1,29.00561662390828,0.04198067076049065,A0001,29.37809396535158
+A0015,fuse compressed-row expansion with memory addition,within_noise,prefill,1,2048,screen_v1_w3_n5_r1,29.27270131185651,0.18509655272517386,A0001,29.37809396535158
+A0016,single-slot automatic pipeline for small prefill only,accepted,prefill,1,2048,screen_v1_w3_n5_r1,28.941986802965403,0.010548051624232262,A0016,28.941986802965403
+A0017,write-combined pinned pipeline buffers for large inputs,within_noise,prefill,1,2048,screen_v1_w3_n5_r1,29.00316994637251,0.034090527204124935,A0016,28.941986802965403
+A0018,submit embedding before waiting for pipeline input IDs,rejected,prefill,1,2048,screen_v1_w3_n5_r1,28.93447820097208,0.01953443638690804,A0016,28.941986802965403
+A0019,start pipeline producer before embedding dispatch,rejected,prefill,1,2048,screen_v1_w3_n5_r1,28.98460617288947,0.043891221555199394,A0016,28.941986802965403
+A0020,reuse per-layer pipeline coordination tickets,within_noise,prefill,1,2048,screen_v1_w3_n5_r1,28.91129031777382,0.03350139848001991,A0016,28.941986802965403
+A0021,Extend selective single-slot auto pipeline through4096 tokens,rejected,prefill,1,2048,screen_v1_w3_n5_r1,28.93376788124442,0.058770575207307815,A0016,28.941986802965403
+A0022,Recover mapped host bulk gather on selective pipeline parent,rejected,prefill,1,2048,screen_v1_w3_n5_r1,28.950966242700815,0.037497923706596395,A0016,28.941986802965403
+A0023,Mapped bulk for all1..16-token inputs,accepted,prefill,1,2048,screen_v1_w3_n5_r1,28.9959866553545,0.06561371752034469,A0023,28.9959866553545
+A0024,Recover short-prefill single-slot pipeline on mapped parent,rejected,prefill,1,2048,screen_v1_w3_n5_r1,29.05769944190979,0.04019732512917724,A0023,28.9959866553545
+A0025,Precompute views for automatic single-slot pipeline,rejected,prefill,1,2048,screen_v1_w3_n5_r1,29.479075223207474,0.9016677982184357,A0023,28.9959866553545
+A0026,One host staging buffer with multi-slot GPU prefetch,rejected,prefill,1,2048,screen_v1_w3_n5_r1,29.02022823691368,0.05083589404444176,A0023,28.9959866553545
+A0027,Caller-stream mapped gather for one-token inputs,rejected,prefill,1,2048,screen_v1_w3_n5_r1,29.03389288112521,0.011851624030681041,A0023,28.9959866553545
+A0028,Shared host staging through16384 input tokens,accepted,prefill,1,2048,screen_v1_w3_n5_r1,29.72852736711502,1.7029443022838993,A0028,29.72852736711502
+A0029,Explicit-stream compiled mapped gather launch,within_noise,prefill,1,2048,screen_v1_w3_n5_r1,28.99933038279414,0.025165287310337202,A0028,29.72852736711502
+A0030,Resolve offload dispatch metadata once per forward,accepted,prefill,1,2048,screen_v1_w3_n5_r1,29.070966877043247,0.013116390984019868,A0030,29.070966877043247
+A0031,Mapped first pipeline group with existing CPU-DMA steady state,rejected,prefill,1,2048,screen_v1_w3_n5_r1,28.980840928852558,0.10509120133787035,A0030,29.070966877043247
+A0000,restored model with verified measurement harness,baseline,decode,1,2048,screen_v1_w3_n5_r1,4.680408537387848,0.03625942888342132,A0000,4.680408537387848
+A0001,pipeline above 1024 tokens,accepted,decode,1,2048,screen_v1_w3_n5_r1,4.620579164475203,0.06799069901388392,A0001,4.620579164475203
+A0002,serial byte copies for tiny CPU lookups,within_noise,decode,1,2048,screen_v1_w3_n5_r1,4.609972238540649,0.06474760885699228,A0001,4.620579164475203
+A0003,two-layer groups in automatic pipeline,rejected,decode,1,2048,screen_v1_w3_n5_r1,4.780148807913065,0.41265621580905504,A0001,4.620579164475203
+A0004,caller-thread pipeline producer,within_noise,decode,1,2048,screen_v1_w3_n5_r1,4.614540189504623,0.07508650686919925,A0001,4.620579164475203
+A0005,compute-stream copies for tiny bulk transfers,within_noise,decode,1,2048,screen_v1_w3_n5_r1,4.586316272616386,0.08242891479504098,A0001,4.620579164475203
+A0006,refill host slot before consumer release,within_noise,decode,1,2048,screen_v1_w3_n5_r1,4.658252373337746,0.05620729435456619,A0001,4.620579164475203
+A0007,precompute immutable pipeline tensor views,rejected,decode,1,2048,screen_v1_w3_n5_r1,5.536122154444456,0.3548524925981378,A0001,4.620579164475203
+A0008,mapped-host GPU gather for pipeline,rejected,decode,1,2048,screen_v1_w3_n5_r1,5.354337953031063,0.033009301947367335,A0001,4.620579164475203
+A0009,within-call token dedup for large pipeline inputs,rejected,decode,1,2048,screen_v1_w3_n5_r1,4.716119170188904,0.20085764811107726,A0001,4.620579164475203
+A0010,alternate pinned host buffers per GPU slot,rejected,decode,1,2048,screen_v1_w3_n5_r1,4.694057442247868,0.0760907527394704,A0001,4.620579164475203
+A0011,reuse pinned input-ID staging buffers,within_noise,decode,1,2048,screen_v1_w3_n5_r1,4.981116950511932,0.39183158138296975,A0001,4.620579164475203
+A0012,blocking producer DMA completion events,within_noise,decode,1,2048,screen_v1_w3_n5_r1,4.880111385136843,0.08010535226770694,A0001,4.620579164475203
+A0013,mapped-host all-layer gather for small bulk inputs,rejected,decode,1,2048,screen_v1_w3_n5_r1,4.631976410746574,0.07616797064587055,A0001,4.620579164475203
+A0014,one-slot automatic pipeline lookahead,rejected,decode,1,2048,screen_v1_w3_n5_r1,4.733304958790541,0.14396827251230213,A0001,4.620579164475203
+A0015,fuse compressed-row expansion with memory addition,within_noise,decode,1,2048,screen_v1_w3_n5_r1,4.868637397885323,0.0843641006383641,A0001,4.620579164475203
+A0016,single-slot automatic pipeline for small prefill only,accepted,decode,1,2048,screen_v1_w3_n5_r1,5.0721158273518085,0.31990271001151954,A0016,5.0721158273518085
+A0017,write-combined pinned pipeline buffers for large inputs,within_noise,decode,1,2048,screen_v1_w3_n5_r1,5.442919209599495,0.26105320288215383,A0016,5.0721158273518085
+A0018,submit embedding before waiting for pipeline input IDs,rejected,decode,1,2048,screen_v1_w3_n5_r1,5.3214602172374725,0.47476369889469905,A0016,5.0721158273518085
+A0019,start pipeline producer before embedding dispatch,rejected,decode,1,2048,screen_v1_w3_n5_r1,4.694135207682848,0.0667747022596898,A0016,5.0721158273518085
+A0020,reuse per-layer pipeline coordination tickets,within_noise,decode,1,2048,screen_v1_w3_n5_r1,5.343450326472521,0.03966589794388784,A0016,5.0721158273518085
+A0021,Extend selective single-slot auto pipeline through4096 tokens,rejected,decode,1,2048,screen_v1_w3_n5_r1,4.6213870868086815,0.047893083213471896,A0016,5.0721158273518085
+A0022,Recover mapped host bulk gather on selective pipeline parent,rejected,decode,1,2048,screen_v1_w3_n5_r1,4.650636948645115,0.058988828055478566,A0016,5.0721158273518085
+A0023,Mapped bulk for all1..16-token inputs,accepted,decode,1,2048,screen_v1_w3_n5_r1,4.702378809452057,0.1769631370895589,A0023,4.702378809452057
+A0024,Recover short-prefill single-slot pipeline on mapped parent,rejected,decode,1,2048,screen_v1_w3_n5_r1,4.54751905053854,0.09166095677815753,A0023,4.702378809452057
+A0025,Precompute views for automatic single-slot pipeline,rejected,decode,1,2048,screen_v1_w3_n5_r1,4.506403766572475,0.10429170206091462,A0023,4.702378809452057
+A0026,One host staging buffer with multi-slot GPU prefetch,rejected,decode,1,2048,screen_v1_w3_n5_r1,4.650760442018509,0.07004134489437999,A0023,4.702378809452057
+A0027,Caller-stream mapped gather for one-token inputs,rejected,decode,1,2048,screen_v1_w3_n5_r1,4.535883571952581,0.07957947314764824,A0023,4.702378809452057
+A0028,Shared host staging through16384 input tokens,accepted,decode,1,2048,screen_v1_w3_n5_r1,4.599728714674711,0.08470967995430063,A0028,4.599728714674711
+A0029,Explicit-stream compiled mapped gather launch,within_noise,decode,1,2048,screen_v1_w3_n5_r1,4.520736634731293,0.09097732652448651,A0028,4.599728714674711
+A0030,Resolve offload dispatch metadata once per forward,accepted,decode,1,2048,screen_v1_w3_n5_r1,4.543550405651331,0.08078361816776006,A0030,4.543550405651331
+A0031,Mapped first pipeline group with existing CPU-DMA steady state,rejected,decode,1,2048,screen_v1_w3_n5_r1,4.479323886334896,0.07887336479375193,A0030,4.543550405651331
+A0000,restored model with verified measurement harness,baseline,prefill,8,2048,screen_v1_w3_n5_r1,209.1618636623025,0.45023637244545023,A0000,209.1618636623025
+A0001,pipeline above 1024 tokens,accepted,prefill,8,2048,screen_v1_w3_n5_r1,209.46270804852247,0.7164509828592313,A0001,209.46270804852247
+A0002,serial byte copies for tiny CPU lookups,within_noise,prefill,8,2048,screen_v1_w3_n5_r1,209.8816559650004,0.1931345149351365,A0001,209.46270804852247
+A0003,two-layer groups in automatic pipeline,rejected,prefill,8,2048,screen_v1_w3_n5_r1,213.51997638121247,0.12858964132972123,A0001,209.46270804852247
+A0004,caller-thread pipeline producer,within_noise,prefill,8,2048,screen_v1_w3_n5_r1,209.16501358151436,0.17931906377304757,A0001,209.46270804852247
+A0005,compute-stream copies for tiny bulk transfers,within_noise,prefill,8,2048,screen_v1_w3_n5_r1,210.35980824381113,0.3400889437135752,A0001,209.46270804852247
+A0006,refill host slot before consumer release,within_noise,prefill,8,2048,screen_v1_w3_n5_r1,209.7764796577394,0.16292688927115284,A0001,209.46270804852247
+A0007,precompute immutable pipeline tensor views,rejected,prefill,8,2048,screen_v1_w3_n5_r1,209.99673306941986,0.2679079163717672,A0001,209.46270804852247
+A0008,mapped-host GPU gather for pipeline,rejected,prefill,8,2048,screen_v1_w3_n5_r1,213.10078306123614,0.22900154961800612,A0001,209.46270804852247
+A0009,within-call token dedup for large pipeline inputs,rejected,prefill,8,2048,screen_v1_w3_n5_r1,211.4801300689578,0.16612503940625323,A0001,209.46270804852247
+A0010,alternate pinned host buffers per GPU slot,rejected,prefill,8,2048,screen_v1_w3_n5_r1,210.2196790277958,0.27966041604938274,A0001,209.46270804852247
+A0011,reuse pinned input-ID staging buffers,within_noise,prefill,8,2048,screen_v1_w3_n5_r1,209.07495021820068,0.17348064120133438,A0001,209.46270804852247
+A0012,blocking producer DMA completion events,within_noise,prefill,8,2048,screen_v1_w3_n5_r1,209.81948915868998,0.21861384935866113,A0001,209.46270804852247
+A0013,mapped-host all-layer gather for small bulk inputs,rejected,prefill,8,2048,screen_v1_w3_n5_r1,209.7273524850607,0.23440536807907894,A0001,209.46270804852247
+A0014,one-slot automatic pipeline lookahead,rejected,prefill,8,2048,screen_v1_w3_n5_r1,207.3718019761145,0.9400097864055902,A0001,209.46270804852247
+A0015,fuse compressed-row expansion with memory addition,within_noise,prefill,8,2048,screen_v1_w3_n5_r1,209.18932734057307,0.3292421341397009,A0001,209.46270804852247
+A0016,single-slot automatic pipeline for small prefill only,accepted,prefill,8,2048,screen_v1_w3_n5_r1,209.8441068083048,0.18427073722124165,A0016,209.8441068083048
+A0017,write-combined pinned pipeline buffers for large inputs,within_noise,prefill,8,2048,screen_v1_w3_n5_r1,207.8240447677672,0.1267395936016108,A0016,209.8441068083048
+A0018,submit embedding before waiting for pipeline input IDs,rejected,prefill,8,2048,screen_v1_w3_n5_r1,210.0050332956016,0.3200269277627206,A0016,209.8441068083048
+A0019,start pipeline producer before embedding dispatch,rejected,prefill,8,2048,screen_v1_w3_n5_r1,210.21057488396764,0.5671956583384248,A0016,209.8441068083048
+A0020,reuse per-layer pipeline coordination tickets,within_noise,prefill,8,2048,screen_v1_w3_n5_r1,209.79514056816697,0.0994841804275117,A0016,209.8441068083048
+A0021,Extend selective single-slot auto pipeline through4096 tokens,rejected,prefill,8,2048,screen_v1_w3_n5_r1,209.93649698793888,0.2901410921013757,A0016,209.8441068083048
+A0022,Recover mapped host bulk gather on selective pipeline parent,rejected,prefill,8,2048,screen_v1_w3_n5_r1,209.69446431845427,0.3462506223333924,A0016,209.8441068083048
+A0023,Mapped bulk for all1..16-token inputs,accepted,prefill,8,2048,screen_v1_w3_n5_r1,210.12823274359107,0.23789429890727917,A0023,210.12823274359107
+A0024,Recover short-prefill single-slot pipeline on mapped parent,rejected,prefill,8,2048,screen_v1_w3_n5_r1,210.0565723143518,0.4968954948764486,A0023,210.12823274359107
+A0025,Precompute views for automatic single-slot pipeline,rejected,prefill,8,2048,screen_v1_w3_n5_r1,209.885994810611,0.17140767076574692,A0023,210.12823274359107
+A0026,One host staging buffer with multi-slot GPU prefetch,rejected,prefill,8,2048,screen_v1_w3_n5_r1,210.120908357203,0.29223813203695065,A0023,210.12823274359107
+A0027,Caller-stream mapped gather for one-token inputs,rejected,prefill,8,2048,screen_v1_w3_n5_r1,209.87557293847203,0.1569458901685775,A0023,210.12823274359107
+A0028,Shared host staging through16384 input tokens,accepted,prefill,8,2048,screen_v1_w3_n5_r1,208.2510926760733,0.09306584518570686,A0028,208.2510926760733
+A0029,Explicit-stream compiled mapped gather launch,within_noise,prefill,8,2048,screen_v1_w3_n5_r1,208.08343589305878,0.2848054867282712,A0028,208.2510926760733
+A0030,Resolve offload dispatch metadata once per forward,accepted,prefill,8,2048,screen_v1_w3_n5_r1,208.84111057966948,1.3063997847141686,A0030,208.84111057966948
+A0031,Mapped first pipeline group with existing CPU-DMA steady state,rejected,prefill,8,2048,screen_v1_w3_n5_r1,207.5783621519804,0.31195989842565236,A0030,208.84111057966948
+A0000,restored model with verified measurement harness,baseline,decode,8,2048,screen_v1_w3_n5_r1,11.02176634594798,0.0211247494037617,A0000,11.02176634594798
+A0001,pipeline above 1024 tokens,accepted,decode,8,2048,screen_v1_w3_n5_r1,11.029212363064289,0.026242426020020155,A0001,11.029212363064289
+A0002,serial byte copies for tiny CPU lookups,within_noise,decode,8,2048,screen_v1_w3_n5_r1,10.99107600748539,0.010654180077795148,A0001,11.029212363064289
+A0003,two-layer groups in automatic pipeline,rejected,decode,8,2048,screen_v1_w3_n5_r1,11.008177977055311,0.02910316640014343,A0001,11.029212363064289
+A0004,caller-thread pipeline producer,within_noise,decode,8,2048,screen_v1_w3_n5_r1,11.041998583823442,0.024107978915256307,A0001,11.029212363064289
+A0005,compute-stream copies for tiny bulk transfers,within_noise,decode,8,2048,screen_v1_w3_n5_r1,11.001310404390097,0.01303693545033228,A0001,11.029212363064289
+A0006,refill host slot before consumer release,within_noise,decode,8,2048,screen_v1_w3_n5_r1,11.004539579153061,0.024696122846473257,A0001,11.029212363064289
+A0007,precompute immutable pipeline tensor views,rejected,decode,8,2048,screen_v1_w3_n5_r1,11.050802748650312,0.021249816343031337,A0001,11.029212363064289
+A0008,mapped-host GPU gather for pipeline,rejected,decode,8,2048,screen_v1_w3_n5_r1,11.010202765464783,0.026229479068843042,A0001,11.029212363064289
+A0009,within-call token dedup for large pipeline inputs,rejected,decode,8,2048,screen_v1_w3_n5_r1,11.011401750147343,0.01596768740001814,A0001,11.029212363064289
+A0010,alternate pinned host buffers per GPU slot,rejected,decode,8,2048,screen_v1_w3_n5_r1,11.010199412703514,0.017325197367697397,A0001,11.029212363064289
+A0011,reuse pinned input-ID staging buffers,within_noise,decode,8,2048,screen_v1_w3_n5_r1,11.018476635217667,0.02360490826535965,A0001,11.029212363064289
+A0012,blocking producer DMA completion events,within_noise,decode,8,2048,screen_v1_w3_n5_r1,10.99939625710249,0.0318547340314962,A0001,11.029212363064289
+A0013,mapped-host all-layer gather for small bulk inputs,rejected,decode,8,2048,screen_v1_w3_n5_r1,11.054449994117022,0.03638607614175885,A0001,11.029212363064289
+A0014,one-slot automatic pipeline lookahead,rejected,decode,8,2048,screen_v1_w3_n5_r1,11.04356488212943,0.017093231795637903,A0001,11.029212363064289
+A0015,fuse compressed-row expansion with memory addition,within_noise,decode,8,2048,screen_v1_w3_n5_r1,11.00138584151864,0.024744765969985445,A0001,11.029212363064289
+A0016,single-slot automatic pipeline for small prefill only,accepted,decode,8,2048,screen_v1_w3_n5_r1,11.006531026214361,0.018868251774215868,A0016,11.006531026214361
+A0017,write-combined pinned pipeline buffers for large inputs,within_noise,decode,8,2048,screen_v1_w3_n5_r1,11.005143821239471,0.02197299815188709,A0016,11.006531026214361
+A0018,submit embedding before waiting for pipeline input IDs,rejected,decode,8,2048,screen_v1_w3_n5_r1,11.026327684521675,0.02278404652256203,A0016,11.006531026214361
+A0019,start pipeline producer before embedding dispatch,rejected,decode,8,2048,screen_v1_w3_n5_r1,11.009723879396915,0.02041515848780148,A0016,11.006531026214361
+A0020,reuse per-layer pipeline coordination tickets,within_noise,decode,8,2048,screen_v1_w3_n5_r1,11.042291764169931,0.014461140985616768,A0016,11.006531026214361
+A0021,Extend selective single-slot auto pipeline through4096 tokens,rejected,decode,8,2048,screen_v1_w3_n5_r1,11.006132140755653,0.019457132556949277,A0016,11.006531026214361
+A0022,Recover mapped host bulk gather on selective pipeline parent,rejected,decode,8,2048,screen_v1_w3_n5_r1,11.04055317118764,0.04544374941021485,A0016,11.006531026214361
+A0023,Mapped bulk for all1..16-token inputs,accepted,decode,8,2048,screen_v1_w3_n5_r1,11.035595554858446,0.0429333251606985,A0023,11.035595554858446
+A0024,Recover short-prefill single-slot pipeline on mapped parent,rejected,decode,8,2048,screen_v1_w3_n5_r1,11.048174649477005,0.03548733074136899,A0023,11.035595554858446
+A0025,Precompute views for automatic single-slot pipeline,rejected,decode,8,2048,screen_v1_w3_n5_r1,11.040550470352173,0.030327274488701608,A0023,11.035595554858446
+A0026,One host staging buffer with multi-slot GPU prefetch,rejected,decode,8,2048,screen_v1_w3_n5_r1,11.04080369696021,0.04511972392578345,A0023,11.035595554858446
+A0027,Caller-stream mapped gather for one-token inputs,rejected,decode,8,2048,screen_v1_w3_n5_r1,11.052910331636667,0.038328752816664695,A0023,11.035595554858446
+A0028,Shared host staging through16384 input tokens,accepted,decode,8,2048,screen_v1_w3_n5_r1,11.034968215972185,0.047549049435501124,A0028,11.034968215972185
+A0029,Explicit-stream compiled mapped gather launch,within_noise,decode,8,2048,screen_v1_w3_n5_r1,11.017167754471302,0.0383524794366811,A0028,11.034968215972185
+A0030,Resolve offload dispatch metadata once per forward,accepted,decode,8,2048,screen_v1_w3_n5_r1,11.023116577416658,0.034303473574623565,A0030,11.023116577416658
+A0031,Mapped first pipeline group with existing CPU-DMA steady state,rejected,decode,8,2048,screen_v1_w3_n5_r1,11.057507991790771,0.025318312745528915,A0030,11.023116577416658

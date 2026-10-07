@@ -1,0 +1,122 @@
+{
+  "date": "2026-10-07",
+  "retained_attempt": "A0030",
+  "retained_source": "a9e5bda62a020e4e1994037732b0dbb7606d5dda",
+  "execution_and_tests_match_retained_source": true,
+  "figure_families": 9,
+  "artifacts": [
+    {
+      "path": "profile/results/optimization/offload-gap-001/A0030/gap-diagnostics/gaps.png",
+      "sha256": "593eba13c3e567a0479014fd3d867d1c3584386b72a0862b0e96e9e3aeaa75aa"
+    },
+    {
+      "path": "profile/results/optimization/offload-gap-001/A0030/gap-diagnostics/gaps.pdf",
+      "sha256": "0117b05c1d7a4a1adbce911516a0e0d4dcfea4e3e364b5362d708713546164e0"
+    },
+    {
+      "path": "profile/results/optimization/offload-gap-001/A0030/gap-diagnostics/gaps.svg",
+      "sha256": "9b5fdf48a1f05ab6e50696601ec875a637dcfaec8d443c151711a20a172152dd"
+    },
+    {
+      "path": "profile/results/optimization/offload-gap-001/A0030/gap-diagnostics/relative-overhead.png",
+      "sha256": "e5c9a3c00e4269778ecc2836733490fb7f0260fc585637874e40c7822ffc8cda"
+    },
+    {
+      "path": "profile/results/optimization/offload-gap-001/A0030/gap-diagnostics/relative-overhead.pdf",
+      "sha256": "c54509be1145df8074375621c81ffdd6a26063ef517a47a0db4268c7ad25d91a"
+    },
+    {
+      "path": "profile/results/optimization/offload-gap-001/A0030/gap-diagnostics/relative-overhead.svg",
+      "sha256": "70319e825ddf516debc0357a65564bab7757b7431eb932769b5e2b713ab9366b"
+    },
+    {
+      "path": "profile/results/optimization/offload-gap-001/A0030/workload-diagnostics/generation.png",
+      "sha256": "5a08573870458c99e22ab81aadbb33e5255c3e93beb1098ec418c568402554a1"
+    },
+    {
+      "path": "profile/results/optimization/offload-gap-001/A0030/workload-diagnostics/generation.pdf",
+      "sha256": "b1d7a010cc1d8132bd55910d609d74619f358d20dd6072ba36098028ab5a5c63"
+    },
+    {
+      "path": "profile/results/optimization/offload-gap-001/A0030/workload-diagnostics/generation.svg",
+      "sha256": "d23fdd3ed18b6eac9dab6a554374aa2776b04798f187996ded81db01d2cba411"
+    },
+    {
+      "path": "profile/results/optimization/offload-gap-001/A0030/workload-diagnostics/latency_ms-scaling.png",
+      "sha256": "0c3d29e7d02cb9707b5c7bd242fe7367393e9daaa5b64c8361bdf418458fd8ed"
+    },
+    {
+      "path": "profile/results/optimization/offload-gap-001/A0030/workload-diagnostics/latency_ms-scaling.pdf",
+      "sha256": "44db3d07e463b384d708716a0d16b5d824b040945bb045b52f83fa1d6e703af2"
+    },
+    {
+      "path": "profile/results/optimization/offload-gap-001/A0030/workload-diagnostics/latency_ms-scaling.svg",
+      "sha256": "73a13648f4fa0ee38110f7872306cd4e86de67d1dcb035b1a24af6f21bedef14"
+    },
+    {
+      "path": "profile/results/optimization/offload-gap-001/A0030/workload-diagnostics/memory.png",
+      "sha256": "f029153c114788d5a148826d692b4cd75d5c5ec98a17a80d9cbc1dc0d3b78866"
+    },
+    {
+      "path": "profile/results/optimization/offload-gap-001/A0030/workload-diagnostics/memory.pdf",
+      "sha256": "ebfb9ee2b1cd4dc41d0d1f66b63ccf578d182c60bb22a1bdd7068b9761c5ff48"
+    },
+    {
+      "path": "profile/results/optimization/offload-gap-001/A0030/workload-diagnostics/memory.svg",
+      "sha256": "2fa92a5ac513b027ae2d31843cbc174409d3921da291a07aef998d9a452014a3"
+    },
+    {
+      "path": "profile/results/optimization/offload-gap-001/A0030/workload-diagnostics/tokens_per_second-scaling.png",
+      "sha256": "40d056363e40e5de52245ad1e5287f580b02bf24f5c462db540e0c16b01ba2e1"
+    },
+    {
+      "path": "profile/results/optimization/offload-gap-001/A0030/workload-diagnostics/tokens_per_second-scaling.pdf",
+      "sha256": "114aa517cc735d84afaec5b2cd005bc14e146f955647f1f2e3f92c6be4d6fc38"
+    },
+    {
+      "path": "profile/results/optimization/offload-gap-001/A0030/workload-diagnostics/tokens_per_second-scaling.svg",
+      "sha256": "1bbca06020b665770ecfcf565c10a04f7cf719a881db5e7f15bd9fd0501fca51"
+    },
+    {
+      "path": "profile/results/optimization/offload-gap-001/continuation-03/history-through-A0031/attempt-history-screen_v1_w3_n5_r1.png",
+      "sha256": "c5a829d5a94dd24f376aa9a0574b7013b6b0b11e44d8c8d65bcbf7f5bb6b1b6d"
+    },
+    {
+      "path": "profile/results/optimization/offload-gap-001/continuation-03/history-through-A0031/attempt-history-screen_v1_w3_n5_r1.pdf",
+      "sha256": "e7b1779f451f9bf741979c7baf59234d22c512d0f02dace24bc3127f835e253a"
+    },
+    {
+      "path": "profile/results/optimization/offload-gap-001/continuation-03/history-through-A0031/attempt-history-screen_v1_w3_n5_r1.svg",
+      "sha256": "a63e5337c7998351f59e83cc8a1d632d615c9421aaffbad16d1e4636dec2a4a4"
+    },
+    {
+      "path": "profile/results/optimization/offload-gap-001/continuation-03/local-findings-through-A0031/blocking-guards.png",
+      "sha256": "ec345cd864ff4ea0fad216d39059666b4ab54476141878f6572e32e6310743e8"
+    },
+    {
+      "path": "profile/results/optimization/offload-gap-001/continuation-03/local-findings-through-A0031/blocking-guards.pdf",
+      "sha256": "bcd30be84755dec2a961701f202222ae73891a6523a59f7094774f4637a81496"
+    },
+    {
+      "path": "profile/results/optimization/offload-gap-001/continuation-03/local-findings-through-A0031/blocking-guards.svg",
+      "sha256": "e86b5930a2cbdf01218e52078c24cd84c01848d6c04dd5759359836a8e1c799b"
+    },
+    {
+      "path": "profile/results/optimization/offload-gap-001/continuation-03/local-findings-through-A0031/local-gains.png",
+      "sha256": "0890c1a06f93b5da5c4a382222812892f5a9745f71ed38bc1759a7dfe1f62ef0"
+    },
+    {
+      "path": "profile/results/optimization/offload-gap-001/continuation-03/local-findings-through-A0031/local-gains.pdf",
+      "sha256": "62c295e85eb0f9c91e364f89e796327428b4d7659913683ba16db5b338bbad01"
+    },
+    {
+      "path": "profile/results/optimization/offload-gap-001/continuation-03/local-findings-through-A0031/local-gains.svg",
+      "sha256": "79675fea54e3452ef6d38ee6ef73a9fcd3e37b75f0d9759da33bf87412bd735e"
+    }
+  ],
+  "report_links_checked": 16,
+  "missing_links": [],
+  "visual_review": "All nine PNGs inspected together in a contact sheet; no obvious clipping or overlap. Not a full-resolution typography review.",
+  "new_performance_measurements": false,
+  "final_independent_acceptance_completed": false
+}

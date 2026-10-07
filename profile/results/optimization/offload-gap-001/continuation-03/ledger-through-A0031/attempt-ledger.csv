@@ -1,0 +1,33 @@
+attempt_id,label,status,parent_attempt_id,candidate_sha,accepted_step,workflow_stage,record_path
+A0000,restored model with verified measurement harness,accepted,,62942a0387608fe21baaeb2dce9ef3b0947dde4d,0,baseline_screen_complete,A0000/record.json
+A0001,pipeline above 1024 tokens,accepted,A0000,942a2a52d94cf6dbe6e753f7ac291daf8b0699fb,1,final_verdict,A0001/record.json
+A0002,serial byte copies for tiny CPU lookups,within_noise,A0001,ac6fbc2cbf534c804bb34227aa3ddee3e08728d9,,final_verdict,A0002/record.json
+A0003,two-layer groups in automatic pipeline,rejected,A0001,986e000b1d973a2a76155ff932aba2d367d03dc0,,final_verdict,A0003/record.json
+A0004,caller-thread pipeline producer,within_noise,A0001,29a0d4ff761e862423e5cd22a8d2a475d9a99a78,,final_verdict,A0004/record.json
+A0005,compute-stream copies for tiny bulk transfers,within_noise,A0001,f33b0e383f2b3d9d7121ea3b92d1e45157aad1de,,final_verdict,A0005/record.json
+A0006,refill host slot before consumer release,within_noise,A0001,b58cdb8640fb2d6a57631e0c26fc6f9a72761f74,,final_verdict,A0006/record.json
+A0007,precompute immutable pipeline tensor views,rejected,A0001,2bcbe8d197ef3244af1f51beb1214e4f3ecf6ffc,,final_verdict,A0007/record.json
+A0008,mapped-host GPU gather for pipeline,rejected,A0001,fb17afb2a97b68ec61ef517622707f68ce33e051,,final_verdict,A0008/record.json
+A0009,within-call token dedup for large pipeline inputs,rejected,A0001,0ac06a0f7ce6c3ce77fd5a878c4a34c991527ec2,,final_verdict,A0009/record.json
+A0010,alternate pinned host buffers per GPU slot,rejected,A0001,b22f8f616ee933ddc4ad2dd09c3eb91e60ef477b,,final_verdict,A0010/record.json
+A0011,reuse pinned input-ID staging buffers,within_noise,A0001,812ac2decafaf2d9919028a7bbd0c740db07ba1a,,final_verdict,A0011/record.json
+A0012,blocking producer DMA completion events,within_noise,A0001,817cc6b5081acdcc7d50935f98e0a4b8c0b71b3a,,final_verdict,A0012/record.json
+A0013,mapped-host all-layer gather for small bulk inputs,rejected,A0001,5d5eb4858f5102b5e7c0c004e359304b13ac38c8,,final_verdict,A0013/record.json
+A0014,one-slot automatic pipeline lookahead,rejected,A0001,b9938ebc46d7a92fc07898a09c72edc547f5f8f3,,final_verdict,A0014/record.json
+A0015,fuse compressed-row expansion with memory addition,within_noise,A0001,0436370506e82e3a32d6ccbc6bb5217bc0e84637,,final_verdict,A0015/record.json
+A0016,single-slot automatic pipeline for small prefill only,accepted,A0001,0ce6645eb4c4bc3992258ad0878c72ea3c37a64e,2,final_verdict,A0016/record.json
+A0017,write-combined pinned pipeline buffers for large inputs,within_noise,A0016,7eb99060e4ac0125bb93487abc85f139f1e73c8f,,final_verdict,A0017/record.json
+A0018,submit embedding before waiting for pipeline input IDs,rejected,A0016,6089489be39a59a31360b8f89add2042cc0a7c8b,,final_verdict,A0018/record.json
+A0019,start pipeline producer before embedding dispatch,rejected,A0016,f59cdf0c8d7fa32f98b6947c0ba784210f0e7437,,final_verdict,A0019/record.json
+A0020,reuse per-layer pipeline coordination tickets,within_noise,A0016,41869553c1df91e5c8ae4cda16cd4c6b1c0ab44b,,final_verdict,A0020/record.json
+A0021,Extend selective single-slot auto pipeline through4096 tokens,rejected,A0016,35a4af8acfb55005b5fedd573707a45fc543642e,,final_verdict,A0021/record.json
+A0022,Recover mapped host bulk gather on selective pipeline parent,rejected,A0016,c84bef59417adb5179c177d732632a10a4226d39,,verdict,A0022/record.json
+A0023,Mapped bulk for all1..16-token inputs,accepted,A0016,5f3d5958fea25f953bb91f5ef6f35880ff37fcfa,3,verdict,A0023/record.json
+A0024,Recover short-prefill single-slot pipeline on mapped parent,rejected,A0023,e6f4f361dbbafd5c2bd1836ded4acdca0fb095a0,,verdict,A0024/record.json
+A0025,Precompute views for automatic single-slot pipeline,rejected,A0023,9778315be1e06335f0c1206ba136dce4a7c546da,,verdict,A0025/record.json
+A0026,One host staging buffer with multi-slot GPU prefetch,rejected,A0023,315478c7cf22fc12429d877c11fe6aab99b8833a,,verdict,A0026/record.json
+A0027,Caller-stream mapped gather for one-token inputs,rejected,A0023,700f5f81a2e2b798d11e323c7508f4010d28ed53,,verdict,A0027/record.json
+A0028,Shared host staging through16384 input tokens,accepted,A0023,6cc9354760ebde3bab9a90996a7713a936dfb439,4,verdict,A0028/record.json
+A0029,Explicit-stream compiled mapped gather launch,within_noise,A0028,f4cead8e0e33c6fac45adda59ac8e0e9a89067eb,,verdict,A0029/record.json
+A0030,Resolve offload dispatch metadata once per forward,accepted,A0028,a9e5bda62a020e4e1994037732b0dbb7606d5dda,5,verdict,A0030/record.json
+A0031,Mapped first pipeline group with existing CPU-DMA steady state,rejected,A0030,47d77970a530ca83a576717db195f6e6834acc34,,verdict,A0031/record.json
