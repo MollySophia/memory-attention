@@ -1,5 +1,5 @@
 {
-  "status": "active",
+  "status": "paused",
   "objective": "Integrate recovered local gains into one validated cumulative implementation, then approach resident latency at all16 fixed workloads.",
   "retained_start": "A0016",
   "retained_source": "a9e5bda62a020e4e1994037732b0dbb7606d5dda",
@@ -98,7 +98,37 @@
         "generation b1/2048"
       ],
       "evidence": "../A0030/final-integrity-audit.json"
+    },
+    {
+      "attempt": "A0031",
+      "status": "rejected",
+      "confirmed_local_gains": [
+        [
+          "prefill",
+          8,
+          2048
+        ],
+        [
+          "prefill",
+          16,
+          2048
+        ]
+      ],
+      "blocking_regressions": [
+        [
+          "generation",
+          1,
+          2048
+        ],
+        [
+          "prefill",
+          8,
+          4096
+        ]
+      ],
+      "evidence": "../A0031/confirmation-audit.json"
     }
   ],
-  "retained_current": "A0030"
+  "retained_current": "A0030",
+  "pause_reason": "User requested retaining A0030 and organizing existing results; no new benchmarks or optimization."
 }
