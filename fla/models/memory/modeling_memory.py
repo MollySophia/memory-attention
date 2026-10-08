@@ -446,7 +446,7 @@ class MemoryModel(MemoryPreTrainedModel):
             # The offload producer gathers from host memory, so it needs the
             # IDs on CPU. Accept them on either device and stage the embedding
             # lookup on the compute device.
-            device = next(self.parameters()).device
+            device = self.embeddings.weight.device
             offloader = self._offloader_for(*input_ids.shape) if input_ids is not None else None
             if getattr(offloader, "accepts_gpu_ids", False):
                 ids_cpu = input_ids  # This bulk path consumes fresh GPU IDs directly.
@@ -458,7 +458,7 @@ class MemoryModel(MemoryPreTrainedModel):
                 inputs_embeds = self.embeddings(input_ids.to(device, non_blocking=True))
             return self._forward_offloaded(
                 inputs_embeds, ids_cpu, attention_mask, past_key_values,
-                use_cache, output_hidden_states, return_dict,
+                use_cache, output_hidden_states, return_dict, offloader=offloader,
             )
 
         if inputs_embeds is None:
@@ -518,6 +518,7 @@ class MemoryModel(MemoryPreTrainedModel):
         use_cache: bool,
         output_hidden_states: bool,
         return_dict: bool,
+        offloader=None,
     ):
         """Run the layer stack while the memory table streams from CPU.
 
@@ -525,47 +526,48 @@ class MemoryModel(MemoryPreTrainedModel):
         point of use, so the H2D for a group overlaps the Q/K kernels of the
         layers already running.
         """
-        batch, seq_len = hidden_states.shape[0], hidden_states.shape[1]
-        offloader = self._offloader_for(batch, seq_len)
-
-        state = dict(hidden=hidden_states, past=past_key_values)
+        if offloader is None:
+            offloader = self._offloader_for(*hidden_states.shape[:2])
+        # Resolve references once for this call; replacements between calls
+        # remain visible and each layer still runs through Module.__call__.
+        layers = tuple(self.layers)
         all_hidden_states = () if output_hidden_states else None
 
         def consume(index: int, memory_table) -> None:
-            nonlocal all_hidden_states
-            layer = self.layers[index]
+            nonlocal hidden_states, past_key_values, all_hidden_states
+            layer = layers[index]
             if output_hidden_states:
-                all_hidden_states += (state["hidden"],)
+                all_hidden_states += (hidden_states,)
             outputs = layer(
-                state["hidden"],
+                hidden_states,
                 attention_mask=attention_mask,
-                past_key_values=state["past"],
+                past_key_values=past_key_values,
                 output_attentions=False,
                 use_cache=use_cache,
                 memory_table=memory_table,
             )
-            state["hidden"] = outputs[0]
+            hidden_states = outputs[0]
             if use_cache:
-                state["past"] = outputs[1]
+                past_key_values = outputs[1]
 
         # Ordinary producers use CPU IDs; mapped bulk accepts CPU or GPU IDs.
         if input_states_ids is None:
             raise ValueError("offloaded forward requires input_ids")
         offloader.forward(input_states_ids, consume)
 
-        hidden_states = self.norm(state["hidden"])
+        hidden_states = self.norm(hidden_states)
 
         if output_hidden_states:
             all_hidden_states += (hidden_states,)
 
         if not return_dict:
             return tuple(
-                v for v in [hidden_states, state["past"], all_hidden_states] if v is not None
+                v for v in [hidden_states, past_key_values, all_hidden_states] if v is not None
             )
 
         return BaseModelOutputWithPast(
             last_hidden_state=hidden_states,
-            past_key_values=state["past"],
+            past_key_values=past_key_values,
             hidden_states=all_hidden_states,
             attentions=None,
         )
