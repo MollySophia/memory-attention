@@ -20,6 +20,7 @@ for i,r in enumerate(rows):
  else:axes[2].text(i,.04,'OOM',transform=axes[2].get_xaxis_transform(),rotation=90,ha='center',fontsize=8)
 axes[2].set_ylabel('GPU memory saved (GiB)');axes[2].set_title('Peak allocated memory: main GPU minus PR offload');axes[2].grid(axis='y',alpha=.25)
 axes[2].set_xticks(x,[f"{r['mode']}\nb{r['batch']}/L{r['length']}" for r in rows],rotation=60,ha='right',fontsize=8)
+axes[2].set_xlim(-.6,len(rows)-.4)
 fig.suptitle('Fresh upstream / PR-head paired measurements',fontsize=14)
 fig.text(.01,.01,'RTX 5090 | 2.8365B BF16 | seeded random weights | last-token logits + KV | 3 process blocks; paired 95% t intervals (df=2).\nNegative latency change is faster. Main includes per-token normalization; folded GPU controls for folding. Generation: prefix +128 steps. OOM is not zero.',fontsize=8)
 fig.tight_layout(rect=(0,.06,1,.96))

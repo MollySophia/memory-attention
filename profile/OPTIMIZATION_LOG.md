@@ -782,3 +782,23 @@ Source/configuration/memory audited and paired environment fingerprints agree.
 A controller audit metadata omission was corrected without repeating either
 completed result; recovery recorded in the manifest.
 [Report](results/optimization/offload-gap-001/A0030/large-batch-01/REPORT.md).
+
+
+## 2026-10-09 — Fresh upstream / PR-head performance comparison
+
+User requested fresh measurements for upstream PR #1. Frozen upstream main
+`66bd7c6326a6a7badf01e7ef5a14ff967fb8000c` and PR head
+`9925991f02502409c0bc838ee0d8c6e70ba878bc`; no production changes.
+Three independent blocks compare main native GPU, head folded GPU and head
+offload across the original16 workloads and batch32/64 prefill/decode.
+162 successful performance processes, six preserved batch64 OOM results,
+12 identical-cell repeats skipped under the frozen rule. Six full-model
+correctness processes match bit-for-bit at batch1/8 over129 steps, including
+all hidden/KV checkpoints. Raw timings/configurations/sources/environment and
+placement order passed audit; elapsed74 minutes. One post-serialization main
+cleanup compatibility error was repaired without discarding/rerunning samples.
+Main vs head offload at b8/2048: prefill208.646→208.593 ms, decode11.036→10.934 ms.
+Folded-control offload gaps are +1.744 ms and +0.002 ms respectively.
+This comparison updates PR evidence; it does not resume optimization or declare
+the independent all-workload near-GPU goal achieved.
+[Report and raw evidence](results/pr-offload-001/REPORT.md).
