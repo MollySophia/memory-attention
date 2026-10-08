@@ -79,15 +79,15 @@
     },
     {
       "path": "profile/results/optimization/offload-gap-001/continuation-03/history-through-A0031/attempt-history-screen_v1_w3_n5_r1.png",
-      "sha256": "c5a829d5a94dd24f376aa9a0574b7013b6b0b11e44d8c8d65bcbf7f5bb6b1b6d"
+      "sha256": "3ce5a7ffc7b929f4e00d36febb8562e13dfeaafbc3aba91b9921f126e0cba6c4"
     },
     {
       "path": "profile/results/optimization/offload-gap-001/continuation-03/history-through-A0031/attempt-history-screen_v1_w3_n5_r1.pdf",
-      "sha256": "e7b1779f451f9bf741979c7baf59234d22c512d0f02dace24bc3127f835e253a"
+      "sha256": "246f47382a5901bb39e6c9ba84b7167b34ad4995f9ead913ff02ca9cfef5ae47"
     },
     {
       "path": "profile/results/optimization/offload-gap-001/continuation-03/history-through-A0031/attempt-history-screen_v1_w3_n5_r1.svg",
-      "sha256": "a63e5337c7998351f59e83cc8a1d632d615c9421aaffbad16d1e4636dec2a4a4"
+      "sha256": "f9db64c15e9d6c0eac30db61627649971e33d2547920d0e953502f1d88dbbad2"
     },
     {
       "path": "profile/results/optimization/offload-gap-001/continuation-03/local-findings-through-A0031/blocking-guards.png",
@@ -118,5 +118,9 @@
   "missing_links": [],
   "visual_review": "All nine PNGs inspected together in a contact sheet; no obvious clipping or overlap. Not a full-resolution typography review.",
   "new_performance_measurements": false,
-  "final_independent_acceptance_completed": false
+  "final_independent_acceptance_completed": false,
+  "history_update": {
+    "date": "2026-10-08",
+    "change": "Added frozen A0000 resident mean and sample-SD band, read from original screening raw results. PNG visually inspected. No new measurements."
+  }
 }

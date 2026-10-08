@@ -56,7 +56,7 @@ lines+=['','[A0030 完整审计](../A0030/final-integrity-audit.json)：64 scree
 '| [生成耗时](../A0030/workload-diagnostics/generation.pdf) | prefix +128 步总耗时 |',
 '| [GPU/host 内存](../A0030/workload-diagnostics/memory.pdf) | 显存节省与 host 代价 |',
 '| [绝对差距](../A0030/gap-diagnostics/gaps.pdf)、[相对开销](../A0030/gap-diagnostics/relative-overhead.pdf) | 全 16 场景容差与区间 |',
-'| [尝试历史](history-through-A0031/attempt-history-screen_v1_w3_n5_r1.pdf) | 含失败尝试及保留版本阶梯线；是筛选历史，不是累计正式收益 |',
+'| [尝试历史](history-through-A0031/attempt-history-screen_v1_w3_n5_r1.pdf) | 含失败尝试、保留版本阶梯线及 A0000 resident 水平基线（阴影为样本标准差）；是筛选历史，不是累计正式收益 |',
 '| [局部收益](local-findings-through-A0031/local-gains.pdf)、[阻止保留的回归](local-findings-through-A0031/blocking-guards.pdf) | 保留与未保留方案的发现均留档 |','',
 '## 尚未完成的证据','',
 '最终独立的 16 场景容差验收、fresh A0000→最终版本累计比较和对应累计性能图尚未完成。本次仅整理既有结果，没有启动新性能测量。重新开始优化或补测需用户后续指示。','',

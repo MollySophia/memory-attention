@@ -47,15 +47,19 @@ def attempts(root):
                     continue
                 if job.get('attempt', record['attempt_id']) != record['attempt_id']:
                     continue
-                if job['status']!='completed' or job['variant']!='ma_offload' or (job['mode'],job['batch']) not in WORKLOADS or job['length']!=2048:
+                if job['status']!='completed' or job['variant'] not in ('ma_offload','ma_gpu') or (job['mode'],job['batch']) not in WORKLOADS or job['length']!=2048:
                     continue
                 raw=manifest_path.parent/(job['name']+'.json')
                 payload=json.loads(raw.read_text())
                 assert payload['protocol_version']=='offload_gap_v1' and payload['stage']=='screening'
                 timing=payload['results'][0]
                 samples=[x for block in timing['samples_ms'] for x in block]
-                rows[(job['mode'],job['batch'])]=dict(measurement_plan_id=payload['measurement_plan_id'],
-                    offload_ms=timing['mean_ms'],offload_sample_sd_ms=statistics.stdev(samples) if len(samples)>1 else None)
+                row=rows.setdefault((job['mode'],job['batch']), {})
+                row['measurement_plan_id']=payload['measurement_plan_id']
+                placement='offload' if job['variant']=='ma_offload' else 'resident'
+                row[placement+'_ms']=timing['mean_ms']
+                row[placement+'_sample_sd_ms']=statistics.stdev(samples) if len(samples)>1 else None
+        rows={key:row for key,row in rows.items() if 'offload_ms' in row}
         found.append(dict(directory=directory,record=record,rows=rows))
     return found
 
@@ -67,6 +71,13 @@ def history(entries,output):
         fig,axes=plt.subplots(2,2,figsize=(max(12,.9*len(entries)),8))
         for ax,key in zip(axes.flat,WORKLOADS):
             incumbent=None;incumbent_attempt=None;step=[];x=[]
+            baseline=next((e['rows'].get(key) for e in entries if e['record']['attempt_id']=='A0000'),None)
+            resident=baseline.get('resident_ms') if baseline and baseline['measurement_plan_id']==plan else None
+            resident_sd=baseline.get('resident_sample_sd_ms') if resident is not None else None
+            if resident is not None:
+                ax.axhline(resident,color='#9556ad',linestyle='-.',linewidth=1.4)
+                if resident_sd is not None:
+                    ax.axhspan(resident-resident_sd,resident+resident_sd,color='#9556ad',alpha=.10)
             for index,entry in enumerate(entries):
                 record=entry['record'];row=entry['rows'].get(key)
                 if row is not None and row['measurement_plan_id']!=plan:row=None
@@ -87,16 +98,19 @@ def history(entries,output):
                                      mode=key[0],batch=key[1],length=2048,measurement_plan_id=plan,
                                      measured_ms=row['offload_ms'] if row else None,
                                      sample_sd_ms=row['offload_sample_sd_ms'] if row else None,
-                                     incumbent_attempt=incumbent_attempt,incumbent_ms=incumbent))
+                                     incumbent_attempt=incumbent_attempt,incumbent_ms=incumbent,
+                                     resident_baseline_attempt='A0000' if resident is not None else None,
+                                     resident_baseline_ms=resident,resident_baseline_sample_sd_ms=resident_sd))
             ax.step(x,step,where='post',color='#222222',linestyle='--',linewidth=1,label='Incumbent accepted implementation')
             ax.set_xticks(x,[e['record']['attempt_id'] for e in entries],rotation=35,ha='right',fontsize=8)
             ax.set_title(f'{key[0].title()}, batch {key[1]}, length/context 2048')
-            ax.set_ylabel('Offloaded latency (ms)');ax.grid(alpha=.2)
-        handles=[plt.Line2D([],[],color=c,marker=m,linestyle='none',label=s) for s,(m,c) in STYLE.items() if s in {'baseline' if e['record']['attempt_id']=='A0000' else e['record'].get('status') or 'pending' for e in entries}]
+            ax.set_ylabel('Latency (ms)');ax.grid(alpha=.2)
+        handles=[plt.Line2D([],[],color=c,marker=m,linestyle='none',label='A0000 offload baseline' if s=='baseline' else s) for s,(m,c) in STYLE.items() if s in {'baseline' if e['record']['attempt_id']=='A0000' else e['record'].get('status') or 'pending' for e in entries}]
         handles.append(plt.Line2D([],[],color='#222222',linestyle='--',label='Accepted incumbent (one model, all workloads)'))
+        handles.append(plt.Line2D([],[],color='#9556ad',linestyle='-.',label='A0000 resident baseline (band: sample SD)'))
         fig.legend(handles=handles,loc='upper center',bbox_to_anchor=(.5,.955),ncol=4,fontsize=8)
         fig.suptitle('Optimization attempts — provisional screening measurements',y=.995)
-        save(fig,output,'attempt-history-'+plan,CAPTION.split('\n')[0]+'\nCached last-token logits and KV; frozen baseline A0000.\nHistory uses matched screening only; bars are sample SD, not confidence intervals. Failures have no numerical point. Incumbent is never a per-metric minimum.',top=.88)
+        save(fig,output,'attempt-history-'+plan,CAPTION.split('\n')[0]+'\nCached last-token logits and KV; points and incumbent show offload; purple line/band: frozen A0000 resident mean +/- sample SD (not a per-attempt matched reference).\nHistory uses matched screening only; bars are sample SD, not confidence intervals. Failures have no numerical point. Incumbent is never a per-metric minimum.',top=.88)
     return exported
 
 
