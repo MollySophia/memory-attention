@@ -1,4 +1,10 @@
-# Copyright (c) 2023-2025, Songlin Yang, Yu Zhang
+# Copyright (c) 2023-2026, Songlin Yang, Yu Zhang, Zhiyuan Li
+#
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+# For a list of all contributors, visit:
+#   https://github.com/fla-org/flash-linear-attention/graphs/contributors
+
 
 from __future__ import annotations
 
@@ -28,8 +34,6 @@ except ImportError:
     flash_attn_func = None
 
 logger = logging.get_logger(__name__)
-
-
 
 
 class MemoryAttention(nn.Module):
@@ -72,7 +76,6 @@ class MemoryAttention(nn.Module):
         if flash_attn_func is None:
             raise ImportError("Please install Flash Attention via `pip install flash-attn --no-build-isolation` first")
 
-
         self.use_gate = use_gate
         self.use_head_gate = use_head_gate
         self.v_dim = self.head_dim
@@ -87,8 +90,6 @@ class MemoryAttention(nn.Module):
         self.m_proj = nn.Embedding(vocab_size, self.kv_dim)
         self.m_norm = RMSNorm(self.head_dim, dtype=torch.float32)
 
-
-
         if self.qk_norm:
             self.q_norm = RMSNorm(self.head_dim, dtype=torch.float32)
             self.k_norm = RMSNorm(self.head_dim, dtype=torch.float32)
@@ -97,7 +98,6 @@ class MemoryAttention(nn.Module):
             self.gate = nn.Linear(self.hidden_size, self.hidden_size, bias=self.qkv_bias)
         if self.use_head_gate:
             self.head_gate = nn.Linear(self.hidden_size, self.num_heads, bias=self.qkv_bias)
-
 
     def forward(
         self,
@@ -119,7 +119,7 @@ class MemoryAttention(nn.Module):
 
         batch_size, q_len, _ = hidden_states.size()
 
-        q,k = self.q_proj(hidden_states), self.k_proj(hidden_states)
+        q, k = self.q_proj(hidden_states), self.k_proj(hidden_states)
         q = rearrange(q, '... (h d) -> ... h d', d=self.head_dim)
         k = rearrange(k, '... (h d) -> ... h d', d=self.head_dim)
 
@@ -184,7 +184,6 @@ class MemoryAttention(nn.Module):
                 v = rearrange(v, '... (h d) -> ... h d', d=self.head_dim)
 
         # Contains at least one padding token in the sequence
- 
 
         if attention_mask is not None:
             if q.shape[1] == 1 and self.window_size is not None:
@@ -221,10 +220,7 @@ class MemoryAttention(nn.Module):
                 window_size=(-1, -1) if self.window_size is None else (self.window_size-1, 0),
             )
 
-
-
         o = o.reshape(batch_size, q_len, -1)
-
 
         if self.use_gate:
             gate = torch.sigmoid(self.gate(hidden_states))
@@ -241,4 +237,3 @@ class MemoryAttention(nn.Module):
         attentions = None
 
         return o, attentions, past_key_values
-    

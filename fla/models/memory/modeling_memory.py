@@ -1,7 +1,15 @@
+# Copyright (c) 2023-2026, Songlin Yang, Yu Zhang, Zhiyuan Li
+#
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+# For a list of all contributors, visit:
+#   https://github.com/fla-org/flash-linear-attention/graphs/contributors
+
 from __future__ import annotations
 
 import math
 import warnings
+from contextlib import suppress
 from typing import TYPE_CHECKING, Any
 
 import torch
@@ -12,9 +20,9 @@ from transformers.utils import logging
 from transformers.utils.deprecation import deprecate_kwarg
 
 from fla.layers.memory_attn import MemoryAttention
-from fla.layers.memory_mapped_bulk import MappedBulkMemoryTableOffloader
 from fla.layers.memory_offload import (
     BulkMemoryTableOffloader,
+    MappedBulkMemoryTableOffloader,
     MemoryTableOffloader,
     build_cpu_table,
     fold_memory_table,
@@ -127,7 +135,7 @@ class MemoryPreTrainedModel(PreTrainedModel):
         rescale_prenorm_residual: bool = False,
         num_residuals_per_layer: int = 2,
     ):
-        if isinstance(module, (nn.Linear, nn.Conv1d)):
+        if isinstance(module, nn.Linear | nn.Conv1d):
             # Slightly different from the TF version which uses truncated_normal for initialization
             # cf https://github.com/pytorch/pytorch/pull/5617
             nn.init.normal_(module.weight, mean=0.0, std=self.config.initializer_range)
@@ -219,8 +227,6 @@ class MemoryModel(MemoryPreTrainedModel):
         # Snapshot the raw weights so the unfolded resident path can be restored.
         # Guard against snapshotting an already-folded table.
         if getattr(self, "_raw_m_proj_weights", None) is None:
-            if any(layer.attn.memory_table_folded for layer in self.layers):
-                raise RuntimeError("cannot enable offload from a folded resident table")
             self._raw_m_proj_weights = [
                 m.weight.detach().to("cpu", copy=True) for m in m_projs
             ]
@@ -251,39 +257,9 @@ class MemoryModel(MemoryPreTrainedModel):
 
         self.memory_table = table.pin_memory() if config.memory_offload_mapped_bulk else table
         self._offload_device = device
-        self._offload_dtype = dtype
-        self._offload_fold_norm = fold_norm
         # One cached offloader per input shape (prefill vs decode differ).
         self._offloader_cache = {}
         self._offloader_cache_size = 2
-
-    def _restore_unfolded_table(
-        self,
-        device: torch.device | str = "cuda:0",
-        dtype: torch.dtype = torch.bfloat16,
-    ) -> None:
-        """Rebuild raw (unfolded) m_proj tables on ``device``.
-
-        Folding replaces m_proj in place, so keep a pristine CPU copy of the
-        original weights and restore from it. Lets a caller move between the
-        unfolded, folded-resident and offloaded placements in one process.
-        """
-        if getattr(self, "_raw_m_proj_weights", None) is None:
-            # Only ever snapshot from a table that is currently unfolded;
-            # capturing folded values here would silently corrupt the restore.
-            if any(layer.attn.memory_table_folded for layer in self.layers):
-                raise RuntimeError(
-                    "cannot snapshot raw weights from an already-folded table"
-                )
-            self._raw_m_proj_weights = [
-                layer.attn.m_proj.weight.detach().to("cpu", copy=True)
-                for layer in self.layers
-            ]
-        for layer, weight in zip(self.layers, self._raw_m_proj_weights):
-            layer.attn.m_proj = nn.Embedding.from_pretrained(
-                weight.to(device=torch.device(device), dtype=dtype), freeze=True
-            )
-            layer.attn.memory_table_folded = False
 
     def fold_memory_table_on_gpu(self, dtype: torch.dtype = torch.bfloat16) -> None:
         """Fold m_norm into the resident table, keeping it on the GPU.
@@ -361,8 +337,8 @@ class MemoryModel(MemoryPreTrainedModel):
         key = (batch, seq_len)
         if key not in cache:
             if len(cache) >= self._offloader_cache_size:
-                # Drop the least recently used entry.
-                cache.pop(next(iter(cache)))
+                # Evicted buffers must finish their transfers before being released.
+                cache.pop(next(iter(cache))).close()
             cache[key] = self._build_offloader(batch, seq_len)
         self.memory_offloader = cache[key]
         return cache[key]
@@ -374,10 +350,8 @@ class MemoryModel(MemoryPreTrainedModel):
     def close_memory_offload(self) -> None:
         """Stop streaming and restore the GPU-resident m_proj path."""
         for offloader in (getattr(self, "_offloader_cache", None) or {}).values():
-            try:
+            with suppress(Exception):
                 offloader.close()
-            except Exception:
-                pass
         self._offloader_cache = {}
         if self.memory_offloader is not None:
             self.memory_offloader.close()
@@ -400,6 +374,7 @@ class MemoryModel(MemoryPreTrainedModel):
                 )
                 layer.attn.memory_table_folded = False
         self._table_folded = False
+        self._raw_m_proj_weights = None
 
     def get_input_embeddings(self):
         return self.embeddings

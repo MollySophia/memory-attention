@@ -1,19 +1,69 @@
-"""Regression coverage for offload placement, outputs and buffer lifetimes."""
+# Copyright (c) 2023-2026, Songlin Yang, Yu Zhang, Zhiyuan Li
+#
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+# For a list of all contributors, visit:
+#   https://github.com/fla-org/flash-linear-attention/graphs/contributors
 
-import importlib.util
-from pathlib import Path
+"""Regression coverage for offload placement, outputs and buffer lifetimes."""
 
 import pytest
 import torch
 
-ROOT = Path(__file__).resolve().parents[1]
+from fla.models.memory.configuration_memory import MemoryConfig
+from fla.models.memory.modeling_memory import MemoryForCausalLM
 
 
-def load_script(name):
-    spec = importlib.util.spec_from_file_location(name, ROOT / 'tests' / f'{name}.py')
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
+def _build(seed=1234, layers=4, hidden=512, heads=8, vocab=2048):
+    torch.manual_seed(seed)
+    config = MemoryConfig(
+        hidden_size=hidden,
+        num_hidden_layers=layers,
+        num_heads=heads,
+        num_kv_heads=heads,
+        vocab_size=vocab,
+        qk_norm=True,
+        use_gate=True,
+        fuse_norm=False,
+        use_cache=False,
+    )
+    model = MemoryForCausalLM(config).to("cuda:0", dtype=torch.bfloat16).eval()
+    return model, config
+
+
+@torch.inference_mode()
+def _resident_prefill(model, ids):
+    """Capture an independent folded resident reference for every case."""
+    model.close_memory_offload()
+    model.fold_memory_table_on_gpu(dtype=torch.bfloat16)
+    try:
+        return model(input_ids=ids, use_cache=False).logits.float().clone()
+    finally:
+        model.close_memory_offload()
+
+
+@torch.inference_mode()
+def _run_case(policy, batch, seq_len, model, ids, ref):
+    model.close_memory_offload()
+    model.enable_memory_offload(device="cuda:0", dtype=torch.bfloat16, fold_norm=True)
+    model.config.memory_offload_policy = policy
+    model.set_offload_offloader(batch, seq_len)
+
+    out = model(input_ids=ids, use_cache=False).logits.float()
+    diff = (out - ref).abs()
+    agree = (out.argmax(-1) == ref.argmax(-1)).float().mean().item() * 100
+
+    return diff.max().item(), agree
+
+
+def _storage_bytes(tensors):
+    """Count backing storage once, including aliased staging views."""
+    seen = {}
+    for tensor in tensors:
+        if tensor is not None:
+            storage = tensor.untyped_storage()
+            seen[(str(tensor.device), storage.data_ptr())] = storage.nbytes()
+    return sum(seen.values())
 
 
 @pytest.fixture
@@ -21,9 +71,8 @@ def model():
     if not torch.cuda.is_available():
         pytest.skip('requires CUDA')
     pytest.importorskip('flash_attn')
-    gate = load_script('memory_offload_helpers')
     with torch.inference_mode():
-        instance, _ = gate.build(layers=3, hidden=128, heads=2, vocab=128)
+        instance, _ = _build(layers=3, hidden=128, heads=2, vocab=128)
         # Non-unit affine weights expose accidental repeated normalization.
         for layer in instance.model.layers:
             layer.attn.m_norm.weight.copy_(
@@ -76,15 +125,14 @@ def test_fold_close_restores_weights_logits_and_device(model):
 
 
 def test_each_prefill_case_uses_resident_reference(model):
-    gate = load_script('memory_offload_helpers')
     for policy, batch, length in [('bulk', 2, 8), ('pipeline', 2, 8), ('pipeline', 1, 16)]:
         ids = torch.randint(0, 128, (batch, length), device='cuda')
         # After the first iteration the model is still offloaded. The helper
         # must restore it before producing the next independent reference.
-        ref = gate.resident_prefill(model, ids)
+        ref = _resident_prefill(model, ids)
         assert model.model.memory_table is None
         assert all(not layer.attn.memory_table_folded for layer in model.model.layers)
-        diff, agree = gate.run_case(policy, batch, length, model, model.config, ids, ref)
+        diff, agree = _run_case(policy, batch, length, model, ids, ref)
         assert diff == 0
         assert agree == 100
 
@@ -121,7 +169,7 @@ def test_growing_cache_exact_with_slot_reuse(seed, policy, padded):
         def trajectory():
             records, cache = [], None
             for index, token in enumerate((prefix, *tokens)):
-                current_mask = torch.cat((mask, torch.ones((2,index),device='cuda',dtype=mask.dtype)), dim=1)
+                current_mask = torch.cat((mask, torch.ones((2, index), device='cuda', dtype=mask.dtype)), dim=1)
                 out = model(input_ids=token, attention_mask=current_mask,
                             past_key_values=cache, use_cache=True,
                             output_hidden_states=True, logits_to_keep=1)
@@ -153,10 +201,9 @@ def test_growing_cache_exact_with_slot_reuse(seed, policy, padded):
 def test_auto_policy_boundary_and_shape_reuse(model):
     model.config.memory_offload_policy = 'auto'
     assert model.config.memory_offload_bulk_max_tokens == 1024
-    gate = load_script('memory_offload_helpers')
     for length, policy in [(1024, 'bulk'), (1025, 'pipeline'), (1, 'bulk'), (1025, 'pipeline')]:
         ids = torch.randint(0, 128, (1, length), device='cuda')
-        ref = gate.resident_prefill(model, ids)
+        ref = _resident_prefill(model, ids)
         model.enable_memory_offload()
         for _ in range(2):
             actual = model(input_ids=ids, use_cache=False).logits.float()
@@ -169,24 +216,22 @@ def test_selective_depth_boundary_capacity_and_exactness(model, policy):
     model.config.memory_offload_policy = policy
     assert model.config.memory_offload_single_slot_max_tokens == 2048
     model.config.memory_offload_prefetch_depth = 4
-    gate = load_script('memory_offload_helpers')
-    for batch, length in [(1,1024),(1,1025),(1,2048),(1,2049),(2,1025),(1,1025)]:
-        ids = torch.randint(0,128,(batch,length),device='cuda')
-        expected = gate.resident_prefill(model,ids)
+    for batch, length in [(1, 1024), (1, 1025), (1, 2048), (1, 2049), (2, 1025), (1, 1025)]:
+        ids = torch.randint(0, 128, (batch, length), device='cuda')
+        expected = _resident_prefill(model, ids)
         model.enable_memory_offload()
         for _ in range(2):
-            actual = model(input_ids=ids,use_cache=False).logits.float()
-            torch.testing.assert_close(actual,expected,rtol=0,atol=0)
+            actual = model(input_ids=ids, use_cache=False).logits.float()
+            torch.testing.assert_close(actual, expected, rtol=0, atol=0)
         off = model.model.memory_offloader
         if policy == 'auto' and batch * length <= 1024:
             assert off.policy == 'bulk'
         else:
-            slots = 1 if policy == 'auto' and batch * length <= 2048 else min(4,len(model.model.layers))
+            slots = 1 if policy == 'auto' and batch * length <= 2048 else min(4, len(model.model.layers))
             assert off.policy == 'pipeline' and len(off.slots) == slots
             expected_bytes = slots * batch * length * off.group * off.dim * off.weights.element_size()
-            telemetry = load_script('memory_offload_helpers')
-            assert telemetry.storage_bytes(slot['host'] for slot in off.slots) == expected_bytes
-            assert telemetry.storage_bytes(slot['gpu'] for slot in off.slots) == expected_bytes
+            assert _storage_bytes(slot['host'] for slot in off.slots) == expected_bytes
+            assert _storage_bytes(slot['gpu'] for slot in off.slots) == expected_bytes
 
 
 def test_single_slot_limit_can_be_disabled_and_validated(model):
@@ -196,28 +241,28 @@ def test_single_slot_limit_can_be_disabled_and_validated(model):
     model.config.memory_offload_single_slot_max_tokens = 0
     model.config.memory_offload_policy = 'auto'
     model.enable_memory_offload()
-    model.set_offload_offloader(1,1025)
-    assert len(model.model.memory_offloader.slots) == min(4,len(model.model.layers))
+    model.set_offload_offloader(1, 1025)
+    assert len(model.model.memory_offloader.slots) == min(4, len(model.model.layers))
 
 
 @pytest.mark.parametrize('group', [1, 2, 3])
 @pytest.mark.skipif(not torch.cuda.is_available(), reason='requires CUDA')
 def test_shared_host_dma_lifetime_fresh_values_and_partial_groups(group):
     from fla.layers.memory_offload import MemoryTableOffloader
-    telemetry = load_script('memory_offload_helpers')
     with torch.inference_mode():
         weights = torch.randn(73, 7, 64, dtype=torch.bfloat16)
         off = MemoryTableOffloader(weights, 2, 17, group_size=group,
                                    prefetch_depth=4, single_host_buffer=True)
         streams = [torch.cuda.Stream(), torch.cuda.Stream()]
         capacity = 2 * 17 * group * 64 * 2
-        assert telemetry.storage_bytes(s['host'] for s in off.slots) == capacity
-        assert telemetry.storage_bytes(s['gpu'] for s in off.slots) == capacity * len(off.slots)
+        assert _storage_bytes(s['host'] for s in off.slots) == capacity
+        assert _storage_bytes(s['gpu'] for s in off.slots) == capacity * len(off.slots)
         try:
             for iteration in range(4):
                 ids = torch.randint(0, 73, (2, 17))
                 weights.add_(1)
                 actual = []
+
                 def consume(layer, handle):
                     value = handle.acquire()
                     actual.append(value.clone())
@@ -232,6 +277,7 @@ def test_shared_host_dma_lifetime_fresh_values_and_partial_groups(group):
                 expected = weights.index_select(0, ids.reshape(-1)).view(2, 17, 7, 64)
                 for layer, value in enumerate(actual):
                     torch.testing.assert_close(value.cpu(), expected[:, :, layer], rtol=0, atol=0)
+
             def fail(layer, handle):
                 handle.acquire()
                 raise ValueError('consumer failure')
@@ -258,10 +304,9 @@ def test_shared_host_policy_boundaries_and_full_model_exactness(model, policy):
         assert off.single_host_buffer == shared
         # Extending host sharing must not shrink the GPU prefetch capacity.
         assert len(off.slots) == min(4, len(model.model.layers))
-        telemetry = load_script('memory_offload_helpers')
         capacity = tokens * off.group * off.dim * off.weights.element_size()
-        assert telemetry.storage_bytes(s['host'] for s in off.slots) == capacity * (1 if shared else len(off.slots))
-        assert telemetry.storage_bytes(s['gpu'] for s in off.slots) == capacity * len(off.slots)
+        assert _storage_bytes(s['host'] for s in off.slots) == capacity * (1 if shared else len(off.slots))
+        assert _storage_bytes(s['gpu'] for s in off.slots) == capacity * len(off.slots)
     # Exercise enabled scheduling cheaply in a full model, including tail group.
     model.close_memory_offload()
     model.config.memory_offload_bulk_max_tokens = 0
@@ -269,10 +314,9 @@ def test_shared_host_policy_boundaries_and_full_model_exactness(model, policy):
     model.config.memory_offload_single_host_min_tokens = 1
     model.config.memory_offload_single_host_max_tokens = 32
     model.config.memory_offload_group_size = 2
-    gate = load_script('memory_offload_helpers')
     for length in (17, 23, 17):
         ids = torch.randint(0, 128, (1, length), device='cuda')
-        expected = gate.resident_prefill(model, ids)
+        expected = _resident_prefill(model, ids)
         model.enable_memory_offload()
         for _ in range(2):
             actual = model(input_ids=ids, use_cache=False).logits.float()
@@ -282,66 +326,70 @@ def test_shared_host_policy_boundaries_and_full_model_exactness(model, policy):
 @pytest.mark.parametrize('batch', [1, 4, 8, 16])
 @pytest.mark.parametrize('ids_device', ['cpu', 'cuda'])
 def test_mapped_bulk_fresh_weights_cross_stream_and_host_lifetime(batch, ids_device):
-    from fla.layers.memory_mapped_bulk import MappedBulkMemoryTableOffloader
-    from fla.layers.memory_offload import PendingM
+    from fla.layers.memory_offload import MappedBulkMemoryTableOffloader, PendingM
     with torch.inference_mode():
-        weights=torch.randn(73,5,64,dtype=torch.bfloat16).pin_memory()
-        off=MappedBulkMemoryTableOffloader(weights,batch,1,'cuda')
-        streams=[torch.cuda.Stream(),torch.cuda.Stream()]
-        for stream in streams:stream.wait_stream(torch.cuda.current_stream())
+        weights = torch.randn(73, 5, 64, dtype=torch.bfloat16).pin_memory()
+        off = MappedBulkMemoryTableOffloader(weights, batch, 1, 'cuda')
+        streams = [torch.cuda.Stream(), torch.cuda.Stream()]
+        for stream in streams:
+            stream.wait_stream(torch.cuda.current_stream())
         try:
             for iteration in range(4):
-                ids=torch.randint(0,73,(batch,1))
-                expected=weights.index_select(0,ids.flatten()).clone()
-                values=[]
-                with torch.cuda.stream(streams[iteration%2]):
-                    device_ids=ids.to(ids_device)
-                    def consume(layer,value):
-                        handle=value if isinstance(value,PendingM) else None
-                        if handle is not None:value=handle.acquire()
+                ids = torch.randint(0, 73, (batch, 1))
+                expected = weights.index_select(0, ids.flatten()).clone()
+                values = []
+                with torch.cuda.stream(streams[iteration % 2]):
+                    device_ids = ids.to(ids_device)
+
+                    def consume(layer, value):
+                        handle = value if isinstance(value, PendingM) else None
+                        if handle is not None:
+                            value = handle.acquire()
                         torch.cuda._sleep(100000)
                         values.append(value.clone())
-                        if handle is not None:handle.release()
-                    off.forward(device_ids,consume)
+                        if handle is not None:
+                            handle.release()
+                    off.forward(device_ids, consume)
                 # No GPU synchronization before host mutation: forward must
                 # already have completed every mapped read of CPU storage.
-                weights.add_(torch.tensor(.125,dtype=weights.dtype))
-                streams[iteration%2].synchronize()
-                actual=torch.stack(values,dim=2).reshape(batch,5,64).cpu()
-                torch.testing.assert_close(actual,expected,rtol=0,atol=0)
-        finally:off.close()
+                weights.add_(torch.tensor(.125, dtype=weights.dtype))
+                streams[iteration % 2].synchronize()
+                actual = torch.stack(values, dim=2).reshape(batch, 5, 64).cpu()
+                torch.testing.assert_close(actual, expected, rtol=0, atol=0)
+        finally:
+            off.close()
 
 
 def test_mapped_bulk_error_cleanup_and_cpu_bounds():
-    from fla.layers.memory_mapped_bulk import MappedBulkMemoryTableOffloader
+    from fla.layers.memory_offload import MappedBulkMemoryTableOffloader
     with torch.inference_mode():
-        weights=torch.randn(17,3,64,dtype=torch.bfloat16).pin_memory()
-        for invalid in (False,True):
-            off=MappedBulkMemoryTableOffloader(weights,8,1,'cuda')
+        weights = torch.randn(17, 3, 64, dtype=torch.bfloat16).pin_memory()
+        for invalid in (False, True):
+            off = MappedBulkMemoryTableOffloader(weights, 8, 1, 'cuda')
             try:
                 if invalid:
-                    with pytest.raises(IndexError,match='out of range'):
-                        off.forward(torch.full((8,1),17),lambda *args:None)
+                    with pytest.raises(IndexError, match='out of range'):
+                        off.forward(torch.full((8, 1), 17), lambda *args: None)
                 else:
-                    def fail(*args):raise ValueError('consumer failure')
-                    with pytest.raises(ValueError,match='consumer failure'):
-                        off.forward(torch.zeros((8,1),device='cuda',dtype=torch.long),fail)
+                    def fail(*args): raise ValueError('consumer failure')
+                    with pytest.raises(ValueError, match='consumer failure'):
+                        off.forward(torch.zeros((8, 1), device='cuda', dtype=torch.long), fail)
                 assert off.broken
-                with pytest.raises(RuntimeError,match='closed or failed'):
-                    off.forward(torch.zeros((8,1),dtype=torch.long),lambda *args:None)
-            finally:off.close()
+                with pytest.raises(RuntimeError, match='closed or failed'):
+                    off.forward(torch.zeros((8, 1), dtype=torch.long), lambda *args: None)
+            finally:
+                off.close()
 
 
 def test_mapped_bulk_model_selection_and_pinned_table_accounting(model):
-    from fla.layers.memory_mapped_bulk import MappedBulkMemoryTableOffloader
-    from fla.layers.memory_offload import BulkMemoryTableOffloader
+    from fla.layers.memory_offload import BulkMemoryTableOffloader, MappedBulkMemoryTableOffloader
     model.enable_memory_offload()
-    for batch in (1,4,8,16):
-        assert isinstance(model.model._offloader_for(batch,1),MappedBulkMemoryTableOffloader)
-    assert isinstance(model.model._offloader_for(17,1),BulkMemoryTableOffloader)
-    mapped=model.model._offloader_for(8,1)
-    assert isinstance(mapped,MappedBulkMemoryTableOffloader)
-    assert mapped.host.numel()==0
+    for batch in (1, 4, 8, 16):
+        assert isinstance(model.model._offloader_for(batch, 1), MappedBulkMemoryTableOffloader)
+    assert isinstance(model.model._offloader_for(17, 1), BulkMemoryTableOffloader)
+    mapped = model.model._offloader_for(8, 1)
+    assert isinstance(mapped, MappedBulkMemoryTableOffloader)
+    assert mapped.host.numel() == 0
     assert model.model.memory_table.is_pinned()
     assert model.model.memory_table.device.type == 'cpu'
     for offloader in model.model._offloader_cache.values():
@@ -430,3 +478,26 @@ def test_offload_dispatch_preserves_hooks_replacements_and_callback_state(use_ca
             assert len(result) == 2
         handle.remove()
     assert calls == [2, 4]
+
+
+def test_offloader_cache_eviction_closes_transfers(model):
+    model.enable_memory_offload()
+    first = model.model._offloader_for(1, 8)
+    model.model._offloader_for(1, 16)
+    model.model._offloader_for(1, 32)
+    assert first.closed
+    assert len(model.model._offloader_cache) == 2
+    assert (1, 8) not in model.model._offloader_cache
+
+
+def test_fold_close_refreshes_weight_snapshot(model):
+    model.fold_memory_table_on_gpu()
+    model.close_memory_offload()
+    assert model.model._raw_m_proj_weights is None
+    for layer in model.model.layers:
+        layer.attn.m_proj.weight.add_(0.25)
+    expected = [layer.attn.m_proj.weight.clone() for layer in model.model.layers]
+    model.fold_memory_table_on_gpu()
+    model.close_memory_offload()
+    for layer, weight in zip(model.model.layers, expected):
+        torch.testing.assert_close(layer.attn.m_proj.weight, weight, rtol=0, atol=0)

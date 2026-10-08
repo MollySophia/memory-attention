@@ -69,14 +69,14 @@ The repository's [`LICENSE`](LICENSE) contains Apache License 2.0, while some li
 
 ## Model memory-table offload
 
-The A0030 implementation supports BF16 inference with CPU-resident memory tables.
+Memory Attention supports BF16 inference with CPU-resident memory tables on CUDA.
 Start with an evaluated CUDA model; offload folds table normalization and streams
-lookups through pinned host memory. Restore the original tables before training.
+lookups through pinned host memory. Disable offload before saving a checkpoint; training with offload is unsupported.
 
 ```python
 model.eval()
-model.enable_memory_offload()
 with torch.inference_mode():
+    model.enable_memory_offload()
     outputs = model(input_ids=input_ids, use_cache=True)
 model.close_memory_offload()
 ```
@@ -84,9 +84,5 @@ model.close_memory_offload()
 Correctness tests require CUDA and FlashAttention:
 
 ```sh
-python -m pytest tests/test_memory_offload_regressions.py -q
+python -m pytest tests/models/test_memory_offload.py -q
 ```
-
-[Results and full experimental evidence](https://github.com/MollySophia/memory-attention/blob/63eae96/profile/results/optimization/offload-gap-001/continuation-03/A0030-RESULTS.md)
-remain on the experiment branch. The implementation is frozen at A0030; final
-independent acceptance across all workloads remains outstanding.

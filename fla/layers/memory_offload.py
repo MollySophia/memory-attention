@@ -1,31 +1,23 @@
-# Copyright (c) 2023-2025, Songlin Yang, Yu Zhang
-"""CPU offload for the Memory Attention table.
+# Copyright (c) 2023-2026, Songlin Yang, Yu Zhang, Zhiyuan Li
+#
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+# For a list of all contributors, visit:
+#   https://github.com/fla-org/flash-linear-attention/graphs/contributors
 
-The memory table ``m_proj`` is an ``nn.Embedding`` of shape
-``[vocab_size, num_kv_heads * head_dim]`` per layer. At typical LM settings that
-is the single largest tensor in the model, so it dominates GPU residency.
-
-This module streams those rows from pinned host memory to the device on demand.
-The design follows two rules that keep the transfer off the critical path:
-
-* CPU readiness and CUDA completion are tracked separately. A ticket signals
-  "the H2D copy is submitted" long before "the copy finished", so the block can
-  keep queueing Q/K kernels instead of stalling on the producer.
-* The transferred buffer is safe to overwrite as soon as ``k + m`` has been
-  *enqueued* on the compute stream, because the copy already happened before
-  that point. Releasing a slot therefore only needs an event record, not a
-  device synchronize.
-
-Everything here is inference-only. Training needs autograd through the table and
-is intentionally unsupported.
-"""
+"""Inference-only CPU table lookup with bounded asynchronous CUDA transfers."""
 
 from __future__ import annotations
 
 import threading
+from collections.abc import Callable
 from concurrent.futures import ThreadPoolExecutor
+from contextlib import suppress
 
 import torch
+import triton
+
+from fla.ops.memory.gather import memory_gather_kernel
 
 
 class GroupTicket:
@@ -72,7 +64,7 @@ class GroupTicket:
 class PendingM:
     """Deferred dependency on a :class:`GroupTicket` slice."""
 
-    def __init__(self, ticket: GroupTicket, offset: int) -> None:
+    def __init__(self, ticket: GroupTicket | _BulkTicket, offset: int) -> None:
         self.ticket = ticket
         self.offset = offset
         self.acquired = False
@@ -244,10 +236,8 @@ class MemoryTableOffloader:
             self.broken = True
             cancel.set()
             if future is not None:
-                try:
+                with suppress(BaseException):
                     future.result()
-                except BaseException:
-                    pass
             raise
         finally:
             self.lock.release()
@@ -267,7 +257,7 @@ class MemoryTableOffloader:
 class _BulkTicket:
     """Bulk path only needs a handle at the first and last layer."""
 
-    def __init__(self, owner: "BulkMemoryTableOffloader") -> None:
+    def __init__(self, owner: BulkMemoryTableOffloader | MappedBulkMemoryTableOffloader) -> None:
         self.owner = owner
 
     def acquire(self, offset: int) -> torch.Tensor:
@@ -415,3 +405,83 @@ def build_cpu_table(
         raw = m_proj.weight.detach().reshape(vocab, kv_dim // head_dim, head_dim).to(norm.weight.dtype)
         table[:, index] = fold_memory_table(norm, raw, chunk_size, dtype).cpu()
     return table
+
+
+class MappedBulkMemoryTableOffloader:
+    policy = "bulk"
+    accepts_gpu_ids = True
+
+    def __init__(self, weights: torch.Tensor, batch: int, seq_len: int, device: torch.device | str) -> None:
+        if weights.device.type != "cpu" or weights.ndim != 3 or not weights.is_pinned() or not weights.is_contiguous():
+            raise ValueError("mapped table must be contiguous pinned CPU [vocab,layers,dim]")
+        if min(batch, seq_len) < 1:
+            raise ValueError("shapes must be positive")
+        self.weights = weights
+        self.batch, self.seq_len = batch, seq_len
+        self.layers, self.dim = weights.shape[1:]
+        self.group = self.layers
+        self.device = torch.device(device)
+        self.gpu = torch.empty((batch * seq_len, self.layers, self.dim),
+                               dtype=weights.dtype, device=self.device)
+        self.values = [self.gpu[:, i].view(batch, seq_len, self.dim) for i in range(self.layers)]
+        self.host = torch.empty(0, dtype=weights.dtype, pin_memory=True)
+        self.slots = [{"host": self.host, "gpu": self.gpu}]
+        self.copy_stream = torch.cuda.Stream(device=self.device)
+        self.copy_stream.wait_stream(torch.cuda.current_stream(self.device))
+        self.copied = torch.cuda.Event()
+        self.consumed = torch.cuda.Event()
+        self.started = self.closed = self.broken = False
+        self.lock = threading.Lock()
+
+    @property
+    def group_size(self) -> int:
+        return self.group
+
+    @torch.inference_mode()
+    def forward(self, ids: torch.Tensor, consume: Callable[[int, PendingM | torch.Tensor], None]) -> None:
+        if self.closed or self.broken:
+            raise RuntimeError("offloader is closed or failed")
+        if ids.dtype != torch.long or tuple(ids.shape) != (self.batch, self.seq_len):
+            raise ValueError("IDs must be int64 with the preallocated shape")
+        if not self.lock.acquire(blocking=False):
+            raise RuntimeError("concurrent forwards are unsupported")
+        try:
+            if ids.device.type == "cpu" and (bool((ids < 0).any()) or bool((ids >= self.weights.shape[0]).any())):
+                raise IndexError("memory table index out of range")
+            ids_gpu = ids.to(self.device, non_blocking=True).reshape(-1).contiguous()
+            self.copy_stream.wait_stream(torch.cuda.current_stream(self.device))
+            with torch.cuda.device(self.device), torch.cuda.stream(self.copy_stream):
+                if self.started:
+                    self.copy_stream.wait_event(self.consumed)
+                width = self.layers * self.dim
+                memory_gather_kernel[(self.batch * self.seq_len, triton.cdiv(width, 512))](
+                    self.weights, ids_gpu, self.gpu, width, self.weights.shape[0], 512, num_warps=4)
+                self.copied.record(self.copy_stream)
+            ticket = _BulkTicket(self)
+            for layer in range(self.layers):
+                if layer == 0 or layer == self.layers - 1:
+                    handle = PendingM(ticket, layer)
+                    consume(layer, handle)
+                    if not handle.released:
+                        raise RuntimeError("consumer did not release M")
+                else:
+                    consume(layer, self.values[layer])
+            # Preserve fresh CPU-table mutation and IDs lifetime semantics.
+            self.copy_stream.synchronize()
+            self.started = True
+        except BaseException:
+            self.broken = True
+            self.copy_stream.synchronize()
+            raise
+        finally:
+            self.lock.release()
+
+    def close(self) -> None:
+        self.closed = True
+        torch.cuda.synchronize(self.device)
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *args) -> None:
+        self.close()
