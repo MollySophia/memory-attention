@@ -28,9 +28,16 @@ for mode,b,l in WORKLOADS:
    assert not parts,'Incomplete successful cells require review'
    row['placements'][label]=dict(status='oom',mean_ms=None);continue
   row['placements'][label]=dict(status='completed',mean_ms=statistics.mean(x['mean_ms'] for x in parts),block_means_ms=[x['mean_ms'] for x in parts],gpu_peak_allocated_gib=statistics.mean(x['memory_after']['gpu_peak_allocated_bytes']/2**30 for x in parts),host_rss_gib=statistics.mean(x['memory_after']['host_rss_bytes']/2**30 for x in parts),host_pinned_gib=statistics.mean(x['memory_after']['offload_pinned_bytes']/2**30 for x in parts))
- if all(row['placements'][x]['status']=='completed' for x in labels):
-  main,gpu,off=[row['placements'][x]['block_means_ms'] for x in labels]
-  row.update(offload_minus_main_ms=ci([o-m for m,o in zip(main,off)]),offload_minus_folded_gpu_ms=ci([o-g for g,o in zip(gpu,off)]),offload_vs_main_pct=ci([(o/m-1)*100 for m,o in zip(main,off)]),offload_vs_folded_gpu_pct=ci([(o/g-1)*100 for g,o in zip(gpu,off)]),folded_gpu_minus_main_ms=ci([g-m for m,g in zip(main,gpu)]))
+ for ref,label in [('main_gpu','main'),('head_gpu','folded_gpu')]:
+  if row['placements'][ref]['status']=='completed' and row['placements']['head_offload']['status']=='completed':
+   baseline=row['placements'][ref]['block_means_ms'];off=row['placements']['head_offload']['block_means_ms']
+   row['offload_minus_'+label+'_ms']=ci([o-g for g,o in zip(baseline,off)])
+   row['offload_vs_'+label+'_pct']=ci([(o/g-1)*100 for g,o in zip(baseline,off)])
+ if row['placements']['main_gpu']['status']==row['placements']['head_gpu']['status']=='completed':
+  main=row['placements']['main_gpu']['block_means_ms'];gpu=row['placements']['head_gpu']['block_means_ms']
+  row['folded_gpu_minus_main_ms']=ci([g-m for m,g in zip(main,gpu)])
+ if 'offload_minus_folded_gpu_ms' in row:
+  gpu=row['placements']['head_gpu']['block_means_ms'];off=row['placements']['head_offload']['block_means_ms']
   residual=[o-g-max(.1,.01*g) for g,o in zip(gpu,off)];v=ci(residual);v['upper_simultaneous_95']=v['mean']+float(t.ppf(1-.05/16,2))*statistics.stdev(residual)/math.sqrt(3);row['original_matrix_tolerance_diagnostic']=v if row['original_matrix'] else None
  rows.append(row)
 out=dict(sources=p['sources'],status='audited',note='All data freshly collected on frozen source commits. Paired 95% Student-t intervals use n=3 independent process blocks, df=2, not 90 independent samples. GPU control folds normalization; main leaves normalization per token. Supplemental OOM does not become zero latency. Tolerance calculation is diagnostic, not a final goal verdict.',environment_match=True,environment_fingerprint=list(next(iter(environments))),correctness=read(D/'correctness-audit.json'),oom=oom,rows=rows)
@@ -50,9 +57,10 @@ with (D/'summary.csv').open('w') as f:
 lines=['# Fresh upstream / PR performance comparison','',f"Upstream main: `{SOURCES['main'][1]}`. PR head: `{SOURCES['head'][1]}`.",'', 'RTX 5090, 24 layers, 2.8365B BF16, vocab 32000, hidden 2048, 32 Q/KV heads, intermediate 5632. Fixed random weights (seed1234) and inputs; no language-quality claim. Inputs start on GPU. Last-token logits and real KV cache. Decode is one fixed-context step; generation includes prefix2048 and all128 growing-cache decode steps, excluding sampling. Setup, folding and allocation excluded.','', 'Three independent blocks rotate the three placement orders. Prefill/decode: 10 warmups, 10 samples ×3 rounds/process. Generation: 2 warmups, 5 trajectories ×3 rounds/process. Intervals use paired process means (t, df=2). Timed functions are AST-identical to the prior harness; only fresh-model/source compatibility and untimed accounting were adapted.','', '## Latency','', '| Mode | Batch | Context | Main GPU ms | PR folded GPU ms | PR offload ms | Offload−main ms | Offload−folded ms (95% CI) |','| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |']
 for r in rows:
  vals=[f"{r['placements'][label]['mean_ms']:.3f}" if r['placements'][label]['status']=='completed' else 'OOM' for label in labels]
- if 'offload_minus_main_ms' in r:
-  before=f"{r['offload_minus_main_ms']['mean']:+.3f}";g=r['offload_minus_folded_gpu_ms'];gap=f"{g['mean']:+.3f} [{g['lower_95']:+.3f}, {g['upper_95']:+.3f}]"
- else:before=gap='unavailable'
+ before=f"{r['offload_minus_main_ms']['mean']:+.3f}" if 'offload_minus_main_ms' in r else 'unavailable'
+ if 'offload_minus_folded_gpu_ms' in r:
+  g=r['offload_minus_folded_gpu_ms'];gap=f"{g['mean']:+.3f} [{g['lower_95']:+.3f}, {g['upper_95']:+.3f}]"
+ else:gap='unavailable' 
  lines.append(f"| {r['mode']} | {r['batch']} | {r['length']} | {' | '.join(vals)} | {before} | {gap} |")
 lines+=['','## Peak allocated GPU memory','','| Mode | Batch | Context | Main GiB | PR folded GiB | PR offload GiB | Offload pinned host GiB |','| --- | ---: | ---: | ---: | ---: | ---: | ---: |']
 for r in rows:
