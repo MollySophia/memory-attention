@@ -106,6 +106,8 @@ class MemoryTableOffloader:
         group_size: Layers transferred per gather + H2D.
         device: CUDA device.
         prefetch_depth: Number of buffered groups. Clamped to the group count.
+        single_host_buffer: Reuse one host allocation after each DMA completes,
+            independently of the number of GPU lookahead slots.
     """
 
     def __init__(
@@ -116,6 +118,7 @@ class MemoryTableOffloader:
         group_size: int = 1,
         device: torch.device | str = "cuda:0",
         prefetch_depth: int = 4,
+        single_host_buffer: bool = False,
     ) -> None:
         if weights.device.type != "cpu" or weights.ndim != 3:
             raise ValueError("weights must be a CPU tensor of shape [vocab, layers, dim]")
@@ -135,9 +138,14 @@ class MemoryTableOffloader:
         self.closed = False
         self.broken = False
         capacity = self.tokens * self.group * self.dim
+        self.single_host_buffer = single_host_buffer
+        self._last_host_copy = None
+        shared_host = (torch.empty(capacity, dtype=weights.dtype, pin_memory=True)
+                       if single_host_buffer else None)
         self.slots = [
             dict(
-                host=torch.empty(capacity, dtype=weights.dtype, pin_memory=True),
+                host=(shared_host if single_host_buffer else
+                      torch.empty(capacity, dtype=weights.dtype, pin_memory=True)),
                 gpu=torch.empty(capacity, dtype=weights.dtype, device=self.device),
                 copied=torch.cuda.Event(),
                 consumed=torch.cuda.Event(),
@@ -174,9 +182,14 @@ class MemoryTableOffloader:
                         if cancel.is_set():
                             return
                         # The pinned host buffer is still being read by DMA.
-                        slot["copied"].synchronize()
+                        if not self.single_host_buffer:
+                            slot["copied"].synchronize()
                     if cancel.is_set():
                         return
+                    # Shared storage belongs to the most recently submitted
+                    # DMA, which may use a different GPU slot or forward.
+                    if self.single_host_buffer and self._last_host_copy is not None:
+                        self._last_host_copy.synchronize()
                     source = self.weights[:, ticket.start: ticket.start + ticket.count]
                     torch.index_select(source, 0, ids, out=self._view(slot["host"], ticket.start))
                     if previous is not None:
@@ -186,6 +199,8 @@ class MemoryTableOffloader:
                         self._view(slot["host"], ticket.start), non_blocking=True
                     )
                     slot["copied"].record(self.copy_stream)
+                    if self.single_host_buffer:
+                        self._last_host_copy = slot["copied"]
                     slot["previous"] = ticket
                     # "Ready" means submitted, not completed.
                     ticket.ready.set()
