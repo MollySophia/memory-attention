@@ -1,0 +1,17 @@
+{
+  "identical_function_AST_to_existing_harness": [
+    "build",
+    "rollback",
+    "run_prefill",
+    "run_decode",
+    "run_generation",
+    "env_fingerprint"
+  ],
+  "compatibility_changes": [
+    "Import frozen source root via environment",
+    "One fresh model and placement per process; omit legacy restore private API",
+    "Treat absent main memory_table as None in untimed accounting",
+    "Source telemetry fingerprints explicit frozen root"
+  ],
+  "measurement_scope_changed": false
+}

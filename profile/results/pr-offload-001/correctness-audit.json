@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "batches": [
+    1,
+    8
+  ],
+  "seed": 1234,
+  "steps": 129,
+  "comparison": "Main resident vs head folded resident vs head offload; exact logits every step and exact all hidden/KV at prefix/steps1,2,128"
+}

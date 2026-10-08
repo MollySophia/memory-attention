@@ -417,7 +417,7 @@ def main():
             f"spread={row['spread_pct']:.2f}%  policy={row['offload_policy']}",
             flush=True,
         )
-    if model is not None:
+    if model is not None and hasattr(model, "close_memory_offload"):
         model.close_memory_offload()
     return 0 if status == "completed" else 1
 

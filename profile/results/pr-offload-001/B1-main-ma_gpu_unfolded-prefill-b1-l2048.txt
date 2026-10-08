@@ -1,0 +1,14 @@
+ma_gpu_unfolded  prefill  median=   29.178 ms  min=   29.106  max=   29.264  spread=0.54%  policy=none
+Traceback (most recent call last):
+  File "/home/molly/workspace-memory-attn/memory-attention/profile/results/pr-offload-001/bench_fla.py", line 426, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/molly/workspace-memory-attn/memory-attention/profile/results/pr-offload-001/bench_fla.py", line 421, in main
+    model.close_memory_offload()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1964, in __getattr__
+    raise AttributeError(
+AttributeError: 'MemoryForCausalLM' object has no attribute 'close_memory_offload'
