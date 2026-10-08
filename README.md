@@ -1,3 +1,5 @@
+> **A0030 result branch:** [implementation, results and validation](RESULT.md).
+
 # Memory Attention
 
 An experimental implementation of Memory Attention built on Flash Linear Attention (FLA). It introduces a learnable memory table indexed by token IDs into the attention value computation and provides a Hugging Face-style causal language model interface.
