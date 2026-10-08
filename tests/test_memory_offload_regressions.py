@@ -158,7 +158,7 @@ Path(a.json).write_text(json.dumps(dict(
 
 @pytest.mark.parametrize('padded', [False, True])
 @pytest.mark.parametrize('seed', [1234, 4321])
-@pytest.mark.parametrize('policy', ['bulk', 'pipeline'])
+@pytest.mark.parametrize('policy', ['bulk', 'pipeline', 'auto'])
 def test_growing_cache_exact_with_slot_reuse(seed, policy, padded):
     """128 growing steps, non-unit norms, partial groups, GQA and padding."""
     if not torch.cuda.is_available():
@@ -170,7 +170,9 @@ def test_growing_cache_exact_with_slot_reuse(seed, policy, padded):
                           num_kv_heads=2, vocab_size=128, qk_norm=True,
                           use_gate=True, fuse_norm=False,
                           memory_offload_policy=policy,
-                          memory_offload_group_size=2, memory_offload_prefetch_depth=1)
+                          memory_offload_group_size=2,
+                          memory_offload_bulk_max_tokens=1,
+                          memory_offload_prefetch_depth=4 if policy == 'auto' else 1)
     with torch.inference_mode():
         model = MemoryForCausalLM(config).to('cuda', dtype=torch.bfloat16).eval()
         for layer in model.model.layers:
@@ -225,3 +227,39 @@ def test_auto_policy_boundary_and_shape_reuse(model):
             actual = model(input_ids=ids, use_cache=False).logits.float()
             assert model.model.memory_offloader.policy == policy
             torch.testing.assert_close(actual, ref, rtol=0, atol=0)
+
+
+@pytest.mark.parametrize('policy', ['auto', 'pipeline'])
+def test_selective_depth_boundary_capacity_and_exactness(model, policy):
+    model.config.memory_offload_policy = policy
+    assert model.config.memory_offload_single_slot_max_tokens == 2048
+    model.config.memory_offload_prefetch_depth = 4
+    gate = load_script('test_memory_offload')
+    for batch, length in [(1,1024),(1,1025),(1,2048),(1,2049),(2,1025),(1,1025)]:
+        ids = torch.randint(0,128,(batch,length),device='cuda')
+        expected = gate.resident_prefill(model,ids)
+        model.enable_memory_offload()
+        for _ in range(2):
+            actual = model(input_ids=ids,use_cache=False).logits.float()
+            torch.testing.assert_close(actual,expected,rtol=0,atol=0)
+        off = model.model.memory_offloader
+        if policy == 'auto' and batch * length <= 1024:
+            assert off.policy == 'bulk'
+        else:
+            slots = 1 if policy == 'auto' and batch * length <= 2048 else min(4,len(model.model.layers))
+            assert off.policy == 'pipeline' and len(off.slots) == slots
+            expected_bytes = slots * batch * length * off.group * off.dim * off.weights.element_size()
+            telemetry = load_script('benchmark_telemetry')
+            assert telemetry.storage_bytes(slot['host'] for slot in off.slots) == expected_bytes
+            assert telemetry.storage_bytes(slot['gpu'] for slot in off.slots) == expected_bytes
+
+
+def test_single_slot_limit_can_be_disabled_and_validated(model):
+    from fla.models.memory.configuration_memory import MemoryConfig
+    with pytest.raises(ValueError):
+        MemoryConfig(memory_offload_single_slot_max_tokens=-1)
+    model.config.memory_offload_single_slot_max_tokens = 0
+    model.config.memory_offload_policy = 'auto'
+    model.enable_memory_offload()
+    model.set_offload_offloader(1,1025)
+    assert len(model.model.memory_offloader.slots) == min(4,len(model.model.layers))
