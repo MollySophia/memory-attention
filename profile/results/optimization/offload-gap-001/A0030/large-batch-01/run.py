@@ -17,11 +17,14 @@ def plan():
    for v in (['ma_gpu','ma_offload'] if block%2==0 else ['ma_offload','ma_gpu']):
     name=f'B{block+1}-{m}-{v}-b{b}'
     cmd=driver.cmd('A0030',(m,b,l),D/(name+'.json'),True);cmd[cmd.index('PLACEHOLDER')]=v
-    jobs.append(dict(name=name,block=block+1,mode=m,batch=b,length=l,variant=v,cwd=sig['root'],candidate_sha=sig['commit'],source_sha256=sig['source_sha256'],command=cmd,status='pending'))
+    jobs.append(dict(name=name,block=block+1,mode=m,batch=b,length=l,variant=v,attempt='A0030',cwd=sig['root'],candidate_sha=sig['commit'],source_sha256=sig['source_sha256'],command=cmd,status='pending'))
  save(D/'manifest.json',dict(study='A0030-large-batch-01',status='planned',source=sig,blocks=4,scope='Supplemental batch32/64 prefill/decode at context2048; not original matrix or final acceptance',planned_jobs=32,estimated_seconds=sum(driver.estimate('A0030',(j['mode'],j['batch'],2048),j['variant'],True) for j in jobs),failure_policy='Preserve failures; after OOM skip repeats of identical cell, continue other cells. Stop on other failures.',jobs=jobs))
 def run():
- p=json.loads((D/'manifest.json').read_text());assert p['status']=='planned';assert driver.signature('A0030')==p['source'];p['status']='running';save(D/'manifest.json',p);oom=set()
+ p=json.loads((D/'manifest.json').read_text());assert p['status'] in ('planned','audit_recovery');assert driver.signature('A0030')==p['source'];p['status']='running';save(D/'manifest.json',p);oom=set()
  for j in p['jobs']:
+  j['attempt']='A0030'
+  if j['status']=='completed':
+   driver.audit_job(j,D/(j['name']+'.json'));continue
   key=(j['mode'],j['batch'],j['variant'])
   if key in oom:j.update(status='not_run',reason='Identical cell already OOM');save(D/'manifest.json',p);continue
   print('START',j['name'],flush=True);j.update(status='running',started_unix=time.time());save(D/'manifest.json',p)

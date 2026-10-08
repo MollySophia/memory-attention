@@ -7,6 +7,8 @@ archived, and its execution changes were separately reverted. Do not launch
 new optimization or performance measurements until the user resumes this work.
 The existing-results report, complete 16-workload tables and figure index are
 [A0030 results](profile/results/optimization/offload-gap-001/continuation-03/A0030-RESULTS.md).
+On 2026-10-08 the user authorized supplemental A0030 batch-32/64 measurements
+only; optimization remains paused. See [large-batch supplement](profile/results/optimization/offload-gap-001/A0030/large-batch-01/REPORT.md).
 The final independent all-workload objective remains unproven. The requirements
 below govern future resumed work; they do not override this pause.
 

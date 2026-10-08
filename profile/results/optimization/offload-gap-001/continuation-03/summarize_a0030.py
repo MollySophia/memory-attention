@@ -69,5 +69,6 @@ lines+=['','[A0030 完整审计](../A0030/final-integrity-audit.json)：64 scree
 'python profile/results/optimization/offload-gap-001/continuation-03/plot_candidate_gaps.py --attempt A0030',
 'python profile/results/optimization/offload-gap-001/plot_history.py --output profile/results/optimization/offload-gap-001/continuation-03/history-through-A0031 --through A0031 --history-only',
 'python profile/results/optimization/offload-gap-001/continuation-03/summarize_a0030.py','```','']
+lines.append('\n## 2026-10-08 大 batch 补测\n\n按用户后续指示，保持 A0030 源码不变，补测 batch 32/64、长度/context 2048 的 prefill/decode。见[补测报告](../A0030/large-batch-01/REPORT.md)。这是独立的扩展场景记录，不改变原 16 场景矩阵或暂停优化的状态。\n')
 (D/'A0030-RESULTS.md').write_text('\n'.join(lines))
 print(dict(mean_within=meanwithin,diagnostic_bounds_within=within,rows=len(rows)))

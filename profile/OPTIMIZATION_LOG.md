@@ -765,3 +765,20 @@ A0031 completed all64 screen processes with raw-mean/source/configuration/memory
 ### A0031 rejected; user pauses optimization at A0030
 
 All64 screening and192 six-block confirmation results preserved; confirmation integrity and fixed Holm8 analysis recomputed. Confirmed local prefill gains atb8/2048 (offload0.65870ms, gap0.82042ms) andb16/2048 (offload2.11523ms, gap1.62037ms). b1 generation regresses (offload6.33609ms, gap5.98084ms), and b8/4096 resident slowdown fails the guard. No R03–R05 escalation; archive evidence then separately revert A0031 execution. User requests remaining at verified A0030 and organizing existing results. No additional optimization or benchmark runs authorized by this整理 task.
+
+
+## 2026-10-08 — A0030 supplemental large-batch measurements
+
+Campaign `offload-gap-001`; user requested larger batches while retaining A0030.
+Optimization remains paused; no new attempt or implementation change.
+Batch 32/64, prefill/decode at context 2048, four alternating independent
+placement pairs planned. Completed 16 batch-32 processes; four batch-64 OOM
+results preserved and 12 identical-cell repeats skipped under the frozen rule.
+Batch 32: prefill offload 838.436 vs GPU 834.679 ms, gap +3.757 ms
+(95% paired CI -5.995 to +13.510); decode 35.587 vs 35.349 ms,
+gap +0.238 ms (CI +0.181 to +0.296). Prefill gap remains uncertain.
+Batch 64 decode failed during prefix construction, before single-step timing.
+Source/configuration/memory audited and paired environment fingerprints agree.
+A controller audit metadata omission was corrected without repeating either
+completed result; recovery recorded in the manifest.
+[Report](results/optimization/offload-gap-001/A0030/large-batch-01/REPORT.md).

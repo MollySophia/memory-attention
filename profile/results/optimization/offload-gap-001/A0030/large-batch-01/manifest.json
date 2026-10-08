@@ -1,6 +1,6 @@
 {
   "study": "A0030-large-batch-01",
-  "status": "planned",
+  "status": "completed_with_oom",
   "source": {
     "attempt": "A0030",
     "root": "/home/molly/workspace-memory-attn/offload-gap-001-A0030",
@@ -73,7 +73,12 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0030/large-batch-01/B1-prefill-ma_gpu-b32.json"
       ],
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791451287.4522967,
+      "pid": 1706622,
+      "returncode": 0,
+      "finished_unix": 1791451338.9232264,
+      "attempt": "A0030"
     },
     {
       "name": "B1-prefill-ma_offload-b32",
@@ -135,7 +140,11 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0030/large-batch-01/B1-prefill-ma_offload-b32.json"
       ],
-      "status": "pending"
+      "status": "completed",
+      "started_unix": 1791451338.9241543,
+      "pid": 1707537,
+      "attempt": "A0030",
+      "returncode": 0
     },
     {
       "name": "B1-decode-ma_gpu-b32",
@@ -197,7 +206,12 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0030/large-batch-01/B1-decode-ma_gpu-b32.json"
       ],
-      "status": "pending"
+      "status": "completed",
+      "attempt": "A0030",
+      "started_unix": 1791451409.6501355,
+      "pid": 1708473,
+      "returncode": 0,
+      "finished_unix": 1791451427.851413
     },
     {
       "name": "B1-decode-ma_offload-b32",
@@ -259,7 +273,12 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0030/large-batch-01/B1-decode-ma_offload-b32.json"
       ],
-      "status": "pending"
+      "status": "completed",
+      "attempt": "A0030",
+      "started_unix": 1791451427.8523853,
+      "pid": 1708780,
+      "returncode": 0,
+      "finished_unix": 1791451447.7537253
     },
     {
       "name": "B1-prefill-ma_gpu-b64",
@@ -321,7 +340,12 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0030/large-batch-01/B1-prefill-ma_gpu-b64.json"
       ],
-      "status": "pending"
+      "status": "oom",
+      "attempt": "A0030",
+      "started_unix": 1791451447.7552557,
+      "pid": 1709176,
+      "returncode": 1,
+      "finished_unix": 1791451466.944621
     },
     {
       "name": "B1-prefill-ma_offload-b64",
@@ -383,7 +407,12 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0030/large-batch-01/B1-prefill-ma_offload-b64.json"
       ],
-      "status": "pending"
+      "status": "oom",
+      "attempt": "A0030",
+      "started_unix": 1791451466.9454045,
+      "pid": 1709640,
+      "returncode": 1,
+      "finished_unix": 1791451485.8819654
     },
     {
       "name": "B1-decode-ma_gpu-b64",
@@ -445,7 +474,12 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0030/large-batch-01/B1-decode-ma_gpu-b64.json"
       ],
-      "status": "pending"
+      "status": "oom",
+      "attempt": "A0030",
+      "started_unix": 1791451485.8830547,
+      "pid": 1710050,
+      "returncode": 1,
+      "finished_unix": 1791451502.5556438
     },
     {
       "name": "B1-decode-ma_offload-b64",
@@ -507,7 +541,12 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0030/large-batch-01/B1-decode-ma_offload-b64.json"
       ],
-      "status": "pending"
+      "status": "oom",
+      "attempt": "A0030",
+      "started_unix": 1791451502.5564117,
+      "pid": 1710409,
+      "returncode": 1,
+      "finished_unix": 1791451521.4236941
     },
     {
       "name": "B2-decode-ma_offload-b64",
@@ -569,7 +608,9 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0030/large-batch-01/B2-decode-ma_offload-b64.json"
       ],
-      "status": "pending"
+      "status": "not_run",
+      "attempt": "A0030",
+      "reason": "Identical cell already OOM"
     },
     {
       "name": "B2-decode-ma_gpu-b64",
@@ -631,7 +672,9 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0030/large-batch-01/B2-decode-ma_gpu-b64.json"
       ],
-      "status": "pending"
+      "status": "not_run",
+      "attempt": "A0030",
+      "reason": "Identical cell already OOM"
     },
     {
       "name": "B2-prefill-ma_offload-b64",
@@ -693,7 +736,9 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0030/large-batch-01/B2-prefill-ma_offload-b64.json"
       ],
-      "status": "pending"
+      "status": "not_run",
+      "attempt": "A0030",
+      "reason": "Identical cell already OOM"
     },
     {
       "name": "B2-prefill-ma_gpu-b64",
@@ -755,7 +800,9 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0030/large-batch-01/B2-prefill-ma_gpu-b64.json"
       ],
-      "status": "pending"
+      "status": "not_run",
+      "attempt": "A0030",
+      "reason": "Identical cell already OOM"
     },
     {
       "name": "B2-decode-ma_offload-b32",
@@ -817,7 +864,12 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0030/large-batch-01/B2-decode-ma_offload-b32.json"
       ],
-      "status": "pending"
+      "status": "completed",
+      "attempt": "A0030",
+      "started_unix": 1791451521.4305038,
+      "pid": 1710781,
+      "returncode": 0,
+      "finished_unix": 1791451541.4085004
     },
     {
       "name": "B2-decode-ma_gpu-b32",
@@ -879,7 +931,12 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0030/large-batch-01/B2-decode-ma_gpu-b32.json"
       ],
-      "status": "pending"
+      "status": "completed",
+      "attempt": "A0030",
+      "started_unix": 1791451541.4096873,
+      "pid": 1711135,
+      "returncode": 0,
+      "finished_unix": 1791451559.5958786
     },
     {
       "name": "B2-prefill-ma_offload-b32",
@@ -941,7 +998,12 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0030/large-batch-01/B2-prefill-ma_offload-b32.json"
       ],
-      "status": "pending"
+      "status": "completed",
+      "attempt": "A0030",
+      "started_unix": 1791451559.5966446,
+      "pid": 1711464,
+      "returncode": 0,
+      "finished_unix": 1791451610.590394
     },
     {
       "name": "B2-prefill-ma_gpu-b32",
@@ -1003,7 +1065,12 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0030/large-batch-01/B2-prefill-ma_gpu-b32.json"
       ],
-      "status": "pending"
+      "status": "completed",
+      "attempt": "A0030",
+      "started_unix": 1791451610.5917008,
+      "pid": 1712040,
+      "returncode": 0,
+      "finished_unix": 1791451659.8195028
     },
     {
       "name": "B3-prefill-ma_gpu-b32",
@@ -1065,7 +1132,12 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0030/large-batch-01/B3-prefill-ma_gpu-b32.json"
       ],
-      "status": "pending"
+      "status": "completed",
+      "attempt": "A0030",
+      "started_unix": 1791451659.8203,
+      "pid": 1712572,
+      "returncode": 0,
+      "finished_unix": 1791451709.2375083
     },
     {
       "name": "B3-prefill-ma_offload-b32",
@@ -1127,7 +1199,12 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0030/large-batch-01/B3-prefill-ma_offload-b32.json"
       ],
-      "status": "pending"
+      "status": "completed",
+      "attempt": "A0030",
+      "started_unix": 1791451709.2382991,
+      "pid": 1713131,
+      "returncode": 0,
+      "finished_unix": 1791451760.6490242
     },
     {
       "name": "B3-decode-ma_gpu-b32",
@@ -1189,7 +1266,12 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0030/large-batch-01/B3-decode-ma_gpu-b32.json"
       ],
-      "status": "pending"
+      "status": "completed",
+      "attempt": "A0030",
+      "started_unix": 1791451760.6506584,
+      "pid": 1713731,
+      "returncode": 0,
+      "finished_unix": 1791451778.889455
     },
     {
       "name": "B3-decode-ma_offload-b32",
@@ -1251,7 +1333,12 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0030/large-batch-01/B3-decode-ma_offload-b32.json"
       ],
-      "status": "pending"
+      "status": "completed",
+      "attempt": "A0030",
+      "started_unix": 1791451778.8902543,
+      "pid": 1714029,
+      "returncode": 0,
+      "finished_unix": 1791451798.8883727
     },
     {
       "name": "B3-prefill-ma_gpu-b64",
@@ -1313,7 +1400,9 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0030/large-batch-01/B3-prefill-ma_gpu-b64.json"
       ],
-      "status": "pending"
+      "status": "not_run",
+      "attempt": "A0030",
+      "reason": "Identical cell already OOM"
     },
     {
       "name": "B3-prefill-ma_offload-b64",
@@ -1375,7 +1464,9 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0030/large-batch-01/B3-prefill-ma_offload-b64.json"
       ],
-      "status": "pending"
+      "status": "not_run",
+      "attempt": "A0030",
+      "reason": "Identical cell already OOM"
     },
     {
       "name": "B3-decode-ma_gpu-b64",
@@ -1437,7 +1528,9 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0030/large-batch-01/B3-decode-ma_gpu-b64.json"
       ],
-      "status": "pending"
+      "status": "not_run",
+      "attempt": "A0030",
+      "reason": "Identical cell already OOM"
     },
     {
       "name": "B3-decode-ma_offload-b64",
@@ -1499,7 +1592,9 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0030/large-batch-01/B3-decode-ma_offload-b64.json"
       ],
-      "status": "pending"
+      "status": "not_run",
+      "attempt": "A0030",
+      "reason": "Identical cell already OOM"
     },
     {
       "name": "B4-decode-ma_offload-b64",
@@ -1561,7 +1656,9 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0030/large-batch-01/B4-decode-ma_offload-b64.json"
       ],
-      "status": "pending"
+      "status": "not_run",
+      "attempt": "A0030",
+      "reason": "Identical cell already OOM"
     },
     {
       "name": "B4-decode-ma_gpu-b64",
@@ -1623,7 +1720,9 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0030/large-batch-01/B4-decode-ma_gpu-b64.json"
       ],
-      "status": "pending"
+      "status": "not_run",
+      "attempt": "A0030",
+      "reason": "Identical cell already OOM"
     },
     {
       "name": "B4-prefill-ma_offload-b64",
@@ -1685,7 +1784,9 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0030/large-batch-01/B4-prefill-ma_offload-b64.json"
       ],
-      "status": "pending"
+      "status": "not_run",
+      "attempt": "A0030",
+      "reason": "Identical cell already OOM"
     },
     {
       "name": "B4-prefill-ma_gpu-b64",
@@ -1747,7 +1848,9 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0030/large-batch-01/B4-prefill-ma_gpu-b64.json"
       ],
-      "status": "pending"
+      "status": "not_run",
+      "attempt": "A0030",
+      "reason": "Identical cell already OOM"
     },
     {
       "name": "B4-decode-ma_offload-b32",
@@ -1809,7 +1912,12 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0030/large-batch-01/B4-decode-ma_offload-b32.json"
       ],
-      "status": "pending"
+      "status": "completed",
+      "attempt": "A0030",
+      "started_unix": 1791451798.8965693,
+      "pid": 1714385,
+      "returncode": 0,
+      "finished_unix": 1791451818.9312358
     },
     {
       "name": "B4-decode-ma_gpu-b32",
@@ -1871,7 +1979,12 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0030/large-batch-01/B4-decode-ma_gpu-b32.json"
       ],
-      "status": "pending"
+      "status": "completed",
+      "attempt": "A0030",
+      "started_unix": 1791451818.9326477,
+      "pid": 1714736,
+      "returncode": 0,
+      "finished_unix": 1791451837.0682037
     },
     {
       "name": "B4-prefill-ma_offload-b32",
@@ -1933,7 +2046,12 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0030/large-batch-01/B4-prefill-ma_offload-b32.json"
       ],
-      "status": "pending"
+      "status": "completed",
+      "attempt": "A0030",
+      "started_unix": 1791451837.069338,
+      "pid": 1715038,
+      "returncode": 0,
+      "finished_unix": 1791451888.0826168
     },
     {
       "name": "B4-prefill-ma_gpu-b32",
@@ -1995,7 +2113,13 @@
         "--json",
         "/home/molly/workspace-memory-attn/memory-attention/profile/results/optimization/offload-gap-001/A0030/large-batch-01/B4-prefill-ma_gpu-b32.json"
       ],
-      "status": "pending"
+      "status": "completed",
+      "attempt": "A0030",
+      "started_unix": 1791451888.0837705,
+      "pid": 1715656,
+      "returncode": 0,
+      "finished_unix": 1791451937.474717
     }
-  ]
+  ],
+  "recovery_note": "Controller audit required attempt metadata missing from supplemental jobs. Added A0030 identifier; audited both completed raw results; resume pending jobs only, no measurements repeated."
 }
