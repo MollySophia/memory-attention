@@ -1,4 +1,4 @@
-"""Regression coverage for table placement, model outputs and sweep identity."""
+"""Regression coverage for offload placement, outputs and buffer lifetimes."""
 
 import importlib.util
 from pathlib import Path
@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def load_script(name):
-    spec = importlib.util.spec_from_file_location(name, ROOT / 'profile' / f'{name}.py')
+    spec = importlib.util.spec_from_file_location(name, ROOT / 'tests' / f'{name}.py')
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
@@ -21,7 +21,7 @@ def model():
     if not torch.cuda.is_available():
         pytest.skip('requires CUDA')
     pytest.importorskip('flash_attn')
-    gate = load_script('test_memory_offload')
+    gate = load_script('memory_offload_helpers')
     with torch.inference_mode():
         instance, _ = gate.build(layers=3, hidden=128, heads=2, vocab=128)
         # Non-unit affine weights expose accidental repeated normalization.
@@ -76,7 +76,7 @@ def test_fold_close_restores_weights_logits_and_device(model):
 
 
 def test_each_prefill_case_uses_resident_reference(model):
-    gate = load_script('test_memory_offload')
+    gate = load_script('memory_offload_helpers')
     for policy, batch, length in [('bulk', 2, 8), ('pipeline', 2, 8), ('pipeline', 1, 16)]:
         ids = torch.randint(0, 128, (batch, length), device='cuda')
         # After the first iteration the model is still offloaded. The helper
@@ -87,73 +87,6 @@ def test_each_prefill_case_uses_resident_reference(model):
         diff, agree = gate.run_case(policy, batch, length, model, model.config, ids, ref)
         assert diff == 0
         assert agree == 100
-
-
-def test_source_fingerprint_tracks_model_edits_and_ignores_results(tmp_path):
-    sweep = load_script('sweep_bmk')
-    profile = tmp_path / 'profile'
-    layers = tmp_path / 'fla' / 'layers'
-    profile.mkdir()
-    layers.mkdir(parents=True)
-    bmk = profile / 'bench_fla.py'
-    bmk.write_text('benchmark = 1\n')
-    source = layers / 'memory_offload.py'
-    source.write_text('implementation = 1\n')
-    before = sweep.source_fingerprint(bmk)
-    (profile / 'results').mkdir()
-    (profile / 'results' / 'out.json').write_text('{}')
-    assert sweep.source_fingerprint(bmk) == before
-    source.write_text('implementation = 2\n')
-    after = sweep.source_fingerprint(bmk)
-    assert after != before
-    extra = layers / 'new_operator.py'
-    extra.write_text('operator = 1\n')
-    assert sweep.source_fingerprint(bmk) != after
-    extra.unlink()
-    assert sweep.source_fingerprint(bmk) == after
-
-
-def test_resume_reruns_after_dirty_model_edit(tmp_path, monkeypatch):
-    sweep = load_script('sweep_bmk')
-    profile = tmp_path / 'profile'
-    layers = tmp_path / 'fla' / 'layers'
-    profile.mkdir()
-    layers.mkdir(parents=True)
-    bmk = profile / 'fake_bmk.py'
-    bmk.write_text('''import argparse, json
-from pathlib import Path
-p = argparse.ArgumentParser()
-for name in ('mode', 'variants', 'batch-size', 'seq-len', 'context-len',
-             'warmup', 'repeats', 'rounds', 'logits-to-keep', 'json'):
-    p.add_argument('--' + name)
-a = p.parse_args()
-counter = Path(__file__).with_suffix('.count')
-counter.write_text(str(int(counter.read_text()) + 1 if counter.exists() else 1))
-Path(a.json).write_text(json.dumps(dict(
-    config=dict(batch_size=int(a.batch_size), seq_len=int(a.seq_len), context_len=int(a.context_len)),
-    results=[dict(variant=a.variants, mode=a.mode, median_ms=1.0)])))
-''')
-    source = layers / 'memory_offload.py'
-    source.write_text('version = 1\n')
-    output = tmp_path / 'output'
-    monkeypatch.setattr(sweep, 'plot_results', lambda *a: None)
-    monkeypatch.setattr(sweep, 'probe_env', lambda b: dict(env=dict(
-        git_commit='same_commit', git_dirty=True, source_sha256=sweep.source_fingerprint(b))))
-    args = ['sweep_bmk.py', '--bmk', str(bmk), '--output', str(output),
-            '--sweep', 'batch', '--batch-sizes', '1', '--fixed-length', '8',
-            '--modes', 'prefill', '--variants', 'ma_gpu', '--reference', 'ma_gpu', '--resume']
-    monkeypatch.setattr('sys.argv', args)
-    assert sweep.main() == 0
-    assert sweep.main() == 0
-    assert bmk.with_suffix('.count').read_text() == '1'
-    source.write_text('version = 2\n')
-    with pytest.raises(SystemExit) as exc:
-        sweep.main()
-    assert exc.value.code == 2
-    assert bmk.with_suffix('.count').read_text() == '1'
-    monkeypatch.setattr('sys.argv', args + ['--allow-env-change'])
-    assert sweep.main() == 0
-    assert bmk.with_suffix('.count').read_text() == '2'
 
 
 @pytest.mark.parametrize('padded', [False, True])
@@ -220,7 +153,7 @@ def test_growing_cache_exact_with_slot_reuse(seed, policy, padded):
 def test_auto_policy_boundary_and_shape_reuse(model):
     model.config.memory_offload_policy = 'auto'
     assert model.config.memory_offload_bulk_max_tokens == 1024
-    gate = load_script('test_memory_offload')
+    gate = load_script('memory_offload_helpers')
     for length, policy in [(1024, 'bulk'), (1025, 'pipeline'), (1, 'bulk'), (1025, 'pipeline')]:
         ids = torch.randint(0, 128, (1, length), device='cuda')
         ref = gate.resident_prefill(model, ids)
@@ -236,7 +169,7 @@ def test_selective_depth_boundary_capacity_and_exactness(model, policy):
     model.config.memory_offload_policy = policy
     assert model.config.memory_offload_single_slot_max_tokens == 2048
     model.config.memory_offload_prefetch_depth = 4
-    gate = load_script('test_memory_offload')
+    gate = load_script('memory_offload_helpers')
     for batch, length in [(1,1024),(1,1025),(1,2048),(1,2049),(2,1025),(1,1025)]:
         ids = torch.randint(0,128,(batch,length),device='cuda')
         expected = gate.resident_prefill(model,ids)
@@ -251,7 +184,7 @@ def test_selective_depth_boundary_capacity_and_exactness(model, policy):
             slots = 1 if policy == 'auto' and batch * length <= 2048 else min(4,len(model.model.layers))
             assert off.policy == 'pipeline' and len(off.slots) == slots
             expected_bytes = slots * batch * length * off.group * off.dim * off.weights.element_size()
-            telemetry = load_script('benchmark_telemetry')
+            telemetry = load_script('memory_offload_helpers')
             assert telemetry.storage_bytes(slot['host'] for slot in off.slots) == expected_bytes
             assert telemetry.storage_bytes(slot['gpu'] for slot in off.slots) == expected_bytes
 
@@ -271,7 +204,7 @@ def test_single_slot_limit_can_be_disabled_and_validated(model):
 @pytest.mark.skipif(not torch.cuda.is_available(), reason='requires CUDA')
 def test_shared_host_dma_lifetime_fresh_values_and_partial_groups(group):
     from fla.layers.memory_offload import MemoryTableOffloader
-    telemetry = load_script('benchmark_telemetry')
+    telemetry = load_script('memory_offload_helpers')
     with torch.inference_mode():
         weights = torch.randn(73, 7, 64, dtype=torch.bfloat16)
         off = MemoryTableOffloader(weights, 2, 17, group_size=group,
@@ -325,7 +258,7 @@ def test_shared_host_policy_boundaries_and_full_model_exactness(model, policy):
         assert off.single_host_buffer == shared
         # Extending host sharing must not shrink the GPU prefetch capacity.
         assert len(off.slots) == min(4, len(model.model.layers))
-        telemetry = load_script('benchmark_telemetry')
+        telemetry = load_script('memory_offload_helpers')
         capacity = tokens * off.group * off.dim * off.weights.element_size()
         assert telemetry.storage_bytes(s['host'] for s in off.slots) == capacity * (1 if shared else len(off.slots))
         assert telemetry.storage_bytes(s['gpu'] for s in off.slots) == capacity * len(off.slots)
@@ -336,7 +269,7 @@ def test_shared_host_policy_boundaries_and_full_model_exactness(model, policy):
     model.config.memory_offload_single_host_min_tokens = 1
     model.config.memory_offload_single_host_max_tokens = 32
     model.config.memory_offload_group_size = 2
-    gate = load_script('test_memory_offload')
+    gate = load_script('memory_offload_helpers')
     for length in (17, 23, 17):
         ids = torch.randint(0, 128, (1, length), device='cuda')
         expected = gate.resident_prefill(model, ids)
@@ -409,9 +342,11 @@ def test_mapped_bulk_model_selection_and_pinned_table_accounting(model):
     mapped=model.model._offloader_for(8,1)
     assert isinstance(mapped,MappedBulkMemoryTableOffloader)
     assert mapped.host.numel()==0
-    snapshot=load_script('benchmark_telemetry').memory_snapshot(model,'cuda')
-    assert snapshot['cpu_table_pinned_bytes']==snapshot['cpu_table_bytes']
-    assert snapshot['offload_pinned_bytes']==snapshot['cpu_table_bytes']+sum(v['host_bytes'] for v in snapshot['offloader_capacities'])
+    assert model.model.memory_table.is_pinned()
+    assert model.model.memory_table.device.type == 'cpu'
+    for offloader in model.model._offloader_cache.values():
+        for slot in offloader.slots:
+            assert slot['host'].numel() == 0 or slot['host'].is_pinned()
 
 
 @pytest.mark.parametrize('ids_device', ['cpu', 'cuda'])
