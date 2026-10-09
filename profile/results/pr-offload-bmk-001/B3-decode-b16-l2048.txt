@@ -1,0 +1,27 @@
+GPU=NVIDIA GeForce RTX 5090 | torch=2.9.0+cu130 | flash-attn=2.8.3
+layers=24, hidden=2048, heads=32, kv_heads=32, batch=16, timing=latency, GPU MA lookup=layerwise
+MLP=GatedMLP, block_style=prenorm, intermediate=5632, fuse_swiglu=True
+Parameter scope=all constructed modules, untied embeddings; timing scope=model, logits_to_keep=1
+Offload: prefill=pipeline, decode=bulk, pipeline group=1, prefetch_depth=4
+Initializing/folding MA weights...
+MA table ready: head-wise RMSNorm folded, eps=1e-06
+
+Building ma_offload...
+decode: offload policy=bulk, layers/group=24
+decode / ma_offload: 8.532 ms (8.525..8.587)
+
+decode: timing scope=model; ALL model parameters including embedding/final norm/LM head
+variant              ms  Std/time  GPU params M  CPU params M      Total M   GPU wt MiB   CPU wt MiB
+ma_offload        8.532       n/a      1263.634      1572.864     2836.498      2410.38      3000.00
+
+Pre-norm blocks with explicit BF16 residual adds; correctness checks=False.
+Input embedding, final RMSNorm and untied LM head are allocated on GPU and INCLUDED in parameter counts.
+Input embedding, final RMSNorm and LM head are INCLUDED in timing. No loss/backward/optimizer/sampling.
+Timing includes Q/K/V, RoPE, cache writes, FlashAttention, gate/O projection, offload and all enabled block operations.
+Decode uses a real prefilled prefix at fixed context length; each repetition overwrites its next-token slot.
+Both CPU/GPU IDs are ready before timing. Prefix construction, norm folding and token-ID D2H are excluded.
+Parameter counts include input embedding/LM head, Q/K/V/O, MLP, all norms, gates and frozen MA tables; M=1,000,000 elements.
+Weight bytes use actual tensor dtype. KV cache, activations and transfer buffers are not parameters.
+CPU staging copies used to initialize GPU weights are excluded from model parameter counts.
+decode offload staging (not parameters): slots=1, GPU=1.50 MiB, pinned CPU=1.50 MiB
+Saved /home/molly/workspace-memory-attn/memory-attention/profile/results/pr-offload-bmk-001/B3-decode-b16-l2048.json

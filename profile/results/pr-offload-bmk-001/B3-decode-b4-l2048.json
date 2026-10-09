@@ -1,0 +1,73 @@
+{
+  "config": {
+    "mode": "decode",
+    "variants": [
+      "ma_offload"
+    ],
+    "decode_offload": "bulk",
+    "check_correctness": false,
+    "batch_size": 4,
+    "logits_to_keep": 1,
+    "pad_token_id": null,
+    "seq_len": 2048,
+    "context_len": 2048,
+    "hidden_size": 2048,
+    "num_heads": 32,
+    "num_kv_heads": 32,
+    "num_layers": 24,
+    "hidden_ratio": 4,
+    "intermediate_size": 5632,
+    "no_fuse_swiglu": false,
+    "vocab_size": 32000,
+    "group_size": 1,
+    "prefetch_depth": 4,
+    "gpu_ma_lookup": "layerwise",
+    "qkv_bias": false,
+    "qk_norm": false,
+    "use_gate": false,
+    "window_size": null,
+    "rope_theta": 10000.0,
+    "norm_eps": 1e-06,
+    "cpu_threads": 16,
+    "fold_chunk": 1024,
+    "id_pool": 16,
+    "warmup": 10,
+    "repeats": 10,
+    "rounds": 3,
+    "timing": "latency",
+    "seed": 1234,
+    "device": "cuda:0",
+    "profile_dir": null,
+    "kernel_trace": false,
+    "json": "/home/molly/workspace-memory-attn/memory-attention/profile/results/pr-offload-bmk-001/B3-decode-b4-l2048.json"
+  },
+  "results": [
+    {
+      "variant": "ma_offload",
+      "mode": "decode",
+      "median_ms": 6.40201810747385,
+      "min_ms": 6.329243816435337,
+      "max_ms": 6.552830711007118,
+      "round_ms": [
+        6.40201810747385,
+        6.329243816435337,
+        6.552830711007118
+      ],
+      "seq_len": 1,
+      "context_len": 2048,
+      "group_size": 24,
+      "benchmark_scope": "model",
+      "offload_policy": "bulk",
+      "prefetch_slots": 1,
+      "offload_gpu_buffer_mib": 0.375,
+      "offload_pinned_mib": 0.375,
+      "outer_gpu_parameters": 131074048,
+      "gpu_parameters": 1263634432,
+      "cpu_parameters": 1572864000,
+      "total_parameters": 2836498432,
+      "gpu_parameter_mib": 2410.3828125,
+      "cpu_parameter_mib": 3000.0,
+      "speedup_vs_standard": null
+    }
+  ]
+}

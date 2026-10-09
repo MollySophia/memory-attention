@@ -802,3 +802,9 @@ Folded-control offload gaps are +1.744 ms and +0.002 ms respectively.
 This comparison updates PR evidence; it does not resume optimization or declare
 the independent all-workload near-GPU goal achieved.
 [Report and raw evidence](results/pr-offload-001/REPORT.md).
+
+### Direct original bmk comparison (pr-offload-bmk-001)
+
+At user request, ran main's unmodified `profile/bmk.py` offload directly, without adapting its offloader into the formal model. Frozen main: `66bd7c6`; PR reference: fresh `pr-offload-001` at `9925991`. Three independent processes per shape, 10 warmups / 10 repeats × 3 rounds, aligned model dimensions, last-token logits, 16 CPU threads. All 18 prefill/decode configurations covered: 48 completed processes, 2 batch-64 OOMs, 4 identical-OOM repeats skipped. Original bmk has no generation mode.
+
+See [full comparison](results/pr-offload-bmk-001/REPORT.md). PR prefill means are 0.99–6.04% lower; decode differs substantially by shape. At batch 8 / context 2048, original bmk 5.982 ms vs PR 10.934 ms; at batch 32 / 2048, 11.993 vs 35.636 ms. This compares different complete model implementations (including static vs dynamic KV cache and preavailable CPU IDs), not isolated offload speedup, and the two studies are not paired. No code optimization or resumption beyond A0030 was performed.

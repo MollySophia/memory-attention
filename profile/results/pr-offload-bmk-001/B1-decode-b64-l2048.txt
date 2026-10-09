@@ -1,0 +1,64 @@
+GPU=NVIDIA GeForce RTX 5090 | torch=2.9.0+cu130 | flash-attn=2.8.3
+layers=24, hidden=2048, heads=32, kv_heads=32, batch=64, timing=latency, GPU MA lookup=layerwise
+MLP=GatedMLP, block_style=prenorm, intermediate=5632, fuse_swiglu=True
+Parameter scope=all constructed modules, untied embeddings; timing scope=model, logits_to_keep=1
+Offload: prefill=pipeline, decode=bulk, pipeline group=1, prefetch_depth=4
+Initializing/folding MA weights...
+MA table ready: head-wise RMSNorm folded, eps=1e-06
+
+Building ma_offload...
+decode: offload policy=bulk, layers/group=24
+Traceback (most recent call last):
+  File "/home/molly/workspace-memory-attn/pr-offload-main/profile/bmk.py", line 997, in <module>
+    main()
+  File "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/molly/workspace-memory-attn/pr-offload-main/profile/bmk.py", line 957, in main
+    rows.extend(benchmark_case(args, variant, table, device))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/molly/workspace-memory-attn/pr-offload-main/profile/bmk.py", line 746, in benchmark_case
+    fill_prefix(stack, cache, context_ids, args, device)
+  File "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/molly/workspace-memory-attn/pr-offload-main/profile/bmk.py", line 715, in fill_prefix
+    stack(hidden, ids_cpu, ids_gpu, cache=cache, offloader=loader)
+  File "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/molly/workspace-memory-attn/pr-offload-main/profile/bmk.py", line 693, in forward
+    offloader.forward(ids_cpu, consume)
+  File "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/molly/workspace-memory-attn/pr-offload-main/profile/bmk.py", line 195, in forward
+    consume(ticket.start + offset, handle)
+  File "/home/molly/workspace-memory-attn/pr-offload-main/profile/bmk.py", line 679, in consume
+    out = self.layers[index](attn_input, input_ids=ids_gpu,
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/molly/workspace-memory-attn/pr-offload-main/profile/bmk.py", line 479, in forward
+    q = self.q_proj(hidden_states).view(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/molly/miniconda3/envs/fla-bench/lib/python3.12/site-packages/torch/nn/modules/linear.py", line 134, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 512.00 MiB. GPU 0 has a total capacity of 31.39 GiB of which 434.88 MiB is free. Process 3625831 has 654.00 MiB memory in use. Including non-PyTorch memory, this process has 30.27 GiB memory in use. Of the allocated memory 29.37 GiB is allocated by PyTorch, and 242.60 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
