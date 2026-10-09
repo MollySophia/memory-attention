@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "batches": [
+    1,
+    8
+  ],
+  "steps": 129,
+  "comparison": "Exact logits at every step, exact all hidden states and raw keys at prefix/steps1,2,128. Recall stores int64 token IDs instead of V."
+}
