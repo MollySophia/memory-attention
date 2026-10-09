@@ -86,3 +86,45 @@ Correctness tests require CUDA and FlashAttention:
 ```sh
 python -m pytest tests/models/test_memory_offload.py -q
 ```
+
+## Memory recall without RoPE
+
+Set `rope_theta=None` to disable rotary positions. Set `memory_recall=True` to
+cache raw keys and token IDs instead of full K/V pairs:
+
+```python
+config = MemoryConfig(rope_theta=None, memory_recall=True)
+model = MemoryForCausalLM(config).to("cuda", dtype=torch.bfloat16).eval()
+with torch.inference_mode():
+    prefix = model(input_ids=input_ids, use_cache=True, logits_to_keep=1)
+    step = model(input_ids=next_token_ids, past_key_values=prefix.past_key_values,
+                 use_cache=True, logits_to_keep=1)
+```
+
+Each layer stores `(K_raw, token_ids)` in its cache `attn_state`. On decode it
+looks up the historical IDs and reconstructs `V = K_raw + RMSNorm(M)` before
+attention. Optional QK normalization is applied after reconstruction, so the
+cached keys remain raw. GPU-folded memory tables also work. With
+`memory_recall=False` and `rope_theta=None`, the same no-RoPE model uses ordinary
+K/V caching as a reference. Use a fresh cache when changing cache modes.
+
+This initial implementation requires GPU-resident tables and does not support
+CPU table offload or cached packed sequences. It materializes historical M and V
+on every decode step; it reduces persistent cache storage, not necessarily peak
+GPU memory or latency. For BF16 and a per-layer key width of `D`, persistent cache
+storage per token changes from `4D` bytes to `2D + 8` bytes. Token IDs are currently
+stored separately in each layer. Combining V reconstruction with a tiled
+attention kernel is future work.
+
+Disabling RoPE changes the model computation; this is not an equivalent conversion
+of a checkpoint trained with RoPE. Existing configurations keep RoPE and full K/V
+caching by default.
+
+Validation covers explicit prefill/decode calls, including 128 decode steps.
+With the tested Transformers 5.3.0 installation, `.generate()` encounters an
+existing cache/input slicing error, also reproduced on the unchanged full-KV
+model with RoPE. Use the explicit calls above for this prototype.
+
+```sh
+python -m pytest tests/models/test_memory_recall.py -q
+```

@@ -45,6 +45,7 @@ class MemoryConfig(PretrainedConfig):
         vocab_size: int = 32000,
         use_gate: bool = False,
         use_head_gate: bool = False,
+        memory_recall: bool = False,
         memory_offload: bool = False,
         memory_offload_policy: str = "auto",
         memory_offload_group_size: int = 1,
@@ -62,6 +63,11 @@ class MemoryConfig(PretrainedConfig):
 
         self.use_gate = use_gate
         self.use_head_gate = use_head_gate
+        if memory_recall and rope_theta is not None:
+            raise ValueError("memory recall currently requires rope_theta=None")
+        if memory_recall and memory_offload:
+            raise ValueError("memory recall currently requires GPU-resident memory tables")
+        self.memory_recall = memory_recall
         self.memory_offload = memory_offload
         if memory_offload_policy not in ("auto", "pipeline", "bulk"):
             raise ValueError("`memory_offload_policy` must be one of 'auto', 'pipeline', 'bulk'")

@@ -67,6 +67,7 @@ class MemoryBlock(GradientCheckpointingLayer):
             use_gate=config.use_gate,
             use_head_gate=config.use_head_gate,
             vocab_size=config.vocab_size,
+            memory_recall=config.memory_recall,
         )
 
         self.mlp_norm = (RMSNorm if config.fuse_norm else nn.RMSNorm)(config.hidden_size, eps=config.norm_eps)
@@ -208,6 +209,8 @@ class MemoryModel(MemoryPreTrainedModel):
 
         Must be called after weights are loaded and the model is on ``device``.
         """
+        if self.config.memory_recall:
+            raise ValueError("memory recall currently requires GPU-resident memory tables")
         if not torch.cuda.is_available():
             raise RuntimeError("memory offload requires CUDA")
         if self.training or torch.is_grad_enabled():
