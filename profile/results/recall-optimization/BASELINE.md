@@ -23,3 +23,8 @@ Persistent cache saving: 49.9023%. Batch8/context8192 decode: 34.659 → 51.305 
 Preserve this baseline. Report comparisons to both initial recall and no recall; do not substitute offload results or RoPE-enabled results. Keep the same cache semantics and memory accounting. Cover the entire matrix, retain regressions/OOMs, and record timings separately from correctness checks. A change in hardware/software/background GPU use requires fresh controls. The original per-shape placement order was fixed; new repeated comparisons should rotate all placements across ordering positions.
 
 The 2026-10-12 GPU has an unrelated process holding about 6994 MiB, versus about 654 MiB during baseline collection. It must not be terminated or its memory attributed to recall. Current-run OOMs are not directly comparable to the frozen baseline capacity result.
+
+
+## First optimization result
+
+[Final R0002 comparison](R0002/REPORT.md) compares frozen baseline with `b7c33a6e` on `exp-0/recall`, using fresh full-KV and initial-recall controls, all20 workloads and three balanced-order blocks. The initial source and original evidence above are unchanged. [Environment audit](R0002/environment-audit.json) corrects the diagnostic-stage external allocation note: all recorded R0002 performance snapshots show654 MiB, not6994 MiB. R0001 is an incomplete, superseded diagnostic and must not be substituted for R0002.
