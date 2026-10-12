@@ -109,9 +109,11 @@ cached keys remain raw. GPU-folded memory tables also work. With
 K/V caching as a reference. Use a fresh cache when changing cache modes.
 
 This initial implementation requires GPU-resident tables and does not support
-CPU table offload or cached packed sequences. It materializes historical M and V
-on every decode step; it reduces persistent cache storage, not necessarily peak
-GPU memory or latency. For BF16 and a per-layer key width of `D`, persistent cache
+CPU table offload or cached packed sequences. Inference decode fuses historical table lookup, RMSNorm and K+M in one Triton
+kernel, preserving the intermediate normalization rounding. It materializes V
+but avoids full-size M intermediates. Training, prefill, unsupported layouts and
+embedding/norm hooks use the ordinary PyTorch path. It reduces persistent cache
+storage; peak GPU memory and latency must still be measured. For BF16 and a per-layer key width of `D`, persistent cache
 storage per token changes from `4D` bytes to `2D + 8` bytes. Token IDs are currently
 stored separately in each layer. Combining V reconstruction with a tiled
 attention kernel is future work.

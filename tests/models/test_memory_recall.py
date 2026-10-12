@@ -153,3 +153,40 @@ def test_recall_config_roundtrip():
         MemoryConfig(memory_recall=True)
     with pytest.raises(ValueError, match='GPU-resident'):
         MemoryConfig(memory_recall=True, rope_theta=None, memory_offload=True)
+
+
+@pytest.mark.parametrize('dtype', [torch.bfloat16, torch.float16])
+@pytest.mark.parametrize('dim', [40, 64, 128])
+@pytest.mark.parametrize('folded', [False, True])
+@torch.inference_mode()
+def test_fused_recall_reconstruction(dtype, dim, folded):
+    _cuda()
+    from fla.modules import RMSNorm
+    from fla.ops.memory.recall import memory_recall
+    torch.manual_seed(987)
+    table = torch.randn(97, 3 * dim, device='cuda', dtype=dtype)
+    ids = torch.randint(0, 97, (2, 37), device='cuda')
+    keys = torch.randn(2, 37, 3, dim, device='cuda', dtype=dtype)
+    norm = RMSNorm(dim).to('cuda', dtype=dtype)
+    norm.weight.copy_(torch.linspace(0.3, 1.7, dim, device='cuda'))
+    memory = torch.nn.functional.embedding(ids, table).view_as(keys)
+    expected = keys + (memory if folded else norm(memory))
+    actual = memory_recall(keys, ids, table, norm.weight, norm.eps, folded)
+    torch.testing.assert_close(actual, expected, rtol=0, atol=0)
+
+
+@torch.inference_mode()
+def test_recall_preserves_embedding_and_norm_hooks():
+    _cuda()
+    model = _model(True)
+    ids = torch.randint(0, 128, (1, 8), device='cuda')
+    cache = model(input_ids=ids, use_cache=True).past_key_values
+    calls = []
+    handles = [module.register_forward_hook(lambda *args: calls.append(True))
+               for layer in model.model.layers for module in (layer.attn.m_proj, layer.attn.m_norm)]
+    try:
+        model(input_ids=ids[:, :1], past_key_values=cache, use_cache=True)
+        assert len(calls) == 2 * len(model.model.layers)
+    finally:
+        for handle in handles:
+            handle.remove()

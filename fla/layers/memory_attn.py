@@ -19,6 +19,7 @@ from transformers.utils import logging
 from fla.layers.memory_offload import PendingM
 from fla.layers.utils import pad_input, unpad_input
 from fla.modules import RMSNorm, RotaryEmbedding
+from fla.ops.memory.recall import memory_recall
 from fla.ops.utils.index import prepare_lens_from_mask
 
 if TYPE_CHECKING:
@@ -150,32 +151,52 @@ class MemoryAttention(nn.Module):
                     k = rearrange(k_cached, '... (h d) -> ... h d', d=self.head_dim)
                     input_ids = ids_cached.squeeze(-1)
 
-        # `memory_table` is the offload path: a [batch, q_len, kv_dim] tensor
-        # whose rows already include the head-wise RMSNorm, or a PendingM handle
-        # that resolves to one. It lets the CPU->GPU transfer overlap the Q/K
-        # kernels instead of serializing before them.
-        pending_m = memory_table if isinstance(memory_table, PendingM) else None
-        if pending_m is not None:
-            m = pending_m.acquire()
-        elif memory_table is not None:
-            m = memory_table
+        fused_recall = (
+            self.memory_recall and past_key_values is not None and q_len == 1
+            and not torch.is_grad_enabled() and k.is_cuda
+            and k.dtype in (torch.bfloat16, torch.float16) and self.head_dim <= 256
+            and type(self.m_proj) is nn.Embedding and type(self.m_norm) is RMSNorm
+            and not any(module._forward_hooks or module._forward_pre_hooks
+                        or "forward" in module.__dict__ for module in (self.m_proj, self.m_norm))
+            and k.is_contiguous() and input_ids.is_contiguous() and input_ids.device == k.device
+            and self.m_proj.weight.device == k.device
+            and (self.m_norm.weight is None or self.m_norm.weight.is_contiguous())
+            and self.m_proj.weight.is_contiguous()
+            and self.m_proj.weight.dtype == k.dtype
+            and self.m_norm.bias is None
+        )
+        if fused_recall:
+            v = memory_recall(
+                k, input_ids, self.m_proj.weight, self.m_norm.weight,
+                self.m_norm.eps, folded=self.memory_table_folded,
+            )
         else:
-            if input_ids is None:
-                raise ValueError("MemoryAttention requires either input_ids or memory_table")
-            m = self.m_proj(input_ids)
+            # `memory_table` is the offload path: a [batch, q_len, kv_dim] tensor
+            # whose rows already include the head-wise RMSNorm, or a PendingM handle
+            # that resolves to one. It lets the CPU->GPU transfer overlap the Q/K
+            # kernels instead of serializing before them.
+            pending_m = memory_table if isinstance(memory_table, PendingM) else None
+            if pending_m is not None:
+                m = pending_m.acquire()
+            elif memory_table is not None:
+                m = memory_table
+            else:
+                if input_ids is None:
+                    raise ValueError("MemoryAttention requires either input_ids or memory_table")
+                m = self.m_proj(input_ids)
 
-        m = rearrange(m, '... (h d) -> ... h d', d=self.head_dim)
+            m = rearrange(m, '... (h d) -> ... h d', d=self.head_dim)
 
-        if self.memory_table_folded:
-            # Table already carries m_norm, so skip the per-token norm.
-            v = k + m
-        else:
-            v = k + self.m_norm(m)
+            if self.memory_table_folded:
+                # Table already carries m_norm, so skip the per-token norm.
+                v = k + m
+            else:
+                v = k + self.m_norm(m)
 
-        if pending_m is not None:
-            # Safe to hand the buffer back: the copy already happened before
-            # this point, and the only consumer is the k + m kernel above.
-            pending_m.release()
+            if pending_m is not None:
+                # Safe to hand the buffer back: the copy already happened before
+                # this point, and the only consumer is the k + m kernel above.
+                pending_m.release()
 
         if self.qk_norm:
             q, k = self.q_norm(q), self.k_norm(k)
