@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "batches": [
+    1,
+    8
+  ],
+  "steps": 129,
+  "comparison": "Exact logits at129 steps, all hidden and raw keys at prefix/1/2/128. Initial/fused recall fingerprints identical, including cached IDs."
+}

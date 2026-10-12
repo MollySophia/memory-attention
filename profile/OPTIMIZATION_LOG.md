@@ -822,3 +822,10 @@ Order audit: neighboring workloads alternate placement order and block2 reverses
 Created `exp-0/recall` from initial no-RoPE recall `e5b52be0`; preserved `exp-0/recall-no-rope` and added immutable-reference tag `recall-baseline-v1`. [Baseline register](results/recall-optimization/BASELINE.md) pins source, original evidence commit `24a7a7d2` and artifact hashes. Subsequent comparisons retain both initial recall and full-KV controls.
 
 R0001 candidate `00f111f1` fuses historical embedding lookup, RMSNorm and raw-K addition during inference decode. 82 CUDA regressions pass. Single-layer diagnostics indicate lower reconstruction latency; full-model three-way matrix testing is in progress. An unrelated process now holds about6994 MiB of GPU memory, so controls are remeasured and capacity observations will be scoped to this environment. No offload optimization goal was resumed.
+
+
+### R0001 diagnostic stop; R0002 final-source verification
+
+R0001 warm measurements are retained but superseded: review found historical row count was a Triton compile-time constant, allowing growing-cache generation to trigger compilation at each new length. The controller was stopped at a completed-process boundary without discarding measurements. Candidate `b7c33a6ef3679871d88871e528a35f7131ee2597` makes the row count a runtime, non-specialized argument. A compiled-kernel hash regression verifies one binary across lengths7/8/31/32/33/2048/2049. It also preserves global module hooks by using the ordinary path. All84 CUDA regressions pass.
+
+R0002 remeasures the full20-workload, three-placement matrix in three independent blocks, rotating placement order for each workload. Full KV and initial recall controls use frozen `e5b52be0`; fused recall uses frozen `b7c33a6e`. All six full-model correctness runs passed at batch1/8 with129 exact-logit checkpoints. Performance collection is running; no final speedup or acceptance conclusion yet. Original baseline remains immutable and the offload goal remains paused.
