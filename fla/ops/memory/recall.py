@@ -10,10 +10,10 @@ import triton
 import triton.language as tl
 
 
-@triton.jit
+@triton.jit(do_not_specialize=["ROWS"])
 def _memory_recall_kernel(
     keys, ids, table, weight, output,
-    ROWS: tl.constexpr, HEADS: tl.constexpr, DIM: tl.constexpr,
+    ROWS, HEADS: tl.constexpr, DIM: tl.constexpr,
     VOCAB: tl.constexpr, EPS: tl.constexpr, FOLDED: tl.constexpr,
     HAS_WEIGHT: tl.constexpr, BLOCK_ROWS: tl.constexpr, BLOCK_DIM: tl.constexpr,
 ):

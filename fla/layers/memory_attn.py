@@ -156,6 +156,8 @@ class MemoryAttention(nn.Module):
             and not torch.is_grad_enabled() and k.is_cuda
             and k.dtype in (torch.bfloat16, torch.float16) and self.head_dim <= 256
             and type(self.m_proj) is nn.Embedding and type(self.m_norm) is RMSNorm
+            and not nn.modules.module._global_forward_hooks
+            and not nn.modules.module._global_forward_pre_hooks
             and not any(module._forward_hooks or module._forward_pre_hooks
                         or "forward" in module.__dict__ for module in (self.m_proj, self.m_norm))
             and k.is_contiguous() and input_ids.is_contiguous() and input_ids.device == k.device

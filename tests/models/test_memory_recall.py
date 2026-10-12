@@ -190,3 +190,43 @@ def test_recall_preserves_embedding_and_norm_hooks():
     finally:
         for handle in handles:
             handle.remove()
+
+
+@torch.inference_mode()
+def test_fused_recall_reuses_kernel_across_history_lengths():
+    _cuda()
+    import triton
+
+    from fla.ops.memory.recall import _memory_recall_kernel
+    table = torch.randn(97, 3 * 64, device='cuda', dtype=torch.bfloat16)
+    weight = torch.ones(64, device='cuda', dtype=torch.bfloat16)
+    binaries = set()
+    for length in (7, 8, 31, 32, 33, 2048, 2049):
+        keys = torch.randn(1, length, 3, 64, device='cuda', dtype=torch.bfloat16)
+        ids = torch.randint(0, 97, (1, length), device='cuda')
+        output = torch.empty_like(keys)
+        compiled = _memory_recall_kernel[(triton.cdiv(length * 3, 16),)](
+            keys, ids, table, weight, output, length * 3, 3, 64, 97,
+            1e-5, False, True, 16, 64, num_warps=4, enable_fp_fusion=False,
+        )
+        binaries.add(compiled.hash)
+    assert len(binaries) == 1
+
+
+@torch.inference_mode()
+def test_recall_preserves_global_module_hooks():
+    _cuda()
+    model = _model(True)
+    ids = torch.randint(0, 128, (1, 8), device='cuda')
+    cache = model(input_ids=ids, use_cache=True).past_key_values
+    watched = {module for layer in model.model.layers for module in (layer.attn.m_proj, layer.attn.m_norm)}
+    calls = []
+    def hook(module, inputs, output):
+        if module in watched:
+            calls.append(module)
+    handle = torch.nn.modules.module.register_module_forward_hook(hook)
+    try:
+        model(input_ids=ids[:, :1], past_key_values=cache, use_cache=True)
+        assert len(calls) == len(watched)
+    finally:
+        handle.remove()
