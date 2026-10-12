@@ -1,0 +1,17 @@
+{
+  "name": "recall-baseline-v1",
+  "source_commit": "e5b52be0be5484a6f8d0c4391b158cb71e561759",
+  "source_branch": "exp-0/recall-no-rope",
+  "optimization_branch": "exp-0/recall",
+  "evidence_commit": "24a7a7d2d9cfd66ff470c597c22fca2d0ad4775a",
+  "evidence_directory": "/home/molly/workspace-memory-attn/memory-attention/profile/results/recall-no-rope-001",
+  "artifacts_sha256": {
+    "REPORT.md": "0a71d08e75c413b7e3c8eb007b9ae26cc9087920a7ad203bef9836dbcf1c172e",
+    "summary.json": "6a165897feb10667adc82066f25f45a78bb249ed62bc756af77949764cf327aa",
+    "summary.csv": "f8394fefe70fa9f73389d158ae5e1fb479633918f5b38c557c30021db410878d",
+    "manifest.json": "db4c6e9b87876e07508e71a562a3fd58964145e9613cbf7ee81b8d1de43123a8",
+    "integrity-audit.json": "9a9fdf5c2698d135a9f838b5c90b52e7ccf1c2dab6a18c500728b98fde32d5b7"
+  },
+  "protocol": "No RoPE, unfolded GPU tables, same seeded 2.8365B BF16 model; 20 workloads including generation; 3 independent blocks. Source/results remain immutable. Compare future candidates with initial recall AND full KV.",
+  "limitations": "Original order fixed within each shape across blocks; original GPU background allocation ~654 MiB. On 2026-10-12 background GPU allocation ~6994 MiB; fresh comparisons must record this and remeasure controls."
+}
